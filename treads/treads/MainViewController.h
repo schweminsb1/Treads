@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MainViewController.h
 //  treads
 //
 //  Created by keavneyrj1 on 2/9/13.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface MainViewController : UIViewController
 
 @end
