@@ -1,24 +1,24 @@
 //
-//  MainViewController.m
-//  treads
+//  CameraVC.m
+//  Treads
 //
-//  Created by keavneyrj1 on 2/9/13.
-//  Copyright (c) 2013 GCC. All rights reserved.
+//  Created by Zachary Kanoff on 2/11/13.
+//  Copyright (c) 2013 Team Walking Stick. All rights reserved.
 //
 
-#import "MainViewController.h"
+#import "CameraVC.h"
 
-@interface MainViewController ()
+@interface CameraVC ()
 
 @end
 
-@implementation MainViewController
+@implementation CameraVC
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.title = NSLocalizedString(@"Camera", @"Camera");
+        self.tabBarItem.image = [UIImage imageNamed:@"camera.png"];
     }
     return self;
 }

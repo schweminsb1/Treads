@@ -1,9 +1,9 @@
 //
 //  main.m
-//  treads
+//  Treads
 //
-//  Created by keavneyrj1 on 2/9/13.
-//  Copyright (c) 2013 GCC. All rights reserved.
+//  Created by Zachary Kanoff on 2/11/13.
+//  Copyright (c) 2013 Team Walking Stick. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
