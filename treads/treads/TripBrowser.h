@@ -10,4 +10,6 @@
 
 @interface TripBrowser : UIView
 
+-(void) setBrowserData:(NSArray*)newSortedData;
+
 @end

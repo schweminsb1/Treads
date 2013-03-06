@@ -26,10 +26,11 @@
     //Initialize and assign to Tab Bar
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.viewControllers = @[
-        [[UINavigationController alloc]initWithRootViewController:mapsVC],
+        [[UINavigationController alloc] initWithRootViewController:followVC],
+        [[UINavigationController alloc] initWithRootViewController:mapsVC],
         cameraVC,
         myTripsVC,
-        followVC,
+        //followVC,
         profileVC
         ];
     self.window.rootViewController = self.tabBarController;

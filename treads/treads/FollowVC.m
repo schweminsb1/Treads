@@ -9,6 +9,8 @@
 #import "FollowVC.h"
 #import "TripBrowser.h"
 
+#import "Trip.h"
+
 @interface FollowVC () {
     NSArray* labelText;
 }
@@ -33,15 +35,19 @@
     
     labelText = @[@"Following Page", @"Feed Page", @"Favorites Page"];
     
-    self.browser = [[TripBrowser alloc]init];
-    //[self.browser addSubview: [[TripBrowser alloc] init]];
+    TripBrowser* browser = [[TripBrowser alloc] initWithFrame:self.browserWindow.frame];
+    [self.browserWindow addSubview: browser];
+    
+    Trip* trip1 = [[Trip alloc] init];
+    trip1.name = @"Test Trip 1";
+    NSArray* tripData = [[NSArray alloc] initWithObjects: trip1, nil];
+    [browser setBrowserData:tripData];
     
 }
 
--(IBAction)segmentControlChange:(UISegmentedControl*)sender {
-    
+-(IBAction)segmentControlChange:(UISegmentedControl*)sender
+{
     self.label.text = labelText[sender.selectedSegmentIndex];
-
 }
 
 - (void)didReceiveMemoryWarning
