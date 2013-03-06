@@ -32,6 +32,8 @@
 		318BA1B516C9E66800700BB8 /* MapsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 318BA1B316C9E66800700BB8 /* MapsVC.m */; };
 		318BA1B616C9E66800700BB8 /* MapsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 318BA1B416C9E66800700BB8 /* MapsVC.xib */; };
 		318D8C3716CA9509005A42F6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 318D8C3516CA94E1005A42F6 /* MapKit.framework */; };
+		3C60C7D716E6CA6C00FDFD7D /* TripBrowserVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C60C7D516E6CA6C00FDFD7D /* TripBrowserVC.m */; };
+		3C60C7D816E6CA6C00FDFD7D /* TripBrowserVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C60C7D616E6CA6C00FDFD7D /* TripBrowserVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +71,9 @@
 		318BA1B316C9E66800700BB8 /* MapsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapsVC.m; sourceTree = "<group>"; };
 		318BA1B416C9E66800700BB8 /* MapsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapsVC.xib; sourceTree = "<group>"; };
 		318D8C3516CA94E1005A42F6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3C60C7D416E6CA6C00FDFD7D /* TripBrowserVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripBrowserVC.h; path = treads/TripBrowserVC.h; sourceTree = SOURCE_ROOT; };
+		3C60C7D516E6CA6C00FDFD7D /* TripBrowserVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripBrowserVC.m; path = treads/TripBrowserVC.m; sourceTree = SOURCE_ROOT; };
+		3C60C7D616E6CA6C00FDFD7D /* TripBrowserVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TripBrowserVC.xib; path = treads/TripBrowserVC.xib; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,23 +122,7 @@
 		3188B16016C9CE17008E1D7F /* Treads */ = {
 			isa = PBXGroup;
 			children = (
-				3188B16916C9CE17008E1D7F /* AppDelegate.h */,
-				3188B16A16C9CE17008E1D7F /* AppDelegate.m */,
-				318BA1B216C9E66800700BB8 /* MapsVC.h */,
-				318BA1B316C9E66800700BB8 /* MapsVC.m */,
-				318BA1B416C9E66800700BB8 /* MapsVC.xib */,
-				3188B19F16C9D2B4008E1D7F /* CameraVC.h */,
-				3188B1A016C9D2B4008E1D7F /* CameraVC.m */,
-				3188B1A116C9D2B4008E1D7F /* CameraVC.xib */,
-				3188B1A416C9D34D008E1D7F /* MyTripsVC.h */,
-				3188B1A516C9D34D008E1D7F /* MyTripsVC.m */,
-				3188B1A616C9D34D008E1D7F /* MyTripsVC.xib */,
-				3188B1AB16C9D508008E1D7F /* FollowVC.h */,
-				3188B1AC16C9D509008E1D7F /* FollowVC.m */,
-				3188B1AD16C9D509008E1D7F /* FollowVC.xib */,
-				3188B1B016C9D5B7008E1D7F /* ProfileVC.h */,
-				3188B1B116C9D5B7008E1D7F /* ProfileVC.m */,
-				3188B1B216C9D5B7008E1D7F /* ProfileVC.xib */,
+				3C60C7CD16E6C28300FDFD7D /* ViewControllers */,
 				3188B19116C9CE4E008E1D7F /* images */,
 				3188B16116C9CE17008E1D7F /* Supporting Files */,
 			);
@@ -164,6 +153,81 @@
 				3188B19516C9CEC0008E1D7F /* map-pin.png */,
 			);
 			name = images;
+			sourceTree = "<group>";
+		};
+		3C60C7CD16E6C28300FDFD7D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3C60C7CE16E6C29200FDFD7D /* Maps */,
+				3C60C7CF16E6C29700FDFD7D /* Camera */,
+				3C60C7D216E6C2A900FDFD7D /* My Trips */,
+				3C60C7D116E6C2A300FDFD7D /* Follow */,
+				3C60C7D016E6C29E00FDFD7D /* Profile */,
+				3C60C7D316E6C2AF00FDFD7D /* Common */,
+				3188B16916C9CE17008E1D7F /* AppDelegate.h */,
+				3188B16A16C9CE17008E1D7F /* AppDelegate.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		3C60C7CE16E6C29200FDFD7D /* Maps */ = {
+			isa = PBXGroup;
+			children = (
+				318BA1B216C9E66800700BB8 /* MapsVC.h */,
+				318BA1B316C9E66800700BB8 /* MapsVC.m */,
+				318BA1B416C9E66800700BB8 /* MapsVC.xib */,
+			);
+			name = Maps;
+			sourceTree = "<group>";
+		};
+		3C60C7CF16E6C29700FDFD7D /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				3188B19F16C9D2B4008E1D7F /* CameraVC.h */,
+				3188B1A016C9D2B4008E1D7F /* CameraVC.m */,
+				3188B1A116C9D2B4008E1D7F /* CameraVC.xib */,
+			);
+			name = Camera;
+			sourceTree = "<group>";
+		};
+		3C60C7D016E6C29E00FDFD7D /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				3188B1B016C9D5B7008E1D7F /* ProfileVC.h */,
+				3188B1B116C9D5B7008E1D7F /* ProfileVC.m */,
+				3188B1B216C9D5B7008E1D7F /* ProfileVC.xib */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		3C60C7D116E6C2A300FDFD7D /* Follow */ = {
+			isa = PBXGroup;
+			children = (
+				3188B1AB16C9D508008E1D7F /* FollowVC.h */,
+				3188B1AC16C9D509008E1D7F /* FollowVC.m */,
+				3188B1AD16C9D509008E1D7F /* FollowVC.xib */,
+			);
+			name = Follow;
+			sourceTree = "<group>";
+		};
+		3C60C7D216E6C2A900FDFD7D /* My Trips */ = {
+			isa = PBXGroup;
+			children = (
+				3188B1A416C9D34D008E1D7F /* MyTripsVC.h */,
+				3188B1A516C9D34D008E1D7F /* MyTripsVC.m */,
+				3188B1A616C9D34D008E1D7F /* MyTripsVC.xib */,
+			);
+			name = "My Trips";
+			sourceTree = "<group>";
+		};
+		3C60C7D316E6C2AF00FDFD7D /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				3C60C7D416E6CA6C00FDFD7D /* TripBrowserVC.h */,
+				3C60C7D516E6CA6C00FDFD7D /* TripBrowserVC.m */,
+				3C60C7D616E6CA6C00FDFD7D /* TripBrowserVC.xib */,
+			);
+			name = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,6 +295,7 @@
 				3188B1AF16C9D509008E1D7F /* FollowVC.xib in Resources */,
 				3188B1B416C9D5B7008E1D7F /* ProfileVC.xib in Resources */,
 				318BA1B616C9E66800700BB8 /* MapsVC.xib in Resources */,
+				3C60C7D816E6CA6C00FDFD7D /* TripBrowserVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +313,7 @@
 				3188B1AE16C9D509008E1D7F /* FollowVC.m in Sources */,
 				3188B1B316C9D5B7008E1D7F /* ProfileVC.m in Sources */,
 				318BA1B516C9E66800700BB8 /* MapsVC.m in Sources */,
+				3C60C7D716E6CA6C00FDFD7D /* TripBrowserVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
