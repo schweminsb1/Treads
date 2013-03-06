@@ -32,8 +32,7 @@
 		318BA1B516C9E66800700BB8 /* MapsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 318BA1B316C9E66800700BB8 /* MapsVC.m */; };
 		318BA1B616C9E66800700BB8 /* MapsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 318BA1B416C9E66800700BB8 /* MapsVC.xib */; };
 		318D8C3716CA9509005A42F6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 318D8C3516CA94E1005A42F6 /* MapKit.framework */; };
-		3C60C7D716E6CA6C00FDFD7D /* TripBrowserVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C60C7D516E6CA6C00FDFD7D /* TripBrowserVC.m */; };
-		3C60C7D816E6CA6C00FDFD7D /* TripBrowserVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C60C7D616E6CA6C00FDFD7D /* TripBrowserVC.xib */; };
+		3C60C7DB16E7004900FDFD7D /* TripBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C60C7DA16E7004900FDFD7D /* TripBrowser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,9 +70,8 @@
 		318BA1B316C9E66800700BB8 /* MapsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapsVC.m; sourceTree = "<group>"; };
 		318BA1B416C9E66800700BB8 /* MapsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapsVC.xib; sourceTree = "<group>"; };
 		318D8C3516CA94E1005A42F6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		3C60C7D416E6CA6C00FDFD7D /* TripBrowserVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripBrowserVC.h; path = treads/TripBrowserVC.h; sourceTree = SOURCE_ROOT; };
-		3C60C7D516E6CA6C00FDFD7D /* TripBrowserVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripBrowserVC.m; path = treads/TripBrowserVC.m; sourceTree = SOURCE_ROOT; };
-		3C60C7D616E6CA6C00FDFD7D /* TripBrowserVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TripBrowserVC.xib; path = treads/TripBrowserVC.xib; sourceTree = SOURCE_ROOT; };
+		3C60C7D916E7004900FDFD7D /* TripBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripBrowser.h; path = treads/TripBrowser.h; sourceTree = SOURCE_ROOT; };
+		3C60C7DA16E7004900FDFD7D /* TripBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripBrowser.m; path = treads/TripBrowser.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,9 +221,8 @@
 		3C60C7D316E6C2AF00FDFD7D /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				3C60C7D416E6CA6C00FDFD7D /* TripBrowserVC.h */,
-				3C60C7D516E6CA6C00FDFD7D /* TripBrowserVC.m */,
-				3C60C7D616E6CA6C00FDFD7D /* TripBrowserVC.xib */,
+				3C60C7D916E7004900FDFD7D /* TripBrowser.h */,
+				3C60C7DA16E7004900FDFD7D /* TripBrowser.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -295,7 +292,6 @@
 				3188B1AF16C9D509008E1D7F /* FollowVC.xib in Resources */,
 				3188B1B416C9D5B7008E1D7F /* ProfileVC.xib in Resources */,
 				318BA1B616C9E66800700BB8 /* MapsVC.xib in Resources */,
-				3C60C7D816E6CA6C00FDFD7D /* TripBrowserVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,7 +309,7 @@
 				3188B1AE16C9D509008E1D7F /* FollowVC.m in Sources */,
 				3188B1B316C9D5B7008E1D7F /* ProfileVC.m in Sources */,
 				318BA1B516C9E66800700BB8 /* MapsVC.m in Sources */,
-				3C60C7D716E6CA6C00FDFD7D /* TripBrowserVC.m in Sources */,
+				3C60C7DB16E7004900FDFD7D /* TripBrowser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

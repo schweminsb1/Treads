@@ -1,5 +1,5 @@
 //
-//  TripBrowserVC.h
+//  TripBrowser.h
 //  treads
 //
 //  Created by keavneyrj1 on 3/5/13.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TripBrowserVC : UIViewController
+@interface TripBrowser : UIView
 
 @end
