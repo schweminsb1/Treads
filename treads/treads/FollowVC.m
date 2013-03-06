@@ -7,6 +7,7 @@
 //
 
 #import "FollowVC.h"
+#import "TripBrowser.h"
 
 @interface FollowVC () {
     NSArray* labelText;
@@ -31,6 +32,9 @@
     [super viewDidLoad];
     
     labelText = @[@"Following Page", @"Feed Page", @"Favorites Page"];
+    
+    self.browser = [[TripBrowser alloc]init];
+    //[self.browser addSubview: [[TripBrowser alloc] init]];
     
 }
 
