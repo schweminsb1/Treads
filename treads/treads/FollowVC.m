@@ -7,13 +7,19 @@
 //
 
 #import "FollowVC.h"
+
 #import "TripBrowser.h"
 
+#import "TripService.h"
 #import "Trip.h"
 
 @interface FollowVC () {
     NSArray* labelText;
+    NSArray* labelSelector;
 }
+
+@property (strong) TripService* tripService;
+@property (strong) TripBrowser* browser;
 
 @end
 
@@ -23,8 +29,12 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        //toolbar
         self.title = NSLocalizedString(@"Follow", @"Follow");
         self.tabBarItem.image = [UIImage imageNamed:@"earth-usa.png"];
+        
+        //set up services
+        self.tripService = [[TripService alloc] init];
     }
     return self;
 }
@@ -34,20 +44,27 @@
     [super viewDidLoad];
     
     labelText = @[@"Following Page", @"Feed Page", @"Favorites Page"];
+    labelSelector = @[
+                       ^NSArray*(void) { return [self.tripService getFollowingTrips]; },
+                       ^NSArray*(void) { return [self.tripService getFeedTrips]; },
+                       ^NSArray*(void) { return [self.tripService getAllTrips]; }
+                      ];
     
-    TripBrowser* browser = [[TripBrowser alloc] initWithFrame:self.browserWindow.frame];
-    [self.browserWindow addSubview: browser];
+    //set up browser
+    self.browser = [[TripBrowser alloc] initWithFrame:self.browserWindow.bounds];
+    [self.browserWindow addSubview: self.browser];
     
-    Trip* trip1 = [[Trip alloc] init];
-    trip1.name = @"Test Trip 1";
-    NSArray* tripData = [[NSArray alloc] initWithObjects: trip1, nil];
-    [browser setBrowserData:tripData];
-    
+    //load browser data
+    NSArray*(^getNewData)(void) = labelSelector[1];
+    [self.browser setBrowserData: getNewData()];
 }
 
--(IBAction)segmentControlChange:(UISegmentedControl*)sender
+- (IBAction)segmentControlChange:(UISegmentedControl*)sender
 {
     self.label.text = labelText[sender.selectedSegmentIndex];
+    
+    NSArray*(^getNewData)(void) = labelSelector[sender.selectedSegmentIndex];
+    [self.browser setBrowserData: getNewData()];
 }
 
 - (void)didReceiveMemoryWarning

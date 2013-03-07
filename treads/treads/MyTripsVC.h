@@ -10,4 +10,6 @@
 
 @interface MyTripsVC : UIViewController
 
+@property (strong) IBOutlet UIView* browserWindow;
+
 @end
