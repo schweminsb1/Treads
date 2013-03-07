@@ -29,7 +29,7 @@
         [[UINavigationController alloc] initWithRootViewController:followVC],
         [[UINavigationController alloc] initWithRootViewController:mapsVC],
         cameraVC,
-        myTripsVC,
+        [[UINavigationController alloc] initWithRootViewController:myTripsVC],
         //followVC,
         profileVC
         ];

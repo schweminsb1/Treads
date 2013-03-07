@@ -15,55 +15,54 @@
 @end
 
 @implementation TripBrowser {
-    NSArray* sortedListData;
-    
-    CGRect browserFrame;
+    NSArray* sortedListData;    
+    //CGRect browserFrame;
     UITableView* browserTable;
 }
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-        browserFrame.origin = CGPointMake(10, 10);
-        browserFrame.size = frame.size;
-        browserFrame.size.height -= 20;
-        browserFrame.size.width -= 20;
-        
+    if ((self = [super initWithFrame:frame])) {
         [self layoutSubviews];
     }
     return self;
 }
 
--(void) layoutSubviews {
+- (void)layoutSubviews
+{
     [super layoutSubviews];
     
-    [self setBackgroundColor:[UIColor redColor]];
-    
     //set up table view
-    browserTable = [[UITableView alloc] initWithFrame:browserFrame style:UITableViewStylePlain];
+    browserTable = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
     [browserTable setDelegate:self];
     [browserTable setDataSource:self];
     [self addSubview:browserTable];
 }
 
--(void) setBrowserData:(NSArray*)newSortedData
+#pragma mark - Data Setting/Interaction
+
+- (void)setBrowserData:(NSArray*)newSortedData
 {
     sortedListData = newSortedData;
+    
+    [browserTable reloadData];
+    [browserTable setContentOffset:CGPointZero animated:NO];
 }
 
 #pragma mark - UITableViewDataSource
 
-//-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+//{
 //    return 1;//sortedListData.count;
 //}
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return sortedListData.count;
 }
 
--(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier: @"CELL"];
     if (!cell)
         cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: @"CELL"];
@@ -75,7 +74,8 @@
 
 #pragma mark - UITableViewDelegate
 
-//-(CGFloat) tableView: tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//- (CGFloat) tableView: tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
 //    return 200;
 //}
 

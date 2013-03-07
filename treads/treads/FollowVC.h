@@ -10,9 +10,9 @@
 
 @interface FollowVC : UIViewController
 
-@property (strong) IBOutlet UILabel* label;
-
 @property (strong) IBOutlet UIView* browserWindow;
+
+@property (strong) IBOutlet UILabel* label;
 
 -(IBAction)segmentControlChange:(UISegmentedControl*)sender;
 

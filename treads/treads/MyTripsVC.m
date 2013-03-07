@@ -8,7 +8,14 @@
 
 #import "MyTripsVC.h"
 
+#import "TripBrowser.h"
+
+#import "TripService.h"
+#import "Trip.h"
+
 @interface MyTripsVC ()
+
+@property (strong) TripService* tripService;
 
 @end
 
@@ -19,6 +26,9 @@
     if (self) {
         self.title = NSLocalizedString(@"My Trips", @"My Trips");
         self.tabBarItem.image = [UIImage imageNamed:@"backpack.png"];
+        
+        //set up services
+        self.tripService = [[TripService alloc] init];
     }
     return self;
 }
@@ -26,7 +36,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    //set up browser
+    TripBrowser* browser = [[TripBrowser alloc] initWithFrame:self.browserWindow.bounds];
+    [self.browserWindow addSubview: browser];
+    
+    //load browser data
+    [browser setBrowserData:[self.tripService getTripsFromProfile:@"Active User"]];
 }
 
 - (void)didReceiveMemoryWarning
