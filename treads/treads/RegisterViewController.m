@@ -112,7 +112,12 @@
                     
                     NSString * test= [self getPasswordHash:@"password"];
                     NSString * hashedPassword= [ self getPasswordHash:_password.text];
-                    NSDictionary * newItem= @{@"userID":[NSNumber numberWithInt:newID] ,  @"emailAddress": _emailAdress.text,  @"password": hashedPassword , @"Fname": _firstName.text , @"Lname": _lastName.text };
+                    NSDictionary * newItem= @{@"userID":[NSNumber numberWithInt:newID] ,
+                                              @"emailAddress": [NSString stringWithString:_emailAdress.text],
+                                              @"password": [NSString stringWithString:hashedPassword] ,
+                                              @"Fname": [NSString stringWithString:_firstName.text] ,
+                                              @"Lname": [NSString stringWithString:_lastName.text]
+                                              };
                     
                     [UserTable insert:newItem completion:itemBlock];
                     
