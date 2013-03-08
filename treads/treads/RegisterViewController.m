@@ -67,7 +67,15 @@
    }
     else
     {
-        if(![_password.text isEqualToString:_confirmPassword.text])
+        if(_password.text.length < 8)
+        {
+            alert.message = @"Passwords must be 8 or more characters long";
+            _password.text =@"";
+            _confirmPassword.text = @"";
+            [alert show];
+            return;
+        }
+        else if(![_password.text isEqualToString:_confirmPassword.text])
         {
             alert.message = @"The Passwords do not match";
             _password.text = @"";
