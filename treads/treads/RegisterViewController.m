@@ -133,7 +133,7 @@
                 }
                 
             };
-            MSReadQueryBlock checkEmail = ^(NSArray *items, NSInteger totalCount, NSError *error)
+            MSReadQueryBlock checkEmail = ^(NSArray *items, NSInteger totaldCount, NSError *error)
             {
                 int count= items.count;
                 if(error)
