@@ -13,6 +13,7 @@
 #import "MyTripsVC.h"
 #import "FollowVC.h"
 #import "ProfileVC.h"
+#import "LoginViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 

@@ -14,6 +14,10 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
+    //Set up MSClient
+    MSClient *client = [MSClient clientWithApplicationURLString:@"https://treads.azure-mobile.net/"
+                                             withApplicationKey:@"uxbEolJjpIKEpNJSnsNEuGehMowvxj53"];
+    
     //Initialize ViewControllers
     UIViewController *mapsVC, *cameraVC, *myTripsVC, *followVC, *profileVC;
     
@@ -22,6 +26,15 @@
     myTripsVC = [[MyTripsVC alloc] initWithNibName:@"MyTripsVC" bundle:nil];
     followVC = [[FollowVC alloc] initWithNibName:@"FollowVC" bundle:nil];
     profileVC = [[ProfileVC alloc] initWithNibName:@"ProfileVC" bundle:nil];
+    
+    LoginViewController * login;
+    
+    //Set the login controller to default
+    login= [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil client:client AppDelegate:self];
+    login.title = @"Login";
+    UINavigationController * LoginNavigation = [[UINavigationController alloc] initWithRootViewController:login];
+    
+    self.window.rootViewController=LoginNavigation;
     
     //Initialize and assign to Tab Bar
     self.tabBarController = [[UITabBarController alloc] init];
@@ -33,7 +46,7 @@
         //followVC,
         profileVC
         ];
-    self.window.rootViewController = self.tabBarController;
+    //self.window.rootViewController = self.tabBarController;
     
     [self.window makeKeyAndVisible];
     return YES;
