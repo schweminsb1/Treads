@@ -28,6 +28,9 @@
 		318BA1B516C9E66800700BB8 /* MapsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 318BA1B316C9E66800700BB8 /* MapsVC.m */; };
 		318BA1B616C9E66800700BB8 /* MapsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 318BA1B416C9E66800700BB8 /* MapsVC.xib */; };
 		318D8C3716CA9509005A42F6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 318D8C3516CA94E1005A42F6 /* MapKit.framework */; };
+		39164F5316EA91C200877549 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39164F5216EA91C200877549 /* CoreLocation.framework */; };
+		39164F5716EA92C600877549 /* TripViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39164F5516EA92C600877549 /* TripViewVC.m */; };
+		39164F5816EA92C600877549 /* TripViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39164F5616EA92C600877549 /* TripViewVC.xib */; };
 		3C60C7DB16E7004900FDFD7D /* TripBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C60C7DA16E7004900FDFD7D /* TripBrowser.m */; };
 		3C8A908C16E7DAA2007F0BB8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C8A908B16E7DAA2007F0BB8 /* Default-568h@2x.png */; };
 		3C8A909016E7DFC8007F0BB8 /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8A908F16E7DFC8007F0BB8 /* Trip.m */; };
@@ -77,6 +80,10 @@
 		318BA1B316C9E66800700BB8 /* MapsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapsVC.m; sourceTree = "<group>"; };
 		318BA1B416C9E66800700BB8 /* MapsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapsVC.xib; sourceTree = "<group>"; };
 		318D8C3516CA94E1005A42F6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		39164F5216EA91C200877549 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		39164F5416EA92C600877549 /* TripViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripViewVC.h; path = treads/TripViewVC.h; sourceTree = SOURCE_ROOT; };
+		39164F5516EA92C600877549 /* TripViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripViewVC.m; path = treads/TripViewVC.m; sourceTree = SOURCE_ROOT; };
+		39164F5616EA92C600877549 /* TripViewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TripViewVC.xib; path = treads/TripViewVC.xib; sourceTree = SOURCE_ROOT; };
 		3C60C7D916E7004900FDFD7D /* TripBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripBrowser.h; path = treads/TripBrowser.h; sourceTree = SOURCE_ROOT; };
 		3C60C7DA16E7004900FDFD7D /* TripBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripBrowser.m; path = treads/TripBrowser.m; sourceTree = SOURCE_ROOT; };
 		3C8A908B16E7DAA2007F0BB8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -108,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39164F5316EA91C200877549 /* CoreLocation.framework in Frameworks */,
 				3C95900816EA6DFE0038AD7C /* WindowsAzureMobileServices.framework in Frameworks */,
 				318D8C3716CA9509005A42F6 /* MapKit.framework in Frameworks */,
 				3188B15B16C9CE17008E1D7F /* UIKit.framework in Frameworks */,
@@ -139,6 +147,7 @@
 		3188B15916C9CE17008E1D7F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				39164F5216EA91C200877549 /* CoreLocation.framework */,
 				3C95900716EA6DFE0038AD7C /* WindowsAzureMobileServices.framework */,
 				318D8C3516CA94E1005A42F6 /* MapKit.framework */,
 				3188B15A16C9CE17008E1D7F /* UIKit.framework */,
@@ -194,9 +203,20 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		39164F4F16EA8A1D00877549 /* Trip View */ = {
+			isa = PBXGroup;
+			children = (
+				39164F5416EA92C600877549 /* TripViewVC.h */,
+				39164F5516EA92C600877549 /* TripViewVC.m */,
+				39164F5616EA92C600877549 /* TripViewVC.xib */,
+			);
+			name = "Trip View";
+			sourceTree = "<group>";
+		};
 		3C60C7CD16E6C28300FDFD7D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				39164F4F16EA8A1D00877549 /* Trip View */,
 				3C958FF216EA6CD20038AD7C /* Login */,
 				3C958FF316EA6CDB0038AD7C /* Register */,
 				3C60C7CE16E6C29200FDFD7D /* Maps */,
@@ -383,6 +403,7 @@
 				3C958FF116EA6C4F0038AD7C /* virgin_river_hiking.jpg in Resources */,
 				3C958FF816EA6CED0038AD7C /* LoginViewController.xib in Resources */,
 				3C958FFD16EA6CFF0038AD7C /* RegisterViewController.xib in Resources */,
+				39164F5816EA92C600877549 /* TripViewVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +429,7 @@
 				3C95900416EA6D220038AD7C /* MapPinAnnotation.m in Sources */,
 				3C95900516EA6D220038AD7C /* Path.m in Sources */,
 				3C95900616EA6D220038AD7C /* TreadsSession.m in Sources */,
+				39164F5716EA92C600877549 /* TripViewVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
