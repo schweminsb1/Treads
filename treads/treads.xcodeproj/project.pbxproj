@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29E2E89E16EAB3EC0010C19B /* mountains.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29E2E89D16EAB3EC0010C19B /* mountains.jpg */; };
 		3188B15B16C9CE17008E1D7F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3188B15A16C9CE17008E1D7F /* UIKit.framework */; };
 		3188B15D16C9CE17008E1D7F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3188B15C16C9CE17008E1D7F /* Foundation.framework */; };
 		3188B15F16C9CE17008E1D7F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3188B15E16C9CE17008E1D7F /* CoreGraphics.framework */; };
@@ -50,6 +51,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		29E2E89D16EAB3EC0010C19B /* mountains.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = mountains.jpg; path = treads/mountains.jpg; sourceTree = SOURCE_ROOT; };
 		3188B15716C9CE17008E1D7F /* treads.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = treads.temp_caseinsensitive_rename.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3188B15A16C9CE17008E1D7F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3188B15C16C9CE17008E1D7F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -190,6 +192,7 @@
 		3188B19116C9CE4E008E1D7F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				29E2E89D16EAB3EC0010C19B /* mountains.jpg */,
 				3C958FEA16EA6C4F0038AD7C /* helicopter-bouldering-crash-pad.jpg */,
 				3C958FEB16EA6C4F0038AD7C /* remote-luxury-hiking-canada.jpg */,
 				3C958FEC16EA6C4F0038AD7C /* summit-boots-hiking-rocks.jpg */,
@@ -404,6 +407,7 @@
 				3C958FF816EA6CED0038AD7C /* LoginViewController.xib in Resources */,
 				3C958FFD16EA6CFF0038AD7C /* RegisterViewController.xib in Resources */,
 				39164F5816EA92C600877549 /* TripViewVC.xib in Resources */,
+				29E2E89E16EAB3EC0010C19B /* mountains.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

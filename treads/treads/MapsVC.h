@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MapPinAnnotation.h"
+#import <MapKit/MapKit.h>
 
 @interface MapsVC : UIViewController
 
