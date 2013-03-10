@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
 @interface MapsVC : UIViewController
 
 @property (strong) IBOutlet UISearchBar* searchBar;
+
+@property (strong) IBOutlet MKMapView* mapView;
+
+@property (strong) CLLocationManager* locationManager;
 
 @end
