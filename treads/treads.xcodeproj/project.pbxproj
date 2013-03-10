@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		316399B616ECB3F6003B3F0E /* EditTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 316399B416ECB3F6003B3F0E /* EditTripViewController.m */; };
+		316399B716ECB3F6003B3F0E /* EditTripViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 316399B516ECB3F6003B3F0E /* EditTripViewController.xib */; };
 		3188B15B16C9CE17008E1D7F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3188B15A16C9CE17008E1D7F /* UIKit.framework */; };
 		3188B15D16C9CE17008E1D7F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3188B15C16C9CE17008E1D7F /* Foundation.framework */; };
 		3188B15F16C9CE17008E1D7F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3188B15E16C9CE17008E1D7F /* CoreGraphics.framework */; };
@@ -52,6 +54,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		316399B316ECB3F6003B3F0E /* EditTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditTripViewController.h; path = treads/EditTripViewController.h; sourceTree = SOURCE_ROOT; };
+		316399B416ECB3F6003B3F0E /* EditTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditTripViewController.m; path = treads/EditTripViewController.m; sourceTree = SOURCE_ROOT; };
+		316399B516ECB3F6003B3F0E /* EditTripViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EditTripViewController.xib; path = treads/EditTripViewController.xib; sourceTree = SOURCE_ROOT; };
 		3188B15716C9CE17008E1D7F /* treads.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = treads.temp_caseinsensitive_rename.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3188B15A16C9CE17008E1D7F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3188B15C16C9CE17008E1D7F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -132,6 +137,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		316399B816ECB404003B3F0E /* EditTrip */ = {
+			isa = PBXGroup;
+			children = (
+				316399B316ECB3F6003B3F0E /* EditTripViewController.h */,
+				316399B416ECB3F6003B3F0E /* EditTripViewController.m */,
+				316399B516ECB3F6003B3F0E /* EditTripViewController.xib */,
+			);
+			name = EditTrip;
+			sourceTree = "<group>";
+		};
 		3188B14E16C9CE16008E1D7F = {
 			isa = PBXGroup;
 			children = (
@@ -231,6 +246,7 @@
 		3C60C7CD16E6C28300FDFD7D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				316399B816ECB404003B3F0E /* EditTrip */,
 				39164F5916EAA3A800877549 /* Add Location */,
 				39164F4F16EA8A1D00877549 /* Trip View */,
 				3C958FF216EA6CD20038AD7C /* Login */,
@@ -421,6 +437,7 @@
 				3C958FFD16EA6CFF0038AD7C /* RegisterViewController.xib in Resources */,
 				39164F5816EA92C600877549 /* TripViewVC.xib in Resources */,
 				39164F5E16EAA3E000877549 /* AddLocationViewController.xib in Resources */,
+				316399B716ECB3F6003B3F0E /* EditTripViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +465,7 @@
 				3C95900616EA6D220038AD7C /* TreadsSession.m in Sources */,
 				39164F5716EA92C600877549 /* TripViewVC.m in Sources */,
 				39164F5D16EAA3E000877549 /* AddLocationViewController.m in Sources */,
+				316399B616ECB3F6003B3F0E /* EditTripViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -37,7 +37,7 @@
         _appDelegate=(AppDelegate *)appdelegate;
         
         pictures = [[NSMutableArray alloc]init];
-        [pictures addObject:[UIImage imageNamed:@"mountains.jpg"]];
+        //[pictures addObject:[UIImage imageNamed:@"mountains.jpg"]];
         [pictures addObject:[UIImage imageNamed:@"remote-luxury-hiking-canada.jpg"]];
         [pictures addObject:[UIImage imageNamed:@"summit-boots-hiking-rocks.jpg"]];
         [pictures addObject:[UIImage imageNamed:@"helicopter-bouldering-crash-pad.jpg"]];
