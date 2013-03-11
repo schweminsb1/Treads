@@ -7,6 +7,7 @@
 //
 
 #import "MapsVC.h"
+#import "MapPinAnnotation.h"
 
 
 @interface MapsVC ()
@@ -24,9 +25,9 @@
     return self;
 }
 
-- (void)viewDidLoad
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidLoad];
+    [super viewDidAppear:YES];
     // Do any additional setup after loading the view from its nib.
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
