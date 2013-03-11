@@ -28,6 +28,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }
+- (IBAction)EditClick:(id)sender
+{
+    // calls edit trips page
+    
+}
 
 - (void)didReceiveMemoryWarning
 {

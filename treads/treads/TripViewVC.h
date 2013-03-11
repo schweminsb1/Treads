@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface TripViewVC : UIViewController
+-(IBAction) EditClick:(id) sender;
 
 @end
