@@ -44,12 +44,12 @@
     followVC = [[FollowVC alloc] initWithNibName:@"FollowVC" bundle:nil withTripService:self.tripService];
     profileVC = [[ProfileVC alloc] initWithNibName:@"ProfileVC" bundle:nil];
     
-    //LoginViewController* login;
+    LoginViewController* login;
     
     //Set the login controller to default
-    //login = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil client:client AppDelegate:self];
-    //login.title = @"Login";
-    //UINavigationController* LoginNavigation = [[UINavigationController alloc] initWithRootViewController:login];
+    login = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil client:self.dataRepository.client AppDelegate:self];
+    login.title = @"Login";
+    UINavigationController* LoginNavigation = [[UINavigationController alloc] initWithRootViewController:login];
     
     //self.window.rootViewController=LoginNavigation;
     
