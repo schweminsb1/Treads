@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3118BFEE16EFC588006DE2E9 /* compass.png in Resources */ = {isa = PBXBuildFile; fileRef = 3118BFED16EFC588006DE2E9 /* compass.png */; };
 		316399B616ECB3F6003B3F0E /* EditTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 316399B416ECB3F6003B3F0E /* EditTripViewController.m */; };
 		316399B716ECB3F6003B3F0E /* EditTripViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 316399B516ECB3F6003B3F0E /* EditTripViewController.xib */; };
 		3188B15B16C9CE17008E1D7F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3188B15A16C9CE17008E1D7F /* UIKit.framework */; };
@@ -17,7 +18,6 @@
 		3188B19316C9CE6A008E1D7F /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 3188B19216C9CE6A008E1D7F /* camera.png */; };
 		3188B19616C9CEC0008E1D7F /* man.png in Resources */ = {isa = PBXBuildFile; fileRef = 3188B19416C9CEC0008E1D7F /* man.png */; };
 		3188B19716C9CEC0008E1D7F /* map-pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 3188B19516C9CEC0008E1D7F /* map-pin.png */; };
-		3188B19916C9CF10008E1D7F /* earth-usa.png in Resources */ = {isa = PBXBuildFile; fileRef = 3188B19816C9CF10008E1D7F /* earth-usa.png */; };
 		3188B1A216C9D2B4008E1D7F /* CameraVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3188B1A016C9D2B4008E1D7F /* CameraVC.m */; };
 		3188B1A316C9D2B4008E1D7F /* CameraVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3188B1A116C9D2B4008E1D7F /* CameraVC.xib */; };
 		3188B1A716C9D34D008E1D7F /* MyTripsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3188B1A516C9D34D008E1D7F /* MyTripsVC.m */; };
@@ -55,6 +55,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3118BFED16EFC588006DE2E9 /* compass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compass.png; sourceTree = "<group>"; };
 		316399B316ECB3F6003B3F0E /* EditTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditTripViewController.h; path = treads/EditTripViewController.h; sourceTree = SOURCE_ROOT; };
 		316399B416ECB3F6003B3F0E /* EditTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditTripViewController.m; path = treads/EditTripViewController.m; sourceTree = SOURCE_ROOT; };
 		316399B516ECB3F6003B3F0E /* EditTripViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EditTripViewController.xib; path = treads/EditTripViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -70,7 +71,6 @@
 		3188B19216C9CE6A008E1D7F /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
 		3188B19416C9CEC0008E1D7F /* man.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = man.png; sourceTree = "<group>"; };
 		3188B19516C9CEC0008E1D7F /* map-pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map-pin.png"; sourceTree = "<group>"; };
-		3188B19816C9CF10008E1D7F /* earth-usa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "earth-usa.png"; sourceTree = "<group>"; };
 		3188B19F16C9D2B4008E1D7F /* CameraVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraVC.h; sourceTree = "<group>"; };
 		3188B1A016C9D2B4008E1D7F /* CameraVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraVC.m; sourceTree = "<group>"; };
 		3188B1A116C9D2B4008E1D7F /* CameraVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraVC.xib; sourceTree = "<group>"; };
@@ -212,13 +212,13 @@
 		3188B19116C9CE4E008E1D7F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3118BFED16EFC588006DE2E9 /* compass.png */,
 				3914480A16EE4B20001B16BE /* mountains.jpeg */,
 				3C958FEA16EA6C4F0038AD7C /* helicopter-bouldering-crash-pad.jpg */,
 				3C958FEB16EA6C4F0038AD7C /* remote-luxury-hiking-canada.jpg */,
 				3C958FEC16EA6C4F0038AD7C /* summit-boots-hiking-rocks.jpg */,
 				3C958FED16EA6C4F0038AD7C /* virgin_river_hiking.jpg */,
 				3188B1A916C9D4D1008E1D7F /* backpack.png */,
-				3188B19816C9CF10008E1D7F /* earth-usa.png */,
 				3188B19416C9CEC0008E1D7F /* man.png */,
 				3188B19216C9CE6A008E1D7F /* camera.png */,
 				3188B19516C9CEC0008E1D7F /* map-pin.png */,
@@ -424,7 +424,6 @@
 				3188B19316C9CE6A008E1D7F /* camera.png in Resources */,
 				3188B19616C9CEC0008E1D7F /* man.png in Resources */,
 				3188B19716C9CEC0008E1D7F /* map-pin.png in Resources */,
-				3188B19916C9CF10008E1D7F /* earth-usa.png in Resources */,
 				3188B1A316C9D2B4008E1D7F /* CameraVC.xib in Resources */,
 				3188B1A816C9D34D008E1D7F /* MyTripsVC.xib in Resources */,
 				3188B1AA16C9D4D1008E1D7F /* backpack.png in Resources */,
@@ -442,6 +441,7 @@
 				39164F5E16EAA3E000877549 /* AddLocationViewController.xib in Resources */,
 				316399B716ECB3F6003B3F0E /* EditTripViewController.xib in Resources */,
 				3914480B16EE4B20001B16BE /* mountains.jpeg in Resources */,
+				3118BFEE16EFC588006DE2E9 /* compass.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
