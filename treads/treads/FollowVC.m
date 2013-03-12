@@ -32,7 +32,7 @@
     if (self) {
         //toolbar
         self.title = NSLocalizedString(@"Follow", @"Follow");
-        self.tabBarItem.image = [UIImage imageNamed:@"earth-usa.png"];
+        self.tabBarItem.image = [UIImage imageNamed:@"compass.png"];
         
         //set up services
         self.tripService = [[TripService alloc] init];
