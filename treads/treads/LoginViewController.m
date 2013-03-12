@@ -87,6 +87,7 @@
               MSReadQueryBlock queryBlock=^(NSArray *items, NSInteger totalCount, NSError *error) {
                   
             int count= [items count];
+            [_activityIndicatorView stopAnimating];
             if(error)
             {
                
@@ -104,12 +105,11 @@
                         
                         @try
                         {
-                             _treadsSession = [_treadsSession initWithAuthenticatedUser: [NSString stringWithString:(NSString *)[items[0][@"emailAddress"] lowercaseString]]];
-                           if(  [_treadsSession Login])
+                            //This inits a treadssession
+                             _treadsSession = [[TreadsSession new]initWithAuthenticatedUser: [NSString stringWithString:(NSString *)[items[0][@"emailAddress"] lowercaseString]]];
+                           if([_treadsSession Login])
                            {
-                               
-                               
-                               
+                               _appDelegate.window.rootViewController= _appDelegate.tabBarController;
                            }
                             else
                             {
@@ -118,7 +118,8 @@
                                 return;
                                 
                             }
-                             _appDelegate.window.rootViewController= _appDelegate.tabBarController;
+                          
+                             
                             
                         }
                         @catch (id exception)
@@ -159,8 +160,10 @@
         
         
         MSQuery * query= [[MSQuery alloc]initWithTable:UserTable withPredicate:predicate];
+        
         [UserTable readWithQueryString:[query queryStringOrError:&error] completion:queryBlock];
-
+        [_activityIndicatorView startAnimating];
+        
         //retrieve the username if it exists in the database
         //if it doesn't exist  then say wrong username and password
         //if it does exist see if our hashed value matches the value stored in the database

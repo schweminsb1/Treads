@@ -16,5 +16,7 @@
 -(id) initWithAuthenticatedUser: (NSString *)user;
 -(BOOL) Login;
 -(BOOL) Logout;
+-(NSString * ) valueOfFile;
+
 
 @end
