@@ -47,10 +47,15 @@
     //set up segmented control
     browserModeControlLabels = @[@"Following", @"Feed", @"Favorites"];
     browserModeControlActions = @[
-                       ^NSArray*(void) { return [self.tripService getFollowingTrips]; },
-                       ^NSArray*(void) { return [self.tripService getFeedTrips]; },
-                       ^NSArray*(void) { return [self.tripService getAllTrips]; }
+                       ^void(void) { [self.tripService getAllTripsForTarget:self withAction:@selector(dataHasLoaded:)]; },
+                       ^void(void) { [self.tripService getAllTripsForTarget:self withAction:@selector(dataHasLoaded:)]; },
+                        ^void(void) { [self.tripService getAllTripsForTarget:self withAction:@selector(dataHasLoaded:)]; }
                       ];
+    //browserModeControlActions = @[
+    //                              ^NSArray*(void) { return [self.tripService getFollowingTrips]; },
+    //                               ^NSArray*(void) { return [self.tripService getFeedTrips]; },
+    //                               ^NSArray*(void) { return [self.tripService getAllTrips]; }
+    //                               ];
     self.browserModeControl = [[UISegmentedControl alloc] initWithItems:browserModeControlLabels];
     [self.browserModeControl addTarget:self action:@selector(segmentControlChange:) forControlEvents:UIControlEventValueChanged];
     [self.browserModeControl setSelectedSegmentIndex:1];
@@ -65,17 +70,25 @@
     [self.browserWindow addSubview: self.browser];
     
     //load browser data
-    NSArray*(^getNewData)(void) = browserModeControlActions[1];
-    [self.browser setBrowserData: getNewData() forTarget:self withAction:@selector(showTrip:)];
+    //NSArray*(^getNewData)(void) = browserModeControlActions[1];
+    //[self.browser setBrowserData: getNewData() forTarget:self withAction:@selector(showTrip:)];
+    void(^fcn)(void) = browserModeControlActions[1]; fcn();
 }
 
 - (void)segmentControlChange:(UISegmentedControl*)sender
 {
     //self.label.text = labelText[sender.selectedSegmentIndex];
     
-    NSArray*(^getNewData)(void) = browserModeControlActions[sender.selectedSegmentIndex];
+    //NSArray*(^getNewData)(void) = browserModeControlActions[sender.selectedSegmentIndex];
     //[self.browser setBrowserData: getNewData() withAction:^void(Trip* trip){[self showTrip:trip];}];
-    [self.browser setBrowserData: getNewData() forTarget: self withAction:@selector(showTrip:)];
+    //[self.browser setBrowserData: getNewData() forTarget: self withAction:@selector(showTrip:)];
+    [self.browser setBrowserData:nil forTarget:nil withAction:nil];
+    void(^fcn)(void) = browserModeControlActions[sender.selectedSegmentIndex]; fcn();
+}
+
+- (void)dataHasLoaded:(NSArray*)newData
+{
+    [self.browser setBrowserData:newData forTarget:self withAction:@selector(showTrip:)];
 }
 
 - (void)didReceiveMemoryWarning

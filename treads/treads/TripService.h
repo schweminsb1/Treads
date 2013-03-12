@@ -18,9 +18,9 @@
 - (void)getTripWithID:(int)tripID forTarget:(NSObject *)target withAction:(SEL)returnAction;
 
 //dummy services
-- (NSArray*)getAllTrips;
-- (NSArray*)getFollowingTrips;
-- (NSArray*)getFeedTrips;
-- (NSArray*)getTripsFromProfile: (NSString*)profileName;
+//- (NSArray*)getAllTrips;
+//- (NSArray*)getFollowingTrips;
+//- (NSArray*)getFeedTrips;
+//- (NSArray*)getTripsFromProfile: (NSString*)profileName;
 
 @end

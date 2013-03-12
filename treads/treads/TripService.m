@@ -38,48 +38,48 @@
 
 #pragma mark - dummy services
 
-- (NSArray*)getAllTrips
-{
-    NSMutableArray* tempArray = [[NSMutableArray alloc] init];
-    for (int i=0; i<100; i++) {
-        Trip* trip = [[Trip alloc] init];
-        trip.name = [NSString stringWithFormat:@"Global Test Trip %d", i];
-        [tempArray addObject:trip];
-    }
-    return [NSArray arrayWithArray:tempArray];
-}
-
-- (NSArray*)getFollowingTrips
-{
-    NSMutableArray* tempArray = [[NSMutableArray alloc] init];
-    for (int i=0; i<100; i++) {
-        Trip* trip = [[Trip alloc] init];
-        trip.name = [NSString stringWithFormat:@"Following Test Trip %d", i];
-        [tempArray addObject:trip];
-    }
-    return [NSArray arrayWithArray:tempArray];
-}
-
-- (NSArray*)getFeedTrips
-{
-    NSMutableArray* tempArray = [[NSMutableArray alloc] init];
-    for (int i=0; i<100; i++) {
-        Trip* trip = [[Trip alloc] init];
-        trip.name = [NSString stringWithFormat:@"Feed Test Trip %d", i];
-        [tempArray addObject:trip];
-    }
-    return [NSArray arrayWithArray:tempArray];
-}
-
-- (NSArray*)getTripsFromProfile:(NSString *)profileName
-{
-    NSMutableArray* tempArray = [[NSMutableArray alloc] init];
-    for (int i=0; i<100; i++) {
-        Trip* trip = [[Trip alloc] init];
-        trip.name = [NSString stringWithFormat:@"%@'s Test Trip %d", profileName, i];
-        [tempArray addObject:trip];
-    }
-    return [NSArray arrayWithArray:tempArray];
-}
+//- (NSArray*)getAllTrips
+//{
+//    NSMutableArray* tempArray = [[NSMutableArray alloc] init];
+//    for (int i=0; i<100; i++) {
+//        Trip* trip = [[Trip alloc] init];
+//        trip.name = [NSString stringWithFormat:@"Global Test Trip %d", i];
+//        [tempArray addObject:trip];
+//    }
+//    return [NSArray arrayWithArray:tempArray];
+//}
+//
+//- (NSArray*)getFollowingTrips
+//{
+//    NSMutableArray* tempArray = [[NSMutableArray alloc] init];
+//    for (int i=0; i<100; i++) {
+//        Trip* trip = [[Trip alloc] init];
+//        trip.name = [NSString stringWithFormat:@"Following Test Trip %d", i];
+//        [tempArray addObject:trip];
+//    }
+//    return [NSArray arrayWithArray:tempArray];
+//}
+//
+//- (NSArray*)getFeedTrips
+//{
+//    NSMutableArray* tempArray = [[NSMutableArray alloc] init];
+//    for (int i=0; i<100; i++) {
+//        Trip* trip = [[Trip alloc] init];
+//        trip.name = [NSString stringWithFormat:@"Feed Test Trip %d", i];
+//        [tempArray addObject:trip];
+//    }
+//    return [NSArray arrayWithArray:tempArray];
+//}
+//
+//- (NSArray*)getTripsFromProfile:(NSString *)profileName
+//{
+//    NSMutableArray* tempArray = [[NSMutableArray alloc] init];
+//    for (int i=0; i<100; i++) {
+//        Trip* trip = [[Trip alloc] init];
+//        trip.name = [NSString stringWithFormat:@"%@'s Test Trip %d", profileName, i];
+//        [tempArray addObject:trip];
+//    }
+//    return [NSArray arrayWithArray:tempArray];
+//}
 
 @end

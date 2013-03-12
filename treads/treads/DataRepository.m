@@ -57,7 +57,7 @@
             [returnData addObject:trip];
         }
         @catch (NSException* exception) {
-            trip.name = @"ERROR";
+            trip.name = @"Error - could not parse trip data";
             [returnData addObject:trip];
         }
     }
