@@ -16,20 +16,21 @@
 @interface MyTripsVC ()
 
 @property (strong) TripService* tripService;
+@property (strong) TripBrowser* browser;
 @property (strong) UIBarButtonItem* tripNewButton;
 
 @end
 
 @implementation MyTripsVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withTripService:(TripService *)tripServiceHandle
 {
     if (self) {
         self.title = NSLocalizedString(@"My Trips", @"My Trips");
         self.tabBarItem.image = [UIImage imageNamed:@"backpack.png"];
         
         //set up services
-        self.tripService = [[TripService alloc] init];
+        self.tripService = tripServiceHandle;//[[TripService alloc] init];
     }
     return self;
 }
@@ -46,11 +47,19 @@
     self.navigationItem.rightBarButtonItem = self.tripNewButton;
     
     //set up browser
-    TripBrowser* browser = [[TripBrowser alloc] initWithFrame:self.browserWindow.bounds];
-    [self.browserWindow addSubview: browser];
+    self.browser = [[TripBrowser alloc] initWithFrame:self.browserWindow.bounds];
+    [self.browserWindow addSubview: self.browser];
     
     //load browser data
-    [browser setBrowserData:[self.tripService getTripsFromProfile:@"Active User"] forTarget:self withAction:@selector(showTrip:)];
+    //[browser setBrowserData:[self.tripService getTripsFromProfile:@"Active User"] forTarget:self withAction:@selector(showTrip:)];
+    [self.tripService getAllTripsForTarget:self withAction:@selector(dataHasLoaded:)];
+    //[self.tripService getTripWithID:0 forTarget:self withAction:@selector(dataHasLoaded:)];
+
+}
+
+- (void)dataHasLoaded:(NSArray*)newData
+{
+    [self.browser setBrowserData:newData forTarget:self withAction:@selector(showTrip:)];
 }
 
 - (void)didReceiveMemoryWarning

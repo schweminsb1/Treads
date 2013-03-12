@@ -8,9 +8,35 @@
 
 #import "TripService.h"
 
+#import "DataRepository.h"
 #import "Trip.h"
 
+@interface TripService()
+    
+@property DataRepository* dataRepository;
+
+@end
+    
 @implementation TripService
+
+- (id)initWithRepository:(DataRepository*)repository {
+    if ((self = [super init])) {
+        self.dataRepository = repository;
+    }
+    return self;
+}
+
+- (void)getAllTripsForTarget:(NSObject *)target withAction:(SEL)returnAction
+{
+    [self.dataRepository getTripsMeetingCondition:@"" forTarget:target withAction:returnAction];
+}
+
+- (void)getTripWithID:(int)tripID forTarget:(NSObject *)target withAction:(SEL)returnAction
+{
+    [self.dataRepository getTripsMeetingCondition:[NSString stringWithFormat:@"tripID == %d", tripID] forTarget:target withAction:returnAction];
+}
+
+#pragma mark - dummy services
 
 - (NSArray*)getAllTrips
 {

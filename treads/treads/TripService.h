@@ -8,7 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class DataRepository;
+
 @interface TripService : NSObject
+
+- (id)initWithRepository:(DataRepository*)repository;
+
+- (void)getAllTripsForTarget:(NSObject*)target withAction:(SEL) returnAction;
+- (void)getTripWithID:(int)tripID forTarget:(NSObject *)target withAction:(SEL)returnAction;
 
 //dummy services
 - (NSArray*)getAllTrips;

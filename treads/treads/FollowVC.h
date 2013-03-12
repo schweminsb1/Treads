@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class TripService;
+
 @interface FollowVC : UIViewController
 
 @property (strong) IBOutlet UIView* browserWindow;
+
+- (id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil withTripService:(TripService*)tripServiceHandle;
 
 @end

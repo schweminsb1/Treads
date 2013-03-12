@@ -11,5 +11,8 @@
 @interface Trip : NSObject
 
 @property (copy) NSString* name;
+@property int myID;
+@property int tripID;
+@property (copy) NSString* description;
 
 @end

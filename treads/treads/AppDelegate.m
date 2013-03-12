@@ -8,31 +8,48 @@
 
 #import "AppDelegate.h"
 
+#import "DataRepository.h"
+#import "TripService.h"
+#import "ProfileService.h"
+
+@interface AppDelegate()
+
+//repositories
+@property (strong) DataRepository* dataRepository;
+
+//services
+@property (strong) TripService* tripService;
+@property (strong) ProfileService* profileService;
+
+@end
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    //Set up MSClient
-    MSClient *client = [MSClient clientWithApplicationURLString:@"https://treads.azure-mobile.net/"
-                                             withApplicationKey:@"uxbEolJjpIKEpNJSnsNEuGehMowvxj53"];
+    //Initialize repositories
+    self.dataRepository = [[DataRepository alloc] init];
+    
+    //Initialize services
+    self.tripService = [[TripService alloc] initWithRepository:self.dataRepository];
     
     //Initialize ViewControllers
     UIViewController *mapsVC, *cameraVC, *myTripsVC, *followVC, *profileVC;
     
     mapsVC = [[MapsVC alloc] initWithNibName:@"MapsVC" bundle:nil];
     cameraVC = [[CameraVC alloc] initWithNibName:@"CameraVC" bundle:nil];
-    myTripsVC = [[MyTripsVC alloc] initWithNibName:@"MyTripsVC" bundle:nil];
-    followVC = [[FollowVC alloc] initWithNibName:@"FollowVC" bundle:nil];
+    myTripsVC = [[MyTripsVC alloc] initWithNibName:@"MyTripsVC" bundle:nil withTripService:self.tripService];
+    followVC = [[FollowVC alloc] initWithNibName:@"FollowVC" bundle:nil withTripService:self.tripService];
     profileVC = [[ProfileVC alloc] initWithNibName:@"ProfileVC" bundle:nil];
     
-    LoginViewController * login;
+    //LoginViewController* login;
     
     //Set the login controller to default
-    login= [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil client:client AppDelegate:self];
-    login.title = @"Login";
-    UINavigationController * LoginNavigation = [[UINavigationController alloc] initWithRootViewController:login];
+    //login = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil client:client AppDelegate:self];
+    //login.title = @"Login";
+    //UINavigationController* LoginNavigation = [[UINavigationController alloc] initWithRootViewController:login];
     
     //self.window.rootViewController=LoginNavigation;
     

@@ -12,8 +12,8 @@
 
 @interface DataRepository : NSObject
 
-- (void)getTripsMeetingCondition: (NSString*) predicateBody forTarget:(NSObject*)newTarget withAction:(SEL) targetSelector;
+@property MSClient* client;
 
-@property          MSClient    * client;
+- (void)getTripsMeetingCondition:(NSString*)predicateBody forTarget:(NSObject*)newTarget withAction:(SEL) targetSelector;
 
 @end

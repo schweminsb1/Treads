@@ -26,7 +26,7 @@
 
 @implementation FollowVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withTripService:(TripService*)tripServiceHandle
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -35,7 +35,7 @@
         self.tabBarItem.image = [UIImage imageNamed:@"compass.png"];
         
         //set up services
-        self.tripService = [[TripService alloc] init];
+        self.tripService = tripServiceHandle;//[[TripService alloc] init];
     }
     return self;
 }
