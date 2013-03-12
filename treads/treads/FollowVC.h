@@ -12,8 +12,4 @@
 
 @property (strong) IBOutlet UIView* browserWindow;
 
-@property (strong) IBOutlet UILabel* label;
-
--(IBAction)segmentControlChange:(UISegmentedControl*)sender;
-
 @end

@@ -8,15 +8,15 @@
 
 #import "TripBrowser.h"
 
-#import "Trip.h"
-
 @interface TripBrowser()<UITableViewDataSource, UITableViewDelegate>
 
 @end
 
 @implementation TripBrowser {
-    NSArray* sortedListData;    
-    //CGRect browserFrame;
+    NSArray* sortedListData;
+    //void(^listSelectAction)(Trip*);
+    SEL listSelectAction;
+    NSObject* target;
     UITableView* browserTable;
 }
 
@@ -24,6 +24,7 @@
 {
     if ((self = [super initWithFrame:frame])) {
         [self layoutSubviews];
+        listSelectAction = nil;
     }
     return self;
 }
@@ -41,9 +42,12 @@
 
 #pragma mark - Data Setting/Interaction
 
-- (void)setBrowserData:(NSArray*)newSortedData
+//- (void)setBrowserData:(NSArray*)newSortedData withAction: (void(^)(Trip*))newListSelectAction
+- (void)setBrowserData:(NSArray*)newSortedData forTarget:(NSObject*)newTarget withAction:(SEL)newListSelectAction
 {
     sortedListData = newSortedData;
+    target = newTarget;
+    listSelectAction = newListSelectAction;
     
     [browserTable reloadData];
     [browserTable setContentOffset:CGPointZero animated:NO];
@@ -73,6 +77,14 @@
 }
 
 #pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //listSelectAction((Trip*)sortedListData[indexPath.row]);
+    if ([target respondsToSelector:listSelectAction]) {
+        [target performSelector:listSelectAction withObject:((Trip*)sortedListData[indexPath.row])];
+    }
+}
 
 //- (CGFloat) tableView: tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 //{

@@ -16,6 +16,7 @@
 @interface MyTripsVC ()
 
 @property (strong) TripService* tripService;
+@property (strong) UIBarButtonItem* tripNewButton;
 
 @end
 
@@ -37,18 +38,36 @@
 {
     [super viewDidLoad];
     
+    //set up new trip button
+    self.tripNewButton = [[UIBarButtonItem alloc] initWithTitle:@"New Trip" style:UIBarButtonItemStyleDone target:self action:@selector(createNewTrip)];
+    
+    //attach new trip button to navigation controller
+    //UINavigationController* navigationController = [self navigationController];
+    self.navigationItem.rightBarButtonItem = self.tripNewButton;
+    
     //set up browser
     TripBrowser* browser = [[TripBrowser alloc] initWithFrame:self.browserWindow.bounds];
     [self.browserWindow addSubview: browser];
     
     //load browser data
-    [browser setBrowserData:[self.tripService getTripsFromProfile:@"Active User"]];
+    [browser setBrowserData:[self.tripService getTripsFromProfile:@"Active User"] forTarget:self withAction:@selector(showTrip:)];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)createNewTrip
+{
+    //add a blank edit trip vc to the navigation controller stack
+    NSLog(@"Create new trip");
+}
+
+- (void)showTrip:(Trip*)trip
+{
+    NSLog(@"Showing Trip: %@", trip.name);
 }
 
 @end

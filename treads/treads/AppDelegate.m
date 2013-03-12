@@ -34,7 +34,7 @@
     login.title = @"Login";
     UINavigationController * LoginNavigation = [[UINavigationController alloc] initWithRootViewController:login];
     
-    self.window.rootViewController=LoginNavigation;
+    //self.window.rootViewController=LoginNavigation;
     
     //Initialize and assign to Tab Bar
     self.tabBarController = [[UITabBarController alloc] init];
@@ -46,7 +46,7 @@
         //followVC,
         profileVC
         ];
-    //self.window.rootViewController = self.tabBarController;
+    self.window.rootViewController = self.tabBarController;
     
     [self.window makeKeyAndVisible];
     return YES;
