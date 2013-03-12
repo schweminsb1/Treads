@@ -7,7 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
+#import "AppDelegate.h"
 
 @interface DataRepository : NSObject
+
+- (void)getTripsMeetingCondition: (NSString*) predicateBody forTarget:(NSObject*)newTarget withAction:(SEL) targetSelector;
+
+@property          MSClient    * client;
 
 @end
