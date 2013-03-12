@@ -128,8 +128,6 @@
                                               };
                     
                     [UserTable insert:newItem completion:itemBlock];
-                    
-                   
                 }
                 
             };

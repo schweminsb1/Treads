@@ -11,6 +11,8 @@
 
 @interface LoginViewController : UIViewController
 
+@property (strong) IBOutlet UIActivityIndicatorView* activityIndicatorView;
+
 -(IBAction) LoginClick:(id) sender;
 -(IBAction) RegisterClick:(id) sender;
 -(IBAction) ForgottenPassword:(id) sender;

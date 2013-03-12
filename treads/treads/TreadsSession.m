@@ -21,15 +21,16 @@
 }
 -(BOOL) Login
 {
-    
+     __autoreleasing NSError * error;
     @try
     {
-        __autoreleasing NSError * error;
+       
         NSString * test = [Path subLibraryCachesDirectory:@"User"];
         [ _treadsUser writeToFile:test  atomically:YES encoding:NSUTF8StringEncoding error:&error];
     }
     @catch (id exception)
     {
+        NSLog(@"%@",error );
         return NO;
     }
     
@@ -38,9 +39,30 @@
 }
 -(BOOL) Logout
 {
+     __autoreleasing NSError * error;
+    @try
+    {
+        
+        NSString * test = [Path subLibraryCachesDirectory:@"User"];
+        [ @"" writeToFile:test  atomically:YES encoding:NSUTF8StringEncoding error:&error];
+    }
+    @catch (id exception)
+    {
+        NSLog(@"%@",error );
+        return NO;
+    }
     
-    return NO;
+    return YES;
 }
+-(NSString * ) valueOfFile
+{
+     NSString * filePath = [Path subLibraryCachesDirectory:@"User"];
+     NSString * fileString = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    
+    
+    return fileString;
+}
+
 
 
 
