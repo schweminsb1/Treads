@@ -118,10 +118,10 @@
                 {
                     int newID= [[((NSDictionary *)items[count-1]) valueForKey:@"userID"]integerValue] + 1;
                     
-                    NSString * test= [self getPasswordHash:@"password"];
+                    
                     NSString * hashedPassword= [ self getPasswordHash:_password.text];
                     NSDictionary * newItem= @{@"userID":[NSNumber numberWithInt:newID] ,
-                                              @"emailAddress": [NSString stringWithString:_emailAdress.text],
+                                              @"emailAddress": [NSString stringWithString:[_emailAdress.text lowercaseString]],
                                               @"password": [NSString stringWithString:hashedPassword] ,
                                               @"Fname": [NSString stringWithString:_firstName.text] ,
                                               @"Lname": [NSString stringWithString:_lastName.text]

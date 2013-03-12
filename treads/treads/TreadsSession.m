@@ -26,7 +26,7 @@
     {
         __autoreleasing NSError * error;
         NSString * test = [Path subLibraryCachesDirectory:@"User"];
-        [ _treadsUser writeToFile:[Path subLibraryCachesDirectory:@"User"]  atomically:YES encoding:NSUTF8StringEncoding error:&error];
+        [ _treadsUser writeToFile:test  atomically:YES encoding:NSUTF8StringEncoding error:&error];
     }
     @catch (id exception)
     {

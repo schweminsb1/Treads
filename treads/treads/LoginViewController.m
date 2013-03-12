@@ -99,13 +99,25 @@
                     
                     returnedValues = [items mutableCopy];
                     
-                    if([_usernameText.text isEqual: items[0][@"emailAddress"]]&& [[self getPasswordHash:_passwordText.text] isEqual: items[0][@"password"]])
+                    if([[_usernameText.text lowercaseString]isEqual: [items[0][@"emailAddress"] lowercaseString]]&& [[self getPasswordHash:_passwordText.text] isEqual: items[0][@"password"]])
                     {
                         
                         @try
                         {
-                            [_treadsSession initWithAuthenticatedUser: [NSString stringWithString:(NSString *)items[0][@"emailAddress"]]];
-                            BOOL result=      [_treadsSession Login];
+                             _treadsSession = [_treadsSession initWithAuthenticatedUser: [NSString stringWithString:(NSString *)[items[0][@"emailAddress"] lowercaseString]]];
+                           if(  [_treadsSession Login])
+                           {
+                               
+                               
+                               
+                           }
+                            else
+                            {
+                                alert.message= @"Your drive may be full too full to use Treads";
+                                [alert show];
+                                return;
+                                
+                            }
                              _appDelegate.window.rootViewController= _appDelegate.tabBarController;
                             
                         }

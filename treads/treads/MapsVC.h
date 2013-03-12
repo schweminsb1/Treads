@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "MapPinAnnotation.h"
 
-@interface MapsVC : UIViewController
+@interface MapsVC : UIViewController<CLLocationManagerDelegate>
 
 @property (strong) IBOutlet UISearchBar* searchBar;
 
