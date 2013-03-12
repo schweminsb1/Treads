@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29E2E8A116EFEE620010C19B /* TreadsSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 29E2E8A016EFEE620010C19B /* TreadsSession.m */; };
+		29E2E8A316EFEEFA0010C19B /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29E2E8A216EFEEFA0010C19B /* RegisterViewController.m */; };
 		3118BFEE16EFC588006DE2E9 /* compass.png in Resources */ = {isa = PBXBuildFile; fileRef = 3118BFED16EFC588006DE2E9 /* compass.png */; };
 		316399B616ECB3F6003B3F0E /* EditTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 316399B416ECB3F6003B3F0E /* EditTripViewController.m */; };
 		316399B716ECB3F6003B3F0E /* EditTripViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 316399B516ECB3F6003B3F0E /* EditTripViewController.xib */; };
@@ -48,15 +50,16 @@
 		3C958FF116EA6C4F0038AD7C /* virgin_river_hiking.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C958FED16EA6C4F0038AD7C /* virgin_river_hiking.jpg */; };
 		3C958FF716EA6CED0038AD7C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C958FF516EA6CED0038AD7C /* LoginViewController.m */; };
 		3C958FF816EA6CED0038AD7C /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C958FF616EA6CED0038AD7C /* LoginViewController.xib */; };
-		3C958FFC16EA6CFF0038AD7C /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C958FFA16EA6CFF0038AD7C /* RegisterViewController.m */; };
 		3C958FFD16EA6CFF0038AD7C /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C958FFB16EA6CFF0038AD7C /* RegisterViewController.xib */; };
 		3C95900416EA6D220038AD7C /* MapPinAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C958FFF16EA6D220038AD7C /* MapPinAnnotation.m */; };
 		3C95900516EA6D220038AD7C /* Path.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C95900116EA6D220038AD7C /* Path.m */; };
-		3C95900616EA6D220038AD7C /* TreadsSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C95900316EA6D220038AD7C /* TreadsSession.m */; };
 		3C95900816EA6DFE0038AD7C /* WindowsAzureMobileServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C95900716EA6DFE0038AD7C /* WindowsAzureMobileServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		29E2E89F16EFEE620010C19B /* TreadsSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreadsSession.h; path = "../../../../local copy/TreadsSession.h"; sourceTree = "<group>"; };
+		29E2E8A016EFEE620010C19B /* TreadsSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreadsSession.m; path = "../../../../local copy/TreadsSession.m"; sourceTree = "<group>"; };
+		29E2E8A216EFEEFA0010C19B /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegisterViewController.m; path = treads/RegisterViewController.m; sourceTree = SOURCE_ROOT; };
 		3118BFED16EFC588006DE2E9 /* compass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compass.png; sourceTree = "<group>"; };
 		316399B316ECB3F6003B3F0E /* EditTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditTripViewController.h; path = treads/EditTripViewController.h; sourceTree = SOURCE_ROOT; };
 		316399B416ECB3F6003B3F0E /* EditTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditTripViewController.m; path = treads/EditTripViewController.m; sourceTree = SOURCE_ROOT; };
@@ -117,14 +120,11 @@
 		3C958FF516EA6CED0038AD7C /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = treads/LoginViewController.m; sourceTree = SOURCE_ROOT; };
 		3C958FF616EA6CED0038AD7C /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = treads/LoginViewController.xib; sourceTree = SOURCE_ROOT; };
 		3C958FF916EA6CFF0038AD7C /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegisterViewController.h; path = treads/RegisterViewController.h; sourceTree = SOURCE_ROOT; };
-		3C958FFA16EA6CFF0038AD7C /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegisterViewController.m; path = treads/RegisterViewController.m; sourceTree = SOURCE_ROOT; };
 		3C958FFB16EA6CFF0038AD7C /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RegisterViewController.xib; path = treads/RegisterViewController.xib; sourceTree = SOURCE_ROOT; };
 		3C958FFE16EA6D220038AD7C /* MapPinAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapPinAnnotation.h; path = treads/MapPinAnnotation.h; sourceTree = SOURCE_ROOT; };
 		3C958FFF16EA6D220038AD7C /* MapPinAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapPinAnnotation.m; path = treads/MapPinAnnotation.m; sourceTree = SOURCE_ROOT; };
 		3C95900016EA6D220038AD7C /* Path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Path.h; path = treads/Path.h; sourceTree = SOURCE_ROOT; };
 		3C95900116EA6D220038AD7C /* Path.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Path.m; path = treads/Path.m; sourceTree = SOURCE_ROOT; };
-		3C95900216EA6D220038AD7C /* TreadsSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreadsSession.h; path = treads/TreadsSession.h; sourceTree = SOURCE_ROOT; };
-		3C95900316EA6D220038AD7C /* TreadsSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreadsSession.m; path = treads/TreadsSession.m; sourceTree = SOURCE_ROOT; };
 		3C95900716EA6DFE0038AD7C /* WindowsAzureMobileServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMobileServices.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -201,12 +201,12 @@
 		3188B16116C9CE17008E1D7F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				29E2E89F16EFEE620010C19B /* TreadsSession.h */,
+				29E2E8A016EFEE620010C19B /* TreadsSession.m */,
 				3C958FFE16EA6D220038AD7C /* MapPinAnnotation.h */,
 				3C958FFF16EA6D220038AD7C /* MapPinAnnotation.m */,
 				3C95900016EA6D220038AD7C /* Path.h */,
 				3C95900116EA6D220038AD7C /* Path.m */,
-				3C95900216EA6D220038AD7C /* TreadsSession.h */,
-				3C95900316EA6D220038AD7C /* TreadsSession.m */,
 				3C8A908B16E7DAA2007F0BB8 /* Default-568h@2x.png */,
 				3188B16216C9CE17008E1D7F /* treads.temp_caseinsensitive_rename-Info.plist */,
 				3188B16616C9CE17008E1D7F /* main.m */,
@@ -373,8 +373,8 @@
 		3C958FF316EA6CDB0038AD7C /* Register */ = {
 			isa = PBXGroup;
 			children = (
+				29E2E8A216EFEEFA0010C19B /* RegisterViewController.m */,
 				3C958FF916EA6CFF0038AD7C /* RegisterViewController.h */,
-				3C958FFA16EA6CFF0038AD7C /* RegisterViewController.m */,
 				3C958FFB16EA6CFF0038AD7C /* RegisterViewController.xib */,
 			);
 			name = Register;
@@ -473,15 +473,15 @@
 				3C8A909016E7DFC8007F0BB8 /* Trip.m in Sources */,
 				3C8AC26D16E82BE30070271E /* TripService.m in Sources */,
 				3C958FF716EA6CED0038AD7C /* LoginViewController.m in Sources */,
-				3C958FFC16EA6CFF0038AD7C /* RegisterViewController.m in Sources */,
 				3C95900416EA6D220038AD7C /* MapPinAnnotation.m in Sources */,
 				3C95900516EA6D220038AD7C /* Path.m in Sources */,
-				3C95900616EA6D220038AD7C /* TreadsSession.m in Sources */,
 				39164F5716EA92C600877549 /* TripViewVC.m in Sources */,
 				39164F5D16EAA3E000877549 /* AddLocationViewController.m in Sources */,
 				316399B616ECB3F6003B3F0E /* EditTripViewController.m in Sources */,
 				3C12312416EFCB89006CCBFE /* DataRepository.m in Sources */,
 				3C12312716EFCB98006CCBFE /* ProfileService.m in Sources */,
+				29E2E8A116EFEE620010C19B /* TreadsSession.m in Sources */,
+				29E2E8A316EFEEFA0010C19B /* RegisterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

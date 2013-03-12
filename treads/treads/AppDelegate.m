@@ -49,9 +49,9 @@
     //Set the login controller to default
     login = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil client:self.dataRepository.client AppDelegate:self];
     login.title = @"Login";
-    UINavigationController* LoginNavigation = [[UINavigationController alloc] initWithRootViewController:login];
+    //UINavigationController* LoginNavigation = [[UINavigationController alloc] initWithRootViewController:login];
     
-    //self.window.rootViewController=LoginNavigation;
+   //self.window.rootViewController=LoginNavigation;
     
     //Initialize and assign to Tab Bar
     self.tabBarController = [[UITabBarController alloc] init];
