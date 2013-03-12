@@ -82,7 +82,10 @@
 {
     //listSelectAction((Trip*)sortedListData[indexPath.row]);
     if ([target respondsToSelector:listSelectAction]) {
+        #pragma clang diagnostic push
+        #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [target performSelector:listSelectAction withObject:((Trip*)sortedListData[indexPath.row])];
+        #pragma clang diagnostic pop
     }
 }
 
