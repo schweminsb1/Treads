@@ -36,8 +36,14 @@
     [self.dataRepository getTripsMeetingCondition:[NSString stringWithFormat:@"tripID == %d", tripID] forTarget:target withAction:returnAction];
 }
 
-- (void)updateTripWithID:(int)tripID forTarget:(NSDictionary *)target withAction:(SEL)returnAction {
-    [self.dataRepository updateTripWithID:tripID forTarget:target withAction:returnAction];
+- (void)updateTrip:(Trip*)trip forTarget:(NSObject *)target withAction:(SEL)returnAction
+{
+    NSMutableDictionary* tripDictionary;
+    [tripDictionary setObject:trip.name forKey:@"name"];
+    [tripDictionary setObject:[NSNumber numberWithInt:trip.myID] forKey:@"myID"];
+    [tripDictionary setObject:[NSNumber numberWithInt:trip.myID] forKey:@"tripID"];
+    [tripDictionary setObject:trip.description forKey:@"description"];
+    [self.dataRepository updateTrip:[NSDictionary dictionaryWithDictionary:tripDictionary] forTarget:target withAction:returnAction];
 }
 
 #pragma mark - dummy services

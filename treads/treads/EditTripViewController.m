@@ -15,7 +15,7 @@
 
 @interface EditTripViewController ()
 
-@property TripService  * tripService;
+@property TripService* tripService;
 @property int tripID;
 @property int myID;
 
@@ -78,12 +78,17 @@
 
 
 -(IBAction) saveChanges:(id) sender {
-    NSDictionary * newItem= @{@"myID":[NSNumber numberWithInt:self.myID] ,
-                              @"tripID": [NSNumber numberWithInt: self.tripID],
-                              @"description": [NSString stringWithString: self.tripDescription.text],
-                              @"name": [NSString stringWithString: self.tripTitle.text]
-                              };
-    [self.tripService updateTripWithID:self.tripID forTarget:newItem withAction:@selector(changesSaved)];
+    //NSDictionary * newItem= @{@"myID":[NSNumber numberWithInt:self.myID] ,
+    //                          @"tripID": [NSNumber numberWithInt: self.tripID],
+    //                          @"description": [NSString stringWithString: self.tripDescription.text],
+    //                          @"name": [NSString stringWithString: self.tripTitle.text]
+    //                          };
+    Trip* myTrip = [[Trip alloc] init];
+    myTrip.name = self.tripTitle.text;
+    myTrip.tripID = self.tripID;
+    myTrip.myID = self.myID;
+    myTrip.description = self.tripDescription.text;
+    [self.tripService updateTrip:myTrip forTarget:self withAction:@selector(changesSaved)];
 }
 
 -(void) changesSaved {

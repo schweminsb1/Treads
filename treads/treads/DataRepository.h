@@ -14,8 +14,8 @@
 
 @property MSClient* client;
 
-- (void)getTripsMeetingCondition:(NSString*)predicateBody forTarget:(NSObject*)newTarget withAction:(SEL) targetSelector;
+- (void)getTripsMeetingCondition:(NSString*)predicateBody forTarget:(NSObject*)target withAction:(SEL) returnAction;
 
-- (void)updateTripWithID:(int)tripID forTarget:(NSDictionary *)target withAction:(SEL)returnAction;
+- (void)updateTrip:(NSDictionary*)tripDictionary forTarget:(NSObject*)target withAction:(SEL)returnAction;
 
 @end

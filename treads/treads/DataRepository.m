@@ -19,14 +19,14 @@
     return self;
 }
 
-- (void)getTripsMeetingCondition:(NSString*)predicateBody forTarget:(NSObject*)newTarget withAction:(SEL)targetSelector
+- (void)getTripsMeetingCondition:(NSString*)predicateBody forTarget:(NSObject*)target withAction:(SEL)returnAction
 {
-    MSTable* MyTripsTable=  [self.client getTable:@"MyTripsTable"];
+    MSTable* MyTripsTable = [self.client getTable:@"MyTripsTable"];
     MSReadQueryBlock queryBlock=^(NSArray* items, NSInteger totalCount, NSError *error) {
         if (error == nil) {
             #pragma clang diagnostic push
             #pragma clang diagnostic ignored "-Warc-performSelector-leaks"        
-            [newTarget performSelector:targetSelector withObject:[self convertDataToTripModel:items]];
+            [target performSelector:returnAction withObject:[self convertDataToTripModel:items]];
             #pragma clang diagnostic pop
         }
     };
@@ -64,16 +64,20 @@
     return [NSArray arrayWithArray:returnData];
 }
 
-- (void)updateTripWithID:(int)tripID forTarget:(NSDictionary *)target withAction:(SEL)returnAction {
-    MSTable * UserTable=  [self.client getTable:@"MyTripsTable"];
-
+- (void)updateTrip:(NSDictionary*)tripDictionary forTarget:(NSObject*)target withAction:(SEL)returnAction
+{
+    MSTable* userTable = [self.client getTable:@"MyTripsTable"];
     MSItemBlock updateBlock=^(NSDictionary* item, NSError* error) {
         if (error == nil) {
-            NSLog(@"YAY!");
+            NSLog(@"Item updated");
+            #pragma clang diagnostic push
+            #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            [target performSelector:returnAction]; //withObject:[self convertDataToTripModel:items]];
+            #pragma clang diagnostic pop
         }
+        else {NSLog(error.description);}
     };
-    UserTable readWhere:<#(NSPredicate *)#> completion:<#^(NSArray *items, NSInteger totalCount, NSError *error)completion#>
-    [UserTable update:target completion:updateBlock];
+    [userTable update:tripDictionary completion:updateBlock];
 }
 
 @end
