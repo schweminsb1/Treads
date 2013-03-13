@@ -13,6 +13,8 @@
 #import "TripService.h"
 #import "Trip.h"
 
+#import "TripViewVC.h"
+
 @interface FollowVC () {
     NSArray* browserModeControlLabels;
     NSArray* browserModeControlActions;
@@ -58,31 +60,27 @@
     //                               ];
     self.browserModeControl = [[UISegmentedControl alloc] initWithItems:browserModeControlLabels];
     [self.browserModeControl addTarget:self action:@selector(segmentControlChange:) forControlEvents:UIControlEventValueChanged];
-    [self.browserModeControl setSelectedSegmentIndex:1];
     self.browserModeControl.segmentedControlStyle = UISegmentedControlStyleBar;
     
     //attach segmented control to navigation controller
-    UINavigationController* navigationController = [self navigationController];
-    [navigationController.navigationBar.topItem setTitleView:self.browserModeControl];
+    [self.navigationController.navigationBar.topItem setTitleView:self.browserModeControl];
     
     //set up
     self.browser = [[TripBrowser alloc] initWithFrame:self.browserWindow.bounds];
     [self.browserWindow addSubview: self.browser];
     
-    //load browser data
-    //NSArray*(^getNewData)(void) = browserModeControlActions[1];
-    //[self.browser setBrowserData: getNewData() forTarget:self withAction:@selector(showTrip:)];
-    void(^fcn)(void) = browserModeControlActions[1]; fcn();
+    //initial display
+    [self.browserModeControl setSelectedSegmentIndex:1];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self segmentControlChange:self.browserModeControl];
 }
 
 - (void)segmentControlChange:(UISegmentedControl*)sender
 {
-    //self.label.text = labelText[sender.selectedSegmentIndex];
-    
-    //NSArray*(^getNewData)(void) = browserModeControlActions[sender.selectedSegmentIndex];
-    //[self.browser setBrowserData: getNewData() withAction:^void(Trip* trip){[self showTrip:trip];}];
-    //[self.browser setBrowserData: getNewData() forTarget: self withAction:@selector(showTrip:)];
-    [self.browser setBrowserData:nil forTarget:nil withAction:nil];
+    [self.browser clearAndWait];
     void(^fcn)(void) = browserModeControlActions[sender.selectedSegmentIndex]; fcn();
 }
 
@@ -99,7 +97,12 @@
 
 - (void)showTrip:(Trip*)trip
 {
-    NSLog(@"Showing Trip: %@", trip.name);
+    //NSLog(@"Showing Trip: %@", trip.name);
+    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:browserModeControlLabels[self.browserModeControl.selectedSegmentIndex] style: UIBarButtonItemStyleBordered target: nil action: nil];
+    [self.navigationItem setBackBarButtonItem: newBackButton];
+    
+    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil tripService:self.tripService tripID:trip.tripID];
+    [self.navigationController pushViewController:tripViewVC animated:YES];
 }
 
 @end

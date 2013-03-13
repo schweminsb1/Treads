@@ -13,6 +13,8 @@
 #import "TripService.h"
 #import "Trip.h"
 
+#import "TripViewVC.h"
+
 @interface MyTripsVC ()
 
 @property (strong) TripService* tripService;
@@ -39,22 +41,21 @@
 {
     [super viewDidLoad];
     
-    //set up new trip button
+    //set up new trip button and attach to navigation controller
     self.tripNewButton = [[UIBarButtonItem alloc] initWithTitle:@"New Trip" style:UIBarButtonItemStyleDone target:self action:@selector(createNewTrip)];
-    
-    //attach new trip button to navigation controller
-    //UINavigationController* navigationController = [self navigationController];
     self.navigationItem.rightBarButtonItem = self.tripNewButton;
     
     //set up browser
     self.browser = [[TripBrowser alloc] initWithFrame:self.browserWindow.bounds];
     [self.browserWindow addSubview: self.browser];
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
     //load browser data
-    //[browser setBrowserData:[self.tripService getTripsFromProfile:@"Active User"] forTarget:self withAction:@selector(showTrip:)];
+    [self.browser clearAndWait];
     [self.tripService getAllTripsForTarget:self withAction:@selector(dataHasLoaded:)];
     //[self.tripService getTripWithID:0 forTarget:self withAction:@selector(dataHasLoaded:)];
-
 }
 
 - (void)dataHasLoaded:(NSArray*)newData
@@ -76,7 +77,8 @@
 
 - (void)showTrip:(Trip*)trip
 {
-    NSLog(@"Showing Trip: %@", trip.name);
+    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil tripService:self.tripService tripID:trip.tripID];
+    [self.navigationController pushViewController:tripViewVC animated:YES];
 }
 
 @end
