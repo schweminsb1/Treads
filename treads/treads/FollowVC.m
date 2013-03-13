@@ -64,8 +64,7 @@
     self.browserModeControl.segmentedControlStyle = UISegmentedControlStyleBar;
     
     //attach segmented control to navigation controller
-    UINavigationController* navigationController = [self navigationController];
-    [navigationController.navigationBar.topItem setTitleView:self.browserModeControl];
+    [self.navigationController.navigationBar.topItem setTitleView:self.browserModeControl];
     
     //set up
     self.browser = [[TripBrowser alloc] initWithFrame:self.browserWindow.bounds];
@@ -102,6 +101,9 @@
 - (void)showTrip:(Trip*)trip
 {
     //NSLog(@"Showing Trip: %@", trip.name);
+    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:browserModeControlLabels[self.browserModeControl.selectedSegmentIndex] style: UIBarButtonItemStyleBordered target: nil action: nil];
+    [self.navigationItem setBackBarButtonItem: newBackButton];
+    
     TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil tripService:self.tripService tripID:trip.tripID];
     [self.navigationController pushViewController:tripViewVC animated:YES];
 }

@@ -36,8 +36,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    //grab trip info from the database
     [self.tripService getTripWithID:self.tripID forTarget:self withAction:@selector(populateData:)];
+    
     
 }
 -(void) populateData:(NSArray *)array
@@ -45,7 +47,8 @@
     if(array.count > 0)
     {
         Trip * myTrip = (Trip*)array[0];
-        // trip query retrieved data
+        
+        //populate view fields
         _tripTitle.text = myTrip.name;
         _userName.text = [NSString stringWithFormat:@"%d", myTrip.myID];
         _tripDescription.text = myTrip.description;
@@ -61,6 +64,16 @@
             //for each Location[] {
                 //if TripLocation[].LocationID == Location[].LocationID
                     //append Location to myLocations
+        
+        //update navigation item title
+        self.navigationItem.title = myTrip.name;
+        
+        //navigation
+        //UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+        //                               initWithTitle: @"Back"
+        //                               style: UIBarButtonItemStyleBordered
+        //                               target: nil action: nil];
+        //[self.navigationItem setBackBarButtonItem: backButton];
     }
 }
 - (IBAction)EditClick:(id)sender
