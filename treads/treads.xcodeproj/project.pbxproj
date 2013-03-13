@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		29E2E8A116EFEE620010C19B /* TreadsSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 29E2E8A016EFEE620010C19B /* TreadsSession.m */; };
 		29E2E8A316EFEEFA0010C19B /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29E2E8A216EFEEFA0010C19B /* RegisterViewController.m */; };
 		3118BFEE16EFC588006DE2E9 /* compass.png in Resources */ = {isa = PBXBuildFile; fileRef = 3118BFED16EFC588006DE2E9 /* compass.png */; };
 		316399B616ECB3F6003B3F0E /* EditTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 316399B416ECB3F6003B3F0E /* EditTripViewController.m */; };
@@ -38,6 +37,7 @@
 		39164F5816EA92C600877549 /* TripViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39164F5616EA92C600877549 /* TripViewVC.xib */; };
 		39164F5D16EAA3E000877549 /* AddLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39164F5B16EAA3E000877549 /* AddLocationViewController.m */; };
 		39164F5E16EAA3E000877549 /* AddLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39164F5C16EAA3E000877549 /* AddLocationViewController.xib */; };
+		3C094FA716EFF74700C537B1 /* TreadsSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C094FA616EFF74700C537B1 /* TreadsSession.m */; };
 		3C12312416EFCB89006CCBFE /* DataRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C12312316EFCB89006CCBFE /* DataRepository.m */; };
 		3C12312716EFCB98006CCBFE /* ProfileService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C12312616EFCB98006CCBFE /* ProfileService.m */; };
 		3C60C7DB16E7004900FDFD7D /* TripBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C60C7DA16E7004900FDFD7D /* TripBrowser.m */; };
@@ -57,8 +57,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		29E2E89F16EFEE620010C19B /* TreadsSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreadsSession.h; path = "../../../../local copy/TreadsSession.h"; sourceTree = "<group>"; };
-		29E2E8A016EFEE620010C19B /* TreadsSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreadsSession.m; path = "../../../../local copy/TreadsSession.m"; sourceTree = "<group>"; };
 		29E2E8A216EFEEFA0010C19B /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegisterViewController.m; path = treads/RegisterViewController.m; sourceTree = SOURCE_ROOT; };
 		3118BFED16EFC588006DE2E9 /* compass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compass.png; sourceTree = "<group>"; };
 		316399B316ECB3F6003B3F0E /* EditTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditTripViewController.h; path = treads/EditTripViewController.h; sourceTree = SOURCE_ROOT; };
@@ -101,6 +99,8 @@
 		39164F5A16EAA3E000877549 /* AddLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddLocationViewController.h; path = treads/AddLocationViewController.h; sourceTree = SOURCE_ROOT; };
 		39164F5B16EAA3E000877549 /* AddLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddLocationViewController.m; path = treads/AddLocationViewController.m; sourceTree = SOURCE_ROOT; };
 		39164F5C16EAA3E000877549 /* AddLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddLocationViewController.xib; path = treads/AddLocationViewController.xib; sourceTree = SOURCE_ROOT; };
+		3C094FA516EFF74700C537B1 /* TreadsSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreadsSession.h; path = treads/TreadsSession.h; sourceTree = SOURCE_ROOT; };
+		3C094FA616EFF74700C537B1 /* TreadsSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreadsSession.m; path = treads/TreadsSession.m; sourceTree = SOURCE_ROOT; };
 		3C12312216EFCB89006CCBFE /* DataRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataRepository.h; path = treads/DataRepository.h; sourceTree = SOURCE_ROOT; };
 		3C12312316EFCB89006CCBFE /* DataRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataRepository.m; path = treads/DataRepository.m; sourceTree = SOURCE_ROOT; };
 		3C12312516EFCB98006CCBFE /* ProfileService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileService.h; path = treads/ProfileService.h; sourceTree = SOURCE_ROOT; };
@@ -201,8 +201,8 @@
 		3188B16116C9CE17008E1D7F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				29E2E89F16EFEE620010C19B /* TreadsSession.h */,
-				29E2E8A016EFEE620010C19B /* TreadsSession.m */,
+				3C094FA516EFF74700C537B1 /* TreadsSession.h */,
+				3C094FA616EFF74700C537B1 /* TreadsSession.m */,
 				3C958FFE16EA6D220038AD7C /* MapPinAnnotation.h */,
 				3C958FFF16EA6D220038AD7C /* MapPinAnnotation.m */,
 				3C95900016EA6D220038AD7C /* Path.h */,
@@ -480,8 +480,8 @@
 				316399B616ECB3F6003B3F0E /* EditTripViewController.m in Sources */,
 				3C12312416EFCB89006CCBFE /* DataRepository.m in Sources */,
 				3C12312716EFCB98006CCBFE /* ProfileService.m in Sources */,
-				29E2E8A116EFEE620010C19B /* TreadsSession.m in Sources */,
 				29E2E8A316EFEEFA0010C19B /* RegisterViewController.m in Sources */,
+				3C094FA716EFF74700C537B1 /* TreadsSession.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
