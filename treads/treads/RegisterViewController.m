@@ -32,6 +32,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        _activityIndicatorView.hidden = YES;
+        _activityIndicatorView.hidesWhenStopped = YES;
         _client=client;
         _appDelegate=(AppDelegate *)appdelegate;
     }
@@ -103,6 +105,7 @@
                 else
                 {
                     //Login
+                    [_activityIndicatorView stopAnimating];
                      _appDelegate.window.rootViewController= _appDelegate.tabBarController;
                     
                 }
@@ -170,7 +173,7 @@
             NSPredicate * predicateEmail = [NSPredicate predicateWithFormat:@"emailAddress == %@", _emailAdress.text ];
             MSQuery * queryEmail= [[MSQuery alloc]initWithTable:UserTable withPredicate:predicateEmail];
             [UserTable readWithQueryString:[queryEmail queryStringOrError:nil] completion:checkEmail];
-            
+            [_activityIndicatorView startAnimating];
             //All fields are filled
             //use one way hash to send the encrypted password
 

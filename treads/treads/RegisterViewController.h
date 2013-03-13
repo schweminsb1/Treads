@@ -12,6 +12,7 @@
 
 @interface RegisterViewController : UIViewController
 
+@property (strong) IBOutlet UIActivityIndicatorView* activityIndicatorView;
 -(IBAction) RegisterNewUser :(id) sender;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil client:(MSClient *) client  AppDelegate: ( id) appdelegate;

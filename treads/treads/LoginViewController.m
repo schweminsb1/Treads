@@ -32,7 +32,11 @@
 {
     
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
     if (self) {
+        _activityIndicatorView.hidesWhenStopped= YES;
+        _activityIndicatorView.hidden=YES;
+        
         _client=client;
         _appDelegate=(AppDelegate *)appdelegate;
         
