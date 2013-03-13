@@ -10,6 +10,8 @@
 
 @interface Trip : NSObject
 
++ (int)UNDEFINED_TRIP_ID;
+
 @property int tripID; //id
 @property int userID;
 @property (copy) NSString* name;

@@ -41,7 +41,10 @@
     //set up new trip button and attach to navigation controller
     self.tripEditButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStyleDone target:self action:@selector(tapEditButton:)];
     self.navigationItem.rightBarButtonItem = self.tripEditButton;
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
     //grab trip info from the database
     [self.tripService getTripWithID:self.tripID forTarget:self withAction:@selector(populateData:)];
 }

@@ -18,10 +18,10 @@
 @property IBOutlet UITextView  * tripDescription;
 @property IBOutlet UITableView * tripTable;
 
--(IBAction) saveChanges:(id) sender;
+- (void)changesSavedTo:(NSNumber*)savedTripID successfully:(NSNumber*)wasSuccessful;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService: (TripService*) myTripService tripID: (int)myTripID;
 
--(void) populateData:(NSArray *)array;
+- (void) populateData:(NSArray*)array;
 
 @end

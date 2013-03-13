@@ -10,4 +10,6 @@
 
 @implementation Trip
 
++ (int)UNDEFINED_TRIP_ID {return -1;}
+
 @end

@@ -18,4 +18,6 @@
 
 - (void)updateTrip:(NSDictionary*)tripDictionary forTarget:(NSObject*)target withAction:(SEL)returnAction;
 
+- (int)getNewTripID;
+
 @end

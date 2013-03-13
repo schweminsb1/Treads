@@ -15,6 +15,8 @@
 
 #import "TripViewVC.h"
 
+#import "EditTripViewController.h"
+
 @interface MyTripsVC ()
 
 @property (strong) TripService* tripService;
@@ -72,7 +74,12 @@
 - (void)createNewTrip
 {
     //add a blank edit trip vc to the navigation controller stack
-    NSLog(@"Create new trip");
+    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style: UIBarButtonItemStyleBordered target: nil action: nil];
+    [self.navigationItem setBackBarButtonItem: newBackButton];
+    
+    //calls edit trips page
+    EditTripViewController* editTripVC = [[EditTripViewController alloc] initWithNibName:@"EditTripViewController" bundle:nil tripService:self.tripService tripID:[Trip UNDEFINED_TRIP_ID]];
+    [self.navigationController pushViewController:editTripVC animated:YES];
 }
 
 - (void)showTrip:(Trip*)trip

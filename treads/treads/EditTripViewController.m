@@ -16,25 +16,23 @@
 @interface EditTripViewController ()
 
 @property TripService* tripService;
+@property (strong) UIBarButtonItem* tripSaveButton;
+
 @property int tripID;
 @property int userID;
-@property (strong) UIBarButtonItem* tripSaveButton;
 
 @end
 
 @implementation EditTripViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService: (TripService*) myTripService tripID: (int)myTripID
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService: (TripService*) myTripService tripID:(int)myTripID
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.tripService = myTripService;
         self.tripID = myTripID;
     }
-    
     return self;
-    
-    
 }
 
 - (void)viewDidLoad
@@ -46,7 +44,9 @@
     self.navigationItem.rightBarButtonItem = self.tripSaveButton;
     
     //set up controller
-    [self.tripService getTripWithID:self.tripID forTarget:self withAction:@selector(populateData:)];
+    if (self.tripID != [Trip UNDEFINED_TRIP_ID]) {
+        [self.tripService getTripWithID:self.tripID forTarget:self withAction:@selector(populateData:)];
+    }
 }
 
 - (void)populateData:(NSArray *)array
@@ -87,24 +87,36 @@
     myTrip.tripID = self.tripID;
     myTrip.userID = self.userID;
     myTrip.description = self.tripDescription.text;
-    [self.tripService updateTrip:myTrip forTarget:self withAction:@selector(changesSaved)];
+    [self.tripService updateTrip:myTrip forTarget:self withAction:@selector(changesSavedTo:successfully:)];
 }
 
-- (void)changesSaved {
-    UIAlertView *saved = [[UIAlertView alloc]
-                                initWithTitle: @"Woah!!"
-                                message: @"Changes saved!"
-                                delegate: nil
-                                cancelButtonTitle:@"OK"
-                                otherButtonTitles:nil];
-    [saved show];
+- (void)changesSavedTo:(NSNumber*)savedTripID successfully:(NSNumber*)wasSuccessful {
+    int savedID = [savedTripID integerValue];
+    BOOL successful = [wasSuccessful boolValue];
+    if (successful) {
+        UIAlertView *saved = [[UIAlertView alloc]
+                                    initWithTitle: self.tripTitle.text
+                                    message: @"Changes saved."
+                                    delegate: nil
+                                    cancelButtonTitle:@"OK"
+                                    otherButtonTitles:nil];
+        [saved show];
+        
+        if (self.tripID != savedID) {
+            self.tripID = savedID;
+        }
+    }
+    else {
+        UIAlertView *saved = [[UIAlertView alloc]
+                              initWithTitle: self.tripTitle.text
+                              message: @"Error: Changes could not be saved."
+                              delegate: nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
+        [saved show];
+    }
     
-    UIViewController * TripVC;
-    
-    TripVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil tripService:self.tripService tripID:self.tripID];
-    //[self.navigationController pushViewController:TripVC animated:YES];
     //[self.navigationController popViewControllerAnimated:YES];
-    
 }
 
 @end

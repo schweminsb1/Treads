@@ -64,6 +64,11 @@
     return [NSArray arrayWithArray:returnData];
 }
 
+- (int)getNewTripID
+{
+    return -1;
+}
+
 - (void)updateTrip:(NSDictionary*)tripDictionary forTarget:(NSObject*)target withAction:(SEL)returnAction
 {
     MSTable* userTable = [self.client getTable:@"MyTripsTable"];
@@ -71,7 +76,13 @@
         if (error == nil) {
             #pragma clang diagnostic push
             #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-            [target performSelector:returnAction]; //withObject:[self convertDataToTripModel:items]];
+            [target performSelector:returnAction withObject:[item objectForKey:@"id"] withObject:[NSNumber numberWithBool:YES]]; //withObject:[self convertDataToTripModel:items]];
+            #pragma clang diagnostic pop
+        }
+        else {
+            #pragma clang diagnostic push
+            #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            [target performSelector:returnAction withObject:[NSNumber numberWithInt: [Trip UNDEFINED_TRIP_ID]] withObject:[NSNumber numberWithBool:NO]];
             #pragma clang diagnostic pop
         }
     };

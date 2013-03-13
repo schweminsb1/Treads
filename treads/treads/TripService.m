@@ -38,6 +38,19 @@
 
 - (void)updateTrip:(Trip*)trip forTarget:(NSObject *)target withAction:(SEL)returnAction
 {
+    if (trip.tripID == [Trip UNDEFINED_TRIP_ID]) {
+        //get a valid ID before continuing
+        trip.tripID = [self.dataRepository getNewTripID];
+        
+        //abort if failed
+        if (trip.tripID == [Trip UNDEFINED_TRIP_ID]) {
+            #pragma clang diagnostic push
+            #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            [target performSelector:returnAction withObject:[NSNumber numberWithInt: trip.tripID] withObject:[NSNumber numberWithBool:NO]];
+            #pragma clang diagnostic pop
+            return;
+        }
+    }
     NSMutableDictionary* tripDictionary = [[NSMutableDictionary alloc] init];
     [tripDictionary setObject:[NSNumber numberWithInt:trip.tripID] forKey:@"id"];
     [tripDictionary setObject:[NSNumber numberWithInt:trip.userID] forKey:@"userID"];
