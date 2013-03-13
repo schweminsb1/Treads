@@ -9,8 +9,16 @@
 #import <UIKit/UIKit.h>
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 
+@class TripService;
+
 @interface TripViewVC : UIViewController
 -(IBAction) EditClick:(id) sender;
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil client:(MSClient *) client  AppDelegate: ( id) appdelegate;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService: (TripService*) myTripService tripID: (int)myTripID;
+- (void) populateData:(NSArray *)array;
+
+@property IBOutlet          UILabel      * tripTitle;
+@property IBOutlet         UILabel      * userName;
+@property IBOutlet          UILabel      * tripDescription;
+@property IBOutlet         UITableView  * tripTable;
 
 @end
