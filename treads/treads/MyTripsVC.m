@@ -51,12 +51,14 @@
     //set up browser
     self.browser = [[TripBrowser alloc] initWithFrame:self.browserWindow.bounds];
     [self.browserWindow addSubview: self.browser];
-    
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
     //load browser data
-    //[browser setBrowserData:[self.tripService getTripsFromProfile:@"Active User"] forTarget:self withAction:@selector(showTrip:)];
+    [self.browser clearAndWait];
     [self.tripService getAllTripsForTarget:self withAction:@selector(dataHasLoaded:)];
     //[self.tripService getTripWithID:0 forTarget:self withAction:@selector(dataHasLoaded:)];
-
 }
 
 - (void)dataHasLoaded:(NSArray*)newData

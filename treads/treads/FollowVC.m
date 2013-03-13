@@ -60,7 +60,6 @@
     //                               ];
     self.browserModeControl = [[UISegmentedControl alloc] initWithItems:browserModeControlLabels];
     [self.browserModeControl addTarget:self action:@selector(segmentControlChange:) forControlEvents:UIControlEventValueChanged];
-    [self.browserModeControl setSelectedSegmentIndex:1];
     self.browserModeControl.segmentedControlStyle = UISegmentedControlStyleBar;
     
     //attach segmented control to navigation controller
@@ -70,20 +69,18 @@
     self.browser = [[TripBrowser alloc] initWithFrame:self.browserWindow.bounds];
     [self.browserWindow addSubview: self.browser];
     
-    //load browser data
-    //NSArray*(^getNewData)(void) = browserModeControlActions[1];
-    //[self.browser setBrowserData: getNewData() forTarget:self withAction:@selector(showTrip:)];
-    void(^fcn)(void) = browserModeControlActions[1]; fcn();
+    //initial display
+    [self.browserModeControl setSelectedSegmentIndex:1];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self segmentControlChange:self.browserModeControl];
 }
 
 - (void)segmentControlChange:(UISegmentedControl*)sender
 {
-    //self.label.text = labelText[sender.selectedSegmentIndex];
-    
-    //NSArray*(^getNewData)(void) = browserModeControlActions[sender.selectedSegmentIndex];
-    //[self.browser setBrowserData: getNewData() withAction:^void(Trip* trip){[self showTrip:trip];}];
-    //[self.browser setBrowserData: getNewData() forTarget: self withAction:@selector(showTrip:)];
-    [self.browser setBrowserData:nil forTarget:nil withAction:nil];
+    [self.browser clearAndWait];
     void(^fcn)(void) = browserModeControlActions[sender.selectedSegmentIndex]; fcn();
 }
 

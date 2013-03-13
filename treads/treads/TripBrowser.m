@@ -14,10 +14,10 @@
 
 @implementation TripBrowser {
     NSArray* sortedListData;
-    //void(^listSelectAction)(Trip*);
     SEL listSelectAction;
     NSObject* target;
     UITableView* browserTable;
+    UIActivityIndicatorView* activityIndicatorView;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -38,6 +38,17 @@
     [browserTable setDelegate:self];
     [browserTable setDataSource:self];
     [self addSubview:browserTable];
+    
+    //set up activity view
+    activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:self.bounds];
+    [activityIndicatorView stopAnimating];
+    [activityIndicatorView setHidesWhenStopped:YES];
+    activityIndicatorView.alpha = 1.0;
+    activityIndicatorView.center = self.center;
+    activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    activityIndicatorView.color = [UIColor colorWithRed:0 green:105/255 blue:19/255 alpha:1];
+    [self addSubview:activityIndicatorView];
+    [self bringSubviewToFront:activityIndicatorView];
 }
 
 #pragma mark - Data Setting/Interaction
@@ -51,6 +62,13 @@
     
     [browserTable reloadData];
     [browserTable setContentOffset:CGPointZero animated:NO];
+    if (newSortedData != nil) {[activityIndicatorView stopAnimating];}
+}
+
+- (void)clearAndWait
+{
+    [activityIndicatorView startAnimating];
+    [self setBrowserData:nil forTarget:nil withAction:nil];
 }
 
 #pragma mark - UITableViewDataSource
