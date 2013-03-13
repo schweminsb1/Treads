@@ -37,6 +37,7 @@
 		39164F5816EA92C600877549 /* TripViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39164F5616EA92C600877549 /* TripViewVC.xib */; };
 		39164F5D16EAA3E000877549 /* AddLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39164F5B16EAA3E000877549 /* AddLocationViewController.m */; };
 		39164F5E16EAA3E000877549 /* AddLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39164F5C16EAA3E000877549 /* AddLocationViewController.xib */; };
+		395CD5EE16F03EEA009FD655 /* LocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 395CD5ED16F03EEA009FD655 /* LocationService.m */; };
 		3C094FA716EFF74700C537B1 /* TreadsSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C094FA616EFF74700C537B1 /* TreadsSession.m */; };
 		3C12312416EFCB89006CCBFE /* DataRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C12312316EFCB89006CCBFE /* DataRepository.m */; };
 		3C12312716EFCB98006CCBFE /* ProfileService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C12312616EFCB98006CCBFE /* ProfileService.m */; };
@@ -99,6 +100,8 @@
 		39164F5A16EAA3E000877549 /* AddLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddLocationViewController.h; path = treads/AddLocationViewController.h; sourceTree = SOURCE_ROOT; };
 		39164F5B16EAA3E000877549 /* AddLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddLocationViewController.m; path = treads/AddLocationViewController.m; sourceTree = SOURCE_ROOT; };
 		39164F5C16EAA3E000877549 /* AddLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddLocationViewController.xib; path = treads/AddLocationViewController.xib; sourceTree = SOURCE_ROOT; };
+		395CD5EC16F03EEA009FD655 /* LocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationService.h; path = treads/LocationService.h; sourceTree = SOURCE_ROOT; };
+		395CD5ED16F03EEA009FD655 /* LocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationService.m; path = treads/LocationService.m; sourceTree = SOURCE_ROOT; };
 		3C094FA516EFF74700C537B1 /* TreadsSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreadsSession.h; path = treads/TreadsSession.h; sourceTree = SOURCE_ROOT; };
 		3C094FA616EFF74700C537B1 /* TreadsSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreadsSession.m; path = treads/TreadsSession.m; sourceTree = SOURCE_ROOT; };
 		3C12312216EFCB89006CCBFE /* DataRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataRepository.h; path = treads/DataRepository.h; sourceTree = SOURCE_ROOT; };
@@ -356,6 +359,8 @@
 				3C8AC26C16E82BE30070271E /* TripService.m */,
 				3C12312516EFCB98006CCBFE /* ProfileService.h */,
 				3C12312616EFCB98006CCBFE /* ProfileService.m */,
+				395CD5EC16F03EEA009FD655 /* LocationService.h */,
+				395CD5ED16F03EEA009FD655 /* LocationService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -482,6 +487,7 @@
 				3C12312716EFCB98006CCBFE /* ProfileService.m in Sources */,
 				29E2E8A316EFEEFA0010C19B /* RegisterViewController.m in Sources */,
 				3C094FA716EFF74700C537B1 /* TreadsSession.m in Sources */,
+				395CD5EE16F03EEA009FD655 /* LocationService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

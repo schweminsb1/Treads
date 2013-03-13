@@ -12,6 +12,7 @@
 #import "TripService.h"
 #import "ProfileService.h"
 #import "EditTripViewController.h"
+#import "LocationService.h"
 
 @interface AppDelegate()
 
@@ -21,6 +22,7 @@
 //services
 @property (strong) TripService* tripService;
 @property (strong) ProfileService* profileService;
+@property (strong) LocationService* locationService;
 
 @end
 
@@ -36,6 +38,8 @@
     //Initialize services
     self.tripService = [[TripService alloc] initWithRepository:self.dataRepository];
     
+    self.locationService = [[LocationService alloc]initWithRepository:_dataRepository];
+    
     //Initialize ViewControllers
     UIViewController *mapsVC, *cameraVC, *myTripsVC, *followVC, *profileVC;
     
@@ -50,7 +54,7 @@
     //Set the login controller to default
     login = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil client:self.dataRepository.client AppDelegate:self];
     login.title = @"Login";
-    UINavigationController* LoginNavigation = [[UINavigationController alloc] initWithRootViewController:login];
+    //UINavigationController* LoginNavigation = [[UINavigationController alloc] initWithRootViewController:login];
     
     //self.window.rootViewController=LoginNavigation;
     
@@ -64,9 +68,13 @@
         //followVC,
         profileVC
         ];
-    self.window.rootViewController = self.tabBarController;
+    
+    AddLocationViewController * addLocationController = [[AddLocationViewController new]initWithNibName:@"AddLocationViewController" bundle:(nil ) locationService:_locationService tripID:0];
+    
+    self.window.rootViewController = addLocationController;
     
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

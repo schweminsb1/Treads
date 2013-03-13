@@ -16,8 +16,11 @@
 
 - (void)getTripsMeetingCondition:(NSString*)predicateBody forTarget:(NSObject*)target withAction:(SEL) returnAction;
 
-- (void)updateTrip:(NSDictionary*)tripDictionary forTarget:(NSObject*)target withAction:(SEL)returnAction;
+- (void)addLocation:(NSDictionary*)newLocation forTarget:(NSObject*) target withAction: (SEL) returnAction;
 
 - (int)getNewTripID;
+
+-(void) getLocationsOrdered: (MSReadQueryBlock) getAll;
+- (void)updateTrip:(NSDictionary*)tripDictionary forTarget:(NSObject*)target withAction:(SEL)returnAction;
 
 @end

@@ -88,5 +88,44 @@
     };
     [userTable update:tripDictionary completion:updateBlock];
 }
+- (void)addLocation:(NSDictionary*)newLocation forTarget:(NSObject*) target withAction: (SEL) returnAction
+{
+     MSTable * LocationTable=  [self.client getTable:@"LocationTable"];
+    MSItemBlock itemBlock=^(NSDictionary *item, NSError *error)
+    {
+        if(error)
+        {
+            NSLog( [error localizedDescription]);
+            
+        }
+        else
+        {
+            
+            [target performSelector:returnAction];
+            // root view controller is the tabBar
+            //_appDelegate.window.rootViewController= _appDelegate.tabBarController;
+            
+        }
+    };
+    [LocationTable insert:newLocation completion:itemBlock];
+        
+    
+}
 
+-(void) getLocationsOrdered: (MSReadQueryBlock) getAll
+{
+    
+    
+     MSTable * LocationTable=  [self.client getTable:@"LocationTable"];
+    
+    NSPredicate * predicategetALL = [NSPredicate predicateWithValue:YES];
+    
+    //sets the predicate to return an ordered set value based on the UserID
+    [predicategetALL mutableOrderedSetValueForKey:@"id"];
+    
+    MSQuery * queryGetAll = [[MSQuery alloc]initWithTable:LocationTable withPredicate:predicategetALL];
+    
+    [LocationTable readWithQueryString:[queryGetAll queryStringOrError:nil] completion:getAll ];
+    
+}
 @end

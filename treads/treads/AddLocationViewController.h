@@ -8,10 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
+@class LocationService;
+
 @interface AddLocationViewController : UIViewController
 
 -(IBAction) FinishClick:(id) sender;
 -(IBAction) AddCoordinates:(id) sender;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil client:(MSClient *) client  AppDelegate: ( id) appdelegate;
+@property IBOutlet UITextField  * locationText;
+@property IBOutlet UITextView   * descriptionText;
+@property IBOutlet UITextView   * attributeText;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil locationService:(LocationService *)myLocationService tripID:(int)myTripID;
+-(void) goBack;
+
 @end
