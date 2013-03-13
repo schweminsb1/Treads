@@ -73,7 +73,7 @@
     [self.browserModeControl setSelectedSegmentIndex:1];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [self segmentControlChange:self.browserModeControl];
 }

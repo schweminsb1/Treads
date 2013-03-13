@@ -41,11 +41,8 @@
 {
     [super viewDidLoad];
     
-    //set up new trip button
+    //set up new trip button and attach to navigation controller
     self.tripNewButton = [[UIBarButtonItem alloc] initWithTitle:@"New Trip" style:UIBarButtonItemStyleDone target:self action:@selector(createNewTrip)];
-    
-    //attach new trip button to navigation controller
-    //UINavigationController* navigationController = [self navigationController];
     self.navigationItem.rightBarButtonItem = self.tripNewButton;
     
     //set up browser
@@ -53,7 +50,7 @@
     [self.browserWindow addSubview: self.browser];
 }
 
--(void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     //load browser data
     [self.browser clearAndWait];

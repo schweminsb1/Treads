@@ -13,10 +13,11 @@
 #import "Trip.h"
 #import "TripService.h"
 
-@interface TripViewVC ()
+@interface TripViewVC()
 
-@property TripService  * tripService;
+@property TripService* tripService;
 @property int tripID;
+@property (strong) UIBarButtonItem* tripEditButton;
 
 @end
 
@@ -30,17 +31,18 @@
         self.tripID = myTripID;
     }
     return self;
-    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    //set up new trip button and attach to navigation controller
+    self.tripEditButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStyleDone target:self action:@selector(tapEditButton:)];
+    self.navigationItem.rightBarButtonItem = self.tripEditButton;
+    
     //grab trip info from the database
     [self.tripService getTripWithID:self.tripID forTarget:self withAction:@selector(populateData:)];
-    
-    
 }
 -(void) populateData:(NSArray *)array
 {
@@ -49,9 +51,9 @@
         Trip * myTrip = (Trip*)array[0];
         
         //populate view fields
-        _tripTitle.text = myTrip.name;
-        _userName.text = [NSString stringWithFormat:@"%d", myTrip.myID];
-        _tripDescription.text = myTrip.description;
+        self.tripTitle.text = myTrip.name;
+        self.userName.text = [NSString stringWithFormat:@"%d", myTrip.myID];
+        self.tripDescription.text = myTrip.description;
         
         //TripLocation[] = select * from locationTripTable where tripID == x
         
@@ -76,7 +78,7 @@
         //[self.navigationItem setBackBarButtonItem: backButton];
     }
 }
-- (IBAction)EditClick:(id)sender
+- (void)tapEditButton:(id)sender
 {
     // calls edit trips page
   //  EditTripViewController *EditTripVC = [[EditTripViewController alloc]initWithNibName:@"EditTripViewController" bundle:nil client: _client AppDelegate: _appDelegate];
