@@ -13,6 +13,8 @@
 #import "TripService.h"
 #import "Trip.h"
 
+#import "TripViewVC.h"
+
 @interface FollowVC () {
     NSArray* browserModeControlLabels;
     NSArray* browserModeControlActions;
@@ -99,7 +101,9 @@
 
 - (void)showTrip:(Trip*)trip
 {
-    NSLog(@"Showing Trip: %@", trip.name);
+    //NSLog(@"Showing Trip: %@", trip.name);
+    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil tripService:self.tripService tripID:trip.tripID];
+    [self.navigationController pushViewController:tripViewVC animated:YES];
 }
 
 @end
