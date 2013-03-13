@@ -10,9 +10,9 @@
 
 @interface Trip : NSObject
 
+@property int tripID; //id
+@property int userID;
 @property (copy) NSString* name;
-@property int myID;
-@property int tripID;
 @property (copy) NSString* description;
 
 @end

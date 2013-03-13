@@ -12,6 +12,7 @@
 #import "DataRepository.h"
 #import "Trip.h"
 #import "TripService.h"
+#import "EditTripViewController.h"
 
 @interface TripViewVC()
 
@@ -44,7 +45,8 @@
     //grab trip info from the database
     [self.tripService getTripWithID:self.tripID forTarget:self withAction:@selector(populateData:)];
 }
--(void) populateData:(NSArray *)array
+
+- (void) populateData:(NSArray *)array
 {
     if(array.count > 0)
     {
@@ -52,7 +54,7 @@
         
         //populate view fields
         self.tripTitle.text = myTrip.name;
-        self.userName.text = [NSString stringWithFormat:@"%d", myTrip.myID];
+        self.userName.text = [NSString stringWithFormat:@"%d", myTrip.userID];
         self.tripDescription.text = myTrip.description;
         
         //TripLocation[] = select * from locationTripTable where tripID == x
@@ -80,10 +82,12 @@
 }
 - (void)tapEditButton:(id)sender
 {
-    // calls edit trips page
-  //  EditTripViewController *EditTripVC = [[EditTripViewController alloc]initWithNibName:@"EditTripViewController" bundle:nil client: _client AppDelegate: _appDelegate];
-  //  [self.navigationController pushViewController:EditTripVC animated:YES];
+    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style: UIBarButtonItemStyleBordered target: nil action: nil];
+    [self.navigationItem setBackBarButtonItem: newBackButton];
     
+    //calls edit trips page
+    EditTripViewController* editTripVC = [[EditTripViewController alloc] initWithNibName:@"EditTripViewController" bundle:nil tripService:self.tripService tripID:self.tripID];
+    [self.navigationController pushViewController:editTripVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

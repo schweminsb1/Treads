@@ -50,9 +50,9 @@
     for (NSDictionary* sourceTrip in sourceData) {
         Trip* trip = [[Trip alloc] init];
         @try {
+            trip.tripID = [[sourceTrip objectForKey:@"id"] integerValue];
+            trip.userID = [[sourceTrip objectForKey:@"userID"] integerValue];
             trip.name = [sourceTrip objectForKey:@"name"];
-            trip.myID = [[sourceTrip objectForKey:@"myID"] integerValue];
-            trip.tripID = [[sourceTrip objectForKey:@"tripID"] integerValue];
             trip.description = [sourceTrip objectForKey:@"description"];
             [returnData addObject:trip];
         }
@@ -69,13 +69,11 @@
     MSTable* userTable = [self.client getTable:@"MyTripsTable"];
     MSItemBlock updateBlock=^(NSDictionary* item, NSError* error) {
         if (error == nil) {
-            NSLog(@"Item updated");
             #pragma clang diagnostic push
             #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             [target performSelector:returnAction]; //withObject:[self convertDataToTripModel:items]];
             #pragma clang diagnostic pop
         }
-        else {NSLog(error.description);}
     };
     [userTable update:tripDictionary completion:updateBlock];
 }

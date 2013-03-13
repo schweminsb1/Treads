@@ -17,7 +17,8 @@
 
 @property TripService* tripService;
 @property int tripID;
-@property int myID;
+@property int userID;
+@property (strong) UIBarButtonItem* tripSaveButton;
 
 @end
 
@@ -40,12 +41,15 @@
 {
     [super viewDidLoad];
     
+    //set up save button and attach to navigation controller
+    self.tripSaveButton = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(saveChanges:)];
+    self.navigationItem.rightBarButtonItem = self.tripSaveButton;
+    
+    //set up controller
     [self.tripService getTripWithID:self.tripID forTarget:self withAction:@selector(populateData:)];
-
-
 }
 
--(void) populateData:(NSArray *)array
+- (void)populateData:(NSArray *)array
 {
     if(array.count > 0)
     {
@@ -53,7 +57,7 @@
         // trip query retrieved data
         self.tripTitle.text = myTrip.name;
         self.tripDescription.text = myTrip.description;
-        self.myID = myTrip.myID;
+        self.userID = myTrip.userID;
         
         //TripLocation[] = select * from locationTripTable where tripID == x
         
@@ -77,21 +81,16 @@
 }
 
 
--(IBAction) saveChanges:(id) sender {
-    //NSDictionary * newItem= @{@"myID":[NSNumber numberWithInt:self.myID] ,
-    //                          @"tripID": [NSNumber numberWithInt: self.tripID],
-    //                          @"description": [NSString stringWithString: self.tripDescription.text],
-    //                          @"name": [NSString stringWithString: self.tripTitle.text]
-    //                          };
+- (void)saveChanges:(id) sender {
     Trip* myTrip = [[Trip alloc] init];
     myTrip.name = self.tripTitle.text;
     myTrip.tripID = self.tripID;
-    myTrip.myID = self.myID;
+    myTrip.userID = self.userID;
     myTrip.description = self.tripDescription.text;
     [self.tripService updateTrip:myTrip forTarget:self withAction:@selector(changesSaved)];
 }
 
--(void) changesSaved {
+- (void)changesSaved {
     UIAlertView *saved = [[UIAlertView alloc]
                                 initWithTitle: @"Woah!!"
                                 message: @"Changes saved!"
@@ -103,8 +102,8 @@
     UIViewController * TripVC;
     
     TripVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil tripService:self.tripService tripID:self.tripID];
-    [self.navigationController pushViewController:TripVC animated:YES];
-    
+    //[self.navigationController pushViewController:TripVC animated:YES];
+    //[self.navigationController popViewControllerAnimated:YES];
     
 }
 

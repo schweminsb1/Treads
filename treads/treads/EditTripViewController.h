@@ -22,7 +22,6 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService: (TripService*) myTripService tripID: (int)myTripID;
 
-
 -(void) populateData:(NSArray *)array;
 
 @end

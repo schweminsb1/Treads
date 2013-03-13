@@ -373,8 +373,8 @@
 		3C958FF316EA6CDB0038AD7C /* Register */ = {
 			isa = PBXGroup;
 			children = (
-				29E2E8A216EFEEFA0010C19B /* RegisterViewController.m */,
 				3C958FF916EA6CFF0038AD7C /* RegisterViewController.h */,
+				29E2E8A216EFEEFA0010C19B /* RegisterViewController.m */,
 				3C958FFB16EA6CFF0038AD7C /* RegisterViewController.xib */,
 			);
 			name = Register;
