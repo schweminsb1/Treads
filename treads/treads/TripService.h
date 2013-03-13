@@ -16,6 +16,7 @@
 
 - (void)getAllTripsForTarget:(NSObject*)target withAction:(SEL) returnAction;
 - (void)getTripWithID:(int)tripID forTarget:(NSObject *)target withAction:(SEL)returnAction;
+- (void)updateTripWithID:(int)tripID forTarget:(NSDictionary *)target withAction:(SEL)returnAction;
 
 //dummy services
 //- (NSArray*)getAllTrips;

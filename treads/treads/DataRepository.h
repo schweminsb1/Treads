@@ -16,4 +16,6 @@
 
 - (void)getTripsMeetingCondition:(NSString*)predicateBody forTarget:(NSObject*)newTarget withAction:(SEL) targetSelector;
 
+- (void)updateTripWithID:(int)tripID forTarget:(NSDictionary *)target withAction:(SEL)returnAction;
+
 @end

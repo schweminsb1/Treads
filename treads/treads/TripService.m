@@ -36,6 +36,10 @@
     [self.dataRepository getTripsMeetingCondition:[NSString stringWithFormat:@"tripID == %d", tripID] forTarget:target withAction:returnAction];
 }
 
+- (void)updateTripWithID:(int)tripID forTarget:(NSDictionary *)target withAction:(SEL)returnAction {
+    [self.dataRepository updateTripWithID:tripID forTarget:target withAction:returnAction];
+}
+
 #pragma mark - dummy services
 
 //- (NSArray*)getAllTrips

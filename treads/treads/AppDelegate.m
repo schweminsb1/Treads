@@ -11,6 +11,7 @@
 #import "DataRepository.h"
 #import "TripService.h"
 #import "ProfileService.h"
+#import "EditTripViewController.h"
 
 @interface AppDelegate()
 
@@ -51,7 +52,19 @@
     login.title = @"Login";
     UINavigationController* LoginNavigation = [[UINavigationController alloc] initWithRootViewController:login];
     
-   self.window.rootViewController=LoginNavigation;
+   //self.window.rootViewController=LoginNavigation;
+    
+    
+    
+    UIViewController * editTripVC;
+    
+    editTripVC = [[EditTripViewController alloc] initWithNibName:@"EditTripViewController" bundle:nil tripService:self.tripService tripID:0];
+    self.window.rootViewController = editTripVC;
+    
+    
+    
+    
+    
     
     //Initialize and assign to Tab Bar
     self.tabBarController = [[UITabBarController alloc] init];

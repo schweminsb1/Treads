@@ -64,4 +64,16 @@
     return [NSArray arrayWithArray:returnData];
 }
 
+- (void)updateTripWithID:(int)tripID forTarget:(NSDictionary *)target withAction:(SEL)returnAction {
+    MSTable * UserTable=  [self.client getTable:@"MyTripsTable"];
+
+    MSItemBlock updateBlock=^(NSDictionary* item, NSError* error) {
+        if (error == nil) {
+            NSLog(@"YAY!");
+        }
+    };
+    UserTable readWhere:<#(NSPredicate *)#> completion:<#^(NSArray *items, NSInteger totalCount, NSError *error)completion#>
+    [UserTable update:target completion:updateBlock];
+}
+
 @end
