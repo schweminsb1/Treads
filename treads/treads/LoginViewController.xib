@@ -262,7 +262,7 @@
 						<string key="NSFrame">{{299, 498}, {266, 30}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="702014949"/>
+						<reference key="NSNextKeyView" ref="161162454"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -397,7 +397,7 @@
 						<reference key="IBUIFontDescription" ref="61644643"/>
 						<reference key="IBUIFont" ref="20387019"/>
 					</object>
-					<object class="IBUIActivityIndicatorView" id="702014949">
+					<object class="IBUIActivityIndicatorView" id="161162454">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{371, 483}, {37, 37}}</string>
@@ -467,7 +467,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">activityIndicatorView</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="702014949"/>
+						<reference key="destination" ref="161162454"/>
 					</object>
 					<int key="connectionID">498</int>
 				</object>
@@ -534,7 +534,7 @@
 							<reference ref="534584746"/>
 							<reference ref="256649570"/>
 							<reference ref="133896071"/>
-							<reference ref="702014949"/>
+							<reference ref="161162454"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -612,7 +612,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">497</int>
-						<reference key="object" ref="702014949"/>
+						<reference key="object" ref="161162454"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>
