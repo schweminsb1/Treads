@@ -13,7 +13,7 @@
 
 @interface TripService()
 
-@property DataRepository* dataRepository;
+//@property DataRepository* dataRepository;
 
 @end
 
@@ -22,48 +22,57 @@
 - (id)initWithRepository:(DataRepository*)repository {
     if ((self = [super init])) {
         self.dataRepository = repository;
+        self.dataTableIdentifier = @"TripTable";
     }
     return self;
 }
 
+- (NSArray*)convertReturnDataToServiceModel:(NSArray*)returnData
+{
+    NSMutableArray* convertedData = [[NSMutableArray alloc] init];
+    for (NSDictionary* returnTrip in returnData) {
+        Trip* trip = [[Trip alloc] init];
+        @try {
+            trip.tripID = [[returnTrip objectForKey:@"id"] intValue];
+            trip.userID = [[returnTrip objectForKey:@"userID"] intValue];
+            trip.name = [returnTrip objectForKey:@"name"];
+            trip.description = [returnTrip objectForKey:@"description"];
+            [convertedData addObject:trip];
+        }
+        @catch (NSException* exception) {
+            trip.name = @"Error - could not parse trip data";
+            [convertedData addObject:trip];
+        }
+    }
+    return [NSArray arrayWithArray:convertedData];
+}
+
 - (void)getAllTripsForTarget:(NSObject *)target withAction:(SEL)returnAction
 {
-    [self.dataRepository getTripsMeetingCondition:@"" forTarget:target withAction:returnAction];
+    [self.dataRepository retrieveDataItemsMatching:nil usingService:self forRequestingObject:target withReturnAction:returnAction];
+    //[self.dataRepository getTripsMeetingCondition:@"" forTarget:target withAction:returnAction];
 }
 
 - (void)getTripWithID:(int)tripID forTarget:(NSObject *)target withAction:(SEL)returnAction
 {
-    [self.dataRepository getTripsMeetingCondition:[NSString stringWithFormat:@"id = '%d'", tripID] forTarget:target withAction:returnAction];
+    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"id = '%d'", tripID] usingService:self forRequestingObject:target withReturnAction:returnAction];
+    //[self.dataRepository getTripsMeetingCondition:[NSString stringWithFormat:@"id = '%d'", tripID] forTarget:target withAction:returnAction];
 }
 
 - (void)updateTrip:(Trip*)trip forTarget:(NSObject *)target withAction:(SEL)returnAction
 {
-    /*if (trip.tripID == [Trip UNDEFINED_TRIP_ID]) {
-     //get a valid ID before continuing
-     trip.tripID = [self.dataRepository getNewTripID];
-     
-     //abort if failed
-     if (trip.tripID == [Trip UNDEFINED_TRIP_ID]) {
-     #pragma clang diagnostic push
-     #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-     [target performSelector:returnAction withObject:[NSNumber numberWithInt: trip.tripID] withObject:[NSNumber numberWithBool:NO]];
-     #pragma clang diagnostic pop
-     return;
-     }
-     }*/
     NSMutableDictionary* tripDictionary = [[NSMutableDictionary alloc] init];
-    if (trip.tripID != [Trip UNDEFINED_TRIP_ID]) {
-        //[tripDictionary setObject:[NSString stringWithFormat:@"%d", trip.tripID] forKey:@"id"];
-        [tripDictionary setObject:[NSNumber numberWithInt:trip.tripID] forKey:@"id"];
-    }
-    else {
-        [tripDictionary setObject:[NSNull null] forKey:@"id"];
-    }
-    //[tripDictionary setObject:[NSString stringWithFormat:@"%d", trip.userID] forKey:@"userID"];
     [tripDictionary setObject:[NSNumber numberWithInt:trip.userID] forKey:@"userID"];
     [tripDictionary setObject:trip.name forKey:@"name"];
     [tripDictionary setObject:trip.description forKey:@"description"];
-    [self.dataRepository updateTrip:[NSDictionary dictionaryWithDictionary:tripDictionary] forTarget:target withAction:returnAction];
+    if (trip.tripID == [Trip UNDEFINED_TRIP_ID]) {
+        [self.dataRepository createDataItem:tripDictionary usingService:self forRequestingObject:target withReturnAction:returnAction];
+    }
+    else {
+        [tripDictionary setObject:[NSNumber numberWithInt:trip.tripID] forKey:@"id"];
+        [self.dataRepository updateDataItem:tripDictionary usingService:self forRequestingObject:target withReturnAction:returnAction];
+    }
+    //[self.dataRepository updateTrip:[NSDictionary dictionaryWithDictionary:tripDictionary] forTarget:target withAction:returnAction];
 }
 
 @end

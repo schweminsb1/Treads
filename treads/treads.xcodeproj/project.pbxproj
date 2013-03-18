@@ -102,6 +102,7 @@
 		39164F5C16EAA3E000877549 /* AddLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddLocationViewController.xib; path = treads/AddLocationViewController.xib; sourceTree = SOURCE_ROOT; };
 		395CD5EC16F03EEA009FD655 /* LocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationService.h; path = treads/LocationService.h; sourceTree = SOURCE_ROOT; };
 		395CD5ED16F03EEA009FD655 /* LocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationService.m; path = treads/LocationService.m; sourceTree = SOURCE_ROOT; };
+		3C04028C16F6B8CA0030D8BA /* TreadsService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TreadsService.h; path = treads/TreadsService.h; sourceTree = SOURCE_ROOT; };
 		3C094FA516EFF74700C537B1 /* TreadsSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreadsSession.h; path = treads/TreadsSession.h; sourceTree = SOURCE_ROOT; };
 		3C094FA616EFF74700C537B1 /* TreadsSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreadsSession.m; path = treads/TreadsSession.m; sourceTree = SOURCE_ROOT; };
 		3C12312216EFCB89006CCBFE /* DataRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataRepository.h; path = treads/DataRepository.h; sourceTree = SOURCE_ROOT; };
@@ -355,6 +356,7 @@
 		3C8AC26A16E82BD10070271E /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3C04028C16F6B8CA0030D8BA /* TreadsService.h */,
 				3C8AC26B16E82BE30070271E /* TripService.h */,
 				3C8AC26C16E82BE30070271E /* TripService.m */,
 				3C12312516EFCB98006CCBFE /* ProfileService.h */,

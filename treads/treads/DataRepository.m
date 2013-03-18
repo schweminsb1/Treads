@@ -9,96 +9,89 @@
 #import "DataRepository.h"
 #import "Trip.h"
 
-@interface DataRepository() {
-    NSString* TRIP_TABLE;
-}
-
-@end
-
 @implementation DataRepository
 
 - (id)init
 {
     if ((self = [super init])) {
         self.client = [MSClient clientWithApplicationURLString:@"https://treads.azure-mobile.net/" withApplicationKey:@"uxbEolJjpIKEpNJSnsNEuGehMowvxj53"];
-        TRIP_TABLE = @"TripTable";
     }
     return self;
 }
 
-- (void)getTripsMeetingCondition:(NSString*)predicateBody forTarget:(NSObject*)target withAction:(SEL)returnAction
+//retrieval
+
+- (void)retrieveDataItemsMatching:(NSString*)predicateStringOrNil usingService:(id<TreadsService>)callingService forRequestingObject:(NSObject*)requestingObject withReturnAction:(SEL)returnAction
 {
-    MSTable* MyTripsTable = [self.client getTable:TRIP_TABLE];
-    MSReadQueryBlock queryBlock=^(NSArray* items, NSInteger totalCount, NSError *error) {
+    MSTable* queryTable = [self.client getTable:callingService.dataTableIdentifier];
+    MSQuery* query = [[MSQuery alloc] initWithTable:queryTable];
+    if (predicateStringOrNil != nil) {
+        [query setPredicate:[NSPredicate predicateWithFormat:predicateStringOrNil]];
+    }
+    
+    MSReadQueryBlock queryCompletionBlock = ^(NSArray* items, NSInteger totalCount, NSError *error) {
         if (error == nil) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-            [target performSelector:returnAction withObject:[self convertDataToTripModel:items]];
-#pragma clang diagnostic pop
+            #pragma clang diagnostic push
+            #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            [requestingObject performSelector:returnAction withObject:[callingService convertReturnDataToServiceModel:items]];
+            #pragma clang diagnostic pop
         }
     };
     
     __autoreleasing NSError* error = [[NSError alloc] init];
     
-    MSQuery* query;
-    if ([predicateBody isEqual: @""]) {
-        query = [[MSQuery alloc]initWithTable:MyTripsTable];
-    }
-    else {
-        query= [[MSQuery alloc]initWithTable:MyTripsTable withPredicate:[NSPredicate predicateWithFormat:predicateBody]];
-    }
-    
-    [MyTripsTable readWithQueryString:[query queryStringOrError:&error] completion:queryBlock];
+    [queryTable readWithQueryString:[query queryStringOrError:&error] completion:queryCompletionBlock];
 }
 
-- (NSArray*)convertDataToTripModel:(NSArray*)sourceData
-{
-    NSMutableArray* returnData = [[NSMutableArray alloc] init];
-    for (NSDictionary* sourceTrip in sourceData) {
-        Trip* trip = [[Trip alloc] init];
-        @try {
-            trip.tripID = [[sourceTrip objectForKey:@"id"] intValue];
-            trip.userID = [[sourceTrip objectForKey:@"userID"] intValue];
-            trip.name = [sourceTrip objectForKey:@"name"];
-            trip.description = [sourceTrip objectForKey:@"description"];
-            [returnData addObject:trip];
-        }
-        @catch (NSException* exception) {
-            trip.name = @"Error - could not parse trip data";
-            [returnData addObject:trip];
-        }
-    }
-    return [NSArray arrayWithArray:returnData];
-}
+//updating
 
-- (void)updateTrip:(NSDictionary*)tripDictionary forTarget:(NSObject*)target withAction:(SEL)returnAction
+- (void)createDataItem:(NSDictionary*)updateItem usingService:(id<TreadsService>)callingService forRequestingObject:(NSObject*)requestingObject withReturnAction:(SEL)returnAction
 {
-    MSTable* userTable = [self.client getTable:TRIP_TABLE];
+    MSTable* userTable = [self.client getTable:callingService.dataTableIdentifier];
     MSItemBlock updateBlock=^(NSDictionary* item, NSError* error) {
         if (error == nil) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-            [target performSelector:returnAction withObject:[item objectForKey:@"id"] withObject:[NSNumber numberWithBool:YES]]; //withObject:[self convertDataToTripModel:items]];
-#pragma clang diagnostic pop
+            #pragma clang diagnostic push
+            #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            [requestingObject performSelector:returnAction withObject:[item objectForKey:@"id"] withObject:[NSNumber numberWithBool:YES]];
+            #pragma clang diagnostic pop
         }
         else {
             //NSLog([error localizedDescription]);
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-            [target performSelector:returnAction withObject:[NSNull null] withObject:[NSNumber numberWithBool:NO]];
-#pragma clang diagnostic pop
+            #pragma clang diagnostic push
+            #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            [requestingObject performSelector:returnAction withObject:[NSNull null] withObject:[NSNumber numberWithBool:NO]];
+            #pragma clang diagnostic pop
         }
     };
     //NSLog(tripDictionary.description);
-    if ([tripDictionary objectForKey:@"id"] != [NSNull null]) {
-        [userTable update:tripDictionary completion:updateBlock];
-    }
-    else {
-        NSMutableDictionary* mutableDictionary = [[NSMutableDictionary alloc] initWithDictionary:tripDictionary];
-        [mutableDictionary removeObjectForKey:@"id"];
-        [userTable insert:[NSDictionary dictionaryWithDictionary:mutableDictionary] completion:updateBlock];
-    }
+    [userTable insert:updateItem completion:updateBlock];
 }
+
+- (void)updateDataItem:(NSDictionary*)updateItem usingService:(id<TreadsService>)callingService forRequestingObject:(NSObject*)requestingObject withReturnAction:(SEL)returnAction
+{
+    MSTable* userTable = [self.client getTable:callingService.dataTableIdentifier];
+    MSItemBlock updateBlock=^(NSDictionary* item, NSError* error) {
+        if (error == nil) {
+            #pragma clang diagnostic push
+            #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            [requestingObject performSelector:returnAction withObject:[item objectForKey:@"id"] withObject:[NSNumber numberWithBool:YES]];
+            #pragma clang diagnostic pop
+        }
+        else {
+            //NSLog([error localizedDescription]);
+            #pragma clang diagnostic push
+            #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            [requestingObject performSelector:returnAction withObject:[NSNull null] withObject:[NSNumber numberWithBool:NO]];
+            #pragma clang diagnostic pop
+        }
+    };
+    [userTable update:updateItem completion:updateBlock];
+}
+
+
+
+
+
 
 - (void)addLocation:(NSDictionary*)newLocation forTarget:(NSObject*) target withAction: (SEL) returnAction
 {

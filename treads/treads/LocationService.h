@@ -11,9 +11,9 @@
 
 @class DataRepository;
 
-typedef void (^MSReadQueryBlock)(NSArray *items,
-NSInteger totalCount,
-NSError *error);
+//typedef void (^MSReadQueryBlock)(NSArray *items,
+//NSInteger totalCount,
+//NSError *error);
 
 @interface LocationService : NSObject
 

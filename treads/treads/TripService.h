@@ -7,14 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TreadsService.h"
 
 @class DataRepository;
 @class Trip;
 
-@interface TripService : NSObject
+@interface TripService : NSObject <TreadsService>
+
+//protocol
+@property (strong) DataRepository* dataRepository;
+@property (copy) NSString* dataTableIdentifier;
 
 - (id)initWithRepository:(DataRepository*)repository;
+- (NSArray*)convertReturnDataToServiceModel:(NSArray*)returnData;
 
+//services
 - (void)getAllTripsForTarget:(NSObject*)target withAction:(SEL)returnAction;
 - (void)getTripWithID:(int)tripID forTarget:(NSObject*)target withAction:(SEL)returnAction;
 - (void)updateTrip:(Trip*)trip forTarget:(NSObject*)target withAction:(SEL)returnAction;
