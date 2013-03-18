@@ -14,13 +14,14 @@
 
 @property MSClient* client;
 
+//Trips
 - (void)getTripsMeetingCondition:(NSString*)predicateBody forTarget:(NSObject*)target withAction:(SEL) returnAction;
 
+- (void)updateTrip:(NSDictionary*)tripDictionary forTarget:(NSObject*)target withAction:(SEL)returnAction;
+
+//Locations
 - (void)addLocation:(NSDictionary*)newLocation forTarget:(NSObject*) target withAction: (SEL) returnAction;
 
-- (int)getNewTripID;
-
--(void) getLocationsOrdered: (MSReadQueryBlock) getAll;
-- (void)updateTrip:(NSDictionary*)tripDictionary forTarget:(NSObject*)target withAction:(SEL)returnAction;
+- (void) getLocationsOrdered: (MSReadQueryBlock) getAll;
 
 @end

@@ -69,9 +69,11 @@
         profileVC
         ];
     
-    AddLocationViewController * addLocationController = [[AddLocationViewController new]initWithNibName:@"AddLocationViewController" bundle:(nil ) locationService:_locationService tripID:0];
+    self.window.rootViewController = self.tabBarController;
     
-    self.window.rootViewController = addLocationController;
+    //AddLocationViewController * addLocationController = [[AddLocationViewController new]initWithNibName:@"AddLocationViewController" bundle:(nil ) locationService:_locationService tripID:0];
+    
+    //self.window.rootViewController = addLocationController;
     
     [self.window makeKeyAndVisible];
     

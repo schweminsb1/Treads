@@ -9,25 +9,32 @@
 #import "DataRepository.h"
 #import "Trip.h"
 
+@interface DataRepository() {
+    NSString* TRIP_TABLE;
+}
+
+@end
+
 @implementation DataRepository
 
 - (id)init
 {
     if ((self = [super init])) {
         self.client = [MSClient clientWithApplicationURLString:@"https://treads.azure-mobile.net/" withApplicationKey:@"uxbEolJjpIKEpNJSnsNEuGehMowvxj53"];
+        TRIP_TABLE = @"TripTable";
     }
     return self;
 }
 
 - (void)getTripsMeetingCondition:(NSString*)predicateBody forTarget:(NSObject*)target withAction:(SEL)returnAction
 {
-    MSTable* MyTripsTable = [self.client getTable:@"MyTripsTable"];
+    MSTable* MyTripsTable = [self.client getTable:TRIP_TABLE];
     MSReadQueryBlock queryBlock=^(NSArray* items, NSInteger totalCount, NSError *error) {
         if (error == nil) {
-            #pragma clang diagnostic push
-            #pragma clang diagnostic ignored "-Warc-performSelector-leaks"        
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             [target performSelector:returnAction withObject:[self convertDataToTripModel:items]];
-            #pragma clang diagnostic pop
+#pragma clang diagnostic pop
         }
     };
     
@@ -50,8 +57,8 @@
     for (NSDictionary* sourceTrip in sourceData) {
         Trip* trip = [[Trip alloc] init];
         @try {
-            trip.tripID = [[sourceTrip objectForKey:@"id"] integerValue];
-            trip.userID = [[sourceTrip objectForKey:@"userID"] integerValue];
+            trip.tripID = [[sourceTrip objectForKey:@"id"] intValue];
+            trip.userID = [[sourceTrip objectForKey:@"userID"] intValue];
             trip.name = [sourceTrip objectForKey:@"name"];
             trip.description = [sourceTrip objectForKey:@"description"];
             [returnData addObject:trip];
@@ -64,30 +71,35 @@
     return [NSArray arrayWithArray:returnData];
 }
 
-- (int)getNewTripID
-{
-    return -1;
-}
-
 - (void)updateTrip:(NSDictionary*)tripDictionary forTarget:(NSObject*)target withAction:(SEL)returnAction
 {
-    MSTable* userTable = [self.client getTable:@"MyTripsTable"];
+    MSTable* userTable = [self.client getTable:TRIP_TABLE];
     MSItemBlock updateBlock=^(NSDictionary* item, NSError* error) {
         if (error == nil) {
-            #pragma clang diagnostic push
-            #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             [target performSelector:returnAction withObject:[item objectForKey:@"id"] withObject:[NSNumber numberWithBool:YES]]; //withObject:[self convertDataToTripModel:items]];
-            #pragma clang diagnostic pop
+#pragma clang diagnostic pop
         }
         else {
-            #pragma clang diagnostic push
-            #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-            [target performSelector:returnAction withObject:[NSNumber numberWithInt: [Trip UNDEFINED_TRIP_ID]] withObject:[NSNumber numberWithBool:NO]];
-            #pragma clang diagnostic pop
+            //NSLog([error localizedDescription]);
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            [target performSelector:returnAction withObject:[NSNull null] withObject:[NSNumber numberWithBool:NO]];
+#pragma clang diagnostic pop
         }
     };
-    [userTable update:tripDictionary completion:updateBlock];
+    //NSLog(tripDictionary.description);
+    if ([tripDictionary objectForKey:@"id"] != [NSNull null]) {
+        [userTable update:tripDictionary completion:updateBlock];
+    }
+    else {
+        NSMutableDictionary* mutableDictionary = [[NSMutableDictionary alloc] initWithDictionary:tripDictionary];
+        [mutableDictionary removeObjectForKey:@"id"];
+        [userTable insert:[NSDictionary dictionaryWithDictionary:mutableDictionary] completion:updateBlock];
+    }
 }
+
 - (void)addLocation:(NSDictionary*)newLocation forTarget:(NSObject*) target withAction: (SEL) returnAction
 {
      MSTable * LocationTable=  [self.client getTable:@"LocationTable"];

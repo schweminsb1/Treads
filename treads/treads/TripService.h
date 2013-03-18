@@ -19,10 +19,4 @@
 - (void)getTripWithID:(int)tripID forTarget:(NSObject*)target withAction:(SEL)returnAction;
 - (void)updateTrip:(Trip*)trip forTarget:(NSObject*)target withAction:(SEL)returnAction;
 
-//dummy services
-//- (NSArray*)getAllTrips;
-//- (NSArray*)getFollowingTrips;
-//- (NSArray*)getFeedTrips;
-//- (NSArray*)getTripsFromProfile: (NSString*)profileName;
-
 @end

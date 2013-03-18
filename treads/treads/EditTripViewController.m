@@ -31,6 +31,7 @@
     if (self) {
         self.tripService = myTripService;
         self.tripID = myTripID;
+        self.userID = [Trip UNDEFINED_TRIP_ID];
     }
     return self;
 }
@@ -91,19 +92,20 @@
 }
 
 - (void)changesSavedTo:(NSNumber*)savedTripID successfully:(NSNumber*)wasSuccessful {
-    int savedID = [savedTripID integerValue];
     BOOL successful = [wasSuccessful boolValue];
     if (successful) {
+        int tripID = [savedTripID intValue];
+        
         UIAlertView *saved = [[UIAlertView alloc]
-                                    initWithTitle: self.tripTitle.text
-                                    message: @"Changes saved."
-                                    delegate: nil
-                                    cancelButtonTitle:@"OK"
-                                    otherButtonTitles:nil];
+                              initWithTitle: self.tripTitle.text
+                              message: @"Changes saved."
+                              delegate: nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
         [saved show];
         
-        if (self.tripID != savedID) {
-            self.tripID = savedID;
+        if (self.tripID != tripID) {
+            self.tripID = tripID;
         }
     }
     else {
