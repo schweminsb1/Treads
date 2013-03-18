@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 
-@interface LoginViewController : UIViewController
+@interface LoginVC : UIViewController
 
 @property (strong) IBOutlet UIActivityIndicatorView* activityIndicatorView;
 

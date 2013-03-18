@@ -8,11 +8,11 @@
 
 #import "TripViewVC.h"
 #import "AppDelegate.h"
-#import "EditTripViewController.h"
+#import "EditTripVC.h"
 #import "DataRepository.h"
 #import "Trip.h"
 #import "TripService.h"
-#import "EditTripViewController.h"
+#import "EditTripVC.h"
 
 @interface TripViewVC()
 
@@ -49,11 +49,11 @@
     [self.tripService getTripWithID:self.tripID forTarget:self withAction:@selector(populateData:)];
 }
 
-- (void) populateData:(NSArray *)array
+- (void)populateData:(NSArray*)tripReturnArray
 {
-    if(array.count > 0)
+    if(tripReturnArray.count > 0)
     {
-        Trip * myTrip = (Trip*)array[0];
+        Trip * myTrip = (Trip*)tripReturnArray[0];
         
         //populate view fields
         self.tripTitle.text = myTrip.name;
@@ -89,7 +89,7 @@
     [self.navigationItem setBackBarButtonItem: newBackButton];
     
     //calls edit trips page
-    EditTripViewController* editTripVC = [[EditTripViewController alloc] initWithNibName:@"EditTripViewController" bundle:nil tripService:self.tripService tripID:self.tripID];
+    EditTripVC* editTripVC = [[EditTripVC alloc] initWithNibName:@"EditTripVC" bundle:nil tripService:self.tripService tripID:self.tripID];
     [self.navigationController pushViewController:editTripVC animated:YES];
 }
 

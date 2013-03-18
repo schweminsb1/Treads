@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Team Walking Stick. All rights reserved.
 //
 
-#import "RegisterViewController.h"
+#import "RegisterVC.h"
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 #import "AppDelegate.h"
 
-@interface RegisterViewController ()
+@interface RegisterVC ()
 @property IBOutlet UIImageView * background;
 @property IBOutlet UITextField * emailAdress;
 @property IBOutlet UITextField * firstName;
@@ -26,7 +26,7 @@
 
 @end
 
-@implementation RegisterViewController
+@implementation RegisterVC
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil client:(MSClient *) client  AppDelegate: ( id) appdelegate
 {
@@ -52,7 +52,7 @@
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction) RegisterNewUser :(id) sender
+-(IBAction) registerNewUser :(id) sender
 {
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle: @"Woah!!"

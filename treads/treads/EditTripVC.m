@@ -6,14 +6,14 @@
 //  Copyright (c) 2013 Team Walking Stick. All rights reserved.
 //
 
-#import "EditTripViewController.h"
+#import "EditTripVC.h"
 #import "AppDelegate.h"
 #import "TreadsSession.h"
 #import "Trip.h"
 #import "TripService.h"
 #import "DataRepository.h"
 
-@interface EditTripViewController ()
+@interface EditTripVC ()
 
 @property TripService* tripService;
 @property (strong) UIBarButtonItem* tripSaveButton;
@@ -23,7 +23,7 @@
 
 @end
 
-@implementation EditTripViewController
+@implementation EditTripVC
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService: (TripService*) myTripService tripID:(int)myTripID
 {
@@ -46,11 +46,11 @@
     
     //set up controller
     if (self.tripID != [Trip UNDEFINED_TRIP_ID]) {
-        [self.tripService getTripWithID:self.tripID forTarget:self withAction:@selector(populateData:)];
+        [self.tripService getTripWithID:self.tripID forTarget:self withAction:@selector(displayLoadedTripData:)];
     }
 }
 
-- (void)populateData:(NSArray *)array
+- (void)displayLoadedTripData:(NSArray *)array
 {
     if(array.count > 0)
     {

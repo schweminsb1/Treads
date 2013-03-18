@@ -15,7 +15,7 @@
 
 #import "TripViewVC.h"
 
-#import "EditTripViewController.h"
+#import "EditTripVC.h"
 
 @interface MyTripsVC ()
 
@@ -78,7 +78,7 @@
     [self.navigationItem setBackBarButtonItem: newBackButton];
     
     //calls edit trips page
-    EditTripViewController* editTripVC = [[EditTripViewController alloc] initWithNibName:@"EditTripViewController" bundle:nil tripService:self.tripService tripID:[Trip UNDEFINED_TRIP_ID]];
+    EditTripVC* editTripVC = [[EditTripVC alloc] initWithNibName:@"EditTripVC" bundle:nil tripService:self.tripService tripID:[Trip UNDEFINED_TRIP_ID]];
     [self.navigationController pushViewController:editTripVC animated:YES];
 }
 

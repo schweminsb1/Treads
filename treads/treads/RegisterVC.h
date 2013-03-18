@@ -10,13 +10,13 @@
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 #import "AppDelegate.h"
 
-@interface RegisterViewController : UIViewController
+@interface RegisterVC : UIViewController
 
 @property (strong) IBOutlet UIActivityIndicatorView* activityIndicatorView;
--(IBAction) RegisterNewUser :(id) sender;
+-(IBAction) registerNewUser :(id) sender;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil client:(MSClient *) client  AppDelegate: ( id) appdelegate;
 
--(NSString *) getPasswordHash:(NSString *) user_input;
+-(NSString *)getPasswordHash:(NSString *) user_input;
 
 @end

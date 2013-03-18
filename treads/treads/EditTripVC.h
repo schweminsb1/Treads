@@ -11,7 +11,7 @@
 
 @class TripService;
 
-@interface EditTripViewController : UIViewController
+@interface EditTripVC : UIViewController
 
 
 @property IBOutlet UITextField * tripTitle;
@@ -22,6 +22,6 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService: (TripService*) myTripService tripID: (int)myTripID;
 
-- (void) populateData:(NSArray*)array;
+- (void)displayLoadedTripData:(NSArray*)array;
 
 @end

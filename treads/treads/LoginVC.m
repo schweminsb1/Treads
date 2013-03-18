@@ -6,11 +6,12 @@
 //  Copyright (c) 2013 Team Walking Stick. All rights reserved.
 //
 
-#import "LoginViewController.h"
+#import "LoginVC.h"
 #import "AppDelegate.h"
-#import "RegisterViewController.h"
+#import "RegisterVC.h"
 #import "TreadsSession.h"
-@interface LoginViewController ()
+
+@interface LoginVC ()
 
 @property IBOutlet UIImageView * background;
 @property IBOutlet UITextField * usernameText;
@@ -22,7 +23,7 @@
 
 @end
 
-@implementation LoginViewController
+@implementation LoginVC
 {
     NSMutableArray * pictures;
    
@@ -195,7 +196,7 @@
 }
 -(IBAction) RegisterClick:(id) sender;
 {
-    RegisterViewController * registerView= [[RegisterViewController alloc]initWithNibName:@"RegisterViewController" bundle:nil client:_client AppDelegate:_appDelegate];
+    RegisterVC * registerView= [[RegisterVC alloc]initWithNibName:@"RegisterVC" bundle:nil client:_client AppDelegate:_appDelegate];
     
     [self.navigationController pushViewController:registerView animated:YES];
     

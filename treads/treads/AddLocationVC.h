@@ -10,10 +10,10 @@
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 @class LocationService;
 
-@interface AddLocationViewController : UIViewController
+@interface AddLocationVC : UIViewController
 
--(IBAction) FinishClick:(id) sender;
--(IBAction) AddCoordinates:(id) sender;
+-(IBAction) finishClick:(id) sender;
+-(IBAction) addCoordinates:(id) sender;
 
 @property IBOutlet UITextField  * locationText;
 @property IBOutlet UITextView   * descriptionText;

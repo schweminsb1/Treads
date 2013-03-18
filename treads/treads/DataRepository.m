@@ -100,13 +100,15 @@
     {
         if(error)
         {
-            NSLog( [error localizedDescription]);
+            NSLog([error localizedDescription]);
             
         }
         else
         {
-            
+            #pragma clang diagnostic push
+            #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             [target performSelector:returnAction];
+            #pragma clang diagnostic pop
             // root view controller is the tabBar
             //_appDelegate.window.rootViewController= _appDelegate.tabBarController;
             

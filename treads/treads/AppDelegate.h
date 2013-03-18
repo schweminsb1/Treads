@@ -13,9 +13,9 @@
 #import "MyTripsVC.h"
 #import "FollowVC.h"
 #import "ProfileVC.h"
-#import "LoginViewController.h"
+#import "LoginVC.h"
 #import "TripViewVC.h"
-#import "AddLocationViewController.h"
+#import "AddLocationVC.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 

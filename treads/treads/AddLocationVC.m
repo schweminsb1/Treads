@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Team Walking Stick. All rights reserved.
 //
 
-#import "AddLocationViewController.h"
+#import "AddLocationVC.h"
 #import "TreadsSession.h"
 #import "AppDelegate.h"
 #import "TripService.h"
@@ -14,7 +14,7 @@
 #import <MapKit/MapKit.h>
 #import "LocationService.h"
 
-@interface AddLocationViewController ()
+@interface AddLocationVC ()
 
 
 @property double                 latitude;
@@ -25,7 +25,7 @@
 
 @end
 
-@implementation AddLocationViewController
+@implementation AddLocationVC
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil locationService:(LocationService *)myLocationService tripID:(int)myTripID {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -49,7 +49,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(IBAction)FinishClick:(id)sender
+-(IBAction)finishClick:(id)sender
 {
     // user clicks finish and pushes the new data to the database
     
@@ -118,7 +118,7 @@
     
     
 }
--(IBAction)AddCoordinates:(id)sender
+-(IBAction)addCoordinates:(id)sender
 {
     UIButton *button = (UIButton*)sender;
     UIAlertView *alert = [[UIAlertView alloc]

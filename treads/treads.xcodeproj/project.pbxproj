@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		29E2E8A316EFEEFA0010C19B /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29E2E8A216EFEEFA0010C19B /* RegisterViewController.m */; };
+		29E2E8A316EFEEFA0010C19B /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 29E2E8A216EFEEFA0010C19B /* RegisterVC.m */; };
 		3118BFEE16EFC588006DE2E9 /* compass.png in Resources */ = {isa = PBXBuildFile; fileRef = 3118BFED16EFC588006DE2E9 /* compass.png */; };
-		316399B616ECB3F6003B3F0E /* EditTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 316399B416ECB3F6003B3F0E /* EditTripViewController.m */; };
-		316399B716ECB3F6003B3F0E /* EditTripViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 316399B516ECB3F6003B3F0E /* EditTripViewController.xib */; };
+		316399B616ECB3F6003B3F0E /* EditTripVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 316399B416ECB3F6003B3F0E /* EditTripVC.m */; };
+		316399B716ECB3F6003B3F0E /* EditTripVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 316399B516ECB3F6003B3F0E /* EditTripVC.xib */; };
 		3188B15B16C9CE17008E1D7F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3188B15A16C9CE17008E1D7F /* UIKit.framework */; };
 		3188B15D16C9CE17008E1D7F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3188B15C16C9CE17008E1D7F /* Foundation.framework */; };
 		3188B15F16C9CE17008E1D7F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3188B15E16C9CE17008E1D7F /* CoreGraphics.framework */; };
@@ -35,8 +35,8 @@
 		39164F5316EA91C200877549 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39164F5216EA91C200877549 /* CoreLocation.framework */; };
 		39164F5716EA92C600877549 /* TripViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39164F5516EA92C600877549 /* TripViewVC.m */; };
 		39164F5816EA92C600877549 /* TripViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39164F5616EA92C600877549 /* TripViewVC.xib */; };
-		39164F5D16EAA3E000877549 /* AddLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39164F5B16EAA3E000877549 /* AddLocationViewController.m */; };
-		39164F5E16EAA3E000877549 /* AddLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39164F5C16EAA3E000877549 /* AddLocationViewController.xib */; };
+		39164F5D16EAA3E000877549 /* AddLocationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39164F5B16EAA3E000877549 /* AddLocationVC.m */; };
+		39164F5E16EAA3E000877549 /* AddLocationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39164F5C16EAA3E000877549 /* AddLocationVC.xib */; };
 		395CD5EE16F03EEA009FD655 /* LocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 395CD5ED16F03EEA009FD655 /* LocationService.m */; };
 		3C094FA716EFF74700C537B1 /* TreadsSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C094FA616EFF74700C537B1 /* TreadsSession.m */; };
 		3C12312416EFCB89006CCBFE /* DataRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C12312316EFCB89006CCBFE /* DataRepository.m */; };
@@ -49,27 +49,27 @@
 		3C958FEF16EA6C4F0038AD7C /* remote-luxury-hiking-canada.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C958FEB16EA6C4F0038AD7C /* remote-luxury-hiking-canada.jpg */; };
 		3C958FF016EA6C4F0038AD7C /* summit-boots-hiking-rocks.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C958FEC16EA6C4F0038AD7C /* summit-boots-hiking-rocks.jpg */; };
 		3C958FF116EA6C4F0038AD7C /* virgin_river_hiking.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C958FED16EA6C4F0038AD7C /* virgin_river_hiking.jpg */; };
-		3C958FF716EA6CED0038AD7C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C958FF516EA6CED0038AD7C /* LoginViewController.m */; };
-		3C958FF816EA6CED0038AD7C /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C958FF616EA6CED0038AD7C /* LoginViewController.xib */; };
-		3C958FFD16EA6CFF0038AD7C /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C958FFB16EA6CFF0038AD7C /* RegisterViewController.xib */; };
+		3C958FF716EA6CED0038AD7C /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C958FF516EA6CED0038AD7C /* LoginVC.m */; };
+		3C958FF816EA6CED0038AD7C /* LoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C958FF616EA6CED0038AD7C /* LoginVC.xib */; };
+		3C958FFD16EA6CFF0038AD7C /* RegisterVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C958FFB16EA6CFF0038AD7C /* RegisterVC.xib */; };
 		3C95900416EA6D220038AD7C /* MapPinAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C958FFF16EA6D220038AD7C /* MapPinAnnotation.m */; };
 		3C95900516EA6D220038AD7C /* Path.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C95900116EA6D220038AD7C /* Path.m */; };
 		3C95900816EA6DFE0038AD7C /* WindowsAzureMobileServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C95900716EA6DFE0038AD7C /* WindowsAzureMobileServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		29E2E8A216EFEEFA0010C19B /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegisterViewController.m; path = treads/RegisterViewController.m; sourceTree = SOURCE_ROOT; };
+		29E2E8A216EFEEFA0010C19B /* RegisterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegisterVC.m; path = treads/RegisterVC.m; sourceTree = SOURCE_ROOT; };
 		3118BFED16EFC588006DE2E9 /* compass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compass.png; sourceTree = "<group>"; };
-		316399B316ECB3F6003B3F0E /* EditTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditTripViewController.h; path = treads/EditTripViewController.h; sourceTree = SOURCE_ROOT; };
-		316399B416ECB3F6003B3F0E /* EditTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditTripViewController.m; path = treads/EditTripViewController.m; sourceTree = SOURCE_ROOT; };
-		316399B516ECB3F6003B3F0E /* EditTripViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EditTripViewController.xib; path = treads/EditTripViewController.xib; sourceTree = SOURCE_ROOT; };
-		3188B15716C9CE17008E1D7F /* treads.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = treads.temp_caseinsensitive_rename.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		316399B316ECB3F6003B3F0E /* EditTripVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditTripVC.h; path = treads/EditTripVC.h; sourceTree = SOURCE_ROOT; };
+		316399B416ECB3F6003B3F0E /* EditTripVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditTripVC.m; path = treads/EditTripVC.m; sourceTree = SOURCE_ROOT; };
+		316399B516ECB3F6003B3F0E /* EditTripVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EditTripVC.xib; path = treads/EditTripVC.xib; sourceTree = SOURCE_ROOT; };
+		3188B15716C9CE17008E1D7F /* treads.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = treads.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3188B15A16C9CE17008E1D7F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3188B15C16C9CE17008E1D7F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3188B15E16C9CE17008E1D7F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		3188B16216C9CE17008E1D7F /* treads.temp_caseinsensitive_rename-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "treads.temp_caseinsensitive_rename-Info.plist"; sourceTree = "<group>"; };
+		3188B16216C9CE17008E1D7F /* treads-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "treads-Info.plist"; sourceTree = "<group>"; };
 		3188B16616C9CE17008E1D7F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		3188B16816C9CE17008E1D7F /* treads.temp_caseinsensitive_rename-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "treads.temp_caseinsensitive_rename-Prefix.pch"; sourceTree = "<group>"; };
+		3188B16816C9CE17008E1D7F /* treads-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "treads-Prefix.pch"; sourceTree = "<group>"; };
 		3188B16916C9CE17008E1D7F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3188B16A16C9CE17008E1D7F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3188B19216C9CE6A008E1D7F /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
@@ -97,9 +97,9 @@
 		39164F5416EA92C600877549 /* TripViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripViewVC.h; path = treads/TripViewVC.h; sourceTree = SOURCE_ROOT; };
 		39164F5516EA92C600877549 /* TripViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripViewVC.m; path = treads/TripViewVC.m; sourceTree = SOURCE_ROOT; };
 		39164F5616EA92C600877549 /* TripViewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TripViewVC.xib; path = treads/TripViewVC.xib; sourceTree = SOURCE_ROOT; };
-		39164F5A16EAA3E000877549 /* AddLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddLocationViewController.h; path = treads/AddLocationViewController.h; sourceTree = SOURCE_ROOT; };
-		39164F5B16EAA3E000877549 /* AddLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddLocationViewController.m; path = treads/AddLocationViewController.m; sourceTree = SOURCE_ROOT; };
-		39164F5C16EAA3E000877549 /* AddLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddLocationViewController.xib; path = treads/AddLocationViewController.xib; sourceTree = SOURCE_ROOT; };
+		39164F5A16EAA3E000877549 /* AddLocationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddLocationVC.h; path = treads/AddLocationVC.h; sourceTree = SOURCE_ROOT; };
+		39164F5B16EAA3E000877549 /* AddLocationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddLocationVC.m; path = treads/AddLocationVC.m; sourceTree = SOURCE_ROOT; };
+		39164F5C16EAA3E000877549 /* AddLocationVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddLocationVC.xib; path = treads/AddLocationVC.xib; sourceTree = SOURCE_ROOT; };
 		395CD5EC16F03EEA009FD655 /* LocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationService.h; path = treads/LocationService.h; sourceTree = SOURCE_ROOT; };
 		395CD5ED16F03EEA009FD655 /* LocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationService.m; path = treads/LocationService.m; sourceTree = SOURCE_ROOT; };
 		3C04028C16F6B8CA0030D8BA /* TreadsService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TreadsService.h; path = treads/TreadsService.h; sourceTree = SOURCE_ROOT; };
@@ -120,11 +120,11 @@
 		3C958FEB16EA6C4F0038AD7C /* remote-luxury-hiking-canada.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "remote-luxury-hiking-canada.jpg"; path = "treads/remote-luxury-hiking-canada.jpg"; sourceTree = SOURCE_ROOT; };
 		3C958FEC16EA6C4F0038AD7C /* summit-boots-hiking-rocks.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "summit-boots-hiking-rocks.jpg"; path = "treads/summit-boots-hiking-rocks.jpg"; sourceTree = SOURCE_ROOT; };
 		3C958FED16EA6C4F0038AD7C /* virgin_river_hiking.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = virgin_river_hiking.jpg; path = treads/virgin_river_hiking.jpg; sourceTree = SOURCE_ROOT; };
-		3C958FF416EA6CED0038AD7C /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = treads/LoginViewController.h; sourceTree = SOURCE_ROOT; };
-		3C958FF516EA6CED0038AD7C /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = treads/LoginViewController.m; sourceTree = SOURCE_ROOT; };
-		3C958FF616EA6CED0038AD7C /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = treads/LoginViewController.xib; sourceTree = SOURCE_ROOT; };
-		3C958FF916EA6CFF0038AD7C /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegisterViewController.h; path = treads/RegisterViewController.h; sourceTree = SOURCE_ROOT; };
-		3C958FFB16EA6CFF0038AD7C /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RegisterViewController.xib; path = treads/RegisterViewController.xib; sourceTree = SOURCE_ROOT; };
+		3C958FF416EA6CED0038AD7C /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginVC.h; path = treads/LoginVC.h; sourceTree = SOURCE_ROOT; };
+		3C958FF516EA6CED0038AD7C /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginVC.m; path = treads/LoginVC.m; sourceTree = SOURCE_ROOT; };
+		3C958FF616EA6CED0038AD7C /* LoginVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginVC.xib; path = treads/LoginVC.xib; sourceTree = SOURCE_ROOT; };
+		3C958FF916EA6CFF0038AD7C /* RegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegisterVC.h; path = treads/RegisterVC.h; sourceTree = SOURCE_ROOT; };
+		3C958FFB16EA6CFF0038AD7C /* RegisterVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RegisterVC.xib; path = treads/RegisterVC.xib; sourceTree = SOURCE_ROOT; };
 		3C958FFE16EA6D220038AD7C /* MapPinAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapPinAnnotation.h; path = treads/MapPinAnnotation.h; sourceTree = SOURCE_ROOT; };
 		3C958FFF16EA6D220038AD7C /* MapPinAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapPinAnnotation.m; path = treads/MapPinAnnotation.m; sourceTree = SOURCE_ROOT; };
 		3C95900016EA6D220038AD7C /* Path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Path.h; path = treads/Path.h; sourceTree = SOURCE_ROOT; };
@@ -152,9 +152,9 @@
 		316399B816ECB404003B3F0E /* EditTrip */ = {
 			isa = PBXGroup;
 			children = (
-				316399B316ECB3F6003B3F0E /* EditTripViewController.h */,
-				316399B416ECB3F6003B3F0E /* EditTripViewController.m */,
-				316399B516ECB3F6003B3F0E /* EditTripViewController.xib */,
+				316399B316ECB3F6003B3F0E /* EditTripVC.h */,
+				316399B416ECB3F6003B3F0E /* EditTripVC.m */,
+				316399B516ECB3F6003B3F0E /* EditTripVC.xib */,
 			);
 			name = EditTrip;
 			sourceTree = "<group>";
@@ -171,7 +171,7 @@
 		3188B15816C9CE17008E1D7F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3188B15716C9CE17008E1D7F /* treads.temp_caseinsensitive_rename.app */,
+				3188B15716C9CE17008E1D7F /* treads.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -212,9 +212,9 @@
 				3C95900016EA6D220038AD7C /* Path.h */,
 				3C95900116EA6D220038AD7C /* Path.m */,
 				3C8A908B16E7DAA2007F0BB8 /* Default-568h@2x.png */,
-				3188B16216C9CE17008E1D7F /* treads.temp_caseinsensitive_rename-Info.plist */,
+				3188B16216C9CE17008E1D7F /* treads-Info.plist */,
 				3188B16616C9CE17008E1D7F /* main.m */,
-				3188B16816C9CE17008E1D7F /* treads.temp_caseinsensitive_rename-Prefix.pch */,
+				3188B16816C9CE17008E1D7F /* treads-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -249,9 +249,9 @@
 		39164F5916EAA3A800877549 /* Add Location */ = {
 			isa = PBXGroup;
 			children = (
-				39164F5A16EAA3E000877549 /* AddLocationViewController.h */,
-				39164F5B16EAA3E000877549 /* AddLocationViewController.m */,
-				39164F5C16EAA3E000877549 /* AddLocationViewController.xib */,
+				39164F5A16EAA3E000877549 /* AddLocationVC.h */,
+				39164F5B16EAA3E000877549 /* AddLocationVC.m */,
+				39164F5C16EAA3E000877549 /* AddLocationVC.xib */,
 			);
 			name = "Add Location";
 			sourceTree = "<group>";
@@ -370,9 +370,9 @@
 		3C958FF216EA6CD20038AD7C /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				3C958FF416EA6CED0038AD7C /* LoginViewController.h */,
-				3C958FF516EA6CED0038AD7C /* LoginViewController.m */,
-				3C958FF616EA6CED0038AD7C /* LoginViewController.xib */,
+				3C958FF416EA6CED0038AD7C /* LoginVC.h */,
+				3C958FF516EA6CED0038AD7C /* LoginVC.m */,
+				3C958FF616EA6CED0038AD7C /* LoginVC.xib */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -380,9 +380,9 @@
 		3C958FF316EA6CDB0038AD7C /* Register */ = {
 			isa = PBXGroup;
 			children = (
-				3C958FF916EA6CFF0038AD7C /* RegisterViewController.h */,
-				29E2E8A216EFEEFA0010C19B /* RegisterViewController.m */,
-				3C958FFB16EA6CFF0038AD7C /* RegisterViewController.xib */,
+				3C958FF916EA6CFF0038AD7C /* RegisterVC.h */,
+				29E2E8A216EFEEFA0010C19B /* RegisterVC.m */,
+				3C958FFB16EA6CFF0038AD7C /* RegisterVC.xib */,
 			);
 			name = Register;
 			sourceTree = "<group>";
@@ -390,9 +390,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3188B15616C9CE17008E1D7F /* treads.temp_caseinsensitive_rename */ = {
+		3188B15616C9CE17008E1D7F /* treads */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3188B18E16C9CE17008E1D7F /* Build configuration list for PBXNativeTarget "treads.temp_caseinsensitive_rename" */;
+			buildConfigurationList = 3188B18E16C9CE17008E1D7F /* Build configuration list for PBXNativeTarget "treads" */;
 			buildPhases = (
 				3188B15316C9CE17008E1D7F /* Sources */,
 				3188B15416C9CE17008E1D7F /* Frameworks */,
@@ -402,9 +402,9 @@
 			);
 			dependencies = (
 			);
-			name = treads.temp_caseinsensitive_rename;
+			name = treads;
 			productName = Treads;
-			productReference = 3188B15716C9CE17008E1D7F /* treads.temp_caseinsensitive_rename.app */;
+			productReference = 3188B15716C9CE17008E1D7F /* treads.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -428,7 +428,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3188B15616C9CE17008E1D7F /* treads.temp_caseinsensitive_rename */,
+				3188B15616C9CE17008E1D7F /* treads */,
 			);
 		};
 /* End PBXProject section */
@@ -452,11 +452,11 @@
 				3C958FEF16EA6C4F0038AD7C /* remote-luxury-hiking-canada.jpg in Resources */,
 				3C958FF016EA6C4F0038AD7C /* summit-boots-hiking-rocks.jpg in Resources */,
 				3C958FF116EA6C4F0038AD7C /* virgin_river_hiking.jpg in Resources */,
-				3C958FF816EA6CED0038AD7C /* LoginViewController.xib in Resources */,
-				3C958FFD16EA6CFF0038AD7C /* RegisterViewController.xib in Resources */,
+				3C958FF816EA6CED0038AD7C /* LoginVC.xib in Resources */,
+				3C958FFD16EA6CFF0038AD7C /* RegisterVC.xib in Resources */,
 				39164F5816EA92C600877549 /* TripViewVC.xib in Resources */,
-				39164F5E16EAA3E000877549 /* AddLocationViewController.xib in Resources */,
-				316399B716ECB3F6003B3F0E /* EditTripViewController.xib in Resources */,
+				39164F5E16EAA3E000877549 /* AddLocationVC.xib in Resources */,
+				316399B716ECB3F6003B3F0E /* EditTripVC.xib in Resources */,
 				3914480B16EE4B20001B16BE /* mountains.jpeg in Resources */,
 				3118BFEE16EFC588006DE2E9 /* compass.png in Resources */,
 			);
@@ -479,15 +479,15 @@
 				3C60C7DB16E7004900FDFD7D /* TripBrowser.m in Sources */,
 				3C8A909016E7DFC8007F0BB8 /* Trip.m in Sources */,
 				3C8AC26D16E82BE30070271E /* TripService.m in Sources */,
-				3C958FF716EA6CED0038AD7C /* LoginViewController.m in Sources */,
+				3C958FF716EA6CED0038AD7C /* LoginVC.m in Sources */,
 				3C95900416EA6D220038AD7C /* MapPinAnnotation.m in Sources */,
 				3C95900516EA6D220038AD7C /* Path.m in Sources */,
 				39164F5716EA92C600877549 /* TripViewVC.m in Sources */,
-				39164F5D16EAA3E000877549 /* AddLocationViewController.m in Sources */,
-				316399B616ECB3F6003B3F0E /* EditTripViewController.m in Sources */,
+				39164F5D16EAA3E000877549 /* AddLocationVC.m in Sources */,
+				316399B616ECB3F6003B3F0E /* EditTripVC.m in Sources */,
 				3C12312416EFCB89006CCBFE /* DataRepository.m in Sources */,
 				3C12312716EFCB98006CCBFE /* ProfileService.m in Sources */,
-				29E2E8A316EFEEFA0010C19B /* RegisterViewController.m in Sources */,
+				29E2E8A316EFEEFA0010C19B /* RegisterVC.m in Sources */,
 				3C094FA716EFF74700C537B1 /* TreadsSession.m in Sources */,
 				395CD5EE16F03EEA009FD655 /* LocationService.m in Sources */,
 			);
@@ -562,9 +562,9 @@
 					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Treads/treads.temp_caseinsensitive_rename-Prefix.pch";
-				INFOPLIST_FILE = "Treads/treads.temp_caseinsensitive_rename-Info.plist";
-				PRODUCT_NAME = treads.temp_caseinsensitive_rename;
+				GCC_PREFIX_HEADER = "Treads/treads-Prefix.pch";
+				INFOPLIST_FILE = "Treads/treads-Info.plist";
+				PRODUCT_NAME = treads;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -577,9 +577,9 @@
 					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Treads/treads.temp_caseinsensitive_rename-Prefix.pch";
-				INFOPLIST_FILE = "Treads/treads.temp_caseinsensitive_rename-Info.plist";
-				PRODUCT_NAME = treads.temp_caseinsensitive_rename;
+				GCC_PREFIX_HEADER = "Treads/treads-Prefix.pch";
+				INFOPLIST_FILE = "Treads/treads-Info.plist";
+				PRODUCT_NAME = treads;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -596,7 +596,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3188B18E16C9CE17008E1D7F /* Build configuration list for PBXNativeTarget "treads.temp_caseinsensitive_rename" */ = {
+		3188B18E16C9CE17008E1D7F /* Build configuration list for PBXNativeTarget "treads" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3188B18F16C9CE17008E1D7F /* Debug */,

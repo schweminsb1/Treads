@@ -11,7 +11,7 @@
 #import "DataRepository.h"
 #import "TripService.h"
 #import "ProfileService.h"
-#import "EditTripViewController.h"
+#import "EditTripVC.h"
 #import "LocationService.h"
 
 @interface AppDelegate()
@@ -49,10 +49,10 @@
     followVC = [[FollowVC alloc] initWithNibName:@"FollowVC" bundle:nil withTripService:self.tripService];
     profileVC = [[ProfileVC alloc] initWithNibName:@"ProfileVC" bundle:nil];
     
-    LoginViewController* login;
+    LoginVC* login;
     
     //Set the login controller to default
-    login = [[LoginViewController alloc]initWithNibName:@"LoginViewController" bundle:nil client:self.dataRepository.client AppDelegate:self];
+    login = [[LoginVC alloc]initWithNibName:@"LoginVC" bundle:nil client:self.dataRepository.client AppDelegate:self];
     login.title = @"Login";
     //UINavigationController* LoginNavigation = [[UINavigationController alloc] initWithRootViewController:login];
     
@@ -71,7 +71,7 @@
     
     self.window.rootViewController = self.tabBarController;
     
-    //AddLocationViewController * addLocationController = [[AddLocationViewController new]initWithNibName:@"AddLocationViewController" bundle:(nil ) locationService:_locationService tripID:0];
+    //AddLocationViewController * addLocationController = [[AddLocationViewController new]initWithNibName:@"AddLocationVC" bundle:(nil ) locationService:_locationService tripID:0];
     
     //self.window.rootViewController = addLocationController;
     
