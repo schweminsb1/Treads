@@ -7,19 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 
 @class TripService;
 
 @interface TripViewVC : UIViewController
 
+@property (strong) IBOutlet UIView* viewerWindow;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService: (TripService*) myTripService tripID: (int)myTripID;
 
 - (void) populateData:(NSArray *)array;
 
-@property IBOutlet UILabel* tripTitle;
-@property IBOutlet UILabel* userName;
-@property IBOutlet UILabel* tripDescription;
-@property IBOutlet UITableView* tripTable;
+//@property IBOutlet UILabel* tripTitle;
+//@property IBOutlet UILabel* userName;
+//@property IBOutlet UILabel* tripDescription;
+//@property IBOutlet UITableView* tripTable;
 
 @end
