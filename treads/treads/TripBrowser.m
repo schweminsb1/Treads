@@ -22,7 +22,7 @@
     NSObject* target;
     UITableView* browserTable;
     UIActivityIndicatorView* activityIndicatorView;
-    int cellPadding;
+    int cellVerticalPadding;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -45,7 +45,7 @@
     [browserTable setBackgroundColor:[AppColors secondaryBackgroundColor]];
     [browserTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self addSubview:browserTable];
-    cellPadding = 16;
+    cellVerticalPadding = 16;
     
     //set up activity view
     activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:self.bounds];
@@ -93,15 +93,8 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier: @"CELL"];
-//    if (!cell)
-//        cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: @"CELL"];
-//    
-//    cell.textLabel.text = ((Trip*)sortedListData[indexPath.row]).name;
-    
     TripBrowserCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CELL"];
     if (!cell) {
-        //[tableView registerNib:[UINib nibWithNibName:@"TripBrowserCell" bundle:nil] forCellReuseIdentifier:@"CELL"];
         cell = [[TripBrowserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL"];
     }
     
@@ -135,27 +128,17 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return cellPadding / 2;
+    return cellVerticalPadding / 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return cellPadding / 2;
+    return cellVerticalPadding / 2;
 }
 
 - (CGFloat)tableView: tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //at some point we will need to add a footer to make sure the bottom doesn't get cut off
-    return [self tableView:tableView cellForRowAtIndexPath:indexPath].bounds.size.height + cellPadding;
+    return [self tableView:tableView cellForRowAtIndexPath:indexPath].bounds.size.height + cellVerticalPadding;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

@@ -12,9 +12,13 @@
 
 + (int)UNDEFINED_TRIP_ID;
 
+//header
 @property int tripID; //id
 @property int userID;
 @property (copy) NSString* name;
 @property (copy) NSString* description;
+
+//location
+@property (strong) NSArray* tripLocations;
 
 @end

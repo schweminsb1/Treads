@@ -14,10 +14,13 @@
 #import "TripService.h"
 #import "EditTripVC.h"
 
+#import "TripViewer.h"
+
 @interface TripViewVC()
 
 @property TripService* tripService;
 @property int tripID;
+@property (strong) TripViewer* viewer;
 @property (strong) UIBarButtonItem* tripEditButton;
 
 @end
@@ -41,24 +44,39 @@
     //set up new trip button and attach to navigation controller
     self.tripEditButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStyleDone target:self action:@selector(tapEditButton:)];
     self.navigationItem.rightBarButtonItem = self.tripEditButton;
+    
+    //set up browser
+    self.viewer = [[TripViewer alloc] initWithFrame:self.viewerWindow.bounds];
+    [self.viewerWindow addSubview: self.viewer];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     //grab trip info from the database
-    [self.tripService getTripWithID:self.tripID forTarget:self withAction:@selector(populateData:)];
+    [self.viewer clearAndWait];
+    [self.tripService getTripWithID:self.tripID forTarget:self withAction:@selector(dataHasLoaded:)];
 }
 
-- (void)populateData:(NSArray*)tripReturnArray
+- (void)dataHasLoaded:(NSArray*)newData
+{
+    if (newData.count == 1) {
+        [self.viewer setViewerTrip:((Trip*)newData[0]) enableEditing:NO];
+    }
+    else {
+        [self.viewer displayTripLoadFailure];
+    }
+}
+
+/*- (void)populateData:(NSArray*)tripReturnArray
 {
     if(tripReturnArray.count > 0)
     {
         Trip * myTrip = (Trip*)tripReturnArray[0];
         
         //populate view fields
-        self.tripTitle.text = myTrip.name;
-        self.userName.text = [NSString stringWithFormat:@"%d", myTrip.userID];
-        self.tripDescription.text = myTrip.description;
+        //self.tripTitle.text = myTrip.name;
+        //self.userName.text = [NSString stringWithFormat:@"%d", myTrip.userID];
+        //self.tripDescription.text = myTrip.description;
         
         //TripLocation[] = select * from locationTripTable where tripID == x
         
@@ -82,7 +100,8 @@
         //                               target: nil action: nil];
         //[self.navigationItem setBackBarButtonItem: backButton];
     }
-}
+}*/
+
 - (void)tapEditButton:(id)sender
 {
     UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style: UIBarButtonItemStyleBordered target: nil action: nil];

@@ -1,5 +1,5 @@
 //
-//  TripViewerHeaderCell.h
+//  TripViewerAddCell.h
 //  treads
 //
 //  Created by keavneyrj1 on 3/19/13.
@@ -8,10 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@class Trip;
-
-@interface TripViewerHeaderCell : UITableViewCell
-
-@property (assign, nonatomic) Trip* trip;
+@interface TripViewerAddCell : UITableViewCell
 
 @end

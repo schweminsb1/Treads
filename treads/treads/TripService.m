@@ -37,6 +37,7 @@
             trip.userID = [[returnTrip objectForKey:@"userID"] intValue];
             trip.name = [returnTrip objectForKey:@"name"];
             trip.description = [returnTrip objectForKey:@"description"];
+            trip.tripLocations = [[NSArray alloc] init]; /* currently does not load items */
             [convertedData addObject:trip];
         }
         @catch (NSException* exception) {

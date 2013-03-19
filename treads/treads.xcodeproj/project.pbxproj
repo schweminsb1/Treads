@@ -60,7 +60,9 @@
 		3C9DA9E916F91B47009EEED7 /* TripViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9DA9E816F91B47009EEED7 /* TripViewer.m */; };
 		3C9DA9EE16F91BE9009EEED7 /* TripViewerHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9DA9ED16F91BE9009EEED7 /* TripViewerHeaderCell.m */; };
 		3C9DA9F116F91BF9009EEED7 /* TripViewerLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9DA9F016F91BF9009EEED7 /* TripViewerLocationCell.m */; };
-		3C9DA9F416F91C1F009EEED7 /* TripViewerFooterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9DA9F316F91C1F009EEED7 /* TripViewerFooterCell.m */; };
+		3C9DA9F416F91C1F009EEED7 /* TripViewerAddCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9DA9F316F91C1F009EEED7 /* TripViewerAddCell.m */; };
+		3C9DA9F716F92262009EEED7 /* TripLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9DA9F616F92262009EEED7 /* TripLocation.m */; };
+		3C9DA9FB16F92422009EEED7 /* TripLocationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9DA9FA16F92422009EEED7 /* TripLocationItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,8 +148,12 @@
 		3C9DA9ED16F91BE9009EEED7 /* TripViewerHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripViewerHeaderCell.m; path = treads/TripViewerHeaderCell.m; sourceTree = SOURCE_ROOT; };
 		3C9DA9EF16F91BF9009EEED7 /* TripViewerLocationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripViewerLocationCell.h; path = treads/TripViewerLocationCell.h; sourceTree = SOURCE_ROOT; };
 		3C9DA9F016F91BF9009EEED7 /* TripViewerLocationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripViewerLocationCell.m; path = treads/TripViewerLocationCell.m; sourceTree = SOURCE_ROOT; };
-		3C9DA9F216F91C1F009EEED7 /* TripViewerFooterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripViewerFooterCell.h; path = treads/TripViewerFooterCell.h; sourceTree = SOURCE_ROOT; };
-		3C9DA9F316F91C1F009EEED7 /* TripViewerFooterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripViewerFooterCell.m; path = treads/TripViewerFooterCell.m; sourceTree = SOURCE_ROOT; };
+		3C9DA9F216F91C1F009EEED7 /* TripViewerAddCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripViewerAddCell.h; path = treads/TripViewerAddCell.h; sourceTree = SOURCE_ROOT; };
+		3C9DA9F316F91C1F009EEED7 /* TripViewerAddCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripViewerAddCell.m; path = treads/TripViewerAddCell.m; sourceTree = SOURCE_ROOT; };
+		3C9DA9F516F92262009EEED7 /* TripLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripLocation.h; path = treads/TripLocation.h; sourceTree = SOURCE_ROOT; };
+		3C9DA9F616F92262009EEED7 /* TripLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripLocation.m; path = treads/TripLocation.m; sourceTree = SOURCE_ROOT; };
+		3C9DA9F916F92422009EEED7 /* TripLocationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripLocationItem.h; path = treads/TripLocationItem.h; sourceTree = SOURCE_ROOT; };
+		3C9DA9FA16F92422009EEED7 /* TripLocationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripLocationItem.m; path = treads/TripLocationItem.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -358,8 +364,7 @@
 		3C8A908D16E7DFBB007F0BB8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3C8A908E16E7DFC8007F0BB8 /* Trip.h */,
-				3C8A908F16E7DFC8007F0BB8 /* Trip.m */,
+				3C9DA9F816F92346009EEED7 /* Trip */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -427,10 +432,23 @@
 				3C9DA9ED16F91BE9009EEED7 /* TripViewerHeaderCell.m */,
 				3C9DA9EF16F91BF9009EEED7 /* TripViewerLocationCell.h */,
 				3C9DA9F016F91BF9009EEED7 /* TripViewerLocationCell.m */,
-				3C9DA9F216F91C1F009EEED7 /* TripViewerFooterCell.h */,
-				3C9DA9F316F91C1F009EEED7 /* TripViewerFooterCell.m */,
+				3C9DA9F216F91C1F009EEED7 /* TripViewerAddCell.h */,
+				3C9DA9F316F91C1F009EEED7 /* TripViewerAddCell.m */,
 			);
 			name = "Trip Viewer";
+			sourceTree = "<group>";
+		};
+		3C9DA9F816F92346009EEED7 /* Trip */ = {
+			isa = PBXGroup;
+			children = (
+				3C8A908E16E7DFC8007F0BB8 /* Trip.h */,
+				3C8A908F16E7DFC8007F0BB8 /* Trip.m */,
+				3C9DA9F516F92262009EEED7 /* TripLocation.h */,
+				3C9DA9F616F92262009EEED7 /* TripLocation.m */,
+				3C9DA9F916F92422009EEED7 /* TripLocationItem.h */,
+				3C9DA9FA16F92422009EEED7 /* TripLocationItem.m */,
+			);
+			name = Trip;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -541,7 +559,9 @@
 				3C9DA9E916F91B47009EEED7 /* TripViewer.m in Sources */,
 				3C9DA9EE16F91BE9009EEED7 /* TripViewerHeaderCell.m in Sources */,
 				3C9DA9F116F91BF9009EEED7 /* TripViewerLocationCell.m in Sources */,
-				3C9DA9F416F91C1F009EEED7 /* TripViewerFooterCell.m in Sources */,
+				3C9DA9F416F91C1F009EEED7 /* TripViewerAddCell.m in Sources */,
+				3C9DA9F716F92262009EEED7 /* TripLocation.m in Sources */,
+				3C9DA9FB16F92422009EEED7 /* TripLocationItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,7 +16,7 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService: (TripService*) myTripService tripID: (int)myTripID;
 
-- (void) populateData:(NSArray *)array;
+- (void)dataHasLoaded:(NSArray*)newData;
 
 //@property IBOutlet UILabel* tripTitle;
 //@property IBOutlet UILabel* userName;
