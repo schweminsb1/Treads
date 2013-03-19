@@ -13,6 +13,7 @@
 #import "ProfileService.h"
 #import "EditTripVC.h"
 #import "LocationService.h"
+#import "AppColors.h"
 
 @interface AppDelegate()
 
@@ -39,6 +40,10 @@
     self.tripService = [[TripService alloc] initWithRepository:self.dataRepository];
     
     self.locationService = [[LocationService alloc]initWithRepository:_dataRepository];
+    
+    //Set global display options
+    [[UINavigationBar appearance] setTintColor:[AppColors toolbarColor]];
+    [[UITabBar appearance] setSelectedImageTintColor:[AppColors toolbarColor]];
     
     //Initialize ViewControllers
     UIViewController *mapsVC, *cameraVC, *myTripsVC, *followVC, *profileVC;

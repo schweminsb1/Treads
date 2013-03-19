@@ -46,14 +46,12 @@
     [super viewDidLoad];
     
     //set up new trip button and attach to navigation controller
-    self.tripNewButton = [[UIBarButtonItem alloc] initWithTitle:@"New Trip" style:UIBarButtonItemStyleDone target:self action:@selector(createNewTrip)];
+    self.tripNewButton = [[UIBarButtonItem alloc] initWithTitle:@"Create New Trip" style:UIBarButtonItemStyleDone target:self action:@selector(createNewTrip)];
     self.navigationItem.rightBarButtonItem = self.tripNewButton;
     
     //set up browser
     self.browser = [[TripBrowser alloc] initWithFrame:self.browserWindow.bounds];
     [self.browserWindow addSubview: self.browser];
-    
-    [self.navigationController.navigationBar setTintColor:[UIColor colorWithHue:[AppColors primaryHue] saturation:[AppColors primarySaturation]*0.85 brightness:[AppColors primaryValue]*0.75 alpha:1]];
 }
 
 - (void)viewWillAppear:(BOOL)animated

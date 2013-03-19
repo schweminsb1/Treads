@@ -41,7 +41,7 @@
     [super viewDidLoad];
     
     //set up save button and attach to navigation controller
-    self.tripSaveButton = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(saveChanges:)];
+    self.tripSaveButton = [[UIBarButtonItem alloc] initWithTitle:@"Publish" style:UIBarButtonItemStyleDone target:self action:@selector(saveChanges:)];
     self.navigationItem.rightBarButtonItem = self.tripSaveButton;
     
     //set up controller

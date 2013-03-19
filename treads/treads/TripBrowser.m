@@ -42,7 +42,7 @@
     browserTable = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
     [browserTable setDelegate:self];
     [browserTable setDataSource:self];
-    [browserTable setBackgroundColor:[UIColor colorWithHue:[AppColors primaryHue] saturation:[AppColors primarySaturation]*0.07 brightness:[AppColors primaryValue]*0.80 alpha:1]];
+    [browserTable setBackgroundColor:[AppColors secondaryBackgroundColor]];
     [browserTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self addSubview:browserTable];
     cellPadding = 16;
@@ -54,7 +54,7 @@
     activityIndicatorView.alpha = 1.0;
     activityIndicatorView.center = self.center;
     activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
-    activityIndicatorView.color = [UIColor colorWithHue:[AppColors primaryHue] saturation:[AppColors primarySaturation]*0.80 brightness:[AppColors primaryValue]*0.40 alpha:1];
+    activityIndicatorView.color = [AppColors activityIndicatorColor];
     [self addSubview:activityIndicatorView];
     [self bringSubviewToFront:activityIndicatorView];
 }

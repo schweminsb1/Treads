@@ -42,7 +42,7 @@
     [super layoutSubviews];
     
     self.bounds = CGRectMake(0, 0, 720, 110);
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [AppColors mainBackgroundColor];
     
     if (layoutDone) {
         return;
@@ -55,33 +55,31 @@
     
     //self.bounds = CGRectMake(0, 0, 768, 90);
     
-    UIColor* lightColor = [UIColor colorWithHue:[AppColors primaryHue] saturation:[AppColors primarySaturation]*0.85 brightness:[AppColors primaryValue]*0.54 alpha:1];
-    
     tripOwnerLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 12, 260, 30)];
     tripOwnerLabel.backgroundColor = [UIColor clearColor];
     tripOwnerLabel.font = [UIFont boldSystemFontOfSize: 24];
-    tripOwnerLabel.textColor = [UIColor blackColor];
+    tripOwnerLabel.textColor = [AppColors mainTextColor];
     tripOwnerLabel.textAlignment = NSTextAlignmentLeft;
     tripOwnerLabel.adjustsFontSizeToFitWidth = YES;
     
     tripNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 40, 260, 23)];
     tripNameLabel.backgroundColor = [UIColor clearColor];
     tripNameLabel.font = [UIFont systemFontOfSize: 17];
-    tripNameLabel.textColor = [UIColor blackColor];
+    tripNameLabel.textColor = [AppColors mainTextColor];
     tripNameLabel.textAlignment = NSTextAlignmentLeft;
     tripNameLabel.adjustsFontSizeToFitWidth = YES;
     
     tripDatesLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 62, 260, 19)];
     tripDatesLabel.backgroundColor = [UIColor clearColor];
     tripDatesLabel.font = [UIFont systemFontOfSize: 13];
-    tripDatesLabel.textColor = lightColor;
+    tripDatesLabel.textColor = [AppColors secondaryTextColor];
     tripDatesLabel.textAlignment = NSTextAlignmentLeft;
     tripDatesLabel.adjustsFontSizeToFitWidth = YES;
     
     tripContentLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 79, 260, 19)];
     tripContentLabel.backgroundColor = [UIColor clearColor];
     tripContentLabel.font = [UIFont systemFontOfSize: 13];
-    tripContentLabel.textColor = lightColor;
+    tripContentLabel.textColor = [AppColors secondaryTextColor];
     tripContentLabel.textAlignment = NSTextAlignmentLeft;
     tripContentLabel.adjustsFontSizeToFitWidth = YES;
     
@@ -92,7 +90,7 @@
     
     UIView *bgColorView = [[UIView alloc] init];
     bgColorView.bounds = self.bounds;
-    [bgColorView setBackgroundColor:[UIColor colorWithHue:85.0/360.0 saturation:0.85 brightness:0.75 alpha:1]];
+    [bgColorView setBackgroundColor:[AppColors toolbarColor]];
     [self setSelectedBackgroundView:bgColorView];
 }
 

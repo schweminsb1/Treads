@@ -10,8 +10,20 @@
 
 @interface AppColors : NSObject
 
+//raw values
 + (float)primaryHue;
 + (float)primarySaturation;
 + (float)primaryValue;
+
+//implementation values
++ (UIColor*)toolbarColor;
+
++ (UIColor*)mainBackgroundColor;
++ (UIColor*)secondaryBackgroundColor;
+
++ (UIColor*)mainTextColor;
++ (UIColor*)secondaryTextColor;
+
++ (UIColor*)activityIndicatorColor;
 
 @end
