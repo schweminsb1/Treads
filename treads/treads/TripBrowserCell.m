@@ -13,6 +13,7 @@
 #import "AppColors.h"
 
 @implementation TripBrowserCell {
+    BOOL layoutDone;
     UILabel* tripOwnerLabel;
     UILabel* tripNameLabel;
     UILabel* tripDatesLabel;
@@ -23,7 +24,8 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        [self layoutSubviews];
+        //[self layoutSubviews];
+        layoutDone = NO;
     }
     return self;
 }
@@ -37,9 +39,21 @@
 
 - (void)layoutSubviews
 {
-    //self.bounds = CGRectMake(0, 0, 768, 90);
+    [super layoutSubviews];
+    
     self.bounds = CGRectMake(0, 0, 720, 110);
     self.backgroundColor = [UIColor whiteColor];
+    
+    if (layoutDone) {
+        return;
+    }
+    
+    layoutDone = YES;
+    
+    //for (UIView* subview in self.subviews)
+    //    [subview removeFromSuperview];
+    
+    //self.bounds = CGRectMake(0, 0, 768, 90);
     
     UIColor* lightColor = [UIColor colorWithHue:[AppColors primaryHue] saturation:[AppColors primarySaturation]*0.85 brightness:[AppColors primaryValue]*0.54 alpha:1];
     
@@ -77,12 +91,15 @@
     [self addSubview:tripContentLabel];
     
     UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.bounds = self.bounds;
     [bgColorView setBackgroundColor:[UIColor colorWithHue:85.0/360.0 saturation:0.85 brightness:0.75 alpha:1]];
     [self setSelectedBackgroundView:bgColorView];
 }
 
 - (void)setDisplayTrip:(Trip*)displayTrip
 {
+    if (!layoutDone)
+        [self layoutSubviews];
     tripOwnerLabel.text = @"Trip Owner";
     tripNameLabel.text = displayTrip.name;
     tripDatesLabel.text = @"1/1/2013 - 12/31/2013";
