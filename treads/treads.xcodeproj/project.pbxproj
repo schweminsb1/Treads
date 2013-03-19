@@ -42,9 +42,11 @@
 		3C12312416EFCB89006CCBFE /* DataRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C12312316EFCB89006CCBFE /* DataRepository.m */; };
 		3C12312716EFCB98006CCBFE /* ProfileService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C12312616EFCB98006CCBFE /* ProfileService.m */; };
 		3C60C7DB16E7004900FDFD7D /* TripBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C60C7DA16E7004900FDFD7D /* TripBrowser.m */; };
+		3C87B12316F7E7B8000ABF18 /* AppColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C87B12216F7E7B8000ABF18 /* AppColors.m */; };
 		3C8A908C16E7DAA2007F0BB8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C8A908B16E7DAA2007F0BB8 /* Default-568h@2x.png */; };
 		3C8A909016E7DFC8007F0BB8 /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8A908F16E7DFC8007F0BB8 /* Trip.m */; };
 		3C8AC26D16E82BE30070271E /* TripService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8AC26C16E82BE30070271E /* TripService.m */; };
+		3C906BEF16F7A8B2009C75BF /* TripBrowserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C906BEE16F7A8B2009C75BF /* TripBrowserCell.m */; };
 		3C958FEE16EA6C4F0038AD7C /* helicopter-bouldering-crash-pad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C958FEA16EA6C4F0038AD7C /* helicopter-bouldering-crash-pad.jpg */; };
 		3C958FEF16EA6C4F0038AD7C /* remote-luxury-hiking-canada.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C958FEB16EA6C4F0038AD7C /* remote-luxury-hiking-canada.jpg */; };
 		3C958FF016EA6C4F0038AD7C /* summit-boots-hiking-rocks.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C958FEC16EA6C4F0038AD7C /* summit-boots-hiking-rocks.jpg */; };
@@ -111,11 +113,15 @@
 		3C12312616EFCB98006CCBFE /* ProfileService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileService.m; path = treads/ProfileService.m; sourceTree = SOURCE_ROOT; };
 		3C60C7D916E7004900FDFD7D /* TripBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripBrowser.h; path = treads/TripBrowser.h; sourceTree = SOURCE_ROOT; };
 		3C60C7DA16E7004900FDFD7D /* TripBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripBrowser.m; path = treads/TripBrowser.m; sourceTree = SOURCE_ROOT; };
+		3C87B12116F7E7B8000ABF18 /* AppColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppColors.h; path = treads/AppColors.h; sourceTree = SOURCE_ROOT; };
+		3C87B12216F7E7B8000ABF18 /* AppColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppColors.m; path = treads/AppColors.m; sourceTree = SOURCE_ROOT; };
 		3C8A908B16E7DAA2007F0BB8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		3C8A908E16E7DFC8007F0BB8 /* Trip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Trip.h; path = treads/Trip.h; sourceTree = SOURCE_ROOT; };
 		3C8A908F16E7DFC8007F0BB8 /* Trip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Trip.m; path = treads/Trip.m; sourceTree = SOURCE_ROOT; };
 		3C8AC26B16E82BE30070271E /* TripService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripService.h; path = treads/TripService.h; sourceTree = SOURCE_ROOT; };
 		3C8AC26C16E82BE30070271E /* TripService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripService.m; path = treads/TripService.m; sourceTree = SOURCE_ROOT; };
+		3C906BED16F7A8B2009C75BF /* TripBrowserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripBrowserCell.h; path = treads/TripBrowserCell.h; sourceTree = SOURCE_ROOT; };
+		3C906BEE16F7A8B2009C75BF /* TripBrowserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripBrowserCell.m; path = treads/TripBrowserCell.m; sourceTree = SOURCE_ROOT; };
 		3C958FEA16EA6C4F0038AD7C /* helicopter-bouldering-crash-pad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "helicopter-bouldering-crash-pad.jpg"; path = "treads/helicopter-bouldering-crash-pad.jpg"; sourceTree = SOURCE_ROOT; };
 		3C958FEB16EA6C4F0038AD7C /* remote-luxury-hiking-canada.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "remote-luxury-hiking-canada.jpg"; path = "treads/remote-luxury-hiking-canada.jpg"; sourceTree = SOURCE_ROOT; };
 		3C958FEC16EA6C4F0038AD7C /* summit-boots-hiking-rocks.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "summit-boots-hiking-rocks.jpg"; path = "treads/summit-boots-hiking-rocks.jpg"; sourceTree = SOURCE_ROOT; };
@@ -205,6 +211,8 @@
 		3188B16116C9CE17008E1D7F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3C87B12116F7E7B8000ABF18 /* AppColors.h */,
+				3C87B12216F7E7B8000ABF18 /* AppColors.m */,
 				3C094FA516EFF74700C537B1 /* TreadsSession.h */,
 				3C094FA616EFF74700C537B1 /* TreadsSession.m */,
 				3C958FFE16EA6D220038AD7C /* MapPinAnnotation.h */,
@@ -331,6 +339,8 @@
 			children = (
 				3C60C7D916E7004900FDFD7D /* TripBrowser.h */,
 				3C60C7DA16E7004900FDFD7D /* TripBrowser.m */,
+				3C906BED16F7A8B2009C75BF /* TripBrowserCell.h */,
+				3C906BEE16F7A8B2009C75BF /* TripBrowserCell.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -490,6 +500,8 @@
 				29E2E8A316EFEEFA0010C19B /* RegisterVC.m in Sources */,
 				3C094FA716EFF74700C537B1 /* TreadsSession.m in Sources */,
 				395CD5EE16F03EEA009FD655 /* LocationService.m in Sources */,
+				3C906BEF16F7A8B2009C75BF /* TripBrowserCell.m in Sources */,
+				3C87B12316F7E7B8000ABF18 /* AppColors.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,6 +17,8 @@
 
 #import "EditTripVC.h"
 
+#import "AppColors.h"
+
 @interface MyTripsVC ()
 
 @property (strong) TripService* tripService;
@@ -50,6 +52,8 @@
     //set up browser
     self.browser = [[TripBrowser alloc] initWithFrame:self.browserWindow.bounds];
     [self.browserWindow addSubview: self.browser];
+    
+    [self.navigationController.navigationBar setTintColor:[UIColor colorWithHue:[AppColors primaryHue] saturation:[AppColors primarySaturation]*0.85 brightness:[AppColors primaryValue]*0.75 alpha:1]];
 }
 
 - (void)viewWillAppear:(BOOL)animated

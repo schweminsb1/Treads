@@ -8,6 +8,10 @@
 
 #import "TripBrowser.h"
 
+#import "TripBrowserCell.h"
+
+#import "AppColors.h"
+
 @interface TripBrowser()<UITableViewDataSource, UITableViewDelegate>
 
 @end
@@ -18,6 +22,7 @@
     NSObject* target;
     UITableView* browserTable;
     UIActivityIndicatorView* activityIndicatorView;
+    int cellPadding;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -37,7 +42,10 @@
     browserTable = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
     [browserTable setDelegate:self];
     [browserTable setDataSource:self];
+    [browserTable setBackgroundColor:[UIColor colorWithHue:[AppColors primaryHue] saturation:[AppColors primarySaturation]*0.07 brightness:[AppColors primaryValue]*0.80 alpha:1]];
+    [browserTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self addSubview:browserTable];
+    cellPadding = 16;
     
     //set up activity view
     activityIndicatorView = [[UIActivityIndicatorView alloc] initWithFrame:self.bounds];
@@ -46,7 +54,7 @@
     activityIndicatorView.alpha = 1.0;
     activityIndicatorView.center = self.center;
     activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
-    activityIndicatorView.color = [UIColor colorWithRed:0 green:105/255 blue:19/255 alpha:1];
+    activityIndicatorView.color = [UIColor colorWithHue:[AppColors primaryHue] saturation:[AppColors primarySaturation]*0.80 brightness:[AppColors primaryValue]*0.40 alpha:1];
     [self addSubview:activityIndicatorView];
     [self bringSubviewToFront:activityIndicatorView];
 }
@@ -85,11 +93,19 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier: @"CELL"];
-    if (!cell)
-        cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: @"CELL"];
+//    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier: @"CELL"];
+//    if (!cell)
+//        cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: @"CELL"];
+//    
+//    cell.textLabel.text = ((Trip*)sortedListData[indexPath.row]).name;
     
-    cell.textLabel.text = ((Trip*)sortedListData[indexPath.row]).name;
+    TripBrowserCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CELL"];
+    if (!cell) {
+        //[tableView registerNib:[UINib nibWithNibName:@"TripBrowserCell" bundle:nil] forCellReuseIdentifier:@"CELL"];
+        cell = [[TripBrowserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL"];
+    }
+    
+    cell.displayTrip = (Trip*)sortedListData[indexPath.row];
     
     return cell;
 }
@@ -107,10 +123,31 @@
     }
 }
 
-//- (CGFloat) tableView: tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return 200;
-//}
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return [[UIView alloc] init];
+}
+
+- (UIView*)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return [[UIView alloc] init];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return cellPadding / 2;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return cellPadding / 2;
+}
+
+- (CGFloat)tableView: tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //at some point we will need to add a footer to make sure the bottom doesn't get cut off
+    return [self tableView:tableView cellForRowAtIndexPath:indexPath].bounds.size.height + cellPadding;
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

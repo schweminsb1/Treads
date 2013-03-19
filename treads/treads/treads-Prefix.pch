@@ -13,4 +13,5 @@
     #import <Foundation/Foundation.h>
     #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
     #import "Path.h"
+    #import "AppColors.h"
 #endif

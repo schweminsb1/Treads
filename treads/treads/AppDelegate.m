@@ -61,15 +61,15 @@
     //Initialize and assign to Tab Bar
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.viewControllers = @[
-        [[UINavigationController alloc] initWithRootViewController:followVC],
         [[UINavigationController alloc] initWithRootViewController:mapsVC],
         cameraVC,
         [[UINavigationController alloc] initWithRootViewController:myTripsVC],
-        //followVC,
+        [[UINavigationController alloc] initWithRootViewController:followVC],
         profileVC
         ];
     
     self.window.rootViewController = self.tabBarController;
+    [self.tabBarController setSelectedIndex:2];
     
     //AddLocationViewController * addLocationController = [[AddLocationViewController new]initWithNibName:@"AddLocationVC" bundle:(nil ) locationService:_locationService tripID:0];
     
