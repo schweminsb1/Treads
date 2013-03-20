@@ -60,11 +60,18 @@
 - (void)dataHasLoaded:(NSArray*)newData
 {
     if (newData.count == 1) {
-        [self.viewer setViewerTrip:((Trip*)newData[0]) enableEditing:NO];
+        Trip* returnedTrip = (Trip*)newData[0];
+        [self.viewer setViewerTrip:(returnedTrip) enableEditing:NO];
+        [self setTitleBar:returnedTrip];
     }
     else {
         [self.viewer displayTripLoadFailure];
     }
+}
+
+- (void)setTitleBar:(Trip*)trip
+{
+    self.navigationItem.title = [NSString stringWithFormat:@"%@ - %@", @"Trip Owner", trip.name];
 }
 
 /*- (void)populateData:(NSArray*)tripReturnArray
