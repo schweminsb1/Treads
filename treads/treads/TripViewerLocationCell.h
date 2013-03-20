@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class TripLocation
+@class TripLocation;
 
 @interface TripViewerLocationCell : UITableViewCell
 
