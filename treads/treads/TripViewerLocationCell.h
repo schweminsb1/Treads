@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class TripLocation
+
 @interface TripViewerLocationCell : UITableViewCell
+
+@property (assign, nonatomic) TripLocation* tripLocation;
 
 @end

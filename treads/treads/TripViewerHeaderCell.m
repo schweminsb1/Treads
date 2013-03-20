@@ -58,6 +58,9 @@
     
     tripFeaturedImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 720, 240)];
     
+    //tripOwnerLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, -30 + tripFeaturedImage.bounds.size.height, 100, 60)];
+    //tripOwnerLabel.backgroundColor = [AppColors mainBackgroundColor];
+    //tripOwnerLabel.font = [UIFont boldSystemFontOfSize: 36];
     tripOwnerLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 16 + tripFeaturedImage.bounds.size.height, 680, 38)];
     tripOwnerLabel.backgroundColor = [UIColor clearColor];
     tripOwnerLabel.font = [UIFont boldSystemFontOfSize: 32];
@@ -84,6 +87,8 @@
     [self addSubview:tripNameLabel];
     [self addSubview:tripDescriptionLabel];
     
+    [self bringSubviewToFront:tripOwnerLabel];
+    
     UIView *bgColorView = [[UIView alloc] init];
     bgColorView.bounds = self.bounds;
     [bgColorView setBackgroundColor:[AppColors mainBackgroundColor]];//[AppColors toolbarColor]];
@@ -101,6 +106,13 @@
         }
     }
     tripOwnerLabel.text = @"Trip Owner";
+    //CGSize sizeOfText=[tripOwnerLabel.text sizeWithFont:tripOwnerLabel.font constrainedToSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
+    //[tripOwnerLabel setBounds:CGRectMake(
+    //                                     tripOwnerLabel.bounds.origin.x,
+    //                                     tripOwnerLabel.bounds.origin.y,
+    //                                     sizeOfText.width,
+    //                                     tripOwnerLabel.bounds.size.height)];
+    //tripOwnerLabel.font = [UIFont boldSystemFontOfSize: 36];
     tripNameLabel.text = trip.name;
     tripDescriptionLabel.text = trip.description;
 }
