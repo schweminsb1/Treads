@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "TripLocationItem.h"
+
 @interface Trip : NSObject
 
 + (int)UNDEFINED_TRIP_ID;
@@ -17,6 +19,7 @@
 @property int userID;
 @property (copy) NSString* name;
 @property (copy) NSString* description;
+@property (strong) TripLocationItem* featuredLocationItem;
 
 //location
 @property (strong) NSArray* tripLocations;

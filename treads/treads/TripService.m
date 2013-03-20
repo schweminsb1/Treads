@@ -37,8 +37,13 @@
             trip.userID = [[returnTrip objectForKey:@"userID"] intValue];
             trip.name = [returnTrip objectForKey:@"name"];
             trip.description = [returnTrip objectForKey:@"description"];
-            trip.tripLocations = [[NSArray alloc] init]; /* currently does not load items */
+            
+            //debug items - currently not implemented server-side
+            trip.tripLocations = [[NSArray alloc] init];
             [convertedData addObject:trip];
+            TripLocationItem* dummyLocationItem = [[TripLocationItem alloc] init];
+            dummyLocationItem.image = [UIImage imageNamed:@"mountains.jpeg"];
+            trip.featuredLocationItem = dummyLocationItem;
         }
         @catch (NSException* exception) {
             trip.name = @"Error - could not parse trip data";
