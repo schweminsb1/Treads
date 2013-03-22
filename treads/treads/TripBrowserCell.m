@@ -18,6 +18,7 @@
     UILabel* tripNameLabel;
     UILabel* tripDatesLabel;
     UILabel* tripContentLabel;
+    UIImageView* tripFeaturedImage;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -83,10 +84,13 @@
     tripContentLabel.textAlignment = NSTextAlignmentLeft;
     tripContentLabel.adjustsFontSizeToFitWidth = YES;
     
+    tripFeaturedImage = [[UIImageView alloc] initWithFrame:CGRectMake(260, 0, 460, 110)];
+    
     [self addSubview:tripOwnerLabel];
     [self addSubview:tripNameLabel];
     [self addSubview:tripDatesLabel];
     [self addSubview:tripContentLabel];
+    //[self addSubview:tripFeaturedImage];
     
     UIView *bgColorView = [[UIView alloc] init];
     bgColorView.bounds = self.bounds;
@@ -102,6 +106,12 @@
     tripNameLabel.text = displayTrip.name;
     tripDatesLabel.text = @"1/1/2013 - 12/31/2013";
     tripContentLabel.text = @"P213 C87";
+    tripFeaturedImage.image = nil;
+    if (displayTrip.featuredLocationItem != nil) {
+        if (displayTrip.featuredLocationItem.image != nil) {
+            tripFeaturedImage.image = displayTrip.featuredLocationItem.image;
+        }
+    }
 }
 
 @end
