@@ -67,7 +67,7 @@
         dummyLocation.tripLocationID = i;
         dummyLocation.tripID = trip.tripID;
         dummyLocation.locationID = i;
-        dummyLocation.description = [NSString stringWithFormat:@"Description for Trip Location %d: %@", i, [self loremIpsum]];
+        dummyLocation.description = [self loremIpsum];
         if (i % 2 == 0) {dummyLocation.tripLocationItems = [[NSArray alloc] initWithObjects:dummyLocationItem, nil];}
         [dummyLocationArray addObject:dummyLocation];
     }
