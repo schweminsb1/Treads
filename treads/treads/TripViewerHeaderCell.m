@@ -89,10 +89,10 @@
     
     [self bringSubviewToFront:tripOwnerLabel];
     
-    UIView *bgColorView = [[UIView alloc] init];
+    /*UIView *bgColorView = [[UIView alloc] init];
     bgColorView.bounds = self.bounds;
     [bgColorView setBackgroundColor:[AppColors mainBackgroundColor]];//[AppColors toolbarColor]];
-    [self setSelectedBackgroundView:bgColorView];
+    [self setSelectedBackgroundView:bgColorView];*/
 }
 
 - (void)setTrip:(Trip*)trip

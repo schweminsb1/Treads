@@ -8,13 +8,18 @@
 
 #import "TripViewerLocationCell.h"
 
+#import "ImageScrollBrowser.h"
+
 #import "TripLocation.h"
 #import "TripLocationItem.h"
 
 @implementation TripViewerLocationCell {
     BOOL layoutDone;
     UILabel* locationNameLabel;
-    UILabel* locationDescriptionLabel;
+    UITextView* locationDescriptionTextView;
+    UIView* locationMapView;
+    UIView* locationTextBackgroundView;
+    ImageScrollBrowser* imageScrollBrowser;
     //UIImageView* tripFeaturedImage;
     //UILabel* tripNameLabel;
     //UILabel* tripDatesLabel;
@@ -41,7 +46,7 @@
 {
     [super layoutSubviews];
     
-    self.bounds = CGRectMake(0, 0, 720, 300);
+    self.bounds = CGRectMake(0, 0, 720, 686);
     self.backgroundColor = [AppColors mainBackgroundColor];
     
     if (layoutDone) {
@@ -57,27 +62,39 @@
     
     //tripFeaturedImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 720, 240)];
     
-    locationNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 16, 680, 38)];
+    locationNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 16, 500, 38)];
     locationNameLabel.backgroundColor = [UIColor clearColor];
     locationNameLabel.font = [UIFont boldSystemFontOfSize: 32];
     locationNameLabel.textColor = [AppColors mainTextColor];
     locationNameLabel.textAlignment = NSTextAlignmentLeft;
     locationNameLabel.adjustsFontSizeToFitWidth = YES;
     
-    locationDescriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 52, 680, 23)];
-    locationDescriptionLabel.backgroundColor = [UIColor clearColor];
-    locationDescriptionLabel.font = [UIFont systemFontOfSize: 17];
-    locationDescriptionLabel.textColor = [AppColors mainTextColor];
-    locationDescriptionLabel.textAlignment = NSTextAlignmentLeft;
-    locationDescriptionLabel.adjustsFontSizeToFitWidth = YES;
+    locationDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, 56, 440, 138)];
+    locationDescriptionTextView.backgroundColor = [UIColor clearColor];
+    locationDescriptionTextView.font = [UIFont systemFontOfSize: 17];
+    locationDescriptionTextView.textColor = [AppColors mainTextColor];
+    locationDescriptionTextView.textAlignment = NSTextAlignmentLeft;
+    locationDescriptionTextView.editable = false;
+    locationDescriptionTextView.contentInset = UIEdgeInsetsMake(-10, -7, 0, -7);
     
+    //locationTextBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 460, 210)];
+    //locationTextBackgroundView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.8];
+    
+    locationMapView = [[UIView alloc] initWithFrame:CGRectMake(460, 0, 300, 210)];
+    locationMapView.backgroundColor = [UIColor cyanColor];
+    
+    imageScrollBrowser = [[ImageScrollBrowser alloc] initWithFrame:CGRectMake(0, 210, 720, 460)];
+    
+    [self addSubview:locationMapView];
+    //[self addSubview:locationTextBackgroundView];
     [self addSubview:locationNameLabel];
-    [self addSubview:locationDescriptionLabel];
+    [self addSubview:locationDescriptionTextView];
+    [self addSubview:imageScrollBrowser];
     
-    UIView *bgColorView = [[UIView alloc] init];
+    /*UIView *bgColorView = [[UIView alloc] init];
     bgColorView.bounds = self.bounds;
     [bgColorView setBackgroundColor:[AppColors mainBackgroundColor]];//[AppColors toolbarColor]];
-    [self setSelectedBackgroundView:bgColorView];
+    [self setSelectedBackgroundView:bgColorView];*/
 }
 
 - (void)setTripLocation:(TripLocation *)tripLocation
@@ -86,7 +103,7 @@
         [self layoutSubviews];
     }
     locationNameLabel.text = [NSString stringWithFormat:@"Location ID: %d", tripLocation.tripLocationID];
-    locationDescriptionLabel.text = tripLocation.description;
+    locationDescriptionTextView.text = tripLocation.description;
 }
 
 @end

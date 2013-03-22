@@ -120,6 +120,7 @@
         }
         //fill out data
         cell.trip = trip;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
     else if (indexPath.row <= trip.tripLocations.count) {
@@ -130,6 +131,7 @@
         }
         //fill out data
         cell.tripLocation = trip.tripLocations[indexPath.row - 1];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
     else if (editingEnabled) {
