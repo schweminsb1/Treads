@@ -129,7 +129,7 @@
             cell = [[TripViewerLocationCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[TripViewer locationCellIdentifier]];
         }
         //fill out data
-        
+        cell.tripLocation = trip.tripLocations[indexPath.row - 1];
         return cell;
     }
     else if (editingEnabled) {

@@ -37,13 +37,11 @@
             trip.userID = [[returnTrip objectForKey:@"userID"] intValue];
             trip.name = [returnTrip objectForKey:@"name"];
             trip.description = [returnTrip objectForKey:@"description"];
-            
-            //debug items - currently not implemented server-side
             trip.tripLocations = [[NSArray alloc] init];
+            
+            [self addDebugItemsToTrip:trip];
+            
             [convertedData addObject:trip];
-            TripLocationItem* dummyLocationItem = [[TripLocationItem alloc] init];
-            dummyLocationItem.image = [UIImage imageNamed:@"mountains.jpeg"];
-            trip.featuredLocationItem = dummyLocationItem;
         }
         @catch (NSException* exception) {
             trip.name = @"Error - could not parse trip data";
@@ -51,6 +49,30 @@
         }
     }
     return [NSArray arrayWithArray:convertedData];
+}
+
+- (void)addDebugItemsToTrip:(Trip*)trip
+{
+    //debug items - test models for items currently not implemented server-side
+    
+    //featured item
+    TripLocationItem* dummyLocationItem = [[TripLocationItem alloc] init];
+    dummyLocationItem.image = [UIImage imageNamed:@"mountains.jpeg"];
+    trip.featuredLocationItem = dummyLocationItem;
+    
+    //locations
+    NSMutableArray* dummyLocationArray = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 6; i++) {
+        TripLocation* dummyLocation = [[TripLocation alloc] init];
+        dummyLocation.tripLocationID = i;
+        dummyLocation.tripID = trip.tripID;
+        dummyLocation.locationID = i;
+        dummyLocation.description = [NSString stringWithFormat:@"Description for Trip Location %d", i];
+        if (i % 2 == 0) {dummyLocation.tripLocationItems = [[NSArray alloc] initWithObjects:dummyLocationItem, nil];}
+        [dummyLocationArray addObject:dummyLocation];
+    }
+    
+    trip.tripLocations = [NSArray arrayWithArray:dummyLocationArray];
 }
 
 - (void)getAllTripsForTarget:(NSObject *)target withAction:(SEL)returnAction
