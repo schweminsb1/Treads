@@ -21,6 +21,7 @@
 @property double                 longitude;
 @property CLGeocoder            *geocoder;
 @property LocationService       *myLocationService;
+
 //@property        TreadsSession * treadsSession;
 
 @end
@@ -32,8 +33,8 @@
     if (self) {
         // Custom initialization
         _myLocationService=myLocationService;
-        self.latitude = 50.0;
-        self.longitude = 50.0;
+        self.latitude = 0.0;
+        self.longitude =0.0;
     }
     return self;
 }
@@ -49,7 +50,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(IBAction)finishClick:(id)sender
+-(IBAction)FinishClick:(id)sender
 {
     // user clicks finish and pushes the new data to the database
     
@@ -100,15 +101,22 @@
         {
             int count = items.count;
             int newID= [[((NSDictionary *)items[count-1]) valueForKey:@"LocationID"]integerValue] + 1;
-            
+          
+            // convert the latitude and longitude strings into double values
+            NSString * myLat = _latitudeText.text;
+            NSString * myLon = _longitudeText.text;
+            self.latitude = [myLat doubleValue];
+            self.longitude = [myLon doubleValue];
+
             NSDictionary * newItem= @{@"LocationID": [NSNumber numberWithInt:newID] ,
                                       @"name": [NSString stringWithString: _locationText.text],
                                       @"description": [NSString stringWithString: _descriptionText.text] ,
-                                      @"latitude": [NSNumber numberWithDouble: (_latitude)] ,
-                                      @"longitude": [NSNumber numberWithDouble: (_longitude)]
+                                      @"latitude": [NSNumber numberWithDouble: self.latitude],
+                                      @"longitude": [NSNumber numberWithDouble: self.longitude]
                                       };
             //call to insert item
             [_myLocationService addLocation:newItem forTarget:self withAction:(@selector(goBack))];
+
             //also add to location-attribute table
         };
         [_myLocationService getLocationsOrdered:getAll];

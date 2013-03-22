@@ -12,12 +12,16 @@
 
 @interface AddLocationVC : UIViewController
 
--(IBAction) finishClick:(id) sender;
+-(IBAction) FinishClick:(id) sender;
 -(IBAction) addCoordinates:(id) sender;
 
 @property IBOutlet UITextField  * locationText;
+
 @property IBOutlet UITextView   * descriptionText;
 @property IBOutlet UITextView   * attributeText;
+
+@property IBOutlet UITextField  * latitudeText;
+@property IBOutlet UITextField  * longitudeText;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil locationService:(LocationService *)myLocationService tripID:(int)myTripID;
 -(void) goBack;

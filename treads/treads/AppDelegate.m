@@ -56,29 +56,29 @@
     
     LoginVC* login;
     
-    //Set the login controller to default
-    login = [[LoginVC alloc]initWithNibName:@"LoginVC" bundle:nil client:self.dataRepository.client AppDelegate:self];
-    login.title = @"Login";
-    //UINavigationController* LoginNavigation = [[UINavigationController alloc] initWithRootViewController:login];
+//    //Set the login controller to default
+//    login = [[LoginVC alloc]initWithNibName:@"LoginVC" bundle:nil client:self.dataRepository.client AppDelegate:self];
+//    login.title = @"Login";
+//    //UINavigationController* LoginNavigation = [[UINavigationController alloc] initWithRootViewController:login];
+//    
+//    //self.window.rootViewController=LoginNavigation;
+//    
+//    //Initialize and assign to Tab Bar
+//    self.tabBarController = [[UITabBarController alloc] init];
+//    self.tabBarController.viewControllers = @[
+//        [[UINavigationController alloc] initWithRootViewController:mapsVC],
+//        cameraVC,
+//        [[UINavigationController alloc] initWithRootViewController:myTripsVC],
+//        [[UINavigationController alloc] initWithRootViewController:followVC],
+//        profileVC
+//        ];
+//    
+//    self.window.rootViewController = self.tabBarController;
+    //[self.tabBarController setSelectedIndex:2];
     
-    //self.window.rootViewController=LoginNavigation;
+    AddLocationVC * addLocationController = [[AddLocationVC new]initWithNibName:@"AddLocationVC" bundle:(nil ) locationService:_locationService tripID:0];
     
-    //Initialize and assign to Tab Bar
-    self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[
-        [[UINavigationController alloc] initWithRootViewController:mapsVC],
-        cameraVC,
-        [[UINavigationController alloc] initWithRootViewController:myTripsVC],
-        [[UINavigationController alloc] initWithRootViewController:followVC],
-        profileVC
-        ];
-    
-    self.window.rootViewController = self.tabBarController;
-    [self.tabBarController setSelectedIndex:2];
-    
-    //AddLocationViewController * addLocationController = [[AddLocationViewController new]initWithNibName:@"AddLocationVC" bundle:(nil ) locationService:_locationService tripID:0];
-    
-    //self.window.rootViewController = addLocationController;
+    self.window.rootViewController = addLocationController;
     
     [self.window makeKeyAndVisible];
     

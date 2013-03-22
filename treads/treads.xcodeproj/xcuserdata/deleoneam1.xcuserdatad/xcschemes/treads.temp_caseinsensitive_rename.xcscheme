@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3188B15616C9CE17008E1D7F"
-               BuildableName = "treads.temp_caseinsensitive_rename.app"
-               BlueprintName = "treads.temp_caseinsensitive_rename"
+               BuildableName = "treads.app"
+               BlueprintName = "treads"
                ReferencedContainer = "container:treads.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3188B15616C9CE17008E1D7F"
-            BuildableName = "treads.temp_caseinsensitive_rename.app"
-            BlueprintName = "treads.temp_caseinsensitive_rename"
+            BuildableName = "treads.app"
+            BlueprintName = "treads"
             ReferencedContainer = "container:treads.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -52,8 +52,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3188B15616C9CE17008E1D7F"
-            BuildableName = "treads.temp_caseinsensitive_rename.app"
-            BlueprintName = "treads.temp_caseinsensitive_rename"
+            BuildableName = "treads.app"
+            BlueprintName = "treads"
             ReferencedContainer = "container:treads.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -70,8 +70,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3188B15616C9CE17008E1D7F"
-            BuildableName = "treads.temp_caseinsensitive_rename.app"
-            BlueprintName = "treads.temp_caseinsensitive_rename"
+            BuildableName = "treads.app"
+            BlueprintName = "treads"
             ReferencedContainer = "container:treads.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
