@@ -18,6 +18,9 @@
     UILabel* tripOwnerLabel;
     UILabel* tripNameLabel;
     UILabel* tripDescriptionLabel;
+    
+    UIView* textBackground;
+    UIView* profilePictureView;
     //UILabel* tripDatesLabel;
     //UILabel* tripContentLabel;
 }
@@ -42,7 +45,7 @@
 {
     [super layoutSubviews];
     
-    self.bounds = CGRectMake(0, 0, 720, 370);
+    self.bounds = CGRectMake(0, 0, 720, 410);
     self.backgroundColor = [AppColors mainBackgroundColor];
     
     if (layoutDone) {
@@ -56,33 +59,44 @@
     
     //self.bounds = CGRectMake(0, 0, 768, 90);
     
-    tripFeaturedImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 720, 240)];
+    tripFeaturedImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 720, 350)]; //280
+    tripFeaturedImage.contentMode = UIViewContentModeScaleAspectFill;
+    tripFeaturedImage.clipsToBounds = YES;
     
-    //tripOwnerLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, -30 + tripFeaturedImage.bounds.size.height, 100, 60)];
-    //tripOwnerLabel.backgroundColor = [AppColors mainBackgroundColor];
-    //tripOwnerLabel.font = [UIFont boldSystemFontOfSize: 36];
-    tripOwnerLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 16 + tripFeaturedImage.bounds.size.height, 680, 38)];
+    //tripOwnerLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 16 + tripFeaturedImage.bounds.size.height, 680, 38)];
+    tripOwnerLabel = [[UILabel alloc] initWithFrame:CGRectMake(172, 38, 680, 42)];
     tripOwnerLabel.backgroundColor = [UIColor clearColor];
-    tripOwnerLabel.font = [UIFont boldSystemFontOfSize: 32];
-    tripOwnerLabel.textColor = [AppColors mainTextColor];
+    tripOwnerLabel.font = [UIFont boldSystemFontOfSize: 36];
+    tripOwnerLabel.textColor = [AppColors lightTextColor];
     tripOwnerLabel.textAlignment = NSTextAlignmentLeft;
     tripOwnerLabel.adjustsFontSizeToFitWidth = YES;
     
-    tripNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 52 + tripFeaturedImage.bounds.size.height, 680, 31)];
+    //tripNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 52 + tripFeaturedImage.bounds.size.height, 680, 31)];
+    tripNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(172, 80, 680, 32)];
     tripNameLabel.backgroundColor = [UIColor clearColor];
-    tripNameLabel.font = [UIFont systemFontOfSize: 25];
-    tripNameLabel.textColor = [AppColors mainTextColor];
+    tripNameLabel.font = [UIFont systemFontOfSize: 26];
+    tripNameLabel.textColor = [AppColors lightTextColor];
     tripNameLabel.textAlignment = NSTextAlignmentLeft;
     tripNameLabel.adjustsFontSizeToFitWidth = YES;
     
-    tripDescriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 84 + tripFeaturedImage.bounds.size.height, 680, 23)];
+    tripDescriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 84 + tripFeaturedImage.bounds.size.height - 70, 680, 23)];
     tripDescriptionLabel.backgroundColor = [UIColor clearColor];
     tripDescriptionLabel.font = [UIFont systemFontOfSize: 17];
     tripDescriptionLabel.textColor = [AppColors mainTextColor];
     tripDescriptionLabel.textAlignment = NSTextAlignmentLeft;
     tripDescriptionLabel.adjustsFontSizeToFitWidth = YES;
     
+    textBackground = [[UIView alloc] initWithFrame:CGRectMake(0, 24, 720, 104)];
+    textBackground.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
+    
+    profilePictureView = [[UIView alloc] initWithFrame:CGRectMake(20, 16, 132, 132)];
+    profilePictureView.backgroundColor = [UIColor lightGrayColor];
+    
     [self addSubview:tripFeaturedImage];
+    
+    [self addSubview:textBackground];
+    [self addSubview:profilePictureView];
+    
     [self addSubview:tripOwnerLabel];
     [self addSubview:tripNameLabel];
     [self addSubview:tripDescriptionLabel];
@@ -99,6 +113,7 @@
 {
     if (!layoutDone) {
         [self layoutSubviews];
+        //[self setNeedsLayout];
     }
     if (trip.featuredLocationItem != nil) {
         if (trip.featuredLocationItem.image != nil) {

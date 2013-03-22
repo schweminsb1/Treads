@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class TripLocation;
+
 @interface ImageScrollBrowser : UIView
+
+@property (assign, nonatomic) TripLocation* tripLocation;
 
 @end

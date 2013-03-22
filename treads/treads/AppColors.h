@@ -22,6 +22,7 @@
 + (UIColor*)secondaryBackgroundColor;
 
 + (UIColor*)mainTextColor;
++ (UIColor*)lightTextColor;
 + (UIColor*)secondaryTextColor;
 
 + (UIColor*)activityIndicatorColor;

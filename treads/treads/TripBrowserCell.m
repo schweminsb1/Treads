@@ -100,8 +100,10 @@
 
 - (void)setDisplayTrip:(Trip*)displayTrip
 {
-    if (!layoutDone)
+    if (!layoutDone) {
         [self layoutSubviews];
+        //[self setNeedsLayout];
+    }
     tripOwnerLabel.text = @"Trip Owner";
     tripNameLabel.text = displayTrip.name;
     tripDatesLabel.text = @"1/1/2013 - 12/31/2013";
