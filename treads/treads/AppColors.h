@@ -20,6 +20,7 @@
 
 + (UIColor*)mainBackgroundColor;
 + (UIColor*)secondaryBackgroundColor;
++ (UIColor*)tertiaryBackgroundColor;
 
 + (UIColor*)mainTextColor;
 + (UIColor*)lightTextColor;

@@ -19,9 +19,10 @@
 @implementation ImageScrollBrowser {
     BOOL layoutDone;
     UIScrollView* imageScrollView;
+    UIImageView* imageScrollPaddingLeft;
+    UIImageView* imageScrollPaddingRight;
+
     UITextView* descriptionTextView;
-    
-    
     
     UIImageView* imageSubView;
     UIImageView* imageSubView2;
@@ -49,22 +50,32 @@
     
     layoutDone = YES;
     
-    imageScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 300)];
+    imageScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 360)];
     //imageScrollView.backgroundColor = [AppColors toolbarColor];
+    imageScrollView.bounces = NO;
     
     imageScrollView.delegate = self;
     
-    imageSubView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 500, 300)];
-    imageSubView2 = [[UIImageView alloc] initWithFrame:CGRectMake(500, 0, 500, 300)];
-    imageSubView3 = [[UIImageView alloc] initWithFrame:CGRectMake(1000, 0, 500, 300)];
+    imageScrollPaddingLeft = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, (self.bounds.size.width-540)/2, imageScrollView.bounds.size.width)];
+    imageScrollPaddingLeft.backgroundColor = [AppColors tertiaryBackgroundColor];
+    
+    imageScrollPaddingRight = [[UIImageView alloc] initWithFrame:CGRectMake(1620 + imageScrollPaddingLeft.bounds.size.width, 0, (self.bounds.size.width-540)/2, imageScrollView.bounds.size.width)];
+    imageScrollPaddingRight.backgroundColor = [AppColors tertiaryBackgroundColor];
+    
+    imageSubView = [[UIImageView alloc] initWithFrame:CGRectMake(0 + imageScrollPaddingLeft.bounds.size.width, 0, 540, 360)];
+    imageSubView2 = [[UIImageView alloc] initWithFrame:CGRectMake(540 + imageScrollPaddingLeft.bounds.size.width, 0, 540, 360)];
+    imageSubView3 = [[UIImageView alloc] initWithFrame:CGRectMake(1080 + imageScrollPaddingLeft.bounds.size.width, 0, 540, 360)];
+    
+    [imageScrollView addSubview:imageScrollPaddingLeft];
+    [imageScrollView addSubview:imageScrollPaddingRight];
     
     [imageScrollView addSubview:imageSubView];
     [imageScrollView addSubview:imageSubView2];
     [imageScrollView addSubview:imageSubView3];
     
-    imageScrollView.contentSize = CGSizeMake(1500, 300);
+    imageScrollView.contentSize = CGSizeMake(1620 + imageScrollPaddingLeft.bounds.size.width * 2, 300);
     
-    descriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, 316, self.bounds.size.width - 40, self.bounds.size.height - 332)];
+    descriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, 376, self.bounds.size.width - 40, self.bounds.size.height - 392)];
     descriptionTextView.backgroundColor = [UIColor clearColor];
     descriptionTextView.font = [UIFont systemFontOfSize: 17];
     descriptionTextView.textColor = [AppColors mainTextColor];
@@ -87,7 +98,7 @@
     imageSubView3.image = [UIImage imageNamed:@"mountains.jpeg"];
     descriptionTextView.text = [NSString stringWithFormat:@"Picture descriptions will go here: %@", tripLocation.description];
     imageScrollView.contentOffset = CGPointZero;
-    descriptionTextView.contentOffset = CGPointZero;
+    descriptionTextView.contentOffset = CGPointMake(-descriptionTextView.contentInset.left, -descriptionTextView.contentInset.top);
 }
 
 @end

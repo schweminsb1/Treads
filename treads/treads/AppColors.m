@@ -24,6 +24,7 @@
 + (UIColor*)mainTextColor {return [UIColor blackColor];}
 + (UIColor*)lightTextColor {return [UIColor whiteColor];}
 + (UIColor*)secondaryTextColor {return [UIColor colorWithHue:[AppColors primaryHue] saturation:[AppColors primarySaturation]*0.85 brightness:[AppColors primaryValue]*0.54 alpha:1];}
++ (UIColor*)tertiaryBackgroundColor {return [UIColor colorWithHue:[AppColors primaryHue] saturation:[AppColors primarySaturation]*0.90 brightness:[AppColors primaryValue]*0.30 alpha:1];}
 
 + (UIColor*)activityIndicatorColor {return [UIColor colorWithHue:[AppColors primaryHue] saturation:[AppColors primarySaturation]*0.80 brightness:[AppColors primaryValue]*0.40 alpha:1];}
 
