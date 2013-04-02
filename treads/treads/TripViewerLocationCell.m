@@ -17,7 +17,7 @@
     BOOL layoutDone;
     UILabel* locationNameLabel;
     UITextView* locationDescriptionTextView;
-    UIView* locationMapView;
+    UIImageView* locationMapView;
     UIView* locationTextBackgroundView;
     ImageScrollBrowser* imageScrollBrowser;
     //UIImageView* tripFeaturedImage;
@@ -80,8 +80,10 @@
     locationTextBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 500, 70)];
     locationTextBackgroundView.backgroundColor = [AppColors mainBackgroundColor];
     
-    locationMapView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 70)];
-    locationMapView.backgroundColor = [UIColor colorWithHue:60.0/360.0 saturation:0.5 brightness:0.8 alpha:1];
+    locationMapView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 70)];
+    //locationMapView.backgroundColor = [UIColor colorWithHue:60.0/360.0 saturation:0.5 brightness:0.8 alpha:1];
+    locationMapView.contentMode = UIViewContentModeScaleAspectFill;
+    locationMapView.clipsToBounds = YES;
     
     imageScrollBrowser = [[ImageScrollBrowser alloc] initWithFrame:CGRectMake(0, 70, 720, 550)];
     
@@ -106,6 +108,8 @@
     locationNameLabel.text = [NSString stringWithFormat:@"Location ID: %d", tripLocation.tripLocationID];
     CGSize sizeOfText=[locationNameLabel.text sizeWithFont:locationNameLabel.font constrainedToSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
     [locationTextBackgroundView setFrame:CGRectMake(0, 0, 40 + sizeOfText.width, 70)];
+    
+    locationMapView.image = [UIImage imageNamed:@"map_preview.png"];
     
     locationDescriptionTextView.text = [NSString stringWithFormat:@"Description for Trip Location %d: %@", tripLocation.tripID, tripLocation.description];
     locationDescriptionTextView.contentOffset = CGPointZero;

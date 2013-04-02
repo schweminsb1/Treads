@@ -43,6 +43,7 @@
 		3C12312716EFCB98006CCBFE /* ProfileService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C12312616EFCB98006CCBFE /* ProfileService.m */; };
 		3C60C7DB16E7004900FDFD7D /* TripBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C60C7DA16E7004900FDFD7D /* TripBrowser.m */; };
 		3C87B12316F7E7B8000ABF18 /* AppColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C87B12216F7E7B8000ABF18 /* AppColors.m */; };
+		3C89482D170B560600EEEED0 /* map_preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C89482C170B560600EEEED0 /* map_preview.png */; };
 		3C8A908C16E7DAA2007F0BB8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C8A908B16E7DAA2007F0BB8 /* Default-568h@2x.png */; };
 		3C8A909016E7DFC8007F0BB8 /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8A908F16E7DFC8007F0BB8 /* Trip.m */; };
 		3C8AC26D16E82BE30070271E /* TripService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8AC26C16E82BE30070271E /* TripService.m */; };
@@ -122,6 +123,7 @@
 		3C60C7DA16E7004900FDFD7D /* TripBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripBrowser.m; path = treads/TripBrowser.m; sourceTree = SOURCE_ROOT; };
 		3C87B12116F7E7B8000ABF18 /* AppColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppColors.h; path = treads/AppColors.h; sourceTree = SOURCE_ROOT; };
 		3C87B12216F7E7B8000ABF18 /* AppColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppColors.m; path = treads/AppColors.m; sourceTree = SOURCE_ROOT; };
+		3C89482C170B560600EEEED0 /* map_preview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_preview.png; sourceTree = "<group>"; };
 		3C8A908B16E7DAA2007F0BB8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		3C8A908E16E7DFC8007F0BB8 /* Trip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Trip.h; path = treads/Trip.h; sourceTree = SOURCE_ROOT; };
 		3C8A908F16E7DFC8007F0BB8 /* Trip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Trip.m; path = treads/Trip.m; sourceTree = SOURCE_ROOT; };
@@ -251,6 +253,7 @@
 		3188B19116C9CE4E008E1D7F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3C89482C170B560600EEEED0 /* map_preview.png */,
 				3118BFED16EFC588006DE2E9 /* compass.png */,
 				3914480A16EE4B20001B16BE /* mountains.jpeg */,
 				3C958FEA16EA6C4F0038AD7C /* helicopter-bouldering-crash-pad.jpg */,
@@ -528,6 +531,7 @@
 				316399B716ECB3F6003B3F0E /* EditTripVC.xib in Resources */,
 				3914480B16EE4B20001B16BE /* mountains.jpeg in Resources */,
 				3118BFEE16EFC588006DE2E9 /* compass.png in Resources */,
+				3C89482D170B560600EEEED0 /* map_preview.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

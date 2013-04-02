@@ -15,6 +15,10 @@
 + (float)primarySaturation;
 + (float)primaryValue;
 
++ (float)secondaryHue;
++ (float)secondarySaturation;
++ (float)secondaryValue;
+
 //implementation values
 + (UIColor*)toolbarColor;
 
