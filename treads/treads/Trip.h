@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "TripLocation.h"
 #import "TripLocationItem.h"
 
 @interface Trip : NSObject

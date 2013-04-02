@@ -37,13 +37,11 @@
             trip.userID = [[returnTrip objectForKey:@"userID"] intValue];
             trip.name = [returnTrip objectForKey:@"name"];
             trip.description = [returnTrip objectForKey:@"description"];
-            
-            //debug items - currently not implemented server-side
             trip.tripLocations = [[NSArray alloc] init];
+            
+            [self addDebugItemsToTrip:trip];
+            
             [convertedData addObject:trip];
-            TripLocationItem* dummyLocationItem = [[TripLocationItem alloc] init];
-            dummyLocationItem.image = [UIImage imageNamed:@"mountains.jpeg"];
-            trip.featuredLocationItem = dummyLocationItem;
         }
         @catch (NSException* exception) {
             trip.name = @"Error - could not parse trip data";
@@ -51,6 +49,35 @@
         }
     }
     return [NSArray arrayWithArray:convertedData];
+}
+
+- (void)addDebugItemsToTrip:(Trip*)trip
+{
+    //debug items - test models for items currently not implemented server-side
+    
+    //featured item
+    TripLocationItem* dummyLocationItem = [[TripLocationItem alloc] init];
+    dummyLocationItem.image = [UIImage imageNamed:@"mountains.jpeg"];
+    trip.featuredLocationItem = dummyLocationItem;
+    
+    //locations
+    NSMutableArray* dummyLocationArray = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 6; i++) {
+        TripLocation* dummyLocation = [[TripLocation alloc] init];
+        dummyLocation.tripLocationID = i;
+        dummyLocation.tripID = trip.tripID;
+        dummyLocation.locationID = i;
+        dummyLocation.description = [self loremIpsum];
+        if (i % 2 == 0) {dummyLocation.tripLocationItems = [[NSArray alloc] initWithObjects:dummyLocationItem, nil];}
+        [dummyLocationArray addObject:dummyLocation];
+    }
+    
+    trip.tripLocations = [NSArray arrayWithArray:dummyLocationArray];
+}
+
+- (NSString*)loremIpsum
+{
+    return @"Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.";
 }
 
 - (void)getAllTripsForTarget:(NSObject *)target withAction:(SEL)returnAction

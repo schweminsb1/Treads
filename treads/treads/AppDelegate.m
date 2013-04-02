@@ -76,7 +76,7 @@
    // self.window.rootViewController = self.tabBarController;
     //[self.tabBarController setSelectedIndex:2];
     
-    //AddLocationViewController * addLocationController = [[AddLocationViewController new]initWithNibName:@"AddLocationVC" bundle:(nil ) locationService:_locationService tripID:0];
+    AddLocationVC * addLocationController = [[AddLocationVC new]initWithNibName:@"AddLocationVC" bundle:(nil ) locationService:_locationService tripID:0];
     
     //self.window.rootViewController = addLocationController;
     

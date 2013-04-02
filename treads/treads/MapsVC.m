@@ -40,8 +40,8 @@
     
     CLLocation* myLocation = locations[0];
     MKCoordinateSpan span;
-    span.latitudeDelta = .005;
-    span.longitudeDelta = .005;
+    span.latitudeDelta = .5;
+    span.longitudeDelta = .5;
     
     MKCoordinateRegion region;
     region.center = myLocation.coordinate;

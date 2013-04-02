@@ -43,6 +43,7 @@
 		3C12312716EFCB98006CCBFE /* ProfileService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C12312616EFCB98006CCBFE /* ProfileService.m */; };
 		3C60C7DB16E7004900FDFD7D /* TripBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C60C7DA16E7004900FDFD7D /* TripBrowser.m */; };
 		3C87B12316F7E7B8000ABF18 /* AppColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C87B12216F7E7B8000ABF18 /* AppColors.m */; };
+		3C89482D170B560600EEEED0 /* map_preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C89482C170B560600EEEED0 /* map_preview.png */; };
 		3C8A908C16E7DAA2007F0BB8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C8A908B16E7DAA2007F0BB8 /* Default-568h@2x.png */; };
 		3C8A909016E7DFC8007F0BB8 /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8A908F16E7DFC8007F0BB8 /* Trip.m */; };
 		3C8AC26D16E82BE30070271E /* TripService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8AC26C16E82BE30070271E /* TripService.m */; };
@@ -57,6 +58,7 @@
 		3C95900416EA6D220038AD7C /* MapPinAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C958FFF16EA6D220038AD7C /* MapPinAnnotation.m */; };
 		3C95900516EA6D220038AD7C /* Path.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C95900116EA6D220038AD7C /* Path.m */; };
 		3C95900816EA6DFE0038AD7C /* WindowsAzureMobileServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C95900716EA6DFE0038AD7C /* WindowsAzureMobileServices.framework */; };
+		3C96E23E16FCEB3A007FA511 /* ImageScrollBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96E23D16FCEB3A007FA511 /* ImageScrollBrowser.m */; };
 		3C9DA9E916F91B47009EEED7 /* TripViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9DA9E816F91B47009EEED7 /* TripViewer.m */; };
 		3C9DA9EE16F91BE9009EEED7 /* TripViewerHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9DA9ED16F91BE9009EEED7 /* TripViewerHeaderCell.m */; };
 		3C9DA9F116F91BF9009EEED7 /* TripViewerLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9DA9F016F91BF9009EEED7 /* TripViewerLocationCell.m */; };
@@ -122,6 +124,7 @@
 		3C60C7DA16E7004900FDFD7D /* TripBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripBrowser.m; path = treads/TripBrowser.m; sourceTree = SOURCE_ROOT; };
 		3C87B12116F7E7B8000ABF18 /* AppColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppColors.h; path = treads/AppColors.h; sourceTree = SOURCE_ROOT; };
 		3C87B12216F7E7B8000ABF18 /* AppColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppColors.m; path = treads/AppColors.m; sourceTree = SOURCE_ROOT; };
+		3C89482C170B560600EEEED0 /* map_preview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_preview.png; sourceTree = "<group>"; };
 		3C8A908B16E7DAA2007F0BB8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		3C8A908E16E7DFC8007F0BB8 /* Trip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Trip.h; path = treads/Trip.h; sourceTree = SOURCE_ROOT; };
 		3C8A908F16E7DFC8007F0BB8 /* Trip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Trip.m; path = treads/Trip.m; sourceTree = SOURCE_ROOT; };
@@ -143,6 +146,8 @@
 		3C95900016EA6D220038AD7C /* Path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Path.h; path = treads/Path.h; sourceTree = SOURCE_ROOT; };
 		3C95900116EA6D220038AD7C /* Path.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Path.m; path = treads/Path.m; sourceTree = SOURCE_ROOT; };
 		3C95900716EA6DFE0038AD7C /* WindowsAzureMobileServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMobileServices.framework; sourceTree = "<group>"; };
+		3C96E23C16FCEB3A007FA511 /* ImageScrollBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageScrollBrowser.h; path = treads/ImageScrollBrowser.h; sourceTree = SOURCE_ROOT; };
+		3C96E23D16FCEB3A007FA511 /* ImageScrollBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageScrollBrowser.m; path = treads/ImageScrollBrowser.m; sourceTree = SOURCE_ROOT; };
 		3C9DA9E716F91B47009EEED7 /* TripViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripViewer.h; path = treads/TripViewer.h; sourceTree = SOURCE_ROOT; };
 		3C9DA9E816F91B47009EEED7 /* TripViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripViewer.m; path = treads/TripViewer.m; sourceTree = SOURCE_ROOT; };
 		3C9DA9EC16F91BE9009EEED7 /* TripViewerHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripViewerHeaderCell.h; path = treads/TripViewerHeaderCell.h; sourceTree = SOURCE_ROOT; };
@@ -250,6 +255,7 @@
 		3188B19116C9CE4E008E1D7F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3C89482C170B560600EEEED0 /* map_preview.png */,
 				3118BFED16EFC588006DE2E9 /* compass.png */,
 				3914480A16EE4B20001B16BE /* mountains.jpeg */,
 				3C958FEA16EA6C4F0038AD7C /* helicopter-bouldering-crash-pad.jpg */,
@@ -436,6 +442,8 @@
 				3C9DA9F016F91BF9009EEED7 /* TripViewerLocationCell.m */,
 				3C9DA9F216F91C1F009EEED7 /* TripViewerAddCell.h */,
 				3C9DA9F316F91C1F009EEED7 /* TripViewerAddCell.m */,
+				3C96E23C16FCEB3A007FA511 /* ImageScrollBrowser.h */,
+				3C96E23D16FCEB3A007FA511 /* ImageScrollBrowser.m */,
 			);
 			name = "Trip Viewer";
 			sourceTree = "<group>";
@@ -525,6 +533,7 @@
 				316399B716ECB3F6003B3F0E /* EditTripVC.xib in Resources */,
 				3914480B16EE4B20001B16BE /* mountains.jpeg in Resources */,
 				3118BFEE16EFC588006DE2E9 /* compass.png in Resources */,
+				3C89482D170B560600EEEED0 /* map_preview.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,6 +573,7 @@
 				3C9DA9F416F91C1F009EEED7 /* TripViewerAddCell.m in Sources */,
 				3C9DA9F716F92262009EEED7 /* TripLocation.m in Sources */,
 				3C9DA9FB16F92422009EEED7 /* TripLocationItem.m in Sources */,
+				3C96E23E16FCEB3A007FA511 /* ImageScrollBrowser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

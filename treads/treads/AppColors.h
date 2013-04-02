@@ -15,13 +15,19 @@
 + (float)primarySaturation;
 + (float)primaryValue;
 
++ (float)secondaryHue;
++ (float)secondarySaturation;
++ (float)secondaryValue;
+
 //implementation values
 + (UIColor*)toolbarColor;
 
 + (UIColor*)mainBackgroundColor;
 + (UIColor*)secondaryBackgroundColor;
++ (UIColor*)tertiaryBackgroundColor;
 
 + (UIColor*)mainTextColor;
++ (UIColor*)lightTextColor;
 + (UIColor*)secondaryTextColor;
 
 + (UIColor*)activityIndicatorColor;

@@ -120,6 +120,7 @@
         }
         //fill out data
         cell.trip = trip;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
     else if (indexPath.row <= trip.tripLocations.count) {
@@ -129,7 +130,8 @@
             cell = [[TripViewerLocationCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[TripViewer locationCellIdentifier]];
         }
         //fill out data
-        
+        cell.tripLocation = trip.tripLocations[indexPath.row - 1];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
     else if (editingEnabled) {
