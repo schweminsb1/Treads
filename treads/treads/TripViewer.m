@@ -47,6 +47,7 @@
     
     //set up table view
     viewerTable = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
+    [viewerTable setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     [viewerTable setDelegate:self];
     [viewerTable setDataSource:self];
     [viewerTable setBackgroundColor:[AppColors secondaryBackgroundColor]];

@@ -40,6 +40,7 @@
     
     //set up table view
     browserTable = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
+    [browserTable setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     [browserTable setDelegate:self];
     [browserTable setDataSource:self];
     [browserTable setBackgroundColor:[AppColors secondaryBackgroundColor]];
@@ -96,6 +97,7 @@
     TripBrowserCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CELL"];
     if (!cell) {
         cell = [[TripBrowserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL"];
+        [cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     }
     
     cell.displayTrip = (Trip*)sortedListData[indexPath.row];
