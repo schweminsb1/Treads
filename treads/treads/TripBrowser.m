@@ -17,6 +17,7 @@
 @end
 
 @implementation TripBrowser {
+    BOOL layoutDone;
     NSArray* sortedListData;
     SEL listSelectAction;
     NSObject* target;
@@ -28,6 +29,7 @@
 - (id)initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame])) {
+        layoutDone = NO;
         [self layoutSubviews];
         listSelectAction = nil;
     }
@@ -37,6 +39,12 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    
+    if (layoutDone) {
+        return;
+    }
+    
+    layoutDone = YES;
     
     //set up table view
     browserTable = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
@@ -97,7 +105,8 @@
     TripBrowserCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CELL"];
     if (!cell) {
         cell = [[TripBrowserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL"];
-        [cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+        //[cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+        //[cell setAutoresizesSubviews:YES];
     }
     
     cell.displayTrip = (Trip*)sortedListData[indexPath.row];
@@ -138,9 +147,10 @@
     return cellVerticalPadding / 2;
 }
 
-- (CGFloat)tableView: tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [self tableView:tableView cellForRowAtIndexPath:indexPath].bounds.size.height + cellVerticalPadding;
+    //return [self tableView:tableView cellForRowAtIndexPath:indexPath].bounds.size.height + cellVerticalPadding;
+    return 110 + cellVerticalPadding;
 }
 
 @end
