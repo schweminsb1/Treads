@@ -59,9 +59,9 @@
     //Set the login controller to default
     login = [[LoginVC alloc]initWithNibName:@"LoginVC" bundle:nil client:self.dataRepository.client AppDelegate:self];
     login.title = @"Login";
-    //UINavigationController* LoginNavigation = [[UINavigationController alloc] initWithRootViewController:login];
+    UINavigationController* LoginNavigation = [[UINavigationController alloc] initWithRootViewController:login];
     
-    //self.window.rootViewController=LoginNavigation;
+    self.window.rootViewController=LoginNavigation;
     
     //Initialize and assign to Tab Bar
     self.tabBarController = [[UITabBarController alloc] init];
@@ -73,8 +73,8 @@
         profileVC
         ];
     
-    self.window.rootViewController = self.tabBarController;
-    [self.tabBarController setSelectedIndex:2];
+   // self.window.rootViewController = self.tabBarController;
+    //[self.tabBarController setSelectedIndex:2];
     
     //AddLocationViewController * addLocationController = [[AddLocationViewController new]initWithNibName:@"AddLocationVC" bundle:(nil ) locationService:_locationService tripID:0];
     

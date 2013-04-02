@@ -66,6 +66,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		296CC3F816FCEA7C0089F1F1 /* treads.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = treads.entitlements; path = treads/treads.entitlements; sourceTree = "<group>"; };
 		29E2E8A216EFEEFA0010C19B /* RegisterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegisterVC.m; path = treads/RegisterVC.m; sourceTree = SOURCE_ROOT; };
 		3118BFED16EFC588006DE2E9 /* compass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compass.png; sourceTree = "<group>"; };
 		316399B316ECB3F6003B3F0E /* EditTripVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditTripVC.h; path = treads/EditTripVC.h; sourceTree = SOURCE_ROOT; };
@@ -186,6 +187,7 @@
 		3188B14E16C9CE16008E1D7F = {
 			isa = PBXGroup;
 			children = (
+				296CC3F816FCEA7C0089F1F1 /* treads.entitlements */,
 				3188B16016C9CE17008E1D7F /* Treads */,
 				3188B15916C9CE17008E1D7F /* Frameworks */,
 				3188B15816C9CE17008E1D7F /* Products */,
@@ -629,6 +631,7 @@
 		3188B18F16C9CE17008E1D7F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = treads/treads.entitlements;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -644,6 +647,7 @@
 		3188B19016C9CE17008E1D7F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = treads/treads.entitlements;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
