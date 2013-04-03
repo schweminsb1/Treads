@@ -51,6 +51,7 @@
     
     //set up browser
     self.browser = [[TripBrowser alloc] initWithFrame:self.browserWindow.bounds];
+    [self.browser setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     [self.browserWindow addSubview: self.browser];
 }
 

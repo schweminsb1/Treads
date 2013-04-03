@@ -14,11 +14,11 @@
 
 @implementation TripViewerHeaderCell {
     BOOL layoutDone;
+    UIView* subView;
     UIImageView* tripFeaturedImage;
     UILabel* tripOwnerLabel;
     UILabel* tripNameLabel;
     UILabel* tripDescriptionLabel;
-    
     UIView* textBackground;
     UIImageView* profilePictureView;
     //UILabel* tripDatesLabel;
@@ -45,70 +45,73 @@
 {
     [super layoutSubviews];
     
-    self.bounds = CGRectMake(0, 0, 720, 480);
-    self.backgroundColor = [AppColors mainBackgroundColor];
-    
-    if (layoutDone) {
-        return;
+    if (!layoutDone) {
+        //add subviews if layout has not been set
+        [self createAndAddSubviews];
+        layoutDone = YES;
     }
     
-    layoutDone = YES;
+    //set frames of subviews
+    [subView setFrame:CGRectMake(24, 8, self.bounds.size.width-48, 480)];
+    [tripFeaturedImage setFrame:CGRectMake(0, 0, subView.frame.size.width, 320)];
+    [tripOwnerLabel setFrame:CGRectMake(176, 38, subView.frame.size.width-196, 44)];
+    [tripNameLabel setFrame:CGRectMake(176, 82, subView.frame.size.width-196, 36)];
+    [tripDescriptionLabel setFrame:CGRectMake(20, 336, subView.frame.size.width-40, 23)];
+    [textBackground setFrame:CGRectMake(0, 24, subView.frame.size.width, 108)];
+    [profilePictureView setFrame:CGRectMake(20, 16, 136, 136)];
+}
+
+- (void)createAndAddSubviews
+{
+    self.backgroundColor = [UIColor clearColor];
     
-    //for (UIView* subview in self.subviews)
-    //    [subview removeFromSuperview];
+    subView = [[UIView alloc] init];
+    subView.backgroundColor = [AppColors mainBackgroundColor];
+    [self addSubview:subView];
     
-    //self.bounds = CGRectMake(0, 0, 768, 90);
-    
-    tripFeaturedImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 720, 320)]; //280
+    tripFeaturedImage = [[UIImageView alloc] init]; //280
     tripFeaturedImage.contentMode = UIViewContentModeScaleAspectFill;
     tripFeaturedImage.clipsToBounds = YES;
     
-    //tripOwnerLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 16 + tripFeaturedImage.bounds.size.height, 680, 38)];
-    tripOwnerLabel = [[UILabel alloc] initWithFrame:CGRectMake(176, 38, 680, 44)];
+    tripOwnerLabel = [[UILabel alloc] init];
     tripOwnerLabel.backgroundColor = [UIColor clearColor];
     tripOwnerLabel.font = [UIFont boldSystemFontOfSize: 38];
     tripOwnerLabel.textColor = [AppColors lightTextColor];
     tripOwnerLabel.textAlignment = NSTextAlignmentLeft;
     tripOwnerLabel.adjustsFontSizeToFitWidth = YES;
     
-    //tripNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 52 + tripFeaturedImage.bounds.size.height, 680, 31)];
-    tripNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(176, 82, 680, 36)];
+    tripNameLabel = [[UILabel alloc] init];
     tripNameLabel.backgroundColor = [UIColor clearColor];
     tripNameLabel.font = [UIFont systemFontOfSize: 28];
     tripNameLabel.textColor = [AppColors lightTextColor];
     tripNameLabel.textAlignment = NSTextAlignmentLeft;
     tripNameLabel.adjustsFontSizeToFitWidth = YES;
     
-    tripDescriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 336, 680, 23)];
+    tripDescriptionLabel = [[UILabel alloc] init];
     tripDescriptionLabel.backgroundColor = [UIColor clearColor];
     tripDescriptionLabel.font = [UIFont systemFontOfSize: 17];
     tripDescriptionLabel.textColor = [AppColors mainTextColor];
     tripDescriptionLabel.textAlignment = NSTextAlignmentLeft;
     tripDescriptionLabel.adjustsFontSizeToFitWidth = YES;
     
-    textBackground = [[UIView alloc] initWithFrame:CGRectMake(0, 24, 720, 108)];
+    textBackground = [[UIView alloc] init];
     textBackground.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
     
-    profilePictureView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 16, 136, 136)];
+    profilePictureView = [[UIImageView alloc] init];
     profilePictureView.backgroundColor = [UIColor lightGrayColor];
     profilePictureView.contentMode = UIViewContentModeScaleAspectFill;
     profilePictureView.clipsToBounds = YES;
     
-    [self addSubview:tripFeaturedImage];
+    [subView addSubview:tripFeaturedImage];
     
-    [self addSubview:textBackground];
-    [self addSubview:profilePictureView];
+    [subView addSubview:textBackground];
+    [subView addSubview:profilePictureView];
     
-    [self addSubview:tripOwnerLabel];
-    [self addSubview:tripNameLabel];
-    [self addSubview:tripDescriptionLabel];
+    [subView addSubview:tripOwnerLabel];
+    [subView addSubview:tripNameLabel];
+    [subView addSubview:tripDescriptionLabel];
     
-    [self bringSubviewToFront:tripOwnerLabel];
-    
-    /*UIView *bgColorView = [[UIView alloc] init];
-    bgColorView.bounds = self.bounds;
-    [bgColorView setBackgroundColor:[AppColors mainBackgroundColor]];//[AppColors toolbarColor]];
-    [self setSelectedBackgroundView:bgColorView];*/
+    [subView bringSubviewToFront:tripOwnerLabel];
 }
 
 - (void)setTrip:(Trip*)trip

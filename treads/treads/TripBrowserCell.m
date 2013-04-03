@@ -14,6 +14,7 @@
 
 @implementation TripBrowserCell {
     BOOL layoutDone;
+    UIView* subView;
     UILabel* tripOwnerLabel;
     UILabel* tripNameLabel;
     UILabel* tripDatesLabel;
@@ -42,19 +43,23 @@
 {
     [super layoutSubviews];
     
-    self.bounds = CGRectMake(0, 0, 720, 110);
-    self.backgroundColor = [AppColors mainBackgroundColor];
-    
-    if (layoutDone) {
-        return;
+    if (!layoutDone) {
+        //add subviews if layout has not been set
+        [self createAndAddSubviews];
+        layoutDone = YES;
     }
     
-    layoutDone = YES;
+    //set frames of subviews
+    [subView setFrame:CGRectMake(24, 8, self.bounds.size.width-48, 110)];
+}
+
+- (void)createAndAddSubviews
+{
+    self.backgroundColor = [UIColor clearColor];
     
-    //for (UIView* subview in self.subviews)
-    //    [subview removeFromSuperview];
-    
-    //self.bounds = CGRectMake(0, 0, 768, 90);
+    subView = [[UIView alloc] initWithFrame:CGRectMake(24, 8, self.bounds.size.width-48, 110)];
+    subView.backgroundColor = [AppColors mainBackgroundColor];
+    [self addSubview:subView];
     
     tripOwnerLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 12, 260, 30)];
     tripOwnerLabel.backgroundColor = [UIColor clearColor];
@@ -86,14 +91,15 @@
     
     tripFeaturedImage = [[UIImageView alloc] initWithFrame:CGRectMake(260, 0, 460, 110)];
     
-    [self addSubview:tripOwnerLabel];
-    [self addSubview:tripNameLabel];
-    [self addSubview:tripDatesLabel];
-    [self addSubview:tripContentLabel];
+    [subView addSubview:tripOwnerLabel];
+    [subView addSubview:tripNameLabel];
+    [subView addSubview:tripDatesLabel];
+    [subView addSubview:tripContentLabel];
     //[self addSubview:tripFeaturedImage];
     
     UIView *bgColorView = [[UIView alloc] init];
-    bgColorView.bounds = self.bounds;
+    bgColorView.bounds = subView.bounds;
+    bgColorView.frame = subView.frame;
     [bgColorView setBackgroundColor:[AppColors toolbarColor]];
     [self setSelectedBackgroundView:bgColorView];
 }
@@ -108,6 +114,7 @@
     tripNameLabel.text = displayTrip.name;
     tripDatesLabel.text = @"1/1/2013 - 12/31/2013";
     tripContentLabel.text = @"P213 C87";
+//    tripContentLabel.text = [NSString stringWithFormat:@"%f, %f, %f, %f", self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, self.bounds.size.height];
     tripFeaturedImage.image = nil;
     if (displayTrip.featuredLocationItem != nil) {
         if (displayTrip.featuredLocationItem.image != nil) {

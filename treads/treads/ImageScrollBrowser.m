@@ -41,30 +41,41 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-
-    self.backgroundColor = [AppColors mainBackgroundColor];
     
-    if (layoutDone) {
-        return;
+    if (!layoutDone) {
+        //add subviews if layout has not been set
+        [self createAndAddSubviews];
+        layoutDone = YES;
     }
     
-    layoutDone = YES;
-    
-    imageScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 360)];
-    //imageScrollView.backgroundColor = [AppColors toolbarColor];
-    imageScrollView.bounces = NO;
+    //set frames of subviews
+    [imageScrollView setFrame:CGRectMake(0, 0, self.bounds.size.width, 360)];
+    [imageScrollPaddingLeft setFrame:CGRectMake(0, 0, (self.bounds.size.width-540)/2, imageScrollView.bounds.size.width)];
+    [imageScrollPaddingRight setFrame:CGRectMake(1620 + imageScrollPaddingLeft.bounds.size.width, 0, (self.bounds.size.width-540)/2, imageScrollView.bounds.size.width)];
+    [imageSubView setFrame:CGRectMake(0 + imageScrollPaddingLeft.bounds.size.width, 0, 540, 360)];
+    [imageSubView2 setFrame:CGRectMake(540 + imageScrollPaddingLeft.bounds.size.width, 0, 540, 360)];
+    [imageSubView3 setFrame:CGRectMake(1080 + imageScrollPaddingLeft.bounds.size.width, 0, 540, 360)];
+    [descriptionTextView setFrame:CGRectMake(20, 376, self.bounds.size.width - 40, self.bounds.size.height - 392)];
+    imageScrollView.contentSize = CGSizeMake(1620 + imageScrollPaddingLeft.bounds.size.width * 2, 300);
+}
+
+- (void)createAndAddSubviews
+{
+    imageScrollView = [[UIScrollView alloc] init];
+    imageScrollView.backgroundColor = [AppColors tertiaryBackgroundColor];
+    //imageScrollView.bounces = NO;
     
     imageScrollView.delegate = self;
     
-    imageScrollPaddingLeft = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, (self.bounds.size.width-540)/2, imageScrollView.bounds.size.width)];
+    imageScrollPaddingLeft = [[UIImageView alloc] init];
     imageScrollPaddingLeft.backgroundColor = [AppColors tertiaryBackgroundColor];
     
-    imageScrollPaddingRight = [[UIImageView alloc] initWithFrame:CGRectMake(1620 + imageScrollPaddingLeft.bounds.size.width, 0, (self.bounds.size.width-540)/2, imageScrollView.bounds.size.width)];
+    imageScrollPaddingRight = [[UIImageView alloc] init];
     imageScrollPaddingRight.backgroundColor = [AppColors tertiaryBackgroundColor];
     
-    imageSubView = [[UIImageView alloc] initWithFrame:CGRectMake(0 + imageScrollPaddingLeft.bounds.size.width, 0, 540, 360)];
-    imageSubView2 = [[UIImageView alloc] initWithFrame:CGRectMake(540 + imageScrollPaddingLeft.bounds.size.width, 0, 540, 360)];
-    imageSubView3 = [[UIImageView alloc] initWithFrame:CGRectMake(1080 + imageScrollPaddingLeft.bounds.size.width, 0, 540, 360)];
+    imageSubView = [[UIImageView alloc] init];
+    imageSubView2 = [[UIImageView alloc] init];
+    imageSubView3 = [[UIImageView alloc] init];
     
     [imageScrollView addSubview:imageScrollPaddingLeft];
     [imageScrollView addSubview:imageScrollPaddingRight];
@@ -73,9 +84,7 @@
     [imageScrollView addSubview:imageSubView2];
     [imageScrollView addSubview:imageSubView3];
     
-    imageScrollView.contentSize = CGSizeMake(1620 + imageScrollPaddingLeft.bounds.size.width * 2, 300);
-    
-    descriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, 376, self.bounds.size.width - 40, self.bounds.size.height - 392)];
+    descriptionTextView = [[UITextView alloc] init];
     descriptionTextView.backgroundColor = [UIColor clearColor];
     descriptionTextView.font = [UIFont systemFontOfSize: 17];
     descriptionTextView.textColor = [AppColors mainTextColor];

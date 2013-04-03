@@ -15,6 +15,7 @@
 
 @implementation TripViewerLocationCell {
     BOOL layoutDone;
+    UIView* subView;
     UILabel* locationNameLabel;
     UITextView* locationDescriptionTextView;
     UIImageView* locationMapView;
@@ -46,57 +47,57 @@
 {
     [super layoutSubviews];
     
-    self.bounds = CGRectMake(0, 0, 720, 620);
-    self.backgroundColor = [AppColors mainBackgroundColor];
-    
-    if (layoutDone) {
-        return;
+    if (!layoutDone) {
+        //add subviews if layout has not been set
+        [self createAndAddSubviews];
+        layoutDone = YES;
     }
     
-    layoutDone = YES;
+    //set frames of subviews
+    [subView setFrame:CGRectMake(24, 8, self.bounds.size.width-48, 620)];
+    [locationNameLabel setFrame:CGRectMake(20, 16, self.bounds.size.width, 38)];
+    CGSize sizeOfText=[locationNameLabel.text sizeWithFont:locationNameLabel.font constrainedToSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
+    [locationTextBackgroundView setFrame:CGRectMake(0, 0, 40 + sizeOfText.width, 70)];
+    [locationMapView setFrame:CGRectMake(0, 0, subView.bounds.size.width, 70)];
+    [imageScrollBrowser setFrame:CGRectMake(0, 70, subView.bounds.size.width, 550)];
+    [imageScrollBrowser setNeedsLayout];
+}
+
+- (void)createAndAddSubviews
+{
+    subView = [[UIView alloc] init];
+    subView.backgroundColor = [AppColors mainBackgroundColor];
+    [self addSubview:subView];
     
-    //for (UIView* subview in self.subviews)
-    //    [subview removeFromSuperview];
-    
-    //self.bounds = CGRectMake(0, 0, 768, 90);
-    
-    //tripFeaturedImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 720, 240)];
-    
-    locationNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 16, 500, 38)];
+    locationNameLabel = [[UILabel alloc] init];
     locationNameLabel.backgroundColor = [UIColor clearColor];
     locationNameLabel.font = [UIFont boldSystemFontOfSize: 32];
     locationNameLabel.textColor = [AppColors mainTextColor];
     locationNameLabel.textAlignment = NSTextAlignmentLeft;
     locationNameLabel.adjustsFontSizeToFitWidth = YES;
     
-//    locationDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, 56, 430, 116)];
-//    locationDescriptionTextView.backgroundColor = [UIColor clearColor];
-//    locationDescriptionTextView.font = [UIFont systemFontOfSize: 17];
-//    locationDescriptionTextView.textColor = [AppColors mainTextColor];
-//    locationDescriptionTextView.textAlignment = NSTextAlignmentLeft;
-//    locationDescriptionTextView.editable = false;
-//    locationDescriptionTextView.contentInset = UIEdgeInsetsMake(-10, -7, 0, -7);
+    //    locationDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(20, 56, 430, 116)];
+    //    locationDescriptionTextView.backgroundColor = [UIColor clearColor];
+    //    locationDescriptionTextView.font = [UIFont systemFontOfSize: 17];
+    //    locationDescriptionTextView.textColor = [AppColors mainTextColor];
+    //    locationDescriptionTextView.textAlignment = NSTextAlignmentLeft;
+    //    locationDescriptionTextView.editable = false;
+    //    locationDescriptionTextView.contentInset = UIEdgeInsetsMake(-10, -7, 0, -7);
     
-    locationTextBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 500, 70)];
+    locationTextBackgroundView = [[UIView alloc] init];
     locationTextBackgroundView.backgroundColor = [AppColors mainBackgroundColor];
     
-    locationMapView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 70)];
-    //locationMapView.backgroundColor = [UIColor colorWithHue:60.0/360.0 saturation:0.5 brightness:0.8 alpha:1];
-    locationMapView.contentMode = UIViewContentModeScaleAspectFill;
+    locationMapView = [[UIImageView alloc] init];
+    locationMapView.contentMode = UIViewContentModeRight;
     locationMapView.clipsToBounds = YES;
     
-    imageScrollBrowser = [[ImageScrollBrowser alloc] initWithFrame:CGRectMake(0, 70, 720, 550)];
+    imageScrollBrowser = [[ImageScrollBrowser alloc] init];
     
-    [self addSubview:locationMapView];
-    [self addSubview:locationTextBackgroundView];
-    [self addSubview:locationNameLabel];
-    //[self addSubview:locationDescriptionTextView];
-    [self addSubview:imageScrollBrowser];
-    
-    /*UIView *bgColorView = [[UIView alloc] init];
-    bgColorView.bounds = self.bounds;
-    [bgColorView setBackgroundColor:[AppColors mainBackgroundColor]];//[AppColors toolbarColor]];
-    [self setSelectedBackgroundView:bgColorView];*/
+    [subView addSubview:locationMapView];
+    [subView addSubview:locationTextBackgroundView];
+    [subView addSubview:locationNameLabel];
+    //[subView addSubview:locationDescriptionTextView];
+    [subView addSubview:imageScrollBrowser];
 }
 
 - (void)setTripLocation:(TripLocation *)tripLocation
@@ -106,8 +107,6 @@
         //[self setNeedsLayout];
     }
     locationNameLabel.text = [NSString stringWithFormat:@"Location ID: %d", tripLocation.tripLocationID];
-    CGSize sizeOfText=[locationNameLabel.text sizeWithFont:locationNameLabel.font constrainedToSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
-    [locationTextBackgroundView setFrame:CGRectMake(0, 0, 40 + sizeOfText.width, 70)];
     
     locationMapView.image = [UIImage imageNamed:@"map_preview.png"];
     

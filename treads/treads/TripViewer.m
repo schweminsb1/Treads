@@ -21,6 +21,7 @@
 @end
 
 @implementation TripViewer {
+    BOOL layoutDone;
     Trip* trip;
     BOOL editingEnabled;
     UITableView* viewerTable;
@@ -36,6 +37,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        layoutDone = NO;
         [self layoutSubviews];
     }
     return self;
@@ -45,8 +47,15 @@
 {
     [super layoutSubviews];
     
+    if (layoutDone) {
+        return;
+    }
+    
+    layoutDone = YES;
+    
     //set up table view
     viewerTable = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
+    [viewerTable setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     [viewerTable setDelegate:self];
     [viewerTable setDataSource:self];
     [viewerTable setBackgroundColor:[AppColors secondaryBackgroundColor]];
@@ -181,7 +190,11 @@
 
 - (CGFloat)tableView: tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [self tableView:tableView cellForRowAtIndexPath:indexPath].bounds.size.height + cellVerticalPadding;
+    if (indexPath.row == 0) {
+        return 480 + cellVerticalPadding;
+    }
+    return 620 + cellVerticalPadding;
+    //return [self tableView:tableView cellForRowAtIndexPath:indexPath].bounds.size.height + cellVerticalPadding;
 }
 
 @end
