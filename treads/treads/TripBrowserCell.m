@@ -98,7 +98,8 @@
     //[self addSubview:tripFeaturedImage];
     
     UIView *bgColorView = [[UIView alloc] init];
-    bgColorView.bounds = self.bounds;
+    bgColorView.bounds = subView.bounds;
+    bgColorView.frame = subView.frame;
     [bgColorView setBackgroundColor:[AppColors toolbarColor]];
     [self setSelectedBackgroundView:bgColorView];
 }

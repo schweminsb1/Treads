@@ -193,7 +193,8 @@
     if (indexPath.row == 0) {
         return 480 + cellVerticalPadding;
     }
-    return [self tableView:tableView cellForRowAtIndexPath:indexPath].bounds.size.height + cellVerticalPadding;
+    return 620 + cellVerticalPadding;
+    //return [self tableView:tableView cellForRowAtIndexPath:indexPath].bounds.size.height + cellVerticalPadding;
 }
 
 @end
