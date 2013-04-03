@@ -26,6 +26,8 @@
 + (UIColor*)secondaryBackgroundColor;
 + (UIColor*)tertiaryBackgroundColor;
 
++ (UIColor*)blankItemBackgroundColor;
+
 + (UIColor*)mainTextColor;
 + (UIColor*)lightTextColor;
 + (UIColor*)secondaryTextColor;

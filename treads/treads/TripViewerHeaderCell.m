@@ -14,6 +14,7 @@
 
 @implementation TripViewerHeaderCell {
     BOOL layoutDone;
+    UIView* bgrView;
     UIView* subView;
     UIImageView* tripFeaturedImage;
     UILabel* tripOwnerLabel;
@@ -52,6 +53,8 @@
     }
     
     //set frames of subviews
+    [bgrView setFrame:CGRectMake(0, 16, self.bounds.size.width, 320)];
+    //[bgrView setFrame:CGRectMake(0, 328, self.bounds.size.width, self.bounds.size.height-328)];
     [subView setFrame:CGRectMake(24, 8, self.bounds.size.width-48, 480)];
     [tripFeaturedImage setFrame:CGRectMake(0, 0, subView.frame.size.width, 320)];
     [tripOwnerLabel setFrame:CGRectMake(176, 38, subView.frame.size.width-196, 44)];
@@ -63,7 +66,10 @@
 
 - (void)createAndAddSubviews
 {
-    self.backgroundColor = [UIColor clearColor];
+    //self.backgroundColor = [UIColor clearColor];
+    bgrView = [[UIView alloc] init];
+    bgrView.backgroundColor = [AppColors tertiaryBackgroundColor];
+    [self addSubview:bgrView];
     
     subView = [[UIView alloc] init];
     subView.backgroundColor = [AppColors mainBackgroundColor];

@@ -15,6 +15,7 @@
 
 @implementation TripViewerLocationCell {
     BOOL layoutDone;
+    UIView* bgrView;
     UIView* subView;
     UILabel* locationNameLabel;
     UITextView* locationDescriptionTextView;
@@ -54,6 +55,8 @@
     }
     
     //set frames of subviews
+    //[bgrView setFrame:CGRectMake(0, 16, self.bounds.size.width, 70)];
+    //[bgrView setFrame:self.bounds];
     [subView setFrame:CGRectMake(24, 8, self.bounds.size.width-48, 620)];
     [locationNameLabel setFrame:CGRectMake(20, 16, self.bounds.size.width, 38)];
     CGSize sizeOfText=[locationNameLabel.text sizeWithFont:locationNameLabel.font constrainedToSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
@@ -65,6 +68,10 @@
 
 - (void)createAndAddSubviews
 {
+    //bgrView = [[UIView alloc] init];
+    //bgrView.backgroundColor = [AppColors tertiaryBackgroundColor];
+    //[self addSubview:bgrView];
+    
     subView = [[UIView alloc] init];
     subView.backgroundColor = [AppColors mainBackgroundColor];
     [self addSubview:subView];
