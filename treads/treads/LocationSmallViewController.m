@@ -14,11 +14,16 @@
 
 @implementation LocationSmallViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil location: (Location *) location
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.location=location;
+        
+       
+        
         // Custom initialization
+        
     }
     return self;
 }
@@ -26,6 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+     self.name.text = _location.title;
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -35,4 +41,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(IBAction)goToLocationPage:(id)sender
+{
+    
+    
+}
 @end

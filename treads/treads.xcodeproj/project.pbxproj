@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		29C21B94170BA76D005B39E4 /* LocationSmallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C21B92170BA76D005B39E4 /* LocationSmallViewController.m */; };
 		29C21B95170BA76D005B39E4 /* LocationSmallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29C21B93170BA76D005B39E4 /* LocationSmallViewController.xib */; };
+		29C21B98170C9B6E005B39E4 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C21B97170C9B6E005B39E4 /* Location.m */; };
 		29E2E8A316EFEEFA0010C19B /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 29E2E8A216EFEEFA0010C19B /* RegisterVC.m */; };
 		3118BFEE16EFC588006DE2E9 /* compass.png in Resources */ = {isa = PBXBuildFile; fileRef = 3118BFED16EFC588006DE2E9 /* compass.png */; };
 		316399B616ECB3F6003B3F0E /* EditTripVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 316399B416ECB3F6003B3F0E /* EditTripVC.m */; };
@@ -74,6 +75,8 @@
 		29C21B91170BA76D005B39E4 /* LocationSmallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationSmallViewController.h; path = treads/LocationSmallViewController.h; sourceTree = SOURCE_ROOT; };
 		29C21B92170BA76D005B39E4 /* LocationSmallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationSmallViewController.m; path = treads/LocationSmallViewController.m; sourceTree = SOURCE_ROOT; };
 		29C21B93170BA76D005B39E4 /* LocationSmallViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LocationSmallViewController.xib; path = treads/LocationSmallViewController.xib; sourceTree = SOURCE_ROOT; };
+		29C21B96170C9B6D005B39E4 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Location.h; path = treads/Location.h; sourceTree = SOURCE_ROOT; };
+		29C21B97170C9B6E005B39E4 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Location.m; path = treads/Location.m; sourceTree = SOURCE_ROOT; };
 		29E2E8A216EFEEFA0010C19B /* RegisterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegisterVC.m; path = treads/RegisterVC.m; sourceTree = SOURCE_ROOT; };
 		3118BFED16EFC588006DE2E9 /* compass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compass.png; sourceTree = "<group>"; };
 		316399B316ECB3F6003B3F0E /* EditTripVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditTripVC.h; path = treads/EditTripVC.h; sourceTree = SOURCE_ROOT; };
@@ -381,6 +384,8 @@
 			isa = PBXGroup;
 			children = (
 				3C9DA9F816F92346009EEED7 /* Trip */,
+				29C21B96170C9B6D005B39E4 /* Location.h */,
+				29C21B97170C9B6E005B39E4 /* Location.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -584,6 +589,7 @@
 				3C9DA9FB16F92422009EEED7 /* TripLocationItem.m in Sources */,
 				3C96E23E16FCEB3A007FA511 /* ImageScrollBrowser.m in Sources */,
 				29C21B94170BA76D005B39E4 /* LocationSmallViewController.m in Sources */,
+				29C21B98170C9B6E005B39E4 /* Location.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

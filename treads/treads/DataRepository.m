@@ -122,7 +122,6 @@
 -(void) getLocationsOrdered: (MSReadQueryBlock) getAll
 {
     
-    
      MSTable * LocationTable=  [self.client getTable:@"LocationTable"];
     
     NSPredicate * predicategetALL = [NSPredicate predicateWithValue:YES];

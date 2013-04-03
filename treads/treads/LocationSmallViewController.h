@@ -7,7 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Location.h"
 
 @interface LocationSmallViewController : UIViewController
+
+@property Location * location;
+@property IBOutlet UILabel * name;
+
+
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil location: (Location *) location;
+
+-(IBAction)goToLocationPage:(id)sender;
+
 
 @end

@@ -48,7 +48,7 @@
     //Initialize ViewControllers
     UIViewController *mapsVC, *cameraVC, *myTripsVC, *followVC, *profileVC;
     
-    mapsVC = [[MapsVC alloc] initWithNibName:@"MapsVC" bundle:nil];
+    mapsVC = [[MapsVC alloc] initWithNibName:@"MapsVC" bundle:nil withLocationService: self.locationService];
     cameraVC = [[CameraVC alloc] initWithNibName:@"CameraVC" bundle:nil];
     myTripsVC = [[MyTripsVC alloc] initWithNibName:@"MyTripsVC" bundle:nil withTripService:self.tripService];
     followVC = [[FollowVC alloc] initWithNibName:@"FollowVC" bundle:nil withTripService:self.tripService];

@@ -8,15 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
+#import "Location.h"
 @interface MapPinAnnotation : NSObject<MKAnnotation>
 
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 @property (nonatomic, readonly) NSString* title;
 @property (nonatomic, readonly) NSString* subtitle;
+@property (nonatomic, readonly) Location * location;
 
 - (id)initWithCoordinates:(CLLocationCoordinate2D)location
                 placeName:(NSString *)placeName
               description:(NSString *)description;
+- (id)initWithLocation:(Location *) location;
 
 
 

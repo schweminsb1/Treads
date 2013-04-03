@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "MapPinAnnotation.h"
 #import "LocationSmallViewController.h"
+#import "LocationService.h"
 
 @interface MapsVC : UIViewController<CLLocationManagerDelegate, UISearchBarDelegate>
 
@@ -21,4 +22,5 @@
 
 @property (strong) UIPopoverController * callout;
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withLocationService:(LocationService *) locationService;
 @end

@@ -8,29 +8,82 @@
 
 #import "MapsVC.h"
 #import "MapPinAnnotation.h"
+#import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
+
 
 
 @interface MapsVC ()
 
 @property NSMutableArray * locationsInView;
-@property NSMutableArray * locaionsTotal;
+@property NSMutableArray * locationsTotal;
+@property LocationService * locationService;
+
 
 @end
 
 @implementation MapsVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withLocationService:(LocationService *) locationService{
     if (self) {
+        _locationService=locationService;
         self.title = NSLocalizedString(@"Maps", @"Maps");
         self.tabBarItem.image = [UIImage imageNamed:@"map-pin.png"];
+        _locationsTotal = [[NSMutableArray alloc]init];
+        _locationsInView = [[NSMutableArray alloc]init];
     }
     return self;
 }
+- (void) viewDidLoad
+{
+           
+        [super viewDidLoad];
+            //recieve a bunch of Location models
+        //create a bunch of pins
+        // add the pins to locations Total
+        //add the pins to the mapView
+    //end block
+    
+    
+    
+    
+    
+    
 
+    
+}
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:YES];
+    
+    MSReadQueryBlock recieveAll= ^(NSArray *items, NSInteger totalCount, NSError *error)
+    {
+        
+        for( int i=0; i< items.count; i++)
+        {
+            Location * location= [[Location alloc] init];
+            location.idField= items[i][@"LocationID"];
+            location.title= items[i][@"name"];
+            location.description= items[i][@"description"];
+            NSString * latstring= items[i][@"latitude"];
+            NSString * lonstring= items[i][@"longitude"];
+            location.latitude = [latstring floatValue];
+            location.longitude= [lonstring floatValue];
+            
+            MapPinAnnotation * locationPin= [[MapPinAnnotation alloc] initWithLocation:location];
+            [_locationsTotal addObject:locationPin];
+            
+        }
+        
+        
+        for(int i=0; i< _locationsTotal.count; i++)
+        {
+            [self.mapView addAnnotation:_locationsTotal[i]];
+        }
+    };
+    [_locationService performSelectorOnMainThread:@selector(getLocationsOrdered:) withObject:recieveAll waitUntilDone:YES];
+        
+
+    
     // Do any additional setup after loading the view from its nib.
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
@@ -40,6 +93,7 @@
     
     
 }
+
 
 -(void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
@@ -54,9 +108,9 @@
     [self.mapView setRegion:region animated:YES];
     [self.locationManager stopUpdatingLocation];
     
-    MapPinAnnotation * testpin= [[MapPinAnnotation alloc]initWithCoordinates:myLocation.coordinate placeName:@"Test" description:@"The test"];
-    [self.mapView addAnnotation:testpin];
+
 }
+
 
 
 - (void)didReceiveMemoryWarning
@@ -79,7 +133,7 @@
     }
     UIImage *img = [UIImage imageNamed:@"default_thumb.png"];
     aView.image=img;
-    aView.pinColor = MKPinAnnotationColorGreen;
+    aView.pinColor = MKPinAnnotationColorRed;
     // now configure the view
 
     aView.canShowCallout = NO;
@@ -113,8 +167,10 @@
 -(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
     [mapView deselectAnnotation:view.annotation animated:YES];
+    MapPinAnnotation * thisPin= (MapPinAnnotation *)view.annotation;
     
-    LocationSmallViewController *ycvc = [[LocationSmallViewController alloc] init];
+    
+    LocationSmallViewController *ycvc = [[LocationSmallViewController alloc] initWithNibName:@"LocationSmallViewController" bundle:nil location:thisPin.location];
                                        UIPopoverController *poc = [[UIPopoverController alloc] initWithContentViewController:ycvc];
                                    
                                        //hold ref to popover in an ivar

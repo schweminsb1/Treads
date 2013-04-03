@@ -11,9 +11,7 @@
 @implementation MapPinAnnotation
 
 
-@synthesize coordinate;
-@synthesize title;
-@synthesize subtitle;
+
 
 - (id)initWithCoordinates:(CLLocationCoordinate2D)location
                 placeName:(NSString *)placeName
@@ -22,12 +20,29 @@
     self = [super init];
     if (self)
     {
-        coordinate = location;
-        title = placeName;
-        subtitle = description;
+        _coordinate = location;
+        _title = placeName;
+        _subtitle = description;
     }
     
     return self;
 }
 
+
+- (id)initWithLocation:(Location *) location
+{
+    
+    self = [super init];
+    if (self)
+    {
+        _coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude);
+        _title = location.title;
+        _subtitle = location.description;
+        _location=location;
+        
+    }
+    
+    return self;
+    
+}
 @end
