@@ -54,6 +54,15 @@
     followVC = [[FollowVC alloc] initWithNibName:@"FollowVC" bundle:nil withTripService:self.tripService];
     profileVC = [[ProfileVC alloc] initWithNibName:@"ProfileVC" bundle:nil];
     
+    self.tabBarController = [[UITabBarController alloc] init];
+    self.tabBarController.viewControllers = @[
+                                              [[UINavigationController alloc] initWithRootViewController:mapsVC],
+                                              cameraVC,
+                                              [[UINavigationController alloc] initWithRootViewController:myTripsVC],
+                                              [[UINavigationController alloc] initWithRootViewController:followVC],
+                                              profileVC
+                                              ];
+    
     LoginVC* login;
     
     //Set the login controller to default
@@ -64,14 +73,7 @@
     self.window.rootViewController=LoginNavigation;
     
     //Initialize and assign to Tab Bar
-    self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[
-        [[UINavigationController alloc] initWithRootViewController:mapsVC],
-        cameraVC,
-        [[UINavigationController alloc] initWithRootViewController:myTripsVC],
-        [[UINavigationController alloc] initWithRootViewController:followVC],
-        profileVC
-        ];
+
     
    // self.window.rootViewController = self.tabBarController;
     //[self.tabBarController setSelectedIndex:2];

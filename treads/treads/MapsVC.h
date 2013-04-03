@@ -9,13 +9,16 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "MapPinAnnotation.h"
+#import "LocationSmallViewController.h"
 
-@interface MapsVC : UIViewController<CLLocationManagerDelegate>
+@interface MapsVC : UIViewController<CLLocationManagerDelegate, UISearchBarDelegate>
 
 @property (strong) IBOutlet UISearchBar* searchBar;
 
 @property (strong) IBOutlet MKMapView* mapView;
 
 @property (strong) CLLocationManager* locationManager;
+
+@property (strong) UIPopoverController * callout;
 
 @end

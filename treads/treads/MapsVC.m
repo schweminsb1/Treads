@@ -12,6 +12,9 @@
 
 @interface MapsVC ()
 
+@property NSMutableArray * locationsInView;
+@property NSMutableArray * locaionsTotal;
+
 @end
 
 @implementation MapsVC
@@ -33,6 +36,8 @@
     self.locationManager.delegate = self;
     [self.locationManager startUpdatingLocation];
     
+ 
+    
     
 }
 
@@ -48,6 +53,9 @@
     region.span = span;
     [self.mapView setRegion:region animated:YES];
     [self.locationManager stopUpdatingLocation];
+    
+    MapPinAnnotation * testpin= [[MapPinAnnotation alloc]initWithCoordinates:myLocation.coordinate placeName:@"Test" description:@"The test"];
+    [self.mapView addAnnotation:testpin];
 }
 
 
@@ -63,26 +71,18 @@
 //
 - (MKAnnotationView *) mapView: (MKMapView *) mapView viewForAnnotation: (id<MKAnnotation>) annotation {
     // reuse a view, if one exists
-    MKAnnotationView *aView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"pinView"];
+    MKPinAnnotationView *aView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"pinView"];
     
     // create a new view else
     if (!aView) {
-        aView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pinView"];
+        aView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pinView"];
     }
-    
+    UIImage *img = [UIImage imageNamed:@"default_thumb.png"];
+    aView.image=img;
+    aView.pinColor = MKPinAnnotationColorGreen;
     // now configure the view
-    aView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    [(UIButton*)aView.rightCalloutAccessoryView addTarget:self action:@selector(showDetails:) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    [rightButton setTitle:annotation.title forState:UIControlStateNormal];
-    [aView setRightCalloutAccessoryView:rightButton];
-    
-    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeInfoDark];
-    [leftButton setTitle:annotation.title forState:UIControlStateNormal];
-    [aView setLeftCalloutAccessoryView:leftButton];
-    
-    aView.canShowCallout = YES;
+
+    aView.canShowCallout = NO;
     aView.enabled = YES;
     [aView setDraggable:YES];
     
@@ -108,6 +108,49 @@
               [(MapPinAnnotation*)[view annotation] coordinate].longitude,
               [(MapPinAnnotation*)[view annotation] coordinate].latitude);
     }
+}
+
+-(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
+{
+    [mapView deselectAnnotation:view.annotation animated:YES];
+    
+    LocationSmallViewController *ycvc = [[LocationSmallViewController alloc] init];
+                                       UIPopoverController *poc = [[UIPopoverController alloc] initWithContentViewController:ycvc];
+                                   
+                                       //hold ref to popover in an ivar
+                                       self.callout = poc;
+                                       
+                                       //size as needed
+                                       poc.popoverContentSize = CGSizeMake(320, 400);
+                                       
+                                       //show the popover next to the annotation view (pin)
+                                       [poc presentPopoverFromRect:view.bounds inView:view 
+                                          permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                                       
+                                 
+    
+}
+-(void)mapView:(MKMapView *)mapView didDeSelectAnnotationView:(MKAnnotationView *)view
+{
+    
+    
+}
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    //Do search on searchbar
+    //set mapview center focus on pin with location the searchbar most matches
+    
+}
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    searchBar.text=@"";
+    [searchBar setShowsCancelButton:NO animated:YES];
+    [searchBar resignFirstResponder];
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    [searchBar setShowsCancelButton:YES animated:YES];
 }
 
 @end
