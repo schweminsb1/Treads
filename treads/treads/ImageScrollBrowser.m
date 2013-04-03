@@ -28,6 +28,7 @@
     CGSize imageSubViewSize;
     
     UITextView* descriptionTextView;
+    int displayedTextIndex;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -92,12 +93,16 @@
     descriptionTextView.editable = false;
     descriptionTextView.contentInset = UIEdgeInsetsMake(-10, -7, 0, -7);
     
+    displayedTextIndex = -1;
+    
     [self addSubview:imageScrollView];
     [self addSubview:descriptionTextView];
 }
 
 - (void)setTripLocation:(TripLocation*)tripLocation
 {
+    _tripLocation = tripLocation;
+    
     if (!layoutDone) {
         [self layoutSubviews];
         //[self setNeedsLayout];
@@ -131,11 +136,47 @@
     }
     imageSubViewCount = imageSubViews.count;
     
-    descriptionTextView.text = [NSString stringWithFormat:@"SubViewCount: %d || Picture descriptions will go here: %@", imageSubViewCount, tripLocation.description];
+    //descriptionTextView.text = [NSString stringWithFormat:@"SubViewCount: %d || Picture descriptions will go here: %@", imageSubViewCount, tripLocation.description];
     imageScrollView.contentOffset = CGPointZero;
     descriptionTextView.contentOffset = CGPointMake(-descriptionTextView.contentInset.left, -descriptionTextView.contentInset.top);
     
+    displayedTextIndex = -1;
+    [self setDescriptionDisplayToIndex:0];
+    
     [self setNeedsLayout];
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    //round scrollview to nearest image center
+    int scrollCenter = scrollView.contentOffset.x + imageScrollView.bounds.size.width / 2;
+    scrollCenter /= imageSubViewSize.width;
+    CGPoint endDestination = CGPointMake(scrollCenter*imageSubViewSize.width/* + imageSubViewSize.width/2 - imageScrollView.bounds.size.width/2*/, scrollView.contentOffset.y);
+    [scrollView setContentOffset:endDestination animated:YES];
+    [self setDescriptionDisplayToIndex:scrollCenter];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    int scrollCenter = scrollView.contentOffset.x + imageScrollView.bounds.size.width / 2;
+    scrollCenter /= imageSubViewSize.width;
+    if (scrollCenter != displayedTextIndex) {
+        //[scrollView setContentOffset:CGPointMake(scrollCenter*imageSubViewSize.width, scrollView.contentOffset.y) animated:YES];
+        [self setDescriptionDisplayToIndex:scrollCenter];
+    }
+}
+
+- (void)setDescriptionDisplayToIndex:(int)index
+{
+    if (displayedTextIndex != index && index >= 0 && index < self.tripLocation.tripLocationItems.count) {
+        TripLocationItem* tripLocationItem = (TripLocationItem*)self.tripLocation.tripLocationItems[index];
+        displayedTextIndex = index;
+        descriptionTextView.text = tripLocationItem.description;
+        descriptionTextView.contentOffset = CGPointMake(-descriptionTextView.contentInset.left, -descriptionTextView.contentInset.top);
+        
+        //[descriptionTextView setNeedsDisplay];
+        [self setNeedsLayout];
+    }
 }
 
 @end

@@ -78,7 +78,7 @@
         for (int j = 0; j < cap; j++) {
             TripLocationItem* dummyLocationItem = [[TripLocationItem alloc] init];
             dummyLocationItem.image = [self randomImage];
-            dummyLocationItem.description = [self loremIpsum];
+            dummyLocationItem.description = [NSString stringWithFormat:@"%d [%ld] : %@", j, random()%1000, [self loremIpsum]];
             [dummyLocationItemsArray addObject:dummyLocationItem];
         }
         dummyLocation.tripLocationItems = [NSArray arrayWithArray:dummyLocationItemsArray];
