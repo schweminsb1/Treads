@@ -1,0 +1,24 @@
+//
+//  MapsVC.h
+//  Treads
+//
+//  Created by Zachary Kanoff on 2/11/13.
+//  Copyright (c) 2013 Team Walking Stick. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+<<<<<<< HEAD
+#import "MapPinAnnotation.h"
+=======
+>>>>>>> c913ac79db8a0cc9b57c3e3d2b85dde9171de4e2
+#import <MapKit/MapKit.h>
+
+@interface MapsVC : UIViewController
+
+@property (strong) IBOutlet UISearchBar* searchBar;
+
+@property (strong) IBOutlet MKMapView* mapView;
+
+@property (strong) CLLocationManager* locationManager;
+
+@end
