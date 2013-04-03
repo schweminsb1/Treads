@@ -177,6 +177,14 @@
         //[descriptionTextView setNeedsDisplay];
         [self setNeedsLayout];
     }
+    else if (self.tripLocation.tripLocationItems.count == 0) {
+        displayedTextIndex = -1;
+        descriptionTextView.text = @"";
+        descriptionTextView.contentOffset = CGPointMake(-descriptionTextView.contentInset.left, -descriptionTextView.contentInset.top);
+        
+        //[descriptionTextView setNeedsDisplay];
+        [self setNeedsLayout];
+    }
 }
 
 @end

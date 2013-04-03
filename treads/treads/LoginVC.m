@@ -20,7 +20,6 @@
 @property          AppDelegate * appDelegate;
 @property        TreadsSession * treadsSession;
 
-
 @end
 
 @implementation LoginVC
@@ -65,6 +64,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)skipClick:(id)sender
+{
+    _appDelegate.window.rootViewController= _appDelegate.tabBarController;
+}
 
 -(IBAction) LoginClick:(id) sender
 {
