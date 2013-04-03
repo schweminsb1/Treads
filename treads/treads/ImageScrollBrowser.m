@@ -9,6 +9,7 @@
 #import "ImageScrollBrowser.h"
 
 #import "TripLocation.h"
+#import "TripLocationItem.h"
 
 #import "AppColors.h"
 
@@ -21,12 +22,12 @@
     UIScrollView* imageScrollView;
     UIImageView* imageScrollPaddingLeft;
     UIImageView* imageScrollPaddingRight;
-
-    UITextView* descriptionTextView;
     
-    UIImageView* imageSubView;
-    UIImageView* imageSubView2;
-    UIImageView* imageSubView3;
+    NSMutableArray* imageSubViews;
+    int imageSubViewCount;
+    CGSize imageSubViewSize;
+    
+    UITextView* descriptionTextView;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -49,40 +50,39 @@
     }
     
     //set frames of subviews
-    [imageScrollView setFrame:CGRectMake(0, 0, self.bounds.size.width, 360)];
-    [imageScrollPaddingLeft setFrame:CGRectMake(0, 0, (self.bounds.size.width-540)/2, imageScrollView.bounds.size.width)];
-    [imageScrollPaddingRight setFrame:CGRectMake(1620 + imageScrollPaddingLeft.bounds.size.width, 0, (self.bounds.size.width-540)/2, imageScrollView.bounds.size.width)];
-    [imageSubView setFrame:CGRectMake(0 + imageScrollPaddingLeft.bounds.size.width, 0, 540, 360)];
-    [imageSubView2 setFrame:CGRectMake(540 + imageScrollPaddingLeft.bounds.size.width, 0, 540, 360)];
-    [imageSubView3 setFrame:CGRectMake(1080 + imageScrollPaddingLeft.bounds.size.width, 0, 540, 360)];
+    [imageScrollView setFrame:CGRectMake(0, 0, self.bounds.size.width, imageSubViewSize.height)];
+    [imageScrollPaddingLeft setFrame:CGRectMake(0, 0, (self.bounds.size.width-imageSubViewSize.width)/2, imageScrollView.bounds.size.height)];
+    [imageScrollPaddingRight setFrame:CGRectMake(imageSubViewCount*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width, 0, (self.bounds.size.width-imageSubViewSize.width)/2, imageScrollView.bounds.size.height)];
+    
+    for (int i=0; i<imageSubViews.count; i++) {
+        UIImageView* imageSubView = (UIImageView*)imageSubViews[i];
+        [imageSubView setFrame:CGRectMake(i*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width, 0, imageSubViewSize.width, imageSubViewSize.height)];
+    }
+    
     [descriptionTextView setFrame:CGRectMake(20, 376, self.bounds.size.width - 40, self.bounds.size.height - 392)];
-    imageScrollView.contentSize = CGSizeMake(1620 + imageScrollPaddingLeft.bounds.size.width * 2, 300);
+    [imageScrollView setContentSize:CGSizeMake(imageSubViewCount*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width*2, imageScrollView.bounds.size.height)];
 }
 
 - (void)createAndAddSubviews
 {
+    imageSubViewCount = 0;
+    imageSubViewSize = CGSizeMake(540, 360);
+    
     imageScrollView = [[UIScrollView alloc] init];
-    imageScrollView.backgroundColor = [AppColors tertiaryBackgroundColor];
-    //imageScrollView.bounces = NO;
+    imageScrollView.backgroundColor = [AppColors blankItemBackgroundColor];
     
     imageScrollView.delegate = self;
     
     imageScrollPaddingLeft = [[UIImageView alloc] init];
-    imageScrollPaddingLeft.backgroundColor = [AppColors tertiaryBackgroundColor];
+    imageScrollPaddingLeft.backgroundColor = [AppColors blankItemBackgroundColor];
     
     imageScrollPaddingRight = [[UIImageView alloc] init];
-    imageScrollPaddingRight.backgroundColor = [AppColors tertiaryBackgroundColor];
-    
-    imageSubView = [[UIImageView alloc] init];
-    imageSubView2 = [[UIImageView alloc] init];
-    imageSubView3 = [[UIImageView alloc] init];
+    imageScrollPaddingRight.backgroundColor = [AppColors blankItemBackgroundColor];
     
     [imageScrollView addSubview:imageScrollPaddingLeft];
     [imageScrollView addSubview:imageScrollPaddingRight];
     
-    [imageScrollView addSubview:imageSubView];
-    [imageScrollView addSubview:imageSubView2];
-    [imageScrollView addSubview:imageSubView3];
+    imageSubViews = [[NSMutableArray alloc] init];
     
     descriptionTextView = [[UITextView alloc] init];
     descriptionTextView.backgroundColor = [UIColor clearColor];
@@ -96,18 +96,46 @@
     [self addSubview:descriptionTextView];
 }
 
-- (void)setTripLocation:(TripLocation *)tripLocation
+- (void)setTripLocation:(TripLocation*)tripLocation
 {
     if (!layoutDone) {
         [self layoutSubviews];
         //[self setNeedsLayout];
     }
-    imageSubView.image = [UIImage imageNamed:@"summit-boots-hiking-rocks.jpg"];
-    imageSubView2.image = [UIImage imageNamed:@"remote-luxury-hiking-canada.jpg"];
-    imageSubView3.image = [UIImage imageNamed:@"mountains.jpeg"];
-    descriptionTextView.text = [NSString stringWithFormat:@"Picture descriptions will go here: %@", tripLocation.description];
+    
+    //assign new trip location items to existing subviews
+    for (int i=0; i<imageSubViews.count; i++) {
+        //break if there are no more items to be added
+        if (i >= tripLocation.tripLocationItems.count) {break;}
+        //copy image to image view
+        TripLocationItem* tripLocationItem = (TripLocationItem*)tripLocation.tripLocationItems[i];
+        UIImageView* imageSubView = (UIImageView*)imageSubViews[i];
+        imageSubView.image = tripLocationItem.image;
+    }
+    
+    //expand the subview array if needed
+    for (int i=imageSubViews.count; i<tripLocation.tripLocationItems.count; i++) {
+        TripLocationItem* tripLocationItem = (TripLocationItem*)tripLocation.tripLocationItems[i];
+        UIImageView* imageSubView = [[UIImageView alloc] init];
+        imageSubView.contentMode = UIViewContentModeScaleAspectFill;
+        imageSubView.clipsToBounds = YES;
+        imageSubView.image = tripLocationItem.image;
+        [imageSubViews addObject:imageSubView];
+        [imageScrollView addSubview:imageSubView];
+    }
+    
+    //remove extra unused subviews
+    for (int i=((NSInteger)imageSubViews.count)-1; i>=(NSInteger)tripLocation.tripLocationItems.count; i--) {
+        [((UIImageView*)imageSubViews[i]) removeFromSuperview];
+        [imageSubViews removeObjectAtIndex:i];
+    }
+    imageSubViewCount = imageSubViews.count;
+    
+    descriptionTextView.text = [NSString stringWithFormat:@"SubViewCount: %d || Picture descriptions will go here: %@", imageSubViewCount, tripLocation.description];
     imageScrollView.contentOffset = CGPointZero;
     descriptionTextView.contentOffset = CGPointMake(-descriptionTextView.contentInset.left, -descriptionTextView.contentInset.top);
+    
+    [self setNeedsLayout];
 }
 
 @end

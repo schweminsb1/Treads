@@ -55,24 +55,62 @@
 {
     //debug items - test models for items currently not implemented server-side
     
+    //items are currently randomized using the tripID as a seed
+    srand(trip.tripID);
+    
     //featured item
-    TripLocationItem* dummyLocationItem = [[TripLocationItem alloc] init];
-    dummyLocationItem.image = [UIImage imageNamed:@"mountains.jpeg"];
-    trip.featuredLocationItem = dummyLocationItem;
+    TripLocationItem* dummyFeaturedLocationItem = [[TripLocationItem alloc] init];
+    dummyFeaturedLocationItem.image = [self randomImage];
+    trip.featuredLocationItem = dummyFeaturedLocationItem;
     
     //locations
     NSMutableArray* dummyLocationArray = [[NSMutableArray alloc] init];
-    for (int i = 0; i < 6; i++) {
+    int count = random()%8 + 1;
+    for (int i = 0; i < count; i++) {
         TripLocation* dummyLocation = [[TripLocation alloc] init];
         dummyLocation.tripLocationID = i;
         dummyLocation.tripID = trip.tripID;
         dummyLocation.locationID = i;
         dummyLocation.description = [self loremIpsum];
-        if (i % 2 == 0) {dummyLocation.tripLocationItems = [[NSArray alloc] initWithObjects:dummyLocationItem, nil];}
+        
+        NSMutableArray* dummyLocationItemsArray = [[NSMutableArray alloc] init];
+        int cap = random()%6;
+        for (int j = 0; j < cap; j++) {
+            TripLocationItem* dummyLocationItem = [[TripLocationItem alloc] init];
+            dummyLocationItem.image = [self randomImage];
+            dummyLocationItem.description = [self loremIpsum];
+            [dummyLocationItemsArray addObject:dummyLocationItem];
+        }
+        dummyLocation.tripLocationItems = [NSArray arrayWithArray:dummyLocationItemsArray];
+        
         [dummyLocationArray addObject:dummyLocation];
     }
     
     trip.tripLocations = [NSArray arrayWithArray:dummyLocationArray];
+}
+
+- (UIImage*)randomImage
+{
+    int image = random()%5;
+    switch (image) {
+        case 0:
+            return [UIImage imageNamed:@"mountains.jpeg"];
+            break;
+        case 1:
+            return [UIImage imageNamed:@"helicopter-bouldering-crash-pad.jpg"];
+            break;
+        case 2:
+            return [UIImage imageNamed:@"remote-luxury-hiking-canada.jpg"];
+            break;
+        case 3:
+            return [UIImage imageNamed:@"summit-boots-hiking-rocks.jpg"];
+            break;
+        case 4:
+            return [UIImage imageNamed:@"virgin_river_hiking.jpg"];
+            break;
+        default:
+            break;
+    }
 }
 
 - (NSString*)loremIpsum
