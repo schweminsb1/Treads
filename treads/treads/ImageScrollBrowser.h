@@ -12,6 +12,7 @@
 
 @interface ImageScrollBrowser : UIView
 
-@property (assign, nonatomic) TripLocation* tripLocation;
+//@property (assign, nonatomic) TripLocation* tripLocation;
+@property (assign, nonatomic) NSArray* displayItems;
 
 @end

@@ -120,7 +120,7 @@
     locationDescriptionTextView.text = [NSString stringWithFormat:@"Description for Trip Location %d: %@", tripLocation.tripID, tripLocation.description];
     locationDescriptionTextView.contentOffset = CGPointZero;
     
-    imageScrollBrowser.tripLocation = tripLocation;
+    imageScrollBrowser.displayItems = tripLocation.tripLocationItems;
 }
 
 @end

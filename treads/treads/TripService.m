@@ -111,6 +111,7 @@
         default:
             break;
     }
+    return nil;
 }
 
 - (NSString*)loremIpsum

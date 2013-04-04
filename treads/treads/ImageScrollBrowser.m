@@ -8,8 +8,10 @@
 
 #import "ImageScrollBrowser.h"
 
-#import "TripLocation.h"
-#import "TripLocationItem.h"
+//#import "TripLocation.h"
+//#import "TripLocationItem.h"
+
+#import "ImageScrollDisplayableItem.h"
 
 #import "AppColors.h"
 
@@ -99,9 +101,9 @@
     [self addSubview:descriptionTextView];
 }
 
-- (void)setTripLocation:(TripLocation*)tripLocation
+- (void)setDisplayItems:(NSArray *)displayItems
 {
-    _tripLocation = tripLocation;
+    _displayItems = displayItems;
     
     if (!layoutDone) {
         [self layoutSubviews];
@@ -111,26 +113,26 @@
     //assign new trip location items to existing subviews
     for (int i=0; i<imageSubViews.count; i++) {
         //break if there are no more items to be added
-        if (i >= tripLocation.tripLocationItems.count) {break;}
+        if (i >= displayItems.count) {break;}
         //copy image to image view
-        TripLocationItem* tripLocationItem = (TripLocationItem*)tripLocation.tripLocationItems[i];
+        id<ImageScrollDisplayableItem> displayItem = (id<ImageScrollDisplayableItem>)displayItems[i];
         UIImageView* imageSubView = (UIImageView*)imageSubViews[i];
-        imageSubView.image = tripLocationItem.image;
+        imageSubView.image = [displayItem displayImage];
     }
     
     //expand the subview array if needed
-    for (int i=imageSubViews.count; i<tripLocation.tripLocationItems.count; i++) {
-        TripLocationItem* tripLocationItem = (TripLocationItem*)tripLocation.tripLocationItems[i];
+    for (int i=imageSubViews.count; i<displayItems.count; i++) {
+        id<ImageScrollDisplayableItem> displayItem = (id<ImageScrollDisplayableItem>)displayItems[i];
         UIImageView* imageSubView = [[UIImageView alloc] init];
         imageSubView.contentMode = UIViewContentModeScaleAspectFill;
         imageSubView.clipsToBounds = YES;
-        imageSubView.image = tripLocationItem.image;
+        imageSubView.image = [displayItem displayImage];
         [imageSubViews addObject:imageSubView];
         [imageScrollView addSubview:imageSubView];
     }
     
     //remove extra unused subviews
-    for (int i=((NSInteger)imageSubViews.count)-1; i>=(NSInteger)tripLocation.tripLocationItems.count; i--) {
+    for (int i=((NSInteger)imageSubViews.count)-1; i>=(NSInteger)displayItems.count; i--) {
         [((UIImageView*)imageSubViews[i]) removeFromSuperview];
         [imageSubViews removeObjectAtIndex:i];
     }
@@ -165,16 +167,16 @@
 
 - (void)setDescriptionDisplayToIndex:(int)index
 {
-    if (displayedTextIndex != index && index >= 0 && index < self.tripLocation.tripLocationItems.count) {
-        TripLocationItem* tripLocationItem = (TripLocationItem*)self.tripLocation.tripLocationItems[index];
+    if (displayedTextIndex != index && index >= 0 && index < self.displayItems.count) {
+        id<ImageScrollDisplayableItem> displayItem = (id<ImageScrollDisplayableItem>)self.displayItems[index];
         displayedTextIndex = index;
-        descriptionTextView.text = tripLocationItem.description;
+        descriptionTextView.text = (NSString*)[displayItem displayItem];
         descriptionTextView.contentOffset = CGPointMake(-descriptionTextView.contentInset.left, -descriptionTextView.contentInset.top);
         
         //[descriptionTextView setNeedsDisplay];
         [self setNeedsLayout];
     }
-    else if (self.tripLocation.tripLocationItems.count == 0) {
+    else if (self.displayItems.count == 0) {
         displayedTextIndex = -1;
         descriptionTextView.text = @"";
         descriptionTextView.contentOffset = CGPointMake(-descriptionTextView.contentInset.left, -descriptionTextView.contentInset.top);

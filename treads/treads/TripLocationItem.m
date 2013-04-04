@@ -8,6 +8,15 @@
 
 #import "TripLocationItem.h"
 
+#import "ImageScrollDisplayableItem.h"
+
+@interface TripLocationItem()<ImageScrollDisplayableItem>
+
+@end
+
 @implementation TripLocationItem
+
+- (UIImage*)displayImage {return self.image;}
+- (NSObject*)displayItem {return self.description;}
 
 @end
