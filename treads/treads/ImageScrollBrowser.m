@@ -19,7 +19,6 @@
 
 @implementation ImageScrollBrowser {
     BOOL layoutDone;
-    BOOL isSnapped;
     UIScrollView* imageScrollView;
     UIImageView* imageScrollPaddingLeft;
     UIImageView* imageScrollPaddingRight;
@@ -143,33 +142,8 @@
     
     displayedTextIndex = -1;
     [self setDescriptionDisplayToIndex:0];
-    isSnapped = YES;
     
     [self setNeedsLayout];
-}
-
-//- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-//{
-//    if (!decelerate) {
-//        [self scrollViewSnapToNearest:scrollView];
-//    }
-//}
-
-//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-//{
-//    if (!scrollView.isDragging) {
-//        [self scrollViewSnapToNearest:scrollView];
-//    }
-//}
-
-- (void)scrollViewSnapToNearest:(UIScrollView *)scrollView
-{
-    //round scrollview to nearest image center
-    int scrollCenter = scrollView.contentOffset.x + imageScrollView.bounds.size.width / 2 - imageScrollPaddingLeft.bounds.size.width;
-    scrollCenter /= imageSubViewSize.width;
-    CGPoint endDestination = CGPointMake(scrollCenter*imageSubViewSize.width/* + imageSubViewSize.width/2 - imageScrollView.bounds.size.width/2*/, scrollView.contentOffset.y);
-    [scrollView setContentOffset:endDestination animated:YES];
-    [self setDescriptionDisplayToIndex:scrollCenter];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -177,14 +151,13 @@
     int scrollCenter = scrollView.contentOffset.x + imageScrollView.bounds.size.width / 2 - imageScrollPaddingLeft.bounds.size.width;
     scrollCenter /= imageSubViewSize.width;
     if (scrollCenter != displayedTextIndex) {
-        //[scrollView setContentOffset:CGPointMake(scrollCenter*imageSubViewSize.width, scrollView.contentOffset.y) animated:YES];
         [self setDescriptionDisplayToIndex:scrollCenter];
     }
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
 {
-    //round scrollview to nearest image center
+    //move scrollview to nearest image center
     int scrollCenter = targetContentOffset->x + imageScrollView.bounds.size.width / 2 - imageScrollPaddingLeft.bounds.size.width;
     scrollCenter /= imageSubViewSize.width;
     targetContentOffset->x = scrollCenter*imageSubViewSize.width;

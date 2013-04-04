@@ -374,10 +374,20 @@
 		3C60C7D316E6C2AF00FDFD7D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				3C882DBC170D14E60041A9C8 /* Image Scroll Browser */,
 				3C9DA9EB16F91B85009EEED7 /* Trip Viewer */,
 				3C9DA9EA16F91B5B009EEED7 /* Trip Browser */,
 			);
 			name = Common;
+			sourceTree = "<group>";
+		};
+		3C882DBC170D14E60041A9C8 /* Image Scroll Browser */ = {
+			isa = PBXGroup;
+			children = (
+				3C96E23C16FCEB3A007FA511 /* ImageScrollBrowser.h */,
+				3C96E23D16FCEB3A007FA511 /* ImageScrollBrowser.m */,
+			);
+			name = "Image Scroll Browser";
 			sourceTree = "<group>";
 		};
 		3C8A908D16E7DFBB007F0BB8 /* Models */ = {
@@ -455,8 +465,6 @@
 				3C9DA9F016F91BF9009EEED7 /* TripViewerLocationCell.m */,
 				3C9DA9F216F91C1F009EEED7 /* TripViewerAddCell.h */,
 				3C9DA9F316F91C1F009EEED7 /* TripViewerAddCell.m */,
-				3C96E23C16FCEB3A007FA511 /* ImageScrollBrowser.h */,
-				3C96E23D16FCEB3A007FA511 /* ImageScrollBrowser.m */,
 			);
 			name = "Trip Viewer";
 			sourceTree = "<group>";
