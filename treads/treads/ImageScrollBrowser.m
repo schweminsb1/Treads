@@ -8,10 +8,8 @@
 
 #import "ImageScrollBrowser.h"
 
-//#import "TripLocation.h"
-//#import "TripLocationItem.h"
-
 #import "ImageScrollDisplayableItem.h"
+#import "ImageScrollDisplayView.h"
 
 #import "AppColors.h"
 
@@ -29,15 +27,18 @@
     int imageSubViewCount;
     CGSize imageSubViewSize;
     
-    UITextView* descriptionTextView;
+    UIView<ImageScrollDisplayView>* displayView;
+    //UITextView* descriptionTextView;
     int displayedTextIndex;
 }
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithImageSize:(CGSize)size displayView:(UIView<ImageScrollDisplayView>*)initializedDisplayView
 {
-    self = [super initWithFrame:frame];
+    self = [super init];
     if (self) {
         layoutDone = NO;
+        imageSubViewSize = size;
+        displayView = initializedDisplayView;
     }
     return self;
 }
@@ -61,15 +62,16 @@
         UIImageView* imageSubView = (UIImageView*)imageSubViews[i];
         [imageSubView setFrame:CGRectMake(i*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width, 0, imageSubViewSize.width, imageSubViewSize.height)];
     }
-    
-    [descriptionTextView setFrame:CGRectMake(20, 376, self.bounds.size.width - 40, self.bounds.size.height - 392)];
+
     [imageScrollView setContentSize:CGSizeMake(imageSubViewCount*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width*2, imageScrollView.bounds.size.height)];
+    
+    [displayView setFrame:CGRectMake(0, imageSubViewSize.height, self.bounds.size.width, self.bounds.size.height - imageSubViewSize.height)];
 }
 
 - (void)createAndAddSubviews
 {
     imageSubViewCount = 0;
-    imageSubViewSize = CGSizeMake(540, 360);
+    //imageSubViewSize = CGSizeMake(540, 360);
     
     imageScrollView = [[UIScrollView alloc] init];
     imageScrollView.backgroundColor = [AppColors blankItemBackgroundColor];
@@ -87,18 +89,10 @@
     
     imageSubViews = [[NSMutableArray alloc] init];
     
-    descriptionTextView = [[UITextView alloc] init];
-    descriptionTextView.backgroundColor = [UIColor clearColor];
-    descriptionTextView.font = [UIFont systemFontOfSize: 17];
-    descriptionTextView.textColor = [AppColors mainTextColor];
-    descriptionTextView.textAlignment = NSTextAlignmentLeft;
-    descriptionTextView.editable = false;
-    descriptionTextView.contentInset = UIEdgeInsetsMake(-10, -7, 0, -7);
-    
     displayedTextIndex = -1;
     
     [self addSubview:imageScrollView];
-    [self addSubview:descriptionTextView];
+    [self addSubview:displayView];
 }
 
 - (void)setDisplayItems:(NSArray *)displayItems
@@ -107,7 +101,6 @@
     
     if (!layoutDone) {
         [self layoutSubviews];
-        //[self setNeedsLayout];
     }
     
     //assign new trip location items to existing subviews
@@ -138,9 +131,7 @@
     }
     imageSubViewCount = imageSubViews.count;
     
-    //descriptionTextView.text = [NSString stringWithFormat:@"SubViewCount: %d || Picture descriptions will go here: %@", imageSubViewCount, tripLocation.description];
     imageScrollView.contentOffset = CGPointZero;
-    descriptionTextView.contentOffset = CGPointMake(-descriptionTextView.contentInset.left, -descriptionTextView.contentInset.top);
     
     displayedTextIndex = -1;
     [self setDescriptionDisplayToIndex:0];
@@ -170,18 +161,12 @@
     if (displayedTextIndex != index && index >= 0 && index < self.displayItems.count) {
         id<ImageScrollDisplayableItem> displayItem = (id<ImageScrollDisplayableItem>)self.displayItems[index];
         displayedTextIndex = index;
-        descriptionTextView.text = (NSString*)[displayItem displayItem];
-        descriptionTextView.contentOffset = CGPointMake(-descriptionTextView.contentInset.left, -descriptionTextView.contentInset.top);
-        
-        //[descriptionTextView setNeedsDisplay];
+        [displayView setDisplayItem:[displayItem displayItem]];
         [self setNeedsLayout];
     }
     else if (self.displayItems.count == 0) {
         displayedTextIndex = -1;
-        descriptionTextView.text = @"";
-        descriptionTextView.contentOffset = CGPointMake(-descriptionTextView.contentInset.left, -descriptionTextView.contentInset.top);
-        
-        //[descriptionTextView setNeedsDisplay];
+        [displayView setDisplayItem:nil];
         [self setNeedsLayout];
     }
 }

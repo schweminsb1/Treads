@@ -9,6 +9,7 @@
 #import "TripViewerLocationCell.h"
 
 #import "ImageScrollBrowser.h"
+#import "ImageScrollTextView.h"
 
 #import "TripLocation.h"
 #import "TripLocationItem.h"
@@ -98,7 +99,8 @@
     locationMapView.contentMode = UIViewContentModeRight;
     locationMapView.clipsToBounds = YES;
     
-    imageScrollBrowser = [[ImageScrollBrowser alloc] init];
+    //imageScrollBrowser = [[ImageScrollBrowser alloc] init];
+    imageScrollBrowser = [[ImageScrollBrowser alloc] initWithImageSize:CGSizeMake(540, 360) displayView:[[ImageScrollTextView alloc] init]];
     
     [subView addSubview:locationMapView];
     [subView addSubview:locationTextBackgroundView];

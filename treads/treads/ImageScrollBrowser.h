@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class TripLocation;
+#import "ImageScrollDisplayView.h"
 
 @interface ImageScrollBrowser : UIView
 
-//@property (assign, nonatomic) TripLocation* tripLocation;
+- (id)initWithImageSize:(CGSize)size displayView:(UIView<ImageScrollDisplayView>*)view;
+
 @property (assign, nonatomic) NSArray* displayItems;
 
 @end
