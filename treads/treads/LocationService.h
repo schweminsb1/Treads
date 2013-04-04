@@ -23,8 +23,8 @@
 
 - (void)addLocation:(NSDictionary*)newLocation forTarget:(NSObject*) target withAction: (SEL) returnAction;
 
--(void) getLocationsOrdered: (MSReadQueryBlock) getAll;
+- (void) getLocationsOrdered: (MSReadQueryBlock) getAll;
 
-
+- (NSMutableArray *) getCommentsFromLocationID: (NSString*)locationID;
 
 @end

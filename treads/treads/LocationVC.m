@@ -9,7 +9,7 @@
 #import "LocationVC.h"
 
 @interface LocationVC ()
-
+@property NSMutableArray * commentModels;
 @end
 
 @implementation LocationVC
@@ -22,9 +22,10 @@
     {
         _locationService = service;
         _model=model;
-        
-            }
-    else{
+    _commentModels = [_locationService getCommentsFromLocationID:_model.idField];
+    }
+    else
+    {
         NSLog(@"error in LocationVC");
         
     }

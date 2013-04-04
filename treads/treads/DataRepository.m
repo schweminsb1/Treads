@@ -134,4 +134,22 @@
     [LocationTable readWithQueryString:[queryGetAll queryStringOrError:nil] completion:getAll ];
     
 }
+
+-(void) getCommentsFromLocationID: (NSString *) locationID withBlock: (MSReadQueryBlock) getComments
+{
+
+  //__autoreleasing  NSError * error= [[NSError alloc]init];
+    
+    MSTable * commentsTable= [self.client getTable:@"CommentTable"];
+    long  inte= [locationID intValue];
+    NSPredicate * predicate = [NSPredicate predicateWithValue:YES];   /*[NSPredicate predicateWithFormat:@"id == %@", [NSNumber numberWithInt:  inte]  ];*/
+    MSQuery * query= [[MSQuery alloc]initWithTable:commentsTable withPredicate:predicate];
+    
+    [commentsTable readWithQueryString:[query queryStringOrError:nil] completion:getComments];
+  
+    
+    
+    
+}
+
 @end

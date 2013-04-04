@@ -19,6 +19,7 @@
 
 @property Location * location;
 @property IBOutlet UILabel * name;
+@property IBOutlet UIView * scrollView;
 @property LocationService * service;
 
 

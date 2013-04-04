@@ -43,14 +43,7 @@
         // add the pins to locations Total
         //add the pins to the mapView
     //end block
-    
-    
-    
-    
-    
-    
-
-    
+  
 }
 - (void)viewDidAppear:(BOOL)animated
 {

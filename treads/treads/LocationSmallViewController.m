@@ -8,6 +8,9 @@
 
 #import "LocationSmallViewController.h"
 #import "LocationVC.h"
+#import "ImageScrollDisplayView.h"
+#import "ImageScrollBrowser.h"
+
 @interface LocationSmallViewController ()
 
 @end
@@ -35,6 +38,9 @@
     [super viewDidLoad];
      self.name.text = _location.title;
     // Do any additional setup after loading the view from its nib.
+    CGSize  size= _scrollView.frame.size;
+    //add subView
+    //[_scrollView addSubview: [[ImageScrollBrowser alloc]initWithImageSize: size displayView:]];
 }
 
 - (void)didReceiveMemoryWarning
