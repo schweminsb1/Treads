@@ -10,13 +10,14 @@
 #import "MapPinAnnotation.h"
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 
-
+#import "LoginVC.h"
 
 @interface MapsVC ()
 
 @property NSMutableArray * locationsInView;
 @property NSMutableArray * locationsTotal;
 @property LocationService * locationService;
+@property Location * currentLocation;
 
 
 @end
@@ -168,15 +169,16 @@
 {
     [mapView deselectAnnotation:view.annotation animated:YES];
     MapPinAnnotation * thisPin= (MapPinAnnotation *)view.annotation;
+    _currentLocation = thisPin.location;
     
+    LocationSmallViewController *ycvc = [[LocationSmallViewController alloc] initWithNibName:@"LocationSmallViewController" bundle:nil location:thisPin.location homeController:self Service: _locationService];
     
-    LocationSmallViewController *ycvc = [[LocationSmallViewController alloc] initWithNibName:@"LocationSmallViewController" bundle:nil location:thisPin.location];
                                        UIPopoverController *poc = [[UIPopoverController alloc] initWithContentViewController:ycvc];
                                    
                                        //hold ref to popover in an ivar
                                        self.callout = poc;
                                        
-                                       //size as needed
+                                       //size as neededs
                                        poc.popoverContentSize = CGSizeMake(320, 400);
                                        
                                        //show the popover next to the annotation view (pin)
@@ -207,6 +209,14 @@
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     [searchBar setShowsCancelButton:YES animated:YES];
+}
+
+-(void)pushLocation
+{
+    
+    LocationVC * locationvc= [[LocationVC alloc]initWithNibName:@"LocationVC" bundle:nil withModel:_currentLocation withLocationService:_locationService];
+    [self.navigationController pushViewController:locationvc animated:YES];
+    [self.callout dismissPopoverAnimated:YES];
 }
 
 @end

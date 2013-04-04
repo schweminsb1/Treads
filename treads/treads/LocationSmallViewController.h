@@ -8,15 +8,26 @@
 
 #import <UIKit/UIKit.h>
 #import "Location.h"
+#import "LocationVC.h"
+#import "MapsVC.h"
+
+
+@class LocationService;
+@class MapsVC;
 
 @interface LocationSmallViewController : UIViewController
 
 @property Location * location;
 @property IBOutlet UILabel * name;
+@property LocationService * service;
+
+
+//contains the page from which called this popup controller, this will be used to push a page onto the navigation controller of this instance
+@property MapsVC * homepage;
 
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil location: (Location *) location;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil location: (Location *) location homeController: (MapsVC *) root Service: (LocationService *) service;
 
 -(IBAction)goToLocationPage:(id)sender;
 

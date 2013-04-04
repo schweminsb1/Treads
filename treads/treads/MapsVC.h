@@ -12,7 +12,7 @@
 #import "LocationSmallViewController.h"
 #import "LocationService.h"
 
-@interface MapsVC : UIViewController<CLLocationManagerDelegate, UISearchBarDelegate>
+@interface MapsVC : UIViewController<CLLocationManagerDelegate, UISearchBarDelegate, UINavigationControllerDelegate>
 
 @property (strong) IBOutlet UISearchBar* searchBar;
 
@@ -23,4 +23,6 @@
 @property (strong) UIPopoverController * callout;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withLocationService:(LocationService *) locationService;
+
+-(void)pushLocation;
 @end

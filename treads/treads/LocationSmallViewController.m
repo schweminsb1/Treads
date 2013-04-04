@@ -7,20 +7,22 @@
 //
 
 #import "LocationSmallViewController.h"
-
+#import "LocationVC.h"
 @interface LocationSmallViewController ()
 
 @end
 
 @implementation LocationSmallViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil location: (Location *) location
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil location: (Location *) location homeController: (MapsVC *) root Service: (LocationService *)service
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.location=location;
         
-       
+        self.location=location;
+        self.homepage = root;
+        self.service = service;
         
         // Custom initialization
         
@@ -43,7 +45,6 @@
 
 -(IBAction)goToLocationPage:(id)sender
 {
-    
-    
+    [self.homepage pushLocation];
 }
 @end
