@@ -47,6 +47,10 @@
 		3C60C7DB16E7004900FDFD7D /* TripBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C60C7DA16E7004900FDFD7D /* TripBrowser.m */; };
 		3C87B12316F7E7B8000ABF18 /* AppColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C87B12216F7E7B8000ABF18 /* AppColors.m */; };
 		3C882DC1170D1DF30041A9C8 /* ImageScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C882DC0170D1DF30041A9C8 /* ImageScrollTextView.m */; };
+		3C882DC8170D28160041A9C8 /* LocationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C882DC3170D28160041A9C8 /* LocationVC.m */; };
+		3C882DC9170D28160041A9C8 /* LocationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C882DC4170D28160041A9C8 /* LocationVC.xib */; };
+		3C882DCA170D28160041A9C8 /* LocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C882DC6170D28160041A9C8 /* LocationViewController.m */; };
+		3C882DCB170D28160041A9C8 /* LocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C882DC7170D28160041A9C8 /* LocationViewController.xib */; };
 		3C89482D170B560600EEEED0 /* map_preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C89482C170B560600EEEED0 /* map_preview.png */; };
 		3C8A908C16E7DAA2007F0BB8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C8A908B16E7DAA2007F0BB8 /* Default-568h@2x.png */; };
 		3C8A909016E7DFC8007F0BB8 /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8A908F16E7DFC8007F0BB8 /* Trip.m */; };
@@ -137,6 +141,12 @@
 		3C882DBE170D1CFF0041A9C8 /* ImageScrollDisplayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ImageScrollDisplayView.h; path = treads/ImageScrollDisplayView.h; sourceTree = SOURCE_ROOT; };
 		3C882DBF170D1DF30041A9C8 /* ImageScrollTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageScrollTextView.h; path = treads/ImageScrollTextView.h; sourceTree = SOURCE_ROOT; };
 		3C882DC0170D1DF30041A9C8 /* ImageScrollTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageScrollTextView.m; path = treads/ImageScrollTextView.m; sourceTree = SOURCE_ROOT; };
+		3C882DC2170D28090041A9C8 /* LocationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationVC.h; path = treads/LocationVC.h; sourceTree = SOURCE_ROOT; };
+		3C882DC3170D28160041A9C8 /* LocationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationVC.m; path = treads/LocationVC.m; sourceTree = SOURCE_ROOT; };
+		3C882DC4170D28160041A9C8 /* LocationVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LocationVC.xib; path = treads/LocationVC.xib; sourceTree = SOURCE_ROOT; };
+		3C882DC5170D28160041A9C8 /* LocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationViewController.h; path = treads/LocationViewController.h; sourceTree = SOURCE_ROOT; };
+		3C882DC6170D28160041A9C8 /* LocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationViewController.m; path = treads/LocationViewController.m; sourceTree = SOURCE_ROOT; };
+		3C882DC7170D28160041A9C8 /* LocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LocationViewController.xib; path = treads/LocationViewController.xib; sourceTree = SOURCE_ROOT; };
 		3C89482C170B560600EEEED0 /* map_preview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_preview.png; sourceTree = "<group>"; };
 		3C8A908B16E7DAA2007F0BB8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		3C8A908E16E7DFC8007F0BB8 /* Trip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Trip.h; path = treads/Trip.h; sourceTree = SOURCE_ROOT; };
@@ -326,6 +336,12 @@
 		3C60C7CE16E6C29200FDFD7D /* Maps */ = {
 			isa = PBXGroup;
 			children = (
+				3C882DC2170D28090041A9C8 /* LocationVC.h */,
+				3C882DC3170D28160041A9C8 /* LocationVC.m */,
+				3C882DC4170D28160041A9C8 /* LocationVC.xib */,
+				3C882DC5170D28160041A9C8 /* LocationViewController.h */,
+				3C882DC6170D28160041A9C8 /* LocationViewController.m */,
+				3C882DC7170D28160041A9C8 /* LocationViewController.xib */,
 				318BA1B216C9E66800700BB8 /* MapsVC.h */,
 				318BA1B316C9E66800700BB8 /* MapsVC.m */,
 				318BA1B416C9E66800700BB8 /* MapsVC.xib */,
@@ -565,6 +581,8 @@
 				3118BFEE16EFC588006DE2E9 /* compass.png in Resources */,
 				3C89482D170B560600EEEED0 /* map_preview.png in Resources */,
 				29C21B95170BA76D005B39E4 /* LocationSmallViewController.xib in Resources */,
+				3C882DC9170D28160041A9C8 /* LocationVC.xib in Resources */,
+				3C882DCB170D28160041A9C8 /* LocationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,6 +626,8 @@
 				29C21B94170BA76D005B39E4 /* LocationSmallViewController.m in Sources */,
 				29C21B98170C9B6E005B39E4 /* Location.m in Sources */,
 				3C882DC1170D1DF30041A9C8 /* ImageScrollTextView.m in Sources */,
+				3C882DC8170D28160041A9C8 /* LocationVC.m in Sources */,
+				3C882DCA170D28160041A9C8 /* LocationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

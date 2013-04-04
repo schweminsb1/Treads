@@ -16,7 +16,7 @@
 @property Location * model;
 
 
--(id) initwithModel: (Location *) model withLocationService: (LocationService *) service;
+-(id) initWithModel: (Location *) model withLocationService: (LocationService *) service;
 
 
 @end

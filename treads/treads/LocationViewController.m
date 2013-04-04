@@ -14,7 +14,7 @@
 
 @implementation LocationViewController
 
--(id) initwithModel: (Location *) model withLocationService: (LocationService *) service
+-(id) initWithModel: (Location *) model withLocationService: (LocationService *) service
 {
     self =  [super init];
     if(self)
