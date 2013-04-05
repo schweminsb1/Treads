@@ -158,16 +158,18 @@
 
 - (void)setDescriptionDisplayToIndex:(int)index
 {
-    if (displayedTextIndex != index && index >= 0 && index < self.displayItems.count) {
-        id<ImageScrollDisplayableItem> displayItem = (id<ImageScrollDisplayableItem>)self.displayItems[index];
-        displayedTextIndex = index;
-        [displayView setDisplayItem:[displayItem displayItem]];
-        [self setNeedsLayout];
-    }
-    else if (self.displayItems.count == 0) {
-        displayedTextIndex = -1;
-        [displayView setDisplayItem:nil];
-        [self setNeedsLayout];
+    if (displayView != nil) {
+        if (displayedTextIndex != index && index >= 0 && index < self.displayItems.count) {
+            id<ImageScrollDisplayableItem> displayItem = (id<ImageScrollDisplayableItem>)self.displayItems[index];
+            displayedTextIndex = index;
+            [displayView setDisplayItem:[displayItem displayItem]];
+            [self setNeedsLayout];
+        }
+        else if (self.displayItems.count == 0) {
+            displayedTextIndex = -1;
+            [displayView setDisplayItem:nil];
+            [self setNeedsLayout];
+        }
     }
 }
 
