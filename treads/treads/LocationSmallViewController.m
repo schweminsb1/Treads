@@ -10,6 +10,7 @@
 #import "LocationVC.h"
 #import "ImageScrollDisplayView.h"
 #import "ImageScrollBrowser.h"
+#import "TripLocationItem.h"
 
 @interface LocationSmallViewController ()
 
@@ -40,7 +41,18 @@
     // Do any additional setup after loading the view from its nib.
     CGSize  size= _scrollView.frame.size;
     //add subView
-    //[_scrollView addSubview: [[ImageScrollBrowser alloc]initWithImageSize: size displayView:]];
+    ImageScrollBrowser * scrollbrowse= [[ImageScrollBrowser alloc]initWithImageSize: size displayView:nil];
+    [scrollbrowse setFrame:CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + 200 , self.view.bounds.size.width, 550)];
+    [scrollbrowse setNeedsLayout];
+    
+    NSMutableArray * triplocationItems= [[NSMutableArray alloc] init];
+    TripLocationItem * triplocationitem= [[TripLocationItem alloc]init];
+    triplocationitem.image= [UIImage imageNamed:@"mountains"];
+    
+    [ triplocationItems addObject:triplocationitem];
+    
+    scrollbrowse.displayItems= triplocationItems;
+    [_scrollView addSubview: scrollbrowse];
 }
 
 - (void)didReceiveMemoryWarning

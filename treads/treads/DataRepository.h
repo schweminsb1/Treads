@@ -12,7 +12,17 @@
 
 @interface DataRepository : NSObject
 
+typedef void (^ CompletionWithSasBlock)(NSURL*);
+
 @property MSClient* client;
+@property MSTable * tablesTable;
+@property MSTable * tableRowsTable;
+@property MSTable * containersTable;
+@property MSTable * blobsTable;
+
+@property NSURL * SasURL;
+//will be used to make requests to the server via this URL so do NSMutableURLREquest to get information hopefully from the Blob
+
 
 //retrieval
 - (void)retrieveDataItemsMatching:(NSString*)predicateStringOrNil usingService:(id<TreadsService>)callingService forRequestingObject:(NSObject*)requestingObject withReturnAction:(SEL)returnAction;
@@ -28,5 +38,6 @@
 - (void) getLocationsOrdered: (MSReadQueryBlock) getAll;
 
 -(void) getCommentsFromLocationID: (NSString *) locationID withBlock: (MSReadQueryBlock) getComments;
+
 
 @end

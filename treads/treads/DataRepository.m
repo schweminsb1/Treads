@@ -15,6 +15,14 @@
 {
     if ((self = [super init])) {
         self.client = [MSClient clientWithApplicationURLString:@"https://treads.azure-mobile.net/" withApplicationKey:@"uxbEolJjpIKEpNJSnsNEuGehMowvxj53"];
+        
+        self.tablesTable = [_client getTable:@"Tables"];
+        self.tableRowsTable = [_client getTable:@"TableRows"];
+        
+        self.containersTable = [_client getTable:@"BlobContainers"];
+        self.blobsTable = [_client getTable:@"BlobBlobs"];
+        
+        //self.tables = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -95,6 +103,7 @@
 
 - (void)addLocation:(NSDictionary*)newLocation forTarget:(NSObject*) target withAction: (SEL) returnAction
 {
+    
      MSTable * LocationTable=  [self.client getTable:@"LocationTable"];
     MSItemBlock itemBlock=^(NSDictionary *item, NSError *error)
     {
@@ -150,6 +159,18 @@
     
     
     
+}
+
+typedef void (^ CompletionWithSasBlock)(NSURL*);
+
+- (void) getSasUrlForNewBlob:(NSString *)blobName forContainer:(NSString *)containerName withCompletion:(CompletionWithSasBlock) completion {
+    NSDictionary *item = @{  };
+    NSDictionary *params = @{ @"containerName" : containerName, @"blobName" : blobName };
+    [self.blobsTable insert:item parameters:params completion:^(NSDictionary *item, NSError *error) {
+        NSLog(@"Item: %@", item);
+        completion([item objectForKey:@"sasUrl"]);
+       /* Once we get that back, we can then post those bytes from the client which it does with a NSMutableURLRequest and NSURLConnection.*/
+    }];
 }
 
 @end

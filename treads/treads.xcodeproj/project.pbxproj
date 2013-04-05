@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		29241803170E4CE100BB9FAE /* CommentService.m in Sources */ = {isa = PBXBuildFile; fileRef = 29241802170E4CE100BB9FAE /* CommentService.m */; };
+		29241806170E645200BB9FAE /* UserService.m in Sources */ = {isa = PBXBuildFile; fileRef = 29241805170E645200BB9FAE /* UserService.m */; };
+		29241809170E651900BB9FAE /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 29241808170E651900BB9FAE /* User.m */; };
 		29829831170D3B08002BA507 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 29829830170D3B08002BA507 /* Comment.m */; };
 		29C21B94170BA76D005B39E4 /* LocationSmallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C21B92170BA76D005B39E4 /* LocationSmallViewController.m */; };
 		29C21B95170BA76D005B39E4 /* LocationSmallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29C21B93170BA76D005B39E4 /* LocationSmallViewController.xib */; };
@@ -80,6 +82,10 @@
 /* Begin PBXFileReference section */
 		29241801170E4CE100BB9FAE /* CommentService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentService.h; path = treads/CommentService.h; sourceTree = SOURCE_ROOT; };
 		29241802170E4CE100BB9FAE /* CommentService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentService.m; path = treads/CommentService.m; sourceTree = SOURCE_ROOT; };
+		29241804170E645200BB9FAE /* UserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserService.h; path = treads/UserService.h; sourceTree = SOURCE_ROOT; };
+		29241805170E645200BB9FAE /* UserService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserService.m; path = treads/UserService.m; sourceTree = SOURCE_ROOT; };
+		29241807170E651800BB9FAE /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = treads/User.h; sourceTree = SOURCE_ROOT; };
+		29241808170E651900BB9FAE /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = treads/User.m; sourceTree = SOURCE_ROOT; };
 		296CC3F816FCEA7C0089F1F1 /* treads.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = treads.entitlements; path = treads/treads.entitlements; sourceTree = "<group>"; };
 		2982982F170D3B07002BA507 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Comment.h; path = treads/Comment.h; sourceTree = SOURCE_ROOT; };
 		29829830170D3B08002BA507 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Comment.m; path = treads/Comment.m; sourceTree = SOURCE_ROOT; };
@@ -429,6 +435,8 @@
 				29C21B97170C9B6E005B39E4 /* Location.m */,
 				2982982F170D3B07002BA507 /* Comment.h */,
 				29829830170D3B08002BA507 /* Comment.m */,
+				29241807170E651800BB9FAE /* User.h */,
+				29241808170E651900BB9FAE /* User.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -454,6 +462,8 @@
 				395CD5ED16F03EEA009FD655 /* LocationService.m */,
 				29241801170E4CE100BB9FAE /* CommentService.h */,
 				29241802170E4CE100BB9FAE /* CommentService.m */,
+				29241804170E645200BB9FAE /* UserService.h */,
+				29241805170E645200BB9FAE /* UserService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -640,6 +650,8 @@
 				3C882DCA170D28160041A9C8 /* LocationViewController.m in Sources */,
 				29829831170D3B08002BA507 /* Comment.m in Sources */,
 				29241803170E4CE100BB9FAE /* CommentService.m in Sources */,
+				29241806170E645200BB9FAE /* UserService.m in Sources */,
+				29241809170E651900BB9FAE /* User.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
