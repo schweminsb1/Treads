@@ -22,8 +22,9 @@
 
 @implementation TripViewer {
     BOOL layoutDone;
-    Trip* trip;
     BOOL editingEnabled;
+    BOOL changesMade;
+    Trip* trip;
     UITableView* viewerTable;
     UIActivityIndicatorView* activityIndicatorView;
     int cellVerticalPadding;
@@ -38,6 +39,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         layoutDone = NO;
+        changesMade = YES;
         [self layoutSubviews];
     }
     return self;
@@ -80,11 +82,32 @@
 - (void)setViewerTrip:(Trip*)newTrip enableEditing:(BOOL)canEditTrip;
 {
     trip = newTrip;
-    editingEnabled = canEditTrip;
+    [self setEditingEnabled:canEditTrip];
     
     [viewerTable reloadData];
     [viewerTable setContentOffset:CGPointZero animated:NO];
     if (newTrip != nil) {[activityIndicatorView stopAnimating];}
+    else {[self setEditingEnabled:NO];}
+}
+
+- (Trip*)viewerTrip
+{
+    return trip;
+}
+
+- (BOOL)editingEnabled
+{
+    return editingEnabled;
+}
+
+- (void)setEditingEnabled:(BOOL)canEditTrip
+{
+    editingEnabled = canEditTrip;
+    if (editingEnabled) {[viewerTable setBackgroundColor:[AppColors tertiaryBackgroundColor]];}
+    else {[viewerTable setBackgroundColor:[AppColors secondaryBackgroundColor]];}
+    
+    //change cells' editing status
+    [self setNeedsDisplay];
 }
 
 - (void)displayTripLoadFailure
@@ -128,6 +151,9 @@
             cell = [[TripViewerHeaderCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[TripViewer headerCellIdentifier]];
         }
         //fill out data
+        TripViewer* __weak _self = self;
+        cell.editingEnabled = ^BOOL(){return [_self editingEnabled];};
+        cell.markChangeMade = ^(){[_self markChangeMade];};
         cell.trip = trip;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -139,6 +165,9 @@
             cell = [[TripViewerLocationCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[TripViewer locationCellIdentifier]];
         }
         //fill out data
+        TripViewer* __weak _self = self;
+        cell.editingEnabled = ^BOOL(){return [_self editingEnabled];};
+        cell.markChangeMade = ^(){[_self markChangeMade];};
         cell.tripLocation = trip.tripLocations[indexPath.row - 1];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -159,6 +188,16 @@
     }
     
     return [[UITableViewCell alloc] init];
+}
+
+- (void)markChangeMade
+{
+    changesMade = YES;
+}
+
+- (BOOL)changesWereMade
+{
+    return changesMade;
 }
 
 #pragma mark - UITableViewDelegate

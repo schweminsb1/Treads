@@ -13,7 +13,13 @@
 @interface TripViewer : UIView
 
 - (void)setViewerTrip:(Trip*)newTrip enableEditing:(BOOL)canEditTrip;
+- (Trip*)viewerTrip;
 - (void)displayTripLoadFailure;
+
+- (BOOL)editingEnabled;
+- (void)setEditingEnabled:(BOOL)canEditTrip;
+
+- (BOOL)changesWereMade;
 
 - (Trip*)getViewerTrip;
 

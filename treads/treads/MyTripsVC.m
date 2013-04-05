@@ -46,7 +46,7 @@
     [super viewDidLoad];
     
     //set up new trip button and attach to navigation controller
-    self.tripNewButton = [[UIBarButtonItem alloc] initWithTitle:@"Create Trip Draft" style:UIBarButtonItemStyleDone target:self action:@selector(createNewTrip)];
+    self.tripNewButton = [[UIBarButtonItem alloc] initWithTitle:@"New Trip" style:UIBarButtonItemStyleDone target:self action:@selector(createNewTrip)];
     self.navigationItem.rightBarButtonItem = self.tripNewButton;
     
     //set up browser
@@ -76,13 +76,17 @@
 
 - (void)createNewTrip
 {
-    //add a blank edit trip vc to the navigation controller stack
-    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style: UIBarButtonItemStyleBordered target: nil action: nil];
-    [self.navigationItem setBackBarButtonItem: newBackButton];
+    Trip* trip = [[Trip alloc] init];
+    trip.tripID = [Trip UNDEFINED_TRIP_ID];
+    [self showTrip:trip];
     
-    //calls edit trips page
-    EditTripVC* editTripVC = [[EditTripVC alloc] initWithNibName:@"EditTripVC" bundle:nil tripService:self.tripService tripID:[Trip UNDEFINED_TRIP_ID]];
-    [self.navigationController pushViewController:editTripVC animated:YES];
+//    //add a blank edit trip vc to the navigation controller stack
+//    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style: UIBarButtonItemStyleBordered target: nil action: nil];
+//    [self.navigationItem setBackBarButtonItem: newBackButton];
+//    
+//    //calls edit trips page
+//    EditTripVC* editTripVC = [[EditTripVC alloc] initWithNibName:@"EditTripVC" bundle:nil tripService:self.tripService tripID:[Trip UNDEFINED_TRIP_ID]];
+//    [self.navigationController pushViewController:editTripVC animated:YES];
 }
 
 - (void)showTrip:(Trip*)trip

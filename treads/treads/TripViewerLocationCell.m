@@ -65,6 +65,15 @@
     [locationMapView setFrame:CGRectMake(0, 0, subView.bounds.size.width, 70)];
     [imageScrollBrowser setFrame:CGRectMake(0, 70, subView.bounds.size.width, 550)];
     [imageScrollBrowser setNeedsLayout];
+    
+    //set editing-related properties
+    BOOL __editingEnabled = self.editingEnabled();
+    if (__editingEnabled) {
+        //subView.backgroundColor = [AppColors tertiaryBackgroundColor];
+    }
+    else {
+        //subView.backgroundColor = [AppColors mainBackgroundColor];
+    }
 }
 
 - (void)createAndAddSubviews

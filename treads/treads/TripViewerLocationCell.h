@@ -14,4 +14,7 @@
 
 @property (assign, nonatomic) TripLocation* tripLocation;
 
+@property (copy) BOOL(^editingEnabled)();
+@property (copy) void(^markChangeMade)();
+
 @end

@@ -62,6 +62,15 @@
     [tripDescriptionLabel setFrame:CGRectMake(20, 336, subView.frame.size.width-40, 23)];
     [textBackground setFrame:CGRectMake(0, 24, subView.frame.size.width, 108)];
     [profilePictureView setFrame:CGRectMake(20, 16, 136, 136)];
+    
+    //set editing-related properties
+    BOOL __editingEnabled = self.editingEnabled();
+    if (__editingEnabled) {
+        //subView.backgroundColor = [AppColors tertiaryBackgroundColor];
+    }
+    else {
+        //subView.backgroundColor = [AppColors mainBackgroundColor];
+    }
 }
 
 - (void)createAndAddSubviews
