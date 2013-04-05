@@ -14,6 +14,7 @@
 #import "EditTripVC.h"
 #import "LocationService.h"
 #import "AppColors.h"
+#import "CommentService.h"
 
 @interface AppDelegate()
 
@@ -24,6 +25,7 @@
 @property (strong) TripService* tripService;
 @property (strong) ProfileService* profileService;
 @property (strong) LocationService* locationService;
+@property (strong) CommentService* commentService;
 
 @end
 
@@ -40,7 +42,7 @@
     self.tripService = [[TripService alloc] initWithRepository:self.dataRepository];
     
     self.locationService = [[LocationService alloc]initWithRepository:_dataRepository];
-    
+    _commentService= [[CommentService alloc] initWithRepository:_dataRepository];
     //Set global display options
     [[UINavigationBar appearance] setTintColor:[AppColors toolbarColor]];
     [[UITabBar appearance] setSelectedImageTintColor:[AppColors toolbarColor]];
@@ -48,7 +50,7 @@
     //Initialize ViewControllers
     UIViewController *mapsVC, *cameraVC, *myTripsVC, *followVC, *profileVC;
     
-    mapsVC = [[MapsVC alloc] initWithNibName:@"MapsVC" bundle:nil withLocationService: self.locationService];
+    mapsVC = [[MapsVC alloc] initWithNibName:@"MapsVC" bundle:nil withLocationService: self.locationService withCommentService: self.commentService];
     cameraVC = [[CameraVC alloc] initWithNibName:@"CameraVC" bundle:nil];
     myTripsVC = [[MyTripsVC alloc] initWithNibName:@"MyTripsVC" bundle:nil withTripService:self.tripService];
     followVC = [[FollowVC alloc] initWithNibName:@"FollowVC" bundle:nil withTripService:self.tripService];

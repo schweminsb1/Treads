@@ -9,20 +9,23 @@
 
 #import <UIKit/UIKit.h>
 #import "LocationService.h"
+#import "CommentService.h"
 #import "Location.h"
 
 @interface LocationVC : UIViewController 
 
-@property LocationService * locationService;
+@property CommentService * commentService;
 @property Location * model;
+
 //UI
 @property (strong, atomic) IBOutlet  UILabel * name;
 @property (strong, atomic) IBOutlet  UILabel * lat;
 @property (strong, atomic) IBOutlet  UILabel * lon;
 @property (strong, atomic) IBOutlet  UITextView * description;
+@property IBOutlet UITableView * commentTable;
 
 
--(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withModel: (Location *) model withLocationService: (LocationService *) service;
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withModel: (Location *) model withCommentService: (CommentService *) service;
 
 
 @end

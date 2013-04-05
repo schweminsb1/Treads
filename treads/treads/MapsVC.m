@@ -9,7 +9,7 @@
 #import "MapsVC.h"
 #import "MapPinAnnotation.h"
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
-
+#import "CommentService.h"
 #import "LoginVC.h"
 
 @interface MapsVC ()
@@ -17,6 +17,7 @@
 @property NSMutableArray * locationsInView;
 @property NSMutableArray * locationsTotal;
 @property LocationService * locationService;
+@property CommentService * commentService;
 @property Location * currentLocation;
 
 
@@ -24,9 +25,10 @@
 
 @implementation MapsVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withLocationService:(LocationService *) locationService{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withLocationService:(LocationService *) locationService withCommentService: (CommentService*) commentService {
     if (self) {
         _locationService=locationService;
+        _commentService = commentService;
         self.title = NSLocalizedString(@"Maps", @"Maps");
         self.tabBarItem.image = [UIImage imageNamed:@"map-pin.png"];
         _locationsTotal = [[NSMutableArray alloc]init];
@@ -207,7 +209,7 @@
 -(void)pushLocation
 {
     
-    LocationVC * locationvc= [[LocationVC alloc]initWithNibName:@"LocationVC" bundle:nil withModel:_currentLocation withLocationService:_locationService];
+    LocationVC * locationvc= [[LocationVC alloc]initWithNibName:@"LocationVC" bundle:nil withModel:_currentLocation withCommentService: _commentService];
     [self.navigationController pushViewController:locationvc animated:YES];
     [self.callout dismissPopoverAnimated:YES];
 }
