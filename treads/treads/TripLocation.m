@@ -10,4 +10,6 @@
 
 @implementation TripLocation
 
++ (int)UNDEFINED_TRIPLOCATION_ID {return -1;}
+
 @end

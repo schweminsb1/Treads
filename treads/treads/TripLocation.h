@@ -10,6 +10,8 @@
 
 @interface TripLocation : NSObject
 
++ (int)UNDEFINED_TRIPLOCATION_ID;
+
 //identifiers
 @property int tripLocationID; //id
 @property int tripID;
