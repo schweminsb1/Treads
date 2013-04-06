@@ -12,11 +12,10 @@
 #import "DataRepository.h"
 #import "Trip.h"
 #import "TripService.h"
-#import "EditTripVC.h"
 
 #import "TripViewer.h"
 
-@interface TripViewVC()
+@interface TripViewVC()<UINavigationBarDelegate>
 
 @property TripService* tripService;
 @property int tripID;
@@ -28,14 +27,16 @@
 
 @implementation TripViewVC {
     NSString* baseTitle;
+    NSString* previousViewTitle;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService: (TripService*) myTripService tripID: (int)myTripID
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil backTitle:(NSString *)backTitle tripService:(TripService *)myTripService tripID:(int)myTripID
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.tripService = myTripService;
         self.tripID = myTripID;
+        previousViewTitle = backTitle;
     }
     return self;
 }
@@ -48,6 +49,10 @@
     self.viewer = [[TripViewer alloc] initWithFrame:self.viewerWindow.bounds];
     [self.viewer setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     [self.viewerWindow addSubview: self.viewer];
+    
+    //set up back button
+    self.backButton = [[UIBarButtonItem alloc] initWithTitle:previousViewTitle style:UIBarButtonItemStyleBordered target:self action:@selector(goBack:)];
+    self.navigationItem.leftBarButtonItem = self.backButton;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -58,6 +63,8 @@
         Trip* trip = [[Trip alloc] init];
         trip.tripID = [Trip UNDEFINED_TRIP_ID];
         trip.userID = -1;
+        trip.name = @"New Trip";
+        trip.description = @"Trip Description";
         [self dataHasLoaded:@[trip]];
     }
     else {
@@ -80,15 +87,8 @@
         //if the user has editing rights, add the nav bar item
         if (YES) { //can edit
             //set up new trip button and attach to navigation controller
-            self.tripEditButton = [[UIBarButtonItem alloc] initWithTitle:(returnedTrip.tripID == [Trip UNDEFINED_TRIP_ID]?@"Preview":@"Edit") style:UIBarButtonItemStyleDone target:self action:@selector(tapEditButton:)];
+            self.tripEditButton = [[UIBarButtonItem alloc] initWithTitle:(returnedTrip.tripID == [Trip UNDEFINED_TRIP_ID]?@"Preview":@"Edit") style:UIBarButtonItemStyleBordered target:self action:@selector(tapEditButton:)];
             self.navigationItem.rightBarButtonItem = self.tripEditButton;
-            
-            //set up back button to save changes
-            //self.backButton = [[UIBarButtonItem alloc] initWithTitle:@"TEST" style:UIBarButtonItemStyleDone target:self action:@selector(goBack:)];
-            //self.navigationItem.backBarButtonItem = self.backButton;
-            //[self.navigationItem.backBarButtonItem ]
-            //self.navigationItem.leftBarButtonItem.target = self;
-            //self.navigationItem.leftBarButtonItem.action = @selector(goBack:);
         }
         else {
             self.navigationItem.rightBarButtonItem = nil;
@@ -128,23 +128,16 @@
         [self.viewer setEditingEnabled:YES];
         [self setTitleBar:@"Editing"];
     }
-    
-//    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style: UIBarButtonItemStyleBordered target: nil action: nil];
-//    [self.navigationItem setBackBarButtonItem: newBackButton];
-//    
-//    //calls edit trips page
-//    EditTripVC* editTripVC = [[EditTripVC alloc] initWithNibName:@"EditTripVC" bundle:nil tripService:self.tripService tripID:self.tripID];
-//    [self.navigationController pushViewController:editTripVC animated:YES];
-    
 }
 
-- (void)goBack:(id) sender {
-    if ([self.viewer changesWereMade]) {
+- (void)goBack:(id)sender
+{
+    if ([self.viewer getViewerTrip] != nil && [self.viewer changesWereMade]) {
         //save trip changes if any were made
-    [self.tripService updateTrip:[self.viewer viewerTrip] forTarget:self withAction:@selector(changesSavedTo:successfully:)];
+        [self.tripService updateTrip:[self.viewer viewerTrip] forTarget:self withAction:@selector(changesSavedTo:successfully:)];
     }
     else {
-        //if no changes were made, simply pop the trip viewer
+        //if no changes were made or a trip is not loaded, simply pop the trip viewer
         [self.navigationController popViewControllerAnimated:YES];
     };
 }
@@ -153,32 +146,32 @@
     BOOL successful = [wasSuccessful boolValue];
     if (successful) {
         int tripID = [savedTripID intValue];
+        if (self.tripID != tripID) {
+            [self.viewer viewerTrip].tripID = tripID;
+        }
+        [self.viewer clearChangesFlag];
         
         UIAlertView *saved = [[UIAlertView alloc]
                               initWithTitle: [self.viewer viewerTrip].name
                               message: @"Changes saved."
-                              delegate: nil
+                              delegate: self
                               cancelButtonTitle:@"OK"
                               otherButtonTitles:nil];
         [saved show];
-        
-        if (self.tripID != tripID) {
-            [self.viewer viewerTrip].tripID = tripID;
-        }
-        [self.navigationController popViewControllerAnimated:YES];
     }
     else {
         UIAlertView *saved = [[UIAlertView alloc]
                               initWithTitle: [self.viewer viewerTrip].name
                               message: @"Error: Changes could not be saved."
-                              delegate: nil
+                              delegate: self
                               cancelButtonTitle:@"OK"
                               otherButtonTitles:nil];
         [saved show];
-        [self.navigationController popViewControllerAnimated:YES];
     }
-    
-    //[self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning

@@ -19,6 +19,7 @@
 - (BOOL)editingEnabled;
 - (void)setEditingEnabled:(BOOL)canEditTrip;
 
+- (void)clearChangesFlag;
 - (BOOL)changesWereMade;
 
 - (Trip*)getViewerTrip;

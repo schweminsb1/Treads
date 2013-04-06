@@ -14,7 +14,7 @@
 
 @property (strong) IBOutlet UIView* viewerWindow;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService: (TripService*) myTripService tripID: (int)myTripID;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil backTitle:(NSString*)backTitle tripService: (TripService*)myTripService tripID:(int)myTripID;
 
 - (void)dataHasLoaded:(NSArray*)newData;
 

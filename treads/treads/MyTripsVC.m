@@ -19,7 +19,7 @@
 
 #import "AppColors.h"
 
-@interface MyTripsVC ()
+@interface MyTripsVC()
 
 @property (strong) TripService* tripService;
 @property (strong) TripBrowser* browser;
@@ -79,19 +79,11 @@
     Trip* trip = [[Trip alloc] init];
     trip.tripID = [Trip UNDEFINED_TRIP_ID];
     [self showTrip:trip];
-    
-//    //add a blank edit trip vc to the navigation controller stack
-//    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style: UIBarButtonItemStyleBordered target: nil action: nil];
-//    [self.navigationItem setBackBarButtonItem: newBackButton];
-//    
-//    //calls edit trips page
-//    EditTripVC* editTripVC = [[EditTripVC alloc] initWithNibName:@"EditTripVC" bundle:nil tripService:self.tripService tripID:[Trip UNDEFINED_TRIP_ID]];
-//    [self.navigationController pushViewController:editTripVC animated:YES];
 }
 
 - (void)showTrip:(Trip*)trip
 {
-    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil tripService:self.tripService tripID:trip.tripID];
+    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID];
     [self.navigationController pushViewController:tripViewVC animated:YES];
 }
 
