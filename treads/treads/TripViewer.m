@@ -39,7 +39,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         layoutDone = NO;
-        changesMade = YES;
+        changesMade = NO;
         [self layoutSubviews];
     }
     return self;
