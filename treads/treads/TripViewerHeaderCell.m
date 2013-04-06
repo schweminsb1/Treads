@@ -10,6 +10,8 @@
 
 #import "Trip.h"
 
+#import "EditableTextView.h"
+
 #import "AppColors.h"
 
 @implementation TripViewerHeaderCell {

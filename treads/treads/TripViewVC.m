@@ -63,6 +63,8 @@
         Trip* trip = [[Trip alloc] init];
         trip.tripID = [Trip UNDEFINED_TRIP_ID];
         trip.userID = -1;
+        trip.name = @"New Trip";
+        trip.description = @"Trip Description";
         [self dataHasLoaded:@[trip]];
     }
     else {

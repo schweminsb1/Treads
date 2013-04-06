@@ -72,6 +72,7 @@
 		3C95900516EA6D220038AD7C /* Path.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C95900116EA6D220038AD7C /* Path.m */; };
 		3C95900816EA6DFE0038AD7C /* WindowsAzureMobileServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C95900716EA6DFE0038AD7C /* WindowsAzureMobileServices.framework */; };
 		3C96E23E16FCEB3A007FA511 /* ImageScrollBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C96E23D16FCEB3A007FA511 /* ImageScrollBrowser.m */; };
+		3C9901781710909B003B7916 /* EditableTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9901771710909B003B7916 /* EditableTextView.m */; };
 		3C9DA9E916F91B47009EEED7 /* TripViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9DA9E816F91B47009EEED7 /* TripViewer.m */; };
 		3C9DA9EE16F91BE9009EEED7 /* TripViewerHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9DA9ED16F91BE9009EEED7 /* TripViewerHeaderCell.m */; };
 		3C9DA9F116F91BF9009EEED7 /* TripViewerLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C9DA9F016F91BF9009EEED7 /* TripViewerLocationCell.m */; };
@@ -186,6 +187,8 @@
 		3C95900716EA6DFE0038AD7C /* WindowsAzureMobileServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMobileServices.framework; sourceTree = "<group>"; };
 		3C96E23C16FCEB3A007FA511 /* ImageScrollBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageScrollBrowser.h; path = treads/ImageScrollBrowser.h; sourceTree = SOURCE_ROOT; };
 		3C96E23D16FCEB3A007FA511 /* ImageScrollBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageScrollBrowser.m; path = treads/ImageScrollBrowser.m; sourceTree = SOURCE_ROOT; };
+		3C9901761710909B003B7916 /* EditableTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditableTextView.h; path = treads/EditableTextView.h; sourceTree = SOURCE_ROOT; };
+		3C9901771710909B003B7916 /* EditableTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditableTextView.m; path = treads/EditableTextView.m; sourceTree = SOURCE_ROOT; };
 		3C9DA9E716F91B47009EEED7 /* TripViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripViewer.h; path = treads/TripViewer.h; sourceTree = SOURCE_ROOT; };
 		3C9DA9E816F91B47009EEED7 /* TripViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripViewer.m; path = treads/TripViewer.m; sourceTree = SOURCE_ROOT; };
 		3C9DA9EC16F91BE9009EEED7 /* TripViewerHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripViewerHeaderCell.h; path = treads/TripViewerHeaderCell.h; sourceTree = SOURCE_ROOT; };
@@ -410,6 +413,7 @@
 		3C60C7D316E6C2AF00FDFD7D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				3C99017517108F01003B7916 /* Editable Views */,
 				3C882DBC170D14E60041A9C8 /* Image Scroll Browser */,
 				3C9DA9EB16F91B85009EEED7 /* Trip Viewer */,
 				3C9DA9EA16F91B5B009EEED7 /* Trip Browser */,
@@ -491,6 +495,15 @@
 				3C958FFB16EA6CFF0038AD7C /* RegisterVC.xib */,
 			);
 			name = Register;
+			sourceTree = "<group>";
+		};
+		3C99017517108F01003B7916 /* Editable Views */ = {
+			isa = PBXGroup;
+			children = (
+				3C9901761710909B003B7916 /* EditableTextView.h */,
+				3C9901771710909B003B7916 /* EditableTextView.m */,
+			);
+			name = "Editable Views";
 			sourceTree = "<group>";
 		};
 		3C9DA9EA16F91B5B009EEED7 /* Trip Browser */ = {
@@ -658,6 +671,7 @@
 				29241806170E645200BB9FAE /* UserService.m in Sources */,
 				29241809170E651900BB9FAE /* User.m in Sources */,
 				31EC36E71710789E0039FAED /* TripLocationService.m in Sources */,
+				3C9901781710909B003B7916 /* EditableTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
