@@ -8,9 +8,7 @@
 
 #import "TripLocationItem.h"
 
-#import "ImageScrollDisplayableItem.h"
-
-@interface TripLocationItem()<ImageScrollDisplayableItem>
+@interface TripLocationItem()
 
 @end
 

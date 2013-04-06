@@ -28,17 +28,20 @@
     CGSize imageSubViewSize;
     
     UIView<ImageScrollDisplayView>* displayView;
+    
+    UIView* addItemView;
     //UITextView* descriptionTextView;
     int displayedTextIndex;
 }
 
-- (id)initWithImageSize:(CGSize)size displayView:(UIView<ImageScrollDisplayView>*)initializedDisplayView
+- (id)initWithImageSize:(CGSize)size displayView:(UIView<ImageScrollDisplayView>*)initializedDisplayView addItemView:(UIView *)addView
 {
     self = [super init];
     if (self) {
         layoutDone = NO;
         imageSubViewSize = size;
         displayView = initializedDisplayView;
+        addItemView = addView;
     }
     return self;
 }
@@ -53,17 +56,27 @@
         layoutDone = YES;
     }
     
+    BOOL __editingEnabled = self.editingEnabled();
+    int additionalCells = (__editingEnabled&&addItemView!=nil)?1:0;
+    
     //set frames of subviews
     [imageScrollView setFrame:CGRectMake(0, 0, self.bounds.size.width, imageSubViewSize.height)];
     [imageScrollPaddingLeft setFrame:CGRectMake(0, 0, (self.bounds.size.width-imageSubViewSize.width)/2, imageScrollView.bounds.size.height)];
-    [imageScrollPaddingRight setFrame:CGRectMake(imageSubViewCount*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width, 0, (self.bounds.size.width-imageSubViewSize.width)/2, imageScrollView.bounds.size.height)];
+    [imageScrollPaddingRight setFrame:CGRectMake((imageSubViewCount+additionalCells)*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width, 0, (self.bounds.size.width-imageSubViewSize.width)/2, imageScrollView.bounds.size.height)];
     
     for (int i=0; i<imageSubViews.count; i++) {
         UIImageView* imageSubView = (UIImageView*)imageSubViews[i];
         [imageSubView setFrame:CGRectMake(i*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width, 0, imageSubViewSize.width, imageSubViewSize.height)];
     }
+    
+    if (addItemView!=nil) {
+        [addItemView setHidden:!__editingEnabled];
+        if (__editingEnabled) {
+            [addItemView setFrame:CGRectMake(imageSubViews.count*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width, 0, imageSubViewSize.width, imageSubViewSize.height)];
+        }
+    }
 
-    [imageScrollView setContentSize:CGSizeMake(imageSubViewCount*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width*2, imageScrollView.bounds.size.height)];
+    [imageScrollView setContentSize:CGSizeMake((imageSubViewCount+additionalCells)*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width*2, imageScrollView.bounds.size.height)];
     
     [displayView setFrame:CGRectMake(0, imageSubViewSize.height, self.bounds.size.width, self.bounds.size.height - imageSubViewSize.height)];
     
@@ -88,6 +101,11 @@
     
     [imageScrollView addSubview:imageScrollPaddingLeft];
     [imageScrollView addSubview:imageScrollPaddingRight];
+    if (addItemView!=nil) {
+        [imageScrollView addSubview:addItemView];
+        UITapGestureRecognizer* addTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addButtonWasTapped:)];
+        [addItemView addGestureRecognizer:addTap];
+    }
     
     imageSubViews = [[NSMutableArray alloc] init];
     
@@ -167,12 +185,25 @@
             [displayView setDisplayItem:[displayItem displayItem] index:index];
             [self setNeedsLayout];
         }
-        else if (self.displayItems.count == 0) {
+        else if (self.displayItems.count == 0 || (self.editingEnabled()&&index==self.displayItems.count)) {
             displayedTextIndex = -1;
             [displayView setDisplayItem:nil index:-1];
             [self setNeedsLayout];
         }
     }
+}
+
+- (void)addButtonWasTapped:(UITapGestureRecognizer *)recognizer
+{
+    self.sendNewItemRequest();
+}
+
+- (void)addItemToDisplayView:(id<ImageScrollDisplayableItem>)item
+{
+    NSMutableArray* temp = [NSMutableArray arrayWithArray:self.displayItems];
+    [temp addObject:item];
+    self.arrayWasChanged(temp);
+    self.displayItems = temp;
 }
 
 @end
