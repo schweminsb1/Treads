@@ -12,12 +12,14 @@
 
 - (id)initWithFont:(UIFont*)font edgeInset:(UIEdgeInsets)edgeInset restrictSingleLine:(BOOL)singleLine maxTextLength:(int)maxTextLength;
 
+//editing
 -(void) setText:(NSString*)newText;
 @property (copy) void(^textWasChanged)(NSString* newText);
 
 @property (copy) BOOL(^editingEnabled)();
 @property (copy) void(^markChangeMade)();
 
+//display
 @property (strong) UIColor* editingDisabledBackgroundColor;
 @property (strong) UIColor* editingEnabledBackgroundColor;
 
