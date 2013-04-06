@@ -8,6 +8,8 @@
 
 #import "EditableTextView.h"
 
+#include "AppDelegate.h"
+
 @interface EditableTextView()<UITextViewDelegate>
 
 @end
@@ -19,6 +21,8 @@
     UIEdgeInsets textEdgeInset;
     BOOL textSingleLine;
     int textMaxLength;
+    UITapGestureRecognizer *tap;
+    UISwipeGestureRecognizer *swipe;
 }
 
 - (id)initWithFont:(UIFont*)font edgeInset:(UIEdgeInsets)edgeInset restrictSingleLine:(BOOL)singleLine maxTextLength:(int)maxTextLength
@@ -32,6 +36,11 @@
         textMaxLength = maxTextLength;
     }
     return self;
+}
+
+- (void)loseFocus
+{
+    [descriptionTextView resignFirstResponder];
 }
 
 - (void)layoutSubviews
@@ -80,6 +89,31 @@
     descriptionTextView.text = newText;
     descriptionTextView.contentOffset = CGPointMake(-descriptionTextView.contentInset.left, -descriptionTextView.contentInset.top);
     [self setNeedsLayout];
+}
+
+- (UIViewController*)getTopViewController
+{
+    AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//    UIViewController* vc = appDelegate.tabBarController.selectedViewController;
+//    UINavigationController* nc =  (UINavigationController*)vc;
+//    UIViewController* vcc = nc.topViewController;
+    return ((UINavigationController*)appDelegate.tabBarController.selectedViewController).topViewController;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    
+    [[self getTopViewController].view addGestureRecognizer:tap];
+    [[self getTopViewController].view addGestureRecognizer:swipe];
+}
+
+-(void)dismissKeyboard
+{
+    [descriptionTextView resignFirstResponder];
+    [[self getTopViewController].view removeGestureRecognizer:tap];
+    [[self getTopViewController].view removeGestureRecognizer:swipe];
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView

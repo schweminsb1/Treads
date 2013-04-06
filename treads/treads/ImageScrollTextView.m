@@ -11,6 +11,7 @@
 @implementation ImageScrollTextView {
     BOOL layoutDone;
     UITextView* descriptionTextView;
+    int displayIndex;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -49,8 +50,9 @@
     [self addSubview:descriptionTextView];
 }
 
-- (void)setDisplayItem:(NSObject *)displayItem
+- (void)setDisplayItem:(NSObject *)displayItem index:(int)index
 {
+    displayIndex = index;
     if (!layoutDone) {
         [self layoutSubviews];
     }

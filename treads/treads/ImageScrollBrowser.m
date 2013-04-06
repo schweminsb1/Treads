@@ -66,6 +66,8 @@
     [imageScrollView setContentSize:CGSizeMake(imageSubViewCount*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width*2, imageScrollView.bounds.size.height)];
     
     [displayView setFrame:CGRectMake(0, imageSubViewSize.height, self.bounds.size.width, self.bounds.size.height - imageSubViewSize.height)];
+    
+    [displayView setNeedsLayout];
 }
 
 - (void)createAndAddSubviews
@@ -162,12 +164,12 @@
         if (displayedTextIndex != index && index >= 0 && index < self.displayItems.count) {
             id<ImageScrollDisplayableItem> displayItem = (id<ImageScrollDisplayableItem>)self.displayItems[index];
             displayedTextIndex = index;
-            [displayView setDisplayItem:[displayItem displayItem]];
+            [displayView setDisplayItem:[displayItem displayItem] index:index];
             [self setNeedsLayout];
         }
         else if (self.displayItems.count == 0) {
             displayedTextIndex = -1;
-            [displayView setDisplayItem:nil];
+            [displayView setDisplayItem:nil index:-1];
             [self setNeedsLayout];
         }
     }

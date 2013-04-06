@@ -10,6 +10,7 @@
 
 #import "ImageScrollBrowser.h"
 #import "ImageScrollTextView.h"
+#import "ImageScrollEditableTextView.h"
 
 #import "TripLocation.h"
 #import "TripLocationItem.h"
@@ -23,6 +24,7 @@
     UIImageView* locationMapView;
     UIView* locationTextBackgroundView;
     ImageScrollBrowser* imageScrollBrowser;
+    ImageScrollEditableTextView* imageScrollEditableTextView;
     //UIImageView* tripFeaturedImage;
     //UILabel* tripNameLabel;
     //UILabel* tripDatesLabel;
@@ -78,6 +80,8 @@
 
 - (void)createAndAddSubviews
 {
+    TripViewerLocationCell* __weak _self = self;
+    
     //bgrView = [[UIView alloc] init];
     //bgrView.backgroundColor = [AppColors tertiaryBackgroundColor];
     //[self addSubview:bgrView];
@@ -109,7 +113,12 @@
     locationMapView.clipsToBounds = YES;
     
     //imageScrollBrowser = [[ImageScrollBrowser alloc] init];
-    imageScrollBrowser = [[ImageScrollBrowser alloc] initWithImageSize:CGSizeMake(540, 360) displayView:[[ImageScrollTextView alloc] init]];
+    //ImageScrollTextView* imageScrollTextView = [[ImageScrollTextView alloc] init];
+    imageScrollEditableTextView = [[ImageScrollEditableTextView alloc] init];
+    imageScrollEditableTextView.editingEnabled = ^BOOL(){return _self.editingEnabled();};
+    imageScrollEditableTextView.markChangeMade = ^(){_self.markChangeMade();};
+    
+    imageScrollBrowser = [[ImageScrollBrowser alloc] initWithImageSize:CGSizeMake(540, 360) displayView:imageScrollEditableTextView];
     
     [subView addSubview:locationMapView];
     [subView addSubview:locationTextBackgroundView];
@@ -132,6 +141,9 @@
     locationDescriptionTextView.contentOffset = CGPointZero;
     
     imageScrollBrowser.displayItems = tripLocation.tripLocationItems;
+    imageScrollEditableTextView.textWasChanged = ^(NSString* newText, int index){
+        ((TripLocationItem*)tripLocation.tripLocationItems[index]).description = newText;
+    };
 }
 
 @end
