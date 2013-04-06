@@ -195,6 +195,11 @@
     changesMade = YES;
 }
 
+- (void)clearChangesFlag
+{
+    changesMade = NO;
+}
+
 - (BOOL)changesWereMade
 {
     return changesMade;

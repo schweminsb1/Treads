@@ -19,7 +19,7 @@
 
 #import "AppColors.h"
 
-@interface MyTripsVC ()
+@interface MyTripsVC()
 
 @property (strong) TripService* tripService;
 @property (strong) TripBrowser* browser;
@@ -91,7 +91,7 @@
 
 - (void)showTrip:(Trip*)trip
 {
-    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil tripService:self.tripService tripID:trip.tripID];
+    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID];
     [self.navigationController pushViewController:tripViewVC animated:YES];
 }
 
