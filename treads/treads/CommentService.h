@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "TreadsService.h"
+#import "UserService.h"
 
 @class DataRepository;
 @class Comment;
 @interface CommentService : NSObject<TreadsService>
 
 //protocol
+@property UserService * userService;
 @property (strong) DataRepository* dataRepository;
 @property (copy) NSString* dataTableIdentifier;
 

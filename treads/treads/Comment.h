@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "User.h"
 
 @interface Comment : NSObject
 
@@ -14,5 +15,9 @@
 @property NSString * CommentID;
 @property NSString * LocationID;
 @property NSString * UserID;
+
+
+//filled with UserService
+@property User * commentsUser;
 
 @end

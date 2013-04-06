@@ -8,6 +8,7 @@
 
 #import "LocationVC.h"
 #import "Comment.h"
+#import "CommentCell.h"
 @interface LocationVC ()
 @property NSMutableArray * commentModels;
 @end
@@ -23,7 +24,12 @@
         _commentService = service;
         _model=model;
         [_commentService getCommentInLocation:[model.idField intValue] forTarget:self withAction:@selector(getModels:)];
-  
+        
+        CGRect commentEnterRect = CGRectMake(_commentTable.frame.origin.x, _commentTable.frame.origin.y -50, _commentTable.frame.size.width, 50);
+        _commentEnterCell = [[CommentEnterBox alloc] initWithFrame:commentEnterRect];
+        [self.view addSubview:_commentEnterCell];
+        
+        
     }
     else
     {
@@ -44,6 +50,7 @@
     
     self.description.text= _model.description;
      
+    
     
     // Do any additional setup after loading the view from its nib.
 }
@@ -66,6 +73,7 @@
 -(void)getModels: (NSArray*) items
 {
     _commentModels=(NSMutableArray *)items;
+    //get users, and fill comentModel
     [_commentTable reloadData];
     
 }
@@ -82,18 +90,25 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CELL"];
-    cell.userInteractionEnabled = NO;
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL"];
-        cell.userInteractionEnabled = NO;
+    //UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CELL"];
+    CommentCell * ccell= [tableView dequeueReusableCellWithIdentifier:@"CELL"];
+    
+    if (!ccell) {
+        ccell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL" withCommentModel:((Comment *)_commentModels[indexPath.row])];
+        
         //[cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
         //[cell setAutoresizesSubviews:YES];
     }
     
-    cell.textLabel.text= ((Comment *)_commentModels[indexPath.row]).comment;
-    
-    return cell;
+       return ccell;
 }
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 100;
+    
+}
+
 
 @end
