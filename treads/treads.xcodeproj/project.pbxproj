@@ -38,6 +38,7 @@
 		318BA1B516C9E66800700BB8 /* MapsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 318BA1B316C9E66800700BB8 /* MapsVC.m */; };
 		318BA1B616C9E66800700BB8 /* MapsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 318BA1B416C9E66800700BB8 /* MapsVC.xib */; };
 		318D8C3716CA9509005A42F6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 318D8C3516CA94E1005A42F6 /* MapKit.framework */; };
+		31EC36E71710789E0039FAED /* TripLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 31EC36E61710789E0039FAED /* TripLocationService.m */; };
 		3914480B16EE4B20001B16BE /* mountains.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 3914480A16EE4B20001B16BE /* mountains.jpeg */; };
 		39164F5316EA91C200877549 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39164F5216EA91C200877549 /* CoreLocation.framework */; };
 		39164F5716EA92C600877549 /* TripViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39164F5516EA92C600877549 /* TripViewVC.m */; };
@@ -128,6 +129,8 @@
 		318BA1B316C9E66800700BB8 /* MapsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapsVC.m; sourceTree = "<group>"; };
 		318BA1B416C9E66800700BB8 /* MapsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapsVC.xib; sourceTree = "<group>"; };
 		318D8C3516CA94E1005A42F6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		31EC36E51710789E0039FAED /* TripLocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripLocationService.h; path = treads/TripLocationService.h; sourceTree = SOURCE_ROOT; };
+		31EC36E61710789E0039FAED /* TripLocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripLocationService.m; path = treads/TripLocationService.m; sourceTree = SOURCE_ROOT; };
 		3914480A16EE4B20001B16BE /* mountains.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = mountains.jpeg; path = treads/mountains.jpeg; sourceTree = SOURCE_ROOT; };
 		39164F5216EA91C200877549 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		39164F5416EA92C600877549 /* TripViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripViewVC.h; path = treads/TripViewVC.h; sourceTree = SOURCE_ROOT; };
@@ -464,6 +467,8 @@
 				29241802170E4CE100BB9FAE /* CommentService.m */,
 				29241804170E645200BB9FAE /* UserService.h */,
 				29241805170E645200BB9FAE /* UserService.m */,
+				31EC36E51710789E0039FAED /* TripLocationService.h */,
+				31EC36E61710789E0039FAED /* TripLocationService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -652,6 +657,7 @@
 				29241803170E4CE100BB9FAE /* CommentService.m in Sources */,
 				29241806170E645200BB9FAE /* UserService.m in Sources */,
 				29241809170E651900BB9FAE /* User.m in Sources */,
+				31EC36E71710789E0039FAED /* TripLocationService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
