@@ -8,7 +8,7 @@
 
 #import "UserService.h"
 #import "User.h"
-#include "DataRepository.h"
+#import "DataRepository.h"
 
 @implementation UserService
 
@@ -30,7 +30,7 @@
         user.fname          =       returnData[i][@"Fname"];
         user.emailaddress   =       returnData[i][@"emailAddress"];
         user.lname          =       returnData[i][@"Lname"];
-        user.User_ID        =       (int)returnData[i][@"userID"];
+        user.User_ID        =       (int)returnData[i][@"id"];
         user.profilePictureID=      (int)returnData[i][@"profilePhotoID"];
         [results addObject: user];
     }
@@ -42,15 +42,34 @@
 - (void)getUserbyID:(int)UserID forTarget:(NSObject *)target withAction:(SEL)returnAction
 {
     
-    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"UserID = '%d'", UserID] usingService:self forRequestingObject:target withReturnAction:returnAction];
+    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"id = '%d'", UserID] usingService:self forRequestingObject:target withReturnAction:returnAction];
     
+    
+}
+-(NSArray *)getUserbyID:(int)UserID withReturnItems: (NSArray *)itm
+{
+    __block NSArray * objects;
+    __block BOOL completed=false;
+    CompletionWithItems completion= ^(NSArray * items){
+        completed=true;
+        objects=items;
+        
+    };
+    
+    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"id = '%d'", UserID] usingService:self withReturnBlock:completion];
+    while(!completed)
+    {}
+    
+    
+    
+    return objects;
     
 }
 
 - (void)getUserbyEmail:(NSString *)emailAddress forTarget:(NSObject *)target withAction:(SEL)returnAction
 {
     
-    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"emailAdress = '%@'", emailAddress] usingService:self forRequestingObject:target withReturnAction:returnAction];
+    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"id = '%@'", emailAddress] usingService:self forRequestingObject:target withReturnAction:returnAction];
     
     
 }

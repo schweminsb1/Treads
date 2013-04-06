@@ -25,6 +25,6 @@
 
 - (void) getLocationsOrdered: (MSReadQueryBlock) getAll;
 
-- (NSMutableArray *) getCommentsFromLocationID: (NSString*)locationID;
+
 
 @end
