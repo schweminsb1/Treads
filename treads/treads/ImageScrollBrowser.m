@@ -19,6 +19,7 @@
 
 @implementation ImageScrollBrowser {
     BOOL layoutDone;
+    BOOL resetOnDisplay;
     UIScrollView* imageScrollView;
     UIImageView* imageScrollPaddingLeft;
     UIImageView* imageScrollPaddingRight;
@@ -39,6 +40,7 @@
     self = [super init];
     if (self) {
         layoutDone = NO;
+        resetOnDisplay = YES;
         imageSubViewSize = size;
         displayView = initializedDisplayView;
         addItemView = addView;
@@ -94,10 +96,10 @@
     imageScrollView.delegate = self;
     
     imageScrollPaddingLeft = [[UIImageView alloc] init];
-    imageScrollPaddingLeft.backgroundColor = [AppColors blankItemBackgroundColor];
+    imageScrollPaddingLeft.backgroundColor = [AppColors secondaryBackgroundColor];
     
     imageScrollPaddingRight = [[UIImageView alloc] init];
-    imageScrollPaddingRight.backgroundColor = [AppColors blankItemBackgroundColor];
+    imageScrollPaddingRight.backgroundColor = [AppColors secondaryBackgroundColor];
     
     [imageScrollView addSubview:imageScrollPaddingLeft];
     [imageScrollView addSubview:imageScrollPaddingRight];
@@ -151,10 +153,21 @@
     }
     imageSubViewCount = imageSubViews.count;
     
-    imageScrollView.contentOffset = CGPointZero;
     
-    displayedTextIndex = -1;
-    [self setDescriptionDisplayToIndex:0];
+    if (resetOnDisplay) {
+        imageScrollView.contentOffset = CGPointZero;
+        displayedTextIndex = -1;
+        [self setDescriptionDisplayToIndex:0];
+    }
+    else {
+        if (imageScrollView.contentOffset.x / imageSubViewSize.width == displayedTextIndex) {
+            displayedTextIndex--;
+            [self setDescriptionDisplayToIndex:displayedTextIndex+1];
+        }
+    }
+    
+    resetOnDisplay = YES;
+    
     
     [self setNeedsLayout];
 }
@@ -185,9 +198,14 @@
             [displayView setDisplayItem:[displayItem displayItem] index:index];
             [self setNeedsLayout];
         }
-        else if (self.displayItems.count == 0 || (self.editingEnabled()&&index==self.displayItems.count)) {
+        else if (self.displayItems.count == 0 /*|| (self.editingEnabled()&&index==self.displayItems.count)*/) {
             displayedTextIndex = -1;
             [displayView setDisplayItem:nil index:-1];
+            [self setNeedsLayout];
+        }
+        else if (self.editingEnabled()&&index==self.displayItems.count) {
+            displayedTextIndex = index;
+            [displayView setDisplayItem:nil index:index];
             [self setNeedsLayout];
         }
     }
@@ -202,6 +220,9 @@
 {
     NSMutableArray* temp = [NSMutableArray arrayWithArray:self.displayItems];
     [temp addObject:item];
+    resetOnDisplay = NO;
+    displayedTextIndex = self.displayItems.count;
+    [imageScrollView setContentOffset:CGPointMake(displayedTextIndex*imageSubViewSize.width, 0) animated:YES];
     self.arrayWasChanged(temp);
     self.displayItems = temp;
 }
