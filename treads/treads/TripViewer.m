@@ -107,7 +107,8 @@
     else {[viewerTable setBackgroundColor:[AppColors secondaryBackgroundColor]];}
     
     //change cells' editing status
-    [self setNeedsDisplay];
+    //[self setNeedsDisplay];
+    [viewerTable reloadData];
 }
 
 - (void)displayTripLoadFailure
@@ -119,6 +120,12 @@
 - (Trip*)getViewerTrip
 {
     return trip;
+}
+
+- (void)prepareForExit
+{
+    //resign all first responders
+    //[self setEditingEnabled:NO];
 }
 
 - (void)clearAndWait
@@ -179,7 +186,7 @@
             cell = [[TripViewerAddCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[TripViewer addCellIdentifer]];
         }
         //fill out data
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
     else {
@@ -209,7 +216,30 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (editingEnabled && indexPath.row == trip.tripLocations.count + 1) {
+        //add new location
+        //at some point this will need to be converted to an async call/request function
+        TripLocation* dummyLocation = [[TripLocation alloc] init];
+        dummyLocation.tripLocationID = trip.tripLocations.count;
+        dummyLocation.tripID = trip.tripID;
+        dummyLocation.locationID = trip.tripLocations.count;
+        dummyLocation.description = @"New location";
+        dummyLocation.tripLocationItems = [[NSArray alloc] init];
+        [self addLocationToCurrentTrip:dummyLocation];
+    }
     return;
+}
+
+- (void)addLocationToCurrentTrip:(TripLocation*)newLocation
+{
+    NSMutableArray* temp = [NSMutableArray arrayWithArray:trip.tripLocations];
+    [temp addObject:newLocation];
+    
+    trip.tripLocations = temp;
+    [self markChangeMade];
+    [viewerTable reloadData];
+    //[viewerTable setContentOffset:CGPointMake(0, viewerTable.contentOffset.y + 620) animated:YES];
+    [viewerTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:trip.tripLocations.count inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -237,8 +267,10 @@
     if (indexPath.row == 0) {
         return 480 + cellVerticalPadding;
     }
+    else if (editingEnabled && indexPath.row == trip.tripLocations.count + 1) {
+        return 150 + cellVerticalPadding;
+    }
     return 620 + cellVerticalPadding;
-    //return [self tableView:tableView cellForRowAtIndexPath:indexPath].bounds.size.height + cellVerticalPadding;
 }
 
 @end

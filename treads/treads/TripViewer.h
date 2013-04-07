@@ -23,6 +23,7 @@
 - (BOOL)changesWereMade;
 
 - (Trip*)getViewerTrip;
+- (void)prepareForExit;
 
 - (void)clearAndWait;
 

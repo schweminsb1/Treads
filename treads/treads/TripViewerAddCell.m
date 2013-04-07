@@ -8,7 +8,10 @@
 
 #import "TripViewerAddCell.h"
 
-@implementation TripViewerAddCell
+@implementation TripViewerAddCell {
+    BOOL layoutDone;
+    UIView* subView;
+}
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -24,6 +27,27 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    if (!layoutDone) {
+        //add subviews if layout has not been set
+        [self createAndAddSubviews];
+        layoutDone = YES;
+    }
+    
+    //set frames of subviews
+    [subView setFrame:CGRectMake(24, 8, self.bounds.size.width-48, 150)];
+}
+
+- (void)createAndAddSubviews
+{
+    subView = [[UIView alloc] init];
+    subView.backgroundColor = [AppColors toolbarColor];
+    [self addSubview:subView];
 }
 
 @end

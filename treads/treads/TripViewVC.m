@@ -132,6 +132,7 @@
 
 - (void)goBack:(id)sender
 {
+    [self.viewer prepareForExit];
     if ([self.viewer getViewerTrip] != nil && [self.viewer changesWereMade]) {
         //save trip changes if any were made
         [self.tripService updateTrip:[self.viewer viewerTrip] forTarget:self withAction:@selector(changesSavedTo:successfully:)];

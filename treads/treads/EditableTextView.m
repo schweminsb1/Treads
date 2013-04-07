@@ -106,14 +106,14 @@
     swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     
     [[self getTopViewController].view addGestureRecognizer:tap];
-    [[self getTopViewController].view addGestureRecognizer:swipe];
+    //[[self getTopViewController].view addGestureRecognizer:swipe];
 }
 
 -(void)dismissKeyboard
 {
     [descriptionTextView resignFirstResponder];
     [[self getTopViewController].view removeGestureRecognizer:tap];
-    [[self getTopViewController].view removeGestureRecognizer:swipe];
+    //[[self getTopViewController].view removeGestureRecognizer:swipe];
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView

@@ -96,10 +96,10 @@
     imageScrollView.delegate = self;
     
     imageScrollPaddingLeft = [[UIImageView alloc] init];
-    imageScrollPaddingLeft.backgroundColor = [AppColors secondaryBackgroundColor];
+    imageScrollPaddingLeft.backgroundColor = [AppColors blankItemBackgroundColor];
     
     imageScrollPaddingRight = [[UIImageView alloc] init];
-    imageScrollPaddingRight.backgroundColor = [AppColors secondaryBackgroundColor];
+    imageScrollPaddingRight.backgroundColor = [AppColors blankItemBackgroundColor];
     
     [imageScrollView addSubview:imageScrollPaddingLeft];
     [imageScrollView addSubview:imageScrollPaddingRight];
