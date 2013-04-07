@@ -111,7 +111,7 @@
     }
     else if(indexPath.row >0)
     {
-         ccell= [tableView dequeueReusableCellWithIdentifier:@"CELL"];
+         //ccell= [tableView dequeueReusableCellWithIdentifier:@"CELL"];
         if (!ccell)
         {
             ccell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL" withCommentModel:((Comment *)_commentModels[(_commentModels.count)-(indexPath.row)])];
