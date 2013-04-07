@@ -7,6 +7,8 @@
 //
 
 #import "CommentEnterCell.h"
+#import "AppColors.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation CommentEnterCell
 
@@ -15,44 +17,68 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+     
+
     }
     return self;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
-    [super setSelected:selected animated:animated];
+    
 
     // Configure the view for the selected state
 }
 
 -(void) layoutSubviews
 {
+    [self setBackgroundColor: [AppColors mainBackgroundColor]];
     [super layoutSubviews];
     [super layoutSubviews];
-    
-    CGRect imageRect= CGRectMake(self.bounds.origin.x+5, self.bounds.origin.y+5, 50, self.bounds.size.height-10);
+    UIImage * img=[UIImage imageNamed:@"mountains.jpeg"];
+    CGRect imageRect= CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.height, self.bounds.size.height);
     _profilePicture =[[UIImageView alloc] initWithFrame: imageRect];
-    _profilePicture.image = [UIImage imageNamed:@"mountains.jpeg"];
+    _profilePicture.image = img;
     
-    CGRect buttonBounds= CGRectMake(self.bounds.origin.x+ self.bounds.size.width -80, self.bounds.origin.y+10, 40, self.bounds.size.height-20);
-    _postButton = [[UIButton alloc] initWithFrame:buttonBounds];
-    [_postButton setTitle: @"myTitle" forState: UIControlStateNormal];
-    [_postButton setTitle: @"myTitle" forState: UIControlStateApplication];
-    [_postButton setTitle: @"myTitle" forState: UIControlStateHighlighted];
-    [_postButton setTitle: @"myTitle" forState: UIControlStateReserved];
-    [_postButton setTitle: @"myTitle" forState: UIControlStateSelected];
-    [_postButton setTitle: @"myTitle" forState: UIControlStateDisabled];
+    CGRect textRect= CGRectMake(imageRect.origin.x + imageRect.size.width + 1, self.bounds.origin.y, 550, self.bounds.size.height-1);
+    
+    CGRect buttonBounds= CGRectMake(textRect.origin.x + textRect.size.width + 1, self.bounds.origin.y, 90, self.bounds.size.height);
+    _postButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    _postButton.frame=buttonBounds;
+ 
+    [_postButton setTitle: @"Post" forState: UIControlStateNormal];
+    [_postButton setTitle: @"Post" forState: UIControlStateApplication];
+    [_postButton setTitle: @"Post" forState: UIControlStateHighlighted];
+    [_postButton setTitle: @"Post" forState: UIControlStateReserved];
+    [_postButton setTitle: @"Post" forState: UIControlStateSelected];
+    [_postButton setTitle: @"Post" forState: UIControlStateDisabled];
     
     
-    CGRect textRect= CGRectMake(imageRect.origin.x + imageRect.size.width + 5, self.bounds.origin.y+5, 200, self.bounds.size.height-10);
+    [_postButton setHidden:NO];
+    [_postButton setTitleColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] forState:UIControlStateNormal];
+        [_postButton setTitleColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] forState:UIControlStateApplication];
+        [_postButton setTitleColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] forState:UIControlStateHighlighted];
+        [_postButton setTitleColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] forState:UIControlStateReserved];
+        [_postButton setTitleColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] forState:UIControlStateSelected];
+        [_postButton setTitleColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] forState:UIControlStateDisabled];
+     
     
     _enterField= [[UITextView alloc] initWithFrame:textRect];
     [_enterField setEditable: YES];
     
+    _enterField.layer.borderColor = [[UIColor grayColor] CGColor];
+    _enterField.layer.borderWidth = 1;
+    
     [self addSubview:_profilePicture];
-    [self addSubview:_postButton];
+ 
     [self addSubview:_enterField];
+    
+       [self addSubview:_postButton];
+    
+    [_profilePicture setNeedsDisplay];
+    [_enterField setNeedsDisplay];
+    [_postButton setNeedsDisplay];
+    
     
 
 }

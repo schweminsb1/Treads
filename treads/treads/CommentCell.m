@@ -38,13 +38,13 @@
     
     [super layoutSubviews];
     
-    CGRect imageRect= CGRectMake(self.bounds.origin.x+5, self.bounds.origin.y+5, 50, self.bounds.size.height-10);
+    CGRect imageRect= CGRectMake(self.bounds.origin.x+5, self.bounds.origin.y+5, self.bounds.size.height-20, self.bounds.size.height-20);
     
     _profileImage =[[UIImageView alloc] initWithFrame: imageRect];
     _profileImage.image = [UIImage imageNamed:@"mountains.jpeg"];
     
-    _commentField = [[UITextView alloc] initWithFrame:CGRectMake(imageRect.origin.x+ imageRect.size.width + 5, self.bounds.origin.y+5, 200, self.bounds.size.height-10)];
-    _commentField.text = [NSString stringWithFormat:@"Sam Schwemin says: \n  %@",  _commentModel.comment ];
+    _commentField = [[UITextView alloc] initWithFrame:CGRectMake(imageRect.origin.x+ imageRect.size.width + 1, self.bounds.origin.y, 550, self.bounds.size.height-1)];
+    _commentField.text = [NSString stringWithFormat:@"Sam Schwemin says: \n \n \t %@",  _commentModel.comment ];
     
     
     [self addSubview:_profileImage];

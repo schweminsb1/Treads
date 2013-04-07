@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Comment.h"
 #import "CommentService.h"
-#import "CommentEnterBox.h"
+
 #import "Location.h"
 
 @interface CommentBox : UIView  <UITableViewDataSource>
@@ -18,7 +18,7 @@
 @property CommentService * commentService;
 
 @property UITableView * commentTable;
-@property CommentEnterBox * commentEnterCell;
+
 
 @property NSArray * commentModels;
 

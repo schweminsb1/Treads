@@ -9,6 +9,7 @@
 #import "LocationVC.h"
 #import "Comment.h"
 #import "CommentCell.h"
+#import "CommentEnterCell.h"
 @interface LocationVC ()
 @property NSMutableArray * commentModels;
 @end
@@ -85,19 +86,33 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _commentModels.count;
+    return _commentModels.count + 1;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CELL"];
-    CommentCell * ccell= [tableView dequeueReusableCellWithIdentifier:@"CELL"];
+    UITableViewCell * ccell= [tableView dequeueReusableCellWithIdentifier:@"CELL"];
     
-    if (!ccell) {
-        ccell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL" withCommentModel:((Comment *)_commentModels[indexPath.row])];
+    
+    if(indexPath.row == 0)
+    {
         
+        if (!ccell)
+        {
+            ccell = [[CommentEnterCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL" ];
+            //[cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+            //[cell setAutoresizesSubviews:YES];
+        }
+    }
+    else if(indexPath.row >0)
+    {
+        if (!ccell)
+        {
+            ccell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL" withCommentModel:((Comment *)_commentModels[indexPath.row-1])];
         //[cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
         //[cell setAutoresizesSubviews:YES];
+        }
     }
     
        return ccell;
@@ -107,6 +122,11 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 100;
+    
+}
+
+- (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) indexPath {
+    
     
 }
 
