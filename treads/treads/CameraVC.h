@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 
-@interface CameraVC : UIViewController
-
+@interface CameraVC : UIImagePickerController
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker;
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info;
+- (void)image:(UIImage *)image finishedSavingWithError:(NSError *)error contextInfo:(void *)contextInfo;
 @end

@@ -46,6 +46,7 @@
 		39164F5D16EAA3E000877549 /* AddLocationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39164F5B16EAA3E000877549 /* AddLocationVC.m */; };
 		39164F5E16EAA3E000877549 /* AddLocationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39164F5C16EAA3E000877549 /* AddLocationVC.xib */; };
 		395CD5EE16F03EEA009FD655 /* LocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 395CD5ED16F03EEA009FD655 /* LocationService.m */; };
+		3973FE4C1710AC6000D4AAE1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3973FE4B1710AC6000D4AAE1 /* MobileCoreServices.framework */; };
 		3C094FA716EFF74700C537B1 /* TreadsSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C094FA616EFF74700C537B1 /* TreadsSession.m */; };
 		3C12312416EFCB89006CCBFE /* DataRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C12312316EFCB89006CCBFE /* DataRepository.m */; };
 		3C12312716EFCB98006CCBFE /* ProfileService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C12312616EFCB98006CCBFE /* ProfileService.m */; };
@@ -143,6 +144,7 @@
 		39164F5C16EAA3E000877549 /* AddLocationVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddLocationVC.xib; path = treads/AddLocationVC.xib; sourceTree = SOURCE_ROOT; };
 		395CD5EC16F03EEA009FD655 /* LocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationService.h; path = treads/LocationService.h; sourceTree = SOURCE_ROOT; };
 		395CD5ED16F03EEA009FD655 /* LocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationService.m; path = treads/LocationService.m; sourceTree = SOURCE_ROOT; };
+		3973FE4B1710AC6000D4AAE1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		3C04028C16F6B8CA0030D8BA /* TreadsService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TreadsService.h; path = treads/TreadsService.h; sourceTree = SOURCE_ROOT; };
 		3C094FA516EFF74700C537B1 /* TreadsSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreadsSession.h; path = treads/TreadsSession.h; sourceTree = SOURCE_ROOT; };
 		3C094FA616EFF74700C537B1 /* TreadsSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreadsSession.m; path = treads/TreadsSession.m; sourceTree = SOURCE_ROOT; };
@@ -211,6 +213,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3973FE4C1710AC6000D4AAE1 /* MobileCoreServices.framework in Frameworks */,
 				39164F5316EA91C200877549 /* CoreLocation.framework in Frameworks */,
 				3C95900816EA6DFE0038AD7C /* WindowsAzureMobileServices.framework in Frameworks */,
 				318D8C3716CA9509005A42F6 /* MapKit.framework in Frameworks */,
@@ -254,6 +257,7 @@
 		3188B15916C9CE17008E1D7F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3973FE4B1710AC6000D4AAE1 /* MobileCoreServices.framework */,
 				39164F5216EA91C200877549 /* CoreLocation.framework */,
 				3C95900716EA6DFE0038AD7C /* WindowsAzureMobileServices.framework */,
 				318D8C3516CA94E1005A42F6 /* MapKit.framework */,
