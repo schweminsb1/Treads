@@ -43,7 +43,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self.view setBackgroundColor:[AppColors mainBackgroundColor]];
     self.name.text = _model.title;
     
     self.lon.text = [NSString stringWithFormat:@"%f", _model.longitude ];
@@ -92,24 +92,29 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CELL"];
-    UITableViewCell * ccell= [tableView dequeueReusableCellWithIdentifier:@"CELL"];
+    UITableViewCell * ccell;
     
     
     if(indexPath.row == 0)
     {
-        
+          ccell= [tableView dequeueReusableCellWithIdentifier:@"CCELL"];
         if (!ccell)
         {
-            ccell = [[CommentEnterCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL" ];
+            ccell = [[CommentEnterCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CCELL" ];
+            CommentEnterCell * cell=(CommentEnterCell *)ccell;
+            cell.cellOwner=self;
+            cell.buttonCallBack= @selector(addCommentToTableFromUserWithComment:);
+            
             //[cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
             //[cell setAutoresizesSubviews:YES];
         }
     }
     else if(indexPath.row >0)
     {
+         ccell= [tableView dequeueReusableCellWithIdentifier:@"CELL"];
         if (!ccell)
         {
-            ccell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL" withCommentModel:((Comment *)_commentModels[indexPath.row-1])];
+            ccell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL" withCommentModel:((Comment *)_commentModels[(_commentModels.count)-(indexPath.row)])];
         //[cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
         //[cell setAutoresizesSubviews:YES];
         }
@@ -128,6 +133,19 @@
 - (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) indexPath {
     
     
+}
+
+-(void) addCommentToTableFromUserWithComment: (NSString *) comment
+{
+    Comment* newComment= [[Comment alloc]init];
+    newComment.comment=comment;
+    newComment.CommentID=[NSString stringWithFormat:@"'%d'", _commentModels.count ];
+    newComment.LocationID= _model.idField;
+    newComment.UserID= 0;
+    //Change to Correct User ID
+    [_commentModels addObject:newComment];
+    
+    [_commentTable reloadData];
 }
 
 

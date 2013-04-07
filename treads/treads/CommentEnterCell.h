@@ -8,11 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@class LocationVC;
 @interface CommentEnterCell : UITableViewCell
 
 @property UIImageView * profilePicture;
 @property UIButton * postButton;
 @property UITextView * enterField;
+
+@property LocationVC * cellOwner;
+@property SEL buttonCallBack;
 
 
 @end

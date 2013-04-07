@@ -17,6 +17,7 @@
 @property User    * userModel;
 @property Comment * commentModel;
 
+
 @property UIImageView * profileImage;
 @property UITextView * commentField;
 @property UILabel * userName;

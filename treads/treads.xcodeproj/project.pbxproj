@@ -18,6 +18,7 @@
 		29AB7C681710D341007D9F16 /* TripLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 29AB7C671710D341007D9F16 /* TripLocationService.m */; };
 		29AB7C6B171117B5007D9F16 /* CommentEnterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 29AB7C6A171117B4007D9F16 /* CommentEnterCell.m */; };
 		29AB7C6E17111A05007D9F16 /* CommentEnterBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 29AB7C6D17111A05007D9F16 /* CommentEnterBox.m */; };
+		29AB7C7517113596007D9F16 /* addCommentButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 29AB7C7417113596007D9F16 /* addCommentButton.m */; };
 		29C21B94170BA76D005B39E4 /* LocationSmallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C21B92170BA76D005B39E4 /* LocationSmallViewController.m */; };
 		29C21B95170BA76D005B39E4 /* LocationSmallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29C21B93170BA76D005B39E4 /* LocationSmallViewController.xib */; };
 		29C21B98170C9B6E005B39E4 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C21B97170C9B6E005B39E4 /* Location.m */; };
@@ -111,6 +112,8 @@
 		29AB7C6A171117B4007D9F16 /* CommentEnterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentEnterCell.m; path = treads/CommentEnterCell.m; sourceTree = SOURCE_ROOT; };
 		29AB7C6C17111A04007D9F16 /* CommentEnterBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentEnterBox.h; path = treads/CommentEnterBox.h; sourceTree = SOURCE_ROOT; };
 		29AB7C6D17111A05007D9F16 /* CommentEnterBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentEnterBox.m; path = treads/CommentEnterBox.m; sourceTree = SOURCE_ROOT; };
+		29AB7C7317113596007D9F16 /* addCommentButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = addCommentButton.h; path = treads/addCommentButton.h; sourceTree = SOURCE_ROOT; };
+		29AB7C7417113596007D9F16 /* addCommentButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = addCommentButton.m; path = treads/addCommentButton.m; sourceTree = SOURCE_ROOT; };
 		29C21B91170BA76D005B39E4 /* LocationSmallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationSmallViewController.h; path = treads/LocationSmallViewController.h; sourceTree = SOURCE_ROOT; };
 		29C21B92170BA76D005B39E4 /* LocationSmallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationSmallViewController.m; path = treads/LocationSmallViewController.m; sourceTree = SOURCE_ROOT; };
 		29C21B93170BA76D005B39E4 /* LocationSmallViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LocationSmallViewController.xib; path = treads/LocationSmallViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -267,6 +270,15 @@
 			name = "Editable Views";
 			sourceTree = "<group>";
 		};
+		29AB7C6F17113545007D9F16 /* buttons */ = {
+			isa = PBXGroup;
+			children = (
+				29AB7C7317113596007D9F16 /* addCommentButton.h */,
+				29AB7C7417113596007D9F16 /* addCommentButton.m */,
+			);
+			name = buttons;
+			sourceTree = "<group>";
+		};
 		316399B816ECB404003B3F0E /* EditTrip */ = {
 			isa = PBXGroup;
 			children = (
@@ -312,6 +324,7 @@
 		3188B16016C9CE17008E1D7F /* Treads */ = {
 			isa = PBXGroup;
 			children = (
+				29AB7C6F17113545007D9F16 /* buttons */,
 				3C8AC26A16E82BD10070271E /* Services */,
 				3C8AC26916E82AEB0070271E /* Repositories */,
 				3C8A908D16E7DFBB007F0BB8 /* Models */,
@@ -714,6 +727,7 @@
 				29AB7C681710D341007D9F16 /* TripLocationService.m in Sources */,
 				29AB7C6B171117B5007D9F16 /* CommentEnterCell.m in Sources */,
 				29AB7C6E17111A05007D9F16 /* CommentEnterBox.m in Sources */,
+				29AB7C7517113596007D9F16 /* addCommentButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

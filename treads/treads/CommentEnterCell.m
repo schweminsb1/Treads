@@ -9,6 +9,7 @@
 #import "CommentEnterCell.h"
 #import "AppColors.h"
 #import <QuartzCore/QuartzCore.h>
+#import "LocationVC.h"
 
 @implementation CommentEnterCell
 
@@ -45,6 +46,8 @@
     CGRect buttonBounds= CGRectMake(textRect.origin.x + textRect.size.width + 1, self.bounds.origin.y, 90, self.bounds.size.height);
     _postButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     _postButton.frame=buttonBounds;
+    
+    [_postButton addTarget:self action:@selector(fillButton) forControlEvents: UIControlEventTouchUpInside];
  
     [_postButton setTitle: @"Post" forState: UIControlStateNormal];
     [_postButton setTitle: @"Post" forState: UIControlStateApplication];
@@ -81,6 +84,12 @@
     
     
 
+}
+
+-(void)fillButton
+{
+    [_cellOwner performSelector:_buttonCallBack withObject:_enterField.text];
+    
 }
 
 @end
