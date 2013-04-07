@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ImageScrollEditableTextView : UIView
+#import "ImageScrollDisplayView.h"
+
+@interface ImageScrollEditableTextView : UIView<ImageScrollDisplayView> 
+
+//editing
+//-(void) setText:(NSString*)newText;
+@property (copy) void(^textWasChanged)(NSString* newText, int index);
+
+@property (copy) BOOL(^editingEnabled)();
+@property (copy) void(^markChangeMade)();
 
 @end

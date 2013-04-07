@@ -12,6 +12,6 @@
 @protocol ImageScrollDisplayView <NSObject>
 
 @required
-- (void)setDisplayItem:(NSObject*)displayItem;
+- (void)setDisplayItem:(NSObject*)displayItem index:(int)index;
 
 @end

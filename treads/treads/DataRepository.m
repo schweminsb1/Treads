@@ -53,6 +53,33 @@
     [queryTable readWithQueryString:[query queryStringOrError:&error] completion:queryCompletionBlock];
 }
 
+- (void)retrieveDataItemsMatching:(NSString*)predicateStringOrNil usingService:(id<TreadsService>)callingService  withReturnBlock:(CompletionWithItems)completion
+{
+    MSTable* queryTable = [self.client getTable:callingService.dataTableIdentifier];
+    MSQuery* query = [[MSQuery alloc] initWithTable:queryTable];
+    if (predicateStringOrNil != nil) {
+        [query setPredicate:[NSPredicate predicateWithFormat:predicateStringOrNil]];
+    }
+     __block  NSError* error = [[NSError alloc] init];
+    MSReadQueryBlock queryCompletionBlock = ^(NSArray* items, NSInteger totalCount, NSError *error) {
+        if (error == nil) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            completion(   [callingService convertReturnDataToServiceModel:items]);
+#pragma clang diagnostic pop
+        }
+        else
+        {
+            
+            [self logErrorIfNotNil:error];
+        }
+    };
+    
+  
+    
+    [queryTable readWithQueryString:[query queryStringOrError:&error] completion:queryCompletionBlock];
+}
+
 //updating
 
 - (void)createDataItem:(NSDictionary*)updateItem usingService:(id<TreadsService>)callingService forRequestingObject:(NSObject*)requestingObject withReturnAction:(SEL)returnAction

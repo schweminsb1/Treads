@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface TripLocationItem : NSObject
+#import "ImageScrollDisplayableItem.h"
+
+@interface TripLocationItem : NSObject<ImageScrollDisplayableItem>
 
 //identifiers
 @property int tripLocationItemID; //id

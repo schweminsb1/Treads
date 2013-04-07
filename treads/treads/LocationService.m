@@ -30,31 +30,6 @@
     [_dataRepository getLocationsOrdered:getAll];
 }
 
--(NSMutableArray *) getCommentsFromLocationID: (NSString*)locationID
-{
-    
-    __block NSMutableArray * results= [[NSMutableArray alloc] init];
-    MSReadQueryBlock completionBlock=^(NSArray * items, NSInteger totalCount, NSError * error){
-        //items should return a array of CommentDictionaries
-        
-        //parse items into a nsmutableArray of Comment model objects
-        
-        for ( int i=0; i< items.count; i++)
-        {
-            Comment * comment  = [[Comment alloc] init];
-            comment.comment    = items[i][@"comment"];
-            comment.CommentID  = items[i][@"commentID"];
-            comment.LocationID = items[i][@"LocationID"];
-            comment.UserID     = items[i][@"userID"];
-            
-            [results addObject: comment];
-        }
-      
-    };
-    
-    [_dataRepository getCommentsFromLocationID:locationID withBlock:completionBlock];
-    
-    
-}
+
 
 @end

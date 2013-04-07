@@ -19,6 +19,7 @@ typedef void (^CompletionBlock) ();
 typedef void (^CompletionWithIndexBlock) (NSUInteger index);
 typedef void (^CompletionWithMessagesBlock) (id messages);
 typedef void (^CompletionWithSasBlock) (NSString *sasUrl);
+typedef void (^CompletionWithItems)(NSArray * items);
 typedef void (^BusyUpdateBlock) (BOOL busy);
 
 @property MSClient* client;
@@ -44,6 +45,7 @@ typedef void (^BusyUpdateBlock) (BOOL busy);
 //retrieval
 - (void)retrieveDataItemsMatching:(NSString*)predicateStringOrNil usingService:(id<TreadsService>)callingService forRequestingObject:(NSObject*)requestingObject withReturnAction:(SEL)returnAction;
 
+- (void)retrieveDataItemsMatching:(NSString*)predicateStringOrNil usingService:(id<TreadsService>)callingService  withReturnBlock:(CompletionWithItems)completion;
 //creating, updating
 - (void)createDataItem:(NSDictionary*)updateItem usingService:(id<TreadsService>)callingService forRequestingObject:(NSObject*)requestingObject withReturnAction:(SEL)returnAction;
 
@@ -76,6 +78,7 @@ typedef void (^BusyUpdateBlock) (BOOL busy);
 - (void) refreshBlobsOnSuccess:(NSString *)containerName withCompletion:(CompletionBlock) completion;
 - (void) deleteBlob:(NSString *)blobName fromContainer:(NSString *)containerName withCompletion:(CompletionBlock) completion;
 - (void) getSasUrlForNewBlob:(NSString *)blobName forContainer:(NSString *)containerName withCompletion:(CompletionWithSasBlock) completion;
+
 
 
 

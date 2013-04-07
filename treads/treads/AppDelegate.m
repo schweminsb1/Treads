@@ -37,7 +37,12 @@
     
     //Initialize repositories
     self.dataRepository = [[DataRepository alloc] init];
-    
+    CompletionBlock comp= ^(){
+        
+        self.tripService = [[TripService alloc] initWithRepository:self.dataRepository];
+        
+    };
+    //[_dataRepository createContainer:@"TreadsContainer" withPublicSetting:YES withCompletion:comp];
     //Initialize services
     self.tripService = [[TripService alloc] initWithRepository:self.dataRepository];
     
