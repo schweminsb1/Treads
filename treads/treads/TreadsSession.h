@@ -12,11 +12,17 @@
 
 
 @property NSString * treadsUser;
+@property int treadsUserID;
 
 -(id) initWithAuthenticatedUser: (NSString *)user;
 -(BOOL) Login;
 -(BOOL) Logout;
 -(NSString * ) valueOfFile;
+
++(TreadsSession*) instance ;
++(BOOL) Login;
++(BOOL) Logout;
++(NSString * ) valueOfFile;
 
 
 @end

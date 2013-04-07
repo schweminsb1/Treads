@@ -110,12 +110,15 @@
                     
                     if([[_usernameText.text lowercaseString]isEqual: [items[0][@"emailAddress"] lowercaseString]]&& [[self getPasswordHash:_passwordText.text] isEqual: items[0][@"password"]])
                     {
-                        
+                        int userID= items[0][@"id"];
                         @try
                         {
                             //This inits a treadssession
-                             _treadsSession = [[TreadsSession new]initWithAuthenticatedUser: [NSString stringWithString:(NSString *)[items[0][@"emailAddress"] lowercaseString]]];
-                           if([_treadsSession Login])
+                            [TreadsSession instance].treadsUser=[items[0][@"emailAddress"] lowercaseString];
+                            [TreadsSession instance].treadsUserID  = userID;
+                            
+                            // _treadsSession = [[TreadsSession new]initWithAuthenticatedUser: [NSString stringWithString:(NSString *)[items[0][@"emailAddress"] lowercaseString]]];
+                           if([TreadsSession Login])
                            {
                                _appDelegate.window.rootViewController= _appDelegate.tabBarController;
                            }
