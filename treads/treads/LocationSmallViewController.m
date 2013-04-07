@@ -41,6 +41,8 @@
     // Do any additional setup after loading the view from its nib.
     CGSize  size= _scrollView.frame.size;
     //add subView
+    
+    /*
     ImageScrollBrowser * scrollbrowse= [[ImageScrollBrowser alloc]initWithImageSize: size displayView:nil addItemView:nil];
     [scrollbrowse setFrame:CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + 200 , self.view.bounds.size.width, 550)];
     [scrollbrowse setNeedsLayout];
@@ -53,6 +55,8 @@
     
     scrollbrowse.displayItems= triplocationItems;
     [_scrollView addSubview: scrollbrowse];
+     
+     */
 }
 
 - (void)didReceiveMemoryWarning
