@@ -17,6 +17,7 @@
 		29AB7C621710D30C007D9F16 /* CommentBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 29AB7C611710D30C007D9F16 /* CommentBox.m */; };
 		29AB7C651710D328007D9F16 /* ImageScrollEditableTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29AB7C641710D328007D9F16 /* ImageScrollEditableTextView.m */; };
 		29AB7C681710D341007D9F16 /* TripLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 29AB7C671710D341007D9F16 /* TripLocationService.m */; };
+		29AB7C6B171117B5007D9F16 /* CommentEnterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 29AB7C6A171117B4007D9F16 /* CommentEnterCell.m */; };
 		29C21B94170BA76D005B39E4 /* LocationSmallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C21B92170BA76D005B39E4 /* LocationSmallViewController.m */; };
 		29C21B95170BA76D005B39E4 /* LocationSmallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 29C21B93170BA76D005B39E4 /* LocationSmallViewController.xib */; };
 		29C21B98170C9B6E005B39E4 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C21B97170C9B6E005B39E4 /* Location.m */; };
@@ -108,6 +109,8 @@
 		29AB7C641710D328007D9F16 /* ImageScrollEditableTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageScrollEditableTextView.m; path = treads/ImageScrollEditableTextView.m; sourceTree = SOURCE_ROOT; };
 		29AB7C661710D341007D9F16 /* TripLocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripLocationService.h; path = treads/TripLocationService.h; sourceTree = SOURCE_ROOT; };
 		29AB7C671710D341007D9F16 /* TripLocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripLocationService.m; path = treads/TripLocationService.m; sourceTree = SOURCE_ROOT; };
+		29AB7C69171117B3007D9F16 /* CommentEnterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentEnterCell.h; path = treads/CommentEnterCell.h; sourceTree = SOURCE_ROOT; };
+		29AB7C6A171117B4007D9F16 /* CommentEnterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentEnterCell.m; path = treads/CommentEnterCell.m; sourceTree = SOURCE_ROOT; };
 		29C21B91170BA76D005B39E4 /* LocationSmallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationSmallViewController.h; path = treads/LocationSmallViewController.h; sourceTree = SOURCE_ROOT; };
 		29C21B92170BA76D005B39E4 /* LocationSmallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationSmallViewController.m; path = treads/LocationSmallViewController.m; sourceTree = SOURCE_ROOT; };
 		29C21B93170BA76D005B39E4 /* LocationSmallViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LocationSmallViewController.xib; path = treads/LocationSmallViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -247,6 +250,8 @@
 				3C882DC2170D28090041A9C8 /* LocationVC.h */,
 				3C882DC3170D28160041A9C8 /* LocationVC.m */,
 				3C882DC4170D28160041A9C8 /* LocationVC.xib */,
+				29AB7C69171117B3007D9F16 /* CommentEnterCell.h */,
+				29AB7C6A171117B4007D9F16 /* CommentEnterCell.m */,
 			);
 			name = Location;
 			sourceTree = "<group>";
@@ -708,6 +713,7 @@
 				29AB7C621710D30C007D9F16 /* CommentBox.m in Sources */,
 				29AB7C651710D328007D9F16 /* ImageScrollEditableTextView.m in Sources */,
 				29AB7C681710D341007D9F16 /* TripLocationService.m in Sources */,
+				29AB7C6B171117B5007D9F16 /* CommentEnterCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
