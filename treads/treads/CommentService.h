@@ -14,6 +14,7 @@
 @class Comment;
 @interface CommentService : NSObject<TreadsService>
 
+
 //protocol
 @property UserService * userService;
 @property (strong) DataRepository* dataRepository;
