@@ -66,5 +66,18 @@
     
 }
 
+-(void)insertNewComment: (Comment*)commentModel fromTarget:(NSObject *) target withReturn:(SEL) returnAction
+{
+    NSMutableDictionary * commentDict = [[NSMutableDictionary alloc] init];
+
+    [commentDict  setValue:[NSNumber numberWithInt:[commentModel.UserID intValue]]forKey:@"userID"];
+     [commentDict  setValue:[NSNumber numberWithInt:[commentModel.LocationID intValue]] forKey:@"LocationID"];
+     [commentDict  setValue:commentModel.comment forKey:@"comment"];
+    [_dataRepository createDataItem:commentDict usingService:self forRequestingObject:target withReturnAction:returnAction];
+ 
+    
+    
+}
+
 
 @end

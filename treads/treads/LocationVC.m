@@ -9,6 +9,7 @@
 #import "LocationVC.h"
 #import "Comment.h"
 #import "CommentCell.h"
+#import "TreadsSession.h"
 #import "CommentEnterCell.h"
 @interface LocationVC ()
 @property NSMutableArray * commentModels;
@@ -139,13 +140,22 @@
 {
     Comment* newComment= [[Comment alloc]init];
     newComment.comment=comment;
-    newComment.CommentID=[NSString stringWithFormat:@"'%d'", _commentModels.count ];
+    newComment.CommentID=[NSString stringWithFormat:@"'%d'",-1 ];
     newComment.LocationID= _model.idField;
-    newComment.UserID= 0;
+    int userID= [TreadsSession instance].treadsUserID;
+    newComment.UserID= [NSString stringWithFormat:@"%d",userID ];
     //Change to Correct User ID
     [_commentModels addObject:newComment];
     
     [_commentTable reloadData];
+    [  _commentService insertNewComment:newComment fromTarget:self withReturn:@selector(addCommentReturnAction::)];
+    
+    
+}
+-(void) addCommentReturnAction:(NSNumber *) idNum wasSuccesful:(NSNumber *) worked
+{
+    
+    
 }
 
 

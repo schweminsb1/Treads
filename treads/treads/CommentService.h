@@ -10,6 +10,7 @@
 #import "TreadsService.h"
 #import "UserService.h"
 
+
 @class DataRepository;
 @class Comment;
 @interface CommentService : NSObject<TreadsService>
@@ -25,6 +26,7 @@
 
 
 - (void)getCommentInLocation:(int)LocationID forTarget:(NSObject *)target withAction:(SEL)returnAction;
+-(void)insertNewComment: (Comment*)commentModel fromTarget:(NSObject *) target withReturn:(SEL) returnAction;
 
 
 @end

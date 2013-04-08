@@ -110,7 +110,7 @@
                     
                     if([[_usernameText.text lowercaseString]isEqual: [items[0][@"emailAddress"] lowercaseString]]&& [[self getPasswordHash:_passwordText.text] isEqual: items[0][@"password"]])
                     {
-                        int userID= items[0][@"id"];
+                        int userID= [((NSString *)items[0][@"id"]) intValue];
                         @try
                         {
                             //This inits a treadssession

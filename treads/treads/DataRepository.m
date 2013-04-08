@@ -93,7 +93,7 @@
             #pragma clang diagnostic pop
         }
         else {
-            //NSLog([error localizedDescription]);
+            NSLog([error localizedDescription]);
             #pragma clang diagnostic push
             #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             [requestingObject performSelector:returnAction withObject:[NSNull null] withObject:[NSNumber numberWithBool:NO]];
