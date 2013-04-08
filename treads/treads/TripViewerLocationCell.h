@@ -17,4 +17,7 @@
 @property (copy) BOOL(^editingEnabled)();
 @property (copy) void(^markChangeMade)();
 
+@property (copy) void(^sendNewLocationRequest)();
+- (void)changeLocation:(int)newLocationID;
+
 @end

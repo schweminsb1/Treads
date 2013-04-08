@@ -106,9 +106,13 @@
     if (editingEnabled) {[viewerTable setBackgroundColor:[AppColors tertiaryBackgroundColor]];}
     else {[viewerTable setBackgroundColor:[AppColors secondaryBackgroundColor]];}
     
-    //change cells' editing status
-    //[self setNeedsDisplay];
+    //reload table data
     [viewerTable reloadData];
+    
+    //scroll if at bottom of screen to show/hide add button
+//    if (viewerTable.contentOffset.y == viewerTable.contentSize.height - self.bounds.size.height) {
+//        [viewerTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:trip.tripLocations.count+(editingEnabled?1:0) inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//    }
 }
 
 - (void)displayTripLoadFailure
@@ -173,10 +177,12 @@
         }
         //fill out data
         TripViewer* __weak _self = self;
+        TripViewerLocationCell* __weak _cell = cell;
         cell.editingEnabled = ^BOOL(){return [_self editingEnabled];};
         cell.markChangeMade = ^(){[_self markChangeMade];};
         cell.tripLocation = trip.tripLocations[indexPath.row - 1];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.sendNewLocationRequest = ^(){[_cell changeLocation:200];};
         return cell;
     }
     else if (editingEnabled) {
