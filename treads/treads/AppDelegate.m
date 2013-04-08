@@ -26,6 +26,7 @@
 @property (strong) ProfileService* profileService;
 @property (strong) LocationService* locationService;
 @property (strong) CommentService* commentService;
+@property (strong) NSString * SASURL;
 
 @end
 
@@ -37,12 +38,13 @@
     
     //Initialize repositories
     self.dataRepository = [[DataRepository alloc] init];
-    CompletionBlock comp= ^(){
+    CompletionWithSasBlock comp= ^(NSString* sas){
         
-        self.tripService = [[TripService alloc] initWithRepository:self.dataRepository];
+        _SASURL=sas;
         
     };
     //[_dataRepository createContainer:@"TreadsContainer" withPublicSetting:YES withCompletion:comp];
+    [_dataRepository getSasUrlForNewBlob:@"images" forContainer:@"images" withCompletion:comp];
     //Initialize services
     self.tripService = [[TripService alloc] initWithRepository:self.dataRepository];
     
