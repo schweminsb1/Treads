@@ -148,11 +148,11 @@
     [_commentModels addObject:newComment];
     
     [_commentTable reloadData];
-    [  _commentService insertNewComment:newComment fromTarget:self withReturn:@selector(addCommentReturnAction::)];
+    [  _commentService insertNewComment:newComment fromTarget:self withReturn:@selector(addCommentReturnAction:wasSuccessful:)];
     
     
 }
--(void) addCommentReturnAction:(NSNumber *) idNum wasSuccesful:(NSNumber *) worked
+-(void) addCommentReturnAction:(NSNumber *) idNum wasSuccessful:(NSNumber *) worked
 {
     
     
