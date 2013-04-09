@@ -10,6 +10,10 @@
 
 @implementation ImageScrollEditItemView {
     BOOL layoutDone;
+    UIButton* changeItemButton;
+    UIButton* removeItemButton;
+    UIButton* moveForwardButton;
+    UIButton* moveBackwardButton;
 }
 
 @synthesize requestChangeItem;
@@ -37,20 +41,54 @@
     }
     
     //set frames of subviews
+    [moveBackwardButton setFrame:CGRectMake(0, 0, self.bounds.size.width/4, self.bounds.size.height)];
+    [moveForwardButton setFrame:CGRectMake(self.bounds.size.width*(0.25), 0, self.bounds.size.width/4, self.bounds.size.height)];
+    [changeItemButton setFrame:CGRectMake(self.bounds.size.width*(0.5), 0, self.bounds.size.width/4, self.bounds.size.height)];
+    [removeItemButton setFrame:CGRectMake(self.bounds.size.width*(0.75), 0, self.bounds.size.width/4, self.bounds.size.height)];
 }
 
 - (void)createAndAddSubviews
 {
-////    ImageScrollEditItemView* __weak _self = self;
-//    descriptionTextView = [[EditableTextView alloc] initWithFont:[UIFont systemFontOfSize:17]  edgeInset:UIEdgeInsetsMake(-10, -7, 0, -7) restrictSingleLine:NO maxTextLength:5000];
-//    descriptionTextView.editingDisabledBackgroundColor = [UIColor clearColor];
-//    descriptionTextView.editingEnabledBackgroundColor = [AppColors secondaryBackgroundColor];
-//    descriptionTextView.editingDisabledTextColor = [AppColors mainTextColor];
-//    descriptionTextView.editingEnabledTextColor = [AppColors mainTextColor];
-//    descriptionTextView.editingEnabled = ^BOOL(){return _self.editingEnabled() && [_self getDisplayItemIsValid];};
-//    descriptionTextView.markChangeMade = self.markChangeMade;
-//    
-//    [self addSubview:descriptionTextView];
+    changeItemButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [changeItemButton setTitle:@"C" forState:UIControlStateNormal];
+    [changeItemButton addTarget:self action:@selector(tappedChangeItemButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    removeItemButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [removeItemButton setTitle:@"-" forState:UIControlStateNormal];
+    [removeItemButton addTarget:self action:@selector(tappedRemoveItemButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    moveForwardButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [moveForwardButton setTitle:@">" forState:UIControlStateNormal];
+    [moveForwardButton addTarget:self action:@selector(tappedMoveForwardButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    moveBackwardButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [moveBackwardButton setTitle:@"<" forState:UIControlStateNormal];
+    [moveBackwardButton addTarget:self action:@selector(tappedMoveBackwardButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self addSubview:changeItemButton];
+    [self addSubview:removeItemButton];
+    [self addSubview:moveForwardButton];
+    [self addSubview:moveBackwardButton];
+}
+
+- (void)tappedChangeItemButton:(id)sender
+{
+    self.requestChangeItem();
+}
+
+- (void)tappedRemoveItemButton:(id)sender
+{
+    self.requestRemoveItem();
+}
+
+- (void)tappedMoveForwardButton:(id)sender
+{
+    self.requestMoveForward();
+}
+
+- (void)tappedMoveBackwardButton:(id)sender
+{
+    self.requestMoveBackward();
 }
 
 

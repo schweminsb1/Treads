@@ -11,17 +11,18 @@
 #import "ImageScrollDisplayView.h"
 
 #import "ImageScrollDisplayableItem.h"
+#import "EditControlsView.h"
 
 @interface ImageScrollBrowser : UIView
 
-- (id)initWithImageSize:(CGSize)size displayView:(UIView<ImageScrollDisplayView>*)view addItemView:(UIView*)addView;
+- (id)initWithImageSize:(CGSize)size displayView:(UIView<ImageScrollDisplayView>*)view addItemView:(UIView*)addView editItemView:(UIView<EditControlsView>*)editView;
 
 @property (assign, nonatomic) NSArray* displayItems;
 
 //editing
 //@property (strong) UIView* addItemView;
-@property (copy) void(^sendNewItemRequest)();
-- (void)addItemToDisplayView:(id<ImageScrollDisplayableItem>)item;
+@property (copy) void(^sendNewItemRequest)(int index);
+- (void)setDisplayViewItem:(id<ImageScrollDisplayableItem>)item atIndex:(int)index;
 @property (copy) BOOL(^editingEnabled)();
 @property (copy) void(^arrayWasChanged)(NSArray* newDisplayItems);
 
