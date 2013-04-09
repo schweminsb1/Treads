@@ -17,9 +17,9 @@
     int displayIndex;
 }
 
-- (id)initWithFrame:(CGRect)frame
+- (id)init
 {
-    self = [super initWithFrame:frame];
+    self = [super init];
     if (self) {
         layoutDone = NO;
         displayItemIsValid = NO;

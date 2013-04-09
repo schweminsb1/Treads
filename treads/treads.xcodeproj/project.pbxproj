@@ -69,6 +69,7 @@
 		3C8A909016E7DFC8007F0BB8 /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8A908F16E7DFC8007F0BB8 /* Trip.m */; };
 		3C8AC26D16E82BE30070271E /* TripService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8AC26C16E82BE30070271E /* TripService.m */; };
 		3C906BEF16F7A8B2009C75BF /* TripBrowserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C906BEE16F7A8B2009C75BF /* TripBrowserCell.m */; };
+		3C919D5E17149FC300FED52D /* ImageScrollEditItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C919D5D17149FC300FED52D /* ImageScrollEditItemView.m */; };
 		3C958FEE16EA6C4F0038AD7C /* helicopter-bouldering-crash-pad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C958FEA16EA6C4F0038AD7C /* helicopter-bouldering-crash-pad.jpg */; };
 		3C958FEF16EA6C4F0038AD7C /* remote-luxury-hiking-canada.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C958FEB16EA6C4F0038AD7C /* remote-luxury-hiking-canada.jpg */; };
 		3C958FF016EA6C4F0038AD7C /* summit-boots-hiking-rocks.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C958FEC16EA6C4F0038AD7C /* summit-boots-hiking-rocks.jpg */; };
@@ -193,6 +194,9 @@
 		3C8AC26C16E82BE30070271E /* TripService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripService.m; path = treads/TripService.m; sourceTree = SOURCE_ROOT; };
 		3C906BED16F7A8B2009C75BF /* TripBrowserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripBrowserCell.h; path = treads/TripBrowserCell.h; sourceTree = SOURCE_ROOT; };
 		3C906BEE16F7A8B2009C75BF /* TripBrowserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripBrowserCell.m; path = treads/TripBrowserCell.m; sourceTree = SOURCE_ROOT; };
+		3C919D5B17149EB000FED52D /* EditControlsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EditControlsView.h; path = treads/EditControlsView.h; sourceTree = SOURCE_ROOT; };
+		3C919D5C17149FC300FED52D /* ImageScrollEditItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageScrollEditItemView.h; path = treads/ImageScrollEditItemView.h; sourceTree = SOURCE_ROOT; };
+		3C919D5D17149FC300FED52D /* ImageScrollEditItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageScrollEditItemView.m; path = treads/ImageScrollEditItemView.m; sourceTree = SOURCE_ROOT; };
 		3C958FEA16EA6C4F0038AD7C /* helicopter-bouldering-crash-pad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "helicopter-bouldering-crash-pad.jpg"; path = "treads/helicopter-bouldering-crash-pad.jpg"; sourceTree = SOURCE_ROOT; };
 		3C958FEB16EA6C4F0038AD7C /* remote-luxury-hiking-canada.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "remote-luxury-hiking-canada.jpg"; path = "treads/remote-luxury-hiking-canada.jpg"; sourceTree = SOURCE_ROOT; };
 		3C958FEC16EA6C4F0038AD7C /* summit-boots-hiking-rocks.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "summit-boots-hiking-rocks.jpg"; path = "treads/summit-boots-hiking-rocks.jpg"; sourceTree = SOURCE_ROOT; };
@@ -262,8 +266,6 @@
 		29AB7C5F1710D27F007D9F16 /* Editable Views */ = {
 			isa = PBXGroup;
 			children = (
-				29AB7C631710D328007D9F16 /* ImageScrollEditableTextView.h */,
-				29AB7C641710D328007D9F16 /* ImageScrollEditableTextView.m */,
 				29AB7C5B1710D1D7007D9F16 /* EditableTextView.h */,
 				29AB7C5C1710D1D7007D9F16 /* EditableTextView.m */,
 			);
@@ -472,6 +474,7 @@
 		3C60C7D316E6C2AF00FDFD7D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				3C919D5B17149EB000FED52D /* EditControlsView.h */,
 				29AB7C5F1710D27F007D9F16 /* Editable Views */,
 				3C882DBC170D14E60041A9C8 /* Image Scroll Browser */,
 				3C9DA9EB16F91B85009EEED7 /* Trip Viewer */,
@@ -483,12 +486,10 @@
 		3C882DBC170D14E60041A9C8 /* Image Scroll Browser */ = {
 			isa = PBXGroup;
 			children = (
-				3C882DBD170D15C80041A9C8 /* ImageScrollDisplayableItem.h */,
-				3C882DBE170D1CFF0041A9C8 /* ImageScrollDisplayView.h */,
+				3C919D5917149E6B00FED52D /* Protocols */,
+				3C919D5A17149E7500FED52D /* Subviews */,
 				3C96E23C16FCEB3A007FA511 /* ImageScrollBrowser.h */,
 				3C96E23D16FCEB3A007FA511 /* ImageScrollBrowser.m */,
-				3C882DBF170D1DF30041A9C8 /* ImageScrollTextView.h */,
-				3C882DC0170D1DF30041A9C8 /* ImageScrollTextView.m */,
 			);
 			name = "Image Scroll Browser";
 			sourceTree = "<group>";
@@ -534,6 +535,28 @@
 				29241805170E645200BB9FAE /* UserService.m */,
 			);
 			name = Services;
+			sourceTree = "<group>";
+		};
+		3C919D5917149E6B00FED52D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				3C882DBD170D15C80041A9C8 /* ImageScrollDisplayableItem.h */,
+				3C882DBE170D1CFF0041A9C8 /* ImageScrollDisplayView.h */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		3C919D5A17149E7500FED52D /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				3C882DBF170D1DF30041A9C8 /* ImageScrollTextView.h */,
+				3C882DC0170D1DF30041A9C8 /* ImageScrollTextView.m */,
+				29AB7C631710D328007D9F16 /* ImageScrollEditableTextView.h */,
+				29AB7C641710D328007D9F16 /* ImageScrollEditableTextView.m */,
+				3C919D5C17149FC300FED52D /* ImageScrollEditItemView.h */,
+				3C919D5D17149FC300FED52D /* ImageScrollEditItemView.m */,
+			);
+			name = Subviews;
 			sourceTree = "<group>";
 		};
 		3C958FF216EA6CD20038AD7C /* Login */ = {
@@ -728,6 +751,7 @@
 				29AB7C6B171117B5007D9F16 /* CommentEnterCell.m in Sources */,
 				29AB7C6E17111A05007D9F16 /* CommentEnterBox.m in Sources */,
 				29AB7C7517113596007D9F16 /* addCommentButton.m in Sources */,
+				3C919D5E17149FC300FED52D /* ImageScrollEditItemView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

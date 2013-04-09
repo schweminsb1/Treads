@@ -114,14 +114,11 @@
     [self addGestureRecognizer:tapGestureRecognizer];
     
     locationTextBackgroundView = [[UIView alloc] init];
-    //locationTextBackgroundView.backgroundColor = [AppColors mainBackgroundColor];
     
     locationMapView = [[UIImageView alloc] init];
     locationMapView.contentMode = UIViewContentModeRight;
     locationMapView.clipsToBounds = YES;
     
-    //imageScrollBrowser = [[ImageScrollBrowser alloc] init];
-    //ImageScrollTextView* imageScrollTextView = [[ImageScrollTextView alloc] init];
     imageScrollEditableTextView = [[ImageScrollEditableTextView alloc] init];
     imageScrollEditableTextView.editingEnabled = ^BOOL(){return _self.editingEnabled();};
     imageScrollEditableTextView.markChangeMade = ^(){_self.markChangeMade();};

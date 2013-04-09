@@ -92,8 +92,10 @@
     
     imageScrollView = [[UIScrollView alloc] init];
     imageScrollView.backgroundColor = [AppColors blankItemBackgroundColor];
-    
     imageScrollView.delegate = self;
+    
+    UITapGestureRecognizer* moveTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewItemWasTapped:)];
+    [imageScrollView addGestureRecognizer:moveTap];
     
     imageScrollPaddingLeft = [[UIImageView alloc] init];
     imageScrollPaddingLeft.backgroundColor = [AppColors blankItemBackgroundColor];
@@ -105,8 +107,8 @@
     [imageScrollView addSubview:imageScrollPaddingRight];
     if (addItemView!=nil) {
         [imageScrollView addSubview:addItemView];
-        UITapGestureRecognizer* addTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addButtonWasTapped:)];
-        [addItemView addGestureRecognizer:addTap];
+//        UITapGestureRecognizer* addTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewItemWasTapped:)];
+//        [addItemView addGestureRecognizer:addTap];
     }
     
     imageSubViews = [[NSMutableArray alloc] init];
@@ -211,9 +213,23 @@
     }
 }
 
-- (void)addButtonWasTapped:(UITapGestureRecognizer *)recognizer
+- (void)viewItemWasTapped:(UITapGestureRecognizer *)recognizer
 {
-    self.sendNewItemRequest();
+    //scrolls to item
+    CGPoint tapLocation = [recognizer locationInView:imageScrollView];
+    int relativeXLocation = tapLocation.x - imageScrollPaddingLeft.bounds.size.width;
+    int tappedIndex = relativeXLocation / imageSubViewSize.width;
+    
+    BOOL canScrollToAddItemView = addItemView && !addItemView.hidden;
+    
+    if (tappedIndex >= 0 && (tappedIndex < imageSubViews.count || (tappedIndex == imageSubViews.count && canScrollToAddItemView))) {
+        [imageScrollView setContentOffset:CGPointMake(tappedIndex*imageSubViewSize.width, 0) animated:YES];
+    }
+        
+    //sends item request if appropriate
+    if (tappedIndex == imageSubViews.count && canScrollToAddItemView) {
+        self.sendNewItemRequest();
+    }
 }
 
 - (void)addItemToDisplayView:(id<ImageScrollDisplayableItem>)item
@@ -222,7 +238,7 @@
     [temp addObject:item];
     resetOnDisplay = NO;
     displayedTextIndex = self.displayItems.count;
-    [imageScrollView setContentOffset:CGPointMake(displayedTextIndex*imageSubViewSize.width, 0) animated:YES];
+//    [imageScrollView setContentOffset:CGPointMake(displayedTextIndex*imageSubViewSize.width, 0) animated:YES];
     self.arrayWasChanged(temp);
     self.displayItems = temp;
 }
