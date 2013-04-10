@@ -49,6 +49,7 @@
     self.locationService = [[LocationService alloc]initWithRepository:_dataRepository];
     _commentService= [[CommentService alloc] initWithRepository:_dataRepository];
     
+    /*
     CompletionWithItems completion= ^(NSArray* items)
     {
         UIImage * returnImage= items[0];
@@ -61,10 +62,11 @@
 
         
     };
+    */
     self.imageService = [[ImageService alloc] initWithRepository:self.dataRepository];
     
-    UIImage * testImage= [UIImage imageNamed:@"mountains.jpeg"];
-    [self.imageService insertImageAsBlob:testImage withCompletion:comp];
+ //   UIImage * testImage= [UIImage imageNamed:@"mountains.jpeg"];
+   // [self.imageService insertImageAsBlob:testImage withCompletion:comp];
     
  
     
