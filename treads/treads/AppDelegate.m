@@ -38,6 +38,7 @@
     
     //Initialize repositories
 
+    self.dataRepository = [[DataRepository alloc] init];
     //[_dataRepository createContainer:@"TreadsContainer" withPublicSetting:YES withCompletion:comp];
    
     //Initialize services
