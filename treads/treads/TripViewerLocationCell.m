@@ -11,6 +11,7 @@
 #import "ImageScrollBrowser.h"
 #import "ImageScrollTextView.h"
 #import "ImageScrollEditableTextView.h"
+#import "ImageScrollEditItemView.h"
 
 #import "ImageScrollDisplayableItem.h"
 
@@ -32,6 +33,7 @@
     UIView* locationTextBackgroundView;
     ImageScrollBrowser* imageScrollBrowser;
     ImageScrollEditableTextView* imageScrollEditableTextView;
+    ImageScrollEditItemView* imageScrollEditItemView;
     UIView* imageScrollBrowserAddItemView;
 }
 
@@ -126,16 +128,18 @@
     imageScrollBrowserAddItemView = [[UIView alloc] init];
     imageScrollBrowserAddItemView.backgroundColor = [AppColors toolbarColor];
     
-    imageScrollBrowser = [[ImageScrollBrowser alloc] initWithImageSize:CGSizeMake(540, 360) displayView:imageScrollEditableTextView addItemView:imageScrollBrowserAddItemView];
+    imageScrollEditItemView = [[ImageScrollEditItemView alloc] init];
+    
+    imageScrollBrowser = [[ImageScrollBrowser alloc] initWithImageSize:CGSizeMake(540, 360) displayView:imageScrollEditableTextView addItemView:imageScrollBrowserAddItemView editItemView:imageScrollEditItemView];
     imageScrollBrowser.editingEnabled = ^BOOL(){return _self.editingEnabled();};
     ImageScrollBrowser* __weak _imageScrollBrowser = imageScrollBrowser;
-    imageScrollBrowser.sendNewItemRequest = ^(){
+    imageScrollBrowser.sendNewItemRequest = ^(int index){
         TripLocationItem* newItem = [[TripLocationItem alloc] init];
         newItem.tripLocationItemID = -1;
         newItem.tripLocationID = _self.tripLocation.tripLocationID;
         newItem.image = [UIImage imageNamed:@"map_preview.png"];
         newItem.description = @"New Item";
-        [_imageScrollBrowser addItemToDisplayView:newItem];
+        [_imageScrollBrowser setDisplayViewItem:newItem atIndex:index];
     };
     
     [subView addSubview:locationMapView];
