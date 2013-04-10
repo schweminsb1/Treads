@@ -11,7 +11,7 @@
 		29241803170E4CE100BB9FAE /* CommentService.m in Sources */ = {isa = PBXBuildFile; fileRef = 29241802170E4CE100BB9FAE /* CommentService.m */; };
 		29241806170E645200BB9FAE /* UserService.m in Sources */ = {isa = PBXBuildFile; fileRef = 29241805170E645200BB9FAE /* UserService.m */; };
 		29241809170E651900BB9FAE /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 29241808170E651900BB9FAE /* User.m */; };
-		2976728D1715C6AD00C756FB /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 2976728C1715C6AD00C756FB /* NSData+Base64.m */; };
+		297672901715CB4A00C756FB /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 2976728F1715CB4A00C756FB /* NSData+Base64.m */; };
 		29829831170D3B08002BA507 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 29829830170D3B08002BA507 /* Comment.m */; };
 		29AB7C591710D199007D9F16 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 29AB7C561710D199007D9F16 /* CommentCell.m */; };
 		29AB7C5D1710D1D7007D9F16 /* EditableTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29AB7C5C1710D1D7007D9F16 /* EditableTextView.m */; };
@@ -101,8 +101,8 @@
 		29241807170E651800BB9FAE /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = treads/User.h; sourceTree = SOURCE_ROOT; };
 		29241808170E651900BB9FAE /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = treads/User.m; sourceTree = SOURCE_ROOT; };
 		296CC3F816FCEA7C0089F1F1 /* treads.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = treads.entitlements; path = treads/treads.entitlements; sourceTree = "<group>"; };
-		2976728B1715C6AD00C756FB /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "treads/NSData_Base64/NSData+Base64.h"; sourceTree = "<group>"; };
-		2976728C1715C6AD00C756FB /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "treads/NSData_Base64/NSData+Base64.m"; sourceTree = "<group>"; };
+		2976728E1715CB4A00C756FB /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "treads/NSData+Base64.h"; sourceTree = SOURCE_ROOT; };
+		2976728F1715CB4A00C756FB /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "treads/NSData+Base64.m"; sourceTree = SOURCE_ROOT; };
 		2982982F170D3B07002BA507 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Comment.h; path = treads/Comment.h; sourceTree = SOURCE_ROOT; };
 		29829830170D3B08002BA507 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Comment.m; path = treads/Comment.m; sourceTree = SOURCE_ROOT; };
 		29AB7C551710D199007D9F16 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentCell.h; path = treads/CommentCell.h; sourceTree = SOURCE_ROOT; };
@@ -301,8 +301,6 @@
 		3188B14E16C9CE16008E1D7F = {
 			isa = PBXGroup;
 			children = (
-				2976728B1715C6AD00C756FB /* NSData+Base64.h */,
-				2976728C1715C6AD00C756FB /* NSData+Base64.m */,
 				296CC3F816FCEA7C0089F1F1 /* treads.entitlements */,
 				3188B16016C9CE17008E1D7F /* Treads */,
 				3188B15916C9CE17008E1D7F /* Frameworks */,
@@ -335,6 +333,8 @@
 		3188B16016C9CE17008E1D7F /* Treads */ = {
 			isa = PBXGroup;
 			children = (
+				2976728E1715CB4A00C756FB /* NSData+Base64.h */,
+				2976728F1715CB4A00C756FB /* NSData+Base64.m */,
 				29AB7C6F17113545007D9F16 /* buttons */,
 				3C8AC26A16E82BD10070271E /* Services */,
 				3C8AC26916E82AEB0070271E /* Repositories */,
@@ -763,7 +763,7 @@
 				29AB7C7517113596007D9F16 /* addCommentButton.m in Sources */,
 				3C919D5E17149FC300FED52D /* ImageScrollEditItemView.m in Sources */,
 				291479791714BFB900D543F9 /* ImageService.m in Sources */,
-				2976728D1715C6AD00C756FB /* NSData+Base64.m in Sources */,
+				297672901715CB4A00C756FB /* NSData+Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
