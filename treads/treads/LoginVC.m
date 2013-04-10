@@ -116,6 +116,8 @@
                             //This inits a treadssession
                             [TreadsSession instance].treadsUser=[items[0][@"emailAddress"] lowercaseString];
                             [TreadsSession instance].treadsUserID  = userID;
+                            [TreadsSession instance].fName= items[0][@"Fname"];
+                            [TreadsSession instance].lName= items[0][@"Lname"];
                             
                             // _treadsSession = [[TreadsSession new]initWithAuthenticatedUser: [NSString stringWithString:(NSString *)[items[0][@"emailAddress"] lowercaseString]]];
                            if([TreadsSession Login])
