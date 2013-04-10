@@ -29,7 +29,7 @@ typedef void (^CompletionWithItems)(NSArray * items);
 @property int imagesSizeNextImageID;
 @property (nonatomic,strong)CompletionBlock comp;
 
--(void) insertImageAsBlob:(UIImage *) image withCompletion:(MSItemBlock) ultimatecompletionblock;
+-(void) insertImage:(UIImage *) image withCompletion:(MSItemBlock) ultimatecompletionblock;
 
 
 -(void) getImageWithPhotoID:(int) photoid withReturnBlock:(CompletionWithItems) comp;

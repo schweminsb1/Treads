@@ -25,5 +25,6 @@
 - (void)getAllTripsForTarget:(NSObject*)target withAction:(SEL)returnAction;
 - (void)getTripWithID:(int)tripID forTarget:(NSObject*)target withAction:(SEL)returnAction;
 - (void)updateTrip:(Trip*)trip forTarget:(NSObject*)target withAction:(SEL)returnAction;
+- (void)getTripsWithUserID:(int)userID forTarget:(NSObject*)target withAction:(SEL)returnAction;
 
 @end
