@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		291479791714BFB900D543F9 /* ImageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 291479781714BFB900D543F9 /* ImageService.m */; };
+		2914797B1715BB7C00D543F9 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 2914797A1715BB7C00D543F9 /* NSData+Base64.m */; };
 		29241803170E4CE100BB9FAE /* CommentService.m in Sources */ = {isa = PBXBuildFile; fileRef = 29241802170E4CE100BB9FAE /* CommentService.m */; };
 		29241806170E645200BB9FAE /* UserService.m in Sources */ = {isa = PBXBuildFile; fileRef = 29241805170E645200BB9FAE /* UserService.m */; };
 		29241809170E651900BB9FAE /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 29241808170E651900BB9FAE /* User.m */; };
@@ -93,6 +94,7 @@
 /* Begin PBXFileReference section */
 		291479771714BFB900D543F9 /* ImageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageService.h; path = treads/ImageService.h; sourceTree = SOURCE_ROOT; };
 		291479781714BFB900D543F9 /* ImageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageService.m; path = treads/ImageService.m; sourceTree = SOURCE_ROOT; };
+		2914797A1715BB7C00D543F9 /* NSData+Base64.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "NSData_Base64/NSData+Base64.m"; sourceTree = "<group>"; };
 		29241801170E4CE100BB9FAE /* CommentService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentService.h; path = treads/CommentService.h; sourceTree = SOURCE_ROOT; };
 		29241802170E4CE100BB9FAE /* CommentService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentService.m; path = treads/CommentService.m; sourceTree = SOURCE_ROOT; };
 		29241804170E645200BB9FAE /* UserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserService.h; path = treads/UserService.h; sourceTree = SOURCE_ROOT; };
@@ -298,6 +300,7 @@
 		3188B14E16C9CE16008E1D7F = {
 			isa = PBXGroup;
 			children = (
+				2914797A1715BB7C00D543F9 /* NSData+Base64.m */,
 				296CC3F816FCEA7C0089F1F1 /* treads.entitlements */,
 				3188B16016C9CE17008E1D7F /* Treads */,
 				3188B15916C9CE17008E1D7F /* Frameworks */,
@@ -709,6 +712,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2914797B1715BB7C00D543F9 /* NSData+Base64.m in Sources */,
 				3188B16716C9CE17008E1D7F /* main.m in Sources */,
 				3188B16B16C9CE17008E1D7F /* AppDelegate.m in Sources */,
 				3188B1A216C9D2B4008E1D7F /* CameraVC.m in Sources */,
