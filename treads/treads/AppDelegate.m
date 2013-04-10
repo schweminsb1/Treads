@@ -93,7 +93,7 @@
     UINavigationController* LoginNavigation = [[UINavigationController alloc] initWithRootViewController:login];
     
     //self.window.rootViewController=LoginNavigation;
-    self.window.rootViewController=picker;
+    self.window.rootViewController=LoginNavigation;
     //Initialize and assign to Tab Bar
 
     
