@@ -55,6 +55,7 @@
 		39164F5D16EAA3E000877549 /* AddLocationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39164F5B16EAA3E000877549 /* AddLocationVC.m */; };
 		39164F5E16EAA3E000877549 /* AddLocationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39164F5C16EAA3E000877549 /* AddLocationVC.xib */; };
 		395CD5EE16F03EEA009FD655 /* LocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 395CD5ED16F03EEA009FD655 /* LocationService.m */; };
+		395E625F1715EC0E007AB363 /* CameraService.m in Sources */ = {isa = PBXBuildFile; fileRef = 395E625E1715EC0E007AB363 /* CameraService.m */; };
 		3973FE4C1710AC6000D4AAE1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3973FE4B1710AC6000D4AAE1 /* MobileCoreServices.framework */; };
 		3C094FA716EFF74700C537B1 /* TreadsSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C094FA616EFF74700C537B1 /* TreadsSession.m */; };
 		3C12312416EFCB89006CCBFE /* DataRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C12312316EFCB89006CCBFE /* DataRepository.m */; };
@@ -170,6 +171,8 @@
 		39164F5C16EAA3E000877549 /* AddLocationVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddLocationVC.xib; path = treads/AddLocationVC.xib; sourceTree = SOURCE_ROOT; };
 		395CD5EC16F03EEA009FD655 /* LocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationService.h; path = treads/LocationService.h; sourceTree = SOURCE_ROOT; };
 		395CD5ED16F03EEA009FD655 /* LocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationService.m; path = treads/LocationService.m; sourceTree = SOURCE_ROOT; };
+		395E625D1715EC0E007AB363 /* CameraService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraService.h; sourceTree = "<group>"; };
+		395E625E1715EC0E007AB363 /* CameraService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraService.m; sourceTree = "<group>"; };
 		3973FE4B1710AC6000D4AAE1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		3C04028C16F6B8CA0030D8BA /* TreadsService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TreadsService.h; path = treads/TreadsService.h; sourceTree = SOURCE_ROOT; };
 		3C094FA516EFF74700C537B1 /* TreadsSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreadsSession.h; path = treads/TreadsSession.h; sourceTree = SOURCE_ROOT; };
@@ -528,6 +531,8 @@
 		3C8AC26A16E82BD10070271E /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				395E625D1715EC0E007AB363 /* CameraService.h */,
+				395E625E1715EC0E007AB363 /* CameraService.m */,
 				291479771714BFB900D543F9 /* ImageService.h */,
 				291479781714BFB900D543F9 /* ImageService.m */,
 				29AB7C661710D341007D9F16 /* TripLocationService.h */,
@@ -764,6 +769,7 @@
 				3C919D5E17149FC300FED52D /* ImageScrollEditItemView.m in Sources */,
 				291479791714BFB900D543F9 /* ImageService.m in Sources */,
 				297672901715CB4A00C756FB /* NSData+Base64.m in Sources */,
+				395E625F1715EC0E007AB363 /* CameraService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
