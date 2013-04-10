@@ -104,6 +104,28 @@
     [userTable insert:updateItem completion:updateBlock];
 }
 
+- (void)createDataItem:(NSDictionary*)updateItem usingService:(id<TreadsService>)callingService withReturnBlock:(MSItemBlock)block
+{
+    MSTable* userTable = [self.client getTable:callingService.dataTableIdentifier];
+    MSItemBlock updateBlock=^(NSDictionary* item, NSError* error) {
+        if (error == nil) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            block(item,error);
+#pragma clang diagnostic pop
+        }
+        else {
+            //      NSLog([error localizedDescription]);
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            block(item,error);
+#pragma clang diagnostic pop
+        }
+    };
+    //NSLog(tripDictionary.description);
+    [userTable insert:updateItem completion:updateBlock];
+}
+
 - (void)updateDataItem:(NSDictionary*)updateItem usingService:(id<TreadsService>)callingService forRequestingObject:(NSObject*)requestingObject withReturnAction:(SEL)returnAction
 {
     MSTable* userTable = [self.client getTable:callingService.dataTableIdentifier];

@@ -17,7 +17,7 @@
 @interface ImageService : NSObject <TreadsService>
 
 typedef void (^CompletionBlock) ();
-
+typedef void (^CompletionWithItems)(NSArray * items);
 
 @property (strong) DataRepository* dataRepository;
 @property (copy) NSString* dataTableIdentifier;
@@ -28,9 +28,11 @@ typedef void (^CompletionBlock) ();
 //only used in insert
 @property int imagesSizeNextImageID;
 @property (nonatomic,strong)CompletionBlock comp;
--(void) insertImageAsBlob:(UIImage *) image withCompletion:(CompletionBlock) ultimatecompletionblock;
 
--(void) getImageWithPhotoID:(int) photoid  getImageWithPhotoID:(int) photoid;
+-(void) insertImageAsBlob:(UIImage *) image withCompletion:(MSItemBlock) ultimatecompletionblock;
+
+
+-(void) getImageWithPhotoID:(int) photoid withReturnBlock:(CompletionWithItems) comp;
 
 - (id)initWithRepository:(DataRepository*)repository;
 - (NSArray*)convertReturnDataToServiceModel:(NSArray*)returnData;

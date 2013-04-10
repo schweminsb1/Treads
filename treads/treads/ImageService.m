@@ -21,7 +21,7 @@
 }
 
 
--(void) insertImageAsBlob:(UIImage *) image withCompletion:(CompletionBlock) ultimatecompletionblock
+-(void) insertImageAsBlob:(UIImage *) image withCompletion:(MSItemBlock) ultimatecompletionblock
 {
     CompletionWithSasBlock comp= ^(NSString* sas){
         
@@ -42,13 +42,13 @@
     
     CompletionWithItems complwithitems= ^(NSArray * items)
     {
-        _imagesSizeNextImageID=items.count;
-     [_dataRepository getSasUrlForNewBlob:[NSString stringWithFormat:@"%d",items.count] forContainer:@"images" withCompletion:comp];
+        _imagesSizeNextImageID=items.count+5;
+     [_dataRepository getSasUrlForNewBlob:[NSString stringWithFormat:@"%d",_imagesSizeNextImageID] forContainer:@"images" withCompletion:comp];
         
         _comp=ultimatecompletionblock;
     };
    
-        [_dataRepository retrieveDataItemsMatching:@"id>-1" usingService:self withReturnBlock:complwithitems ];
+        [_dataRepository retrieveDataItemsMatching:@"id > -1" usingService:self withReturnBlock:complwithitems ];
         
         
         //insert image path into database for a newID
@@ -63,9 +63,9 @@
         _SASURL=sas;
         NSData *data=[NSData dataWithContentsOfURL:[NSURL URLWithString:_SASURL]];
   
-        UIImage * image= [UIImage imageWithData:data];
-        NSArray * results= @[image];
-        comp(results);
+      //  UIImage * image= [UIImage imageWithData:data];
+       // NSArray * results= @[image];
+       // comp(results);
 
         
         //write to the url the UIIMageData
@@ -88,7 +88,7 @@
 //post to the database the newdata item
     NSMutableDictionary * dictionary= [[NSMutableDictionary alloc] init];
     [dictionary setValue:[NSString stringWithFormat:@"%d",_imagesSizeNextImageID] forKey:@"blobPath"];
-    [_dataRepository insertTableRow:dictionary withTableName:@"ImageTable" withCompletion:_comp];
+    [_dataRepository createDataItem:dictionary usingService:self withReturnBlock:_comp];
 }
 
 
