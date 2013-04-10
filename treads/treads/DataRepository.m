@@ -93,7 +93,7 @@
             #pragma clang diagnostic pop
         }
         else {
-            NSLog([error localizedDescription]);
+      //      NSLog([error localizedDescription]);
             #pragma clang diagnostic push
             #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             [requestingObject performSelector:returnAction withObject:[NSNull null] withObject:[NSNumber numberWithBool:NO]];
@@ -138,7 +138,7 @@
     {
         if(error)
         {
-            NSLog([error localizedDescription]);
+        //    NSLog([error localizedDescription]);
             
         }
         else
@@ -179,7 +179,7 @@
   //__autoreleasing  NSError * error= [[NSError alloc]init];
     
     MSTable * commentsTable= [self.client getTable:@"CommentTable"];
-    long  inte= [locationID intValue];
+ //   long  inte= [locationID intValue];
     NSPredicate * predicate = [NSPredicate predicateWithValue:YES];   /*[NSPredicate predicateWithFormat:@"id == %@", [NSNumber numberWithInt:  inte]  ];*/
     MSQuery * query= [[MSQuery alloc]initWithTable:commentsTable withPredicate:predicate];
     

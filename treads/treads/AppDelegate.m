@@ -37,14 +37,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     //Initialize repositories
-    self.dataRepository = [[DataRepository alloc] init];
-    CompletionWithSasBlock comp= ^(NSString* sas){
-        
-        _SASURL=sas;
-        
-    };
+
     //[_dataRepository createContainer:@"TreadsContainer" withPublicSetting:YES withCompletion:comp];
-    [_dataRepository getSasUrlForNewBlob:@"images" forContainer:@"images" withCompletion:comp];
+   
     //Initialize services
     self.tripService = [[TripService alloc] initWithRepository:self.dataRepository];
     

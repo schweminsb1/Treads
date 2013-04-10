@@ -7,7 +7,32 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "TreadsService.h"
 
-@interface ImageService : NSObject
+
+
+@class DataRepository;
+
+@interface ImageService : NSObject <TreadsService>
+
+typedef void (^CompletionBlock) ();
+
+
+@property (strong) DataRepository* dataRepository;
+@property (copy) NSString* dataTableIdentifier;
+
+@property (nonatomic,strong)NSString * SASURL;
+@property (nonatomic,strong)MSTable * imageTable;
+
+//only used in insert
+@property int imagesSizeNextImageID;
+@property (nonatomic,strong)CompletionBlock comp;
+-(void) insertImageAsBlob:(UIImage *) image withCompletion:(CompletionBlock) ultimatecompletionblock;
+
+-(void) getImageWithPhotoID:(int) photoid  getImageWithPhotoID:(int) photoid;
+
+- (id)initWithRepository:(DataRepository*)repository;
+- (NSArray*)convertReturnDataToServiceModel:(NSArray*)returnData;
 
 @end
