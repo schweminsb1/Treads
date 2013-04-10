@@ -90,7 +90,7 @@
     if (editItemView!=nil) {
         [editItemView setHidden:!__editingEnabled];
         if (__editingEnabled) {
-            [editItemView setFrame:CGRectMake(self.bounds.size.width/2 - 120, imageSubViewSize.height - 50, 240, 40)];
+            [editItemView setFrame:CGRectMake(self.bounds.size.width/2 - 100, imageSubViewSize.height - 50, 200, 40)];
         }
     }
 

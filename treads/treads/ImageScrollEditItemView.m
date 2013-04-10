@@ -57,8 +57,8 @@
 - (void)createAndAddSubviews
 {
     changeItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [changeItemButton setBackgroundImage:[UIImage imageNamed:@"plus_unselect.png"] forState:UIControlStateNormal];
-    [changeItemButton setBackgroundImage:[UIImage imageNamed:@"plus_select.png"] forState:UIControlStateHighlighted];
+    [changeItemButton setBackgroundImage:[UIImage imageNamed:@"change_unselect.png"] forState:UIControlStateNormal];
+    [changeItemButton setBackgroundImage:[UIImage imageNamed:@"change_select.png"] forState:UIControlStateHighlighted];
     [changeItemButton addTarget:self action:@selector(tappedChangeItemButton:) forControlEvents:UIControlEventTouchUpInside];
     
     removeItemButton = [UIButton buttonWithType:UIButtonTypeCustom];

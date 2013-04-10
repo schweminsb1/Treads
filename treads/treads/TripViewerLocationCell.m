@@ -87,7 +87,7 @@
         locationBGRView.backgroundColor = [UIColor clearColor];
         locationTextBackgroundView.backgroundColor = [AppColors mainBackgroundColor];
     }
-    [editItemView setFrame:CGRectMake(10, 80, 40, 240)];
+    [editItemView setFrame:CGRectMake(10, 80, 40, 200)];
     [editItemView setHidden:!__editingEnabled];
 }
 
