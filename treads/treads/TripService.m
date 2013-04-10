@@ -36,7 +36,7 @@
             trip.tripID = [[returnTrip objectForKey:@"id"] intValue];
             trip.userID = [[returnTrip objectForKey:@"userID"] intValue];
             trip.name = [returnTrip objectForKey:@"name"];
-            trip.description = [returnTrip objectForKey:@"description"];
+            trip.description = [self loremIpsum];//[returnTrip objectForKey:@"description"];
             trip.tripLocations = [[NSArray alloc] init];
             
             [self addDebugItemsToTrip:trip];

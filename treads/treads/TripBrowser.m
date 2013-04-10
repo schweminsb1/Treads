@@ -150,7 +150,7 @@
 - (CGFloat)tableView:tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //return [self tableView:tableView cellForRowAtIndexPath:indexPath].bounds.size.height + cellVerticalPadding;
-    return 110 + cellVerticalPadding;
+    return 440 + cellVerticalPadding;
 }
 
 @end
