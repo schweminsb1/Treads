@@ -8,6 +8,7 @@
 //Blob name is the imageid, located in the images container
 #import "ImageService.h"
 #import "DataRepository.h"
+#import "NSData+Base64.h"
 @implementation ImageService
 
 
@@ -19,7 +20,24 @@
     }
     return self;
 }
-
+-(NSString *) stringFromImage: (UIImage *) image
+{
+    NSString * s;
+   
+    NSData * data = UIImagePNGRepresentation(image);
+    s = [data base64EncodedString];
+    
+    return s;
+}
+-(UIImage *) imageFromString: (NSString *)imageString
+{
+   
+    NSData *data = [NSData dataFromBase64String:imageString];
+    UIImage *image = [UIImage imageWithData:data];
+    
+    
+    return image;
+}
 
 -(void) insertImageAsBlob:(UIImage *) image withCompletion:(MSItemBlock) ultimatecompletionblock
 {
