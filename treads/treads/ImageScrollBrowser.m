@@ -20,9 +20,12 @@
 @implementation ImageScrollBrowser {
     BOOL layoutDone;
     BOOL resetOnDisplay;
+    BOOL isAnimatingItemRemove;
+    BOOL isAnimatingItemSwap;
     UIScrollView* imageScrollView;
     UIImageView* imageScrollPaddingLeft;
     UIImageView* imageScrollPaddingRight;
+    UIImageView* imageScrollPaddingRemoval;
     
     NSMutableArray* imageSubViews;
     int imageSubViewCount;
@@ -40,6 +43,8 @@
     if (self) {
         layoutDone = NO;
         resetOnDisplay = YES;
+        isAnimatingItemRemove = NO;
+        isAnimatingItemSwap = NO;
         imageSubViewSize = size;
         displayView = initializedDisplayView;
         addItemView = addView;
@@ -52,8 +57,8 @@
 {
     [super layoutSubviews];
     
+    //set up subviews if layout has not been set
     if (!layoutDone) {
-        //add subviews if layout has not been set
         [self createAndAddSubviews];
         layoutDone = YES;
     }
@@ -69,8 +74,13 @@
     for (int i=0; i<imageSubViews.count; i++) {
         UIImageView* imageSubView = (UIImageView*)imageSubViews[i];
         [imageSubView setFrame:CGRectMake(i*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width, 0, imageSubViewSize.width, imageSubViewSize.height)];
+//        int addedOffset = (isAnimatingItemRemove&&i>=displayedTextIndex?imageScrollPaddingRemoval.bounds.size.width:0);
+//        int x = imageScrollPaddingRemoval.bounds.size.width;
+//        [imageSubView setFrame:CGRectMake(i*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width + addedOffset, 0, imageSubViewSize.width, imageSubViewSize.height)];
     }
     
+    //if editing is enabled and the views exist, set frames
+    //of add item view and edit item view
     if (addItemView!=nil) {
         [addItemView setHidden:!__editingEnabled];
         if (__editingEnabled) {
@@ -84,44 +94,50 @@
         }
     }
 
-    [imageScrollView setContentSize:CGSizeMake((imageSubViewCount+additionalCells)*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width*2, imageScrollView.bounds.size.height)];
-    
+    //resize the scroll view and display view
+    [imageScrollView setContentSize:CGSizeMake((imageSubViewCount+additionalCells)*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width*2 + (isAnimatingItemRemove?imageScrollPaddingRemoval.bounds.size.width:0), imageScrollView.bounds.size.height)];
     [displayView setFrame:CGRectMake(0, imageSubViewSize.height, self.bounds.size.width, self.bounds.size.height - imageSubViewSize.height)];
-    
     [displayView setNeedsLayout];
 }
 
 - (void)createAndAddSubviews
 {
-    imageSubViewCount = 0;
-    //imageSubViewSize = CGSizeMake(540, 360);
-    
+    //scroll view
     imageScrollView = [[UIScrollView alloc] init];
     imageScrollView.backgroundColor = [AppColors blankItemBackgroundColor];
     imageScrollView.delegate = self;
-    
     UITapGestureRecognizer* moveTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewItemWasTapped:)];
     [imageScrollView addGestureRecognizer:moveTap];
+    [self addSubview:imageScrollView];
     
+    //padding
     imageScrollPaddingLeft = [[UIImageView alloc] init];
     imageScrollPaddingLeft.backgroundColor = [AppColors blankItemBackgroundColor];
-    
     imageScrollPaddingRight = [[UIImageView alloc] init];
     imageScrollPaddingRight.backgroundColor = [AppColors blankItemBackgroundColor];
+    imageScrollPaddingRemoval = [[UIImageView alloc] init];
+    imageScrollPaddingRemoval.backgroundColor = [AppColors blankItemBackgroundColor];
+    [imageScrollPaddingRemoval setHidden:YES];
+    [imageScrollPaddingRemoval setFrame:CGRectZero];
     
     [imageScrollView addSubview:imageScrollPaddingLeft];
     [imageScrollView addSubview:imageScrollPaddingRight];
+    [imageScrollView addSubview:imageScrollPaddingRemoval];
+    
+    //add item view
     if (addItemView != nil) {
         [imageScrollView addSubview:addItemView];
     }
     
+    //image subviews
     imageSubViews = [[NSMutableArray alloc] init];
-    
+    imageSubViewCount = 0;
     displayedTextIndex = -1;
     
-    [self addSubview:imageScrollView];
+    //display view
     [self addSubview:displayView];
     
+    //edit item view
     if (editItemView != nil) {
         ImageScrollBrowser* __weak _self = self;
         editItemView.requestChangeItem = ^(){[_self requestedChangeItem];};
@@ -170,7 +186,6 @@
     }
     imageSubViewCount = imageSubViews.count;
     
-    
     if (resetOnDisplay) {
         imageScrollView.contentOffset = CGPointZero;
         displayedTextIndex = -1;
@@ -184,6 +199,8 @@
     }
     
     resetOnDisplay = YES;
+    
+    [imageScrollView bringSubviewToFront:imageScrollPaddingRemoval];
     
     [self setNeedsLayout];
 }
@@ -207,7 +224,7 @@
 
 - (void)setDescriptionDisplayToIndex:(int)index
 {
-    if (displayView != nil) {
+    if (displayView != nil && !isAnimatingItemSwap) {
         if (displayedTextIndex != index && index >= 0 && index < self.displayItems.count) {
             id<ImageScrollDisplayableItem> displayItem = (id<ImageScrollDisplayableItem>)self.displayItems[index];
             displayedTextIndex = index;
@@ -278,39 +295,95 @@
 - (void)requestedRemoveItem
 {
     if (displayedTextIndex < imageSubViewCount && imageSubViewCount > 0) {
+        //remove item from list
         id<ImageScrollDisplayableItem>item = self.displayItems[displayedTextIndex];
         NSMutableArray* temp = [NSMutableArray arrayWithArray:self.displayItems];
         [temp removeObject:item];
         resetOnDisplay = NO;
         self.arrayWasChanged(temp);
         self.displayItems = temp;
+        [self startHideAnimation];
     }
 }
 
 - (void)requestedMoveForward
 {
-    if (displayedTextIndex < imageSubViewCount - 1) {
+    if (!isAnimatingItemSwap && displayedTextIndex < imageSubViewCount - 1) {
         NSMutableArray* temp = [NSMutableArray arrayWithArray:self.displayItems];
         [temp exchangeObjectAtIndex:displayedTextIndex withObjectAtIndex:displayedTextIndex+1];
         resetOnDisplay = NO;
         displayedTextIndex++;
-        [imageScrollView setContentOffset:CGPointMake(displayedTextIndex*imageSubViewSize.width, 0) animated:YES];
         self.arrayWasChanged(temp);
         self.displayItems = temp;
+        [self performSelectorOnMainThread:@selector(startSwapAnimationWithIndices:) withObject:[NSArray arrayWithObjects:[NSNumber numberWithInt:displayedTextIndex], [NSNumber numberWithInt:(displayedTextIndex-1)], nil] waitUntilDone:NO];
     }
 }
 
 - (void)requestedMoveBackward
 {
-    if (displayedTextIndex > 0 && displayedTextIndex < imageSubViewCount) {
+    if (!isAnimatingItemSwap && displayedTextIndex > 0 && displayedTextIndex < imageSubViewCount) {
         NSMutableArray* temp = [NSMutableArray arrayWithArray:self.displayItems];
         [temp exchangeObjectAtIndex:displayedTextIndex withObjectAtIndex:displayedTextIndex-1];
         resetOnDisplay = NO;
         displayedTextIndex--;
-        [imageScrollView setContentOffset:CGPointMake(displayedTextIndex*imageSubViewSize.width, 0) animated:YES];
         self.arrayWasChanged(temp);
         self.displayItems = temp;
+        [self performSelectorOnMainThread:@selector(startSwapAnimationWithIndices:) withObject:[NSArray arrayWithObjects:[NSNumber numberWithInt:displayedTextIndex], [NSNumber numberWithInt:(displayedTextIndex+1)], nil] waitUntilDone:NO];
     }
+}
+
+- (void)startHideAnimation
+{
+    //show placeholder and animate
+    [imageScrollPaddingRemoval setFrame:CGRectMake(imageScrollPaddingLeft.bounds.size.width + imageSubViewSize.width * displayedTextIndex, 0, imageSubViewSize.width, imageSubViewSize.height)];
+    [imageScrollPaddingRemoval setHidden:NO];
+    isAnimatingItemRemove = YES;
+    for (int i=displayedTextIndex; i<imageSubViews.count; i++) {
+        UIImageView* imageSubView = (UIImageView*)imageSubViews[i];
+        [imageSubView setFrame:CGRectMake((i+1)*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width, 0, imageSubViewSize.width, imageSubViewSize.height)];
+    }
+    BOOL __editingEnabled = self.editingEnabled();
+    if (addItemView!=nil) {
+        [addItemView setHidden:!__editingEnabled];
+        if (__editingEnabled) {
+            [addItemView setFrame:CGRectMake((imageSubViews.count+2)*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width, 0, imageSubViewSize.width, imageSubViewSize.height)];
+        }
+    }
+    [UIView animateWithDuration:0.25 animations:^{
+        [imageScrollPaddingRemoval setFrame:CGRectMake(imageScrollPaddingLeft.bounds.size.width + imageSubViewSize.width * displayedTextIndex, 0, 0, imageSubViewSize.height)];
+        for (int i=displayedTextIndex; i<imageSubViews.count; i++) {
+            UIImageView* imageSubView = (UIImageView*)imageSubViews[i];
+            [imageSubView setFrame:CGRectMake(i*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width, 0, imageSubViewSize.width, imageSubViewSize.height)];
+        }
+        if (addItemView!=nil) {
+            [addItemView setHidden:!__editingEnabled];
+            if (__editingEnabled) {
+                [addItemView setFrame:CGRectMake((imageSubViews.count+1)*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width, 0, imageSubViewSize.width, imageSubViewSize.height)];
+            }
+        }
+    } completion:^(BOOL finished) {
+        [imageScrollPaddingRemoval setHidden:YES];
+        isAnimatingItemRemove = NO;
+    }];
+}
+
+- (void)startSwapAnimationWithIndices:(NSArray*)indices
+{
+    UIImageView* imageSubView1 = (UIImageView*)imageSubViews[[indices[0] intValue]];
+    UIImageView* imageSubView2 = (UIImageView*)imageSubViews[[indices[1] intValue]];
+    [imageScrollView bringSubviewToFront:imageSubView1];
+    CGRect frame1 = imageSubView1.frame;
+    CGRect frame2 = imageSubView2.frame;
+    [imageSubView1 setFrame:frame2];
+    [imageSubView2 setFrame:frame1];
+    isAnimatingItemSwap = YES;
+    [imageScrollView setContentOffset:CGPointMake(displayedTextIndex*imageSubViewSize.width, 0) animated:YES];
+    [UIView animateWithDuration:0.3 animations:^{
+        [imageSubView1 setFrame:frame1];
+        [imageSubView2 setFrame:frame2];
+    } completion:^(BOOL finished) {
+        isAnimatingItemSwap = NO;
+    }];
 }
 
 @end
