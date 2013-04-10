@@ -79,7 +79,7 @@
         [subView setFrame:CGRectMake(self.bounds.size.width/2-275, 8, 550, 110)];
     }
     if (self.cellStyle == TripBrowserCell4x1) {
-        [subView setFrame:CGRectMake(self.bounds.size.width/2-325, 8, 440, 110)];
+        [subView setFrame:CGRectMake(self.bounds.size.width/2-330, 8, 440, 110)];
     }
     
 }
