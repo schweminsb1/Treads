@@ -45,32 +45,37 @@
     //set frames of subviews
     CGFloat xOffset = (layoutHorizontal?self.bounds.size.width:0);
     CGFloat yOffset = (layoutHorizontal?0:self.bounds.size.height);
-    CGFloat xScale = self.bounds.size.width*(layoutHorizontal?0.25:1);
-    CGFloat yScale = self.bounds.size.height*(layoutHorizontal?1:0.25);
-    [removeItemButton setFrame:CGRectMake(0, 0, xScale, yScale)];
-    [changeItemButton setFrame:CGRectMake(xOffset*(0.25), yOffset*(0.25), xScale, yScale)];
-    [moveBackwardButton setFrame:CGRectMake(xOffset*(0.5), yOffset*(0.5), xScale, yScale)];
-    [moveForwardButton setFrame:CGRectMake(xOffset*(0.75), yOffset*(0.75), xScale, yScale)];
+    CGFloat scale = (layoutHorizontal?self.bounds.size.height:self.bounds.size.width);
+    CGFloat xPadding = (layoutHorizontal?(self.bounds.size.width*0.25 - scale)*0.5:0);
+    CGFloat yPadding = (layoutHorizontal?0:(self.bounds.size.width*0.25 - scale)*0.5);
+    [removeItemButton setFrame:CGRectMake(xPadding, yPadding, scale, scale)];
+    [changeItemButton setFrame:CGRectMake(xPadding + xOffset*(0.25), yPadding + yOffset*(0.25), scale, scale)];
+    [moveBackwardButton setFrame:CGRectMake(xPadding + xOffset*(0.5), yPadding + yOffset*(0.5), scale, scale)];
+    [moveForwardButton setFrame:CGRectMake(xPadding + xOffset*(0.75), yPadding + yOffset*(0.75), scale, scale)];
 }
 
 - (void)createAndAddSubviews
 {
     changeItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [changeItemButton setBackgroundImage:[UIImage imageNamed:@"compass.png"] forState:UIControlStateNormal];
-    [changeItemButton setBackgroundImage:[UIImage imageNamed:@"backpack.png"] forState:UIControlStateHighlighted];
-    [changeItemButton setTitle:@"C" forState:UIControlStateNormal];
+    [changeItemButton setBackgroundImage:[UIImage imageNamed:@"plus_unselect.png"] forState:UIControlStateNormal];
+    [changeItemButton setBackgroundImage:[UIImage imageNamed:@"plus_select.png"] forState:UIControlStateHighlighted];
     [changeItemButton addTarget:self action:@selector(tappedChangeItemButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    removeItemButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [removeItemButton setTitle:@"-" forState:UIControlStateNormal];
+    removeItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [removeItemButton setBackgroundImage:[UIImage imageNamed:@"minus_unselect.png"] forState:UIControlStateNormal];
+    [removeItemButton setBackgroundImage:[UIImage imageNamed:@"minus_select.png"] forState:UIControlStateHighlighted];
     [removeItemButton addTarget:self action:@selector(tappedRemoveItemButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    moveForwardButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [moveForwardButton setTitle:@">" forState:UIControlStateNormal];
+    moveForwardButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [moveForwardButton setBackgroundImage:[UIImage imageNamed:@"arrow_unselect.png"] forState:UIControlStateNormal];
+    [moveForwardButton setBackgroundImage:[UIImage imageNamed:@"arrow_select.png"] forState:UIControlStateHighlighted];
+    [moveForwardButton setTransform:CGAffineTransformMakeRotation(layoutHorizontal?M_PI_2:M_PI)];
     [moveForwardButton addTarget:self action:@selector(tappedMoveForwardButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    moveBackwardButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [moveBackwardButton setTitle:@"<" forState:UIControlStateNormal];
+    moveBackwardButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [moveBackwardButton setBackgroundImage:[UIImage imageNamed:@"arrow_unselect.png"] forState:UIControlStateNormal];
+    [moveBackwardButton setBackgroundImage:[UIImage imageNamed:@"arrow_select.png"] forState:UIControlStateHighlighted];
+    [moveBackwardButton setTransform:CGAffineTransformMakeRotation(layoutHorizontal?-M_PI_2:0)];
     [moveBackwardButton addTarget:self action:@selector(tappedMoveBackwardButton:) forControlEvents:UIControlEventTouchUpInside];
     
     [self addSubview:changeItemButton];

@@ -14,7 +14,7 @@
 @property NSString * treadsUser;
 @property int treadsUserID;
 @property NSString * fName;
-@property NString * lName;
+@property NSString * lName;
 
 -(id) initWithAuthenticatedUser: (NSString *)user;
 -(BOOL) Login;

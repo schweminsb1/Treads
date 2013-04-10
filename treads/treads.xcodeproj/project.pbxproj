@@ -72,6 +72,13 @@
 		3C8A909016E7DFC8007F0BB8 /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8A908F16E7DFC8007F0BB8 /* Trip.m */; };
 		3C8AC26D16E82BE30070271E /* TripService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8AC26C16E82BE30070271E /* TripService.m */; };
 		3C906BEF16F7A8B2009C75BF /* TripBrowserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C906BEE16F7A8B2009C75BF /* TripBrowserCell.m */; };
+		3C90EA91171611B300CACCC4 /* arrow_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C90EA8A171611B300CACCC4 /* arrow_select.png */; };
+		3C90EA92171611B300CACCC4 /* arrow_unselect.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C90EA8B171611B300CACCC4 /* arrow_unselect.png */; };
+		3C90EA93171611B300CACCC4 /* minus_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C90EA8C171611B300CACCC4 /* minus_select.png */; };
+		3C90EA94171611B300CACCC4 /* minus_unselect.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C90EA8D171611B300CACCC4 /* minus_unselect.png */; };
+		3C90EA95171611B300CACCC4 /* plus_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C90EA8E171611B300CACCC4 /* plus_select.png */; };
+		3C90EA96171611B300CACCC4 /* plus_transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C90EA8F171611B300CACCC4 /* plus_transparent.png */; };
+		3C90EA97171611B300CACCC4 /* plus_unselect.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C90EA90171611B300CACCC4 /* plus_unselect.png */; };
 		3C919D5E17149FC300FED52D /* ImageScrollEditItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C919D5D17149FC300FED52D /* ImageScrollEditItemView.m */; };
 		3C958FEE16EA6C4F0038AD7C /* helicopter-bouldering-crash-pad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C958FEA16EA6C4F0038AD7C /* helicopter-bouldering-crash-pad.jpg */; };
 		3C958FEF16EA6C4F0038AD7C /* remote-luxury-hiking-canada.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C958FEB16EA6C4F0038AD7C /* remote-luxury-hiking-canada.jpg */; };
@@ -203,6 +210,13 @@
 		3C8AC26C16E82BE30070271E /* TripService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripService.m; path = treads/TripService.m; sourceTree = SOURCE_ROOT; };
 		3C906BED16F7A8B2009C75BF /* TripBrowserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripBrowserCell.h; path = treads/TripBrowserCell.h; sourceTree = SOURCE_ROOT; };
 		3C906BEE16F7A8B2009C75BF /* TripBrowserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripBrowserCell.m; path = treads/TripBrowserCell.m; sourceTree = SOURCE_ROOT; };
+		3C90EA8A171611B300CACCC4 /* arrow_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_select.png; sourceTree = "<group>"; };
+		3C90EA8B171611B300CACCC4 /* arrow_unselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_unselect.png; sourceTree = "<group>"; };
+		3C90EA8C171611B300CACCC4 /* minus_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minus_select.png; sourceTree = "<group>"; };
+		3C90EA8D171611B300CACCC4 /* minus_unselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minus_unselect.png; sourceTree = "<group>"; };
+		3C90EA8E171611B300CACCC4 /* plus_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus_select.png; sourceTree = "<group>"; };
+		3C90EA8F171611B300CACCC4 /* plus_transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus_transparent.png; sourceTree = "<group>"; };
+		3C90EA90171611B300CACCC4 /* plus_unselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus_unselect.png; sourceTree = "<group>"; };
 		3C919D5B17149EB000FED52D /* EditControlsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EditControlsView.h; path = treads/EditControlsView.h; sourceTree = SOURCE_ROOT; };
 		3C919D5C17149FC300FED52D /* ImageScrollEditItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageScrollEditItemView.h; path = treads/ImageScrollEditItemView.h; sourceTree = SOURCE_ROOT; };
 		3C919D5D17149FC300FED52D /* ImageScrollEditItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageScrollEditItemView.m; path = treads/ImageScrollEditItemView.m; sourceTree = SOURCE_ROOT; };
@@ -371,17 +385,9 @@
 		3188B19116C9CE4E008E1D7F /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				3C89482C170B560600EEEED0 /* map_preview.png */,
-				3118BFED16EFC588006DE2E9 /* compass.png */,
-				3914480A16EE4B20001B16BE /* mountains.jpeg */,
-				3C958FEA16EA6C4F0038AD7C /* helicopter-bouldering-crash-pad.jpg */,
-				3C958FEB16EA6C4F0038AD7C /* remote-luxury-hiking-canada.jpg */,
-				3C958FEC16EA6C4F0038AD7C /* summit-boots-hiking-rocks.jpg */,
-				3C958FED16EA6C4F0038AD7C /* virgin_river_hiking.jpg */,
-				3188B1A916C9D4D1008E1D7F /* backpack.png */,
-				3188B19416C9CEC0008E1D7F /* man.png */,
-				3188B19216C9CE6A008E1D7F /* camera.png */,
-				3188B19516C9CEC0008E1D7F /* map-pin.png */,
+				3C90EA891716117500CACCC4 /* Sample Images */,
+				3C90EA881716116000CACCC4 /* Tab Bar Icons */,
+				3C90EA871716115900CACCC4 /* Edit Icons */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -552,6 +558,45 @@
 			name = Services;
 			sourceTree = "<group>";
 		};
+		3C90EA871716115900CACCC4 /* Edit Icons */ = {
+			isa = PBXGroup;
+			children = (
+				3C90EA8A171611B300CACCC4 /* arrow_select.png */,
+				3C90EA8B171611B300CACCC4 /* arrow_unselect.png */,
+				3C90EA8C171611B300CACCC4 /* minus_select.png */,
+				3C90EA8D171611B300CACCC4 /* minus_unselect.png */,
+				3C90EA8E171611B300CACCC4 /* plus_select.png */,
+				3C90EA8F171611B300CACCC4 /* plus_transparent.png */,
+				3C90EA90171611B300CACCC4 /* plus_unselect.png */,
+			);
+			name = "Edit Icons";
+			sourceTree = "<group>";
+		};
+		3C90EA881716116000CACCC4 /* Tab Bar Icons */ = {
+			isa = PBXGroup;
+			children = (
+				3188B1A916C9D4D1008E1D7F /* backpack.png */,
+				3188B19416C9CEC0008E1D7F /* man.png */,
+				3188B19216C9CE6A008E1D7F /* camera.png */,
+				3188B19516C9CEC0008E1D7F /* map-pin.png */,
+				3118BFED16EFC588006DE2E9 /* compass.png */,
+			);
+			name = "Tab Bar Icons";
+			sourceTree = "<group>";
+		};
+		3C90EA891716117500CACCC4 /* Sample Images */ = {
+			isa = PBXGroup;
+			children = (
+				3C89482C170B560600EEEED0 /* map_preview.png */,
+				3914480A16EE4B20001B16BE /* mountains.jpeg */,
+				3C958FEA16EA6C4F0038AD7C /* helicopter-bouldering-crash-pad.jpg */,
+				3C958FEB16EA6C4F0038AD7C /* remote-luxury-hiking-canada.jpg */,
+				3C958FEC16EA6C4F0038AD7C /* summit-boots-hiking-rocks.jpg */,
+				3C958FED16EA6C4F0038AD7C /* virgin_river_hiking.jpg */,
+			);
+			name = "Sample Images";
+			sourceTree = "<group>";
+		};
 		3C919D5917149E6B00FED52D /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -709,6 +754,13 @@
 				29C21B95170BA76D005B39E4 /* LocationSmallViewController.xib in Resources */,
 				3C882DC9170D28160041A9C8 /* LocationVC.xib in Resources */,
 				3C882DCB170D28160041A9C8 /* LocationViewController.xib in Resources */,
+				3C90EA91171611B300CACCC4 /* arrow_select.png in Resources */,
+				3C90EA92171611B300CACCC4 /* arrow_unselect.png in Resources */,
+				3C90EA93171611B300CACCC4 /* minus_select.png in Resources */,
+				3C90EA94171611B300CACCC4 /* minus_unselect.png in Resources */,
+				3C90EA95171611B300CACCC4 /* plus_select.png in Resources */,
+				3C90EA96171611B300CACCC4 /* plus_transparent.png in Resources */,
+				3C90EA97171611B300CACCC4 /* plus_unselect.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
