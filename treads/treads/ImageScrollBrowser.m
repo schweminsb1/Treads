@@ -152,6 +152,9 @@
 
 - (void)setDisplayItems:(NSArray *)displayItems
 {
+    if (_displayItems == displayItems) {
+        resetOnDisplay = NO;
+    }
     _displayItems = displayItems;
     
     if (!layoutDone) {
