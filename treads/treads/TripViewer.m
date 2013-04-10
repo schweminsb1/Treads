@@ -183,6 +183,9 @@
         cell.tripLocation = trip.tripLocations[indexPath.row - 1];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.sendNewLocationRequest = ^(){[_cell changeLocation:200];};
+        cell.sendDeleteLocationRequest = ^(){[_self removeLocationAtIndex:indexPath.row-1];};
+        cell.sendMoveForwardRequest = ^(){[_self swapLocationItemsAtIndex:(indexPath.row-1) index:(indexPath.row)];};
+        cell.sendMoveBackwardRequest = ^(){[_self swapLocationItemsAtIndex:(indexPath.row-1) index:(indexPath.row-2)];};
         return cell;
     }
     else if (editingEnabled) {
@@ -246,6 +249,29 @@
     [viewerTable reloadData];
     //[viewerTable setContentOffset:CGPointMake(0, viewerTable.contentOffset.y + 620) animated:YES];
     [viewerTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:trip.tripLocations.count inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
+- (void)removeLocationAtIndex:(int)index
+{
+    if (index >= 0 && index < trip.tripLocations.count) {
+        NSMutableArray* temp = [NSMutableArray arrayWithArray:trip.tripLocations];
+        [temp removeObjectAtIndex:index];
+        trip.tripLocations = temp;
+        [self markChangeMade];
+        [viewerTable reloadData];
+    }
+}
+
+- (void)swapLocationItemsAtIndex:(int)index1 index:(int)index2
+{
+    if (index1 >= 0 && index2 >= 0 && index1 < trip.tripLocations.count && index2 < trip.tripLocations.count) {
+        NSMutableArray* temp = [NSMutableArray arrayWithArray:trip.tripLocations];
+        [temp exchangeObjectAtIndex:index1 withObjectAtIndex:index2];
+        trip.tripLocations = temp;
+        [self markChangeMade];
+        [viewerTable reloadData];
+        [viewerTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(index2+1) inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

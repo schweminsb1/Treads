@@ -10,6 +10,7 @@
 
 @implementation ImageScrollEditItemView {
     BOOL layoutDone;
+    BOOL layoutHorizontal;
     UIButton* changeItemButton;
     UIButton* removeItemButton;
     UIButton* moveForwardButton;
@@ -21,11 +22,12 @@
 @synthesize requestMoveForward;
 @synthesize requestMoveBackward;
 
-- (id)init
+- (id)initDisplaysHorizontally:(BOOL)horizontal
 {
     self = [super init];
     if (self) {
         layoutDone = NO;
+        layoutHorizontal = horizontal;
     }
     return self;
 }
@@ -41,10 +43,14 @@
     }
     
     //set frames of subviews
-    [moveBackwardButton setFrame:CGRectMake(0, 0, self.bounds.size.width/4, self.bounds.size.height)];
-    [moveForwardButton setFrame:CGRectMake(self.bounds.size.width*(0.25), 0, self.bounds.size.width/4, self.bounds.size.height)];
-    [changeItemButton setFrame:CGRectMake(self.bounds.size.width*(0.5), 0, self.bounds.size.width/4, self.bounds.size.height)];
-    [removeItemButton setFrame:CGRectMake(self.bounds.size.width*(0.75), 0, self.bounds.size.width/4, self.bounds.size.height)];
+    CGFloat xOffset = (layoutHorizontal?self.bounds.size.width:0);
+    CGFloat yOffset = (layoutHorizontal?0:self.bounds.size.height);
+    CGFloat xScale = self.bounds.size.width*(layoutHorizontal?0.25:1);
+    CGFloat yScale = self.bounds.size.height*(layoutHorizontal?1:0.25);
+    [removeItemButton setFrame:CGRectMake(0, 0, xScale, yScale)];
+    [changeItemButton setFrame:CGRectMake(xOffset*(0.25), yOffset*(0.25), xScale, yScale)];
+    [moveBackwardButton setFrame:CGRectMake(xOffset*(0.5), yOffset*(0.5), xScale, yScale)];
+    [moveForwardButton setFrame:CGRectMake(xOffset*(0.75), yOffset*(0.75), xScale, yScale)];
 }
 
 - (void)createAndAddSubviews

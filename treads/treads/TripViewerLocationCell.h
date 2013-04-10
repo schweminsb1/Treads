@@ -18,6 +18,9 @@
 @property (copy) void(^markChangeMade)();
 
 @property (copy) void(^sendNewLocationRequest)();
+@property (copy) void(^sendDeleteLocationRequest)();
+@property (copy) void(^sendMoveForwardRequest)();
+@property (copy) void(^sendMoveBackwardRequest)();
 - (void)changeLocation:(int)newLocationID;
 
 @end

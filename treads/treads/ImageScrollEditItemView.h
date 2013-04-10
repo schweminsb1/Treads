@@ -12,4 +12,6 @@
 
 @interface ImageScrollEditItemView : UIView<EditControlsView>
 
+- (id)initDisplaysHorizontally:(BOOL)horizontal;
+
 @end

@@ -24,17 +24,21 @@
 
 @implementation TripViewerLocationCell {
     BOOL layoutDone;
-    //UIView* bgrView;
+    
     UIView* subView;
+    
     UIView* locationBGRView;
     UILabel* locationNameLabel;
     UITextView* locationDescriptionTextView;
     UIImageView* locationMapView;
     UIView* locationTextBackgroundView;
+    
     ImageScrollBrowser* imageScrollBrowser;
     ImageScrollEditableTextView* imageScrollEditableTextView;
     ImageScrollEditItemView* imageScrollEditItemView;
     UIView* imageScrollBrowserAddItemView;
+    
+    ImageScrollEditItemView* editItemView;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -64,8 +68,6 @@
     }
     
     //set frames of subviews
-    //[bgrView setFrame:CGRectMake(0, 16, self.bounds.size.width, 70)];
-    //[bgrView setFrame:self.bounds];
     [subView setFrame:CGRectMake(24, 8, self.bounds.size.width-48, 620)];
     [locationBGRView setFrame:CGRectMake(0, 0, subView.bounds.size.width, 70)];
     [locationNameLabel setFrame:CGRectMake(20, 16, subView.bounds.size.width-32, 38)];
@@ -78,15 +80,15 @@
     //set editing-related properties
     BOOL __editingEnabled = self.editingEnabled();
     if (__editingEnabled) {
-        //subView.backgroundColor = [AppColors tertiaryBackgroundColor];
         locationBGRView.backgroundColor = [AppColors secondaryBackgroundColor];
         locationTextBackgroundView.backgroundColor = [AppColors secondaryBackgroundColor];
     }
     else {
-        //subView.backgroundColor = [AppColors mainBackgroundColor];
         locationBGRView.backgroundColor = [UIColor clearColor];
         locationTextBackgroundView.backgroundColor = [AppColors mainBackgroundColor];
     }
+    [editItemView setFrame:CGRectMake(10, 80, 40, 240)];
+    [editItemView setHidden:!__editingEnabled];
 }
 
 - (void)createAndAddSubviews
@@ -111,9 +113,9 @@
     locationNameLabel.textAlignment = NSTextAlignmentLeft;
     locationNameLabel.adjustsFontSizeToFitWidth = YES;
     
-    UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:nil];
-    tapGestureRecognizer.delegate = self;
-    [self addGestureRecognizer:tapGestureRecognizer];
+//    UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:nil];
+//    tapGestureRecognizer.delegate = self;
+//    [self addGestureRecognizer:tapGestureRecognizer];
     
     locationTextBackgroundView = [[UIView alloc] init];
     
@@ -128,7 +130,7 @@
     imageScrollBrowserAddItemView = [[UIView alloc] init];
     imageScrollBrowserAddItemView.backgroundColor = [AppColors toolbarColor];
     
-    imageScrollEditItemView = [[ImageScrollEditItemView alloc] init];
+    imageScrollEditItemView = [[ImageScrollEditItemView alloc] initDisplaysHorizontally:YES];
     
     imageScrollBrowser = [[ImageScrollBrowser alloc] initWithImageSize:CGSizeMake(540, 360) displayView:imageScrollEditableTextView addItemView:imageScrollBrowserAddItemView editItemView:imageScrollEditItemView];
     imageScrollBrowser.editingEnabled = ^BOOL(){return _self.editingEnabled();};
@@ -145,27 +147,27 @@
     [subView addSubview:locationMapView];
     [subView addSubview:locationTextBackgroundView];
     [subView addSubview:locationNameLabel];
-    //[subView addSubview:locationDescriptionTextView];
     [subView addSubview:imageScrollBrowser];
+    
+    editItemView = [[ImageScrollEditItemView alloc] initDisplaysHorizontally:NO];
+    editItemView.requestChangeItem = ^(){[_self requestedChangeItem];};
+    editItemView.requestRemoveItem = ^(){[_self requestedRemoveItem];};
+    editItemView.requestMoveForward = ^(){[_self requestedMoveForward];};
+    editItemView.requestMoveBackward = ^(){[_self requestedMoveBackward];};
+    [self addSubview:editItemView];
+    [self bringSubviewToFront:editItemView];
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
-{
-    CGPoint touchLocation = [touch locationInView:locationBGRView];
-    if (self.editingEnabled() && CGRectContainsPoint(locationBGRView.bounds, touchLocation)) {
-        //return YES;
-        [self locationChangeWasTapped];
-    }
-    //return NO;
-    return YES;
-}
-
-- (void)locationChangeWasTapped
-{
-//    if (self.editingEnabled()) {
-        self.sendNewLocationRequest();
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+//{
+//    CGPoint touchLocation = [touch locationInView:locationBGRView];
+//    if (self.editingEnabled() && CGRectContainsPoint(locationBGRView.bounds, touchLocation)) {
+//        //return YES;
+//        [self locationChangeWasTapped];
 //    }
-}
+//    //return NO;
+//    return YES;
+//}
 
 - (void)changeLocation:(int)newLocationID
 {
@@ -173,6 +175,26 @@
     self.tripLocation.tripLocationID = newLocationID;
     [self setTripLocationHeader:self.tripLocation];
     [self setNeedsLayout];
+}
+
+- (void)requestedChangeItem
+{
+    self.sendNewLocationRequest();
+}
+
+- (void)requestedRemoveItem
+{
+    self.sendDeleteLocationRequest();
+}
+
+- (void)requestedMoveForward
+{
+    self.sendMoveForwardRequest();
+}
+
+- (void)requestedMoveBackward
+{
+    self.sendMoveBackwardRequest();
 }
 
 - (void)setTripLocation:(TripLocation *)tripLocation
