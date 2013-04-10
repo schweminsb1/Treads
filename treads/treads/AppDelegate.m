@@ -16,6 +16,7 @@
 #import "AppColors.h"
 #import "CommentService.h"
 #import "ImageService.h"
+#import "UserService.h"
 
 @interface AppDelegate()
 
@@ -28,6 +29,7 @@
 @property (strong) LocationService* locationService;
 @property (strong) CommentService* commentService;
 @property (strong) ImageService* imageService;
+@property (strong) UserService* userService;
 @property (strong) NSString * SASURL;
 
 @end
@@ -48,6 +50,7 @@
     
     self.locationService = [[LocationService alloc]initWithRepository:_dataRepository];
     _commentService= [[CommentService alloc] initWithRepository:_dataRepository];
+    self.userService = [[UserService alloc] initWithRepository:self.dataRepository];
     
     /*
     CompletionWithItems completion= ^(NSArray* items)
@@ -83,7 +86,7 @@
     cameraVC = [[CameraVC alloc] initWithNibName:@"CameraVC" bundle:nil];
     myTripsVC = [[MyTripsVC alloc] initWithNibName:@"MyTripsVC" bundle:nil withTripService:self.tripService];
     followVC = [[FollowVC alloc] initWithNibName:@"FollowVC" bundle:nil withTripService:self.tripService];
-    profileVC = [[ProfileVC alloc] initWithNibName:@"ProfileVC" bundle:nil];
+    profileVC = [[ProfileVC alloc] initWithNibName:@"ProfileVC" bundle:nil tripService:self.tripService userService:self.userService userID:0];
     
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.viewControllers = @[

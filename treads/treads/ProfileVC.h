@@ -7,7 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TripService.h"
+#import "UserService.h"
+#import "User.h"
+
 
 @interface ProfileVC : UIViewController
+
+@property (strong) IBOutlet UIView* browserWindow;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService:(TripService *)myTripService userService:(UserService *)myUserService userID:(int)myUserID;
+
+- (void)dataHasLoaded:(NSArray*)newData;
+- (void)tripsHaveLoaded:(NSArray*)newData;
 
 @end
