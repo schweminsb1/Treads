@@ -65,20 +65,20 @@
     removeItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [removeItemButton setBackgroundImage:[UIImage imageNamed:@"minus_unselect.png"] forState:UIControlStateNormal];
     [removeItemButton setBackgroundImage:[UIImage imageNamed:@"minus_select.png"] forState:UIControlStateHighlighted];
-    [changeItemButton setBackgroundColor:[AppColors toolbarColor]];
+    [removeItemButton setBackgroundColor:[AppColors toolbarColor]];
     [removeItemButton addTarget:self action:@selector(tappedRemoveItemButton:) forControlEvents:UIControlEventTouchUpInside];
     
     moveForwardButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [moveForwardButton setBackgroundImage:[UIImage imageNamed:@"arrow_unselect.png"] forState:UIControlStateNormal];
     [moveForwardButton setBackgroundImage:[UIImage imageNamed:@"arrow_select.png"] forState:UIControlStateHighlighted];
-    [changeItemButton setBackgroundColor:[AppColors toolbarColor]];
+    [moveForwardButton setBackgroundColor:[AppColors toolbarColor]];
     [moveForwardButton setTransform:CGAffineTransformMakeRotation(layoutHorizontal?M_PI_2:M_PI)];
     [moveForwardButton addTarget:self action:@selector(tappedMoveForwardButton:) forControlEvents:UIControlEventTouchUpInside];
     
     moveBackwardButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [moveBackwardButton setBackgroundImage:[UIImage imageNamed:@"arrow_unselect.png"] forState:UIControlStateNormal];
     [moveBackwardButton setBackgroundImage:[UIImage imageNamed:@"arrow_select.png"] forState:UIControlStateHighlighted];
-    [changeItemButton setBackgroundColor:[AppColors toolbarColor]];
+    [moveBackwardButton setBackgroundColor:[AppColors toolbarColor]];
     [moveBackwardButton setTransform:CGAffineTransformMakeRotation(layoutHorizontal?-M_PI_2:0)];
     [moveBackwardButton addTarget:self action:@selector(tappedMoveBackwardButton:) forControlEvents:UIControlEventTouchUpInside];
     
