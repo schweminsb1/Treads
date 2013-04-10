@@ -15,6 +15,7 @@
 #import "LocationService.h"
 #import "AppColors.h"
 #import "CommentService.h"
+#import "ImageService.h"
 
 @interface AppDelegate()
 
@@ -26,6 +27,7 @@
 @property (strong) ProfileService* profileService;
 @property (strong) LocationService* locationService;
 @property (strong) CommentService* commentService;
+@property (strong) ImageService* imageService;
 @property (strong) NSString * SASURL;
 
 @end
@@ -46,6 +48,28 @@
     
     self.locationService = [[LocationService alloc]initWithRepository:_dataRepository];
     _commentService= [[CommentService alloc] initWithRepository:_dataRepository];
+    
+    CompletionWithItems completion= ^(NSArray* items)
+    {
+        UIImage * returnImage= items[0];
+        
+    };
+    
+    MSItemBlock comp= ^(NSDictionary * item, NSError * error)
+    {
+        [self.imageService getImageWithPhotoID:5 withReturnBlock:completion];
+
+        
+    };
+    self.imageService = [[ImageService alloc] initWithRepository:self.dataRepository];
+    
+    UIImage * testImage= [UIImage imageNamed:@"mountains.jpeg"];
+    [self.imageService insertImageAsBlob:testImage withCompletion:comp];
+    
+ 
+    
+       
+    
     //Set global display options
     [[UINavigationBar appearance] setTintColor:[AppColors toolbarColor]];
     [[UITabBar appearance] setSelectedImageTintColor:[AppColors toolbarColor]];

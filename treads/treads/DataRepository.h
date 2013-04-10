@@ -48,6 +48,7 @@ typedef void (^BusyUpdateBlock) (BOOL busy);
 - (void)retrieveDataItemsMatching:(NSString*)predicateStringOrNil usingService:(id<TreadsService>)callingService  withReturnBlock:(CompletionWithItems)completion;
 //creating, updating
 - (void)createDataItem:(NSDictionary*)updateItem usingService:(id<TreadsService>)callingService forRequestingObject:(NSObject*)requestingObject withReturnAction:(SEL)returnAction;
+- (void)createDataItem:(NSDictionary*)updateItem usingService:(id<TreadsService>)callingService withReturnBlock:(MSItemBlock)block;
 
 - (void)updateDataItem:(NSDictionary*)updateItem usingService:(id<TreadsService>)callingService forRequestingObject:(NSObject*)requestingObject withReturnAction:(SEL)returnAction;
 
