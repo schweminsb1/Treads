@@ -17,6 +17,7 @@
 #import "CommentService.h"
 #import "ImageService.h"
 #import "UserService.h"
+#import "LocationPickerVC.h"
 
 @interface AppDelegate()
 
@@ -52,26 +53,13 @@
     _commentService= [[CommentService alloc] initWithRepository:_dataRepository];
     self.userService = [[UserService alloc] initWithRepository:self.dataRepository];
     
-    /*
-    CompletionWithItems completion= ^(NSArray* items)
-    {
-        UIImage * returnImage= items[0];
-        
-    };
-    
-    MSItemBlock comp= ^(NSDictionary * item, NSError * error)
-    {
-        [self.imageService getImageWithPhotoID:5 withReturnBlock:completion];
-
-        
-    };
-    */
+ 
     self.imageService = [[ImageService alloc] initWithRepository:self.dataRepository];
     
  //   UIImage * testImage= [UIImage imageNamed:@"mountains.jpeg"];
    // [self.imageService insertImageAsBlob:testImage withCompletion:comp];
     
- 
+    LocationPickerVC * picker= [[LocationPickerVC alloc] initWithStyle:UITableViewStylePlain withLocationService:self.locationService];
     
        
     
@@ -104,8 +92,8 @@
     login.title = @"Login";
     UINavigationController* LoginNavigation = [[UINavigationController alloc] initWithRootViewController:login];
     
-    self.window.rootViewController=LoginNavigation;
-    
+    //self.window.rootViewController=LoginNavigation;
+    self.window.rootViewController=picker;
     //Initialize and assign to Tab Bar
 
     

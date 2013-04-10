@@ -51,9 +51,9 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == self.searchDisplayController.searchResultsTableView) {
-            return locationsFilteredArray.count;
+            return locationsFilteredArray.count+1;
     } else {
-           return locations.count;
+           return locations.count+1;
     }
 
 }
@@ -66,14 +66,23 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    Location * location;
-    if (tableView == self.searchDisplayController.searchResultsTableView) {
-        location = [locationsFilteredArray objectAtIndex:indexPath.row];
-    } else {
-        location = [locations objectAtIndex:indexPath.row];
+    if(indexPath.row==0)
+    {
+        cell.textLabel.text=@"Create New";
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    
     }
+    else
+    {
+        Location * location;
+        if (tableView == self.searchDisplayController.searchResultsTableView) {
+            location = [locationsFilteredArray objectAtIndex:indexPath.row-1];
+        } else {
+            location = [locations objectAtIndex:indexPath.row-1];
+        }
  
-    cell.textLabel.text=location.title;
+        cell.textLabel.text=location.title;
+    }
     // Configure the cell...
     
     return cell;
