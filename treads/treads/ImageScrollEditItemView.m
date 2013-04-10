@@ -55,7 +55,9 @@
 
 - (void)createAndAddSubviews
 {
-    changeItemButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    changeItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [changeItemButton setBackgroundImage:[UIImage imageNamed:@"compass.png"] forState:UIControlStateNormal];
+    [changeItemButton setBackgroundImage:[UIImage imageNamed:@"backpack.png"] forState:UIControlStateHighlighted];
     [changeItemButton setTitle:@"C" forState:UIControlStateNormal];
     [changeItemButton addTarget:self action:@selector(tappedChangeItemButton:) forControlEvents:UIControlEventTouchUpInside];
     
