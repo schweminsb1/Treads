@@ -12,6 +12,8 @@
 		29241806170E645200BB9FAE /* UserService.m in Sources */ = {isa = PBXBuildFile; fileRef = 29241805170E645200BB9FAE /* UserService.m */; };
 		29241809170E651900BB9FAE /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 29241808170E651900BB9FAE /* User.m */; };
 		297672901715CB4A00C756FB /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 2976728F1715CB4A00C756FB /* NSData+Base64.m */; };
+		297672A017162DD300C756FB /* LocationPickerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2976729E17162DD300C756FB /* LocationPickerVC.m */; };
+		297672A117162DD300C756FB /* LocationPickerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2976729F17162DD300C756FB /* LocationPickerVC.xib */; };
 		29829831170D3B08002BA507 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 29829830170D3B08002BA507 /* Comment.m */; };
 		29AB7C591710D199007D9F16 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 29AB7C561710D199007D9F16 /* CommentCell.m */; };
 		29AB7C5D1710D1D7007D9F16 /* EditableTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 29AB7C5C1710D1D7007D9F16 /* EditableTextView.m */; };
@@ -112,6 +114,9 @@
 		296CC3F816FCEA7C0089F1F1 /* treads.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = treads.entitlements; path = treads/treads.entitlements; sourceTree = "<group>"; };
 		2976728E1715CB4A00C756FB /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "treads/NSData+Base64.h"; sourceTree = SOURCE_ROOT; };
 		2976728F1715CB4A00C756FB /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "treads/NSData+Base64.m"; sourceTree = SOURCE_ROOT; };
+		2976729D17162DD300C756FB /* LocationPickerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationPickerVC.h; path = treads/LocationPickerVC.h; sourceTree = SOURCE_ROOT; };
+		2976729E17162DD300C756FB /* LocationPickerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationPickerVC.m; path = treads/LocationPickerVC.m; sourceTree = SOURCE_ROOT; };
+		2976729F17162DD300C756FB /* LocationPickerVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LocationPickerVC.xib; path = treads/LocationPickerVC.xib; sourceTree = SOURCE_ROOT; };
 		2982982F170D3B07002BA507 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Comment.h; path = treads/Comment.h; sourceTree = SOURCE_ROOT; };
 		29829830170D3B08002BA507 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Comment.m; path = treads/Comment.m; sourceTree = SOURCE_ROOT; };
 		29AB7C551710D199007D9F16 /* CommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentCell.h; path = treads/CommentCell.h; sourceTree = SOURCE_ROOT; };
@@ -270,6 +275,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2976729C17162DA700C756FB /* LocationPickerVC */ = {
+			isa = PBXGroup;
+			children = (
+				2976729D17162DD300C756FB /* LocationPickerVC.h */,
+				2976729E17162DD300C756FB /* LocationPickerVC.m */,
+				2976729F17162DD300C756FB /* LocationPickerVC.xib */,
+			);
+			name = LocationPickerVC;
+			sourceTree = "<group>";
+		};
 		29AB7C5E1710D254007D9F16 /* Location */ = {
 			isa = PBXGroup;
 			children = (
@@ -417,6 +432,7 @@
 		3C60C7CD16E6C28300FDFD7D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				2976729C17162DA700C756FB /* LocationPickerVC */,
 				29AB7C5E1710D254007D9F16 /* Location */,
 				316399B816ECB404003B3F0E /* EditTrip */,
 				39164F5916EAA3A800877549 /* Add Location */,
@@ -765,6 +781,7 @@
 				3C90EAA917161AE000CACCC4 /* minus_unselect.png in Resources */,
 				3C90EAAA17161AE000CACCC4 /* plus_select.png in Resources */,
 				3C90EAAB17161AE000CACCC4 /* plus_unselect.png in Resources */,
+				297672A117162DD300C756FB /* LocationPickerVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -826,6 +843,7 @@
 				291479791714BFB900D543F9 /* ImageService.m in Sources */,
 				297672901715CB4A00C756FB /* NSData+Base64.m in Sources */,
 				395E625F1715EC0E007AB363 /* CameraService.m in Sources */,
+				297672A017162DD300C756FB /* LocationPickerVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
