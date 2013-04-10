@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		291479791714BFB900D543F9 /* ImageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 291479781714BFB900D543F9 /* ImageService.m */; };
 		29241803170E4CE100BB9FAE /* CommentService.m in Sources */ = {isa = PBXBuildFile; fileRef = 29241802170E4CE100BB9FAE /* CommentService.m */; };
 		29241806170E645200BB9FAE /* UserService.m in Sources */ = {isa = PBXBuildFile; fileRef = 29241805170E645200BB9FAE /* UserService.m */; };
 		29241809170E651900BB9FAE /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 29241808170E651900BB9FAE /* User.m */; };
@@ -90,6 +91,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		291479771714BFB900D543F9 /* ImageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageService.h; path = treads/ImageService.h; sourceTree = SOURCE_ROOT; };
+		291479781714BFB900D543F9 /* ImageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageService.m; path = treads/ImageService.m; sourceTree = SOURCE_ROOT; };
 		29241801170E4CE100BB9FAE /* CommentService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentService.h; path = treads/CommentService.h; sourceTree = SOURCE_ROOT; };
 		29241802170E4CE100BB9FAE /* CommentService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentService.m; path = treads/CommentService.m; sourceTree = SOURCE_ROOT; };
 		29241804170E645200BB9FAE /* UserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserService.h; path = treads/UserService.h; sourceTree = SOURCE_ROOT; };
@@ -520,6 +523,8 @@
 		3C8AC26A16E82BD10070271E /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				291479771714BFB900D543F9 /* ImageService.h */,
+				291479781714BFB900D543F9 /* ImageService.m */,
 				29AB7C661710D341007D9F16 /* TripLocationService.h */,
 				29AB7C671710D341007D9F16 /* TripLocationService.m */,
 				3C04028C16F6B8CA0030D8BA /* TreadsService.h */,
@@ -752,6 +757,7 @@
 				29AB7C6E17111A05007D9F16 /* CommentEnterBox.m in Sources */,
 				29AB7C7517113596007D9F16 /* addCommentButton.m in Sources */,
 				3C919D5E17149FC300FED52D /* ImageScrollEditItemView.m in Sources */,
+				291479791714BFB900D543F9 /* ImageService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

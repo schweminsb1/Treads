@@ -39,7 +39,7 @@
     [super viewDidLoad];
      self.name.text = _location.title;
     // Do any additional setup after loading the view from its nib.
-    CGSize  size= _scrollView.frame.size;
+  //  CGSize  size= _scrollView.frame.size;
     //add subView
     
     /*

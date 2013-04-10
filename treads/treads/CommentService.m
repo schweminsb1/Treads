@@ -47,8 +47,8 @@
         
         //save this user to disk
        // _userService getUserbyID:comment.UserID forTarget:self withAction:<#(SEL)#>
-        NSArray * users;
-        int idval= [comment.UserID intValue];
+   //     NSArray * users;
+    //    int idval= [comment.UserID intValue];
        // users=[_userService getUserbyID:idval withReturnItems:users];
        // comment.commentsUser=users[0];
         
