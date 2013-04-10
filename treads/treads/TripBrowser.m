@@ -8,7 +8,7 @@
 
 #import "TripBrowser.h"
 
-#import "TripBrowserCell.h"
+//#import "TripBrowserCell.h"
 
 #import "AppColors.h"
 
@@ -24,6 +24,11 @@
     UITableView* browserTable;
     UIActivityIndicatorView* activityIndicatorView;
     int cellVerticalPadding;
+}
+
+- (NSString*)getCellIdentifier
+{
+    return [NSString stringWithFormat:@"CELL_STYLE_%d", self.cellStyle];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -68,9 +73,14 @@
     [self bringSubviewToFront:activityIndicatorView];
 }
 
+- (void)setCellStyle:(TripBrowserCellStyle)cellStyle
+{
+    _cellStyle = cellStyle;
+    [browserTable reloadData];
+}
+
 #pragma mark - Data Setting/Interaction
 
-//- (void)setBrowserData:(NSArray*)newSortedData withAction: (void(^)(Trip*))newListSelectAction
 - (void)setBrowserData:(NSArray*)newSortedData forTarget:(NSObject*)newTarget withAction:(SEL)newListSelectAction
 {
     sortedListData = newSortedData;
@@ -102,9 +112,9 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TripBrowserCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CELL"];
+    TripBrowserCell* cell = [tableView dequeueReusableCellWithIdentifier:[self getCellIdentifier]];
     if (!cell) {
-        cell = [[TripBrowserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL"];
+        cell = [[TripBrowserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[self getCellIdentifier] cellStyle:self.cellStyle];
         //[cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
         //[cell setAutoresizesSubviews:YES];
     }
@@ -150,7 +160,7 @@
 - (CGFloat)tableView:tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //return [self tableView:tableView cellForRowAtIndexPath:indexPath].bounds.size.height + cellVerticalPadding;
-    return 440 + cellVerticalPadding;
+    return [TripBrowserCell heightForCellStyle:self.cellStyle] + cellVerticalPadding;
 }
 
 @end

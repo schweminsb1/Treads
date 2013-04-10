@@ -59,6 +59,7 @@
 {
     //load browser data
     [self.browser clearAndWait];
+    [self.browser setCellStyle:TripBrowserCell4x1];
     [self.tripService getAllTripsForTarget:self withAction:@selector(dataHasLoaded:)];
     //[self.tripService getTripWithID:0 forTarget:self withAction:@selector(dataHasLoaded:)];
 }

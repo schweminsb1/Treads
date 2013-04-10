@@ -18,6 +18,7 @@
 @interface FollowVC () {
     NSArray* browserModeControlLabels;
     NSArray* browserModeControlActions;
+    NSArray* browserCellStyles;
 }
 
 @property (strong) TripService* tripService;
@@ -53,6 +54,11 @@
                        ^void(void) { [self.tripService getAllTripsForTarget:self withAction:@selector(dataHasLoaded:)]; },
                         ^void(void) { [self.tripService getAllTripsForTarget:self withAction:@selector(dataHasLoaded:)]; }
                       ];
+    browserCellStyles = @[
+                          [NSNumber numberWithInt:TripBrowserCell5x1],
+                          [NSNumber numberWithInt:TripBrowserCell3x4],
+                          [NSNumber numberWithInt:TripBrowserCell6x2]
+                         ];
     //browserModeControlActions = @[
     //                              ^NSArray*(void) { return [self.tripService getFollowingTrips]; },
     //                               ^NSArray*(void) { return [self.tripService getFeedTrips]; },
@@ -82,6 +88,7 @@
 - (void)segmentControlChange:(UISegmentedControl*)sender
 {
     [self.browser clearAndWait];
+    [self.browser setCellStyle:(TripBrowserCellStyle)[browserCellStyles[sender.selectedSegmentIndex] intValue]];
     void(^fcn)(void) = browserModeControlActions[sender.selectedSegmentIndex]; fcn();
 }
 
