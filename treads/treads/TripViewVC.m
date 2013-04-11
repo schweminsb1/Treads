@@ -47,6 +47,12 @@
     
     //set up browser
     self.viewer = [[TripViewer alloc] initWithFrame:self.viewerWindow.bounds];
+    self.viewer.sendNewLocationRequest = ^(void(^onSuccess)(TripLocation*)) {
+        if (YES) {
+            TripLocation* location;
+            onSuccess(location);
+        }
+    };
     [self.viewer setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     [self.viewerWindow addSubview: self.viewer];
     

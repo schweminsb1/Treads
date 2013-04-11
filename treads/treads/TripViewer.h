@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class Trip;
+@class TripLocation;
 
 @interface TripViewer : UIView
 
@@ -26,5 +27,7 @@
 - (void)prepareForExit;
 
 - (void)clearAndWait;
+
+@property (copy) void(^sendNewLocationRequest)(void(^onSuccess)(TripLocation*));
 
 @end

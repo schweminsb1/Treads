@@ -182,7 +182,12 @@
         cell.markChangeMade = ^(){[_self markChangeMade];};
         cell.tripLocation = trip.tripLocations[indexPath.row - 1];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.sendNewLocationRequest = ^(){[_cell changeLocation:200];};
+        cell.sendNewLocationRequest = ^(){
+            self.sendNewLocationRequest(^(TripLocation* newTripLocation){
+                [_cell changeLocation:newTripLocation.locationID];
+            });
+//            [_cell changeLocation:200];
+        };
         cell.sendDeleteLocationRequest = ^(){[_self removeLocationAtIndex:indexPath.row-1];};
         cell.sendMoveForwardRequest = ^(){[_self swapLocationItemsAtIndex:(indexPath.row-1) index:(indexPath.row)];};
         cell.sendMoveBackwardRequest = ^(){[_self swapLocationItemsAtIndex:(indexPath.row-1) index:(indexPath.row-2)];};
