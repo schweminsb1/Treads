@@ -13,6 +13,7 @@
 #import "Trip.h"
 #import "TripService.h"
 #import "CameraService.h"
+#import "LocationPickerVC.h"
 
 #import "TripViewer.h"
 
@@ -23,6 +24,7 @@
 @property (strong) TripViewer* viewer;
 @property (strong) UIBarButtonItem* tripEditButton;
 @property (strong) UIBarButtonItem* backButton;
+@property LocationService * locationService;
 
 @end
 
@@ -32,13 +34,14 @@
     CameraService* cameraService;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil backTitle:(NSString *)backTitle tripService:(TripService *)myTripService tripID:(int)myTripID
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil backTitle:(NSString *)backTitle tripService:(TripService *)myTripService tripID:(int)myTripID LocationService:(LocationService *) myLocationService
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.tripService = myTripService;
         self.tripID = myTripID;
         previousViewTitle = backTitle;
+        _locationService=myLocationService;
     }
     return self;
 }
@@ -53,6 +56,15 @@
     self.viewer = [[TripViewer alloc] initWithFrame:self.viewerWindow.bounds];
     self.viewer.sendNewLocationRequest = ^(void(^onSuccess)(TripLocation*)) {
         if (YES) {
+            //Create Location Picker
+            //make it a popover
+            //on cell selection call the dismiss popover
+            //in the dismiss popover call block
+            //pass the location here,
+            //fill the new TripLocation here
+            LocationPickerVC * picker= [[LocationPickerVC alloc]initWithStyle:UITableViewStylePlain withLocationService:_locationService];
+            
+            
             TripLocation* location;
             onSuccess(location);
         }

@@ -19,22 +19,25 @@
 
 #import "AppColors.h"
 
+#import "LocationService.h"
+
 @interface MyTripsVC()
 
 @property (strong) TripService* tripService;
 @property (strong) TripBrowser* browser;
 @property (strong) UIBarButtonItem* tripNewButton;
+@property LocationService* locationService;
 
 @end
 
 @implementation MyTripsVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withTripService:(TripService *)tripServiceHandle
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withTripService:(TripService *)tripServiceHandle withLocationService:(LocationService*)locationservice
 {
     if (self) {
         self.title = NSLocalizedString(@"My Trips", @"My Trips");
         self.tabBarItem.image = [UIImage imageNamed:@"backpack.png"];
-        
+        _locationService=locationservice;
         //set up services
         self.tripService = tripServiceHandle;//[[TripService alloc] init];
     }
@@ -84,7 +87,7 @@
 
 - (void)showTrip:(Trip*)trip
 {
-    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID];
+    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID LocationService:_locationService];
     [self.navigationController pushViewController:tripViewVC animated:YES];
 }
 

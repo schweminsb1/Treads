@@ -10,6 +10,7 @@
 #import "TripViewVC.h"
 #import "TreadsSession.h"
 #import "TripBrowser.h"
+#import "LocationService.h"
 
 
 @interface ProfileVC ()
@@ -24,12 +25,13 @@
 @property        TreadsSession * treadsSession;
 @property int userID;
 @property (strong) TripBrowser* browser;
+@property LocationService * locationService;
 
 @end
 
 @implementation ProfileVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService:(TripService *)myTripService userService:(UserService *)myUserService imageService:(ImageService*)myImageService userID:(int)myUserID;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService:(TripService *)myTripService userService:(UserService *)myUserService imageService:(ImageService*)myImageService userID:(int)myUserID withLocationService:(LocationService*) locationService ;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -39,6 +41,7 @@
         self.tripService = myTripService;
         self.userService = myUserService;
         self.imageService = myImageService;
+        _locationService=locationService;
     }
     return self;
 }
@@ -105,7 +108,7 @@
 
 - (void)showTrip:(Trip*)trip
 {
-    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID];
+    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID LocationService:_locationService];
     [self.navigationController pushViewController:tripViewVC animated:YES];
 }
 
