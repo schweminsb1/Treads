@@ -20,6 +20,7 @@
 @property IBOutlet UIButton * follow;
 @property TripService* tripService;
 @property UserService* userService;
+@property ImageService* imageService;
 @property        TreadsSession * treadsSession;
 @property int userID;
 @property (strong) TripBrowser* browser;
@@ -28,7 +29,7 @@
 
 @implementation ProfileVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService:(TripService *)myTripService userService:(UserService *)myUserService userID:(int)myUserID;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService:(TripService *)myTripService userService:(UserService *)myUserService imageService:(ImageService*)myImageService userID:(int)myUserID;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -37,6 +38,7 @@
         self.userID = myUserID;
         self.tripService = myTripService;
         self.userService = myUserService;
+        self.imageService = myImageService;
     }
     return self;
 }
@@ -59,15 +61,32 @@
         User* returnedUser = (User*)newData[0];
         
         self.name.text = [NSString stringWithFormat:@"%@ %@", returnedUser.fname, returnedUser.lname];
-        //self.profilePic.image =
-        if (returnedUser.emailaddress == self.treadsSession.treadsUser) {
+        
+        
+    /*    if ((int*)returnedUser.User_ID == (int*)self.treadsSession.treadsUserID) {
             self.follow.hidden = true;
         }
+      */
+        CompletionWithItems completion= ^(NSArray* items) {
+            UIImage * returnImage= items[0];
+            self.profilePic.image = returnImage;
+            
+            CompletionWithItems alsoComplete = ^(NSArray* items) {
+                UIImage * returnImage = items[0];
+                self.banner.image = returnImage;
+                
+                [self.tripService getTripsWithUserID:self.userID forTarget:self withAction:@selector(tripsHaveLoaded:)];
+            };
+            
+            [self.imageService getImageWithPhotoID:16 withReturnBlock:alsoComplete];
+        };
         
-        [self.tripService getTripsWithUserID:self.userID forTarget:self withAction:@selector(tripsHaveLoaded:)];
+        [self.imageService getImageWithPhotoID:15 withReturnBlock:completion];
         
     }
 }
+
+
 
 - (void)tripsHaveLoaded:(NSArray*)newData {
     self.browser = [[TripBrowser alloc] initWithFrame:self.browserWindow.bounds];
