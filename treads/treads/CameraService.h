@@ -10,9 +10,11 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 
 
-@interface CameraService : UIImagePickerController
+@interface CameraService : NSObject
 
 //- (void) showImagePicker;
 //- (UIImage *) returnSelectedImage;
+
+- (void)showImagePickerFromViewController:(UIViewController*)viewController onSuccess:(void(^)(UIImage*))onSuccess;
 
 @end

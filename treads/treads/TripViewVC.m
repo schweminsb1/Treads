@@ -12,6 +12,7 @@
 #import "DataRepository.h"
 #import "Trip.h"
 #import "TripService.h"
+#import "CameraService.h"
 
 #import "TripViewer.h"
 
@@ -28,6 +29,7 @@
 @implementation TripViewVC {
     NSString* baseTitle;
     NSString* previousViewTitle;
+    CameraService* cameraService;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil backTitle:(NSString *)backTitle tripService:(TripService *)myTripService tripID:(int)myTripID
@@ -45,6 +47,8 @@
 {
     [super viewDidLoad];
     
+    cameraService = [[CameraService alloc] init];
+    
     //set up browser
     self.viewer = [[TripViewer alloc] initWithFrame:self.viewerWindow.bounds];
     self.viewer.sendNewLocationRequest = ^(void(^onSuccess)(TripLocation*)) {
@@ -52,6 +56,13 @@
             TripLocation* location;
             onSuccess(location);
         }
+    };
+    TripViewVC* __weak _self = self;
+    CameraService* __weak _cameraService = cameraService;
+    self.viewer.sendNewImageRequest = ^(void(^onSuccess)(UIImage*)) {
+        [_cameraService showImagePickerFromViewController:_self onSuccess:^(UIImage* image) {
+            onSuccess(image);
+        }];
     };
     [self.viewer setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     [self.viewerWindow addSubview: self.viewer];

@@ -29,5 +29,6 @@
 - (void)clearAndWait;
 
 @property (copy) void(^sendNewLocationRequest)(void(^onSuccess)(TripLocation*));
+@property (copy) void(^sendNewImageRequest)(void(^onSuccess)(UIImage*));
 
 @end

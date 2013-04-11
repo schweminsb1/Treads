@@ -188,6 +188,7 @@
             });
 //            [_cell changeLocation:200];
         };
+        cell.sendNewImageRequest = self.sendNewImageRequest;
         cell.sendDeleteLocationRequest = ^(){[_self removeLocationAtIndex:indexPath.row-1];};
         cell.sendMoveForwardRequest = ^(){[_self swapLocationItemsAtIndex:(indexPath.row-1) index:(indexPath.row)];};
         cell.sendMoveBackwardRequest = ^(){[_self swapLocationItemsAtIndex:(indexPath.row-1) index:(indexPath.row-2)];};

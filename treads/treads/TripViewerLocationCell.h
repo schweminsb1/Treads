@@ -23,4 +23,6 @@
 @property (copy) void(^sendMoveBackwardRequest)();
 - (void)changeLocation:(int)newLocationID;
 
+@property (copy) void(^sendNewImageRequest)(void(^onSuccess)(UIImage*));
+
 @end

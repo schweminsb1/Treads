@@ -136,12 +136,16 @@
     imageScrollBrowser.editingEnabled = ^BOOL(){return _self.editingEnabled();};
     ImageScrollBrowser* __weak _imageScrollBrowser = imageScrollBrowser;
     imageScrollBrowser.sendNewItemRequest = ^(int index){
-        TripLocationItem* newItem = [[TripLocationItem alloc] init];
-        newItem.tripLocationItemID = -1;
-        newItem.tripLocationID = _self.tripLocation.tripLocationID;
-        newItem.image = [UIImage imageNamed:@"map_preview.png"];
-        newItem.description = @"New Item";
-        [_imageScrollBrowser setDisplayViewItem:newItem atIndex:index];
+//        CameraService* cameraService = [[CameraService alloc] init];
+//        [cameraService showImagePickerOnSuccess:^(UIImage* returnImage) {
+        _self.sendNewImageRequest(^(UIImage* returnImage) {
+            TripLocationItem* newItem = [[TripLocationItem alloc] init];
+            newItem.tripLocationItemID = -1;
+            newItem.tripLocationID = _self.tripLocation.tripLocationID;
+            newItem.image = returnImage;
+            newItem.description = @"New Item";
+            [_imageScrollBrowser setDisplayViewItem:newItem atIndex:index];
+        });
     };
     
     [subView addSubview:locationMapView];

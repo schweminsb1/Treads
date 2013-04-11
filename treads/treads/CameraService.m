@@ -21,6 +21,12 @@ UIPopoverController *popoverController;
 UIImagePickerController *imagePicker;
 UIImage* selectedImage;
 
+- (void)showImagePickerFromViewController:(UIViewController*)viewController onSuccess:(void(^)(UIImage*))onSuccess
+{
+    //[viewController presentViewController:<#(UIViewController *)#> animated:<#(BOOL)#> completion:<#^(void)completion#>];
+    onSuccess([UIImage imageNamed:@"map_preview.png"]);
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     //[super viewDidLoad];
@@ -38,7 +44,7 @@ UIImage* selectedImage;
         
         if(!doneTakingPictures)
         {
-            [self presentViewController: imagePicker animated:YES completion:nil];
+//            [self presentViewController: imagePicker animated:YES completion:nil];
         }
         newMedia = YES;
     }
@@ -65,8 +71,8 @@ void (^dismissCamera)(void) = ^{
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     dismissCamera();
-    [self dismissViewControllerAnimated:YES completion: nil];
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self dismissViewControllerAnimated:YES completion: nil];
+//    [self.navigationController popViewControllerAnimated:YES];
     
 }
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
