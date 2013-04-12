@@ -20,41 +20,52 @@ UIImagePickerController *imagePicker;
 UIPopoverController* popover;
 UIImage* selectedImage;
 
+
 - (void)showImagePickerFromViewController:(UIViewController*)viewController onSuccess:(void(^)(UIImage*))onSuccess
 {
-        imagePicker = [[UIImagePickerController alloc] init];
-        imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-        imagePicker.delegate = self;
-        if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        if ([popover isPopoverVisible])
         {
-            
-            popover = [[UIPopoverController alloc] initWithContentViewController: imagePicker];
-            popover.delegate = self;
-            [popover presentPopoverFromRect:CGRectMake
-             ((viewController.view.frame.size.height/2),
-              (viewController.view.frame.size.width/2),
-              500,
-              100) inView:viewController.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+            [popover dismissPopoverAnimated:YES];
         }
         else
         {
-            [imagePicker presentViewController: imagePicker animated:YES completion:nil];
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum])
+            {
+                imagePicker = [[UIImagePickerController alloc] init];
+                imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+                imagePicker.delegate = self;
+                imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString *) kUTTypeImage,nil];
+                popover = [[UIPopoverController alloc] initWithContentViewController: imagePicker];
+                popover.delegate = self;
+                [popover presentPopoverFromRect:CGRectMake(0,0,300,300)inView:viewController.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+            }
         }
+    }
+    else
+    {
+       // [imagePicker presentViewController: imagePicker animated:YES completion:nil];
+    }
     //showImagePicker();
     //[viewController presentViewController:popover animated:(YES) completion:nil];
-    onSuccess([UIImage imageNamed:selectedImage]);
+    onSuccess(selectedImage);
 }
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [popover dismissPopoverAnimated:YES];
-    [imagePicker dismissViewControllerAnimated:YES completion:^{
-        selectedImage  = info[UIImagePickerControllerOriginalImage];
-    }];
+    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    [imagePicker dismissViewControllerAnimated:YES completion:nil];
+    if ([mediaType isEqualToString:(NSString *)kUTTypeImage])
+    {
+        selectedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    }
+
 }
-
-
-
-
+UIImage*(^returnSelectedImage)(void) =^
+{
+    return selectedImage;
+};
 //- (void)viewDidAppear:(BOOL)animated
 //{
 //    //[super viewDidLoad];
@@ -104,8 +115,4 @@ UIImage* selectedImage;
 //    
 //}
 
-//UIImage*(^returnSelectedImage)(void) =^
-//{
-//    return self.selectedImage;
-//};
 @end
