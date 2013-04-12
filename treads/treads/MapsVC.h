@@ -13,7 +13,7 @@
 #import "LocationService.h"
 #import "CommentService.h"
 
-@interface MapsVC : UIViewController<CLLocationManagerDelegate, UISearchBarDelegate, UINavigationControllerDelegate>
+@interface MapsVC : UIViewController<CLLocationManagerDelegate, UISearchBarDelegate, UINavigationControllerDelegate,MKMapViewDelegate>
 
 @property (strong) IBOutlet UISearchBar* searchBar;
 
@@ -24,6 +24,6 @@
 @property (strong) UIPopoverController * callout;
 
  - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withLocationService:(LocationService *) locationService withCommentService: (CommentService*) commentService ;
-
+- (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView;
 -(void)pushLocation;
 @end

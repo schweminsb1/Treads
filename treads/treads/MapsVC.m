@@ -70,10 +70,27 @@
             
         }
         
+        CGPoint nePoint = CGPointMake(self.mapView.bounds.origin.x + _mapView.bounds.size.width, _mapView.bounds.origin.y);
+        CGPoint swPoint = CGPointMake((self.mapView.bounds.origin.x), (_mapView.bounds.origin.y + _mapView.bounds.size.height));
         
+        //Then transform those point into lat,lng values
+        CLLocationCoordinate2D neCoord;
+        neCoord = [_mapView convertPoint:nePoint toCoordinateFromView:_mapView];
+        
+        CLLocationCoordinate2D swCoord;
+        swCoord = [_mapView convertPoint:swPoint toCoordinateFromView:_mapView];
         for(int i=0; i< _locationsTotal.count; i++)
         {
-            [self.mapView addAnnotation:_locationsTotal[i]];
+            double lat=((MapPinAnnotation*)_locationsTotal[i]).location.latitude;
+            double lon=((MapPinAnnotation*)_locationsTotal[i]).location.longitude;
+            //double topcornerlat=neCoord.latitude;
+            //double bottomcornerlat=swCoord.latitude;
+            //double topcornerlon=neCoord.longitude;
+            //double bottomcornerlon=swCoord.longitude;
+            if(neCoord.latitude>lat && swCoord.latitude<lat && neCoord.longitude>lon && swCoord.longitude<lon)
+            {
+                [self.mapView addAnnotation:_locationsTotal[i]];
+            }
         }
     };
     [_locationService performSelectorOnMainThread:@selector(getLocationsOrdered:) withObject:recieveAll waitUntilDone:YES];
@@ -212,6 +229,36 @@
     LocationVC * locationvc= [[LocationVC alloc]initWithNibName:@"LocationVC" bundle:nil withModel:_currentLocation withCommentService: _commentService];
     [self.navigationController pushViewController:locationvc animated:YES];
     [self.callout dismissPopoverAnimated:YES];
+}
+- (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView
+{
+    CGPoint nePoint = CGPointMake(self.mapView.bounds.origin.x + mapView.bounds.size.width, mapView.bounds.origin.y);
+    CGPoint swPoint = CGPointMake((self.mapView.bounds.origin.x), (mapView.bounds.origin.y + mapView.bounds.size.height));
+    //Then transform those point into lat,lng values
+    CLLocationCoordinate2D neCoord;
+    neCoord = [mapView convertPoint:nePoint toCoordinateFromView:mapView];
+    CLLocationCoordinate2D swCoord;
+    swCoord = [mapView convertPoint:swPoint toCoordinateFromView:mapView];
+    
+    for(int i=0; i<mapView.annotations.count; i++)
+    {
+        double lat=((MapPinAnnotation*)mapView.annotations[i]).location.latitude;
+        double lon=((MapPinAnnotation*)mapView.annotations[i]).location.longitude;
+        if(!(neCoord.latitude>lat && swCoord.latitude<lat && neCoord.longitude>lon && swCoord.longitude<lon))
+        {//not in the current map view, remove annotation
+            [mapView removeAnnotation:mapView.annotations[i]];
+        }
+    }
+    for(int i=0; i< _locationsTotal.count; i++)//add annotations in view
+    {
+        double lat=((MapPinAnnotation*)_locationsTotal[i]).location.latitude;
+        double lon=((MapPinAnnotation*)_locationsTotal[i]).location.longitude;
+        if(neCoord.latitude>lat && swCoord.latitude<lat && neCoord.longitude>lon && swCoord.longitude<lon)
+        {
+            [self.mapView addAnnotation:_locationsTotal[i]];
+        }
+    }
+    //removr all annotations not in between these points, add all annottions in between the points
 }
 
 @end
