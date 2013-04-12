@@ -9,9 +9,11 @@
 #import "LocationPickerVC.h"
 #import "Location.h"
 #import "LocationService.h"
+#import "TripViewVC.h"
 @interface LocationPickerVC ()
 @property LocationService * service;
 @property NSMutableArray * locations;
+
 @end
 
 @implementation LocationPickerVC
@@ -26,6 +28,7 @@
         // Custom initialization
         _service=service;
     }
+    
     return self;
 }
 
@@ -46,8 +49,6 @@
 
 #pragma mark - Table view data source
 
-
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == self.searchDisplayController.searchResultsTableView) {
@@ -55,7 +56,6 @@
     } else {
            return locations.count+1;
     }
-
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -65,12 +65,10 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    
     if(indexPath.row==0)
     {
         cell.textLabel.text=@"Create New";
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
-    
     }
     else
     {
@@ -93,11 +91,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        self.returnLocationToTripView(locationsFilteredArray[indexPath.row-1]);
+        [self dismissViewControllerAnimated:YES completion:nil];
 
-}
+    } else {
+        self.returnLocationToTripView(locations[indexPath.row-1]);
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    }
 -(void)fillLocations:(NSArray*) items
 {
-    locations=items;
+    locations= (NSMutableArray*)items;
     locationsFilteredArray= [NSMutableArray arrayWithCapacity:locations.count];
     
     [self.tableView reloadData];

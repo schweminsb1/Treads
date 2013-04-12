@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @class TripService;
-
+@class LocationService;
 @interface FollowVC : UIViewController
 
 @property (strong) IBOutlet UIView* browserWindow;
 
-- (id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil withTripService:(TripService*)tripServiceHandle;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withTripService:(TripService*)tripServiceHandle withLocationService:(LocationService*)locationservice;
 
 @end

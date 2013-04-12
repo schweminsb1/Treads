@@ -14,6 +14,7 @@
 #import "Trip.h"
 
 #import "TripViewVC.h"
+#import "LocationService.h"
 
 @interface FollowVC () {
     NSArray* browserModeControlLabels;
@@ -24,19 +25,20 @@
 @property (strong) TripService* tripService;
 @property (strong) TripBrowser* browser;
 @property (strong) UISegmentedControl* browserModeControl;
+@property LocationService * locationService;
 
 @end
 
 @implementation FollowVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withTripService:(TripService*)tripServiceHandle
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withTripService:(TripService*)tripServiceHandle withLocationService:(LocationService*)locationservice
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         //toolbar
         self.title = NSLocalizedString(@"Follow", @"Follow");
         self.tabBarItem.image = [UIImage imageNamed:@"compass.png"];
-        
+        _locationService=locationservice;
         //set up services
         self.tripService = tripServiceHandle;//[[TripService alloc] init];
     }
@@ -109,7 +111,7 @@
     UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:browserModeControlLabels[self.browserModeControl.selectedSegmentIndex] style: UIBarButtonItemStyleBordered target: nil action: nil];
     [self.navigationItem setBackBarButtonItem: newBackButton];
     
-    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID];
+    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID LocationService:_locationService];
     [self.navigationController pushViewController:tripViewVC animated:YES];
 }
 

@@ -7,14 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Location.h"
 @class TripService;
+@class LocationService;
 
 @interface TripViewVC : UIViewController
 
 @property (strong) IBOutlet UIView* viewerWindow;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil backTitle:(NSString*)backTitle tripService: (TripService*)myTripService tripID:(int)myTripID;
+@property Location* returnedLocation;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil backTitle:(NSString *)backTitle tripService:(TripService *)myTripService tripID:(int)myTripID LocationService:(LocationService *) myLocationService;
+
 
 - (void)dataHasLoaded:(NSArray*)newData;
 

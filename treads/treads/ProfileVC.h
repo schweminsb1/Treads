@@ -10,6 +10,7 @@
 #import "TripService.h"
 #import "UserService.h"
 #import "ImageService.h"
+#import "LocationService.h"
 #import "User.h"
 
 
@@ -17,7 +18,7 @@
 
 @property (strong) IBOutlet UIView* browserWindow;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService:(TripService *)myTripService userService:(UserService *)myUserService imageService:(ImageService*)myImageService userID:(int)myUserID;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService:(TripService *)myTripService userService:(UserService *)myUserService imageService:(ImageService*)myImageService userID:(int)myUserID withLocationService:(LocationService*) locationService ;
 
 - (void)dataHasLoaded:(NSArray*)newData;
 - (void)tripsHaveLoaded:(NSArray*)newData;
