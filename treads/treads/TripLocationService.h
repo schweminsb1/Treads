@@ -25,6 +25,6 @@
 //services
 - (void)getAllTripLocationsForTarget:(NSObject*)target withAction:(SEL)returnAction;
 - (void)getTripLocationWithID:(int)tripLocationID forTarget:(NSObject*)target withAction:(SEL)returnAction;
-- (void)updateTripLocation:(TripLocation*)TripLocation forTarget:(NSObject*)target withAction:(SEL)returnAction;
+- (void)updateTripLocation:(TripLocation*)tripLocation forTarget:(NSObject*)target withAction:(SEL)returnAction;
 
 @end

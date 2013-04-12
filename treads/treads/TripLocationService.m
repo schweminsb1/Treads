@@ -42,17 +42,17 @@
     return [NSArray arrayWithArray:convertedData];
 }
 
-- (void)getAllTripLocationsForTarget:(NSObject *)target withAction:(SEL)returnAction
+- (void)getAllTripLocationsForTarget:(NSObject*)target withAction:(SEL)returnAction
 {
     [self.dataRepository retrieveDataItemsMatching:nil usingService:self forRequestingObject:target withReturnAction:returnAction];
 }
 
-- (void)getTripLocationsWithID:(int)tripLocationID forTarget:(NSObject *)target withAction:(SEL)returnAction
+- (void)getTripLocationWithID:(int)tripLocationID forTarget:(NSObject*)target withAction:(SEL)returnAction
 {
     [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"id = '%d'", tripLocationID] usingService:self forRequestingObject:target withReturnAction:returnAction];
 }
 
-- (void)updateTripLocation:(TripLocation*)tripLocation forTarget:(NSObject *)target withAction:(SEL)returnAction
+- (void)updateTripLocation:(TripLocation*)tripLocation forTarget:(NSObject*)target withAction:(SEL)returnAction
 {
     NSMutableDictionary* tripLocationDictionary = [[NSMutableDictionary alloc] init];
     [tripLocationDictionary setObject:[NSNumber numberWithInt:tripLocation.tripID] forKey:@"TripID"];

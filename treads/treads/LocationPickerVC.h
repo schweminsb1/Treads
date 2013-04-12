@@ -8,11 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "LocationService.h"
+#import "Location.h"
 
 @interface LocationPickerVC : UITableViewController <UISearchBarDelegate, UISearchDisplayDelegate>
 
 @property (strong,nonatomic) NSMutableArray *locationsFilteredArray;
 @property IBOutlet UISearchBar *locationSearchBar;
+@property (nonatomic, copy) void (^returnLocationToTripView)(Location*);
+
+
 
 - (id)initWithStyle:(UITableViewStyle)style withLocationService:(LocationService*)service;
 

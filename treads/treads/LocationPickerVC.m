@@ -9,9 +9,11 @@
 #import "LocationPickerVC.h"
 #import "Location.h"
 #import "LocationService.h"
+#import "TripViewVC.h"
 @interface LocationPickerVC ()
 @property LocationService * service;
 @property NSMutableArray * locations;
+
 @end
 
 @implementation LocationPickerVC
@@ -26,6 +28,7 @@
         // Custom initialization
         _service=service;
     }
+    
     return self;
 }
 
@@ -92,7 +95,7 @@
 }
 -(void)fillLocations:(NSArray*) items
 {
-    locations=items;
+    locations= (NSMutableArray*)items;
     locationsFilteredArray= [NSMutableArray arrayWithCapacity:locations.count];
     
     [self.tableView reloadData];

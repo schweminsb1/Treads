@@ -62,11 +62,24 @@
             //in the dismiss popover call block
             //pass the location here,
             //fill the new TripLocation here
+          void  (^myBlock)(Location*);
+            myBlock=^(Location *location)
+            {
+           
+                TripLocation* locationNew;
+                onSuccess(locationNew);
+                
+                
+            };
+         
             LocationPickerVC * picker= [[LocationPickerVC alloc]initWithStyle:UITableViewStylePlain withLocationService:_locationService];
+            picker.returnLocationToTripView=myBlock;
+            
+            [self presentViewController:picker animated:YES completion:nil];
+
             
             
-            TripLocation* location;
-            onSuccess(location);
+           
         }
     };
     TripViewVC* __weak _self = self;
