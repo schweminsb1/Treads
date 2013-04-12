@@ -249,7 +249,7 @@
             [mapView removeAnnotation:mapView.annotations[i]];
         }
     }
-    for(int i=0; i< _locationsTotal.count; i++)//add annotations in view
+    for(int i=0; i<         _locationsTotal.count; i++)//add annotations in view
     {
         double lat=((MapPinAnnotation*)_locationsTotal[i]).location.latitude;
         double lon=((MapPinAnnotation*)_locationsTotal[i]).location.longitude;
