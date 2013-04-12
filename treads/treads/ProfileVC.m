@@ -19,6 +19,7 @@
 @property IBOutlet UIImageView * banner;
 @property IBOutlet UILabel * name;
 @property IBOutlet UIButton * follow;
+@property IBOutlet UIButton * edit;
 @property TripService* tripService;
 @property UserService* userService;
 @property ImageService* imageService;
@@ -41,7 +42,7 @@
         self.tripService = myTripService;
         self.userService = myUserService;
         self.imageService = myImageService;
-        _locationService=locationService;
+        self.locationService = locationService;
     }
     return self;
 }
@@ -51,7 +52,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    
+    self.edit.hidden = true;
+    self.follow.hidden = true;
     
 }
 
@@ -66,10 +68,13 @@
         self.name.text = [NSString stringWithFormat:@"%@ %@", returnedUser.fname, returnedUser.lname];
         
         
-    /*    if ((int*)returnedUser.User_ID == (int*)self.treadsSession.treadsUserID) {
-            self.follow.hidden = true;
+        if (returnedUser.User_ID == [TreadsSession instance].treadsUserID) {
+            self.edit.hidden = false;
         }
-      */
+        else {
+            self.follow.hidden = false;
+        }
+      
         CompletionWithItems completion= ^(NSArray* items) {
             UIImage * returnImage= items[0];
             self.profilePic.image = returnImage;
@@ -84,7 +89,7 @@
             [self.imageService getImageWithPhotoID:16 withReturnBlock:alsoComplete];
         };
         
-        [self.imageService getImageWithPhotoID:15 withReturnBlock:completion];
+        [self.imageService getImageWithPhotoID:returnedUser.profilePictureID withReturnBlock:completion];
         
     }
 }
