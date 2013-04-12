@@ -19,6 +19,7 @@
 #import "UserService.h"
 #import "TripLocationService.h"
 #import "LocationPickerVC.h"
+#import "TreadsSession.h"
 
 @interface AppDelegate()
 
@@ -77,7 +78,12 @@
     cameraVC = [[CameraVC alloc] initWithNibName:@"CameraVC" bundle:nil];
     myTripsVC = [[MyTripsVC alloc] initWithNibName:@"MyTripsVC" bundle:nil withTripService:self.tripService withLocationService:_locationService];
     followVC = [[FollowVC alloc] initWithNibName:@"FollowVC" bundle:nil withTripService:self.tripService withLocationService:_locationService];
-    profileVC = [[ProfileVC alloc] initWithNibName:@"ProfileVC" bundle:nil tripService:self.tripService userService:self.userService imageService:self.imageService userID:0 withLocationService:_locationService];
+    if ([TreadsSession instance].treadsUserID) {
+        profileVC = [[ProfileVC alloc] initWithNibName:@"ProfileVC" bundle:nil tripService:self.tripService userService:self.userService imageService:self.imageService userID:[TreadsSession instance].treadsUserID withLocationService:_locationService];
+    }
+    else {
+        profileVC = [[ProfileVC alloc] initWithNibName:@"ProfileVC" bundle:nil tripService:self.tripService userService:self.userService imageService:self.imageService userID:0 withLocationService:_locationService];
+    }
     
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.viewControllers = @[
