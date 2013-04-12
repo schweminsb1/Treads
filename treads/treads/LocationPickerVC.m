@@ -91,8 +91,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        self.returnLocationToTripView(locationsFilteredArray[indexPath.row-1]);
+        [self dismissViewControllerAnimated:YES completion:nil];
 
-}
+    } else {
+        self.returnLocationToTripView(locations[indexPath.row-1]);
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    }
 -(void)fillLocations:(NSArray*) items
 {
     locations= (NSMutableArray*)items;

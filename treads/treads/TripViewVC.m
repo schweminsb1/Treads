@@ -25,7 +25,7 @@
 @property (strong) UIBarButtonItem* tripEditButton;
 @property (strong) UIBarButtonItem* backButton;
 @property LocationService * locationService;
-
+@property LocationPickerVC * picker;
 @end
 
 @implementation TripViewVC {
@@ -72,10 +72,10 @@
                 
             };
          
-            LocationPickerVC * picker= [[LocationPickerVC alloc]initWithStyle:UITableViewStylePlain withLocationService:_locationService];
-            picker.returnLocationToTripView=myBlock;
+           _picker= [[LocationPickerVC alloc]initWithStyle:UITableViewStylePlain withLocationService:_locationService];
+            _picker.returnLocationToTripView=myBlock;
             
-            [self presentViewController:picker animated:YES completion:nil];
+           [self presentViewController:_picker animated:YES completion:nil];
 
             
             
