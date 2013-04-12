@@ -17,6 +17,7 @@
 #import "CommentService.h"
 #import "ImageService.h"
 #import "UserService.h"
+#import "TripLocationService.h"
 #import "LocationPickerVC.h"
 
 @interface AppDelegate()
@@ -32,6 +33,7 @@
 @property (strong) ImageService* imageService;
 @property (strong) UserService* userService;
 @property (strong) NSString * SASURL;
+@property (strong) TripLocationService * tripLocationService;
 
 @end
 
@@ -53,13 +55,14 @@
     _commentService= [[CommentService alloc] initWithRepository:_dataRepository];
     self.userService = [[UserService alloc] initWithRepository:self.dataRepository];
     
- 
+    self.tripLocationService=  [[TripLocationService alloc] initWithRepository:self.dataRepository];
+    
     self.imageService = [[ImageService alloc] initWithRepository:self.dataRepository];
     
  //   UIImage * testImage= [UIImage imageNamed:@"mountains.jpeg"];
    // [self.imageService insertImageAsBlob:testImage withCompletion:comp];
     
-    LocationPickerVC * picker= [[LocationPickerVC alloc] initWithStyle:UITableViewStylePlain withLocationService:self.locationService];
+    //LocationPickerVC * picker= [[LocationPickerVC alloc] initWithStyle:UITableViewStylePlain withLocationService:self.locationService];
     
        
     
@@ -70,7 +73,7 @@
     //Initialize ViewControllers
     UIViewController *mapsVC, *cameraVC, *myTripsVC, *followVC, *profileVC;
     
-    mapsVC = [[MapsVC alloc] initWithNibName:@"MapsVC" bundle:nil withLocationService: self.locationService withCommentService: self.commentService];
+    mapsVC = [[MapsVC alloc] initWithNibName:@"MapsVC" bundle:nil withLocationService: self.locationService withCommentService: self.commentService withTripLocationService: _tripLocationService];
     cameraVC = [[CameraVC alloc] initWithNibName:@"CameraVC" bundle:nil];
     myTripsVC = [[MyTripsVC alloc] initWithNibName:@"MyTripsVC" bundle:nil withTripService:self.tripService withLocationService:_locationService];
     followVC = [[FollowVC alloc] initWithNibName:@"FollowVC" bundle:nil withTripService:self.tripService withLocationService:_locationService];

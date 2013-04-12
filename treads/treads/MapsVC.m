@@ -11,21 +11,23 @@
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 #import "CommentService.h"
 #import "LoginVC.h"
+#import "TripLocationService.h"
 
 @interface MapsVC ()
-
 @property NSMutableArray * locationsInView;
 @property NSMutableArray * locationsTotal;
 @property LocationService * locationService;
 @property CommentService * commentService;
 @property Location * currentLocation;
-
-
+@property TripLocationService * tripLocationService;
+@property int locationCounter;
+@property __block int locationTotal;
+@property (nonatomic,copy)MSReadQueryBlock recieveAll;
 @end
 
 @implementation MapsVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withLocationService:(LocationService *) locationService withCommentService: (CommentService*) commentService {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withLocationService:(LocationService *) locationService withCommentService: (CommentService*) commentService withTripLocationService:(TripLocationService*) tripLocationService{
     if (self) {
         _locationService=locationService;
         _commentService = commentService;
@@ -33,27 +35,57 @@
         self.tabBarItem.image = [UIImage imageNamed:@"map-pin.png"];
         _locationsTotal = [[NSMutableArray alloc]init];
         _locationsInView = [[NSMutableArray alloc]init];
+        _tripLocationService=tripLocationService;
+        _locationCounter=0;
+        _locationTotal=0;
     }
     return self;
 }
 - (void) viewDidLoad
 {
-           
         [super viewDidLoad];
             //recieve a bunch of Location models
         //create a bunch of pins
         // add the pins to locations Total
         //add the pins to the mapView
-    //end block
+    //end block;
   
 }
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:YES];
-    
-    MSReadQueryBlock recieveAll= ^(NSArray *items, NSInteger totalCount, NSError *error)
+    __block MapsVC* myself=self;
+CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
     {
+        myself.locationCounter+=1;
+        MapPinAnnotation * locationPin= [[MapPinAnnotation alloc] initWithLocation:location];
+        locationPin.tripCount = items.count;
+        [_locationsTotal addObject:locationPin];
+        CGPoint nePoint = CGPointMake(self.mapView.bounds.origin.x + _mapView.bounds.size.width, _mapView.bounds.origin.y);
+        CGPoint swPoint = CGPointMake((self.mapView.bounds.origin.x), (_mapView.bounds.origin.y + _mapView.bounds.size.height));
+        //Then transform those point into lat,lng values
+        CLLocationCoordinate2D neCoord;
+        neCoord = [_mapView convertPoint:nePoint toCoordinateFromView:_mapView];
+        CLLocationCoordinate2D swCoord;
+        swCoord = [_mapView convertPoint:swPoint toCoordinateFromView:_mapView];
         
+        if(_locationCounter == _locationTotal)
+        {
+             for(int i=0; i< _locationsTotal.count; i++)
+             {
+                 double lat=((MapPinAnnotation*)_locationsTotal[i]).location.latitude;
+                 double lon=((MapPinAnnotation*)_locationsTotal[i]).location.longitude;
+                    if(neCoord.latitude>lat && swCoord.latitude<lat && neCoord.longitude>lon && swCoord.longitude<lon)
+                    {
+                        [self.mapView addAnnotation:_locationsTotal[i]];
+                    }
+             }
+        }
+    };
+    
+     _recieveAll= ^(NSArray *items, NSInteger totalCount, NSError *error)
+    {
+        myself.locationTotal=items.count;
         for( int i=0; i< items.count; i++)
         {
             Location * location= [[Location alloc] init];
@@ -64,22 +96,23 @@
             NSString * lonstring= items[i][@"longitude"];
             location.latitude = [latstring floatValue];
             location.longitude= [lonstring floatValue];
-            
-            MapPinAnnotation * locationPin= [[MapPinAnnotation alloc] initWithLocation:location];
-            [_locationsTotal addObject:locationPin];
-            
+            [myself.tripLocationService getTripLocationWithLocation:location withCompletion:comp];
+                       //MapPinAnnotation * locationPin= [[MapPinAnnotation alloc] initWithLocation:location];
+            //[_locationsTotal addObject:locationPin];
         }
+        //add trip count
         
-        CGPoint nePoint = CGPointMake(self.mapView.bounds.origin.x + _mapView.bounds.size.width, _mapView.bounds.origin.y);
-        CGPoint swPoint = CGPointMake((self.mapView.bounds.origin.x), (_mapView.bounds.origin.y + _mapView.bounds.size.height));
+        CGPoint nePoint = CGPointMake(myself.mapView.bounds.origin.x + myself.mapView.bounds.size.width, myself.mapView.bounds.origin.y);
+        CGPoint swPoint = CGPointMake((myself.mapView.bounds.origin.x), (myself.mapView.bounds.origin.y + myself.mapView.bounds.size.height));
         
         //Then transform those point into lat,lng values
         CLLocationCoordinate2D neCoord;
-        neCoord = [_mapView convertPoint:nePoint toCoordinateFromView:_mapView];
+        neCoord = [myself.mapView convertPoint:nePoint toCoordinateFromView:myself.mapView];
         
         CLLocationCoordinate2D swCoord;
-        swCoord = [_mapView convertPoint:swPoint toCoordinateFromView:_mapView];
-        for(int i=0; i< _locationsTotal.count; i++)
+        swCoord = [myself.mapView convertPoint:swPoint toCoordinateFromView:myself.mapView];
+     /* 
+      for(int i=0; i< _locationsTotal.count; i++)
         {
             double lat=((MapPinAnnotation*)_locationsTotal[i]).location.latitude;
             double lon=((MapPinAnnotation*)_locationsTotal[i]).location.longitude;
@@ -92,10 +125,10 @@
                 [self.mapView addAnnotation:_locationsTotal[i]];
             }
         }
+      */
     };
-    [_locationService performSelectorOnMainThread:@selector(getLocationsOrdered:) withObject:recieveAll waitUntilDone:YES];
-        
-
+    [_locationService getLocationsOrdered:_recieveAll];
+    //[_locationService performSelectorOnMainThread:@selector(getLocationsOrdered:) withObject:recieveAll waitUntilDone:YES];
     
     // Do any additional setup after loading the view from its nib.
     self.locationManager = [[CLLocationManager alloc] init];
