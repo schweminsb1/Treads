@@ -17,14 +17,39 @@
 @implementation CameraService
 BOOL doneTakingPictures;
 BOOL newMedia;
-UIPopoverController *popoverController;
 UIImagePickerController *imagePicker;
 UIImage* selectedImage;
+UIViewController* vc;
+UIPopoverController* popover;
 
 - (void)showImagePickerFromViewController:(UIViewController*)viewController onSuccess:(void(^)(UIImage*))onSuccess
 {
-    //[viewController presentViewController:<#(UIViewController *)#> animated:<#(BOOL)#> completion:<#^(void)completion#>];
-    onSuccess([UIImage imageNamed:@"map_preview.png"]);
+    void (^showImagePicker)(void) = ^
+    {
+        
+        imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        imagePicker.delegate = self;
+        if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+        {
+            
+            popover = [[UIPopoverController alloc] initWithContentViewController: imagePicker];
+            popover.delegate = self;
+            [popover presentPopoverFromRect:CGRectMake
+             ((viewController.view.frame.size.height/2),
+              (viewController.view.frame.size.width/2),
+              500,
+              100) inView:viewController.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+            
+        }
+        else
+        {
+            [imagePicker presentViewController: imagePicker animated:YES completion:nil];
+        }
+    };
+    showImagePicker();
+    //[viewController presentViewController:popover animated:(YES) completion:nil];
+    onSuccess([UIImage imageNamed: selectedImage]);
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -44,7 +69,7 @@ UIImage* selectedImage;
         
         if(!doneTakingPictures)
         {
-//            [self presentViewController: imagePicker animated:YES completion:nil];
+            //[self presentViewController: imagePicker animated:YES completion:nil];
         }
         newMedia = YES;
     }
@@ -77,30 +102,13 @@ void (^dismissCamera)(void) = ^{
 }
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    [popoverController dismissPopoverAnimated:true];
-    [imagePicker dismissViewControllerAnimated:YES completion: nil];
-    selectedImage  = [info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    [popover dismissPopoverAnimated:YES];
+    [imagePicker dismissViewControllerAnimated:YES completion:^{
+       selectedImage  = [info objectForKey:UIImagePickerControllerOriginalImage];
+    }];
     
 }
-void (^showImagePicker)(void) = ^
-{
-    
-    imagePicker = [[UIImagePickerController alloc] init];
-    popoverController = [[UIPopoverController alloc] initWithContentViewController: imagePicker];
-    imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-    
-    if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    {
-        
-        popoverController = [[UIPopoverController alloc] initWithContentViewController: imagePicker];
-        //[popoverController presentPopoverFromRect: inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-        
-    }
-    else
-    {
-        [imagePicker presentViewController: imagePicker animated:YES completion:nil];
-    }
-};
 UIImage*(^returnSelectedImage)(void) =^
 {
     return selectedImage;
