@@ -20,7 +20,7 @@
 @interface TripViewVC()<UINavigationBarDelegate>
 
 @property TripService* tripService;
-@property int tripID;
+@property  int tripID;
 @property (strong) TripViewer* viewer;
 @property (strong) UIBarButtonItem* tripEditButton;
 @property (strong) UIBarButtonItem* backButton;
@@ -54,6 +54,7 @@
     
     //set up browser
     self.viewer = [[TripViewer alloc] initWithFrame:self.viewerWindow.bounds];
+    int tripid=_tripID;
     self.viewer.sendNewLocationRequest = ^(void(^onSuccess)(TripLocation*)) {
         if (YES) {
             //Create Location Picker
@@ -62,11 +63,15 @@
             //in the dismiss popover call block
             //pass the location here,
             //fill the new TripLocation here
+          
           void  (^myBlock)(Location*);
             myBlock=^(Location *location)
             {
-           
+                
                 TripLocation* locationNew;
+                locationNew.tripID= tripid ;
+                locationNew.locationID=[location.idField intValue];
+                //add new trip location to database
                 onSuccess(locationNew);
                 
                 
