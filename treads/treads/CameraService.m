@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 
 @interface CameraService ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPopoverControllerDelegate>
-
+@property (nonatomic, copy)void(^onSuccessImage)(UIImage*);
 @end
 
 @implementation CameraService
@@ -27,7 +27,7 @@ UIImage* selectedImage;
     {
         if ([popover isPopoverVisible])
         {
-            [popover dismissPopoverAnimated:YES];
+            //[popover dismissPopoverAnimated:YES];
         }
         else
         {
@@ -49,7 +49,7 @@ UIImage* selectedImage;
     }
     //showImagePicker();
     //[viewController presentViewController:popover animated:(YES) completion:nil];
-    onSuccess(selectedImage);
+    self.onSuccessImage = onSuccess;
 }
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -60,6 +60,7 @@ UIImage* selectedImage;
     {
         selectedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     }
+    self.onSuccessImage(selectedImage);
 
 }
 UIImage*(^returnSelectedImage)(void) =^
