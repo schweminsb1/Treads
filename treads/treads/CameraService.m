@@ -11,22 +11,17 @@
 
 @interface CameraService ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPopoverControllerDelegate>
 
-
 @end
 
 @implementation CameraService
 BOOL doneTakingPictures;
 BOOL newMedia;
 UIImagePickerController *imagePicker;
-UIImage* selectedImage;
-UIViewController* vc;
 UIPopoverController* popover;
+UIImage* selectedImage;
 
 - (void)showImagePickerFromViewController:(UIViewController*)viewController onSuccess:(void(^)(UIImage*))onSuccess
 {
-    void (^showImagePicker)(void) = ^
-    {
-        
         imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
         imagePicker.delegate = self;
@@ -40,77 +35,77 @@ UIPopoverController* popover;
               (viewController.view.frame.size.width/2),
               500,
               100) inView:viewController.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-            
         }
         else
         {
             [imagePicker presentViewController: imagePicker animated:YES completion:nil];
         }
-    };
-    showImagePicker();
+    //showImagePicker();
     //[viewController presentViewController:popover animated:(YES) completion:nil];
-    onSuccess([UIImage imageNamed: selectedImage]);
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    //[super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
-    // setup the Camera
-    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
-    {
-        imagePicker =[[UIImagePickerController alloc] init];
-        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        imagePicker.mediaTypes = @[(NSString *) kUTTypeImage];
-        imagePicker.allowsEditing = NO;
-        imagePicker.delegate = self;
-        doneTakingPictures = NO;
-        
-        if(!doneTakingPictures)
-        {
-            //[self presentViewController: imagePicker animated:YES completion:nil];
-        }
-        newMedia = YES;
-    }
-}
--(void)image:(UIImage *)image finishedSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
-{
-    if (error)
-    {
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle: @"Save failed"
-                              message: @"Failed to save image"
-                              delegate: nil
-                              cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil];
-        [alert show];
-    }
-}
-void (^dismissCamera)(void) = ^{
-    // set the location that the block will complete to
-    AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    [appDelegate.tabBarController setSelectedIndex:3];
-    doneTakingPictures = YES;
-};
--(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    dismissCamera();
-//    [self dismissViewControllerAnimated:YES completion: nil];
-//    [self.navigationController popViewControllerAnimated:YES];
-    
+    onSuccess([UIImage imageNamed:selectedImage]);
 }
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    
     [popover dismissPopoverAnimated:YES];
     [imagePicker dismissViewControllerAnimated:YES completion:^{
-       selectedImage  = [info objectForKey:UIImagePickerControllerOriginalImage];
+        selectedImage  = info[UIImagePickerControllerOriginalImage];
     }];
-    
 }
-UIImage*(^returnSelectedImage)(void) =^
-{
-    return selectedImage;
-};
+
+
+
+
+//- (void)viewDidAppear:(BOOL)animated
+//{
+//    //[super viewDidLoad];
+//    // Do any additional setup after loading the view from its nib.
+//    
+//    // setup the Camera
+//    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
+//    {
+//        imagePicker =[[UIImagePickerController alloc] init];
+//        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//        imagePicker.mediaTypes = @[(NSString *) kUTTypeImage];
+//        imagePicker.allowsEditing = NO;
+//        imagePicker.delegate = self;
+//        doneTakingPictures = NO;
+//        
+//        if(!doneTakingPictures)
+//        {
+//            //[self presentViewController: imagePicker animated:YES completion:nil];
+//        }
+//        newMedia = YES;
+//    }
+//}
+//-(void)image:(UIImage *)image finishedSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+//{
+//    if (error)
+//    {
+//        UIAlertView *alert = [[UIAlertView alloc]
+//                              initWithTitle: @"Save failed"
+//                              message: @"Failed to save image"
+//                              delegate: nil
+//                              cancelButtonTitle:@"OK"
+//                              otherButtonTitles:nil];
+//        [alert show];
+//    }
+//}
+//void (^dismissCamera)(void) = ^{
+//    // set the location that the block will complete to
+//    AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//    [appDelegate.tabBarController setSelectedIndex:3];
+//    doneTakingPictures = YES;
+//};
+//-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+//{
+//    dismissCamera();
+////    [self dismissViewControllerAnimated:YES completion: nil];
+////    [self.navigationController popViewControllerAnimated:YES];
+//    
+//}
+
+//UIImage*(^returnSelectedImage)(void) =^
+//{
+//    return self.selectedImage;
+//};
 @end
