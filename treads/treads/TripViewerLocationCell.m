@@ -226,7 +226,7 @@
 
 - (void)setTripLocationHeader:(TripLocation*)tripLocation
 {
-    locationNameLabel.text = [NSString stringWithFormat:@"Location ID: %d", tripLocation.tripLocationID];
+    locationNameLabel.text = [NSString stringWithFormat:@"Location: ID %d, LocationID: %d", tripLocation.tripLocationID, tripLocation.locationID];
     
     locationMapView.image = [UIImage imageNamed:@"map_preview.png"];
     

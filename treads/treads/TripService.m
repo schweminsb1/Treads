@@ -36,10 +36,21 @@
             trip.tripID = [[returnTrip objectForKey:@"id"] intValue];
             trip.userID = [[returnTrip objectForKey:@"userID"] intValue];
             trip.name = [returnTrip objectForKey:@"name"];
-            trip.description = [self loremIpsum];//[returnTrip objectForKey:@"description"];
-            trip.tripLocations = [[NSArray alloc] init];
+            trip.description = [returnTrip objectForKey:@"description"];
+            NSArray* tripLocationsDictionary = [returnTrip objectForKey:@"tripLocations"];
+            NSMutableArray* tripLocations = [[NSMutableArray alloc] init];
+            for (NSDictionary* tripLocationDictionary in tripLocationsDictionary)
+            {
+                TripLocation* tripLocation = [[TripLocation alloc] init];
+                tripLocation.tripLocationID = [[tripLocationDictionary objectForKey:@"id"] intValue];
+                tripLocation.tripID = [[tripLocationDictionary objectForKey:@"tripID"] intValue];
+                tripLocation.locationID = [[tripLocationDictionary objectForKey:@"locationID"] intValue];
+                tripLocation.description = [tripLocationDictionary objectForKey:@"description"];
+                [tripLocations addObject:tripLocation];
+            }
+            trip.tripLocations = tripLocations;
             
-            [self addDebugItemsToTrip:trip];
+//            [self addDebugItemsToTrip:trip];
             
             [convertedData addObject:trip];
         }
@@ -116,7 +127,7 @@
 
 - (NSString*)loremIpsum
 {
-    return @"Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.";
+    return @"Lorem ipsum dolor sit amet";//, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.";// Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.";// Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.";
 }
 
 - (void)getAllTripsForTarget:(NSObject *)target withAction:(SEL)returnAction
@@ -133,18 +144,36 @@
 
 - (void)updateTrip:(Trip*)trip forTarget:(NSObject *)target withAction:(SEL)returnAction
 {
-    NSMutableDictionary* tripDictionary = [[NSMutableDictionary alloc] init];
-    [tripDictionary setObject:[NSNumber numberWithInt:trip.userID] forKey:@"userID"];
-    [tripDictionary setObject:trip.name forKey:@"name"];
-    [tripDictionary setObject:trip.description forKey:@"description"];
+    NSMutableArray* tripLocations = [[NSMutableArray alloc] init];
+    for(TripLocation* tripLocation in trip.tripLocations) {
+        [tripLocations addObject:[self convertTripLocationToDictionary:tripLocation]];
+    }
+    
+    NSMutableDictionary* tripDictionary = [NSMutableDictionary dictionaryWithDictionary:@{
+                                       @"userID":@(trip.userID),
+                                       @"name":trip.name,
+                                       @"description":trip.description,
+                                       @"tripLocations":tripLocations
+                                 }];
+    
     if (trip.tripID == [Trip UNDEFINED_TRIP_ID]) {
         [self.dataRepository createDataItem:tripDictionary usingService:self forRequestingObject:target withReturnAction:returnAction];
     }
     else {
-        [tripDictionary setObject:[NSNumber numberWithInt:trip.tripID] forKey:@"id"];
+        [tripDictionary setObject:@(trip.tripID) forKey:@"id"];
         [self.dataRepository updateDataItem:tripDictionary usingService:self forRequestingObject:target withReturnAction:returnAction];
     }
     //[self.dataRepository updateTrip:[NSDictionary dictionaryWithDictionary:tripDictionary] forTarget:target withAction:returnAction];
+}
+
+- (NSDictionary*)convertTripLocationToDictionary:(TripLocation*)tripLocation
+{
+    return @{
+             //@"id":@(tripLocation.tripLocationID),
+             @"tripID":@(tripLocation.tripID),
+             @"locationID":@(tripLocation.locationID),
+             @"description":tripLocation.description
+             };
 }
 
 - (void)getTripsWithUserID:(int)userID forTarget:(NSObject*)target withAction:(SEL)returnAction{
