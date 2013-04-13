@@ -18,6 +18,7 @@
 @property int tripLocationID;
 
 //data
+@property int imageID;
 @property (strong) UIImage* image;
 @property (copy) NSString* description;
 

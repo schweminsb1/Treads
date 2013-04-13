@@ -20,6 +20,7 @@
 #import "TripLocationService.h"
 #import "LocationPickerVC.h"
 #import "TreadsSession.h"
+#import "FollowService.h"
 
 @interface AppDelegate()
 
@@ -33,6 +34,7 @@
 @property (strong) CommentService* commentService;
 @property (strong) ImageService* imageService;
 @property (strong) UserService* userService;
+@property (strong) FollowService* followService;
 @property (strong) NSString * SASURL;
 @property (strong) TripLocationService * tripLocationService;
 
@@ -45,27 +47,20 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     //Initialize repositories
-
     self.dataRepository = [[DataRepository alloc] init];
     //[_dataRepository createContainer:@"TreadsContainer" withPublicSetting:YES withCompletion:comp];
    
     //Initialize services
     self.tripService = [[TripService alloc] initWithRepository:self.dataRepository];
-    
-    self.locationService = [[LocationService alloc]initWithRepository:_dataRepository];
-    _commentService= [[CommentService alloc] initWithRepository:_dataRepository];
+    self.locationService = [[LocationService alloc]initWithRepository:self.dataRepository];
+    self.commentService = [[CommentService alloc] initWithRepository:self.dataRepository];
     self.userService = [[UserService alloc] initWithRepository:self.dataRepository];
-    
     self.tripLocationService=  [[TripLocationService alloc] initWithRepository:self.dataRepository];
-    
     self.imageService = [[ImageService alloc] initWithRepository:self.dataRepository];
+    self.followService = [[FollowService alloc] initWithRepository:self.dataRepository];
     
- //   UIImage * testImage= [UIImage imageNamed:@"mountains.jpeg"];
-   // [self.imageService insertImageAsBlob:testImage withCompletion:comp];
-    
-    //LocationPickerVC * picker= [[LocationPickerVC alloc] initWithStyle:UITableViewStylePlain withLocationService:self.locationService];
-    
-       
+    //connect services
+    self.tripService.imageService = self.imageService;
     
     //Set global display options
     [[UINavigationBar appearance] setTintColor:[AppColors toolbarColor]];
@@ -78,7 +73,7 @@
     cameraVC = [[CameraVC alloc] initWithNibName:@"CameraVC" bundle:nil];
     myTripsVC = [[MyTripsVC alloc] initWithNibName:@"MyTripsVC" bundle:nil withTripService:self.tripService withLocationService:_locationService withCommentService: _commentService];
     followVC = [[FollowVC alloc] initWithNibName:@"FollowVC" bundle:nil withTripService:self.tripService withLocationService:_locationService withCommentService:_commentService];
-    profileVC = [[ProfileVC alloc] initWithNibName:@"ProfileVC" bundle:nil tripService:self.tripService userService:self.userService imageService:self.imageService isUser:YES userID:[TreadsSession instance].treadsUserID withLocationService:_locationService withCommentService:_commentService];
+    profileVC = [[ProfileVC alloc] initWithNibName:@"ProfileVC" bundle:nil tripService:self.tripService userService:self.userService imageService:self.imageService isUser:YES userID:[TreadsSession instance].treadsUserID withLocationService:_locationService withCommentService:_commentService withFollowService:self.followService];
 
 
     
