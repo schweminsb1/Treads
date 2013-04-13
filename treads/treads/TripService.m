@@ -181,7 +181,7 @@
                 continue;
             }
             //upload image
-            CGSize newSize = CGSizeMake(540, 360); float newSizeRatio = newSize.width / newSize.height;
+            CGSize newSize = CGSizeMake(270, 180); float newSizeRatio = newSize.width / newSize.height;
             CGSize imageSize = locationItem.image.size; float imageSizeRatio = imageSize.width / imageSize.height;
             if (newSizeRatio < imageSizeRatio) {
                 newSize.height = newSize.width / imageSizeRatio;
