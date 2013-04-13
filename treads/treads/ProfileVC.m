@@ -84,14 +84,7 @@
                 UIImage* defaultPic = [UIImage imageNamed:@"man.png"];
                 self.profilePic.image = defaultPic;
             }
-            CompletionWithItems alsoComplete = ^(NSArray* items) {
-               // UIImage * returnImage = items[0];
-               // self.banner.image = returnImage;
-                
                 [self.tripService getTripsWithUserID:self.userID forTarget:self withAction:@selector(tripsHaveLoaded:)];
-            };
-            
-            [self.imageService getImageWithPhotoID:16 withReturnBlock:alsoComplete];
         };
         [self.imageService getImageWithPhotoID:returnedUser.profilePictureID withReturnBlock:completion];
 
