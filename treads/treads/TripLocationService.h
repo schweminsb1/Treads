@@ -9,7 +9,7 @@
 
 #import <Foundation/Foundation.h>
 #import "TreadsService.h"
-
+#import "DataRepository.h"
 @class DataRepository;
 @class TripLocation;
 
@@ -26,5 +26,6 @@
 - (void)getAllTripLocationsForTarget:(NSObject*)target withAction:(SEL)returnAction;
 - (void)getTripLocationWithID:(int)tripLocationID forTarget:(NSObject*)target withAction:(SEL)returnAction;
 - (void)updateTripLocation:(TripLocation*)tripLocation forTarget:(NSObject*)target withAction:(SEL)returnAction;
+- (void)getTripLocationWithLocation:(Location*)location withCompletion:(CompletionWithItemsandLocation)block;
 
 @end

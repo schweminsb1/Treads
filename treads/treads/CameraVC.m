@@ -35,7 +35,10 @@ BOOL previousDoneHit;
 {
     //[super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    if ([self.popoverController isPopoverVisible])
+    {
+        [self.popoverController dismissPopoverAnimated:YES];
+    }
     // setup the Camera
     if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
     {

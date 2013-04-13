@@ -12,6 +12,7 @@
 #import <Foundation/Foundation.h>
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 #import "TreadsService.h"
+#import "Location.h"
 
 @interface DataRepository : NSObject
 
@@ -21,7 +22,7 @@ typedef void (^CompletionWithMessagesBlock) (id messages);
 typedef void (^CompletionWithSasBlock) (NSString *sasUrl);
 typedef void (^CompletionWithItems)(NSArray * items);
 typedef void (^BusyUpdateBlock) (BOOL busy);
-
+typedef void (^CompletionWithItemsandLocation)(NSArray * items, Location* location);
 @property MSClient* client;
 @property MSTable * tablesTable;
 @property MSTable * tableRowsTable;
