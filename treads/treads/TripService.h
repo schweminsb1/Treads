@@ -32,4 +32,7 @@
 //images
 @property (strong) ImageService* imageService;
 
+- (void)getImagesForTrip:(Trip*)trip forTarget:(NSObject*)target withRefreshAction:(SEL)refreshAction withCompleteAction:(SEL)completeAction;
+- (void)updateNewImagesForTrip:(Trip*)trip forTarget:(NSObject*)target withCompleteAction:(SEL)completeAction;
+
 @end

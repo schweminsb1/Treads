@@ -175,7 +175,7 @@
     for (int i=imageSubViews.count; i<displayItems.count; i++) {
         id<ImageScrollDisplayableItem> displayItem = (id<ImageScrollDisplayableItem>)displayItems[i];
         UIImageView* imageSubView = [[UIImageView alloc] init];
-        imageSubView.contentMode = UIViewContentModeScaleAspectFill;
+        imageSubView.contentMode = UIViewContentModeScaleAspectFit;
         imageSubView.clipsToBounds = YES;
         imageSubView.image = [displayItem displayImage];
         [imageSubViews addObject:imageSubView];

@@ -50,30 +50,32 @@
 {
 //    int requestsSent = 0;
 //    int requestsReceived = 0;
-    for (TripLocationItem* locationItem in trip.tripLocations) {
-        //ignore if no image is present
-        if (locationItem.imageID == [TripLocationItem UNDEFINED_IMAGE_ID]) {
-            locationItem.image = [self imageNotFound];
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-            [target performSelector:refreshAction];
-#pragma clang diagnostic pop
-            continue;
-        }
-        //send request for image
-//        requestsSent++;
-        [self.imageService getImageWithPhotoID:locationItem.imageID withReturnBlock:^(NSArray *items) {
-            if (items.count > 0) {
-                locationItem.image = (UIImage*)(items[0]);
-            }
-            else {
+    for (TripLocation* location in trip.tripLocations) {
+        for (TripLocationItem* locationItem in location.tripLocationItems) {
+            //ignore if no image is present
+            if (locationItem.imageID == [TripLocationItem UNDEFINED_IMAGE_ID]) {
                 locationItem.image = [self imageNotFound];
-            }
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-            [target performSelector:refreshAction];
+                [target performSelector:refreshAction];
 #pragma clang diagnostic pop
-        }];
+                continue;
+            }
+            //send request for image
+            //        requestsSent++;
+            [self.imageService getImageWithPhotoID:locationItem.imageID withReturnBlock:^(NSArray *items) {
+                if (items.count > 0) {
+                    locationItem.image = (UIImage*)(items[0]);
+                }
+                else {
+                    locationItem.image = [self imageNotFound];
+                }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+                [target performSelector:refreshAction];
+#pragma clang diagnostic pop
+            }];
+        }
     }
 }
 
@@ -113,7 +115,7 @@
                     tripLocationItem.index = [[tripLocationItemDictionary objectForKey:@"index"] intValue];
                     [tripLocationItems addObject:tripLocationItem];
                 }
-                [tripLocationItems sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"index" ascending:NO]]];
+                [tripLocationItems sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"index" ascending:YES]]];
                 tripLocation.tripLocationItems = tripLocationItems;
                 [tripLocations addObject:tripLocation];
             }
@@ -135,7 +137,7 @@
 
 #pragma mark - Writing
 
-- (void)updateTrip:(Trip*)trip forTarget:(NSObject *)target withAction:(SEL)returnAction
+- (void)updateTrip:(Trip*)trip forTarget:(NSObject*)target withAction:(SEL)returnAction
 {
     NSMutableArray* tripLocations = [[NSMutableArray alloc] init];
     for (int i=0; i<trip.tripLocations.count; i++) {
@@ -157,6 +159,66 @@
         [self.dataRepository updateDataItem:tripDictionary usingService:self forRequestingObject:target withReturnAction:returnAction];
     }
     //[self.dataRepository updateTrip:[NSDictionary dictionaryWithDictionary:tripDictionary] forTarget:target withAction:returnAction];
+}
+
+- (void)updateNewImagesForTrip:(Trip*)trip forTarget:(NSObject*)target withCompleteAction:(SEL)completeAction
+{
+    int requestsSent = 0;
+    int __block requestsReceived = 0;
+    for (TripLocation* location in trip.tripLocations) {
+        for (TripLocationItem* locationItem in location.tripLocationItems) {
+            //calculate requests to send
+            if (locationItem.imageID != [TripLocationItem UNDEFINED_IMAGE_ID] || !locationItem.image) {
+                continue;
+            }
+            requestsSent++;
+        }
+    }
+    for (TripLocation* location in trip.tripLocations) {
+        for (TripLocationItem* locationItem in location.tripLocationItems) {
+            //ignore if image already exists
+            if (locationItem.imageID != [TripLocationItem UNDEFINED_IMAGE_ID] || !locationItem.image) {
+                continue;
+            }
+            //upload image
+            CGSize newSize = CGSizeMake(540, 360); float newSizeRatio = newSize.width / newSize.height;
+            CGSize imageSize = locationItem.image.size; float imageSizeRatio = imageSize.width / imageSize.height;
+            if (newSizeRatio < imageSizeRatio) {
+                newSize.height = newSize.width / imageSizeRatio;
+            }
+            if (newSizeRatio > imageSizeRatio) {
+                newSize.width = newSize.height * imageSizeRatio;
+            }
+            UIImage* resizedImage = [TripService imageWithImage:locationItem.image scaledToSize:newSize];
+            [self.imageService insertImage:resizedImage withCompletion:^(NSDictionary *item, NSError *error) {
+//                @synchronize(requestsReceived) {
+                requestsReceived++;
+                locationItem.imageID = [[item objectForKey:@"id"] intValue];
+                if (requestsReceived == requestsSent) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+                    [target performSelector:completeAction];
+#pragma clang diagnostic pop
+//                }
+                }
+            }];
+        }
+    }
+    if (requestsSent == 0) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        [target performSelector:completeAction];
+#pragma clang diagnostic pop
+    }
+}
+
++ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    //UIGraphicsBeginImageContext(newSize);
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 - (NSDictionary*)convertTripLocationToDictionary:(TripLocation*)tripLocation atStoredIndex:(int)index

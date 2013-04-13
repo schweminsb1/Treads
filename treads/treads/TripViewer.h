@@ -28,6 +28,8 @@
 
 - (void)clearAndWait;
 
+- (void)refreshWithNewImages;
+
 @property (copy) void(^sendNewLocationRequest)(void(^onSuccess)(TripLocation*));
 @property (copy) void(^sendNewImageRequest)(void(^onSuccess)(UIImage*));
 @property (copy) void(^gotolocationpage)(TripLocation* loc);

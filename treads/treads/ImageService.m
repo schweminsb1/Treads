@@ -44,11 +44,13 @@
     
     NSMutableDictionary * imageDict= [[NSMutableDictionary alloc]init];
     NSString * stringToSend= [self stringFromImage:image];
-    [imageDict setValue:stringToSend forKey:@"imageString"];
-    
-    [_dataRepository createDataItem:imageDict usingService:self withReturnBlock:ultimatecompletionblock];
+    if (stringToSend) {
+        [imageDict setValue:stringToSend forKey:@"imageString"];
+//        [imageDict setValue:@"" forKey:@"blobPath"];
+        
+        [_dataRepository createDataItem:imageDict usingService:self withReturnBlock:ultimatecompletionblock];
         //insert image path into database for a newID
-
+    }
 
   
 }
