@@ -26,6 +26,7 @@
 @property (strong) UIBarButtonItem* backButton;
 @property LocationService * locationService;
 @property LocationPickerVC * picker;
+@property UINavigationController * navcontroller;
 @end
 
 @implementation TripViewVC {
@@ -55,6 +56,7 @@
     //set up browser
     self.viewer = [[TripViewer alloc] initWithFrame:self.viewerWindow.bounds];
     int tripid=_tripID;
+     TripViewVC * myself= self;
     self.viewer.sendNewLocationRequest = ^(void(^onSuccess)(TripLocation*)) {
         if (YES) {
             //Create Location Picker
@@ -68,7 +70,7 @@
             myBlock=^(Location *location)
             {
                 
-                TripLocation* locationNew;
+                TripLocation* locationNew= [[TripLocation alloc]init];
                 locationNew.tripID= tripid ;
                 locationNew.locationID=[location.idField intValue];
                 //add new trip location to database
@@ -76,11 +78,12 @@
                 
                 
             };
-         
-           _picker= [[LocationPickerVC alloc]initWithStyle:UITableViewStylePlain withLocationService:_locationService];
-            _picker.returnLocationToTripView=myBlock;
+           
+           myself.picker= [[LocationPickerVC alloc]initWithStyle:UITableViewStylePlain withLocationService:myself.locationService];
+            myself.picker.returnLocationToTripView=myBlock;
+            myself.navcontroller= [[UINavigationController alloc] initWithRootViewController:myself.picker];
             
-           [self presentViewController:_picker animated:YES completion:nil];
+           [myself presentViewController:myself.navcontroller animated:YES completion:nil];
 
             
             
