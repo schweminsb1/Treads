@@ -21,4 +21,7 @@
 @property (copy) NSString* description; //(summary)
 @property (strong) NSArray* tripLocationItems;
 
+//only used for importing
+@property int index;
+
 @end

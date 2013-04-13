@@ -21,4 +21,7 @@
 @property (strong) UIImage* image;
 @property (copy) NSString* description;
 
+//only used for importing
+@property int index;
+
 @end

@@ -38,7 +38,7 @@
             trip.name = [returnTrip objectForKey:@"name"];
             trip.description = [returnTrip objectForKey:@"description"];
             NSArray* tripLocationsDictionary = [returnTrip objectForKey:@"tripLocations"];
-            NSMutableArray* tripLocations = [[NSMutableArray alloc] init];
+            NSMutableArray* tripLocations = [[NSMutableArray alloc] initWithCapacity:tripLocationsDictionary.count];
             for (NSDictionary* tripLocationDictionary in tripLocationsDictionary)
             {
                 TripLocation* tripLocation = [[TripLocation alloc] init];
@@ -46,18 +46,22 @@
                 tripLocation.tripID = [[tripLocationDictionary objectForKey:@"tripID"] intValue];
                 tripLocation.locationID = [[tripLocationDictionary objectForKey:@"locationID"] intValue];
                 tripLocation.description = [tripLocationDictionary objectForKey:@"description"];
+                tripLocation.index = [[tripLocationDictionary objectForKey:@"index"] intValue];
                 NSArray* tripLocationItemsDictionary = [tripLocationDictionary objectForKey:@"tripLocationItems"];
-                NSMutableArray* tripLocationItems = [[NSMutableArray alloc] init];
+                NSMutableArray* tripLocationItems = [[NSMutableArray alloc] initWithCapacity:tripLocationItemsDictionary.count];
                 for (NSDictionary* tripLocationItemDictionary in tripLocationItemsDictionary) {
                     TripLocationItem* tripLocationItem = [[TripLocationItem alloc] init];
                     tripLocationItem.tripLocationItemID = [[tripLocationItemDictionary objectForKey:@"id"] intValue];
                     tripLocationItem.tripLocationID = [[tripLocationItemDictionary objectForKey:@"tripLocationID"] intValue];
                     tripLocationItem.description = [tripLocationItemDictionary objectForKey:@"description"];
+                    tripLocationItem.index = [[tripLocationItemDictionary objectForKey:@"index"] intValue];
                     [tripLocationItems addObject:tripLocationItem];
                 }
+                [tripLocationItems sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"index" ascending:NO]]];
                 tripLocation.tripLocationItems = tripLocationItems;
                 [tripLocations addObject:tripLocation];
             }
+            [tripLocations sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"index" ascending:YES]]];
             trip.tripLocations = tripLocations;
             
             //[self addDebugItemsToTrip:trip];
@@ -65,6 +69,7 @@
             [convertedData addObject:trip];
         }
         @catch (NSException* exception) {
+//            NSLog(exception.reason);
             trip.name = @"Error - could not parse trip data";
             [convertedData addObject:trip];
         }
@@ -156,15 +161,15 @@
 - (void)updateTrip:(Trip*)trip forTarget:(NSObject *)target withAction:(SEL)returnAction
 {
     NSMutableArray* tripLocations = [[NSMutableArray alloc] init];
-    for(TripLocation* tripLocation in trip.tripLocations) {
-        [tripLocations addObject:[self convertTripLocationToDictionary:tripLocation]];
+    for (int i=0; i<trip.tripLocations.count; i++) {
+        [tripLocations addObject:[self convertTripLocationToDictionary:trip.tripLocations[i] atStoredIndex:i]];
     }
     
     NSMutableDictionary* tripDictionary = [NSMutableDictionary dictionaryWithDictionary:@{
                                        @"userID":@(trip.userID),
                                        @"name":trip.name,
                                        @"description":trip.description,
-                                       @"tripLocations":tripLocations
+                                       @"tripLocations":[NSArray arrayWithArray:tripLocations]
                                  }];
     
     if (trip.tripID == [Trip UNDEFINED_TRIP_ID]) {
@@ -177,11 +182,11 @@
     //[self.dataRepository updateTrip:[NSDictionary dictionaryWithDictionary:tripDictionary] forTarget:target withAction:returnAction];
 }
 
-- (NSDictionary*)convertTripLocationToDictionary:(TripLocation*)tripLocation
+- (NSDictionary*)convertTripLocationToDictionary:(TripLocation*)tripLocation atStoredIndex:(int)index
 {
     NSMutableArray* tripLocationItems = [[NSMutableArray alloc] init];
-    for (TripLocationItem* tripLocationItem in tripLocation.tripLocationItems) {
-        [tripLocationItems addObject:[self convertTripLocationItemToDictionary:tripLocationItem]];
+    for (int i=0; i<tripLocation.tripLocationItems.count; i++) {
+        [tripLocationItems addObject:[self convertTripLocationItemToDictionary:tripLocation.tripLocationItems[i] atStoredIndex:i]];
     }
     
     return @{
@@ -189,17 +194,19 @@
              @"tripID":@(tripLocation.tripID),
              @"locationID":@(tripLocation.locationID),
              @"description":tripLocation.description,
-             @"tripLocationItems":tripLocationItems
+             @"tripLocationItems":[NSArray arrayWithArray:tripLocationItems],
+             @"index":@(index)
              };
 }
 
-- (NSDictionary*)convertTripLocationItemToDictionary:(TripLocationItem*)tripLocationItem
+- (NSDictionary*)convertTripLocationItemToDictionary:(TripLocationItem*)tripLocationItem atStoredIndex:(int)index
 {
     return @{
              //@"id":@(tripLocationItem.tripLocationItemID),
              @"tripLocationID":@(tripLocationItem.tripLocationID),
              @"image":@"",//tripLocationItem.image,
-             @"description":tripLocationItem.description
+             @"description":tripLocationItem.description,
+             @"index":@(index)
              };
 }
 
