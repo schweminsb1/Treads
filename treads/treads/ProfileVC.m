@@ -53,7 +53,8 @@
         self.locationService = locationService;
         self.userID = myUserID;
         self.myProfile = isUser;
-        _commentService=commentService;
+        self.commentService=commentService;
+        self.followService = myFollowService;
 
     }
     
