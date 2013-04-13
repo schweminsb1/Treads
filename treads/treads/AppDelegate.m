@@ -20,6 +20,7 @@
 #import "TripLocationService.h"
 #import "LocationPickerVC.h"
 #import "TreadsSession.h"
+#import "FollowService.h"
 
 @interface AppDelegate()
 
@@ -33,6 +34,7 @@
 @property (strong) CommentService* commentService;
 @property (strong) ImageService* imageService;
 @property (strong) UserService* userService;
+@property (strong) FollowService* followService;
 @property (strong) NSString * SASURL;
 @property (strong) TripLocationService * tripLocationService;
 
@@ -55,6 +57,7 @@
     self.userService = [[UserService alloc] initWithRepository:self.dataRepository];
     self.tripLocationService=  [[TripLocationService alloc] initWithRepository:self.dataRepository];
     self.imageService = [[ImageService alloc] initWithRepository:self.dataRepository];
+    self.followService = [[FollowService alloc] initWithRepository:self.dataRepository];
     
     //connect services
     self.tripService.imageService = self.imageService;
@@ -74,7 +77,7 @@
     cameraVC = [[CameraVC alloc] initWithNibName:@"CameraVC" bundle:nil];
     myTripsVC = [[MyTripsVC alloc] initWithNibName:@"MyTripsVC" bundle:nil withTripService:self.tripService withLocationService:_locationService withCommentService: _commentService];
     followVC = [[FollowVC alloc] initWithNibName:@"FollowVC" bundle:nil withTripService:self.tripService withLocationService:_locationService withCommentService:_commentService];
-    profileVC = [[ProfileVC alloc] initWithNibName:@"ProfileVC" bundle:nil tripService:self.tripService userService:self.userService imageService:self.imageService isUser:YES userID:[TreadsSession instance].treadsUserID withLocationService:_locationService withCommentService:_commentService];
+    profileVC = [[ProfileVC alloc] initWithNibName:@"ProfileVC" bundle:nil tripService:self.tripService userService:self.userService imageService:self.imageService isUser:YES userID:[TreadsSession instance].treadsUserID withLocationService:_locationService withCommentService:_commentService withFollowService:self.followService];
 
 
     
@@ -90,7 +93,7 @@
     LoginVC* login;
     
     //Set the login controller to default
-    login = [[LoginVC alloc]initWithNibName:@"LoginVC" bundle:nil client:self.dataRepository.client AppDelegate:self];
+    login = [[LoginVC alloc]initWithNibName:@"LoginVC" bundle:nil client:self.dataRepository.client AppDelegate:self withUserService:_userService];
     login.title = @"Login";
     UINavigationController* LoginNavigation = [[UINavigationController alloc] initWithRootViewController:login];
     

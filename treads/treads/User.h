@@ -14,5 +14,7 @@
 @property NSString * emailaddress;
 @property NSString * fname;
 @property NSString * lname;
-@property int profilePictureID;
+@property int profilePhotoID;
+@property int coverPhotoID;
+@property NSString * password;
 @end

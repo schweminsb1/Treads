@@ -111,10 +111,7 @@
             [_self.navigationController pushViewController:locationVC animated:YES];
             
         };
-        
         [_self.locationService getLocationByID:loc.locationID withLocationBlock:complete];
-       
-        
     };
     [self.viewer setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     [self.viewerWindow addSubview: self.viewer];

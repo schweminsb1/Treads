@@ -7,7 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "TreadsService.h"
 
-@interface FollowService : NSObject
+
+@class DataRepository;
+
+@interface FollowService : NSObject <TreadsService>
+
+@property (strong) DataRepository* dataRepository;
+@property (copy) NSString* dataTableIdentifier;
+
+- (id)initWithRepository:(DataRepository*)repository;
+- (NSArray*)convertReturnDataToServiceModel:(NSArray*)returnData;
+
+- (void) getPeopleIFollow:(int)myID forTarget:(NSObject*)target withAction:(SEL)returnAction;
 
 @end
