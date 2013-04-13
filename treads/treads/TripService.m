@@ -54,6 +54,7 @@
                     tripLocationItem.tripLocationItemID = [[tripLocationItemDictionary objectForKey:@"id"] intValue];
                     tripLocationItem.tripLocationID = [[tripLocationItemDictionary objectForKey:@"tripLocationID"] intValue];
                     tripLocationItem.description = [tripLocationItemDictionary objectForKey:@"description"];
+                    tripLocationItem.imageID = [[tripLocationItemDictionary objectForKey:@"imageID"] intValue];
                     tripLocationItem.index = [[tripLocationItemDictionary objectForKey:@"index"] intValue];
                     [tripLocationItems addObject:tripLocationItem];
                 }
@@ -204,7 +205,8 @@
     return @{
              //@"id":@(tripLocationItem.tripLocationItemID),
              @"tripLocationID":@(tripLocationItem.tripLocationID),
-             @"image":@"",//tripLocationItem.image,
+//             @"image":@"",//tripLocationItem.image,
+             @"imageID":@(tripLocationItem.imageID),
              @"description":tripLocationItem.description,
              @"index":@(index)
              };
