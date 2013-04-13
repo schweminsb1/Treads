@@ -89,11 +89,7 @@
     }
     else
     {
-        
        //there is something in both of the required text fields
-        
-            
-        
         //[UserTable readWithQueryString:[query queryStringOrError:&error] completion:queryBlock];
         [_userService getUserbyEmail:_usernameText.text forTarget:self withAction:@selector(log:)];
         [_activityIndicatorView startAnimating];
@@ -101,18 +97,9 @@
         //retrieve the username if it exists in the database
         //if it doesn't exist  then say wrong username and password
         //if it does exist see if our hashed value matches the value stored in the database
-        //if it matches then go to the logged in screen
-        
-    
-        
-        //condition will change to match above
-
-        
-        
-        
+        //if it matches then go to the logged in screen     
+        //condition will change to match above  
     }
-    
-    
 }
 -(NSString *) getPasswordHash:(NSString *) user_input
 {
@@ -121,15 +108,12 @@
     [hash appendString:salt];
     NSString * inputHash= [NSString stringWithFormat:@"%lu",(unsigned long)[hash hash]];
     return inputHash;
-    
 }
 -(IBAction) RegisterClick:(id) sender;
 {
     RegisterVC * registerView= [[RegisterVC alloc]initWithNibName:@"RegisterVC" bundle:nil client:_client AppDelegate:_appDelegate withUserService:_userService];
-    
     [self.navigationController pushViewController:registerView animated:YES];
-    
-    
+
 }
 
 -(IBAction) ForgottenPassword:(id) sender
@@ -159,6 +143,8 @@
                 [TreadsSession instance].treadsUserID  = userID;
                 [TreadsSession instance].fName= ((User*)items[0]).fname;
                 [TreadsSession instance].lName= ((User*)items[0]).lname;
+                [TreadsSession instance].profilePhotoID=((User*)items[0]).profilePhotoID;
+                [TreadsSession instance].coverPhotoID=((User*)items[0]).coverPhotoID;
                 
                 // _treadsSession = [[TreadsSession new]initWithAuthenticatedUser: [NSString stringWithString:(NSString *)[items[0][@"emailAddress"] lowercaseString]]];
                 if([TreadsSession Login])
@@ -171,17 +157,12 @@
                     alert.message= @"Your drive may be full too full to use Treads";
                     [alert show];
                     return;
-                    
                 }
-                
-                
-                
             }
             @catch (id exception)
             {
                 NSLog(@"%@", exception);
             }
-            
             //login treads session object
         }
         else
@@ -199,7 +180,6 @@
         _passwordText.text=@"";
         [alert show];
         return;
-        
     }
     else
     {

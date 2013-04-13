@@ -104,7 +104,7 @@
             }
                 [self.tripService getTripsWithUserID:self.userID forTarget:self withAction:@selector(tripsHaveLoaded:)];
         };
-        [self.imageService getImageWithPhotoID:returnedUser.profilePictureID withReturnBlock:completion];
+        [self.imageService getImageWithPhotoID:returnedUser.profilePhotoID withReturnBlock:completion];
 
     }
 }
