@@ -67,6 +67,7 @@
 		3C12312716EFCB98006CCBFE /* ProfileService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C12312616EFCB98006CCBFE /* ProfileService.m */; };
 		3C13F52E171A10F800EA6582 /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C13F52D171A10F700EA6582 /* icon114.png */; };
 		3C13F530171A10FF00EA6582 /* icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C13F52F171A10FF00EA6582 /* icon57.png */; };
+		3C13F539171A184300EA6582 /* 404.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C13F538171A184300EA6582 /* 404.png */; };
 		3C60C7DB16E7004900FDFD7D /* TripBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C60C7DA16E7004900FDFD7D /* TripBrowser.m */; };
 		3C87B12316F7E7B8000ABF18 /* AppColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C87B12216F7E7B8000ABF18 /* AppColors.m */; };
 		3C882DC1170D1DF30041A9C8 /* ImageScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C882DC0170D1DF30041A9C8 /* ImageScrollTextView.m */; };
@@ -206,6 +207,7 @@
 		3C12312616EFCB98006CCBFE /* ProfileService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileService.m; path = treads/ProfileService.m; sourceTree = SOURCE_ROOT; };
 		3C13F52D171A10F700EA6582 /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114.png; sourceTree = "<group>"; };
 		3C13F52F171A10FF00EA6582 /* icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57.png; sourceTree = "<group>"; };
+		3C13F538171A184300EA6582 /* 404.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 404.png; sourceTree = "<group>"; };
 		3C60C7D916E7004900FDFD7D /* TripBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripBrowser.h; path = treads/TripBrowser.h; sourceTree = SOURCE_ROOT; };
 		3C60C7DA16E7004900FDFD7D /* TripBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripBrowser.m; path = treads/TripBrowser.m; sourceTree = SOURCE_ROOT; };
 		3C87B12116F7E7B8000ABF18 /* AppColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppColors.h; path = treads/AppColors.h; sourceTree = SOURCE_ROOT; };
@@ -416,6 +418,7 @@
 		3188B19116C9CE4E008E1D7F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3C13F531171A151A00EA6582 /* Image View */,
 				3C90EA891716117500CACCC4 /* Sample Images */,
 				3C90EA881716116000CACCC4 /* Tab Bar Icons */,
 				3C90EA871716115900CACCC4 /* Edit Icons */,
@@ -451,6 +454,14 @@
 				39164F5C16EAA3E000877549 /* AddLocationVC.xib */,
 			);
 			name = "Add Location";
+			sourceTree = "<group>";
+		};
+		3C13F531171A151A00EA6582 /* Image View */ = {
+			isa = PBXGroup;
+			children = (
+				3C13F538171A184300EA6582 /* 404.png */,
+			);
+			name = "Image View";
 			sourceTree = "<group>";
 		};
 		3C60C7CD16E6C28300FDFD7D /* ViewControllers */ = {
@@ -812,6 +823,7 @@
 				318BC81A1719058500F4EB67 /* EditProfileVC.xib in Resources */,
 				3C13F52E171A10F800EA6582 /* icon114.png in Resources */,
 				3C13F530171A10FF00EA6582 /* icon57.png in Resources */,
+				3C13F539171A184300EA6582 /* 404.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

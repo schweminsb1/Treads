@@ -185,6 +185,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.sendNewLocationRequest = ^(){
             self.sendNewLocationRequest(^(TripLocation* newTripLocation){
+                newTripLocation.description = @"";
                 [_cell changeLocation:newTripLocation.locationID];
             });
 //            [_cell changeLocation:200];
@@ -238,15 +239,21 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingEnabled && indexPath.row == trip.tripLocations.count + 1) {
-        //add new location
-        //at some point this will need to be converted to an async call/request function
-        TripLocation* dummyLocation = [[TripLocation alloc] init];
-        dummyLocation.tripLocationID = trip.tripLocations.count;
-        dummyLocation.tripID = trip.tripID;
-        dummyLocation.locationID = trip.tripLocations.count;
-        dummyLocation.description = @"New location";
-        dummyLocation.tripLocationItems = [[NSArray alloc] init];
-        [self addLocationToCurrentTrip:dummyLocation];
+        self.sendNewLocationRequest(^(TripLocation* newTripLocation){
+//            //add new location
+//            //at some point this will need to be converted to an async call/request function
+//            TripLocation* dummyLocation = [[TripLocation alloc] init];
+//            dummyLocation.tripLocationID = trip.tripLocations.count;
+//            dummyLocation.tripID = trip.tripID;
+//            dummyLocation.locationID = newTripLocation.locationID;
+//            dummyLocation.description = @"New location";
+//            dummyLocation.tripLocationItems = [[NSArray alloc] init];
+            newTripLocation.description = @"";
+            newTripLocation.tripLocationItems = [[NSArray alloc] init];
+            [self addLocationToCurrentTrip:newTripLocation];
+        });
+        
+        
     }
     return;
 }

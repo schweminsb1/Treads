@@ -28,7 +28,7 @@
 + (UIColor*)secondaryBackgroundColor {return [UIColor colorWithHue:[AppColors primaryHue] saturation:[AppColors primarySaturation]*0.05 brightness:[AppColors primaryValue] alpha:1];}
 + (UIColor*)tertiaryBackgroundColor {return [UIColor colorWithHue:[AppColors primaryHue] saturation:[AppColors primarySaturation]*0.05 brightness:[AppColors primaryValue]*0.4 alpha:1];}
 
-+ (UIColor*)blankItemBackgroundColor {return [UIColor colorWithHue:[AppColors primaryHue] saturation:[AppColors primarySaturation]*0.5 brightness:[AppColors primaryValue]*0.15 alpha:1];}
++ (UIColor*)blankItemBackgroundColor {return [UIColor colorWithHue:[AppColors primaryHue] saturation:0.30 brightness:0.10 alpha:1];}
 
 + (UIColor*)mainTextColor {return [UIColor blackColor];}
 + (UIColor*)lightTextColor {return [UIColor whiteColor];}
