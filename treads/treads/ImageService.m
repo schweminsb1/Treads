@@ -55,18 +55,23 @@
 -(void) getImageWithPhotoID:(int) photoid withReturnBlock:(CompletionWithItems) comp
 {
 
-    
     [_dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"id = %d",photoid] usingService:self withReturnBlock:comp];
 }
 
 
 - (NSArray*)convertReturnDataToServiceModel:(NSArray*)returnData
 {
-    NSString * imagestring= returnData[0][@"imageString"];
-    UIImage * returnImage= [self imageFromString:imagestring];
-    NSArray * arr= @[returnImage];
-
-    return arr;
+    if (returnData.count > 0) {
+        
+        NSString * imagestring= returnData[0][@"imageString"];
+        UIImage * returnImage= [self imageFromString:imagestring];
+        NSArray * arr= @[returnImage];
+        return arr;
+    }
+    else {
+        return nil;
+    }
+    
 }
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
 //post to the database the newdata item

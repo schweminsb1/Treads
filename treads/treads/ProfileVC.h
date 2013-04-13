@@ -22,5 +22,6 @@
 
 - (void)dataHasLoaded:(NSArray*)newData;
 - (void)tripsHaveLoaded:(NSArray*)newData;
+- (void)updateUser:(int)myUserID;
 
 @end

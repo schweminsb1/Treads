@@ -122,6 +122,7 @@
                             // _treadsSession = [[TreadsSession new]initWithAuthenticatedUser: [NSString stringWithString:(NSString *)[items[0][@"emailAddress"] lowercaseString]]];
                            if([TreadsSession Login])
                            {
+                               [self.appDelegate.tabBarController.viewControllers[4] updateUser:[TreadsSession instance].treadsUserID];
                                _appDelegate.window.rootViewController= _appDelegate.tabBarController;
                            }
                             else
