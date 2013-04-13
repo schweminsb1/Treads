@@ -46,11 +46,21 @@
                 tripLocation.tripID = [[tripLocationDictionary objectForKey:@"tripID"] intValue];
                 tripLocation.locationID = [[tripLocationDictionary objectForKey:@"locationID"] intValue];
                 tripLocation.description = [tripLocationDictionary objectForKey:@"description"];
+                NSArray* tripLocationItemsDictionary = [tripLocationDictionary objectForKey:@"tripLocationItems"];
+                NSMutableArray* tripLocationItems = [[NSMutableArray alloc] init];
+                for (NSDictionary* tripLocationItemDictionary in tripLocationItemsDictionary) {
+                    TripLocationItem* tripLocationItem = [[TripLocationItem alloc] init];
+                    tripLocationItem.tripLocationItemID = [[tripLocationItemDictionary objectForKey:@"id"] intValue];
+                    tripLocationItem.tripLocationID = [[tripLocationItemDictionary objectForKey:@"tripLocationID"] intValue];
+                    tripLocationItem.description = [tripLocationItemDictionary objectForKey:@"description"];
+                    [tripLocationItems addObject:tripLocationItem];
+                }
+                tripLocation.tripLocationItems = tripLocationItems;
                 [tripLocations addObject:tripLocation];
             }
             trip.tripLocations = tripLocations;
             
-//            [self addDebugItemsToTrip:trip];
+            //[self addDebugItemsToTrip:trip];
             
             [convertedData addObject:trip];
         }
@@ -75,14 +85,15 @@
     trip.featuredLocationItem = dummyFeaturedLocationItem;
     
     //locations
-    NSMutableArray* dummyLocationArray = [[NSMutableArray alloc] init];
-    int count = random()%8 + 1;
-    for (int i = 0; i < count; i++) {
-        TripLocation* dummyLocation = [[TripLocation alloc] init];
-        dummyLocation.tripLocationID = i;
-        dummyLocation.tripID = trip.tripID;
-        dummyLocation.locationID = i;
-        dummyLocation.description = [self loremIpsum];
+//    NSMutableArray* dummyLocationArray = [[NSMutableArray alloc] init];
+//    int count = random()%8 + 1;
+//    for (int i = 0; i < count; i++) {
+    for (int i = 0; i < trip.tripLocations.count; i++) {
+//        TripLocation* dummyLocation = [[TripLocation alloc] init];
+//        dummyLocation.tripLocationID = i;
+//        dummyLocation.tripID = trip.tripID;
+//        dummyLocation.locationID = i;
+//        dummyLocation.description = [self loremIpsum];
         
         NSMutableArray* dummyLocationItemsArray = [[NSMutableArray alloc] init];
         int cap = random()%6;
@@ -92,12 +103,12 @@
             dummyLocationItem.description = [NSString stringWithFormat:@"%d [%ld] : %@", j, random()%1000, [self loremIpsum]];
             [dummyLocationItemsArray addObject:dummyLocationItem];
         }
-        dummyLocation.tripLocationItems = [NSArray arrayWithArray:dummyLocationItemsArray];
+        ((TripLocation*)trip.tripLocations[i]).tripLocationItems = [NSArray arrayWithArray:dummyLocationItemsArray];
         
-        [dummyLocationArray addObject:dummyLocation];
+//        [dummyLocationArray addObject:dummyLocation];
     }
     
-    trip.tripLocations = [NSArray arrayWithArray:dummyLocationArray];
+//    trip.tripLocations = [NSArray arrayWithArray:dummyLocationArray];
 }
 
 - (UIImage*)randomImage
@@ -168,11 +179,27 @@
 
 - (NSDictionary*)convertTripLocationToDictionary:(TripLocation*)tripLocation
 {
+    NSMutableArray* tripLocationItems = [[NSMutableArray alloc] init];
+    for (TripLocationItem* tripLocationItem in tripLocation.tripLocationItems) {
+        [tripLocationItems addObject:[self convertTripLocationItemToDictionary:tripLocationItem]];
+    }
+    
     return @{
              //@"id":@(tripLocation.tripLocationID),
              @"tripID":@(tripLocation.tripID),
              @"locationID":@(tripLocation.locationID),
-             @"description":tripLocation.description
+             @"description":tripLocation.description,
+             @"tripLocationItems":tripLocationItems
+             };
+}
+
+- (NSDictionary*)convertTripLocationItemToDictionary:(TripLocationItem*)tripLocationItem
+{
+    return @{
+             //@"id":@(tripLocationItem.tripLocationItemID),
+             @"tripLocationID":@(tripLocationItem.tripLocationID),
+             @"image":@"",//tripLocationItem.image,
+             @"description":tripLocationItem.description
              };
 }
 
