@@ -20,6 +20,7 @@
 #import "AppColors.h"
 
 #import "LocationService.h"
+#import "CommentService.h"
 
 @interface MyTripsVC()
 
@@ -27,12 +28,13 @@
 @property (strong) TripBrowser* browser;
 @property (strong) UIBarButtonItem* tripNewButton;
 @property LocationService* locationService;
+@property CommentService * commentService;
 
 @end
 
 @implementation MyTripsVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withTripService:(TripService *)tripServiceHandle withLocationService:(LocationService*)locationservice
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withTripService:(TripService *)tripServiceHandle withLocationService:(LocationService*)locationservice withCommentService:(CommentService*)commentService
 {
     if (self) {
         self.title = NSLocalizedString(@"My Trips", @"My Trips");
@@ -40,6 +42,7 @@
         _locationService=locationservice;
         //set up services
         self.tripService = tripServiceHandle;//[[TripService alloc] init];
+        _commentService=commentService;
     }
     return self;
 }
@@ -87,7 +90,7 @@
 
 - (void)showTrip:(Trip*)trip
 {
-    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID LocationService:_locationService];
+    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID LocationService:_locationService withCommentService:_commentService];
     [self.navigationController pushViewController:tripViewVC animated:YES];
 }
 

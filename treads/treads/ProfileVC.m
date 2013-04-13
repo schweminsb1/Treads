@@ -11,6 +11,7 @@
 #import "TreadsSession.h"
 #import "TripBrowser.h"
 #import "LocationService.h"
+#import "EditProfileVC.h"
 
 
 @interface ProfileVC ()
@@ -19,30 +20,40 @@
 @property IBOutlet UIImageView * banner;
 @property IBOutlet UILabel * name;
 @property IBOutlet UIButton * follow;
+@property IBOutlet UIButton * edit;
 @property TripService* tripService;
 @property UserService* userService;
 @property ImageService* imageService;
-@property        TreadsSession * treadsSession;
 @property int userID;
 @property (strong) TripBrowser* browser;
 @property LocationService * locationService;
+
+@property BOOL myProfile;
+
+@property CommentService * commentService;
+
 
 @end
 
 @implementation ProfileVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService:(TripService *)myTripService userService:(UserService *)myUserService imageService:(ImageService*)myImageService userID:(int)myUserID withLocationService:(LocationService*) locationService ;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService:(TripService *)myTripService userService:(UserService *)myUserService imageService:(ImageService*)myImageService isUser:(BOOL)isUser userID:(int)myUserID withLocationService:(LocationService*) locationService withCommentService:(CommentService*) commentService
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = NSLocalizedString(@"Profile", @"Profile");
         self.tabBarItem.image = [UIImage imageNamed:(@"man.png")];
-        self.userID = myUserID;
         self.tripService = myTripService;
         self.userService = myUserService;
         self.imageService = myImageService;
-        _locationService=locationService;
+        self.locationService = locationService;
+        self.userID = myUserID;
+        self.myProfile = isUser;
+        _commentService=commentService;
+
     }
+    
     return self;
 }
 
@@ -51,7 +62,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.edit.hidden = true;
+    self.follow.hidden = true;
     
+    if(self.myProfile) {
+        self.userID = [TreadsSession instance].treadsUserID;
+    }
     
 }
 
@@ -66,26 +82,26 @@
         self.name.text = [NSString stringWithFormat:@"%@ %@", returnedUser.fname, returnedUser.lname];
         
         
-    /*    if ((int*)returnedUser.User_ID == (int*)self.treadsSession.treadsUserID) {
-            self.follow.hidden = true;
+        if (returnedUser.User_ID == [TreadsSession instance].treadsUserID) {
+            self.edit.hidden = false;
         }
-      */
+        else {
+            self.follow.hidden = false;
+        }
+      
         CompletionWithItems completion= ^(NSArray* items) {
-            UIImage * returnImage= items[0];
-            self.profilePic.image = returnImage;
-            
-            CompletionWithItems alsoComplete = ^(NSArray* items) {
-                UIImage * returnImage = items[0];
-                self.banner.image = returnImage;
-                
+            if (items.count > 0) {
+                UIImage * returnImage= items[0];
+                self.profilePic.image = returnImage;
+            }
+            else {
+                UIImage* defaultPic = [UIImage imageNamed:@"man.png"];
+                self.profilePic.image = defaultPic;
+            }
                 [self.tripService getTripsWithUserID:self.userID forTarget:self withAction:@selector(tripsHaveLoaded:)];
-            };
-            
-            [self.imageService getImageWithPhotoID:16 withReturnBlock:alsoComplete];
         };
-        
-        [self.imageService getImageWithPhotoID:15 withReturnBlock:completion];
-        
+        [self.imageService getImageWithPhotoID:returnedUser.profilePictureID withReturnBlock:completion];
+
     }
 }
 
@@ -108,8 +124,17 @@
 
 - (void)showTrip:(Trip*)trip
 {
-    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID LocationService:_locationService];
+    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID LocationService:_locationService withCommentService:_commentService];
     [self.navigationController pushViewController:tripViewVC animated:YES];
+}
+
+- (void)updateUser:(int)myUserID{
+    self.userID = myUserID;
+}
+
+- (IBAction)editProfile:(id)sender{
+    EditProfileVC* editProfileVC = [[EditProfileVC alloc]initWithNibName:@"EditProfileVC" bundle:nil];
+    [self.navigationController pushViewController:editProfileVC animated:YES];
 }
 
 @end

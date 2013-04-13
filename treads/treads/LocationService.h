@@ -7,6 +7,7 @@
 //
 #import <Foundation/Foundation.h>
 #import "TreadsService.h"
+#import "DataRepository.h"
 
 @class DataRepository;
 
@@ -30,4 +31,5 @@
 
 - (void)getLocationsforTarget:(NSObject *)target withAction:(SEL)returnAction;
 
+- (void)getLocationByID:(int)LocationID withLocationBlock:(CompletionWithItemsandLocation)block;
 @end

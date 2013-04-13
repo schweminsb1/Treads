@@ -24,7 +24,6 @@
         _title = placeName;
         _subtitle = description;
     }
-    
     return self;
 }
 
@@ -39,7 +38,7 @@
         _title = location.title;
         _subtitle = location.description;
         _location=location;
-        
+        _tripCount=0;
     }
     
     return self;

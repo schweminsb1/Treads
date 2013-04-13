@@ -178,6 +178,7 @@
         //fill out data
         TripViewer* __weak _self = self;
         TripViewerLocationCell* __weak _cell = cell;
+        cell.gotolocationpage=_gotolocationpage;
         cell.editingEnabled = ^BOOL(){return [_self editingEnabled];};
         cell.markChangeMade = ^(){[_self markChangeMade];};
         cell.tripLocation = trip.tripLocations[indexPath.row - 1];

@@ -9,9 +9,12 @@
 #import "LocationPickerVC.h"
 #import "Location.h"
 #import "LocationService.h"
+#import "TripViewVC.h"
+#import "AddLocationVC.h"
 @interface LocationPickerVC ()
 @property LocationService * service;
 @property NSMutableArray * locations;
+
 @end
 
 @implementation LocationPickerVC
@@ -26,6 +29,7 @@
         // Custom initialization
         _service=service;
     }
+    
     return self;
 }
 
@@ -88,11 +92,29 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(indexPath.row ==0)
+    {
+        AddLocationVC * addLocVC= [[AddLocationVC alloc] init];
+        [self.navigationController pushViewController:addLocVC animated:YES];
+    }
+    else
+    {
+        if (tableView == self.searchDisplayController.searchResultsTableView)
+        {
+            self.returnLocationToTripView(locationsFilteredArray[indexPath.row-1]);
+            [self dismissViewControllerAnimated:YES completion:nil];
 
+        }
+        else
+        {
+            self.returnLocationToTripView(locations[indexPath.row-1]);
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    }
 }
 -(void)fillLocations:(NSArray*) items
 {
-    locations=items;
+    locations= (NSMutableArray*)items;
     locationsFilteredArray= [NSMutableArray arrayWithCapacity:locations.count];
     
     [self.tableView reloadData];

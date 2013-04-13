@@ -30,8 +30,8 @@
         user.fname          =       returnData[i][@"Fname"];
         user.emailaddress   =       returnData[i][@"emailAddress"];
         user.lname          =       returnData[i][@"Lname"];
-        user.User_ID        =       (int)returnData[i][@"id"];
-        user.profilePictureID=      (int)returnData[i][@"profilePhotoID"];
+        user.User_ID        =       [((NSString*)returnData[i][@"id"]) intValue];
+        user.profilePictureID=      [((NSString*)returnData[i][@"profilePhotoID"]) intValue];
         [results addObject: user];
     }
     return results;

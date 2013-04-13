@@ -12,15 +12,22 @@
 #import "ImageService.h"
 #import "LocationService.h"
 #import "User.h"
+@class CommentService;
 
 
 @interface ProfileVC : UIViewController
 
 @property (strong) IBOutlet UIView* browserWindow;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService:(TripService *)myTripService userService:(UserService *)myUserService imageService:(ImageService*)myImageService userID:(int)myUserID withLocationService:(LocationService*) locationService ;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService:(TripService *)myTripService userService:(UserService *)myUserService imageService:(ImageService*)myImageService isUser:(BOOL)isUser userID:(int)myUserID withLocationService:(LocationService*) locationService withCommentService:(CommentService*) commentService;
+
 
 - (void)dataHasLoaded:(NSArray*)newData;
 - (void)tripsHaveLoaded:(NSArray*)newData;
+- (void)updateUser:(int)myUserID;
+
+- (IBAction)editProfile:(id)sender;
+
 
 @end

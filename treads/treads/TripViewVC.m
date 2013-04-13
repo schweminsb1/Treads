@@ -14,18 +14,21 @@
 #import "TripService.h"
 #import "CameraService.h"
 #import "LocationPickerVC.h"
-
+#import "TripLocation.h"
 #import "TripViewer.h"
+#import "CommentService.h"
 
 @interface TripViewVC()<UINavigationBarDelegate>
 
 @property TripService* tripService;
-@property int tripID;
+@property  int tripID;
 @property (strong) TripViewer* viewer;
 @property (strong) UIBarButtonItem* tripEditButton;
 @property (strong) UIBarButtonItem* backButton;
 @property LocationService * locationService;
-
+@property LocationPickerVC * picker;
+@property UINavigationController * navcontroller;
+@property CommentService * commentService;
 @end
 
 @implementation TripViewVC {
@@ -34,7 +37,7 @@
     CameraService* cameraService;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil backTitle:(NSString *)backTitle tripService:(TripService *)myTripService tripID:(int)myTripID LocationService:(LocationService *) myLocationService
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil backTitle:(NSString *)backTitle tripService:(TripService *)myTripService tripID:(int)myTripID LocationService:(LocationService *) myLocationService withCommentService: (CommentService*) commentService
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -42,6 +45,7 @@
         self.tripID = myTripID;
         previousViewTitle = backTitle;
         _locationService=myLocationService;
+        _commentService = commentService;
     }
     return self;
 }
@@ -54,6 +58,8 @@
     
     //set up browser
     self.viewer = [[TripViewer alloc] initWithFrame:self.viewerWindow.bounds];
+    int tripid=_tripID;
+     TripViewVC * myself= self;
     self.viewer.sendNewLocationRequest = ^(void(^onSuccess)(TripLocation*)) {
         if (YES) {
             //Create Location Picker
@@ -62,11 +68,29 @@
             //in the dismiss popover call block
             //pass the location here,
             //fill the new TripLocation here
-            LocationPickerVC * picker= [[LocationPickerVC alloc]initWithStyle:UITableViewStylePlain withLocationService:_locationService];
+          
+          void  (^myBlock)(Location*);
+            myBlock=^(Location *location)
+            {
+                
+                TripLocation* locationNew= [[TripLocation alloc]init];
+                locationNew.tripID= tripid ;
+                locationNew.locationID=[location.idField intValue];
+                //add new trip location to database
+                onSuccess(locationNew);
+                
+                
+            };
+           
+           myself.picker= [[LocationPickerVC alloc]initWithStyle:UITableViewStylePlain withLocationService:myself.locationService];
+            myself.picker.returnLocationToTripView=myBlock;
+            myself.navcontroller= [[UINavigationController alloc] initWithRootViewController:myself.picker];
+            
+           [myself presentViewController:myself.navcontroller animated:YES completion:nil];
+
             
             
-            TripLocation* location;
-            onSuccess(location);
+           
         }
     };
     TripViewVC* __weak _self = self;
@@ -75,6 +99,22 @@
         [_cameraService showImagePickerFromViewController:_self onSuccess:^(UIImage* image) {
             onSuccess(image);
         }];
+    };
+    self.viewer.gotolocationpage= ^(TripLocation * loc)
+    {
+         //
+        //get location model
+        CompletionWithItemsandLocation complete= ^(NSArray * items, Location * location)
+        {
+            Location * location1=location;
+            LocationVC * locationVC= [[LocationVC alloc] initWithNibName:@"LocationVC" bundle:nil withModel:location1 withCommentService:_self.commentService];
+            [_self.navigationController pushViewController:locationVC animated:YES];
+            
+        };
+        
+        [_self.locationService getLocationByID:loc.locationID withLocationBlock:complete];
+       
+        
     };
     [self.viewer setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     [self.viewerWindow addSubview: self.viewer];

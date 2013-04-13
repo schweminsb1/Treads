@@ -10,11 +10,12 @@
 
 @class TripService;
 @class LocationService;
+@class CommentService;
 
 @interface MyTripsVC : UIViewController
 
 @property (strong) IBOutlet UIView* browserWindow;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withTripService:(TripService *)tripServiceHandle withLocationService:(LocationService*)locationservice;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withTripService:(TripService *)tripServiceHandle withLocationService:(LocationService*)locationservice withCommentService:(CommentService*)commentService;
 
 @end

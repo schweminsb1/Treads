@@ -26,7 +26,7 @@
     BOOL layoutDone;
     
     UIView* subView;
-    
+    UIButton *locationButton;
     UIView* locationBGRView;
     UILabel* locationNameLabel;
     UITextView* locationDescriptionTextView;
@@ -69,6 +69,13 @@
     
     //set frames of subviews
     [subView setFrame:CGRectMake(24, 8, self.bounds.size.width-48, 620)];
+    
+    locationButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    locationButton.hidden=NO;
+    locationButton.frame = CGRectMake(0, 0, self.bounds.size.width-48, 70);
+    [locationButton addTarget:self action:@selector(gotoLocationPage) forControlEvents:UIControlEventTouchUpInside];
+    [subView addSubview:locationButton];
+    
     [locationBGRView setFrame:CGRectMake(0, 0, subView.bounds.size.width, 70)];
     [locationNameLabel setFrame:CGRectMake(20, 16, subView.bounds.size.width-32, 38)];
     CGSize sizeOfText=[locationNameLabel.text sizeWithFont:locationNameLabel.font constrainedToSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
@@ -89,11 +96,15 @@
     }
     [editItemView setFrame:CGRectMake(10, 80, 40, 200)];
     [editItemView setHidden:!__editingEnabled];
+    [subView bringSubviewToFront:locationButton];
 }
 
 - (void)createAndAddSubviews
 {
     TripViewerLocationCell* __weak _self = self;
+    
+
+ 
     
     //bgrView = [[UIView alloc] init];
     //bgrView.backgroundColor = [AppColors tertiaryBackgroundColor];
@@ -160,6 +171,7 @@
     editItemView.requestMoveBackward = ^(){[_self requestedMoveBackward];};
     [self addSubview:editItemView];
     [self bringSubviewToFront:editItemView];
+    [self bringSubviewToFront:locationButton];
 }
 
 //- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
@@ -232,6 +244,11 @@
     
     locationDescriptionTextView.text = [NSString stringWithFormat:@"Description for Trip Location %d: %@", tripLocation.tripID, tripLocation.description];
     locationDescriptionTextView.contentOffset = CGPointZero;
+}
+-(void)gotoLocationPage  //connect the button, or make it active
+{
+    _gotolocationpage(_tripLocation);
+    
 }
 
 @end

@@ -75,7 +75,6 @@
         }
     };
     
-  
     
     [queryTable readWithQueryString:[query queryStringOrError:&error] completion:queryCompletionBlock];
 }
