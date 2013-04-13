@@ -49,6 +49,8 @@
 		3188B1B416C9D5B7008E1D7F /* ProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3188B1B216C9D5B7008E1D7F /* ProfileVC.xib */; };
 		318BA1B516C9E66800700BB8 /* MapsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 318BA1B316C9E66800700BB8 /* MapsVC.m */; };
 		318BA1B616C9E66800700BB8 /* MapsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 318BA1B416C9E66800700BB8 /* MapsVC.xib */; };
+		318BC8191719058500F4EB67 /* EditProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 318BC8171719058500F4EB67 /* EditProfileVC.m */; };
+		318BC81A1719058500F4EB67 /* EditProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 318BC8181719058500F4EB67 /* EditProfileVC.xib */; };
 		318D8C3716CA9509005A42F6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 318D8C3516CA94E1005A42F6 /* MapKit.framework */; };
 		3914480B16EE4B20001B16BE /* mountains.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 3914480A16EE4B20001B16BE /* mountains.jpeg */; };
 		39164F5316EA91C200877549 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39164F5216EA91C200877549 /* CoreLocation.framework */; };
@@ -173,6 +175,9 @@
 		318BA1B216C9E66800700BB8 /* MapsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapsVC.h; sourceTree = "<group>"; };
 		318BA1B316C9E66800700BB8 /* MapsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapsVC.m; sourceTree = "<group>"; };
 		318BA1B416C9E66800700BB8 /* MapsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapsVC.xib; sourceTree = "<group>"; };
+		318BC8161719058500F4EB67 /* EditProfileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditProfileVC.h; path = treads/EditProfileVC.h; sourceTree = SOURCE_ROOT; };
+		318BC8171719058500F4EB67 /* EditProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditProfileVC.m; path = treads/EditProfileVC.m; sourceTree = SOURCE_ROOT; };
+		318BC8181719058500F4EB67 /* EditProfileVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EditProfileVC.xib; path = treads/EditProfileVC.xib; sourceTree = SOURCE_ROOT; };
 		318D8C3516CA94E1005A42F6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3914480A16EE4B20001B16BE /* mountains.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = mountains.jpeg; path = treads/mountains.jpeg; sourceTree = SOURCE_ROOT; };
 		39164F5216EA91C200877549 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -409,6 +414,16 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		318BC81C171905EA00F4EB67 /* Edit Profile */ = {
+			isa = PBXGroup;
+			children = (
+				318BC8161719058500F4EB67 /* EditProfileVC.h */,
+				318BC8171719058500F4EB67 /* EditProfileVC.m */,
+				318BC8181719058500F4EB67 /* EditProfileVC.xib */,
+			);
+			name = "Edit Profile";
+			sourceTree = "<group>";
+		};
 		39164F4F16EA8A1D00877549 /* Trip View */ = {
 			isa = PBXGroup;
 			children = (
@@ -444,6 +459,7 @@
 				3C60C7D216E6C2A900FDFD7D /* My Trips */,
 				3C60C7D116E6C2A300FDFD7D /* Follow */,
 				3C60C7D016E6C29E00FDFD7D /* Profile */,
+				318BC81C171905EA00F4EB67 /* Edit Profile */,
 				3C60C7D316E6C2AF00FDFD7D /* Common */,
 				3188B16916C9CE17008E1D7F /* AppDelegate.h */,
 				3188B16A16C9CE17008E1D7F /* AppDelegate.m */,
@@ -782,6 +798,7 @@
 				3C90EAAA17161AE000CACCC4 /* plus_select.png in Resources */,
 				3C90EAAB17161AE000CACCC4 /* plus_unselect.png in Resources */,
 				297672A117162DD300C756FB /* LocationPickerVC.xib in Resources */,
+				318BC81A1719058500F4EB67 /* EditProfileVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -844,6 +861,7 @@
 				297672901715CB4A00C756FB /* NSData+Base64.m in Sources */,
 				395E625F1715EC0E007AB363 /* CameraService.m in Sources */,
 				297672A017162DD300C756FB /* LocationPickerVC.m in Sources */,
+				318BC8191719058500F4EB67 /* EditProfileVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
