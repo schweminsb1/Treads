@@ -27,21 +27,18 @@
 @property int userID;
 @property (strong) TripBrowser* browser;
 @property LocationService * locationService;
-<<<<<<< HEAD
+
 @property BOOL myProfile;
-=======
+
 @property CommentService * commentService;
->>>>>>> 5da6dc057b069638fb78ef09f8f8344d47e1bb11
+
 
 @end
 
 @implementation ProfileVC
 
-<<<<<<< HEAD
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService:(TripService *)myTripService userService:(UserService *)myUserService imageService:(ImageService*)myImageService isUser:(BOOL)isUser userID:(int)myUserID withLocationService:(LocationService*) locationService ;
-=======
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService:(TripService *)myTripService userService:(UserService *)myUserService imageService:(ImageService*)myImageService userID:(int)myUserID withLocationService:(LocationService*) locationService withCommentService:(CommentService*) commentService
->>>>>>> 5da6dc057b069638fb78ef09f8f8344d47e1bb11
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService:(TripService *)myTripService userService:(UserService *)myUserService imageService:(ImageService*)myImageService isUser:(BOOL)isUser userID:(int)myUserID withLocationService:(LocationService*) locationService withCommentService:(CommentService*) commentService
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -52,11 +49,9 @@
         self.imageService = myImageService;
         self.locationService = locationService;
         self.userID = myUserID;
-<<<<<<< HEAD
         self.myProfile = isUser;
-=======
         _commentService=commentService;
->>>>>>> 5da6dc057b069638fb78ef09f8f8344d47e1bb11
+
     }
     
     return self;
