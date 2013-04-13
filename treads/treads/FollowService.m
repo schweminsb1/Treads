@@ -35,8 +35,11 @@
     [self.dataRepository createDataItem:followDict usingService:self forRequestingObject:target withReturnAction:returnAction];
 }
 
-- (void) deleteFollow:(NSArray*)follow fromTarget:(NSObject *) target withReturn:(SEL) returnAction {
-
+- (void) deleteFollow:(NSString*)follow fromTarget:(NSObject *) target withReturn:(SEL) returnAction {
+    
+    
+    [self.dataRepository deleteDataItem:follow usingService:self forRequestingObject:target withReturnAction:returnAction];
+    
 }
 
 @end

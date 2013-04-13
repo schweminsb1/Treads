@@ -23,6 +23,6 @@
 
 - (void) getPeopleIFollow:(int)myID forTarget:(NSObject*)target withAction:(SEL)returnAction;
 - (void) addFollow:(int)myID withTheirID:(int)theirID fromTarget:(NSObject *) target withReturn:(SEL) returnAction;
-- (void) deleteFollow:(NSArray*)follow fromTarget:(NSObject *) target withReturn:(SEL) returnAction;
+- (void) deleteFollow:(NSString*)follow fromTarget:(NSObject *) target withReturn:(SEL) returnAction;
 
 @end

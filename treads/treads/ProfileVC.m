@@ -150,31 +150,29 @@
 - (void) followDataHasLoaded:(NSArray*)newData {
     [self.follow setTitle:@"Follow" forState:UIControlStateNormal];
     self.followID = -1;
-    int y = ((int)newData[0][@"TheirID"]);
+
     for (int x = 0; x < newData.count; x++) {
-        if (self.userID == ((int)newData[x][@"TheirID"])) {
+        if (self.userID == [((NSString*)newData[x][@"TheirID"])intValue]) {
             [self.follow setTitle:@"Unfollow" forState:UIControlStateNormal];
-            self.followID = ((int)newData[x][@"id"]);
+            self.followID = [((NSString*)newData[x][@"id"])intValue];
             break;
         }
     }
+    self.follow.enabled = true;
 }
 
 - (IBAction)followUser:(id)sender {
+    self.follow.enabled = false;
     if(self.followID < 0) {
         [self.followService addFollow:[TreadsSession instance].treadsUserID withTheirID:self.userID fromTarget:self withReturn:@selector(followSuccess)];
     }
     else {
-        
+        [self.followService deleteFollow:[NSString stringWithFormat:@"id = %i", self.followID] fromTarget:self withReturn:@selector(followSuccess)];
     }
 }
 
 - (void) followSuccess {
-    if(self.followID < 0) {
-        [self.follow setTitle:@"Unfollow" forState:UIControlStateNormal];
-    }
-    else {
-        [self.follow setTitle:@"Follow" forState:UIControlStateNormal];
-    }
+    [self.followService getPeopleIFollow:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(followDataHasLoaded:)];
+
 }
 @end
