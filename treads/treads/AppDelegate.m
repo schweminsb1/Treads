@@ -76,8 +76,8 @@
     
     mapsVC = [[MapsVC alloc] initWithNibName:@"MapsVC" bundle:nil withLocationService: self.locationService withCommentService: self.commentService withTripLocationService: _tripLocationService];
     cameraVC = [[CameraVC alloc] initWithNibName:@"CameraVC" bundle:nil];
-    myTripsVC = [[MyTripsVC alloc] initWithNibName:@"MyTripsVC" bundle:nil withTripService:self.tripService withLocationService:_locationService];
-    followVC = [[FollowVC alloc] initWithNibName:@"FollowVC" bundle:nil withTripService:self.tripService withLocationService:_locationService];
+    myTripsVC = [[MyTripsVC alloc] initWithNibName:@"MyTripsVC" bundle:nil withTripService:self.tripService withLocationService:_locationService withCommentService: _commentService];
+    followVC = [[FollowVC alloc] initWithNibName:@"FollowVC" bundle:nil withTripService:self.tripService withLocationService:_locationService withCommentService:_commentService];
     profileVC = [[ProfileVC alloc] initWithNibName:@"ProfileVC" bundle:nil tripService:self.tripService userService:self.userService imageService:self.imageService userID:[TreadsSession instance].treadsUserID withLocationService:_locationService withCommentService:_commentService];
 
 

@@ -7,6 +7,7 @@
 //
 #import <Foundation/Foundation.h>
 #import "TreadsService.h"
+#import "DataRepository.h"
 
 @class DataRepository;
 

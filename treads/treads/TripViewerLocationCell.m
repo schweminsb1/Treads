@@ -89,6 +89,7 @@
     }
     [editItemView setFrame:CGRectMake(10, 80, 40, 200)];
     [editItemView setHidden:!__editingEnabled];
+    [self bringSubviewToFront:locationButton];
 }
 
 - (void)createAndAddSubviews
@@ -97,6 +98,7 @@
     
 
     locationButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    locationButton.hidden=NO;
     locationButton.frame = CGRectMake(0, 0, subView.bounds.size.width, 70);
     [locationButton addTarget:self action:@selector(gotoLocationPage) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:locationButton];
@@ -166,6 +168,7 @@
     editItemView.requestMoveBackward = ^(){[_self requestedMoveBackward];};
     [self addSubview:editItemView];
     [self bringSubviewToFront:editItemView];
+    [self bringSubviewToFront:locationButton];
 }
 
 //- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
