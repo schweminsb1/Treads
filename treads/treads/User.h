@@ -15,4 +15,5 @@
 @property NSString * fname;
 @property NSString * lname;
 @property int profilePictureID;
+@property NSString * password;
 @end

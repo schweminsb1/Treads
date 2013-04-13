@@ -41,6 +41,7 @@
     
     MSReadQueryBlock queryCompletionBlock = ^(NSArray* items, NSInteger totalCount, NSError *error) {
         if (error == nil) {
+            
             #pragma clang diagnostic push
             #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             [requestingObject performSelector:returnAction withObject:[callingService convertReturnDataToServiceModel:items]];

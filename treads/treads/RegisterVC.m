@@ -9,7 +9,7 @@
 #import "RegisterVC.h"
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 #import "AppDelegate.h"
-
+#import "UserService.h"
 @interface RegisterVC ()
 @property IBOutlet UIImageView * background;
 @property IBOutlet UITextField * emailAdress;
@@ -18,7 +18,7 @@
 @property IBOutlet UITextField * confirmEmail;
 @property IBOutlet UITextField * password;
 @property IBOutlet UITextField * confirmPassword;
-
+@property UserService * userService;
 
 
 @property  MSClient * client;
@@ -28,7 +28,7 @@
 
 @implementation RegisterVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil client:(MSClient *) client  AppDelegate: ( id) appdelegate
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil client:(MSClient *) client  AppDelegate: ( id) appdelegate withUserService:(UserService *)userService
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -36,6 +36,7 @@
         _activityIndicatorView.hidesWhenStopped = YES;
         _client=client;
         _appDelegate=(AppDelegate *)appdelegate;
+        _userService= userService;
     }
     return self;
 }
@@ -52,7 +53,7 @@
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction) registerNewUser :(id) sender
+-(IBAction) RegisterNewUser :(id) sender
 {
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle: @"Woah!!"
@@ -95,84 +96,10 @@
         }
         else
         {
-            //passwords and emails match
-            MSItemBlock itemBlock=^(NSDictionary *item, NSError *error)
-            {
-                if(error)
-                {
-                   // NSLog( [error localizedDescription]);
-                }
-                else
-                {
-                    //Login
-                    [_activityIndicatorView stopAnimating];
-                     _appDelegate.window.rootViewController= _appDelegate.tabBarController;
-                    
-                }
-            };
-            MSReadQueryBlock getAll = ^(NSArray *items, NSInteger totalCount, NSError *error)
-            {
-                int count= items.count;
-                if(error)
-                {
-                    
-                }
-                else
-                {
-                    int newID= [[((NSDictionary *)items[count-1]) valueForKey:@"userID"]integerValue] + 1;
-                    
-                    
-                    NSString * hashedPassword= [ self getPasswordHash:_password.text];
-                    NSDictionary * newItem= @{@"userID":[NSNumber numberWithInt:newID] ,
-                                              @"emailAddress": [NSString stringWithString:[_emailAdress.text lowercaseString]],
-                                              @"password": [NSString stringWithString:hashedPassword] ,
-                                              @"Fname": [NSString stringWithString:_firstName.text] ,
-                                              @"Lname": [NSString stringWithString:_lastName.text]
-                                              };
-                    
-                    [UserTable insert:newItem completion:itemBlock];
-                }
-                
-            };
-            MSReadQueryBlock checkEmail = ^(NSArray *items, NSInteger totaldCount, NSError *error)
-            {
-                int count= items.count;
-                if(error)
-                {
-                    
-                }
-                else
-                {
-                    if(count==0)
-                    {
-                        //continue with registration, noone has this email address
-                        //sets a predicate to get all from table
-                        NSPredicate * predicategetALL = [NSPredicate predicateWithValue:YES];
-                        //sets the predicate to return an ordered set value based on the UserID
-                        [predicategetALL mutableOrderedSetValueForKey:@"UserID"];
-                        MSQuery * queryGetAll = [[MSQuery alloc]initWithTable:UserTable withPredicate:predicategetALL];
-                        [UserTable readWithQueryString:[queryGetAll queryStringOrError:nil]completion:getAll ];
-                    }
-                    else{
-                        alert.message = @"This email already exists in the Treads Server";
-                        _emailAdress.text = @"";
-                        _confirmEmail.text= @"";
-                        _password.text    = @"";
-                        _firstName.text   = @"";
-                        _lastName.text    = @"";
-                        _confirmPassword.text = @"";
-                        [alert show];
-                        return;
-                    }
-                }
-                
-            };
- 
+
                         
-            
-            NSPredicate * predicateEmail = [NSPredicate predicateWithFormat:@"emailAddress == %@", _emailAdress.text ];
-            MSQuery * queryEmail= [[MSQuery alloc]initWithTable:UserTable withPredicate:predicateEmail];
-            [UserTable readWithQueryString:[queryEmail queryStringOrError:nil] completion:checkEmail];
+            [_userService getUserbyEmail:_emailAdress.text forTarget:self withAction:@selector(getRequestedEmail:)];
+        
             [_activityIndicatorView startAnimating];
             //All fields are filled
             //use one way hash to send the encrypted password
@@ -181,22 +108,10 @@
             
         }
         
-        MSItemBlock itemBlock=^(NSDictionary *item, NSError *error)
-        {
-            if(error)
-            {
-                
-            }
-            else
-            {
-                
-            }
-        };
+
         //All fields are filled
         //use one way hash to send the encrypted password
-        
-        NSDictionary * newItem= @{@"userID": @"",  @"emailAddress": @"",  @"password": @"" , @"Fname": @"" , @"Lname": @"" };
-        [UserTable insert:newItem completion:itemBlock];
+   
         //insert new user into the database
         
         //Log the user in...
@@ -209,7 +124,43 @@
     
     
 }
+-(void) getRequestedEmail:(NSArray*) items
+{
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle: @"Woah!!"
+                          message: @"This email already exists in the Treads Server"
+                          delegate: nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil];
+    int count= items.count;
 
+        if(count==0)
+        {
+            //continue with registration, noone has this email address
+            //sets a predicate to get all from table
+            NSString * hashedPassword= [ self getPasswordHash:_password.text];
+            NSDictionary * newItem= @{
+                                      @"emailAddress": [NSString stringWithString:[_emailAdress.text lowercaseString]],
+                                      @"password": [NSString stringWithString:hashedPassword] ,
+                                      @"Fname": [NSString stringWithString:_firstName.text] ,
+                                      @"Lname": [NSString stringWithString:_lastName.text]
+                                      };
+            [_userService addUser:newItem forTarget:self withAction:@selector(addUserSuccess:withSuccess:)];
+            
+        }
+        else{
+            _emailAdress.text = @"";
+            _confirmEmail.text= @"";
+            _password.text    = @"";
+            _firstName.text   = @"";
+            _lastName.text    = @"";
+            _confirmPassword.text = @"";
+            [alert show];
+            return;
+        }
+    
+    
+}
 -(NSString *) getPasswordHash:(NSString *) user_input
 {
     NSMutableString * salt = [NSMutableString stringWithString:@"saltValue"];
@@ -217,6 +168,12 @@
     [hash appendString:salt];
     NSString * inputHash= [NSString stringWithFormat:@"%lu",(unsigned long)[hash hash]];
     return inputHash;
+    
+}
+-(void) addUserSuccess:(NSArray*)items withSuccess:(NSNumber*)val
+{
+    [_activityIndicatorView stopAnimating];
+    _appDelegate.window.rootViewController= _appDelegate.tabBarController;
     
 }
 @end

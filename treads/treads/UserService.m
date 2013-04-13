@@ -32,6 +32,7 @@
         user.lname          =       returnData[i][@"Lname"];
         user.User_ID        =       [((NSString*)returnData[i][@"id"]) intValue];
         user.profilePictureID=      [((NSString*)returnData[i][@"profilePhotoID"]) intValue];
+        user.password       =        returnData[i][@"password"];
         [results addObject: user];
     }
     return results;
@@ -69,9 +70,15 @@
 - (void)getUserbyEmail:(NSString *)emailAddress forTarget:(NSObject *)target withAction:(SEL)returnAction
 {
     
-    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"id = '%@'", emailAddress] usingService:self forRequestingObject:target withReturnAction:returnAction];
+    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"emailAddress = '%@' ", emailAddress] usingService:self forRequestingObject:target withReturnAction:returnAction];
     
     
+}
+
+- (void)addUser:(NSDictionary*)newUser forTarget:(NSObject*) target withAction: (SEL) returnAction
+{
+    
+    [_dataRepository createDataItem:newUser usingService:self forRequestingObject:target withReturnAction:returnAction];
 }
 
 

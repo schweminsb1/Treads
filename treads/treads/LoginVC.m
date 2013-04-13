@@ -20,7 +20,7 @@
 @property          MSClient    * client;
 @property          AppDelegate * appDelegate;
 @property        TreadsSession * treadsSession;
-
+@property        UserService * userService;
 @end
 
 @implementation LoginVC
@@ -29,7 +29,7 @@
    
     
 }
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil client:(MSClient *) client  AppDelegate: ( id) appdelegate
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil client:(MSClient *) client  AppDelegate: ( id) appdelegate withUserService:(UserService*) userService
 {
     
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -40,7 +40,7 @@
         
         _client=client;
         _appDelegate=(AppDelegate *)appdelegate;
-        
+        _userService=userService;
         pictures = [[NSMutableArray alloc]init];
         //[pictures addObject:[UIImage imageNamed:@"mountains.jpg"]];
         [pictures addObject:[UIImage imageNamed:@"remote-luxury-hiking-canada.jpg"]];
@@ -79,10 +79,7 @@
                           delegate: nil
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil];
-    
-   MSTable * UserTable=  [   _client getTable:@"UserTable"];
-    __block NSArray * returnedValues= nil;
-    returnedValues= [[NSArray alloc] init];
+
     
 
     
@@ -92,91 +89,13 @@
     }
     else
     {
+        
        //there is something in both of the required text fields
-              MSReadQueryBlock queryBlock=^(NSArray *items, NSInteger totalCount, NSError *error) {
-                  
-            int count= [items count];
-            [_activityIndicatorView stopAnimating];
-            if(error)
-            {
-               
-                
-            }
-            else
-            {
-                if(items.count==1)
-                {
-                    
-                    returnedValues = [items mutableCopy];
-                    
-                    if([[_usernameText.text lowercaseString]isEqual: [items[0][@"emailAddress"] lowercaseString]]&& [[self getPasswordHash:_passwordText.text] isEqual: items[0][@"password"]])
-                    {
-                        int userID= [((NSString *)items[0][@"id"]) intValue];
-                        @try
-                        {
-                            //This inits a treadssession
-                            [TreadsSession instance].treadsUser=[items[0][@"emailAddress"] lowercaseString];
-                            [TreadsSession instance].treadsUserID  = userID;
-                            [TreadsSession instance].fName= items[0][@"Fname"];
-                            [TreadsSession instance].lName= items[0][@"Lname"];
-                            
-                            // _treadsSession = [[TreadsSession new]initWithAuthenticatedUser: [NSString stringWithString:(NSString *)[items[0][@"emailAddress"] lowercaseString]]];
-                           if([TreadsSession Login])
-                           {
-                           //    [self.appDelegate.tabBarController.viewControllers[4] updateUser: [TreadsSession instance].treadsUserID];
-                               _appDelegate.window.rootViewController= _appDelegate.tabBarController;
-                           }
-                            else
-                            {
-                                alert.message= @"Your drive may be full too full to use Treads";
-                                [alert show];
-                                return;
-                                
-                            }
-                          
-                             
-                            
-                        }
-                        @catch (id exception)
-                        {
-                            NSLog(@"%@", exception);
-                        }
-                                               
-                        //login treads session object
-                    }
-                    else
-                    {
-                        alert.message= @"The Email address and password do not match in the Treads server";
-                        [alert show];
-                        return;
-                    }
-
-                }
-                else if(count == 0)
-                {
-                   alert.message=@"The email does not match an account, please register a new one with this email";
-                    _usernameText.text=@"";
-                    _passwordText.text=@"";
-                    [alert show];
-                    return;
-                    
-                }
-                else
-                {
-                   //theres more than one item
-                }
-                
-            }
-        };
-
-
-        __autoreleasing NSError * error= [[NSError alloc]init];
-        NSPredicate * predicate = [NSPredicate predicateWithFormat:@"emailAddress == %@", _usernameText.text ];
         
+            
         
-        MSQuery * query= [[MSQuery alloc]initWithTable:UserTable withPredicate:predicate];
-        
-        [UserTable readWithQueryString:[query queryStringOrError:&error] completion:queryBlock];
+        //[UserTable readWithQueryString:[query queryStringOrError:&error] completion:queryBlock];
+        [_userService getUserbyEmail:_usernameText.text forTarget:self withAction:@selector(logOnFunc:)];
         [_activityIndicatorView startAnimating];
         
         //retrieve the username if it exists in the database
@@ -184,7 +103,7 @@
         //if it does exist see if our hashed value matches the value stored in the database
         //if it matches then go to the logged in screen
         
-      
+    
         
         //condition will change to match above
 
@@ -206,7 +125,7 @@
 }
 -(IBAction) RegisterClick:(id) sender;
 {
-    RegisterVC * registerView= [[RegisterVC alloc]initWithNibName:@"RegisterVC" bundle:nil client:_client AppDelegate:_appDelegate];
+    RegisterVC * registerView= [[RegisterVC alloc]initWithNibName:@"RegisterVC" bundle:nil client:_client AppDelegate:_appDelegate withUserService:_userService];
     
     [self.navigationController pushViewController:registerView animated:YES];
     
@@ -217,6 +136,75 @@
 {
     //open view or alert to 
     
+}
+-(void) logOnFunc:(NSArray*)items
+{
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle: @"Woah!!"
+                          message: @"If you are logging in, be sure to enter your username and password"
+                          delegate: nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil];
+    if(items.count==1)
+    {
+        //NSArray * returnedValues = [items mutableCopy];
+        
+        if([[_usernameText.text lowercaseString]isEqual: [((User*)items[0]).emailaddress lowercaseString]]&& [[self getPasswordHash:_passwordText.text] isEqual: ((User*)items[0]).password])
+        {
+            int userID= ((User*)items[0]).User_ID ;
+            @try
+            {
+                //This inits a treadssession
+                [TreadsSession instance].treadsUser=[((User*)items[0]).emailaddress lowercaseString];
+                [TreadsSession instance].treadsUserID  = userID;
+                [TreadsSession instance].fName= ((User*)items[0]).fname;
+                [TreadsSession instance].lName= ((User*)items[0]).lname;
+                
+                // _treadsSession = [[TreadsSession new]initWithAuthenticatedUser: [NSString stringWithString:(NSString *)[items[0][@"emailAddress"] lowercaseString]]];
+                if([TreadsSession Login])
+                {
+                    //    [self.appDelegate.tabBarController.viewControllers[4] updateUser: [TreadsSession instance].treadsUserID];
+                    _appDelegate.window.rootViewController= _appDelegate.tabBarController;
+                }
+                else
+                {
+                    alert.message= @"Your drive may be full too full to use Treads";
+                    [alert show];
+                    return;
+                    
+                }
+                
+                
+                
+            }
+            @catch (id exception)
+            {
+                NSLog(@"%@", exception);
+            }
+            
+            //login treads session object
+        }
+        else
+        {
+            alert.message= @"The Email address and password do not match in the Treads server";
+            [alert show];
+            return;
+        }
+        
+    }
+    else if(items.count == 0)
+    {
+        alert.message=@"The email does not match an account, please register a new one with this email";
+        _usernameText.text=@"";
+        _passwordText.text=@"";
+        [alert show];
+        return;
+        
+    }
+    else
+    {
+        //theres more than one item
+    }
     
 }
 
