@@ -30,4 +30,5 @@
 
 - (void)getLocationsforTarget:(NSObject *)target withAction:(SEL)returnAction;
 
+- (void)getLocationByID:(int)LocationID withLocationBlock:(CompletionWithItemsandLocation)block;
 @end

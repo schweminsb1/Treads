@@ -102,10 +102,18 @@
     };
     self.viewer.gotolocationpage= ^(TripLocation * loc)
     {
+         //
         //get location model
-        Location * location;
-        LocationVC * locationVC= [[LocationVC alloc] initWithNibName:@"LocationVC" bundle:nil withModel:location withCommentService:_commentService];
-        [_self.navigationController pushViewController:locationVC animated:YES];
+        CompletionWithItemsandLocation complete= ^(NSArray * items, Location * location)
+        {
+            Location * location1=location;
+            LocationVC * locationVC= [[LocationVC alloc] initWithNibName:@"LocationVC" bundle:nil withModel:location1 withCommentService:_self.commentService];
+            [_self.navigationController pushViewController:locationVC animated:YES];
+            
+        };
+        
+        [_self.locationService getLocationByID:loc.locationID withLocationBlock:complete];
+       
         
     };
     [self.viewer setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];

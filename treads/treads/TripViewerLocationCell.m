@@ -239,9 +239,9 @@
     locationDescriptionTextView.text = [NSString stringWithFormat:@"Description for Trip Location %d: %@", tripLocation.tripID, tripLocation.description];
     locationDescriptionTextView.contentOffset = CGPointZero;
 }
--(void)gotoLocationPage
+-(void)gotoLocationPage  //connect the button, or make it active
 {
-    
+    _gotolocationpage(_tripLocation);
     
 }
 
