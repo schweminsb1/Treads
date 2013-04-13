@@ -26,7 +26,7 @@
     BOOL layoutDone;
     
     UIView* subView;
-    
+    UIButton *locationButton;
     UIView* locationBGRView;
     UILabel* locationNameLabel;
     UITextView* locationDescriptionTextView;
@@ -94,6 +94,9 @@
 - (void)createAndAddSubviews
 {
     TripViewerLocationCell* __weak _self = self;
+    locationButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, subView.bounds.size.width, 70)];
+    locationButton.titleLabel.text=[NSString stringWithFormat:@"%d",_tripLocation.locationID];
+    locationButton.hidden=FALSE;
     
     //bgrView = [[UIView alloc] init];
     //bgrView.backgroundColor = [AppColors tertiaryBackgroundColor];
@@ -147,7 +150,7 @@
             [_imageScrollBrowser setDisplayViewItem:newItem atIndex:index];
         });
     };
-    
+    [subView addSubview:locationButton];
     [subView addSubview:locationMapView];
     [subView addSubview:locationTextBackgroundView];
     [subView addSubview:locationNameLabel];
