@@ -78,7 +78,7 @@
     cameraVC = [[CameraVC alloc] initWithNibName:@"CameraVC" bundle:nil];
     myTripsVC = [[MyTripsVC alloc] initWithNibName:@"MyTripsVC" bundle:nil withTripService:self.tripService withLocationService:_locationService];
     followVC = [[FollowVC alloc] initWithNibName:@"FollowVC" bundle:nil withTripService:self.tripService withLocationService:_locationService];
-    profileVC = [[ProfileVC alloc] initWithNibName:@"ProfileVC" bundle:nil tripService:self.tripService userService:self.userService imageService:self.imageService userID:[TreadsSession instance].treadsUserID withLocationService:_locationService];
+    profileVC = [[ProfileVC alloc] initWithNibName:@"ProfileVC" bundle:nil tripService:self.tripService userService:self.userService imageService:self.imageService isUser:YES userID:[TreadsSession instance].treadsUserID withLocationService:_locationService];
 
 
     
@@ -88,7 +88,7 @@
                                               cameraVC,
                                               [[UINavigationController alloc] initWithRootViewController:myTripsVC],
                                               [[UINavigationController alloc] initWithRootViewController:followVC],
-                                              profileVC
+                                              [[UINavigationController alloc] initWithRootViewController:profileVC]
                                               ];
     
     LoginVC* login;

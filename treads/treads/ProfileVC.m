@@ -11,6 +11,7 @@
 #import "TreadsSession.h"
 #import "TripBrowser.h"
 #import "LocationService.h"
+#import "EditProfileVC.h"
 
 
 @interface ProfileVC ()
@@ -26,12 +27,13 @@
 @property int userID;
 @property (strong) TripBrowser* browser;
 @property LocationService * locationService;
+@property BOOL myProfile;
 
 @end
 
 @implementation ProfileVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService:(TripService *)myTripService userService:(UserService *)myUserService imageService:(ImageService*)myImageService userID:(int)myUserID withLocationService:(LocationService*) locationService ;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService:(TripService *)myTripService userService:(UserService *)myUserService imageService:(ImageService*)myImageService isUser:(BOOL)isUser userID:(int)myUserID withLocationService:(LocationService*) locationService ;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -42,7 +44,9 @@
         self.imageService = myImageService;
         self.locationService = locationService;
         self.userID = myUserID;
+        self.myProfile = isUser;
     }
+    
     return self;
 }
 
@@ -54,6 +58,9 @@
     self.edit.hidden = true;
     self.follow.hidden = true;
     
+    if(self.myProfile) {
+        self.userID = [TreadsSession instance].treadsUserID;
+    }
     
 }
 
@@ -116,6 +123,11 @@
 
 - (void)updateUser:(int)myUserID{
     self.userID = myUserID;
+}
+
+- (IBAction)editProfile:(id)sender{
+    EditProfileVC* editProfileVC = [[EditProfileVC alloc]initWithNibName:@"EditProfileVC" bundle:nil];
+    [self.navigationController pushViewController:editProfileVC animated:YES];
 }
 
 @end
