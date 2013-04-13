@@ -76,4 +76,18 @@
     
 }
 
+- (void)getLocationByID:(int)LocationID withLocationBlock:(CompletionWithItemsandLocation)block
+{
+    CompletionWithItems complete= ^(NSArray * items)
+    {
+        NSArray * item;
+        Location * loc= items[0];
+        block(item,loc);
+        
+    };
+    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"LocationID = '%d'", LocationID] usingService:self withReturnBlock:complete];
+    
+    
+}
+
 @end
