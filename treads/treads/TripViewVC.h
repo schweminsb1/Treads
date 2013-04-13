@@ -12,6 +12,7 @@
 @class LocationService;
 @class TripLocation;
 @class CommentService;
+@class UserService;
 
 @interface TripViewVC : UIViewController
 
@@ -21,7 +22,7 @@ typedef void (^GoToLocationBlock) (TripLocation*);
 
 @property Location* returnedLocation;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil backTitle:(NSString *)backTitle tripService:(TripService *)myTripService tripID:(int)myTripID LocationService:(LocationService *) myLocationService withCommentService: (CommentService*) commentService;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil backTitle:(NSString *)backTitle tripService:(TripService *)myTripService tripID:(int)myTripID LocationService:(LocationService *) myLocationService withCommentService: (CommentService*) commentService withUserService:(UserService*)userService;
 
 
 - (void)dataHasLoaded:(NSArray*)newData;

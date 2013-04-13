@@ -27,9 +27,7 @@
 @property CommentEnterBox * commentEnterCell;
 
 
-
-
--(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withModel: (Location *) model withCommentService: (CommentService *) service;
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withModel: (Location *) model withCommentService: (CommentService *) service withUserService:(UserService*) userService;
 
 
 @end

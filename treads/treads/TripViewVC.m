@@ -29,6 +29,7 @@
 @property LocationPickerVC * picker;
 @property UINavigationController * navcontroller;
 @property CommentService * commentService;
+@property UserService * userService;
 @end
 
 @implementation TripViewVC {
@@ -37,7 +38,7 @@
     CameraService* cameraService;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil backTitle:(NSString *)backTitle tripService:(TripService *)myTripService tripID:(int)myTripID LocationService:(LocationService *) myLocationService withCommentService: (CommentService*) commentService
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil backTitle:(NSString *)backTitle tripService:(TripService *)myTripService tripID:(int)myTripID LocationService:(LocationService *) myLocationService withCommentService: (CommentService*) commentService withUserService:(UserService*)userService
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -46,6 +47,7 @@
         previousViewTitle = backTitle;
         _locationService=myLocationService;
         _commentService = commentService;
+        _userService=userService;
     }
     return self;
 }
@@ -107,7 +109,7 @@
         CompletionWithItemsandLocation complete= ^(NSArray * items, Location * location)
         {
             Location * location1=location;
-            LocationVC * locationVC= [[LocationVC alloc] initWithNibName:@"LocationVC" bundle:nil withModel:location1 withCommentService:_self.commentService];
+            LocationVC * locationVC= [[LocationVC alloc] initWithNibName:@"LocationVC" bundle:nil withModel:location1 withCommentService:_self.commentService withUserService:_self.userService];
             [_self.navigationController pushViewController:locationVC animated:YES];
             
         };
