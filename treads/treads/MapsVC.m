@@ -71,6 +71,11 @@ CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
         
         if(_locationCounter == _locationTotal)
         {
+            _locationsTotal = [NSMutableArray arrayWithArray:[_locationsTotal sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+                int first = ((MapPinAnnotation*)a).tripCount;
+                int second = ((MapPinAnnotation*)b).tripCount;
+                return [[NSNumber numberWithInt: first ]compare:[NSNumber numberWithInt: second ]];
+            }]];
              for(int i=0; i< _locationsTotal.count; i++)
              {
                  double lat=((MapPinAnnotation*)_locationsTotal[i]).location.latitude;
@@ -282,7 +287,7 @@ CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
             [mapView removeAnnotation:mapView.annotations[i]];
         }
     }
-    for(int i=0; i<         _locationsTotal.count; i++)//add annotations in view
+    for(int i=0; i< _locationsTotal.count; i++)//add annotations in view
     {
         double lat=((MapPinAnnotation*)_locationsTotal[i]).location.latitude;
         double lon=((MapPinAnnotation*)_locationsTotal[i]).location.longitude;

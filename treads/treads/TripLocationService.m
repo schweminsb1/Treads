@@ -72,7 +72,16 @@
         block1(items,location);
         
     };
-    [_dataRepository retrieveDataItemsMatching:[NSString stringWithFormat: @"locationID = %d",[location.idField intValue]] usingService:self withReturnBlock:block];
+    NSMutableArray * temp= [[NSMutableArray alloc] init];
+    int num= rand()%5;
+    for(int i=0; i< num; i++)
+    {
+        [temp addObject:@""];
+        
+    }
+    
+    block1(temp,location);
+  //  [_dataRepository retrieveDataItemsMatching:[NSString stringWithFormat: @"locationID = %d",[location.idField intValue]] usingService:self withReturnBlock:block];
 }
 
 @end
