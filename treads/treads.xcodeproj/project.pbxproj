@@ -52,6 +52,7 @@
 		318BC8191719058500F4EB67 /* EditProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 318BC8171719058500F4EB67 /* EditProfileVC.m */; };
 		318BC81A1719058500F4EB67 /* EditProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 318BC8181719058500F4EB67 /* EditProfileVC.xib */; };
 		318D8C3716CA9509005A42F6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 318D8C3516CA94E1005A42F6 /* MapKit.framework */; };
+		31983A261719CA2F0048A8D7 /* FollowService.m in Sources */ = {isa = PBXBuildFile; fileRef = 31983A251719CA2F0048A8D7 /* FollowService.m */; };
 		3914480B16EE4B20001B16BE /* mountains.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 3914480A16EE4B20001B16BE /* mountains.jpeg */; };
 		39164F5316EA91C200877549 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39164F5216EA91C200877549 /* CoreLocation.framework */; };
 		39164F5716EA92C600877549 /* TripViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39164F5516EA92C600877549 /* TripViewVC.m */; };
@@ -179,6 +180,8 @@
 		318BC8171719058500F4EB67 /* EditProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditProfileVC.m; path = treads/EditProfileVC.m; sourceTree = SOURCE_ROOT; };
 		318BC8181719058500F4EB67 /* EditProfileVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EditProfileVC.xib; path = treads/EditProfileVC.xib; sourceTree = SOURCE_ROOT; };
 		318D8C3516CA94E1005A42F6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		31983A241719CA2F0048A8D7 /* FollowService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FollowService.h; path = treads/FollowService.h; sourceTree = SOURCE_ROOT; };
+		31983A251719CA2F0048A8D7 /* FollowService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FollowService.m; path = treads/FollowService.m; sourceTree = SOURCE_ROOT; };
 		3914480A16EE4B20001B16BE /* mountains.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = mountains.jpeg; path = treads/mountains.jpeg; sourceTree = SOURCE_ROOT; };
 		39164F5216EA91C200877549 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		39164F5416EA92C600877549 /* TripViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripViewVC.h; path = treads/TripViewVC.h; sourceTree = SOURCE_ROOT; };
@@ -588,6 +591,8 @@
 				29241802170E4CE100BB9FAE /* CommentService.m */,
 				29241804170E645200BB9FAE /* UserService.h */,
 				29241805170E645200BB9FAE /* UserService.m */,
+				31983A241719CA2F0048A8D7 /* FollowService.h */,
+				31983A251719CA2F0048A8D7 /* FollowService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -862,6 +867,7 @@
 				395E625F1715EC0E007AB363 /* CameraService.m in Sources */,
 				297672A017162DD300C756FB /* LocationPickerVC.m in Sources */,
 				318BC8191719058500F4EB67 /* EditProfileVC.m in Sources */,
+				31983A261719CA2F0048A8D7 /* FollowService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

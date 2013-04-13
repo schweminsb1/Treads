@@ -28,6 +28,7 @@
 @property (strong) TripBrowser* browser;
 @property LocationService * locationService;
 
+
 @property BOOL myProfile;
 
 @property CommentService * commentService;
@@ -133,7 +134,7 @@
 }
 
 - (IBAction)editProfile:(id)sender{
-    EditProfileVC* editProfileVC = [[EditProfileVC alloc]initWithNibName:@"EditProfileVC" bundle:nil];
+    EditProfileVC* editProfileVC = [[EditProfileVC alloc]initWithNibName:@"EditProfileVC" bundle:nil userService:self.userService];
     [self.navigationController pushViewController:editProfileVC animated:YES];
 }
 
