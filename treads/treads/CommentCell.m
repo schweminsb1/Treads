@@ -14,13 +14,19 @@
 
 @implementation CommentCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withCommentModel:(Comment *) comment
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withCommentModel:(Comment *) comment withUserService:(UserService*) userService
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        _userModel = [[User alloc]init];
+        _userModel.fname=@"";
+        _userModel.lname=@"";
+        _userModel.User_ID=-1;
         // Initialization code
         _commentModel=comment;
+        _userService=userService;
         self.userInteractionEnabled= NO;
+        [_userService getUserbyID:[_commentModel.UserID intValue] forTarget:self withAction:@selector(recieveUserModel:)];
         
     }
     return self;
@@ -44,11 +50,16 @@
     _profileImage.image = [UIImage imageNamed:@"mountains.jpeg"];
     
     _commentField = [[UITextView alloc] initWithFrame:CGRectMake(imageRect.origin.x+ imageRect.size.width + 1, self.bounds.origin.y, 550, self.bounds.size.height-1)];
-    _commentField.text = [NSString stringWithFormat:@"Sam Schwemin says: \n \n \t %@",  _commentModel.comment ];
+    _commentField.text = [NSString stringWithFormat:@"%@ %@ says: \n \n \t %@",_userModel.fname,_userModel.lname,  _commentModel.comment ];
     
     
     [self addSubview:_profileImage];
     [self addSubview:_commentField];
+    
+}
+-(void)recieveUserModel:(NSArray*) items
+{
+    _userModel=items[0];
     
 }
 

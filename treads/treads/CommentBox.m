@@ -58,7 +58,7 @@
     CommentCell * ccell= [tableView dequeueReusableCellWithIdentifier:@"CELL"];
     
     if (!ccell) {
-        ccell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL" withCommentModel:((Comment *)_commentModels[indexPath.row])];
+       // ccell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL" withCommentModel:((Comment *)_commentModels[indexPath.row])];
         
         //[cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
         //[cell setAutoresizesSubviews:YES];

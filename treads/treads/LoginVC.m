@@ -171,7 +171,6 @@
             [alert show];
             return;
         }
-        
     }
     else if(items.count == 0)
     {

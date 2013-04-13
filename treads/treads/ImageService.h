@@ -12,12 +12,11 @@
 
 
 
-@class DataRepository;
+#import "DataRepository.h"
 
 @interface ImageService : NSObject <TreadsService>
 
-typedef void (^CompletionBlock) ();
-typedef void (^CompletionWithItems)(NSArray * items);
+
 
 @property (strong) DataRepository* dataRepository;
 @property (copy) NSString* dataTableIdentifier;

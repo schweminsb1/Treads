@@ -24,11 +24,12 @@
 @property __block int locationTotal;
 @property (nonatomic,copy)MSReadQueryBlock recieveAll;
 @property UIPopoverController* poc;
+@property UserService * userService;
 @end
 
 @implementation MapsVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withLocationService:(LocationService *) locationService withCommentService: (CommentService*) commentService withTripLocationService:(TripLocationService*) tripLocationService{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withLocationService:(LocationService *) locationService withCommentService: (CommentService*) commentService withTripLocationService:(TripLocationService*) tripLocationService withUserService:(UserService*)userService{
     if (self) {
         _locationService=locationService;
         _commentService = commentService;
@@ -39,6 +40,7 @@
         _tripLocationService=tripLocationService;
         _locationCounter=0;
         _locationTotal=0;
+        _userService=userService;
     }
     return self;
 }
@@ -269,7 +271,7 @@ CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
 -(void)pushLocation
 {
     
-    LocationVC * locationvc= [[LocationVC alloc]initWithNibName:@"LocationVC" bundle:nil withModel:_currentLocation withCommentService: _commentService];
+    LocationVC * locationvc= [[LocationVC alloc]initWithNibName:@"LocationVC" bundle:nil withModel:_currentLocation withCommentService: _commentService withUserService:_userService];
     [self.navigationController pushViewController:locationvc animated:YES];
     [self.callout dismissPopoverAnimated:YES];
 }
