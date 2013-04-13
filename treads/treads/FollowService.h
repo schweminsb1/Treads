@@ -1,0 +1,13 @@
+//
+//  FollowService.h
+//  treads
+//
+//  Created by Zachary Kanoff on 4/13/13.
+//  Copyright (c) 2013 Team Walking Stick. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface FollowService : NSObject
+
+@end
