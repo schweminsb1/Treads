@@ -13,6 +13,8 @@
 
 @interface TripLocationItem : NSObject<ImageScrollDisplayableItem>
 
++ (int)UNDEFINED_IMAGE_ID;
+
 //identifiers
 @property int tripLocationItemID; //id
 @property int tripLocationID;
