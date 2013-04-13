@@ -12,6 +12,7 @@
 #import "TripBrowser.h"
 #import "LocationService.h"
 #import "EditProfileVC.h"
+#import "FollowService.h"
 
 
 @interface ProfileVC ()
@@ -24,6 +25,7 @@
 @property TripService* tripService;
 @property UserService* userService;
 @property ImageService* imageService;
+@property FollowService* followService;
 @property int userID;
 @property (strong) TripBrowser* browser;
 @property LocationService * locationService;
@@ -39,7 +41,7 @@
 @implementation ProfileVC
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService:(TripService *)myTripService userService:(UserService *)myUserService imageService:(ImageService*)myImageService isUser:(BOOL)isUser userID:(int)myUserID withLocationService:(LocationService*) locationService withCommentService:(CommentService*) commentService
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService:(TripService *)myTripService userService:(UserService *)myUserService imageService:(ImageService*)myImageService isUser:(BOOL)isUser userID:(int)myUserID withLocationService:(LocationService*) locationService withCommentService:(CommentService*) commentService withFollowService:(FollowService*) myFollowService
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
