@@ -23,6 +23,7 @@
 @property int locationCounter;
 @property __block int locationTotal;
 @property (nonatomic,copy)MSReadQueryBlock recieveAll;
+@property UIPopoverController* poc;
 @end
 
 @implementation MapsVC
@@ -223,20 +224,24 @@ CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
     
     LocationSmallViewController *ycvc = [[LocationSmallViewController alloc] initWithNibName:@"LocationSmallViewController" bundle:nil location:thisPin.location homeController:self Service: _locationService];
     
-                                       UIPopoverController *poc = [[UIPopoverController alloc] initWithContentViewController:ycvc];
+                                        self.poc = [[UIPopoverController alloc] initWithContentViewController:ycvc];
                                    
                                        //hold ref to popover in an ivar
-                                       self.callout = poc;
+                                       self.callout = self.poc;
                                        
                                        //size as neededs
-                                       poc.popoverContentSize = CGSizeMake(320, 400);
+                                       self.poc.popoverContentSize = CGSizeMake(320, 400);
                                        
                                        //show the popover next to the annotation view (pin)
-                                       [poc presentPopoverFromRect:view.bounds inView:view 
+                                       [self.poc presentPopoverFromRect:view.bounds inView:view
                                           permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
                                        
                                  
     
+}
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [self.poc dismissPopoverAnimated:YES];
 }
 -(void)mapView:(MKMapView *)mapView didDeSelectAnnotationView:(MKAnnotationView *)view
 {
