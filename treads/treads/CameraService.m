@@ -27,7 +27,7 @@ UIImage* selectedImage;
     {
         if ([popover isPopoverVisible])
         {
-            //[popover dismissPopoverAnimated:YES];
+            [popover dismissPopoverAnimated:YES];
         }
         else
         {
@@ -45,7 +45,7 @@ UIImage* selectedImage;
     }
     else
     {
-       // [imagePicker presentViewController: imagePicker animated:YES completion:nil];
+        [imagePicker presentViewController: imagePicker animated:YES completion:nil];
     }
     //showImagePicker();
     //[viewController presentViewController:popover animated:(YES) completion:nil];
