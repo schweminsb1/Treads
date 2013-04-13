@@ -67,11 +67,7 @@
 }
 - (void)getTripLocationWithLocation:(Location*)location withCompletion:(CompletionWithItemsandLocation)block1{
     
-    CompletionWithItems block= ^(NSArray * items)
-    {
-        block1(items,location);
-        
-    };
+  
     NSMutableArray * temp= [[NSMutableArray alloc] init];
     int num= rand()%5;
     for(int i=0; i< num; i++)

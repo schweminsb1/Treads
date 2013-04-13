@@ -29,15 +29,17 @@
 @property LocationPickerVC * picker;
 @property UINavigationController * navcontroller;
 @property CommentService * commentService;
+@property UserService * userService;
 @end
 
 @implementation TripViewVC {
+    BOOL needsTripLoad;
     NSString* baseTitle;
     NSString* previousViewTitle;
     CameraService* cameraService;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil backTitle:(NSString *)backTitle tripService:(TripService *)myTripService tripID:(int)myTripID LocationService:(LocationService *) myLocationService withCommentService: (CommentService*) commentService
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil backTitle:(NSString *)backTitle tripService:(TripService *)myTripService tripID:(int)myTripID LocationService:(LocationService *) myLocationService withCommentService: (CommentService*) commentService withUserService:(UserService*)userService
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -46,6 +48,8 @@
         previousViewTitle = backTitle;
         _locationService=myLocationService;
         _commentService = commentService;
+        _userService=userService;
+        needsTripLoad = YES;
     }
     return self;
 }
@@ -61,37 +65,28 @@
     int tripid=_tripID;
      TripViewVC * myself= self;
     self.viewer.sendNewLocationRequest = ^(void(^onSuccess)(TripLocation*)) {
-        if (YES) {
-            //Create Location Picker
-            //make it a popover
-            //on cell selection call the dismiss popover
-            //in the dismiss popover call block
-            //pass the location here,
-            //fill the new TripLocation here
-          
-          void  (^myBlock)(Location*);
-            myBlock=^(Location *location)
-            {
-                
-                TripLocation* locationNew= [[TripLocation alloc]init];
-                locationNew.tripID= tripid ;
-                locationNew.locationID=[location.idField intValue];
-                //add new trip location to database
-                onSuccess(locationNew);
-                
-                
-            };
-           
-           myself.picker= [[LocationPickerVC alloc]initWithStyle:UITableViewStylePlain withLocationService:myself.locationService];
-            myself.picker.returnLocationToTripView=myBlock;
-            myself.navcontroller= [[UINavigationController alloc] initWithRootViewController:myself.picker];
-            
-           [myself presentViewController:myself.navcontroller animated:YES completion:nil];
-
-            
-            
-           
-        }
+        //Create Location Picker
+        //make it a popover
+        //on cell selection call the dismiss popover
+        //in the dismiss popover call block
+        //pass the location here,
+        //fill the new TripLocation here
+        
+        void  (^myBlock)(Location*);
+        myBlock=^(Location *location)
+        {
+            TripLocation* locationNew= [[TripLocation alloc]init];
+            locationNew.tripID= tripid;
+            locationNew.locationID=[location.idField intValue];
+            //add new trip location to database
+            onSuccess(locationNew);
+        };
+        
+        myself.picker= [[LocationPickerVC alloc]initWithStyle:UITableViewStylePlain withLocationService:myself.locationService];
+        myself.picker.returnLocationToTripView=myBlock;
+        myself.navcontroller= [[UINavigationController alloc] initWithRootViewController:myself.picker];
+        
+        [myself presentViewController:myself.navcontroller animated:YES completion:nil];
     };
     TripViewVC* __weak _self = self;
     CameraService* __weak _cameraService = cameraService;
@@ -107,7 +102,7 @@
         CompletionWithItemsandLocation complete= ^(NSArray * items, Location * location)
         {
             Location * location1=location;
-            LocationVC * locationVC= [[LocationVC alloc] initWithNibName:@"LocationVC" bundle:nil withModel:location1 withCommentService:_self.commentService];
+            LocationVC * locationVC= [[LocationVC alloc] initWithNibName:@"LocationVC" bundle:nil withModel:location1 withCommentService:_self.commentService withUserService:_self.userService];
             [_self.navigationController pushViewController:locationVC animated:YES];
             
         };
@@ -123,19 +118,21 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self.viewer clearAndWait];
-    if (self.tripID == [Trip UNDEFINED_TRIP_ID]) {
-        //create a new trip and place user into editing mode
-        Trip* trip = [[Trip alloc] init];
-        trip.tripID = [Trip UNDEFINED_TRIP_ID];
-        trip.userID = -1;
-        trip.name = @"New Trip";
-        trip.description = @"Trip Description";
-        [self dataHasLoaded:@[trip]];
-    }
-    else {
-        //load the trip from the database
-        [self.tripService getTripWithID:self.tripID forTarget:self withAction:@selector(dataHasLoaded:)];
+    if (needsTripLoad) {
+        [self.viewer clearAndWait];
+        if (self.tripID == [Trip UNDEFINED_TRIP_ID]) {
+            //create a new trip and place user into editing mode
+            Trip* trip = [[Trip alloc] init];
+            trip.tripID = [Trip UNDEFINED_TRIP_ID];
+            trip.userID = -1;
+            trip.name = @"New Trip";
+            trip.description = @"Trip Description";
+            [self dataHasLoaded:@[trip]];
+        }
+        else {
+            //load the trip from the database
+            [self.tripService getTripWithID:self.tripID forTarget:self withAction:@selector(dataHasLoaded:)];
+        }
     }
 }
 
@@ -143,6 +140,7 @@
 {
     if (newData.count == 1) {
         Trip* returnedTrip = (Trip*)newData[0];
+        needsTripLoad = NO;
         
         //only put the user in editing mode right away if the trip is new
         [self.viewer setViewerTrip:(returnedTrip) enableEditing:(returnedTrip.tripID == [Trip UNDEFINED_TRIP_ID]?YES:NO)];

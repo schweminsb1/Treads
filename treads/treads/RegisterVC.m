@@ -61,7 +61,7 @@
                           delegate: nil
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil];
-    MSTable * UserTable=  [   _client getTable:@"UserTable"];
+    
    if( [_emailAdress.text isEqualToString:@""] || [_password.text isEqualToString:@""]|| [_confirmEmail.text isEqualToString:@""]|| [_confirmPassword.text isEqualToString:@""]|| [_lastName.text isEqualToString:@""]|| [_firstName.text isEqualToString:@""])
    {
        

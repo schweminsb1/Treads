@@ -81,7 +81,7 @@
 
 - (UIImage*)imageNotFound
 {
-    return [UIImage imageNamed:@"compass.png"];
+    return [UIImage imageNamed:@"404.png"];
 }
 
 - (NSArray*)convertReturnDataToServiceModel:(NSArray*)returnData

@@ -13,12 +13,13 @@
 #import "CommentEnterCell.h"
 @interface LocationVC ()
 @property NSMutableArray * commentModels;
+@property UserService * userService;
 @end
 
 @implementation LocationVC
 //class contains service and model and fills fields on page
 
--(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withModel: (Location *) model withCommentService: (CommentService *) service
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withModel: (Location *) model withCommentService: (CommentService *) service withUserService:(UserService*) userService
 {
     self =  [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if(self)
@@ -30,6 +31,7 @@
         CGRect commentEnterRect = CGRectMake(_commentTable.frame.origin.x, _commentTable.frame.origin.y -50, _commentTable.frame.size.width, 50);
         _commentEnterCell = [[CommentEnterBox alloc] initWithFrame:commentEnterRect];
         [self.view addSubview:_commentEnterCell];
+        _userService=userService;
         
         
     }
@@ -115,7 +117,7 @@
          //ccell= [tableView dequeueReusableCellWithIdentifier:@"CELL"];
         if (!ccell)
         {
-            ccell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL" withCommentModel:((Comment *)_commentModels[(_commentModels.count)-(indexPath.row)])];
+            ccell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL" withCommentModel:((Comment *)_commentModels[(_commentModels.count)-(indexPath.row)]) withUserService:_userService];
         //[cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
         //[cell setAutoresizesSubviews:YES];
         }

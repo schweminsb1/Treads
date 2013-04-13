@@ -21,8 +21,9 @@
 @property UIImageView * profileImage;
 @property UITextView * commentField;
 @property UILabel * userName;
-
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withCommentModel:(Comment *) comment;
+@property UIButton * userNameButton;
+@property UserService * userService;
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withCommentModel:(Comment *) comment withUserService:(UserService*) userService;
 
 
 
