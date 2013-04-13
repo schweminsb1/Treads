@@ -29,7 +29,7 @@
 @property int userID;
 @property (strong) TripBrowser* browser;
 @property LocationService * locationService;
-
+@property int followID;
 
 @property BOOL myProfile;
 
@@ -55,6 +55,7 @@
         self.myProfile = isUser;
         self.commentService=commentService;
         self.followService = myFollowService;
+        self.followID = -1;
 
     }
     
@@ -66,11 +67,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+
+    
     self.edit.hidden = true;
     self.follow.hidden = true;
     
     if(self.myProfile) {
         self.userID = [TreadsSession instance].treadsUserID;
+    }
+    else {
+        [self.followService getPeopleIFollow:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(followDataHasLoaded:)];
     }
     
 }
@@ -141,4 +147,34 @@
     [self.navigationController pushViewController:editProfileVC animated:YES];
 }
 
+- (void) followDataHasLoaded:(NSArray*)newData {
+    [self.follow setTitle:@"Follow" forState:UIControlStateNormal];
+    self.followID = -1;
+    int y = ((int)newData[0][@"TheirID"]);
+    for (int x = 0; x < newData.count; x++) {
+        if (self.userID == ((int)newData[x][@"TheirID"])) {
+            [self.follow setTitle:@"Unfollow" forState:UIControlStateNormal];
+            self.followID = ((int)newData[x][@"id"]);
+            break;
+        }
+    }
+}
+
+- (IBAction)followUser:(id)sender {
+    if(self.followID < 0) {
+        [self.followService addFollow:[TreadsSession instance].treadsUserID withTheirID:self.userID fromTarget:self withReturn:@selector(followSuccess)];
+    }
+    else {
+        
+    }
+}
+
+- (void) followSuccess {
+    if(self.followID < 0) {
+        [self.follow setTitle:@"Unfollow" forState:UIControlStateNormal];
+    }
+    else {
+        [self.follow setTitle:@"Follow" forState:UIControlStateNormal];
+    }
+}
 @end
