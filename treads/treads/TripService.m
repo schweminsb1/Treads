@@ -11,6 +11,8 @@
 #import "DataRepository.h"
 #import "Trip.h"
 
+#import "ImageService.h"
+
 @interface TripService()
 
 //@property DataRepository* dataRepository;
@@ -25,6 +27,61 @@
         self.dataTableIdentifier = @"TripTable";
     }
     return self;
+}
+
+#pragma mark - Reading
+
+- (void)getAllTripsForTarget:(NSObject *)target withAction:(SEL)returnAction
+{
+    [self.dataRepository retrieveDataItemsMatching:nil usingService:self forRequestingObject:target withReturnAction:returnAction];
+}
+
+- (void)getTripWithID:(int)tripID forTarget:(NSObject *)target withAction:(SEL)returnAction
+{
+    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"id = '%d'", tripID] usingService:self forRequestingObject:target withReturnAction:returnAction];
+}
+
+- (void)getTripsWithUserID:(int)userID forTarget:(NSObject*)target withAction:(SEL)returnAction
+{
+    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"userID = '%d'", userID] usingService:self forRequestingObject:target withReturnAction:returnAction];
+}
+
+- (void)getImagesForTrip:(Trip*)trip forTarget:(NSObject*)target withRefreshAction:(SEL)refreshAction withCompleteAction:(SEL)completeAction
+{
+//    int requestsSent = 0;
+//    int requestsReceived = 0;
+    for (TripLocation* location in trip.tripLocations) {
+        for (TripLocationItem* locationItem in location.tripLocationItems) {
+            //ignore if no image is present
+            if (locationItem.imageID == [TripLocationItem UNDEFINED_IMAGE_ID]) {
+                locationItem.image = [self imageNotFound];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+                [target performSelector:refreshAction];
+#pragma clang diagnostic pop
+                continue;
+            }
+            //send request for image
+            //        requestsSent++;
+            [self.imageService getImageWithPhotoID:locationItem.imageID withReturnBlock:^(NSArray *items) {
+                if (items.count > 0) {
+                    locationItem.image = (UIImage*)(items[0]);
+                }
+                else {
+                    locationItem.image = [self imageNotFound];
+                }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+                [target performSelector:refreshAction];
+#pragma clang diagnostic pop
+            }];
+        }
+    }
+}
+
+- (UIImage*)imageNotFound
+{
+    return [UIImage imageNamed:@"compass.png"];
 }
 
 - (NSArray*)convertReturnDataToServiceModel:(NSArray*)returnData
@@ -58,7 +115,7 @@
                     tripLocationItem.index = [[tripLocationItemDictionary objectForKey:@"index"] intValue];
                     [tripLocationItems addObject:tripLocationItem];
                 }
-                [tripLocationItems sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"index" ascending:NO]]];
+                [tripLocationItems sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"index" ascending:YES]]];
                 tripLocation.tripLocationItems = tripLocationItems;
                 [tripLocations addObject:tripLocation];
             }
@@ -70,13 +127,130 @@
             [convertedData addObject:trip];
         }
         @catch (NSException* exception) {
-//            NSLog(exception.reason);
+            //            NSLog(exception.reason);
             trip.name = @"Error - could not parse trip data";
             [convertedData addObject:trip];
         }
     }
     return [NSArray arrayWithArray:convertedData];
 }
+
+#pragma mark - Writing
+
+- (void)updateTrip:(Trip*)trip forTarget:(NSObject*)target withAction:(SEL)returnAction
+{
+    NSMutableArray* tripLocations = [[NSMutableArray alloc] init];
+    for (int i=0; i<trip.tripLocations.count; i++) {
+        [tripLocations addObject:[self convertTripLocationToDictionary:trip.tripLocations[i] atStoredIndex:i]];
+    }
+    
+    NSMutableDictionary* tripDictionary = [NSMutableDictionary dictionaryWithDictionary:@{
+                                           @"userID":@(trip.userID),
+                                           @"name":trip.name,
+                                           @"description":trip.description,
+                                           @"tripLocations":[NSArray arrayWithArray:tripLocations]
+                                           }];
+    
+    if (trip.tripID == [Trip UNDEFINED_TRIP_ID]) {
+        [self.dataRepository createDataItem:tripDictionary usingService:self forRequestingObject:target withReturnAction:returnAction];
+    }
+    else {
+        [tripDictionary setObject:@(trip.tripID) forKey:@"id"];
+        [self.dataRepository updateDataItem:tripDictionary usingService:self forRequestingObject:target withReturnAction:returnAction];
+    }
+    //[self.dataRepository updateTrip:[NSDictionary dictionaryWithDictionary:tripDictionary] forTarget:target withAction:returnAction];
+}
+
+- (void)updateNewImagesForTrip:(Trip*)trip forTarget:(NSObject*)target withCompleteAction:(SEL)completeAction
+{
+    int requestsSent = 0;
+    int __block requestsReceived = 0;
+    for (TripLocation* location in trip.tripLocations) {
+        for (TripLocationItem* locationItem in location.tripLocationItems) {
+            //calculate requests to send
+            if (locationItem.imageID != [TripLocationItem UNDEFINED_IMAGE_ID] || !locationItem.image) {
+                continue;
+            }
+            requestsSent++;
+        }
+    }
+    for (TripLocation* location in trip.tripLocations) {
+        for (TripLocationItem* locationItem in location.tripLocationItems) {
+            //ignore if image already exists
+            if (locationItem.imageID != [TripLocationItem UNDEFINED_IMAGE_ID] || !locationItem.image) {
+                continue;
+            }
+            //upload image
+            CGSize newSize = CGSizeMake(270, 180); float newSizeRatio = newSize.width / newSize.height;
+            CGSize imageSize = locationItem.image.size; float imageSizeRatio = imageSize.width / imageSize.height;
+            if (newSizeRatio < imageSizeRatio) {
+                newSize.height = newSize.width / imageSizeRatio;
+            }
+            if (newSizeRatio > imageSizeRatio) {
+                newSize.width = newSize.height * imageSizeRatio;
+            }
+            UIImage* resizedImage = [TripService imageWithImage:locationItem.image scaledToSize:newSize];
+            [self.imageService insertImage:resizedImage withCompletion:^(NSDictionary *item, NSError *error) {
+//                @synchronize(requestsReceived) {
+                requestsReceived++;
+                locationItem.imageID = [[item objectForKey:@"id"] intValue];
+                if (requestsReceived == requestsSent) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+                    [target performSelector:completeAction];
+#pragma clang diagnostic pop
+//                }
+                }
+            }];
+        }
+    }
+    if (requestsSent == 0) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        [target performSelector:completeAction];
+#pragma clang diagnostic pop
+    }
+}
+
++ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    //UIGraphicsBeginImageContext(newSize);
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
+- (NSDictionary*)convertTripLocationToDictionary:(TripLocation*)tripLocation atStoredIndex:(int)index
+{
+    NSMutableArray* tripLocationItems = [[NSMutableArray alloc] init];
+    for (int i=0; i<tripLocation.tripLocationItems.count; i++) {
+        [tripLocationItems addObject:[self convertTripLocationItemToDictionary:tripLocation.tripLocationItems[i] atStoredIndex:i]];
+    }
+    
+    return @{
+             //@"id":@(tripLocation.tripLocationID),
+             @"tripID":@(tripLocation.tripID),
+             @"locationID":@(tripLocation.locationID),
+             @"description":tripLocation.description,
+             @"tripLocationItems":[NSArray arrayWithArray:tripLocationItems],
+             @"index":@(index)
+             };
+}
+
+- (NSDictionary*)convertTripLocationItemToDictionary:(TripLocationItem*)tripLocationItem atStoredIndex:(int)index
+{
+    return @{
+             //@"id":@(tripLocationItem.tripLocationItemID),
+             @"tripLocationID":@(tripLocationItem.tripLocationID),
+             //             @"image":@"",//tripLocationItem.image,
+             @"imageID":@(tripLocationItem.imageID),
+             @"description":tripLocationItem.description,
+             @"index":@(index)
+             };
+}
+
+#pragma mark - Debug Items
 
 - (void)addDebugItemsToTrip:(Trip*)trip
 {
@@ -91,15 +265,15 @@
     trip.featuredLocationItem = dummyFeaturedLocationItem;
     
     //locations
-//    NSMutableArray* dummyLocationArray = [[NSMutableArray alloc] init];
-//    int count = random()%8 + 1;
-//    for (int i = 0; i < count; i++) {
+    //    NSMutableArray* dummyLocationArray = [[NSMutableArray alloc] init];
+    //    int count = random()%8 + 1;
+    //    for (int i = 0; i < count; i++) {
     for (int i = 0; i < trip.tripLocations.count; i++) {
-//        TripLocation* dummyLocation = [[TripLocation alloc] init];
-//        dummyLocation.tripLocationID = i;
-//        dummyLocation.tripID = trip.tripID;
-//        dummyLocation.locationID = i;
-//        dummyLocation.description = [self loremIpsum];
+        //        TripLocation* dummyLocation = [[TripLocation alloc] init];
+        //        dummyLocation.tripLocationID = i;
+        //        dummyLocation.tripID = trip.tripID;
+        //        dummyLocation.locationID = i;
+        //        dummyLocation.description = [self loremIpsum];
         
         NSMutableArray* dummyLocationItemsArray = [[NSMutableArray alloc] init];
         int cap = random()%6;
@@ -111,10 +285,10 @@
         }
         ((TripLocation*)trip.tripLocations[i]).tripLocationItems = [NSArray arrayWithArray:dummyLocationItemsArray];
         
-//        [dummyLocationArray addObject:dummyLocation];
+        //        [dummyLocationArray addObject:dummyLocation];
     }
     
-//    trip.tripLocations = [NSArray arrayWithArray:dummyLocationArray];
+    //    trip.tripLocations = [NSArray arrayWithArray:dummyLocationArray];
 }
 
 - (UIImage*)randomImage
@@ -147,73 +321,6 @@
     return @"Lorem ipsum dolor sit amet";//, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.";// Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.";// Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.";
 }
 
-- (void)getAllTripsForTarget:(NSObject *)target withAction:(SEL)returnAction
-{
-    [self.dataRepository retrieveDataItemsMatching:nil usingService:self forRequestingObject:target withReturnAction:returnAction];
-    //[self.dataRepository getTripsMeetingCondition:@"" forTarget:target withAction:returnAction];
-}
 
-- (void)getTripWithID:(int)tripID forTarget:(NSObject *)target withAction:(SEL)returnAction
-{
-    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"id = '%d'", tripID] usingService:self forRequestingObject:target withReturnAction:returnAction];
-    //[self.dataRepository getTripsMeetingCondition:[NSString stringWithFormat:@"id = '%d'", tripID] forTarget:target withAction:returnAction];
-}
-
-- (void)updateTrip:(Trip*)trip forTarget:(NSObject *)target withAction:(SEL)returnAction
-{
-    NSMutableArray* tripLocations = [[NSMutableArray alloc] init];
-    for (int i=0; i<trip.tripLocations.count; i++) {
-        [tripLocations addObject:[self convertTripLocationToDictionary:trip.tripLocations[i] atStoredIndex:i]];
-    }
-    
-    NSMutableDictionary* tripDictionary = [NSMutableDictionary dictionaryWithDictionary:@{
-                                       @"userID":@(trip.userID),
-                                       @"name":trip.name,
-                                       @"description":trip.description,
-                                       @"tripLocations":[NSArray arrayWithArray:tripLocations]
-                                 }];
-    
-    if (trip.tripID == [Trip UNDEFINED_TRIP_ID]) {
-        [self.dataRepository createDataItem:tripDictionary usingService:self forRequestingObject:target withReturnAction:returnAction];
-    }
-    else {
-        [tripDictionary setObject:@(trip.tripID) forKey:@"id"];
-        [self.dataRepository updateDataItem:tripDictionary usingService:self forRequestingObject:target withReturnAction:returnAction];
-    }
-    //[self.dataRepository updateTrip:[NSDictionary dictionaryWithDictionary:tripDictionary] forTarget:target withAction:returnAction];
-}
-
-- (NSDictionary*)convertTripLocationToDictionary:(TripLocation*)tripLocation atStoredIndex:(int)index
-{
-    NSMutableArray* tripLocationItems = [[NSMutableArray alloc] init];
-    for (int i=0; i<tripLocation.tripLocationItems.count; i++) {
-        [tripLocationItems addObject:[self convertTripLocationItemToDictionary:tripLocation.tripLocationItems[i] atStoredIndex:i]];
-    }
-    
-    return @{
-             //@"id":@(tripLocation.tripLocationID),
-             @"tripID":@(tripLocation.tripID),
-             @"locationID":@(tripLocation.locationID),
-             @"description":tripLocation.description,
-             @"tripLocationItems":[NSArray arrayWithArray:tripLocationItems],
-             @"index":@(index)
-             };
-}
-
-- (NSDictionary*)convertTripLocationItemToDictionary:(TripLocationItem*)tripLocationItem atStoredIndex:(int)index
-{
-    return @{
-             //@"id":@(tripLocationItem.tripLocationItemID),
-             @"tripLocationID":@(tripLocationItem.tripLocationID),
-//             @"image":@"",//tripLocationItem.image,
-             @"imageID":@(tripLocationItem.imageID),
-             @"description":tripLocationItem.description,
-             @"index":@(index)
-             };
-}
-
-- (void)getTripsWithUserID:(int)userID forTarget:(NSObject*)target withAction:(SEL)returnAction{
-    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"userID = '%d'", userID] usingService:self forRequestingObject:target withReturnAction:returnAction];
-}
 
 @end

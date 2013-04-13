@@ -31,8 +31,9 @@
         user.emailaddress   =       returnData[i][@"emailAddress"];
         user.lname          =       returnData[i][@"Lname"];
         user.User_ID        =       [((NSString*)returnData[i][@"id"]) intValue];
-        user.profilePictureID=      [((NSString*)returnData[i][@"profilePhotoID"]) intValue];
+        user.profilePhotoID=      [((NSString*)returnData[i][@"profilePhotoID"]) intValue];
         user.password       =        returnData[i][@"password"];
+        user.coverPhotoID   =  [((NSString*)returnData[i][@"coverPhotoID"]) intValue];
         [results addObject: user];
     }
     return results;

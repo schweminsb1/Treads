@@ -153,6 +153,7 @@
             TripLocationItem* newItem = [[TripLocationItem alloc] init];
             newItem.tripLocationItemID = -1;
             newItem.tripLocationID = _self.tripLocation.tripLocationID;
+            newItem.imageID = [TripLocationItem UNDEFINED_IMAGE_ID];
             newItem.image = returnImage;
             newItem.description = @"New Item";
             [_imageScrollBrowser setDisplayViewItem:newItem atIndex:index];

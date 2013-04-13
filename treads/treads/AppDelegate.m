@@ -62,6 +62,10 @@
     //connect services
     self.tripService.imageService = self.imageService;
     
+//    [self.imageService insertImage:[UIImage imageNamed:@"mountains.jpeg"] withCompletion:^(NSDictionary *item, NSError *error) {
+//        NSLog(error.localizedDescription);
+//    }];
+    
     //Set global display options
     [[UINavigationBar appearance] setTintColor:[AppColors toolbarColor]];
     [[UITabBar appearance] setSelectedImageTintColor:[AppColors toolbarColor]];

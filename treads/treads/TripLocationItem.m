@@ -14,6 +14,8 @@
 
 @implementation TripLocationItem
 
++ (int)UNDEFINED_IMAGE_ID {return -1;}
+
 - (UIImage*)displayImage {return self.image;}
 - (NSObject*)displayItem {return self.description;}
 

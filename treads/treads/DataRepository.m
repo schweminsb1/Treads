@@ -115,7 +115,9 @@
 #pragma clang diagnostic pop
         }
         else {
-            //      NSLog([error localizedDescription]);
+            NSLog([error localizedDescription]);
+            NSLog([error localizedFailureReason]);
+            NSLog([error description]);
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             block(item,error);

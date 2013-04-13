@@ -159,10 +159,18 @@
         else {
             self.navigationItem.rightBarButtonItem = nil;
         }
+        
+        //request trip images
+        [self.tripService getImagesForTrip:returnedTrip forTarget:self withRefreshAction:@selector(refreshWithNewImages) withCompleteAction:nil];
     }
     else {
         [self.viewer displayTripLoadFailure];
     }
+}
+
+- (void)refreshWithNewImages
+{
+    [self.viewer refreshWithNewImages];
 }
 
 - (void)setBaseTitle:(Trip*)trip
@@ -201,12 +209,18 @@
     [self.viewer prepareForExit];
     if ([self.viewer getViewerTrip] != nil && [self.viewer changesWereMade]) {
         //save trip changes if any were made
-        [self.tripService updateTrip:[self.viewer viewerTrip] forTarget:self withAction:@selector(changesSavedTo:successfully:)];
+//        [self.tripService updateTrip:[self.viewer viewerTrip] forTarget:self withAction:@selector(changesSavedTo:successfully:)];
+        [self.tripService updateNewImagesForTrip:[self.viewer viewerTrip] forTarget:self withCompleteAction:@selector(imagesWereUploaded)];
     }
     else {
         //if no changes were made or a trip is not loaded, simply pop the trip viewer
         [self.navigationController popViewControllerAnimated:YES];
     };
+}
+
+- (void)imagesWereUploaded
+{
+    [self.tripService updateTrip:[self.viewer viewerTrip] forTarget:self withAction:@selector(changesSavedTo:successfully:)];
 }
 
 - (void)changesSavedTo:(NSNumber*)savedTripID successfully:(NSNumber*)wasSuccessful {
