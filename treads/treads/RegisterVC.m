@@ -143,7 +143,9 @@
                                       @"emailAddress": [NSString stringWithString:[_emailAdress.text lowercaseString]],
                                       @"password": [NSString stringWithString:hashedPassword] ,
                                       @"Fname": [NSString stringWithString:_firstName.text] ,
-                                      @"Lname": [NSString stringWithString:_lastName.text]
+                                      @"Lname": [NSString stringWithString:_lastName.text],
+                                      @"profilePhotoID": @0,
+                                      @"coverPhotoID" : @0
                                       };
             [_userService addUser:newItem forTarget:self withAction:@selector(addUserSuccess:withSuccess:)];
             

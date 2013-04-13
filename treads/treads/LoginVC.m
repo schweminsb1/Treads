@@ -95,7 +95,7 @@
             
         
         //[UserTable readWithQueryString:[query queryStringOrError:&error] completion:queryBlock];
-        [_userService getUserbyEmail:_usernameText.text forTarget:self withAction:@selector(logOnFunc:)];
+        [_userService getUserbyEmail:_usernameText.text forTarget:self withAction:@selector(log:)];
         [_activityIndicatorView startAnimating];
         
         //retrieve the username if it exists in the database
@@ -137,7 +137,7 @@
     //open view or alert to 
     
 }
--(void) logOnFunc:(NSArray*)items
+-(void)log: (NSArray*)items
 {
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle: @"Woah!!"
