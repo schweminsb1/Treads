@@ -26,12 +26,13 @@
 @property (strong) TripBrowser* browser;
 @property (strong) UISegmentedControl* browserModeControl;
 @property LocationService * locationService;
+@property CommentService * commentService;
 
 @end
 
 @implementation FollowVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withTripService:(TripService*)tripServiceHandle withLocationService:(LocationService*)locationservice
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withTripService:(TripService*)tripServiceHandle withLocationService:(LocationService*)locationservice withCommentService:(CommentService*) commentService
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -41,6 +42,7 @@
         _locationService=locationservice;
         //set up services
         self.tripService = tripServiceHandle;//[[TripService alloc] init];
+        _commentService = commentService;
     }
     return self;
 }
@@ -111,7 +113,7 @@
     UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:browserModeControlLabels[self.browserModeControl.selectedSegmentIndex] style: UIBarButtonItemStyleBordered target: nil action: nil];
     [self.navigationItem setBackBarButtonItem: newBackButton];
     
-    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID LocationService:_locationService];
+    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID LocationService:_locationService withCommentService:_commentService];
     [self.navigationController pushViewController:tripViewVC animated:YES];
 }
 
