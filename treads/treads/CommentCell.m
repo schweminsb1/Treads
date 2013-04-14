@@ -85,6 +85,7 @@
 {
     ProfileVC * profilevc= [[ProfileVC alloc]initWithNibName:@"ProfileVC" bundle:nil tripService:_tripService userService:_userService imageService:_imageService isUser:NO userID:_userModel.User_ID withLocationService:_locationService withCommentService:_commentService withFollowService:_followService];
     
+    
 }
 
 @end

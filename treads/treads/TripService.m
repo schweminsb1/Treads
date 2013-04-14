@@ -21,6 +21,15 @@
 
 @implementation TripService
 
+static TripService* repo;
++(TripService*) instance {
+    @synchronized(self) {
+        if (!repo)
+            repo = [[TripService alloc] initWithRepository:[DataRepository instance]];
+        return repo;
+    }
+}
+
 - (id)initWithRepository:(DataRepository*)repository {
     if ((self = [super init])) {
         self.dataRepository = repository;

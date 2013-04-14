@@ -13,6 +13,7 @@
 #import "LocationService.h"
 #import "CommentService.h"
 #import "UserService.h"
+
 @class TripLocationService;
 @class UserService;
 @class LocationService;

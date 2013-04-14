@@ -102,7 +102,8 @@
         CompletionWithItemsandLocation complete= ^(NSArray * items, Location * location)
         {
             Location * location1=location;
-            LocationVC * locationVC= [[LocationVC alloc] initWithNibName:@"LocationVC" bundle:nil withModel:location1 withCommentService:_self.commentService withUserService:_self.userService];
+            LocationVC * locationVC= [[LocationVC alloc] initWithNibName:@"LocationVC" bundle:nil withModel:location1 withTripService:[TripService instance] withUserService:[UserService instance] imageService:[ImageService instance] withLocationService:[LocationService instance] withCommentService:[CommentService instance] withFollowService:[FollowService instance] ];
+            
             [_self.navigationController pushViewController:locationVC animated:YES];
             
         };

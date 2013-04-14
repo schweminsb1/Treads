@@ -17,6 +17,8 @@
 #import "FollowService.h"
 #import "LocationService.h"
 #import "UserService.h"
+#import "TripService.h"
+#import "ImageService.h"
 
 
 @interface MapsVC ()
@@ -274,7 +276,7 @@ CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
 -(void)pushLocation
 {
     
-    LocationVC * locationvc= [[LocationVC alloc]initWithNibName:@"LocationVC" bundle:nil withModel: _currentLocation withTripService:   withUserService:[UserService instance] imageService:[imageService instance]  withLocationService:[LocationService instance] withCommentService:[CommentService instance] withFollowService:[FollowService instance]];
+    LocationVC * locationvc= [[LocationVC alloc]initWithNibName:@"LocationVC" bundle:nil withModel: _currentLocation withTripService: [TripService instance]  withUserService:[UserService instance] imageService:[ImageService instance]  withLocationService:[LocationService instance] withCommentService:[CommentService instance] withFollowService:[FollowService instance]];
     
     [self.navigationController pushViewController:locationvc animated:YES];
     [self.callout dismissPopoverAnimated:YES];
