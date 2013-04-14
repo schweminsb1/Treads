@@ -229,6 +229,11 @@
     return changesMade;
 }
 
+- (void)refreshWithNewHeader
+{
+    [viewerTable reloadData];
+}
+
 - (void)refreshWithNewImages
 {
     [viewerTable reloadData];

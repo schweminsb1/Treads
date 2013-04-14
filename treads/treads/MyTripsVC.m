@@ -75,6 +75,14 @@
 - (void)dataHasLoaded:(NSArray*)newData
 {
     [self.browser setBrowserData:newData forTarget:self withAction:@selector(showTrip:)];
+    for (Trip* trip in newData) {
+        [self.tripService getHeaderImageForTrip:trip forTarget:self withCompleteAction:@selector(refreshWithNewHeader)];
+    }
+}
+
+- (void)refreshWithNewHeader
+{
+    [self.browser refreshWithNewImages];
 }
 
 - (void)didReceiveMemoryWarning

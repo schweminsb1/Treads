@@ -159,11 +159,17 @@
         }
         
         //request trip images
+        [self.tripService getHeaderImageForTrip:returnedTrip forTarget:self withCompleteAction:@selector(refreshWithNewHeader)];
         [self.tripService getImagesForTrip:returnedTrip forTarget:self withRefreshAction:@selector(refreshWithNewImages) withCompleteAction:nil];
     }
     else {
         [self.viewer displayTripLoadFailure];
     }
+}
+
+- (void)refreshWithNewHeader
+{
+    [self.viewer refreshWithNewHeader];
 }
 
 - (void)refreshWithNewImages
