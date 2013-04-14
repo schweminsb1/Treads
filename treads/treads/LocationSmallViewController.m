@@ -11,6 +11,7 @@
 #import "ImageScrollDisplayView.h"
 #import "ImageScrollBrowser.h"
 #import "TripLocationItem.h"
+#import "TripLocationService.h"
 
 @interface LocationSmallViewController ()
 
@@ -25,7 +26,8 @@
     if (self) {
         self.location=location;
         self.homepage = root;
-        self.service = service;  
+        self.service = service;
+        
         // Custom initialization  
     }
     return self;
@@ -40,7 +42,11 @@
     CGRect  size= CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + 200 , self.view.bounds.size.width, 550) ;
     //add subView
     
-    
+    [[TripLocationService instance] getTripLocationWithLocation:_location withCompletion:^(NSArray *items, Location *location) {
+        _IncludedInTrips= [NSString stringWithFormat:@"%d" , items.count];
+        _IncludedInTripsLabel.text=_IncludedInTrips;
+        
+    }];
     ImageScrollBrowser * scrollbrowse= [[ImageScrollBrowser alloc] initWithImageSize:size.size displayView:nil addItemView:nil editItemView:nil];
 
     /*

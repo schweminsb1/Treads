@@ -103,7 +103,7 @@ CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
         for( int i=0; i< items.count; i++)
         {
             Location * location= [[Location alloc] init];
-            location.idField= items[i][@"LocationID"];
+            location.idField= items[i][@"id"];
             location.title= items[i][@"name"];
             location.description= items[i][@"description"];
             NSString * latstring= items[i][@"latitude"];

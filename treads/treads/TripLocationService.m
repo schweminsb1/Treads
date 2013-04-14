@@ -26,7 +26,7 @@ static TripLocationService* repo;
 - (id)initWithRepository:(DataRepository*)repository {
     if ((self = [super init])) {
         self.dataRepository = repository;
-        self.dataTableIdentifier = @"TripsLocations";
+        self.dataTableIdentifier = @"TripLocations";
     }
     return self;
 }
@@ -76,17 +76,13 @@ static TripLocationService* repo;
     }
 }
 - (void)getTripLocationWithLocation:(Location*)location withCompletion:(CompletionWithItemsandLocation)block1{
-    
-  
-    NSMutableArray * temp= [[NSMutableArray alloc] init];
-    int num= rand()%5;
-    for(int i=0; i< num; i++)
+    CompletionWithItems block = ^(NSArray * items)
     {
-        [temp addObject:@""];
+        block1(items,location);
         
-    }
-    
-    block1(temp,location);
+    };
+  
+    [_dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"locationID = %@" , location.idField] usingService:self withReturnBlock:block];
   //  [_dataRepository retrieveDataItemsMatching:[NSString stringWithFormat: @"locationID = %d",[location.idField intValue]] usingService:self withReturnBlock:block];
 }
 
