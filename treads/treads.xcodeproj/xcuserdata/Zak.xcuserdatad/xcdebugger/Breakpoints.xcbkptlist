@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "treads/EditProfileVC.m"
-         timestampString = "387598398.119002"
+         timestampString = "387651746.939134"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "110"
-         endingLineNumber = "110"
+         startingLineNumber = "143"
+         endingLineNumber = "143"
          landmarkName = "-dataHasLoaded:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -125,11 +125,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "treads/EditProfileVC.m"
-         timestampString = "387595747.177379"
+         timestampString = "387651746.939134"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "109"
-         endingLineNumber = "109"
+         startingLineNumber = "139"
+         endingLineNumber = "139"
          landmarkName = "-dataHasLoaded:"
          landmarkType = "5">
       </FileBreakpoint>
