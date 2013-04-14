@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "TripBrowser.h"
+
 @class Trip;
 
 @interface TripBrowserCell : UITableViewCell
-
-typedef enum {TripBrowserCell3x4, TripBrowserCell6x2, TripBrowserCell5x1, TripBrowserCell4x1} TripBrowserCellStyle;
 
 + (int)heightForCellStyle:(TripBrowserCellStyle)cellStyle;
 

@@ -10,9 +10,11 @@
 
 #import "Trip.h"
 
-#import "TripBrowserCell.h"
+//#import "TripBrowserCell.h"
 
 @interface TripBrowser : UIView
+
+typedef enum {TripBrowserCell3x4, TripBrowserCell6x2, TripBrowserCell5x1, TripBrowserCell4x1} TripBrowserCellStyle;
 
 - (void)setBrowserData:(NSArray*)newSortedData forTarget:(NSObject*)newTarget withAction:(SEL)newListSelectAction;
 

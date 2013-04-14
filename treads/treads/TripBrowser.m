@@ -8,7 +8,7 @@
 
 #import "TripBrowser.h"
 
-//#import "TripBrowserCell.h"
+#import "TripBrowserCell.h"
 
 #import "AppColors.h"
 
