@@ -54,19 +54,34 @@ static ImageService* repo;
 
 -(void) insertImage:(UIImage *) image withCompletion:(MSItemBlock) ultimatecompletionblock
 {
+    //resize image
+    CGSize newSize = CGSizeMake(270, 180); float newSizeRatio = newSize.width / newSize.height;
+    CGSize imageSize = image.size; float imageSizeRatio = imageSize.width / imageSize.height;
+    if (newSizeRatio < imageSizeRatio) {
+        newSize.height = newSize.width / imageSizeRatio;
+    }
+    if (newSizeRatio > imageSizeRatio) {
+        newSize.width = newSize.height * imageSizeRatio;
+    }
+    UIImage* resizedImage = [ImageService imageWithImage:image scaledToSize:newSize];
     
-    NSMutableDictionary * imageDict= [[NSMutableDictionary alloc]init];
-    NSString * stringToSend= [self stringFromImage:image];
+    NSMutableDictionary* imageDict = [[NSMutableDictionary alloc]init];
+    NSString* stringToSend = [self stringFromImage:resizedImage];
     if (stringToSend) {
         [imageDict setValue:stringToSend forKey:@"imageString"];
-//        [imageDict setValue:@"" forKey:@"blobPath"];
-        
         [_dataRepository createDataItem:imageDict usingService:self withReturnBlock:ultimatecompletionblock];
-        //insert image path into database for a newID
     }
-
-  
 }
+
++ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    //UIGraphicsBeginImageContext(newSize);
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 -(void) getImageWithPhotoID:(int) photoid withReturnBlock:(CompletionWithItems) comp
 {
     //get image from cache if it exists, else, grab from database

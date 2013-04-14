@@ -243,17 +243,9 @@ static TripService* repo;
             if (locationItem.imageID != [TripLocationItem UNDEFINED_IMAGE_ID] || !locationItem.image) {
                 continue;
             }
+            
             //upload image
-            CGSize newSize = CGSizeMake(270, 180); float newSizeRatio = newSize.width / newSize.height;
-            CGSize imageSize = locationItem.image.size; float imageSizeRatio = imageSize.width / imageSize.height;
-            if (newSizeRatio < imageSizeRatio) {
-                newSize.height = newSize.width / imageSizeRatio;
-            }
-            if (newSizeRatio > imageSizeRatio) {
-                newSize.width = newSize.height * imageSizeRatio;
-            }
-            UIImage* resizedImage = [TripService imageWithImage:locationItem.image scaledToSize:newSize];
-            [self.imageService insertImage:resizedImage withCompletion:^(NSDictionary *item, NSError *error) {
+            [self.imageService insertImage:locationItem.image withCompletion:^(NSDictionary *item, NSError *error) {
 //                @synchronize(requestsReceived) {
                 requestsReceived++;
                 locationItem.imageID = [[item objectForKey:@"id"] intValue];
@@ -276,15 +268,6 @@ static TripService* repo;
         [target performSelector:completeAction];
 #pragma clang diagnostic pop
     }
-}
-
-+ (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
-    //UIGraphicsBeginImageContext(newSize);
-    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
-    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
 }
 
 - (NSDictionary*)convertTripLocationToDictionary:(TripLocation*)tripLocation atStoredIndex:(int)index
