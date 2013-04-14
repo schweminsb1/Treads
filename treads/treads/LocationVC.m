@@ -90,6 +90,7 @@
 {
     _commentModels=(NSMutableArray *)items;
     //get users, and fill comentModel
+    
     [_commentTable reloadData];
     
 }
@@ -134,7 +135,6 @@
         //[cell setAutoresizesSubviews:YES];
         }
     }
-    
        return ccell;
 }
 

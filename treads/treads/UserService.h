@@ -25,7 +25,7 @@
 - (void)getUserbyID:(int)UserID forTarget:(NSObject *)target withAction:(SEL)returnAction;
 - (void)getUserbyEmail:(NSString *)emailAddress forTarget:(NSObject *)target withAction:(SEL)returnAction;
 
--(NSArray *)getUserbyID:(int)UserID withReturnItems: (NSArray *)itm;
+-(NSArray *)getUserbyID:(int)UserID;
 
 - (void)addUser:(NSDictionary*)newUser forTarget:(NSObject*) target withAction: (SEL) returnAction;
 
