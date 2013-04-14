@@ -9,7 +9,7 @@
 // Code referenced for this view
 // http:stackoverflow.com/questions/3959994/how-to-add-a-push-pin-to-a-mkmapviewios-when-touching/3960754#3960754
 
-#import "LocationMapVC.h"
+#import "LocationMapvc.h"
 
 @interface LocationMapVC ()
 @property MapPinAnnotation * locationPin;
