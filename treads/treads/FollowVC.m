@@ -16,6 +16,8 @@
 
 #import "TripViewVC.h"
 #import "LocationService.h"
+#import "FollowService.h"
+#import "TreadsSession.h"
 
 @interface FollowVC () {
     NSArray* browserModeControlLabels;
@@ -60,9 +62,9 @@
                                  @"Favorites"
                                  ];
     browserModeControlActions = @[
-                                  ^void(void) { [self.tripService getAllTripsForTarget:self withAction:@selector(profileDataHasLoaded:)]; },
-                                   ^void(void) { [self.tripService getAllTripsForTarget:self withAction:@selector(tripDataHasLoaded:)]; },
-                                   ^void(void) { [self.tripService getAllTripsForTarget:self withAction:@selector(tripDataHasLoaded:)]; }
+                                  ^void(void) {[[FollowService instance] getPeopleIFollow:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(profileDataHasLoaded:)];},
+                                   ^void(void) {[[TripService instance] getAllTripsForTarget:self withAction:@selector(tripDataHasLoaded:)];},
+                                   ^void(void) {[[TripService instance] getAllTripsForTarget:self withAction:@selector(tripDataHasLoaded:)];}
                       ];
     browserCellStyles = @[
                           [NSNumber numberWithInt:ProfileBrowserCell5x1],
