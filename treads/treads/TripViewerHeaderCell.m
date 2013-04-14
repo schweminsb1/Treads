@@ -155,11 +155,12 @@
         [self layoutSubviews];
         //[self setNeedsLayout];
     }
-    if (trip.featuredLocationItem != nil) {
-        if (trip.featuredLocationItem.image != nil) {
-            tripFeaturedImage.image = trip.featuredLocationItem.image;
-        }
-    }
+//    if (trip.featuredLocationItem != nil) {
+//        if (trip.featuredLocationItem.image != nil) {
+//            tripFeaturedImage.image = trip.featuredLocationItem.image;
+//        }
+//    }
+    tripFeaturedImage.image = trip.image;
     tripOwnerLabel.text = @"Trip Owner";
     //CGSize sizeOfText=[tripOwnerLabel.text sizeWithFont:tripOwnerLabel.font constrainedToSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
     //[tripOwnerLabel setBounds:CGRectMake(

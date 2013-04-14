@@ -20,4 +20,6 @@
 
 @property (nonatomic) TripBrowserCellStyle cellStyle;
 
+- (void)refreshWithNewImages;
+
 @end

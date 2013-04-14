@@ -36,4 +36,19 @@ static FollowService* repo;
     [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"MyID = '%i'", myID] usingService:self forRequestingObject:target withReturnAction:returnAction];
 }
 
+- (void) addFollow:(int)myID withTheirID:(int)theirID fromTarget:(NSObject *) target withReturn:(SEL) returnAction {
+    NSMutableDictionary * followDict = [[NSMutableDictionary alloc] init];
+    
+    [followDict  setValue:[NSNumber numberWithInt:myID]forKey:@"MyID"];
+    [followDict  setValue:[NSNumber numberWithInt:theirID] forKey:@"TheirID"];
+    [self.dataRepository createDataItem:followDict usingService:self forRequestingObject:target withReturnAction:returnAction];
+}
+
+- (void) deleteFollow:(NSString*)follow fromTarget:(NSObject *) target withReturn:(SEL) returnAction {
+    
+    
+    [self.dataRepository deleteDataItem:follow usingService:self forRequestingObject:target withReturnAction:returnAction];
+    
+}
+
 @end

@@ -46,6 +46,32 @@
     [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"userID = '%d'", userID] usingService:self forRequestingObject:target withReturnAction:returnAction];
 }
 
+- (void)getHeaderImageForTrip:(Trip *)trip forTarget:(NSObject *)target withCompleteAction:(SEL)completeAction
+{
+    if (trip.imageID == [TripLocationItem UNDEFINED_IMAGE_ID]) {
+        trip.image = [self imageNotFound];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        [target performSelector:completeAction];
+#pragma clang diagnostic pop
+        return;
+    }
+    //send request for image
+    [self.imageService getImageWithPhotoID:trip.imageID withReturnBlock:^(NSArray *items) {
+        if (items.count > 0) {
+            trip.image = (UIImage*)(items[0]);
+        }
+        else {
+            trip.image = [self imageNotFound];
+        }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        [target performSelector:completeAction];
+#pragma clang diagnostic pop
+    }];
+}
+
+
 - (void)getImagesForTrip:(Trip*)trip forTarget:(NSObject*)target withRefreshAction:(SEL)refreshAction withCompleteAction:(SEL)completeAction
 {
 //    int requestsSent = 0;
@@ -81,7 +107,7 @@
 
 - (UIImage*)imageNotFound
 {
-    return [UIImage imageNamed:@"compass.png"];
+    return [UIImage imageNamed:@"404.png"];
 }
 
 - (NSArray*)convertReturnDataToServiceModel:(NSArray*)returnData
@@ -94,6 +120,7 @@
             trip.userID = [[returnTrip objectForKey:@"userID"] intValue];
             trip.name = [returnTrip objectForKey:@"name"];
             trip.description = [returnTrip objectForKey:@"description"];
+            trip.imageID = [[returnTrip objectForKey:@"imageID"] intValue];
             NSArray* tripLocationsDictionary = [returnTrip objectForKey:@"tripLocations"];
             NSMutableArray* tripLocations = [[NSMutableArray alloc] initWithCapacity:tripLocationsDictionary.count];
             for (NSDictionary* tripLocationDictionary in tripLocationsDictionary)
@@ -148,7 +175,8 @@
                                            @"userID":@(trip.userID),
                                            @"name":trip.name,
                                            @"description":trip.description,
-                                           @"tripLocations":[NSArray arrayWithArray:tripLocations]
+                                           @"tripLocations":[NSArray arrayWithArray:tripLocations],
+                                           @"imageID":@(trip.imageID)
                                            }];
     
     if (trip.tripID == [Trip UNDEFINED_TRIP_ID]) {
@@ -260,9 +288,9 @@
     srand(trip.tripID);
     
     //featured item
-    TripLocationItem* dummyFeaturedLocationItem = [[TripLocationItem alloc] init];
-    dummyFeaturedLocationItem.image = [self randomImage];
-    trip.featuredLocationItem = dummyFeaturedLocationItem;
+//    TripLocationItem* dummyFeaturedLocationItem = [[TripLocationItem alloc] init];
+//    dummyFeaturedLocationItem.image = [self randomImage];
+//    trip.featuredLocationItem = dummyFeaturedLocationItem;
     
     //locations
     //    NSMutableArray* dummyLocationArray = [[NSMutableArray alloc] init];

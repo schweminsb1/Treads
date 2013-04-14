@@ -27,8 +27,11 @@
 - (void)dataHasLoaded:(NSArray*)newData;
 - (void)tripsHaveLoaded:(NSArray*)newData;
 - (void)updateUser:(int)myUserID;
+- (void) followDataHasLoaded:(NSArray*)newData;
+- (IBAction)followUser:(id)sender;
 
 - (IBAction)editProfile:(id)sender;
+- (void) followSuccess;
 
 
 @end

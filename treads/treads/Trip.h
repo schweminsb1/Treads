@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #import "TripLocation.h"
 #import "TripLocationItem.h"
@@ -20,7 +21,8 @@
 @property int userID;
 @property (copy) NSString* name;
 @property (copy) NSString* description;
-@property (strong) TripLocationItem* featuredLocationItem;
+@property int imageID;
+@property (strong) UIImage* image;
 
 //location
 @property (strong) NSArray* tripLocations;

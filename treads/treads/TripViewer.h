@@ -28,6 +28,7 @@
 
 - (void)clearAndWait;
 
+- (void)refreshWithNewHeader;
 - (void)refreshWithNewImages;
 
 @property (copy) void(^sendNewLocationRequest)(void(^onSuccess)(TripLocation*));

@@ -360,7 +360,35 @@ static DataRepository* repo;
     }];
 }
 
-
+- (void) deleteDataItem: (NSString*)predicateStringOrNil usingService:(id<TreadsService>)callingService forRequestingObject:(NSObject*)requestingObject withReturnAction:(SEL)returnAction
+    {
+        MSTable* queryTable = [self.client getTable:callingService.dataTableIdentifier];
+        MSQuery* query = [[MSQuery alloc] initWithTable:queryTable];
+        if (predicateStringOrNil != nil) {
+            [query setPredicate:[NSPredicate predicateWithFormat:predicateStringOrNil]];
+        }
+        
+        MSReadQueryBlock queryCompletionBlock = ^(NSArray* items, NSInteger totalCount, NSError *error) {
+            CompletionBlock completion = ^(NSNumber * itemId, NSError* error) {
+                [requestingObject performSelector:returnAction];
+            };
+            
+            if (error == nil) {
+                id y = items[0][@"id"];
+              //  NSLog(y);
+                [queryTable deleteWithId:items[0][@"id"] completion:completion];
+                //[queryTable delete:y];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+             //   [requestingObject performSelector:returnAction withObject:[callingService convertReturnDataToServiceModel:items]];
+                
+#pragma clang diagnostic pop
+            }
+        };
+        
+        __autoreleasing NSError* error = [[NSError alloc] init];
+        [queryTable readWithQueryString:[query queryStringOrError:&error] completion:queryCompletionBlock];
+}
 
 
 

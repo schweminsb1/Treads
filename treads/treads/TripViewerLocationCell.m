@@ -155,7 +155,7 @@
             newItem.tripLocationID = _self.tripLocation.tripLocationID;
             newItem.imageID = [TripLocationItem UNDEFINED_IMAGE_ID];
             newItem.image = returnImage;
-            newItem.description = @"New Item";
+            newItem.description = @"";
             [_imageScrollBrowser setDisplayViewItem:newItem atIndex:index];
         });
     };
@@ -189,7 +189,7 @@
 - (void)changeLocation:(int)newLocationID
 {
     self.markChangeMade();
-    self.tripLocation.tripLocationID = newLocationID;
+    self.tripLocation.locationID = newLocationID;
     [self setTripLocationHeader:self.tripLocation];
     [self setNeedsLayout];
 }

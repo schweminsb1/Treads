@@ -199,12 +199,13 @@
     tripDatesLabel.text = @"1/1/2013 - 12/31/2013";
     tripContentLabel.text = @"P213 C87";
 //    tripContentLabel.text = [NSString stringWithFormat:@"%f, %f, %f, %f", self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, self.bounds.size.height];
-    tripFeaturedImageView.image = nil;
-    if (displayTrip.featuredLocationItem != nil) {
-        if (displayTrip.featuredLocationItem.image != nil) {
-            tripFeaturedImageView.image = displayTrip.featuredLocationItem.image;
-        }
-    }
+//    tripFeaturedImageView.image = nil;
+//    if (displayTrip.featuredLocationItem != nil) {
+//        if (displayTrip.featuredLocationItem.image != nil) {
+//            tripFeaturedImageView.image = displayTrip.featuredLocationItem.image;
+//        }
+//    }
+    tripFeaturedImageView.image = displayTrip.image;
     profilePictureView.image = [self randomImage];
     tripDescriptionTextView.text = displayTrip.description;
     tripDescriptionTextView.contentOffset = CGPointMake(-tripDescriptionTextView.contentInset.left, -tripDescriptionTextView.contentInset.top);
