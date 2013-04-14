@@ -12,6 +12,6 @@
 
 @interface ImageScrollEditItemView : UIView<EditControlsView>
 
-- (id)initDisplaysHorizontally:(BOOL)horizontal;
+- (id)initDisplaysHorizontally:(BOOL)horizontal showFavorite:(BOOL)favorite;
 
 @end

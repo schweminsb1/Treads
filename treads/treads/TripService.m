@@ -232,6 +232,9 @@ static TripService* repo;
 //                @synchronize(requestsReceived) {
                 requestsReceived++;
                 locationItem.imageID = [[item objectForKey:@"id"] intValue];
+                if (locationItem.image == trip.image) {
+                    trip.imageID = locationItem.imageID;
+                }
                 if (requestsReceived == requestsSent) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"

@@ -22,6 +22,8 @@
 //editing
 //@property (strong) UIView* addItemView;
 @property (copy) void(^sendNewItemRequest)(int index);
+//@property (copy) void(^sendAddItemRequest)(int index);
+@property (copy) void(^sendFavoriteItemRequest)(id<ImageScrollDisplayableItem>);
 - (void)setDisplayViewItem:(id<ImageScrollDisplayableItem>)item atIndex:(int)index;
 @property (copy) BOOL(^editingEnabled)();
 @property (copy) void(^arrayWasChanged)(NSArray* newDisplayItems);
