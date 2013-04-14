@@ -15,6 +15,8 @@
 
 @interface TripBrowser()<UITableViewDataSource, UITableViewDelegate>
 
+@property TripBrowserCellStyle cellStyle;
+
 @end
 
 @implementation TripBrowser {

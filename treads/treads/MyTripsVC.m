@@ -69,14 +69,14 @@
 {
     //load browser data
     [self.browser clearAndWait];
-    [self.browser setCellStyle:TripBrowserCell4x1];
+//    [self.browser setCellStyle:TripBrowserCell4x1];
     [self.tripService getTripsWithUserID:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(dataHasLoaded:)];
     //[self.tripService getTripWithID:0 forTarget:self withAction:@selector(dataHasLoaded:)];
 }
 
 - (void)dataHasLoaded:(NSArray*)newData
 {
-    [self.browser setBrowserData:newData forTarget:self withAction:@selector(showTrip:)];
+    [self.browser setBrowserData:newData withCellStyle:TripBrowserCell4x1 forTarget:self withAction:@selector(showTrip:)];
     for (Trip* trip in newData) {
         [self.tripService getHeaderImageForTrip:trip forTarget:self withCompleteAction:@selector(refreshWithNewHeader)];
     }

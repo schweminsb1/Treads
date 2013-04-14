@@ -67,7 +67,7 @@ static TripService* repo;
     }
     //send request for image
     else {
-        [self.imageService getImageWithPhotoID:trip.imageID withReturnBlock:^(NSArray *items) {
+        [[ImageService instance] getImageWithPhotoID:trip.imageID withReturnBlock:^(NSArray *items) {
             if (items.count > 0) {
                 trip.image = (UIImage*)(items[0]);
             }
@@ -83,7 +83,7 @@ static TripService* repo;
     
     //profile picture
     trip.profileImage = [self emptyImage];
-    [self.imageService getImageWithPhotoID:trip.profileImageID withReturnBlock:^(NSArray *items) {
+    [[ImageService instance] getImageWithPhotoID:trip.profileImageID withReturnBlock:^(NSArray *items) {
         if (items.count > 0) {
             trip.profileImage = (UIImage*)(items[0]);
         }
@@ -115,7 +115,7 @@ static TripService* repo;
             }
             //send request for image
             //        requestsSent++;
-            [self.imageService getImageWithPhotoID:locationItem.imageID withReturnBlock:^(NSArray *items) {
+            [[ImageService instance] getImageWithPhotoID:locationItem.imageID withReturnBlock:^(NSArray *items) {
                 if (items.count > 0) {
                     locationItem.image = (UIImage*)(items[0]);
                 }
@@ -245,7 +245,7 @@ static TripService* repo;
             }
             
             //upload image
-            [self.imageService insertImage:locationItem.image withCompletion:^(NSDictionary *item, NSError *error) {
+            [[ImageService instance] insertImage:locationItem.image withCompletion:^(NSDictionary *item, NSError *error) {
 //                @synchronize(requestsReceived) {
                 requestsReceived++;
                 locationItem.imageID = [[item objectForKey:@"id"] intValue];

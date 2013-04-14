@@ -26,7 +26,7 @@
 @property IBOutlet UILabel * name;
 @property IBOutlet UIButton * follow;
 @property IBOutlet UIButton * edit;
-@property TripService* tripService;
+//@property TripService* tripService;
 @property UserService* userService;
 @property ImageService* imageService;
 @property FollowService* followService;
@@ -54,7 +54,7 @@
     if (self) {
         self.title = NSLocalizedString(@"Profile", @"Profile");
         self.tabBarItem.image = [UIImage imageNamed:(@"man.png")];
-        self.tripService = myTripService;
+//        self.tripService = myTripService;
         self.userService = myUserService;
         self.imageService = myImageService;
         self.locationService = locationService;
@@ -121,11 +121,14 @@
 
 - (void)tripsHaveLoaded:(NSArray*)newData {
     self.browser = [[TripBrowser alloc] initWithFrame:self.browserWindow.bounds];
-    self.browser.cellStyle = TripBrowserCell6x2;
+//    self.browser.cellStyle = TripBrowserCell6x2;
     [self.browser setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     [self.browserWindow addSubview: self.browser];
     [self.browser clearAndWait];
-    [self.browser setBrowserData:newData forTarget:self withAction:@selector(showTrip:)];
+    [self.browser setBrowserData:newData withCellStyle:TripBrowserCell6x2 forTarget:self withAction:@selector(showTrip:)];
+    for (Trip* trip in newData) {
+        [[TripService instance] getHeaderImageForTrip:trip forTarget:self withCompleteAction:@selector(refreshWithNewHeader)];
+    }
     CompletionWithItems completion= ^(NSArray* items) {
         
         if (items.count > 0) {
@@ -139,6 +142,11 @@
         
     };
             [self.imageService getImageWithPhotoID:self.returnedUser.profilePhotoID withReturnBlock:completion];
+}
+
+- (void)refreshWithNewHeader
+{
+    [self.browser refreshWithNewImages];
 }
 
 - (void)didReceiveMemoryWarning
@@ -168,7 +176,7 @@
 
 - (void)showTrip:(Trip*)trip
 {
-    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID LocationService:_locationService withCommentService:_commentService withUserService: _userService];
+    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:[TripService instance] tripID:trip.tripID LocationService:_locationService withCommentService:_commentService withUserService: _userService];
     [self.navigationController pushViewController:tripViewVC animated:YES];
 }
 
