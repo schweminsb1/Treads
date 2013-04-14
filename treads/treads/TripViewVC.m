@@ -130,6 +130,8 @@
             trip.tripID = [Trip UNDEFINED_TRIP_ID];
             trip.userID = [TreadsSession instance].treadsUserID;
             trip.name = @"New Trip";
+            trip.username = [NSString stringWithFormat:@"%@ %@", [TreadsSession instance].fName, [TreadsSession instance].lName];
+            trip.profileImageID = [TreadsSession instance].profilePhotoID;
             trip.description = @"Trip Description";
             trip.imageID = [TripLocationItem UNDEFINED_IMAGE_ID];
             [self dataHasLoaded:@[trip]];

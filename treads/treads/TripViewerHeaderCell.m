@@ -174,7 +174,7 @@
     tripNameLabel.textWasChanged = ^(NSString* newText){trip.name = newText;};
     [tripDescriptionEditableTextView setText:trip.description];
     tripDescriptionEditableTextView.textWasChanged = ^(NSString* newText){trip.description = newText;};
-    profilePictureView.image = [UIImage imageNamed:@"helicopter-bouldering-crash-pad.jpg"];
+    profilePictureView.image = trip.profileImage;//[UIImage imageNamed:@"helicopter-bouldering-crash-pad.jpg"];
 }
 
 @end

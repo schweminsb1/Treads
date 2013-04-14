@@ -57,21 +57,38 @@ static TripService* repo;
 
 - (void)getHeaderImageForTrip:(Trip *)trip forTarget:(NSObject *)target withCompleteAction:(SEL)completeAction
 {
+    //banner picture
     if (trip.imageID == [TripLocationItem UNDEFINED_IMAGE_ID]) {
         trip.image = [self emptyImage];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [target performSelector:completeAction];
 #pragma clang diagnostic pop
-        return;
     }
     //send request for image
-    [self.imageService getImageWithPhotoID:trip.imageID withReturnBlock:^(NSArray *items) {
+    else {
+        [self.imageService getImageWithPhotoID:trip.imageID withReturnBlock:^(NSArray *items) {
+            if (items.count > 0) {
+                trip.image = (UIImage*)(items[0]);
+            }
+            else {
+                trip.image = [self imageNotFound];
+            }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            [target performSelector:completeAction];
+#pragma clang diagnostic pop
+        }];
+    }
+    
+    //profile picture
+    trip.profileImage = [self emptyImage];
+    [self.imageService getImageWithPhotoID:trip.profileImageID withReturnBlock:^(NSArray *items) {
         if (items.count > 0) {
-            trip.image = (UIImage*)(items[0]);
+            trip.profileImage = (UIImage*)(items[0]);
         }
         else {
-            trip.image = [self imageNotFound];
+            trip.profileImage = [self imageNotFound];
         }
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
@@ -133,6 +150,7 @@ static TripService* repo;
             trip.tripID = [[returnTrip objectForKey:@"id"] intValue];
             trip.userID = [[returnTrip objectForKey:@"userID"] intValue];
             trip.username = [returnTrip objectForKey:@"username"];
+            trip.profileImageID = [[returnTrip objectForKey:@"profileImageID"] intValue];
             trip.name = [returnTrip objectForKey:@"name"];
             trip.description = [returnTrip objectForKey:@"description"];
             trip.imageID = [[returnTrip objectForKey:@"imageID"] intValue];
@@ -300,74 +318,74 @@ static TripService* repo;
 
 #pragma mark - Debug Items
 
-- (void)addDebugItemsToTrip:(Trip*)trip
-{
-    //debug items - test models for items currently not implemented server-side
-    
-    //items are currently randomized using the tripID as a seed
-    srand(trip.tripID);
-    
-    //featured item
-//    TripLocationItem* dummyFeaturedLocationItem = [[TripLocationItem alloc] init];
-//    dummyFeaturedLocationItem.image = [self randomImage];
-//    trip.featuredLocationItem = dummyFeaturedLocationItem;
-    
-    //locations
-    //    NSMutableArray* dummyLocationArray = [[NSMutableArray alloc] init];
-    //    int count = random()%8 + 1;
-    //    for (int i = 0; i < count; i++) {
-    for (int i = 0; i < trip.tripLocations.count; i++) {
-        //        TripLocation* dummyLocation = [[TripLocation alloc] init];
-        //        dummyLocation.tripLocationID = i;
-        //        dummyLocation.tripID = trip.tripID;
-        //        dummyLocation.locationID = i;
-        //        dummyLocation.description = [self loremIpsum];
-        
-        NSMutableArray* dummyLocationItemsArray = [[NSMutableArray alloc] init];
-        int cap = random()%6;
-        for (int j = 0; j < cap; j++) {
-            TripLocationItem* dummyLocationItem = [[TripLocationItem alloc] init];
-            dummyLocationItem.image = [self randomImage];
-            dummyLocationItem.description = [NSString stringWithFormat:@"%d [%ld] : %@", j, random()%1000, [self loremIpsum]];
-            [dummyLocationItemsArray addObject:dummyLocationItem];
-        }
-        ((TripLocation*)trip.tripLocations[i]).tripLocationItems = [NSArray arrayWithArray:dummyLocationItemsArray];
-        
-        //        [dummyLocationArray addObject:dummyLocation];
-    }
-    
-    //    trip.tripLocations = [NSArray arrayWithArray:dummyLocationArray];
-}
+//- (void)addDebugItemsToTrip:(Trip*)trip
+//{
+//    //debug items - test models for items currently not implemented server-side
+//    
+//    //items are currently randomized using the tripID as a seed
+//    srand(trip.tripID);
+//    
+//    //featured item
+////    TripLocationItem* dummyFeaturedLocationItem = [[TripLocationItem alloc] init];
+////    dummyFeaturedLocationItem.image = [self randomImage];
+////    trip.featuredLocationItem = dummyFeaturedLocationItem;
+//    
+//    //locations
+//    //    NSMutableArray* dummyLocationArray = [[NSMutableArray alloc] init];
+//    //    int count = random()%8 + 1;
+//    //    for (int i = 0; i < count; i++) {
+//    for (int i = 0; i < trip.tripLocations.count; i++) {
+//        //        TripLocation* dummyLocation = [[TripLocation alloc] init];
+//        //        dummyLocation.tripLocationID = i;
+//        //        dummyLocation.tripID = trip.tripID;
+//        //        dummyLocation.locationID = i;
+//        //        dummyLocation.description = [self loremIpsum];
+//        
+//        NSMutableArray* dummyLocationItemsArray = [[NSMutableArray alloc] init];
+//        int cap = random()%6;
+//        for (int j = 0; j < cap; j++) {
+//            TripLocationItem* dummyLocationItem = [[TripLocationItem alloc] init];
+////            dummyLocationItem.image = [self randomImage];
+//            dummyLocationItem.description = [NSString stringWithFormat:@"%d [%ld] : %@", j, random()%1000, [self loremIpsum]];
+//            [dummyLocationItemsArray addObject:dummyLocationItem];
+//        }
+//        ((TripLocation*)trip.tripLocations[i]).tripLocationItems = [NSArray arrayWithArray:dummyLocationItemsArray];
+//        
+//        //        [dummyLocationArray addObject:dummyLocation];
+//    }
+//    
+//    //    trip.tripLocations = [NSArray arrayWithArray:dummyLocationArray];
+//}
 
-- (UIImage*)randomImage
-{
-    int image = random()%5;
-    switch (image) {
-        case 0:
-            return [UIImage imageNamed:@"mountains.jpeg"];
-            break;
-        case 1:
-            return [UIImage imageNamed:@"helicopter-bouldering-crash-pad.jpg"];
-            break;
-        case 2:
-            return [UIImage imageNamed:@"remote-luxury-hiking-canada.jpg"];
-            break;
-        case 3:
-            return [UIImage imageNamed:@"summit-boots-hiking-rocks.jpg"];
-            break;
-        case 4:
-            return [UIImage imageNamed:@"virgin_river_hiking.jpg"];
-            break;
-        default:
-            break;
-    }
-    return nil;
-}
+//- (UIImage*)randomImage
+//{
+//    int image = random()%5;
+//    switch (image) {
+//        case 0:
+//            return [UIImage imageNamed:@"mountains.jpeg"];
+//            break;
+//        case 1:
+//            return [UIImage imageNamed:@"helicopter-bouldering-crash-pad.jpg"];
+//            break;
+//        case 2:
+//            return [UIImage imageNamed:@"remote-luxury-hiking-canada.jpg"];
+//            break;
+//        case 3:
+//            return [UIImage imageNamed:@"summit-boots-hiking-rocks.jpg"];
+//            break;
+//        case 4:
+//            return [UIImage imageNamed:@"virgin_river_hiking.jpg"];
+//            break;
+//        default:
+//            break;
+//    }
+//    return nil;
+//}
 
-- (NSString*)loremIpsum
-{
-    return @"Lorem ipsum dolor sit amet";//, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.";// Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.";// Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.";
-}
+//- (NSString*)loremIpsum
+//{
+//    return @"Lorem ipsum dolor sit amet";//, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.";// Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.";// Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.";
+//}
 
 
 
