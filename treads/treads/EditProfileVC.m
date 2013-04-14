@@ -96,16 +96,7 @@
             return;
         }
         else {
-         /*   NSDictionary * newItem= @{
-                                      @"id":[NSNumber numberWithInt:[TreadsSession instance].treadsUserID],
-                                      @"emailAddress": [TreadsSession instance].treadsUser,
-                                      @"password": returnedUser.password ,
-                                      @"Fname": [TreadsSession instance].fName ,
-                                      @"Lname": [TreadsSession instance].lName,
-                                      @"profilePhotoID": [NSNumber numberWithInt:[TreadsSession instance].profilePhotoID],
-                                      @"coverPhotoID" : [NSNumber numberWithInt:[TreadsSession instance].coverPhotoID]
-                                      };
-           */returnedUser.password = [self getPasswordHash:self.oldPassword.text];
+            returnedUser.password = [self getPasswordHash:self.updatePassword.text];
             [self.userService updateUser:returnedUser forTarget:self withAction:@selector(success)];
             
         }
