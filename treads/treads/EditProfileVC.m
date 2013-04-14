@@ -20,6 +20,7 @@
 @property IBOutlet UITextField * oldPassword;
 @property IBOutlet UITextField * updatePassword;
 @property IBOutlet UITextField * confirmPassword;
+@property IBOutlet UIButton * passwordUpdate;
 @property UserService * userService;
 
 @end
@@ -49,7 +50,7 @@
 }
 
 -(IBAction) changePassword :(id) sender {
-    
+    self.updatePassword.enabled = false;
     [self.userService getUserbyID:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(dataHasLoaded:)];    
 }
 
@@ -96,9 +97,25 @@
         }
         else {
             returnedUser.password = [self getPasswordHash:self.oldPassword.text];
+            [self.userService updatePassword:((NSDictionary*)returnedUser) forTarget:self withAction:@selector(success)];
             
         }
     }
+}
+             
+-(void) success {
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle: @"Success"
+                          message: @"Password updated"
+                          delegate: nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil];
+    self.oldPassword.text = @"";
+    self.updatePassword.text = @"";
+    self.confirmPassword.text = @"";
+    [alert show];
+    self.passwordUpdate.enabled = true;
+    
 }
 
 -(NSString *) getPasswordHash:(NSString *) user_input

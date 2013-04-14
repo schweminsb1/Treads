@@ -28,5 +28,7 @@
 
 - (void)addUser:(NSDictionary*)newUser forTarget:(NSObject*) target withAction: (SEL) returnAction;
 
+-(void)updatePassword:(NSDictionary*)user forTarget:(NSObject*) target withAction: (SEL) returnAction;
+
 +(UserService*) instance ;
 @end

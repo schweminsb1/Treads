@@ -92,4 +92,8 @@ static UserService* repo;
 }
 
 
+-(void)updatePassword:(NSDictionary*)user forTarget:(NSObject*) target withAction: (SEL) returnAction {
+    [self.dataRepository updateDataItem:user usingService:self forRequestingObject:target withReturnAction:returnAction];
+}
+
 @end
