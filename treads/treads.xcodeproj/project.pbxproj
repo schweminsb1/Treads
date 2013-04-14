@@ -56,8 +56,6 @@
 		39164F5316EA91C200877549 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39164F5216EA91C200877549 /* CoreLocation.framework */; };
 		39164F5716EA92C600877549 /* TripViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39164F5516EA92C600877549 /* TripViewVC.m */; };
 		39164F5816EA92C600877549 /* TripViewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39164F5616EA92C600877549 /* TripViewVC.xib */; };
-		39164F5D16EAA3E000877549 /* AddLocationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39164F5B16EAA3E000877549 /* AddLocationVC.m */; };
-		39164F5E16EAA3E000877549 /* AddLocationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39164F5C16EAA3E000877549 /* AddLocationVC.xib */; };
 		395CD5EE16F03EEA009FD655 /* LocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 395CD5ED16F03EEA009FD655 /* LocationService.m */; };
 		395E625F1715EC0E007AB363 /* CameraService.m in Sources */ = {isa = PBXBuildFile; fileRef = 395E625E1715EC0E007AB363 /* CameraService.m */; };
 		3973FE4C1710AC6000D4AAE1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3973FE4B1710AC6000D4AAE1 /* MobileCoreServices.framework */; };
@@ -186,9 +184,6 @@
 		39164F5416EA92C600877549 /* TripViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripViewVC.h; path = treads/TripViewVC.h; sourceTree = SOURCE_ROOT; };
 		39164F5516EA92C600877549 /* TripViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripViewVC.m; path = treads/TripViewVC.m; sourceTree = SOURCE_ROOT; };
 		39164F5616EA92C600877549 /* TripViewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TripViewVC.xib; path = treads/TripViewVC.xib; sourceTree = SOURCE_ROOT; };
-		39164F5A16EAA3E000877549 /* AddLocationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddLocationVC.h; path = treads/AddLocationVC.h; sourceTree = SOURCE_ROOT; };
-		39164F5B16EAA3E000877549 /* AddLocationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddLocationVC.m; path = treads/AddLocationVC.m; sourceTree = SOURCE_ROOT; };
-		39164F5C16EAA3E000877549 /* AddLocationVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddLocationVC.xib; path = treads/AddLocationVC.xib; sourceTree = SOURCE_ROOT; };
 		395CD5EC16F03EEA009FD655 /* LocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationService.h; path = treads/LocationService.h; sourceTree = SOURCE_ROOT; };
 		395CD5ED16F03EEA009FD655 /* LocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationService.m; path = treads/LocationService.m; sourceTree = SOURCE_ROOT; };
 		395E625D1715EC0E007AB363 /* CameraService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraService.h; sourceTree = "<group>"; };
@@ -442,9 +437,6 @@
 		39164F5916EAA3A800877549 /* Add Location */ = {
 			isa = PBXGroup;
 			children = (
-				39164F5A16EAA3E000877549 /* AddLocationVC.h */,
-				39164F5B16EAA3E000877549 /* AddLocationVC.m */,
-				39164F5C16EAA3E000877549 /* AddLocationVC.xib */,
 			);
 			name = "Add Location";
 			sourceTree = "<group>";
@@ -797,7 +789,6 @@
 				3C958FF816EA6CED0038AD7C /* LoginVC.xib in Resources */,
 				3C958FFD16EA6CFF0038AD7C /* RegisterVC.xib in Resources */,
 				39164F5816EA92C600877549 /* TripViewVC.xib in Resources */,
-				39164F5E16EAA3E000877549 /* AddLocationVC.xib in Resources */,
 				316399B716ECB3F6003B3F0E /* EditTripVC.xib in Resources */,
 				3914480B16EE4B20001B16BE /* mountains.jpeg in Resources */,
 				3118BFEE16EFC588006DE2E9 /* compass.png in Resources */,
@@ -840,7 +831,6 @@
 				3C95900416EA6D220038AD7C /* MapPinAnnotation.m in Sources */,
 				3C95900516EA6D220038AD7C /* Path.m in Sources */,
 				39164F5716EA92C600877549 /* TripViewVC.m in Sources */,
-				39164F5D16EAA3E000877549 /* AddLocationVC.m in Sources */,
 				316399B616ECB3F6003B3F0E /* EditTripVC.m in Sources */,
 				3C12312416EFCB89006CCBFE /* DataRepository.m in Sources */,
 				3C12312716EFCB98006CCBFE /* ProfileService.m in Sources */,
