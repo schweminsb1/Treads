@@ -270,7 +270,8 @@
 
 - (void)setDisplayViewItem:(id<ImageScrollDisplayableItem>)item atIndex:(int)index replaceItem:(BOOL)replaceItem
 {
-    if (index == imageSubViewCount || index < 0) {
+    if (index >= imageSubViewCount || index < 0) {
+        if (index > imageSubViewCount) {index = imageSubViewCount;}
         [self addItemToDisplayView:item];
     }
     else {
