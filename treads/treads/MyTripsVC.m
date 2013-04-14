@@ -23,6 +23,8 @@
 #import "CommentService.h"
 #import "UserService.h"
 
+#import "TreadsSession.h"
+
 @interface MyTripsVC()
 
 @property (strong) TripService* tripService;
@@ -68,7 +70,7 @@
     //load browser data
     [self.browser clearAndWait];
     [self.browser setCellStyle:TripBrowserCell4x1];
-    [self.tripService getAllTripsForTarget:self withAction:@selector(dataHasLoaded:)];
+    [self.tripService getTripsWithUserID:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(dataHasLoaded:)];
     //[self.tripService getTripWithID:0 forTarget:self withAction:@selector(dataHasLoaded:)];
 }
 

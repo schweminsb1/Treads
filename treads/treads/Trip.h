@@ -18,11 +18,12 @@
 
 //header
 @property int tripID; //id
-@property int userID;
 @property (copy) NSString* name;
-@property (copy) NSString* description;
+@property int userID;
+@property (copy) NSString* username;
 @property int imageID;
 @property (strong) UIImage* image;
+@property (copy) NSString* description;
 
 //location
 @property (strong) NSArray* tripLocations;
