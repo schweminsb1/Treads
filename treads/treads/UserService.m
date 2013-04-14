@@ -57,7 +57,7 @@ static UserService* repo;
     
     
 }
--(NSArray *)getUserbyID:(int)UserID withReturnItems: (NSArray *)itm
+-(NSArray *)getUserbyID:(int)UserID 
 {
     __block NSArray * objects;
     __block BOOL completed=false;
@@ -70,7 +70,6 @@ static UserService* repo;
     [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"id = '%d'", UserID] usingService:self withReturnBlock:completion];
     while(!completed)
     {}
-    
     
     
     return objects;

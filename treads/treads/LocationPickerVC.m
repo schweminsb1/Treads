@@ -37,8 +37,14 @@
 {
     [super viewDidLoad];
     
-    [_service getLocationsforTarget:self withAction:@selector(fillLocations:)];
+    //[_service getLocationsforTarget:self withAction:@selector(fillLocations:)];
    
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [_service getLocationsforTarget:self withAction:@selector(fillLocations:)];
+    
 }
 
 - (void)didReceiveMemoryWarning

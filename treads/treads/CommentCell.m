@@ -46,13 +46,7 @@
         self.userInteractionEnabled= YES;
            _userNameButton.userInteractionEnabled=YES;
         [_userService getUserbyID:[_commentModel.UserID intValue] forTarget:self withAction:@selector(recieveUserModel:)];
-        CompletionWithItems block= ^(NSArray* items)
-        {
-            _proImage=items[0];
-            [self setNeedsLayout];
-            
-        };
-        [[ImageService instance] getImageWithPhotoID:[TreadsSession instance].profilePhotoID withReturnBlock:block];
+  
         
     }
     return self;
@@ -89,7 +83,15 @@
     if(items.count>0)
     _userModel=items[0];
     _userNameButton.hidden=NO;
-    [self layoutSubviews];
+    
+    CompletionWithItems block= ^(NSArray* items)
+    {
+        _proImage=items[0];
+      [self layoutSubviews];
+        
+    };
+    [[ImageService instance] getImageWithPhotoID:_userModel.profilePhotoID withReturnBlock:block];
+    
     
     
 }
