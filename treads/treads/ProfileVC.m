@@ -112,19 +112,8 @@
             self.follow.hidden = false;
         }
       
-        CompletionWithItems completion= ^(NSArray* items) {
-            if (items.count > 0) {
-                UIImage *returnImage= items[0];
-                [self.profilePic setImage:returnImage forState:UIControlStateNormal];
-            }
-            else {
-                UIImage* defaultPic = [UIImage imageNamed:@"man.png"];
-                [self.profilePic setImage:defaultPic forState:UIControlStateNormal];
-            }
-                [self.tripService getTripsWithUserID:self.userID forTarget:self withAction:@selector(tripsHaveLoaded:)];
-        };
-        [self.imageService getImageWithPhotoID:self.returnedUser.profilePhotoID withReturnBlock:completion];
-
+        [[TripService instance] getTripsWithUserID:self.userID forTarget:self withAction:@selector(tripsHaveLoaded:)];
+        
     }
 }
 
@@ -137,6 +126,19 @@
     [self.browserWindow addSubview: self.browser];
     [self.browser clearAndWait];
     [self.browser setBrowserData:newData forTarget:self withAction:@selector(showTrip:)];
+    CompletionWithItems completion= ^(NSArray* items) {
+        
+        if (items.count > 0) {
+            UIImage *returnImage= items[0];
+            [self.profilePic setImage:returnImage forState:UIControlStateNormal];
+        }
+        else {
+            UIImage* defaultPic = [UIImage imageNamed:@"man.png"];
+            [self.profilePic setImage:defaultPic forState:UIControlStateNormal];
+        }
+        
+    };
+            [self.imageService getImageWithPhotoID:self.returnedUser.profilePhotoID withReturnBlock:completion];
 }
 
 - (void)didReceiveMemoryWarning
