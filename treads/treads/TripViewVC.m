@@ -78,6 +78,7 @@
             TripLocation* locationNew= [[TripLocation alloc]init];
             locationNew.tripID= tripid;
             locationNew.locationID=[location.idField intValue];
+            locationNew.locationName = location.title;
             //add new trip location to database
             onSuccess(locationNew);
         };

@@ -140,6 +140,7 @@ static TripService* repo;
                 tripLocation.locationID = [[tripLocationDictionary objectForKey:@"locationID"] intValue];
                 tripLocation.description = [tripLocationDictionary objectForKey:@"description"];
                 tripLocation.index = [[tripLocationDictionary objectForKey:@"index"] intValue];
+                tripLocation.locationName = [tripLocationDictionary objectForKey:@"locationName"];
                 NSArray* tripLocationItemsDictionary = [tripLocationDictionary objectForKey:@"tripLocationItems"];
                 NSMutableArray* tripLocationItems = [[NSMutableArray alloc] initWithCapacity:tripLocationItemsDictionary.count];
                 for (NSDictionary* tripLocationItemDictionary in tripLocationItemsDictionary) {

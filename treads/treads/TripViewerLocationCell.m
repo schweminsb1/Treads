@@ -186,10 +186,11 @@
 //    return YES;
 //}
 
-- (void)changeLocation:(int)newLocationID
+- (void)changeLocation:(int)newLocationID withName:(NSString*)name
 {
     self.markChangeMade();
     self.tripLocation.locationID = newLocationID;
+    self.tripLocation.locationName = name;
     [self setTripLocationHeader:self.tripLocation];
     [self setNeedsLayout];
 }
@@ -239,7 +240,7 @@
 
 - (void)setTripLocationHeader:(TripLocation*)tripLocation
 {
-    locationNameLabel.text = [NSString stringWithFormat:@"Location: ID %d, LocationID: %d", tripLocation.tripLocationID, tripLocation.locationID];
+    locationNameLabel.text = tripLocation.locationName;//[NSString stringWithFormat:@"Location: ID %d, LocationID: %d", tripLocation.tripLocationID, tripLocation.locationID];
     
     locationMapView.image = [UIImage imageNamed:@"map_preview.png"];
     

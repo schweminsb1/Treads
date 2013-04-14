@@ -16,7 +16,9 @@
 //identifiers
 @property int tripLocationID; //id
 @property int tripID;
+
 @property int locationID;
+@property (copy) NSString* locationName;
 
 //data
 @property (copy) NSString* description; //(summary)
