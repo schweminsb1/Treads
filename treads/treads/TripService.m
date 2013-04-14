@@ -132,6 +132,7 @@ static TripService* repo;
         @try {
             trip.tripID = [[returnTrip objectForKey:@"id"] intValue];
             trip.userID = [[returnTrip objectForKey:@"userID"] intValue];
+            trip.username = [returnTrip objectForKey:@"username"];
             trip.name = [returnTrip objectForKey:@"name"];
             trip.description = [returnTrip objectForKey:@"description"];
             trip.imageID = [[returnTrip objectForKey:@"imageID"] intValue];
