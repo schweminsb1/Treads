@@ -7,7 +7,7 @@
 //
 
 #import "UserService.h"
-#import "User.h"
+//#import "User.h"
 #import "DataRepository.h"
 
 @implementation UserService
@@ -92,8 +92,22 @@ static UserService* repo;
 }
 
 
--(void)updatePassword:(NSDictionary*)user forTarget:(NSObject*) target withAction: (SEL) returnAction {
-    [self.dataRepository updateDataItem:user usingService:self forRequestingObject:target withReturnAction:returnAction];
+-(void)updatePassword:(User*)user forTarget:(NSObject*) target withAction: (SEL) returnAction {
+    
+    NSMutableDictionary* userDictionary = [NSMutableDictionary dictionaryWithDictionary:@{
+                                           @"id":@(user.User_ID),
+                                           @"emailAddress":[NSString stringWithString: user.emailaddress],
+                                           @"Password":[NSString stringWithString: user.password],
+                                           @"fName":[NSString stringWithString: user.fname],
+                                           @"lName":[NSString stringWithString: user.lname],
+                                           @"profilePhotoID":@(user.profilePhotoID),
+                                           @"coverPhotoID":@(user.coverPhotoID)
+                                           }];
+
+        [userDictionary setObject:@(user.User_ID) forKey:@"id"];
+        [self.dataRepository updateDataItem:userDictionary usingService:self forRequestingObject:target withReturnAction:returnAction];
+    
+   // [self.dataRepository updateDataItem:userDictionary usingService:self forRequestingObject:target withReturnAction:returnAction];
 }
 
 @end
