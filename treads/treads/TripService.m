@@ -58,7 +58,7 @@ static TripService* repo;
 - (void)getHeaderImageForTrip:(Trip *)trip forTarget:(NSObject *)target withCompleteAction:(SEL)completeAction
 {
     if (trip.imageID == [TripLocationItem UNDEFINED_IMAGE_ID]) {
-        trip.image = [self imageNotFound];
+        trip.image = [self emptyImage];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [target performSelector:completeAction];
@@ -114,6 +114,11 @@ static TripService* repo;
     }
 }
 
+- (UIImage*)emptyImage
+{
+    return [UIImage imageNamed:@"empty_item.png"];
+}
+
 - (UIImage*)imageNotFound
 {
     return [UIImage imageNamed:@"404.png"];
@@ -149,6 +154,7 @@ static TripService* repo;
                     tripLocationItem.tripLocationID = [[tripLocationItemDictionary objectForKey:@"tripLocationID"] intValue];
                     tripLocationItem.description = [tripLocationItemDictionary objectForKey:@"description"];
                     tripLocationItem.imageID = [[tripLocationItemDictionary objectForKey:@"imageID"] intValue];
+                    tripLocationItem.image = [self emptyImage];
                     tripLocationItem.index = [[tripLocationItemDictionary objectForKey:@"index"] intValue];
                     [tripLocationItems addObject:tripLocationItem];
                 }

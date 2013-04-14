@@ -33,6 +33,7 @@ BOOL previousDoneHit;
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
     //[super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     if ([self.popoverController isPopoverVisible])
@@ -49,10 +50,10 @@ BOOL previousDoneHit;
         self.imagePicker.navigationBar.opaque = true;
         self.imagePicker.delegate = self;
         doneTakingPictures = NO;
-        
         if(!doneTakingPictures)
         {
             [self presentViewController:self.imagePicker animated:YES completion:nil];
+
         }
         _newMedia = YES;
     }

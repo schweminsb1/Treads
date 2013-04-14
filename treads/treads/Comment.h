@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "User.h"
+#import <UIKit/UIKit.h>
 
 @interface Comment : NSObject
 
@@ -19,5 +20,6 @@
 
 //filled with UserService
 @property User * commentsUser;
+@property UIImage * proImage;
 
 @end

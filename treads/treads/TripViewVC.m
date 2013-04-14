@@ -129,6 +129,7 @@
             trip.userID = -1;
             trip.name = @"New Trip";
             trip.description = @"Trip Description";
+            trip.imageID = [TripLocationItem UNDEFINED_IMAGE_ID];
             [self dataHasLoaded:@[trip]];
         }
         else {
