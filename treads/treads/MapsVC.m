@@ -292,7 +292,7 @@ CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
     CLLocationCoordinate2D swCoord;
     swCoord = [mapView convertPoint:swPoint toCoordinateFromView:mapView];
     
-    for(int i=0; i<mapView.annotations.count && i<_PINLIMIT; i++)
+    for(int i=0; i<mapView.annotations.count ; i++)
     {
         double lat=((MapPinAnnotation*)mapView.annotations[i]).location.latitude;
         double lon=((MapPinAnnotation*)mapView.annotations[i]).location.longitude;
@@ -301,7 +301,7 @@ CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
             [mapView removeAnnotation:mapView.annotations[i]];
         }
     }
-    for(int i=0; i< _locationsTotal.count; i++)//add annotations in view
+    for(int i=0; i< _locationsTotal.count && i<_PINLIMIT; i++)//add annotations in view
     {
         double lat=((MapPinAnnotation*)_locationsTotal[i]).location.latitude;
         double lon=((MapPinAnnotation*)_locationsTotal[i]).location.longitude;
