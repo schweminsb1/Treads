@@ -82,7 +82,9 @@
 }
 
 -(void) viewWillAppear:(BOOL)animated {
+    
     [self.userService getUserbyID:self.userID forTarget:self withAction:@selector(dataHasLoaded:)];
+    
 }
 
 - (void)dataHasLoaded:(NSArray*)newData{

@@ -156,6 +156,7 @@
                 {
                     alert.message= @"Your drive may be full too full to use Treads";
                     [alert show];
+                    [self.activityIndicatorView stopAnimating];
                     return;
                 }
             }
@@ -169,6 +170,7 @@
         {
             alert.message= @"The Email address and password do not match in the Treads server";
             [alert show];
+            [self.activityIndicatorView stopAnimating];
             return;
         }
     }
@@ -178,6 +180,8 @@
         _usernameText.text=@"";
         _passwordText.text=@"";
         [alert show];
+        [self.activityIndicatorView stopAnimating];
+        
         return;
     }
     else
