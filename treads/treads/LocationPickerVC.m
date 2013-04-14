@@ -94,7 +94,9 @@
 {
     if(indexPath.row ==0)
     {
+        
         AddLocationVC * addLocVC= [[AddLocationVC alloc] init];
+
         [self.navigationController pushViewController:addLocVC animated:YES];
     }
     else

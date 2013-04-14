@@ -50,7 +50,7 @@ static LocationService* repo;
     {
         Location * location  = [[Location alloc] init];
         location.title  = returnData[i][@"name"];
-        location.idField  = returnData[i][@"LocationID"];
+        location.idField  = returnData[i][@"id"];
         location.description = returnData[i][@"description"];
         location.latitude     = [returnData[i][@"latitude"] floatValue];
         location.longitude     = [returnData[i][@"longitude"] floatValue];

@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "LocationService.h"
 #import "Location.h"
+#import <MapKit/MapKit.h>
 
 @interface LocationPickerVC : UITableViewController <UISearchBarDelegate, UISearchDisplayDelegate>
-
+typedef void (^CompletionBlockWithCoord) (CLLocationCoordinate2D);
 @property (strong,nonatomic) NSMutableArray *locationsFilteredArray;
 @property IBOutlet UISearchBar *locationSearchBar;
 @property (nonatomic, copy) void (^returnLocationToTripView)(Location*);
