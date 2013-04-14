@@ -149,7 +149,7 @@
                                       @"coverPhotoID" : @-1
                                       };
             [_userService addUser:newItem forTarget:self withAction:@selector(addUserSuccess:withSuccess:)];
-            
+
         }
         else{
             _password.text = @"";
