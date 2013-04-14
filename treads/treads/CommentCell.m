@@ -13,14 +13,16 @@
 #import "FollowService.h"
 #import "LocationService.h"
 #import "UserService.h"
-
+#import "LocationVC.h"
+#import "TreadsSession.h"
 
 @implementation CommentCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withCommentModel:(Comment *) comment withTripService: (TripService*) tripService withUserService:(UserService*) userService imageService:(ImageService*)imageService  withLocationService:(LocationService*)locationService withCommentService:(CommentService*)commentService withFollowService:(FollowService*)followService
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withCommentModel:(Comment *) comment withTripService: (TripService*) tripService withUserService:(UserService*) userService imageService:(ImageService*)imageService  withLocationService:(LocationService*)locationService withCommentService:(CommentService*)commentService withFollowService:(FollowService*)followService withLocationDelegate:(LocationVC*)delegate
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        _delegate=delegate;
         _tripService=tripService;
         _userService=userService;
         _imageService=imageService;
@@ -31,7 +33,8 @@
           _imagerect= CGRectMake(self.bounds.origin.x+5, self.bounds.origin.y+5, self.bounds.size.height-20, self.bounds.size.height-20);
         _userNameButton=[UIButton buttonWithType:UIButtonTypeCustom];
         _userNameButton.frame=CGRectMake(_imagerect.origin.x+ _imagerect.size.width + 1, self.bounds.origin.y, 90, self.bounds.size.height-12);
-        _userNameButton.hidden=YES;
+        _userNameButton.hidden=NO;
+     
         [_userNameButton addTarget:self action:@selector(toProfilePage) forControlEvents:UIControlEventTouchUpInside];
         _userModel = [[User alloc]init];
         _userModel.fname=@"";
@@ -39,9 +42,17 @@
         _userModel.User_ID=-1;
         // Initialization code 
         _commentModel=comment;
-        
-        self.userInteractionEnabled= NO;
+        self.selectionStyle= UITableViewCellSelectionStyleNone;
+        self.userInteractionEnabled= YES;
+           _userNameButton.userInteractionEnabled=YES;
         [_userService getUserbyID:[_commentModel.UserID intValue] forTarget:self withAction:@selector(recieveUserModel:)];
+        CompletionWithItems block= ^(NSArray* items)
+        {
+            _proImage=items[0];
+            [self setNeedsLayout];
+            
+        };
+        [[ImageService instance] getImageWithPhotoID:[TreadsSession instance].profilePhotoID withReturnBlock:block];
         
     }
     return self;
@@ -59,10 +70,10 @@
     
     [super layoutSubviews];
     
-    
+       _userNameButton.userInteractionEnabled=YES;
     
     _profileImage =[[UIImageView alloc] initWithFrame: _imagerect];
-    _profileImage.image = [UIImage imageNamed:@"mountains.jpeg"];
+    _profileImage.image = _proImage;
     
     _commentField = [[UITextView alloc] initWithFrame:CGRectMake(_imagerect.origin.x+ _imagerect.size.width + 1, self.bounds.origin.y, 550, self.bounds.size.height-1)];
     _commentField.text = [NSString stringWithFormat:@"%@ %@ says: \n \n \t %@",_userModel.fname,_userModel.lname,  _commentModel.comment ];
@@ -83,9 +94,16 @@
 }
 -(void)toProfilePage
 {
+    if([TreadsSession instance].treadsUserID == _userModel.User_ID)
+    {
+        ProfileVC * profilevc= [[ProfileVC alloc]initWithNibName:@"ProfileVC" bundle:nil tripService:_tripService userService:_userService imageService:_imageService isUser:YES userID:_userModel.User_ID withLocationService:_locationService withCommentService:_commentService withFollowService:_followService];
+        [self.delegate.navigationController pushViewController:profilevc animated:YES];
+    }
+    else
+    {
     ProfileVC * profilevc= [[ProfileVC alloc]initWithNibName:@"ProfileVC" bundle:nil tripService:_tripService userService:_userService imageService:_imageService isUser:NO userID:_userModel.User_ID withLocationService:_locationService withCommentService:_commentService withFollowService:_followService];
-    
-    
+    [self.delegate.navigationController pushViewController:profilevc animated:YES];
+    }
 }
 
 @end
