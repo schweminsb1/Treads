@@ -146,7 +146,7 @@
     imageScrollBrowser = [[ImageScrollBrowser alloc] initWithImageSize:CGSizeMake(540, 360) displayView:imageScrollEditableTextView addItemView:imageScrollBrowserAddItemView editItemView:imageScrollEditItemView];
     imageScrollBrowser.editingEnabled = ^BOOL(){return _self.editingEnabled();};
     ImageScrollBrowser* __weak _imageScrollBrowser = imageScrollBrowser;
-    imageScrollBrowser.sendNewItemRequest = ^(int index) {
+    imageScrollBrowser.sendNewItemRequest = ^(int index, BOOL replaceItem) {
 //        CameraService* cameraService = [[CameraService alloc] init];
 //        [cameraService showImagePickerOnSuccess:^(UIImage* returnImage) {
         _self.sendNewImageRequest(^(UIImage* returnImage) {
@@ -156,7 +156,7 @@
             newItem.imageID = [TripLocationItem UNDEFINED_IMAGE_ID];
             newItem.image = returnImage;
             newItem.description = @"";
-            [_imageScrollBrowser setDisplayViewItem:newItem atIndex:index];
+            [_imageScrollBrowser setDisplayViewItem:newItem atIndex:index replaceItem:replaceItem];
         });
     };
     imageScrollBrowser.sendFavoriteItemRequest = ^(id<ImageScrollDisplayableItem> item) {
@@ -223,7 +223,7 @@
 
 - (void)requestedAddItem
 {
-    
+    self.sendAddLocationRequest();
 }
 
 - (void)setTripLocation:(TripLocation *)tripLocation

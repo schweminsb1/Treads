@@ -91,7 +91,7 @@ static UserService* repo;
 }
 
 
--(void)updatePassword:(User*)user forTarget:(NSObject*) target withAction: (SEL) returnAction {
+-(void)updateUser:(User*)user forTarget:(NSObject*) target withAction: (SEL) returnAction {
     
     NSMutableDictionary* userDictionary = [NSMutableDictionary dictionaryWithDictionary:@{
                                            @"id":@(user.User_ID),

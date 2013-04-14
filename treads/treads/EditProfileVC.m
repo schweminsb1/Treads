@@ -20,7 +20,9 @@
 @property IBOutlet UITextField * oldPassword;
 @property IBOutlet UITextField * updatePassword;
 @property IBOutlet UITextField * confirmPassword;
-@property IBOutlet UIButton * passwordUpdate;
+@property IBOutlet UIButton * save;
+@property IBOutlet UITextField * fName;
+@property IBOutlet UITextField * lName;
 @property UserService * userService;
 
 @end
@@ -41,6 +43,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,7 +54,7 @@
 }
 
 -(IBAction) changePassword :(id) sender {
-    self.updatePassword.enabled = false;
+    self.save.enabled = false;
     [self.userService getUserbyID:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(dataHasLoaded:)];    
 }
 
@@ -58,32 +62,25 @@
     User* returnedUser = (User*)user[0];
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle: @"Woah!!"
-                          message: @"Please fill all fields to change password"
+                          message: @"Please enter your password to change your profile"
                           delegate: nil
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil];
     
-    if([self.oldPassword.text isEqualToString:@""]|| [self.updatePassword.text isEqualToString:@""]|| [self.confirmPassword.text isEqualToString:@""])
+    if([self.oldPassword.text isEqualToString:@""])
     {
         [alert show];
+        self.save.enabled = true;
     }
     else
     {
         if(![[self getPasswordHash:self.oldPassword.text] isEqual: returnedUser.password]) {
-            alert.message = @"Old Password is incorrect";
+            alert.message = @"Password is incorrect";
             self.oldPassword.text = @"";
             self.updatePassword.text = @"";
             self.confirmPassword.text = @"";
             [alert show];
-            return;
-        }
-        else if(self.updatePassword.text.length < 8)
-        {
-            alert.message = @"Passwords must be 8 or more characters long";
-            self.oldPassword.text = @"";
-            self.updatePassword.text =@"";
-            self.confirmPassword.text = @"";
-            [alert show];
+            self.save.enabled = true;
             return;
         }
         else if(![self.updatePassword.text isEqualToString:self.confirmPassword.text])
@@ -93,21 +90,57 @@
             self.updatePassword.text = @"";
             self.confirmPassword.text = @"";
             [alert show];
+            self.save.enabled = true;
+            return;
+        }
+        else if(self.updatePassword.text.length > 0 && self.updatePassword.text.length < 8)
+        {
+            alert.message = @"Passwords must be 8 or more characters long";
+            self.oldPassword.text = @"";
+            self.updatePassword.text =@"";
+            self.confirmPassword.text = @"";
+            [alert show];
+            self.save.enabled = true;
+            return;
+        }
+        else if(self.updatePassword.text.length > 50) {
+            alert.message = @"Passwords may not be longer than 50 characters";
+            self.oldPassword.text = @"";
+            self.updatePassword.text =@"";
+            self.confirmPassword.text = @"";
+            [alert show];
+            self.save.enabled = true;
+            return;
+        }
+        else if(self.fName.text.length > 50) {
+            alert.message = @"First name may not be longer than 50 characters";
+            self.oldPassword.text = @"";
+            self.updatePassword.text =@"";
+            self.confirmPassword.text = @"";
+            [alert show];
+            self.save.enabled = true;
+            return;
+        }
+        else if(self.lName.text.length > 50) {
+            alert.message = @"Last name may not be longer than 50 characters";
+            self.oldPassword.text = @"";
+            self.updatePassword.text =@"";
+            self.confirmPassword.text = @"";
+            [alert show];
+            self.save.enabled = true;
             return;
         }
         else {
-         /*   NSDictionary * newItem= @{
-                                      @"id":[NSNumber numberWithInt:[TreadsSession instance].treadsUserID],
-                                      @"emailAddress": [TreadsSession instance].treadsUser,
-                                      @"password": returnedUser.password ,
-                                      @"Fname": [TreadsSession instance].fName ,
-                                      @"Lname": [TreadsSession instance].lName,
-                                      @"profilePhotoID": [NSNumber numberWithInt:[TreadsSession instance].profilePhotoID],
-                                      @"coverPhotoID" : [NSNumber numberWithInt:[TreadsSession instance].coverPhotoID]
-                                      };
-           */returnedUser.password = [self getPasswordHash:self.oldPassword.text];
+            if(self.updatePassword.text.length > 0) {
+                returnedUser.password = [self getPasswordHash:self.updatePassword.text];
+            }
+            if (self.fName.text.length > 0) {
+                returnedUser.fname = self.fName.text;
+            }
+            if (self.lName.text.length > 0) {
+                returnedUser.lname = self.lName.text;
+            }
             [self.userService updateUser:returnedUser forTarget:self withAction:@selector(success)];
-            
         }
     }
 }
@@ -115,7 +148,7 @@
 -(void) success {
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle: @"Success"
-                          message: @"Password updated"
+                          message: @"Profile updated"
                           delegate: nil
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil];
@@ -123,7 +156,8 @@
     self.updatePassword.text = @"";
     self.confirmPassword.text = @"";
     [alert show];
-    self.passwordUpdate.enabled = true;
+    self.save.enabled = true;
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
 
