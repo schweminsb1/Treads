@@ -36,6 +36,7 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withLocationService:(LocationService *) locationService withCommentService: (CommentService*) commentService withTripLocationService:(TripLocationService*) tripLocationService withUserService:(UserService*)userService{
     if (self) {
+        _PINLIMIT=50;
         _locationService=locationService;
         _commentService = commentService;
         self.title = NSLocalizedString(@"Maps", @"Maps");
@@ -84,7 +85,7 @@ CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
                 int second = ((MapPinAnnotation*)b).tripCount;
                 return [[NSNumber numberWithInt: first ]compare:[NSNumber numberWithInt: second ]];
             }]];
-             for(int i=0; i< _locationsTotal.count; i++)
+             for(int i=0; i< _locationsTotal.count && i<_PINLIMIT; i++)
              {
                  double lat=((MapPinAnnotation*)_locationsTotal[i]).location.latitude;
                  double lon=((MapPinAnnotation*)_locationsTotal[i]).location.longitude;
@@ -291,7 +292,7 @@ CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
     CLLocationCoordinate2D swCoord;
     swCoord = [mapView convertPoint:swPoint toCoordinateFromView:mapView];
     
-    for(int i=0; i<mapView.annotations.count; i++)
+    for(int i=0; i<mapView.annotations.count ; i++)
     {
         double lat=((MapPinAnnotation*)mapView.annotations[i]).location.latitude;
         double lon=((MapPinAnnotation*)mapView.annotations[i]).location.longitude;
@@ -300,7 +301,7 @@ CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
             [mapView removeAnnotation:mapView.annotations[i]];
         }
     }
-    for(int i=0; i< _locationsTotal.count; i++)//add annotations in view
+    for(int i=0; i< _locationsTotal.count && i<_PINLIMIT; i++)//add annotations in view
     {
         double lat=((MapPinAnnotation*)_locationsTotal[i]).location.latitude;
         double lon=((MapPinAnnotation*)_locationsTotal[i]).location.longitude;

@@ -44,6 +44,7 @@
                                           initWithTarget:self action:@selector(handleLongPress:)];
     lpgr.minimumPressDuration = .1; //user needs to press for .1 seconds
     [self.mapView addGestureRecognizer:lpgr];
+    self.title = NSLocalizedString(@"Drop a Pin on the Map", @"Drop a Pin on the Map");
 }
 - (void)doneAddingLocation
 {

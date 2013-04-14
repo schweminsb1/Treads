@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
-#import "UserService.h"
-
+@class UserService;
 @interface LoginVC : UIViewController
 
 @property (strong) IBOutlet UIActivityIndicatorView* activityIndicatorView;
@@ -19,7 +18,6 @@
 -(IBAction) RegisterClick:(id) sender;
 -(IBAction) ForgottenPassword:(id) sender;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil client:(MSClient *) client  AppDelegate: ( id) appdelegate withUserService:(UserService*) userService;
--(void) log:(NSArray*)items;
 
 -(NSString *) getPasswordHash:(NSString * )user_input;
 

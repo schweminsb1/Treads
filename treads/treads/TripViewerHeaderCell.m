@@ -161,7 +161,7 @@
 //        }
 //    }
     tripFeaturedImage.image = trip.image;
-    tripOwnerLabel.text = @"Trip Owner";
+    tripOwnerLabel.text = trip.username;
     //CGSize sizeOfText=[tripOwnerLabel.text sizeWithFont:tripOwnerLabel.font constrainedToSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
     //[tripOwnerLabel setBounds:CGRectMake(
     //                                     tripOwnerLabel.bounds.origin.x,

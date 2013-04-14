@@ -18,6 +18,8 @@
 #import "TripViewer.h"
 #import "CommentService.h"
 
+#import "TreadsSession.h"
+
 @interface TripViewVC()<UINavigationBarDelegate>
 
 @property TripService* tripService;
@@ -126,7 +128,7 @@
             //create a new trip and place user into editing mode
             Trip* trip = [[Trip alloc] init];
             trip.tripID = [Trip UNDEFINED_TRIP_ID];
-            trip.userID = -1;
+            trip.userID = [TreadsSession instance].treadsUserID;
             trip.name = @"New Trip";
             trip.description = @"Trip Description";
             trip.imageID = [TripLocationItem UNDEFINED_IMAGE_ID];
@@ -152,7 +154,7 @@
         [self setTitleBar:nil];
         
         //if the user has editing rights, add the nav bar item
-        if (YES) { //can edit
+        if (returnedTrip.userID == [TreadsSession instance].treadsUserID) { //can edit
             //set up new trip button and attach to navigation controller
             self.tripEditButton = [[UIBarButtonItem alloc] initWithTitle:(returnedTrip.tripID == [Trip UNDEFINED_TRIP_ID]?@"Preview":@"Edit") style:UIBarButtonItemStyleBordered target:self action:@selector(tapEditButton:)];
             self.navigationItem.rightBarButtonItem = self.tripEditButton;

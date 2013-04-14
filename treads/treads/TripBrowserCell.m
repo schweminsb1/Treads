@@ -194,7 +194,7 @@
         [self layoutSubviews];
         //[self setNeedsLayout];
     }
-    tripOwnerLabel.text = @"Trip Owner";
+    tripOwnerLabel.text = displayTrip.username;
     tripNameLabel.text = displayTrip.name;
     tripDatesLabel.text = @"1/1/2013 - 12/31/2013";
     tripContentLabel.text = @"P213 C87";

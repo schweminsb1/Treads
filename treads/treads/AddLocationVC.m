@@ -14,6 +14,7 @@
 #import <MapKit/MapKit.h>
 #import "LocationService.h"
 #import "LocationMapVC.h"
+#import "AppColors.h"
 
 @interface AddLocationVC ()
 
@@ -38,6 +39,7 @@ CLLocationCoordinate2D placedLocation;
         _myLocationService=myLocationService;
         self.latitude = 0.0;
         self.longitude =0.0;
+        
     }
     return self;
 }
@@ -45,6 +47,7 @@ CLLocationCoordinate2D placedLocation;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = NSLocalizedString(@"Add New Location", @"Add New Location");
     // Do any additional setup after loading the view from its nib.
 }
 

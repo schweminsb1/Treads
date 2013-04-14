@@ -48,6 +48,10 @@
         [pictures addObject:[UIImage imageNamed:@"helicopter-bouldering-crash-pad.jpg"]];
        _background = [[UIImageView alloc]initWithImage:pictures[1]];
         
+        [self.view setAutoresizesSubviews:YES];
+        [self.view setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+            [self.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight
+             ];
         // Custom initialization
     }
     return self;
