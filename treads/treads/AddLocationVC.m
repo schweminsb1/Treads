@@ -138,7 +138,7 @@ CLLocationCoordinate2D placedLocation;
                                       @"longitude": [NSNumber numberWithDouble: self.longitude]
                                       };
             //call to insert item
-        [_myLocationService addLocation:newItem forTarget:self withAction:(@selector(goBack:success:))];
+        [[LocationService instance] addLocation:newItem forTarget:self withAction:(@selector(goBack:success:))];
 
             //also add to location-attribute table
         

@@ -35,7 +35,7 @@ static LocationService* repo;
 }
 - (void)addLocation:(NSDictionary*)newLocation forTarget:(NSObject*) target withAction: (SEL) returnAction
 {
-    [_dataRepository addLocation:newLocation forTarget:target withAction:(returnAction)];
+    [_dataRepository createDataItem:newLocation usingService:self forRequestingObject:target withReturnAction:returnAction];
 }
 
 -(void) getLocationsOrdered: (MSReadQueryBlock) getAll
