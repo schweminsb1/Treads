@@ -10,6 +10,8 @@
 #import "AppColors.h"
 #import <QuartzCore/QuartzCore.h>
 #import "LocationVC.h"
+#import "TreadsSession.h"
+#import "ImageService.h"
 
 @implementation CommentEnterCell
 
@@ -18,7 +20,14 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-     
+        CommentEnterCell * myself= self;
+        _block=^(NSArray* items)
+        {
+            myself.proPic=items[0];
+            [myself layoutSubviews];
+            
+        };
+        [[ImageService instance] getImageWithPhotoID:[TreadsSession instance].profilePhotoID withReturnBlock:_block];
 
     }
     return self;
@@ -33,13 +42,13 @@
 
 -(void) layoutSubviews
 {
+    
     [self setBackgroundColor: [AppColors mainBackgroundColor]];
     [super layoutSubviews];
-    [super layoutSubviews];
-    UIImage * img=[UIImage imageNamed:@"mountains.jpeg"];
+    //UIImage * img=[UIImage imageNamed:@"mountains.jpeg"];
     CGRect imageRect= CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.height, self.bounds.size.height);
     _profilePicture =[[UIImageView alloc] initWithFrame: imageRect];
-    _profilePicture.image = img;
+    _profilePicture.image = _proPic;
     
     CGRect textRect= CGRectMake(imageRect.origin.x + imageRect.size.width + 1, self.bounds.origin.y, 550, self.bounds.size.height-1);
     
