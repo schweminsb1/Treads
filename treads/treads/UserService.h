@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "TreadsService.h"
+#import "User.h"
 
 @class DataRepository;
 
@@ -28,7 +29,7 @@
 
 - (void)addUser:(NSDictionary*)newUser forTarget:(NSObject*) target withAction: (SEL) returnAction;
 
--(void)updatePassword:(NSDictionary*)user forTarget:(NSObject*) target withAction: (SEL) returnAction;
+-(void)updateUser:(User*)user forTarget:(NSObject*) target withAction: (SEL) returnAction;
 
 +(UserService*) instance ;
 @end
