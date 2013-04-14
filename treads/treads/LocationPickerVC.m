@@ -102,13 +102,13 @@
         if (tableView == self.searchDisplayController.searchResultsTableView)
         {
             self.returnLocationToTripView(locationsFilteredArray[indexPath.row-1]);
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [self.navigationController popViewControllerAnimated:YES];
 
         }
         else
         {
             self.returnLocationToTripView(locations[indexPath.row-1]);
-            [self dismissViewControllerAnimated:YES completion:nil];
+           [self.navigationController popViewControllerAnimated:YES];
         }
     }
 }

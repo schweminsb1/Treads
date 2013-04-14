@@ -76,6 +76,7 @@
     _profileImage.image = _proImage;
     
     _commentField = [[UITextView alloc] initWithFrame:CGRectMake(_imagerect.origin.x+ _imagerect.size.width + 1, self.bounds.origin.y, 550, self.bounds.size.height-1)];
+    _commentField.userInteractionEnabled=NO;
     _commentField.text = [NSString stringWithFormat:@"%@ %@ says: \n \n \t %@",_userModel.fname,_userModel.lname,  _commentModel.comment ];
     
     

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DataRepository.h"
 @class LocationVC;
 @interface CommentEnterCell : UITableViewCell
 
@@ -17,6 +17,7 @@
 
 @property LocationVC * cellOwner;
 @property SEL buttonCallBack;
-
+@property (copy,nonatomic)CompletionWithItems block;
+@property UIImage * proPic;
 
 @end
