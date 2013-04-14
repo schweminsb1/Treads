@@ -57,8 +57,8 @@
 - (void)createAndAddSubviews
 {
     changeItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [changeItemButton setBackgroundImage:[UIImage imageNamed:@"change_unselect.png"] forState:UIControlStateNormal];
-    [changeItemButton setBackgroundImage:[UIImage imageNamed:@"change_select.png"] forState:UIControlStateHighlighted];
+    [changeItemButton setBackgroundImage:[UIImage imageNamed:@"pencil_unselect.png"] forState:UIControlStateNormal];
+    [changeItemButton setBackgroundImage:[UIImage imageNamed:@"pencil_select.png"] forState:UIControlStateHighlighted];
     [changeItemButton setBackgroundColor:[AppColors toolbarColor]];
     [changeItemButton addTarget:self action:@selector(tappedChangeItemButton:) forControlEvents:UIControlEventTouchUpInside];
     
