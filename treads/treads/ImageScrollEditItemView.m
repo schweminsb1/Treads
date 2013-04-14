@@ -11,23 +11,29 @@
 @implementation ImageScrollEditItemView {
     BOOL layoutDone;
     BOOL layoutHorizontal;
+    BOOL showFavorite;
     UIButton* changeItemButton;
     UIButton* removeItemButton;
     UIButton* moveForwardButton;
     UIButton* moveBackwardButton;
+    UIButton* addItemButton;
+    UIButton* favoriteItemButton;
 }
 
 @synthesize requestChangeItem;
 @synthesize requestRemoveItem;
+@synthesize requestAddItem;
+@synthesize requestFavoriteItem;
 @synthesize requestMoveForward;
 @synthesize requestMoveBackward;
 
-- (id)initDisplaysHorizontally:(BOOL)horizontal
+- (id)initDisplaysHorizontally:(BOOL)horizontal showFavorite:(BOOL)favorite
 {
     self = [super init];
     if (self) {
         layoutDone = NO;
         layoutHorizontal = horizontal;
+        showFavorite = favorite;
     }
     return self;
 }
@@ -43,22 +49,27 @@
     }
     
     //set frames of subviews
+    CGFloat multiplier = 1.0/(showFavorite?6.0:5.0);
     CGFloat xOffset = (layoutHorizontal?self.bounds.size.width:0);
     CGFloat yOffset = (layoutHorizontal?0:self.bounds.size.height);
     CGFloat scale = (layoutHorizontal?self.bounds.size.height:self.bounds.size.width);
-    CGFloat xPadding = (layoutHorizontal?(self.bounds.size.width*0.25 - scale)*0.5:0);
-    CGFloat yPadding = (layoutHorizontal?0:(self.bounds.size.width*0.25 - scale)*0.5);
+    CGFloat xPadding = (layoutHorizontal?(self.bounds.size.width*multiplier - scale)*0.5:0);
+    CGFloat yPadding = (layoutHorizontal?0:(self.bounds.size.width*multiplier - scale)*0.5);
     [removeItemButton setFrame:CGRectMake(xPadding, yPadding, scale, scale)];
-    [changeItemButton setFrame:CGRectMake(xPadding + xOffset*(0.25), yPadding + yOffset*(0.25), scale, scale)];
-    [moveBackwardButton setFrame:CGRectMake(xPadding + xOffset*(0.5), yPadding + yOffset*(0.5), scale, scale)];
-    [moveForwardButton setFrame:CGRectMake(xPadding + xOffset*(0.75), yPadding + yOffset*(0.75), scale, scale)];
+    [addItemButton setFrame:CGRectMake(xPadding + xOffset*(multiplier), yPadding + yOffset*(multiplier), scale, scale)];
+    [moveBackwardButton setFrame:CGRectMake(xPadding + xOffset*(2*multiplier), yPadding + yOffset*(2*multiplier), scale, scale)];
+    [moveForwardButton setFrame:CGRectMake(xPadding + xOffset*(3*multiplier), yPadding + yOffset*(3*multiplier), scale, scale)];
+    [changeItemButton setFrame:CGRectMake(xPadding + xOffset*(4*multiplier), yPadding + yOffset*(4*multiplier), scale, scale)];
+    if (showFavorite) {
+        [favoriteItemButton setFrame:CGRectMake(xPadding + xOffset*(5*multiplier), yPadding + yOffset*(5*multiplier), scale, scale)];
+    }
 }
 
 - (void)createAndAddSubviews
 {
     changeItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [changeItemButton setBackgroundImage:[UIImage imageNamed:@"change_unselect.png"] forState:UIControlStateNormal];
-    [changeItemButton setBackgroundImage:[UIImage imageNamed:@"change_select.png"] forState:UIControlStateHighlighted];
+    [changeItemButton setBackgroundImage:[UIImage imageNamed:@"pencil_unselect.png"] forState:UIControlStateNormal];
+    [changeItemButton setBackgroundImage:[UIImage imageNamed:@"pencil_select.png"] forState:UIControlStateHighlighted];
     [changeItemButton setBackgroundColor:[AppColors toolbarColor]];
     [changeItemButton addTarget:self action:@selector(tappedChangeItemButton:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -82,10 +93,26 @@
     [moveBackwardButton setTransform:CGAffineTransformMakeRotation(layoutHorizontal?-M_PI_2:0)];
     [moveBackwardButton addTarget:self action:@selector(tappedMoveBackwardButton:) forControlEvents:UIControlEventTouchUpInside];
     
+    addItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addItemButton setBackgroundImage:[UIImage imageNamed:@"plus_unselect.png"] forState:UIControlStateNormal];
+    [addItemButton setBackgroundImage:[UIImage imageNamed:@"plus_select.png"] forState:UIControlStateHighlighted];
+    [addItemButton setBackgroundColor:[AppColors toolbarColor]];
+    [addItemButton addTarget:self action:@selector(tappedAddItemButton:) forControlEvents:UIControlEventTouchUpInside];
+    
     [self addSubview:changeItemButton];
     [self addSubview:removeItemButton];
     [self addSubview:moveForwardButton];
     [self addSubview:moveBackwardButton];
+    [self addSubview:addItemButton];
+    
+    if (showFavorite) {
+        favoriteItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [favoriteItemButton setBackgroundImage:[UIImage imageNamed:@"star_unselect.png"] forState:UIControlStateNormal];
+        [favoriteItemButton setBackgroundImage:[UIImage imageNamed:@"star_select.png"] forState:UIControlStateHighlighted];
+        [favoriteItemButton setBackgroundColor:[AppColors toolbarColor]];
+        [favoriteItemButton addTarget:self action:@selector(tappedFavoriteItemButton:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:favoriteItemButton];
+    }
 }
 
 - (void)tappedChangeItemButton:(id)sender
@@ -96,6 +123,16 @@
 - (void)tappedRemoveItemButton:(id)sender
 {
     self.requestRemoveItem();
+}
+
+- (void)tappedAddItemButton:(id)sender
+{
+    self.requestAddItem();
+}
+
+- (void)tappedFavoriteItemButton:(id)sender
+{
+    self.requestFavoriteItem();
 }
 
 - (void)tappedMoveForwardButton:(id)sender

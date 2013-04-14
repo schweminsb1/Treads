@@ -42,7 +42,7 @@ typedef void (^CompletionWithItemsandLocation)(NSArray * items, Location* locati
 @property NSURL * SasURL;
 //will be used to make requests to the server via this URL so do NSMutableURLREquest to get information hopefully from the Blob
 
-
++(DataRepository*) instance ;
 //retrieval
 - (void)retrieveDataItemsMatching:(NSString*)predicateStringOrNil usingService:(id<TreadsService>)callingService forRequestingObject:(NSObject*)requestingObject withReturnAction:(SEL)returnAction;
 
@@ -73,6 +73,7 @@ typedef void (^CompletionWithItemsandLocation)(NSArray * items, Location* locati
 - (void) createTable:(NSString *)tableName withCompletion:(CompletionBlock) completion;
 - (void) deleteTable:(NSString *)tableName withCompletion:(CompletionBlock) completion;
 - (void) deleteTableRow:(NSDictionary *)item withTableName:(NSString *)tableName withCompletion:(CompletionBlock) completion;
+- (void) deleteDataItem: (NSString*)predicateStringOrNil usingService:(id<TreadsService>)callingService forRequestingObject:(NSObject*)requestingObject withReturnAction:(SEL)returnAction;
 
 - (void) refreshContainersOnSuccess:(CompletionBlock) completion;
 - (void) createContainer:(NSString *)containerName withPublicSetting:(BOOL)isPublic withCompletion:(CompletionBlock) completion;

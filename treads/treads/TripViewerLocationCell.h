@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class TripLocation;
+@class TripLocationItem;
 
 @interface TripViewerLocationCell : UITableViewCell
 
@@ -17,12 +18,14 @@
 @property (copy) BOOL(^editingEnabled)();
 @property (copy) void(^markChangeMade)();
 
+@property (copy) void(^sendAddLocationRequest)();
 @property (copy) void(^sendNewLocationRequest)();
 @property (copy) void(^sendDeleteLocationRequest)();
 @property (copy) void(^sendMoveForwardRequest)();
 @property (copy) void(^sendMoveBackwardRequest)();
-- (void)changeLocation:(int)newLocationID;
--(void)gotoLocationPage;
+@property (copy) void(^sendTripImageIDRequest)(TripLocationItem* locationItem);
+- (void)changeLocation:(int)newLocationID withName:(NSString*)name;
+- (void)gotoLocationPage;
 @property (copy) void(^gotolocationpage)(TripLocation* loc);
 @property (copy) void(^sendNewImageRequest)(void(^onSuccess)(UIImage*));
 

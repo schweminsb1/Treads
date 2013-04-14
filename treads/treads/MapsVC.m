@@ -12,12 +12,18 @@
 #import "CommentService.h"
 #import "LoginVC.h"
 #import "TripLocationService.h"
+#import "ProfileVC.h"
+#import "ImageService.h"
+#import "FollowService.h"
+#import "LocationService.h"
+#import "UserService.h"
+#import "TripService.h"
+#import "ImageService.h"
+
 
 @interface MapsVC ()
 @property NSMutableArray * locationsInView;
 @property NSMutableArray * locationsTotal;
-@property LocationService * locationService;
-@property CommentService * commentService;
 @property Location * currentLocation;
 @property TripLocationService * tripLocationService;
 @property int locationCounter;
@@ -28,7 +34,7 @@
 
 @implementation MapsVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withLocationService:(LocationService *) locationService withCommentService: (CommentService*) commentService withTripLocationService:(TripLocationService*) tripLocationService{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withLocationService:(LocationService *) locationService withCommentService: (CommentService*) commentService withTripLocationService:(TripLocationService*) tripLocationService withUserService:(UserService*)userService{
     if (self) {
         _locationService=locationService;
         _commentService = commentService;
@@ -39,6 +45,7 @@
         _tripLocationService=tripLocationService;
         _locationCounter=0;
         _locationTotal=0;
+        _userService=userService;
     }
     return self;
 }
@@ -269,7 +276,8 @@ CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
 -(void)pushLocation
 {
     
-    LocationVC * locationvc= [[LocationVC alloc]initWithNibName:@"LocationVC" bundle:nil withModel:_currentLocation withCommentService: _commentService];
+    LocationVC * locationvc= [[LocationVC alloc]initWithNibName:@"LocationVC" bundle:nil withModel: _currentLocation withTripService: [TripService instance]  withUserService:[UserService instance] imageService:[ImageService instance]  withLocationService:[LocationService instance] withCommentService:[CommentService instance] withFollowService:[FollowService instance]];
+    
     [self.navigationController pushViewController:locationvc animated:YES];
     [self.callout dismissPopoverAnimated:YES];
 }

@@ -11,25 +11,39 @@
 #import "CommentCell.h"
 #import "TreadsSession.h"
 #import "CommentEnterCell.h"
+
+#import "ProfileVC.h"
+#import "CommentService.h"
+#import "ImageService.h"
+#import "FollowService.h"
+#import "LocationService.h"
+#import "UserService.h"
 @interface LocationVC ()
 @property NSMutableArray * commentModels;
+
 @end
 
 @implementation LocationVC
 //class contains service and model and fills fields on page
 
--(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withModel: (Location *) model withCommentService: (CommentService *) service
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withModel: (Location *) model withTripService: (TripService*) tripService withUserService:(UserService*) userService imageService:(ImageService*)imageService  withLocationService:(LocationService*)locationService withCommentService:(CommentService*)commentService withFollowService:(FollowService*)followService
 {
     self =  [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if(self)
     {
-        _commentService = service;
+        _commentService = commentService;
+        _userService=userService;
+        _imageService=imageService;
+        _locationService=locationService;
+        _followService=followService;
+        
         _model=model;
         [_commentService getCommentInLocation:[model.idField intValue] forTarget:self withAction:@selector(getModels:)];
         
         CGRect commentEnterRect = CGRectMake(_commentTable.frame.origin.x, _commentTable.frame.origin.y -50, _commentTable.frame.size.width, 50);
         _commentEnterCell = [[CommentEnterBox alloc] initWithFrame:commentEnterRect];
         [self.view addSubview:_commentEnterCell];
+        self.view.backgroundColor = [AppColors secondaryBackgroundColor];
         
         
     }
@@ -115,7 +129,7 @@
          //ccell= [tableView dequeueReusableCellWithIdentifier:@"CELL"];
         if (!ccell)
         {
-            ccell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL" withCommentModel:((Comment *)_commentModels[(_commentModels.count)-(indexPath.row)])];
+            ccell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL" withCommentModel: ((Comment *)_commentModels[(_commentModels.count)-(indexPath.row)])withTripService:_tripService withUserService:_userService imageService:_imageService withLocationService:_locationService withCommentService:_commentService withFollowService:_followService withLocationDelegate:self];
         //[cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
         //[cell setAutoresizesSubviews:YES];
         }

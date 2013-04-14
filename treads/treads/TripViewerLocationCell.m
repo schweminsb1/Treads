@@ -94,7 +94,7 @@
         locationBGRView.backgroundColor = [UIColor clearColor];
         locationTextBackgroundView.backgroundColor = [AppColors mainBackgroundColor];
     }
-    [editItemView setFrame:CGRectMake(10, 80, 40, 200)];
+    [editItemView setFrame:CGRectMake(10, 80, 40, 250)];
     [editItemView setHidden:!__editingEnabled];
     [subView bringSubviewToFront:locationButton];
 }
@@ -141,22 +141,27 @@
     imageScrollBrowserAddItemView = [[UIView alloc] init];
     imageScrollBrowserAddItemView.backgroundColor = [AppColors toolbarColor];
     
-    imageScrollEditItemView = [[ImageScrollEditItemView alloc] initDisplaysHorizontally:YES];
+    imageScrollEditItemView = [[ImageScrollEditItemView alloc] initDisplaysHorizontally:YES showFavorite:YES];
     
     imageScrollBrowser = [[ImageScrollBrowser alloc] initWithImageSize:CGSizeMake(540, 360) displayView:imageScrollEditableTextView addItemView:imageScrollBrowserAddItemView editItemView:imageScrollEditItemView];
     imageScrollBrowser.editingEnabled = ^BOOL(){return _self.editingEnabled();};
     ImageScrollBrowser* __weak _imageScrollBrowser = imageScrollBrowser;
-    imageScrollBrowser.sendNewItemRequest = ^(int index){
+    imageScrollBrowser.sendNewItemRequest = ^(int index) {
 //        CameraService* cameraService = [[CameraService alloc] init];
 //        [cameraService showImagePickerOnSuccess:^(UIImage* returnImage) {
         _self.sendNewImageRequest(^(UIImage* returnImage) {
             TripLocationItem* newItem = [[TripLocationItem alloc] init];
             newItem.tripLocationItemID = -1;
             newItem.tripLocationID = _self.tripLocation.tripLocationID;
+            newItem.imageID = [TripLocationItem UNDEFINED_IMAGE_ID];
             newItem.image = returnImage;
-            newItem.description = @"New Item";
+            newItem.description = @"";
             [_imageScrollBrowser setDisplayViewItem:newItem atIndex:index];
         });
+    };
+    imageScrollBrowser.sendFavoriteItemRequest = ^(id<ImageScrollDisplayableItem> item) {
+        TripLocationItem* locationItem = (TripLocationItem*)item;
+        _self.sendTripImageIDRequest(locationItem);
     };
     
     [subView addSubview:locationMapView];
@@ -164,11 +169,13 @@
     [subView addSubview:locationNameLabel];
     [subView addSubview:imageScrollBrowser];
     
-    editItemView = [[ImageScrollEditItemView alloc] initDisplaysHorizontally:NO];
+    editItemView = [[ImageScrollEditItemView alloc] initDisplaysHorizontally:NO showFavorite:NO];
     editItemView.requestChangeItem = ^(){[_self requestedChangeItem];};
     editItemView.requestRemoveItem = ^(){[_self requestedRemoveItem];};
+    editItemView.requestAddItem = ^(){[_self requestedAddItem];};
     editItemView.requestMoveForward = ^(){[_self requestedMoveForward];};
     editItemView.requestMoveBackward = ^(){[_self requestedMoveBackward];};
+    
     [self addSubview:editItemView];
     [self bringSubviewToFront:editItemView];
     [self bringSubviewToFront:locationButton];
@@ -185,10 +192,11 @@
 //    return YES;
 //}
 
-- (void)changeLocation:(int)newLocationID
+- (void)changeLocation:(int)newLocationID withName:(NSString*)name
 {
     self.markChangeMade();
-    self.tripLocation.tripLocationID = newLocationID;
+    self.tripLocation.locationID = newLocationID;
+    self.tripLocation.locationName = name;
     [self setTripLocationHeader:self.tripLocation];
     [self setNeedsLayout];
 }
@@ -211,6 +219,11 @@
 - (void)requestedMoveBackward
 {
     self.sendMoveBackwardRequest();
+}
+
+- (void)requestedAddItem
+{
+    
 }
 
 - (void)setTripLocation:(TripLocation *)tripLocation
@@ -238,7 +251,7 @@
 
 - (void)setTripLocationHeader:(TripLocation*)tripLocation
 {
-    locationNameLabel.text = [NSString stringWithFormat:@"Location: ID %d, LocationID: %d", tripLocation.tripLocationID, tripLocation.locationID];
+    locationNameLabel.text = tripLocation.locationName;//[NSString stringWithFormat:@"Location: ID %d, LocationID: %d", tripLocation.tripLocationID, tripLocation.locationID];
     
     locationMapView.image = [UIImage imageNamed:@"map_preview.png"];
     

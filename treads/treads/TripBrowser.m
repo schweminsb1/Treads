@@ -98,6 +98,11 @@
     [self setBrowserData:nil forTarget:nil withAction:nil];
 }
 
+- (void)refreshWithNewImages
+{
+    [browserTable reloadData];
+}
+
 #pragma mark - UITableViewDataSource
 
 //- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

@@ -27,16 +27,17 @@
 @property (strong) UISegmentedControl* browserModeControl;
 @property LocationService * locationService;
 @property CommentService * commentService;
-
+@property UserService * userService;
 @end
 
 @implementation FollowVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withTripService:(TripService*)tripServiceHandle withLocationService:(LocationService*)locationservice withCommentService:(CommentService*) commentService
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withTripService:(TripService*)tripServiceHandle withLocationService:(LocationService*)locationservice withCommentService:(CommentService*) commentService withUserService:(UserService*) userService
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         //toolbar
+        _userService=userService;
         self.title = NSLocalizedString(@"Follow", @"Follow");
         self.tabBarItem.image = [UIImage imageNamed:@"compass.png"];
         _locationService=locationservice;
@@ -99,6 +100,14 @@
 - (void)dataHasLoaded:(NSArray*)newData
 {
     [self.browser setBrowserData:newData forTarget:self withAction:@selector(showTrip:)];
+    for (Trip* trip in newData) {
+        [self.tripService getHeaderImageForTrip:trip forTarget:self withCompleteAction:@selector(refreshWithNewHeader)];
+    }
+}
+
+- (void)refreshWithNewHeader
+{
+    [self.browser refreshWithNewImages];
 }
 
 - (void)didReceiveMemoryWarning
@@ -113,7 +122,7 @@
     UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:browserModeControlLabels[self.browserModeControl.selectedSegmentIndex] style: UIBarButtonItemStyleBordered target: nil action: nil];
     [self.navigationItem setBackBarButtonItem: newBackButton];
     
-    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID LocationService:_locationService withCommentService:_commentService];
+    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID LocationService:_locationService withCommentService:_commentService withUserService:_userService];
     [self.navigationController pushViewController:tripViewVC animated:YES];
 }
 

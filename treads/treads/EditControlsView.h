@@ -13,6 +13,8 @@
 @required
 @property (copy) void(^requestChangeItem)();
 @property (copy) void(^requestRemoveItem)();
+@property (copy) void(^requestAddItem)();
+@property (copy) void(^requestFavoriteItem)();
 @property (copy) void(^requestMoveBackward)();
 @property (copy) void(^requestMoveForward)();
 

@@ -28,4 +28,5 @@
 - (void)updateTripLocation:(TripLocation*)tripLocation forTarget:(NSObject*)target withAction:(SEL)returnAction;
 - (void)getTripLocationWithLocation:(Location*)location withCompletion:(CompletionWithItemsandLocation)block;
 
++(TripLocationService*) instance ;
 @end

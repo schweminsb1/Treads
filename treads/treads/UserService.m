@@ -7,10 +7,19 @@
 //
 
 #import "UserService.h"
-#import "User.h"
+//#import "User.h"
 #import "DataRepository.h"
 
 @implementation UserService
+
+static UserService* repo;
++(UserService*) instance {
+    @synchronized(self) {
+        if (!repo)
+            repo = [[UserService alloc] initWithRepository:[DataRepository instance]];
+        return repo;
+    }
+}
 
 - (id)initWithRepository:(DataRepository*)repository
 {
@@ -31,7 +40,9 @@
         user.emailaddress   =       returnData[i][@"emailAddress"];
         user.lname          =       returnData[i][@"Lname"];
         user.User_ID        =       [((NSString*)returnData[i][@"id"]) intValue];
-        user.profilePictureID=      [((NSString*)returnData[i][@"profilePhotoID"]) intValue];
+        user.profilePhotoID=      [((NSString*)returnData[i][@"profilePhotoID"]) intValue];
+        user.password       =        returnData[i][@"password"];
+        user.coverPhotoID   =  [((NSString*)returnData[i][@"coverPhotoID"]) intValue];
         [results addObject: user];
     }
     return results;
@@ -69,10 +80,34 @@
 - (void)getUserbyEmail:(NSString *)emailAddress forTarget:(NSObject *)target withAction:(SEL)returnAction
 {
     
-    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"id = '%@'", emailAddress] usingService:self forRequestingObject:target withReturnAction:returnAction];
+    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"emailAddress = '%@' ", emailAddress] usingService:self forRequestingObject:target withReturnAction:returnAction];
     
     
 }
 
+- (void)addUser:(NSDictionary*)newUser forTarget:(NSObject*) target withAction: (SEL) returnAction
+{
+    
+    [_dataRepository createDataItem:newUser usingService:self forRequestingObject:target withReturnAction:returnAction];
+}
+
+
+-(void)updatePassword:(User*)user forTarget:(NSObject*) target withAction: (SEL) returnAction {
+    
+    NSMutableDictionary* userDictionary = [NSMutableDictionary dictionaryWithDictionary:@{
+                                           @"id":@(user.User_ID),
+                                           @"emailAddress":[NSString stringWithString: user.emailaddress],
+                                           @"Password":[NSString stringWithString: user.password],
+                                           @"fName":[NSString stringWithString: user.fname],
+                                           @"lName":[NSString stringWithString: user.lname],
+                                           @"profilePhotoID":@(user.profilePhotoID),
+                                           @"coverPhotoID":@(user.coverPhotoID)
+                                           }];
+
+        [userDictionary setObject:@(user.User_ID) forKey:@"id"];
+        [self.dataRepository updateDataItem:userDictionary usingService:self forRequestingObject:target withReturnAction:returnAction];
+    
+   // [self.dataRepository updateDataItem:userDictionary usingService:self forRequestingObject:target withReturnAction:returnAction];
+}
 
 @end

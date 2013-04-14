@@ -21,6 +21,7 @@
 
 #import "LocationService.h"
 #import "CommentService.h"
+#import "UserService.h"
 
 @interface MyTripsVC()
 
@@ -29,12 +30,12 @@
 @property (strong) UIBarButtonItem* tripNewButton;
 @property LocationService* locationService;
 @property CommentService * commentService;
-
+@property UserService * userService;
 @end
 
 @implementation MyTripsVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withTripService:(TripService *)tripServiceHandle withLocationService:(LocationService*)locationservice withCommentService:(CommentService*)commentService
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withTripService:(TripService *)tripServiceHandle withLocationService:(LocationService*)locationservice withCommentService:(CommentService*)commentService withUserService:(UserService*) userService
 {
     if (self) {
         self.title = NSLocalizedString(@"My Trips", @"My Trips");
@@ -43,6 +44,7 @@
         //set up services
         self.tripService = tripServiceHandle;//[[TripService alloc] init];
         _commentService=commentService;
+        _userService=userService;
     }
     return self;
 }
@@ -73,6 +75,14 @@
 - (void)dataHasLoaded:(NSArray*)newData
 {
     [self.browser setBrowserData:newData forTarget:self withAction:@selector(showTrip:)];
+    for (Trip* trip in newData) {
+        [self.tripService getHeaderImageForTrip:trip forTarget:self withCompleteAction:@selector(refreshWithNewHeader)];
+    }
+}
+
+- (void)refreshWithNewHeader
+{
+    [self.browser refreshWithNewImages];
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,7 +100,7 @@
 
 - (void)showTrip:(Trip*)trip
 {
-    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID LocationService:_locationService withCommentService:_commentService];
+    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID LocationService:_locationService withCommentService:_commentService withUserService:_userService];
     [self.navigationController pushViewController:tripViewVC animated:YES];
 }
 

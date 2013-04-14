@@ -12,6 +12,7 @@
 #import "TripBrowser.h"
 #import "LocationService.h"
 #import "EditProfileVC.h"
+#import "FollowService.h"
 
 
 @interface ProfileVC ()
@@ -24,9 +25,11 @@
 @property TripService* tripService;
 @property UserService* userService;
 @property ImageService* imageService;
+@property FollowService* followService;
 @property int userID;
 @property (strong) TripBrowser* browser;
 @property LocationService * locationService;
+@property int followID;
 
 @property BOOL myProfile;
 
@@ -38,7 +41,7 @@
 @implementation ProfileVC
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService:(TripService *)myTripService userService:(UserService *)myUserService imageService:(ImageService*)myImageService isUser:(BOOL)isUser userID:(int)myUserID withLocationService:(LocationService*) locationService withCommentService:(CommentService*) commentService
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService:(TripService *)myTripService userService:(UserService *)myUserService imageService:(ImageService*)myImageService isUser:(BOOL)isUser userID:(int)myUserID withLocationService:(LocationService*) locationService withCommentService:(CommentService*) commentService withFollowService:(FollowService*) myFollowService
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -50,7 +53,9 @@
         self.locationService = locationService;
         self.userID = myUserID;
         self.myProfile = isUser;
-        _commentService=commentService;
+        self.commentService=commentService;
+        self.followService = myFollowService;
+        self.followID = -1;
 
     }
     
@@ -62,17 +67,24 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+
+    
     self.edit.hidden = true;
     self.follow.hidden = true;
     
     if(self.myProfile) {
         self.userID = [TreadsSession instance].treadsUserID;
     }
+    else {
+        [self.followService getPeopleIFollow:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(followDataHasLoaded:)];
+    }
     
 }
 
 -(void) viewWillAppear:(BOOL)animated {
+    
     [self.userService getUserbyID:self.userID forTarget:self withAction:@selector(dataHasLoaded:)];
+    
 }
 
 - (void)dataHasLoaded:(NSArray*)newData{
@@ -100,7 +112,7 @@
             }
                 [self.tripService getTripsWithUserID:self.userID forTarget:self withAction:@selector(tripsHaveLoaded:)];
         };
-        [self.imageService getImageWithPhotoID:returnedUser.profilePictureID withReturnBlock:completion];
+        [self.imageService getImageWithPhotoID:returnedUser.profilePhotoID withReturnBlock:completion];
 
     }
 }
@@ -124,7 +136,7 @@
 
 - (void)showTrip:(Trip*)trip
 {
-    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID LocationService:_locationService withCommentService:_commentService];
+    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID LocationService:_locationService withCommentService:_commentService withUserService: _userService];
     [self.navigationController pushViewController:tripViewVC animated:YES];
 }
 
@@ -133,8 +145,36 @@
 }
 
 - (IBAction)editProfile:(id)sender{
-    EditProfileVC* editProfileVC = [[EditProfileVC alloc]initWithNibName:@"EditProfileVC" bundle:nil];
+    EditProfileVC* editProfileVC = [[EditProfileVC alloc]initWithNibName:@"EditProfileVC" bundle:nil userService:self.userService];
     [self.navigationController pushViewController:editProfileVC animated:YES];
 }
 
+- (void) followDataHasLoaded:(NSArray*)newData {
+    [self.follow setTitle:@"Follow" forState:UIControlStateNormal];
+    self.followID = -1;
+
+    for (int x = 0; x < newData.count; x++) {
+        if (self.userID == [((NSString*)newData[x][@"TheirID"])intValue]) {
+            [self.follow setTitle:@"Unfollow" forState:UIControlStateNormal];
+            self.followID = [((NSString*)newData[x][@"id"])intValue];
+            break;
+        }
+    }
+    self.follow.enabled = true;
+}
+
+- (IBAction)followUser:(id)sender {
+    self.follow.enabled = false;
+    if(self.followID < 0) {
+        [self.followService addFollow:[TreadsSession instance].treadsUserID withTheirID:self.userID fromTarget:self withReturn:@selector(followSuccess)];
+    }
+    else {
+        [self.followService deleteFollow:[NSString stringWithFormat:@"id = %i", self.followID] fromTarget:self withReturn:@selector(followSuccess)];
+    }
+}
+
+- (void) followSuccess {
+    [self.followService getPeopleIFollow:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(followDataHasLoaded:)];
+
+}
 @end

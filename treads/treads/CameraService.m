@@ -20,6 +20,14 @@ UIImagePickerController *imagePicker;
 UIPopoverController* popover;
 UIImage* selectedImage;
 
+static CameraService* repo;
++(CameraService*) instance {
+    @synchronized(self) {
+        if (!repo)
+            repo = [[CameraService alloc] init];
+        return repo;
+    }
+}
 
 - (void)showImagePickerFromViewController:(UIViewController*)viewController onSuccess:(void(^)(UIImage*))onSuccess
 {

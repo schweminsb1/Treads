@@ -12,10 +12,24 @@
 #import "LocationSmallViewController.h"
 #import "LocationService.h"
 #import "CommentService.h"
+#import "UserService.h"
+
 @class TripLocationService;
+@class UserService;
+@class LocationService;
+@class ImageService;
+@class CommentService;
+@class TripService;
+@class FollowService;
+
 @interface MapsVC : UIViewController<CLLocationManagerDelegate, UISearchBarDelegate, UINavigationControllerDelegate,MKMapViewDelegate>
 
-
+@property UserService * userService;
+@property LocationService * locationService;
+@property ImageService * imageService;
+@property CommentService * commentService;
+@property TripService * tripService;
+@property FollowService * followService;
 
 @property (strong) IBOutlet UISearchBar* searchBar;
 
@@ -25,7 +39,8 @@
 
 @property (strong) UIPopoverController * callout;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withLocationService:(LocationService *) locationService withCommentService: (CommentService*) commentService withTripLocationService:(TripLocationService*) tripLocationService;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withLocationService:(LocationService *) locationService withCommentService: (CommentService*) commentService withTripLocationService:(TripLocationService*) tripLocationService withUserService:(UserService*)userService;
+
 - (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView;
 -(void)pushLocation;
 @end

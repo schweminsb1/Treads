@@ -15,6 +15,15 @@
 @implementation CommentService
 
 
+static CommentService* repo;
++(CommentService*) instance {
+    @synchronized(self) {
+        if (!repo)
+            repo = [[CommentService alloc] initWithRepository:[DataRepository instance]];
+        return repo;
+    }
+}
+
 - (id)initWithRepository:(DataRepository*)repository
 {
 
@@ -26,8 +35,6 @@
         }
         return self;
 
-
-    
 }
 - (NSArray*)convertReturnDataToServiceModel:(NSArray*)returnData
 {

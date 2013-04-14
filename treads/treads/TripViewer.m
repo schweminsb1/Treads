@@ -185,9 +185,16 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.sendNewLocationRequest = ^(){
             self.sendNewLocationRequest(^(TripLocation* newTripLocation){
-                [_cell changeLocation:newTripLocation.locationID];
+                newTripLocation.description = @"";
+                [_cell changeLocation:newTripLocation.locationID withName:newTripLocation.locationName];
             });
 //            [_cell changeLocation:200];
+        };
+        cell.sendTripImageIDRequest = ^(TripLocationItem* locationItem) {
+            trip.imageID = locationItem.imageID;
+            trip.image = locationItem.image;
+            [viewerTable reloadData];
+            [self markChangeMade];
         };
         cell.sendNewImageRequest = self.sendNewImageRequest;
         cell.sendDeleteLocationRequest = ^(){[_self removeLocationAtIndex:indexPath.row-1];};
@@ -228,25 +235,36 @@
     return changesMade;
 }
 
+- (void)refreshWithNewHeader
+{
+    [viewerTable reloadData];
+}
+
+- (void)refreshWithNewImages
+{
+    [viewerTable reloadData];
+}
+
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingEnabled && indexPath.row == trip.tripLocations.count + 1) {
-        //add new location
-        //at some point this will need to be converted to an async call/request function
-        TripLocation* dummyLocation = [[TripLocation alloc] init];
-        dummyLocation.tripLocationID = trip.tripLocations.count;
-        dummyLocation.tripID = trip.tripID;
-        dummyLocation.locationID = trip.tripLocations.count;
-        dummyLocation.description = @"New location";
-        dummyLocation.tripLocationItems = [[NSArray alloc] init];
-        [self addLocationToCurrentTrip:dummyLocation];
+        [self requestNewLocationForIndex:trip.tripLocations.count];
     }
     return;
 }
 
-- (void)addLocationToCurrentTrip:(TripLocation*)newLocation
+- (void)requestNewLocationForIndex:(int)index
+{
+    self.sendNewLocationRequest(^(TripLocation* newTripLocation){
+        newTripLocation.description = @"";
+        newTripLocation.tripLocationItems = [[NSArray alloc] init];
+        [self addLocationToCurrentTrip:newTripLocation atIndex:index];
+    });
+}
+
+- (void)addLocationToCurrentTrip:(TripLocation*)newLocation atIndex:(int)index
 {
     NSMutableArray* temp = [NSMutableArray arrayWithArray:trip.tripLocations];
     [temp addObject:newLocation];

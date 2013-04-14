@@ -15,6 +15,8 @@
 @property int treadsUserID;
 @property NSString * fName;
 @property NSString * lName;
+@property int        profilePhotoID;
+@property int        coverPhotoID;
 
 -(id) initWithAuthenticatedUser: (NSString *)user;
 -(BOOL) Login;

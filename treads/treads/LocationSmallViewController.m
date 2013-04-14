@@ -38,25 +38,27 @@
 {
     [super viewDidLoad];
      self.name.text = _location.title;
+    self.view.backgroundColor = [AppColors mainBackgroundColor];
     // Do any additional setup after loading the view from its nib.
-  //  CGSize  size= _scrollView.frame.size;
+    CGRect  size= CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + 200 , self.view.bounds.size.width, 550) ;
     //add subView
     
-    /*
-    ImageScrollBrowser * scrollbrowse= [[ImageScrollBrowser alloc]initWithImageSize: size displayView:nil addItemView:nil];
-    [scrollbrowse setFrame:CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + 200 , self.view.bounds.size.width, 550)];
-    [scrollbrowse setNeedsLayout];
     
+    ImageScrollBrowser * scrollbrowse= [[ImageScrollBrowser alloc] initWithImageSize:size.size displayView:nil addItemView:nil editItemView:nil];
+    
+   
+   
+    /*
     NSMutableArray * triplocationItems= [[NSMutableArray alloc] init];
     TripLocationItem * triplocationitem= [[TripLocationItem alloc]init];
     triplocationitem.image= [UIImage imageNamed:@"mountains"];
     
     [ triplocationItems addObject:triplocationitem];
     
-    scrollbrowse.displayItems= triplocationItems;
-    [_scrollView addSubview: scrollbrowse];
+    scrollbrowse.displayItems= triplocationItems; */
+    [self.view addSubview: scrollbrowse];
      
-     */
+    
 }
 
 - (void)didReceiveMemoryWarning

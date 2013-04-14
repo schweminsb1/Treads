@@ -11,6 +11,7 @@
 #import "UserService.h"
 #import "ImageService.h"
 #import "LocationService.h"
+#import "FollowService.h"
 #import "User.h"
 @class CommentService;
 
@@ -20,14 +21,17 @@
 @property (strong) IBOutlet UIView* browserWindow;
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService:(TripService *)myTripService userService:(UserService *)myUserService imageService:(ImageService*)myImageService isUser:(BOOL)isUser userID:(int)myUserID withLocationService:(LocationService*) locationService withCommentService:(CommentService*) commentService;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService:(TripService *)myTripService userService:(UserService *)myUserService imageService:(ImageService*)myImageService isUser:(BOOL)isUser userID:(int)myUserID withLocationService:(LocationService*) locationService withCommentService:(CommentService*) commentService  withFollowService:(FollowService*)myFollowService;
 
 
 - (void)dataHasLoaded:(NSArray*)newData;
 - (void)tripsHaveLoaded:(NSArray*)newData;
 - (void)updateUser:(int)myUserID;
+- (void) followDataHasLoaded:(NSArray*)newData;
+- (IBAction)followUser:(id)sender;
 
 - (IBAction)editProfile:(id)sender;
+- (void) followSuccess;
 
 
 @end

@@ -20,6 +20,7 @@
 #import "TripLocationService.h"
 #import "LocationPickerVC.h"
 #import "TreadsSession.h"
+#import "FollowService.h"
 
 @interface AppDelegate()
 
@@ -33,6 +34,7 @@
 @property (strong) CommentService* commentService;
 @property (strong) ImageService* imageService;
 @property (strong) UserService* userService;
+@property (strong) FollowService* followService;
 @property (strong) NSString * SASURL;
 @property (strong) TripLocationService * tripLocationService;
 
@@ -42,31 +44,28 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     //Initialize repositories
-
     self.dataRepository = [[DataRepository alloc] init];
     //[_dataRepository createContainer:@"TreadsContainer" withPublicSetting:YES withCompletion:comp];
    
     //Initialize services
     self.tripService = [[TripService alloc] initWithRepository:self.dataRepository];
-    
-    self.locationService = [[LocationService alloc]initWithRepository:_dataRepository];
-    _commentService= [[CommentService alloc] initWithRepository:_dataRepository];
+    self.locationService = [[LocationService alloc]initWithRepository:self.dataRepository];
+    self.commentService = [[CommentService alloc] initWithRepository:self.dataRepository];
     self.userService = [[UserService alloc] initWithRepository:self.dataRepository];
-    
     self.tripLocationService=  [[TripLocationService alloc] initWithRepository:self.dataRepository];
-    
     self.imageService = [[ImageService alloc] initWithRepository:self.dataRepository];
+    self.followService = [[FollowService alloc] initWithRepository:self.dataRepository];
     
- //   UIImage * testImage= [UIImage imageNamed:@"mountains.jpeg"];
-   // [self.imageService insertImageAsBlob:testImage withCompletion:comp];
+    //connect services
+    self.tripService.imageService = self.imageService;
     
-    //LocationPickerVC * picker= [[LocationPickerVC alloc] initWithStyle:UITableViewStylePlain withLocationService:self.locationService];
-    
-       
+//    [self.imageService insertImage:[UIImage imageNamed:@"mountains.jpeg"] withCompletion:^(NSDictionary *item, NSError *error) {
+//        NSLog(error.localizedDescription);
+//    }];
     
     //Set global display options
     [[UINavigationBar appearance] setTintColor:[AppColors toolbarColor]];
@@ -75,11 +74,11 @@
     //Initialize ViewControllers
     UIViewController *mapsVC, *cameraVC, *myTripsVC, *followVC, *profileVC;
     
-    mapsVC = [[MapsVC alloc] initWithNibName:@"MapsVC" bundle:nil withLocationService: self.locationService withCommentService: self.commentService withTripLocationService: _tripLocationService];
+    mapsVC = [[MapsVC alloc] initWithNibName:@"MapsVC" bundle:nil withLocationService: self.locationService withCommentService: self.commentService withTripLocationService: _tripLocationService withUserService:_userService];
     cameraVC = [[CameraVC alloc] initWithNibName:@"CameraVC" bundle:nil];
-    myTripsVC = [[MyTripsVC alloc] initWithNibName:@"MyTripsVC" bundle:nil withTripService:self.tripService withLocationService:_locationService withCommentService: _commentService];
-    followVC = [[FollowVC alloc] initWithNibName:@"FollowVC" bundle:nil withTripService:self.tripService withLocationService:_locationService withCommentService:_commentService];
-    profileVC = [[ProfileVC alloc] initWithNibName:@"ProfileVC" bundle:nil tripService:self.tripService userService:self.userService imageService:self.imageService isUser:YES userID:[TreadsSession instance].treadsUserID withLocationService:_locationService withCommentService:_commentService];
+    myTripsVC = [[MyTripsVC alloc] initWithNibName:@"MyTripsVC" bundle:nil withTripService:self.tripService withLocationService:_locationService withCommentService: _commentService withUserService:_userService];
+    followVC = [[FollowVC alloc] initWithNibName:@"FollowVC" bundle:nil withTripService:self.tripService withLocationService:_locationService withCommentService:_commentService withUserService:_userService];
+    profileVC = [[ProfileVC alloc] initWithNibName:@"ProfileVC" bundle:nil tripService:self.tripService userService:self.userService imageService:self.imageService isUser:YES userID:[TreadsSession instance].treadsUserID withLocationService:_locationService withCommentService:_commentService withFollowService:self.followService];
 
 
     
@@ -95,7 +94,7 @@
     LoginVC* login;
     
     //Set the login controller to default
-    login = [[LoginVC alloc]initWithNibName:@"LoginVC" bundle:nil client:self.dataRepository.client AppDelegate:self];
+    login = [[LoginVC alloc]initWithNibName:@"LoginVC" bundle:nil client:self.dataRepository.client AppDelegate:self withUserService:_userService];
     login.title = @"Login";
     UINavigationController* LoginNavigation = [[UINavigationController alloc] initWithRootViewController:login];
     

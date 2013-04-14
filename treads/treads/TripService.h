@@ -12,6 +12,8 @@
 @class DataRepository;
 @class Trip;
 
+@class ImageService;
+
 @interface TripService : NSObject <TreadsService>
 
 //protocol
@@ -27,4 +29,13 @@
 - (void)updateTrip:(Trip*)trip forTarget:(NSObject*)target withAction:(SEL)returnAction;
 - (void)getTripsWithUserID:(int)userID forTarget:(NSObject*)target withAction:(SEL)returnAction;
 
+//images
+@property (strong) ImageService* imageService;
+
+- (void)getHeaderImageForTrip:(Trip*)trip forTarget:(NSObject*)target withCompleteAction:(SEL)completeAction;
+
+- (void)getImagesForTrip:(Trip*)trip forTarget:(NSObject*)target withRefreshAction:(SEL)refreshAction withCompleteAction:(SEL)completeAction;
+- (void)updateNewImagesForTrip:(Trip*)trip forTarget:(NSObject*)target withCompleteAction:(SEL)completeAction;
+
++(TripService*) instance ;
 @end

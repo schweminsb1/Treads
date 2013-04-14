@@ -90,7 +90,7 @@
     if (editItemView!=nil) {
         [editItemView setHidden:!__editingEnabled];
         if (__editingEnabled) {
-            [editItemView setFrame:CGRectMake(self.bounds.size.width/2 - 100, imageSubViewSize.height - 50, 200, 40)];
+            [editItemView setFrame:CGRectMake(self.bounds.size.width/2 - 150, imageSubViewSize.height - 50, 300, 40)];
         }
     }
 
@@ -142,6 +142,8 @@
         ImageScrollBrowser* __weak _self = self;
         editItemView.requestChangeItem = ^(){[_self requestedChangeItem];};
         editItemView.requestRemoveItem = ^(){[_self requestedRemoveItem];};
+        editItemView.requestAddItem = ^(){[_self requestedAddItem];};
+        editItemView.requestFavoriteItem = ^(){[_self requestedFavoriteItem];};
         editItemView.requestMoveForward = ^(){[_self requestedMoveForward];};
         editItemView.requestMoveBackward = ^(){[_self requestedMoveBackward];};
         
@@ -175,7 +177,7 @@
     for (int i=imageSubViews.count; i<displayItems.count; i++) {
         id<ImageScrollDisplayableItem> displayItem = (id<ImageScrollDisplayableItem>)displayItems[i];
         UIImageView* imageSubView = [[UIImageView alloc] init];
-        imageSubView.contentMode = UIViewContentModeScaleAspectFill;
+        imageSubView.contentMode = UIViewContentModeScaleAspectFit;
         imageSubView.clipsToBounds = YES;
         imageSubView.image = [displayItem displayImage];
         [imageSubViews addObject:imageSubView];
@@ -306,6 +308,18 @@
         self.arrayWasChanged(temp);
         self.displayItems = temp;
         [self startHideAnimation];
+    }
+}
+
+- (void)requestedAddItem
+{
+//    self.sendadd
+}
+
+- (void)requestedFavoriteItem
+{
+    if (displayedTextIndex >= 0 && displayedTextIndex < self.displayItems.count) {
+        self.sendFavoriteItemRequest(self.displayItems[displayedTextIndex]);
     }
 }
 

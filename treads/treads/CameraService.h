@@ -17,4 +17,6 @@
 
 - (void)showImagePickerFromViewController:(UIViewController*)viewController onSuccess:(void(^)(UIImage*))onSuccess;
 
++(CameraService*) instance ;
+
 @end
