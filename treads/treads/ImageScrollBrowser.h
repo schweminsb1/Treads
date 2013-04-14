@@ -21,10 +21,10 @@
 
 //editing
 //@property (strong) UIView* addItemView;
-@property (copy) void(^sendNewItemRequest)(int index);
+@property (copy) void(^sendNewItemRequest)(int index, BOOL replaceItem);
 //@property (copy) void(^sendAddItemRequest)(int index);
 @property (copy) void(^sendFavoriteItemRequest)(id<ImageScrollDisplayableItem>);
-- (void)setDisplayViewItem:(id<ImageScrollDisplayableItem>)item atIndex:(int)index;
+- (void)setDisplayViewItem:(id<ImageScrollDisplayableItem>)item atIndex:(int)index replaceItem:(BOOL)replaceItem;
 @property (copy) BOOL(^editingEnabled)();
 @property (copy) void(^arrayWasChanged)(NSArray* newDisplayItems);
 

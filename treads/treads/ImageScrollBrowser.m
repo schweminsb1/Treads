@@ -264,22 +264,29 @@
         
     //sends item request if appropriate
     if (tappedIndex == imageSubViewCount && canScrollToAddItemView) {
-        self.sendNewItemRequest(imageSubViewCount);
+        self.sendNewItemRequest(imageSubViewCount, YES);
     }
 }
 
-- (void)setDisplayViewItem:(id<ImageScrollDisplayableItem>)item atIndex:(int)index
+- (void)setDisplayViewItem:(id<ImageScrollDisplayableItem>)item atIndex:(int)index replaceItem:(BOOL)replaceItem
 {
     if (index == imageSubViewCount || index < 0) {
         [self addItemToDisplayView:item];
     }
     else {
+        //replace item
         NSMutableArray* temp = [NSMutableArray arrayWithArray:self.displayItems];
-        temp[index] = item;
+        if (replaceItem) {
+            temp[index] = item;
+        }
+        else {
+            [temp insertObject:item atIndex:index];
+        }
         resetOnDisplay = NO;
         self.arrayWasChanged(temp);
         self.displayItems = temp;
     }
+    [imageScrollView setContentOffset:CGPointMake(index*imageSubViewSize.width, 0) animated:YES];
 }
 
 - (void)addItemToDisplayView:(id<ImageScrollDisplayableItem>)item
@@ -294,7 +301,7 @@
 
 - (void)requestedChangeItem
 {
-    self.sendNewItemRequest(displayedTextIndex);
+    self.sendNewItemRequest(displayedTextIndex, YES);
 }
 
 - (void)requestedRemoveItem
@@ -313,7 +320,7 @@
 
 - (void)requestedAddItem
 {
-//    self.sendadd
+    self.sendNewItemRequest(displayedTextIndex+1, NO);
 }
 
 - (void)requestedFavoriteItem
