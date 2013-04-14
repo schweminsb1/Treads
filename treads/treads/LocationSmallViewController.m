@@ -23,13 +23,10 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
         self.location=location;
         self.homepage = root;
-        self.service = service;
-        
-        // Custom initialization
-        
+        self.service = service;  
+        // Custom initialization  
     }
     return self;
 }
@@ -45,9 +42,7 @@
     
     
     ImageScrollBrowser * scrollbrowse= [[ImageScrollBrowser alloc] initWithImageSize:size.size displayView:nil addItemView:nil editItemView:nil];
-    
-   
-   
+
     /*
     NSMutableArray * triplocationItems= [[NSMutableArray alloc] init];
     TripLocationItem * triplocationitem= [[TripLocationItem alloc]init];

@@ -10,6 +10,7 @@
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 #import "AppDelegate.h"
 #import "UserService.h"
+#import "TreadsSession.h"
 @interface RegisterVC ()
 @property IBOutlet UIImageView * background;
 @property IBOutlet UITextField * emailAdress;
@@ -144,19 +145,16 @@
                                       @"password": [NSString stringWithString:hashedPassword] ,
                                       @"Fname": [NSString stringWithString:_firstName.text] ,
                                       @"Lname": [NSString stringWithString:_lastName.text],
-                                      @"profilePhotoID": @0,
-                                      @"coverPhotoID" : @0
+                                      @"profilePhotoID": @-1,
+                                      @"coverPhotoID" : @-1
                                       };
             [_userService addUser:newItem forTarget:self withAction:@selector(addUserSuccess:withSuccess:)];
             
         }
         else{
-            _emailAdress.text = @"";
-            _confirmEmail.text= @"";
-            _password.text    = @"";
-            _firstName.text   = @"";
-            _lastName.text    = @"";
-            _confirmPassword.text = @"";
+            _password.text = @"";
+            _confirmPassword.text= @"";
+            [_activityIndicatorView stopAnimating];
             [alert show];
             return;
         }
@@ -172,8 +170,16 @@
     return inputHash;
     
 }
--(void) addUserSuccess:(NSArray*)items withSuccess:(NSNumber*)val
+-(void) addUserSuccess:(NSNumber*)item withSuccess:(NSNumber*)val
 {
+    [TreadsSession instance].treadsUser=[NSString stringWithString:[_emailAdress.text lowercaseString]];
+   // [TreadsSession instance].treadsUser=[((User*)items[0]).emailaddress lowercaseString];
+    [TreadsSession instance].treadsUserID  = [item intValue];
+    [TreadsSession instance].fName= [NSString stringWithString:_firstName.text];
+    [TreadsSession instance].lName= [NSString stringWithString:_lastName.text];
+    [TreadsSession instance].profilePhotoID=-1;
+    [TreadsSession instance].coverPhotoID=-1;
+    
     [_activityIndicatorView stopAnimating];
     _appDelegate.window.rootViewController= _appDelegate.tabBarController;
     
