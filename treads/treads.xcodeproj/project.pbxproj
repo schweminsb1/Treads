@@ -61,6 +61,8 @@
 		395CD5EE16F03EEA009FD655 /* LocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 395CD5ED16F03EEA009FD655 /* LocationService.m */; };
 		395E625F1715EC0E007AB363 /* CameraService.m in Sources */ = {isa = PBXBuildFile; fileRef = 395E625E1715EC0E007AB363 /* CameraService.m */; };
 		3973FE4C1710AC6000D4AAE1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3973FE4B1710AC6000D4AAE1 /* MobileCoreServices.framework */; };
+		39F809831719CA160008DF70 /* LocationMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F809811719CA160008DF70 /* LocationMapVC.m */; };
+		39F809841719CA160008DF70 /* LocationMapVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39F809821719CA160008DF70 /* LocationMapVC.xib */; };
 		3C094FA716EFF74700C537B1 /* TreadsSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C094FA616EFF74700C537B1 /* TreadsSession.m */; };
 		3C12312416EFCB89006CCBFE /* DataRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C12312316EFCB89006CCBFE /* DataRepository.m */; };
 		3C12312716EFCB98006CCBFE /* ProfileService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C12312616EFCB98006CCBFE /* ProfileService.m */; };
@@ -192,6 +194,9 @@
 		395E625D1715EC0E007AB363 /* CameraService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraService.h; sourceTree = "<group>"; };
 		395E625E1715EC0E007AB363 /* CameraService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraService.m; sourceTree = "<group>"; };
 		3973FE4B1710AC6000D4AAE1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		39F809801719CA160008DF70 /* LocationMapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationMapVC.h; path = treads/LocationMapVC.h; sourceTree = SOURCE_ROOT; };
+		39F809811719CA160008DF70 /* LocationMapVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationMapVC.m; path = treads/LocationMapVC.m; sourceTree = SOURCE_ROOT; };
+		39F809821719CA160008DF70 /* LocationMapVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LocationMapVC.xib; path = treads/LocationMapVC.xib; sourceTree = SOURCE_ROOT; };
 		3C04028C16F6B8CA0030D8BA /* TreadsService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TreadsService.h; path = treads/TreadsService.h; sourceTree = SOURCE_ROOT; };
 		3C094FA516EFF74700C537B1 /* TreadsSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreadsSession.h; path = treads/TreadsSession.h; sourceTree = SOURCE_ROOT; };
 		3C094FA616EFF74700C537B1 /* TreadsSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreadsSession.m; path = treads/TreadsSession.m; sourceTree = SOURCE_ROOT; };
@@ -444,9 +449,20 @@
 			name = "Add Location";
 			sourceTree = "<group>";
 		};
+		39F809851719CA260008DF70 /* LocationMap */ = {
+			isa = PBXGroup;
+			children = (
+				39F809801719CA160008DF70 /* LocationMapVC.h */,
+				39F809811719CA160008DF70 /* LocationMapVC.m */,
+				39F809821719CA160008DF70 /* LocationMapVC.xib */,
+			);
+			name = LocationMap;
+			sourceTree = "<group>";
+		};
 		3C60C7CD16E6C28300FDFD7D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				39F809851719CA260008DF70 /* LocationMap */,
 				2976729C17162DA700C756FB /* LocationPickerVC */,
 				29AB7C5E1710D254007D9F16 /* Location */,
 				316399B816ECB404003B3F0E /* EditTrip */,
@@ -799,6 +815,7 @@
 				3C90EAAB17161AE000CACCC4 /* plus_unselect.png in Resources */,
 				297672A117162DD300C756FB /* LocationPickerVC.xib in Resources */,
 				318BC81A1719058500F4EB67 /* EditProfileVC.xib in Resources */,
+				39F809841719CA160008DF70 /* LocationMapVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -862,6 +879,7 @@
 				395E625F1715EC0E007AB363 /* CameraService.m in Sources */,
 				297672A017162DD300C756FB /* LocationPickerVC.m in Sources */,
 				318BC8191719058500F4EB67 /* EditProfileVC.m in Sources */,
+				39F809831719CA160008DF70 /* LocationMapVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

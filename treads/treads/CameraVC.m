@@ -46,6 +46,7 @@ BOOL previousDoneHit;
         self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
         self.imagePicker.mediaTypes = @[(NSString *) kUTTypeImage];
         self.imagePicker.allowsEditing = NO;
+        self.imagePicker.navigationBar.opaque = true;
         self.imagePicker.delegate = self;
         doneTakingPictures = NO;
         
