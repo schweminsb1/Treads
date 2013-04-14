@@ -39,6 +39,8 @@
 
 @property (strong) UIPopoverController * callout;
 
+@property  int PINLIMIT;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withLocationService:(LocationService *) locationService withCommentService: (CommentService*) commentService withTripLocationService:(TripLocationService*) tripLocationService withUserService:(UserService*)userService;
 
 - (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView;
