@@ -23,6 +23,7 @@
 @property IBOutlet UIButton * save;
 @property IBOutlet UITextField * fName;
 @property IBOutlet UITextField * lName;
+@property IBOutlet UITextField * email;
 @property UserService * userService;
 
 @end
@@ -130,6 +131,15 @@
             self.save.enabled = true;
             return;
         }
+        else if(self.email.text.length > 50) {
+            alert.message = @"Email may not be longer than 50 characters";
+            self.oldPassword.text = @"";
+            self.updatePassword.text =@"";
+            self.confirmPassword.text = @"";
+            [alert show];
+            self.save.enabled = true;
+            return;
+        }
         else {
             if(self.updatePassword.text.length > 0) {
                 returnedUser.password = [self getPasswordHash:self.updatePassword.text];
@@ -139,6 +149,9 @@
             }
             if (self.lName.text.length > 0) {
                 returnedUser.lname = self.lName.text;
+            }
+            if(self.email.text.length > 0) {
+                returnedUser.emailaddress = self.email.text;
             }
             [self.userService updateUser:returnedUser forTarget:self withAction:@selector(success)];
         }
