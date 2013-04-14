@@ -88,7 +88,8 @@
     {
         _proImage=items[0];
       [self layoutSubviews];
-        
+        [self setAutoresizesSubviews:YES];
+        [self setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     };
     [[ImageService instance] getImageWithPhotoID:_userModel.profilePhotoID withReturnBlock:block];
     

@@ -28,7 +28,7 @@
             
         };
         [[ImageService instance] getImageWithPhotoID:[TreadsSession instance].profilePhotoID withReturnBlock:_block];
-
+        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
     return self;
 }

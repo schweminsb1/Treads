@@ -26,7 +26,7 @@ static TripLocationService* repo;
 - (id)initWithRepository:(DataRepository*)repository {
     if ((self = [super init])) {
         self.dataRepository = repository;
-        self.dataTableIdentifier = @"TripLocations";
+        self.dataTableIdentifier = @"TripLocationTable";
     }
     return self;
 }
