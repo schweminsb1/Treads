@@ -94,7 +94,7 @@
     LoginVC* login;
     
     //Set the login controller to default
-    login = [[LoginVC alloc]initWithNibName:@"LoginVC" bundle:nil client:self.dataRepository.client AppDelegate:self withUserService:_userService];
+    login = [[LoginVC alloc]initWithNibName:@"LoginVC" bundle:nil client:_dataRepository.client AppDelegate:self withUserService:_userService];
     login.title = @"Login";
     UINavigationController* LoginNavigation = [[UINavigationController alloc] initWithRootViewController:login];
     

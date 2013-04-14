@@ -14,7 +14,6 @@
 @interface AddLocationVC : UIViewController
 
 -(IBAction) FinishClick:(id) sender;
-//-(IBAction) addCoordinates:(id) sender;
 -(IBAction) chooseLocation:(id) sender;
 
 @property IBOutlet UITextField  * locationText;
@@ -26,6 +25,6 @@
 @property IBOutlet UITextField  * longitudeText;
 @property (nonatomic, copy)void(^onSuccessLocation)(CLLocationCoordinate2D);
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil locationService:(LocationService *)myLocationService tripID:(int)myTripID;
--(void) goBack;
+-(void) goBack:(NSNumber *)idnum success:(NSNumber*)success;
 
 @end

@@ -13,11 +13,14 @@
 #import "LocationService.h"
 #import "EditProfileVC.h"
 #import "FollowService.h"
+#import "CameraService.h"
+#import "ImageScrollBrowser.h"
 
+#import "ImageScrollEditableTextView.h"
 
 @interface ProfileVC ()
 
-@property IBOutlet UIImageView * profilePic;
+@property IBOutlet UIButton * profilePic;
 @property IBOutlet UIImageView * banner;
 @property IBOutlet UILabel * name;
 @property IBOutlet UIButton * follow;
@@ -56,7 +59,7 @@
         self.commentService=commentService;
         self.followService = myFollowService;
         self.followID = -1;
-
+        self.profilePic.enabled = false;
     }
     
     return self;
@@ -74,6 +77,7 @@
     
     if(self.myProfile) {
         self.userID = [TreadsSession instance].treadsUserID;
+        self.profilePic.enabled = true;
     }
     else {
         [self.followService getPeopleIFollow:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(followDataHasLoaded:)];
@@ -103,12 +107,12 @@
       
         CompletionWithItems completion= ^(NSArray* items) {
             if (items.count > 0) {
-                UIImage * returnImage= items[0];
-                self.profilePic.image = returnImage;
+                UIImage *returnImage= items[0];
+                [self.profilePic setImage:returnImage forState:UIControlStateNormal];
             }
             else {
                 UIImage* defaultPic = [UIImage imageNamed:@"man.png"];
-                self.profilePic.image = defaultPic;
+                [self.profilePic setImage:defaultPic forState:UIControlStateNormal];
             }
                 [self.tripService getTripsWithUserID:self.userID forTarget:self withAction:@selector(tripsHaveLoaded:)];
         };
@@ -132,6 +136,9 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)changePic:(id)sender {
+    
 }
 
 - (void)showTrip:(Trip*)trip

@@ -621,8 +621,8 @@
 			children = (
 				395E625D1715EC0E007AB363 /* CameraService.h */,
 				395E625E1715EC0E007AB363 /* CameraService.m */,
-				291479771714BFB900D543F9 /* ImageService.h */,
 				291479781714BFB900D543F9 /* ImageService.m */,
+				291479771714BFB900D543F9 /* ImageService.h */,
 				29AB7C661710D341007D9F16 /* TripLocationService.h */,
 				29AB7C671710D341007D9F16 /* TripLocationService.m */,
 				3C04028C16F6B8CA0030D8BA /* TreadsService.h */,
