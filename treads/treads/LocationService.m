@@ -75,13 +75,13 @@ static LocationService* repo;
 
 - (void)getLocationByID:(int)LocationID forTarget:(NSObject *)target withAction:(SEL)returnAction
 {
-    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"LocationID = '%d'", LocationID] usingService:self forRequestingObject:target withReturnAction:returnAction];
+    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"id = '%d'", LocationID] usingService:self forRequestingObject:target withReturnAction:returnAction];
     
     
 }
 - (void)getLocationsforTarget:(NSObject *)target withAction:(SEL)returnAction
 {
-    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"LocationID > %d", -1] usingService:self forRequestingObject:target withReturnAction:returnAction];
+    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"id > %d", -1] usingService:self forRequestingObject:target withReturnAction:returnAction];
     
     
 }
@@ -95,7 +95,7 @@ static LocationService* repo;
         block(item,loc);
         
     };
-    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"LocationID = '%d'", LocationID] usingService:self withReturnBlock:complete];
+    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"id = '%d'", LocationID] usingService:self withReturnBlock:complete];
     
     
 }
