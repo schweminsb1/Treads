@@ -196,6 +196,11 @@
             [viewerTable reloadData];
             [self markChangeMade];
         };
+        cell.sendAddLocationRequest = ^(){
+            self.sendNewLocationRequest(^(TripLocation* newTripLocation) {
+                [self addLocationToCurrentTrip:newTripLocation atIndex:indexPath.row];
+            });
+        };
         cell.sendNewImageRequest = self.sendNewImageRequest;
         cell.sendDeleteLocationRequest = ^(){[_self removeLocationAtIndex:indexPath.row-1];};
         cell.sendMoveForwardRequest = ^(){[_self swapLocationItemsAtIndex:(indexPath.row-1) index:(indexPath.row)];};
@@ -267,13 +272,18 @@
 - (void)addLocationToCurrentTrip:(TripLocation*)newLocation atIndex:(int)index
 {
     NSMutableArray* temp = [NSMutableArray arrayWithArray:trip.tripLocations];
-    [temp addObject:newLocation];
+    if (index < temp.count) {
+        [temp insertObject:newLocation atIndex:index];
+    }
+    else {
+        [temp addObject:newLocation];
+    }
     
     trip.tripLocations = temp;
     [self markChangeMade];
     [viewerTable reloadData];
     //[viewerTable setContentOffset:CGPointMake(0, viewerTable.contentOffset.y + 620) animated:YES];
-    [viewerTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:trip.tripLocations.count inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    [viewerTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index+1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 - (void)removeLocationAtIndex:(int)index
