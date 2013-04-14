@@ -61,7 +61,7 @@
     self.followService = [[FollowService alloc] initWithRepository:self.dataRepository];
     
     //connect services
-    self.tripService.imageService = self.imageService;
+//    self.tripService.imageService = self.imageService;
     
 //    [self.imageService insertImage:[UIImage imageNamed:@"mountains.jpeg"] withCompletion:^(NSDictionary *item, NSError *error) {
 //        NSLog(error.localizedDescription);

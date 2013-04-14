@@ -92,14 +92,14 @@
 
 - (void)segmentControlChange:(UISegmentedControl*)sender
 {
-    [self.browser clearAndWait];
-    [self.browser setCellStyle:(TripBrowserCellStyle)[browserCellStyles[sender.selectedSegmentIndex] intValue]];
+//    [self.browser clearAndWait];
+//    [self.browser setCellStyle:(TripBrowserCellStyle)[browserCellStyles[sender.selectedSegmentIndex] intValue]];
     void(^fcn)(void) = browserModeControlActions[sender.selectedSegmentIndex]; fcn();
 }
 
 - (void)dataHasLoaded:(NSArray*)newData
 {
-    [self.browser setBrowserData:newData forTarget:self withAction:@selector(showTrip:)];
+    [self.browser setBrowserData:newData withCellStyle:(TripBrowserCellStyle)[browserCellStyles[self.browserModeControl.selectedSegmentIndex] intValue] forTarget:self withAction:@selector(showTrip:)];
     for (Trip* trip in newData) {
         [self.tripService getHeaderImageForTrip:trip forTarget:self withCompleteAction:@selector(refreshWithNewHeader)];
     }

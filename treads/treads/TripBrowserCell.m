@@ -206,35 +206,35 @@
 //        }
 //    }
     tripFeaturedImageView.image = displayTrip.image;
-    profilePictureView.image = [self randomImage];
+    profilePictureView.image = displayTrip.profileImage;
     tripDescriptionTextView.text = displayTrip.description;
     tripDescriptionTextView.contentOffset = CGPointMake(-tripDescriptionTextView.contentInset.left, -tripDescriptionTextView.contentInset.top);
 }
 
-- (UIImage*)randomImage
-{
-    int image = random()%5;
-    switch (image) {
-        case 0:
-            return [UIImage imageNamed:@"mountains.jpeg"];
-            break;
-        case 1:
-            return [UIImage imageNamed:@"helicopter-bouldering-crash-pad.jpg"];
-            break;
-        case 2:
-            return [UIImage imageNamed:@"remote-luxury-hiking-canada.jpg"];
-            break;
-        case 3:
-            return [UIImage imageNamed:@"summit-boots-hiking-rocks.jpg"];
-            break;
-        case 4:
-            return [UIImage imageNamed:@"virgin_river_hiking.jpg"];
-            break;
-        default:
-            break;
-    }
-    return nil;
-}
+//- (UIImage*)randomImage
+//{
+//    int image = random()%5;
+//    switch (image) {
+//        case 0:
+//            return [UIImage imageNamed:@"mountains.jpeg"];
+//            break;
+//        case 1:
+//            return [UIImage imageNamed:@"helicopter-bouldering-crash-pad.jpg"];
+//            break;
+//        case 2:
+//            return [UIImage imageNamed:@"remote-luxury-hiking-canada.jpg"];
+//            break;
+//        case 3:
+//            return [UIImage imageNamed:@"summit-boots-hiking-rocks.jpg"];
+//            break;
+//        case 4:
+//            return [UIImage imageNamed:@"virgin_river_hiking.jpg"];
+//            break;
+//        default:
+//            break;
+//    }
+//    return nil;
+//}
 
 
 @end

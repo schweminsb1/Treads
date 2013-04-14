@@ -8,11 +8,14 @@
 
 #import "TripBrowser.h"
 
-//#import "TripBrowserCell.h"
+#import "TripBrowserCell.h"
+#import "ProfileBrowserCell.h"
 
 #import "AppColors.h"
 
 @interface TripBrowser()<UITableViewDataSource, UITableViewDelegate>
+
+@property TripBrowserCellStyle cellStyle;
 
 @end
 
@@ -73,16 +76,17 @@
     [self bringSubviewToFront:activityIndicatorView];
 }
 
-- (void)setCellStyle:(TripBrowserCellStyle)cellStyle
-{
-    _cellStyle = cellStyle;
-    [browserTable reloadData];
-}
+//- (void)setCellStyle:(TripBrowserCellStyle)cellStyle
+//{
+//    _cellStyle = cellStyle;
+//    [browserTable reloadData];
+//}
 
 #pragma mark - Data Setting/Interaction
 
-- (void)setBrowserData:(NSArray*)newSortedData forTarget:(NSObject*)newTarget withAction:(SEL)newListSelectAction
+- (void)setBrowserData:(NSArray*)newSortedData withCellStyle:(TripBrowserCellStyle)cellStyle forTarget:(NSObject*)newTarget withAction:(SEL)newListSelectAction
 {
+    _cellStyle = cellStyle;
     sortedListData = newSortedData;
     target = newTarget;
     listSelectAction = newListSelectAction;
@@ -95,7 +99,7 @@
 - (void)clearAndWait
 {
     [activityIndicatorView startAnimating];
-    [self setBrowserData:nil forTarget:nil withAction:nil];
+    [self setBrowserData:nil withCellStyle:self.cellStyle forTarget:nil withAction:nil];
 }
 
 - (void)refreshWithNewImages

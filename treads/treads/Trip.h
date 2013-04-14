@@ -20,12 +20,16 @@
 @property int tripID; //id
 @property (copy) NSString* name;
 @property int userID;
-@property (copy) NSString* username;
 @property int imageID;
-@property (strong) UIImage* image;
 @property (copy) NSString* description;
 
 //location
 @property (strong) NSArray* tripLocations;
+
+//derived information
+@property (copy) NSString* username;
+@property int profileImageID;
+@property (strong) UIImage* profileImage;
+@property (strong) UIImage* image;
 
 @end

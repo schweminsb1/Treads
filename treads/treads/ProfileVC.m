@@ -14,6 +14,7 @@
 #import "EditProfileVC.h"
 #import "FollowService.h"
 #import "CameraService.h"
+#import "ImageService.h"
 #import "ImageScrollBrowser.h"
 
 #import "ImageScrollEditableTextView.h"
@@ -25,7 +26,7 @@
 @property IBOutlet UILabel * name;
 @property IBOutlet UIButton * follow;
 @property IBOutlet UIButton * edit;
-@property TripService* tripService;
+//@property TripService* tripService;
 @property UserService* userService;
 @property ImageService* imageService;
 @property FollowService* followService;
@@ -33,6 +34,7 @@
 @property (strong) TripBrowser* browser;
 @property LocationService * locationService;
 @property int followID;
+@property User* returnedUser;
 
 @property BOOL myProfile;
 
@@ -41,7 +43,9 @@
 
 @end
 
-@implementation ProfileVC
+@implementation ProfileVC {
+    CameraService* cameraService;
+}
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService:(TripService *)myTripService userService:(UserService *)myUserService imageService:(ImageService*)myImageService isUser:(BOOL)isUser userID:(int)myUserID withLocationService:(LocationService*) locationService withCommentService:(CommentService*) commentService withFollowService:(FollowService*) myFollowService
@@ -50,7 +54,7 @@
     if (self) {
         self.title = NSLocalizedString(@"Profile", @"Profile");
         self.tabBarItem.image = [UIImage imageNamed:(@"man.png")];
-        self.tripService = myTripService;
+//        self.tripService = myTripService;
         self.userService = myUserService;
         self.imageService = myImageService;
         self.locationService = locationService;
@@ -74,12 +78,15 @@
     
     self.edit.hidden = true;
     self.follow.hidden = true;
+    self.profilePic.adjustsImageWhenDisabled = NO;
+    self.profilePic.adjustsImageWhenHighlighted = NO;
     
     if(self.myProfile) {
         self.userID = [TreadsSession instance].treadsUserID;
         self.profilePic.enabled = true;
     }
     else {
+        self.profilePic.enabled = false;
         [self.followService getPeopleIFollow:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(followDataHasLoaded:)];
     }
     
@@ -93,31 +100,20 @@
 
 - (void)dataHasLoaded:(NSArray*)newData{
     if(1 == newData.count) {
-        User* returnedUser = (User*)newData[0];
+        self.returnedUser = (User*)newData[0];
         
-        self.name.text = [NSString stringWithFormat:@"%@ %@", returnedUser.fname, returnedUser.lname];
+        self.name.text = [NSString stringWithFormat:@"%@ %@", self.returnedUser.fname, self.returnedUser.lname];
         
         
-        if (returnedUser.User_ID == [TreadsSession instance].treadsUserID) {
+        if (self.returnedUser.User_ID == [TreadsSession instance].treadsUserID) {
             self.edit.hidden = false;
         }
         else {
             self.follow.hidden = false;
         }
       
-        CompletionWithItems completion= ^(NSArray* items) {
-            if (items.count > 0) {
-                UIImage *returnImage= items[0];
-                [self.profilePic setImage:returnImage forState:UIControlStateNormal];
-            }
-            else {
-                UIImage* defaultPic = [UIImage imageNamed:@"man.png"];
-                [self.profilePic setImage:defaultPic forState:UIControlStateNormal];
-            }
-                [self.tripService getTripsWithUserID:self.userID forTarget:self withAction:@selector(tripsHaveLoaded:)];
-        };
-        [self.imageService getImageWithPhotoID:returnedUser.profilePhotoID withReturnBlock:completion];
-
+        [[TripService instance] getTripsWithUserID:self.userID forTarget:self withAction:@selector(tripsHaveLoaded:)];
+        
     }
 }
 
@@ -125,11 +121,32 @@
 
 - (void)tripsHaveLoaded:(NSArray*)newData {
     self.browser = [[TripBrowser alloc] initWithFrame:self.browserWindow.bounds];
-    self.browser.cellStyle = TripBrowserCell6x2;
+//    self.browser.cellStyle = TripBrowserCell6x2;
     [self.browser setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     [self.browserWindow addSubview: self.browser];
     [self.browser clearAndWait];
-    [self.browser setBrowserData:newData forTarget:self withAction:@selector(showTrip:)];
+    [self.browser setBrowserData:newData withCellStyle:TripBrowserCell6x2 forTarget:self withAction:@selector(showTrip:)];
+    for (Trip* trip in newData) {
+        [[TripService instance] getHeaderImageForTrip:trip forTarget:self withCompleteAction:@selector(refreshWithNewHeader)];
+    }
+    CompletionWithItems completion= ^(NSArray* items) {
+        
+        if (items.count > 0) {
+            UIImage *returnImage= items[0];
+            [self.profilePic setImage:returnImage forState:UIControlStateNormal];
+        }
+        else {
+            UIImage* defaultPic = [UIImage imageNamed:@"man.png"];
+            [self.profilePic setImage:defaultPic forState:UIControlStateNormal];
+        }
+        
+    };
+            [self.imageService getImageWithPhotoID:self.returnedUser.profilePhotoID withReturnBlock:completion];
+}
+
+- (void)refreshWithNewHeader
+{
+    [self.browser refreshWithNewImages];
 }
 
 - (void)didReceiveMemoryWarning
@@ -139,16 +156,38 @@
 }
 - (IBAction)changePic:(id)sender {
     
+    ProfileVC* __weak _self = self;
+    [[CameraService instance]showImagePickerFromViewController:_self onSuccess:^(UIImage* image) {
+        [self.profilePic setImage:image forState:UIControlStateNormal];
+        [[ImageService instance] insertImage:image withCompletion:^(NSDictionary *item, NSError* error ) {
+            if (error == nil) {
+                self.returnedUser.profilePhotoID = [((NSString*)item[@"id"]) intValue];
+                [TreadsSession instance].profilePhotoID = [((NSString*)item[@"id"]) intValue];
+                [[UserService instance] updateUser:self.returnedUser forTarget:self withAction:@selector(photoUpdateSuccess)];
+            }
+        }];
+        
+    }];
+}
+
+- (void)photoUpdateSuccess {
+    
 }
 
 - (void)showTrip:(Trip*)trip
 {
-    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID LocationService:_locationService withCommentService:_commentService withUserService: _userService];
+    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:[TripService instance] tripID:trip.tripID LocationService:_locationService withCommentService:_commentService withUserService: _userService];
     [self.navigationController pushViewController:tripViewVC animated:YES];
 }
 
 - (void)updateUser:(int)myUserID{
     self.userID = myUserID;
+    if(self.userID == [TreadsSession instance].treadsUserID) {
+        self.myProfile = YES;
+    }
+    else {
+        self.myProfile = NO;
+    }
 }
 
 - (IBAction)editProfile:(id)sender{
@@ -184,4 +223,5 @@
     [self.followService getPeopleIFollow:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(followDataHasLoaded:)];
 
 }
+
 @end

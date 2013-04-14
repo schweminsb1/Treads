@@ -32,6 +32,6 @@
 
 - (IBAction)editProfile:(id)sender;
 - (void) followSuccess;
-
+@property (copy) void (^sendNewImageRequest)(void(^onSuccess)(UIImage*));
 
 @end
