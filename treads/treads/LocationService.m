@@ -91,8 +91,10 @@ static LocationService* repo;
     CompletionWithItems complete= ^(NSArray * items)
     {
         NSArray * item;
-        Location * loc= items[0];
-        block(item,loc);
+        if (items.count > 0) {
+            Location * loc= items[0];
+            block(item,loc);
+        }
         
     };
     [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"id = '%d'", LocationID] usingService:self withReturnBlock:complete];
