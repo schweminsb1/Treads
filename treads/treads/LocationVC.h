@@ -13,9 +13,22 @@
 #import "Location.h"
 #import "CommentEnterBox.h"
 
+@class UserService;
+@class LocationService;
+@class ImageService;
+@class CommentService;
+@class TripService;
+@class FollowService;
+
 @interface LocationVC : UIViewController 
 
+@property UserService * userService;
+@property LocationService * locationService;
+@property ImageService * imageService;
 @property CommentService * commentService;
+@property TripService * tripService;
+@property FollowService * followService;
+
 @property Location * model;
 
 //UI
@@ -27,7 +40,7 @@
 @property CommentEnterBox * commentEnterCell;
 
 
--(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withModel: (Location *) model withCommentService: (CommentService *) service withUserService:(UserService*) userService;
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withModel: (Location *) model withTripService: (TripService*) tripService withUserService:(UserService*) userService imageService:(ImageService*)imageService  withLocationService:(LocationService*)locationService withCommentService:(CommentService*)commentService withFollowService:(FollowService*)followService;
 
 
 @end

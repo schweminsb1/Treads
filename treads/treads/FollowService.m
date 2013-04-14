@@ -11,6 +11,15 @@
 
 @implementation FollowService
 
+
+static FollowService* repo;
++(FollowService*) instance {
+    @synchronized(self) {
+        if (!repo)
+            repo = [[FollowService alloc] initWithRepository:[DataRepository instance]];
+        return repo;
+    }
+}
 - (id)initWithRepository:(DataRepository*)repository {
     if ((self = [super init])) {
         self.dataRepository = repository;

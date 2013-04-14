@@ -28,5 +28,5 @@
 - (void)getCommentInLocation:(int)LocationID forTarget:(NSObject *)target withAction:(SEL)returnAction;
 -(void)insertNewComment: (Comment*)commentModel fromTarget:(NSObject *) target withReturn:(SEL) returnAction;
 
-
++(CommentService*) instance ;
 @end

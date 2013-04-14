@@ -23,4 +23,5 @@
 
 - (void) getPeopleIFollow:(int)myID forTarget:(NSObject*)target withAction:(SEL)returnAction;
 
++(FollowService*) instance ;
 @end

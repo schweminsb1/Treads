@@ -14,6 +14,16 @@
 @implementation LocationService
 
 
+static LocationService* repo;
++(LocationService*) instance {
+    @synchronized(self) {
+        if (!repo)
+            repo = [[LocationService alloc] initWithRepository:[DataRepository instance]];
+        return repo;
+    }
+}
+
+
 - (id)initWithRepository:(DataRepository*)repository
 {
     if(self = [super init])

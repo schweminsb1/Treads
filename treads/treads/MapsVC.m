@@ -12,19 +12,22 @@
 #import "CommentService.h"
 #import "LoginVC.h"
 #import "TripLocationService.h"
+#import "ProfileVC.h"
+#import "ImageService.h"
+#import "FollowService.h"
+#import "LocationService.h"
+#import "UserService.h"
+
 
 @interface MapsVC ()
 @property NSMutableArray * locationsInView;
 @property NSMutableArray * locationsTotal;
-@property LocationService * locationService;
-@property CommentService * commentService;
 @property Location * currentLocation;
 @property TripLocationService * tripLocationService;
 @property int locationCounter;
 @property __block int locationTotal;
 @property (nonatomic,copy)MSReadQueryBlock recieveAll;
 @property UIPopoverController* poc;
-@property UserService * userService;
 @end
 
 @implementation MapsVC
@@ -271,7 +274,8 @@ CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
 -(void)pushLocation
 {
     
-    LocationVC * locationvc= [[LocationVC alloc]initWithNibName:@"LocationVC" bundle:nil withModel:_currentLocation withCommentService: _commentService withUserService:_userService];
+    LocationVC * locationvc= [[LocationVC alloc]initWithNibName:@"LocationVC" bundle:nil withModel: _currentLocation withTripService:   withUserService:[UserService instance] imageService:[imageService instance]  withLocationService:[LocationService instance] withCommentService:[CommentService instance] withFollowService:[FollowService instance]];
+    
     [self.navigationController pushViewController:locationvc animated:YES];
     [self.callout dismissPopoverAnimated:YES];
 }

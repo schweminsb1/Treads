@@ -27,4 +27,6 @@
 -(NSArray *)getUserbyID:(int)UserID withReturnItems: (NSArray *)itm;
 
 - (void)addUser:(NSDictionary*)newUser forTarget:(NSObject*) target withAction: (SEL) returnAction;
+
++(UserService*) instance ;
 @end

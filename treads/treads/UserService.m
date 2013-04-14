@@ -12,6 +12,15 @@
 
 @implementation UserService
 
+static UserService* repo;
++(UserService*) instance {
+    @synchronized(self) {
+        if (!repo)
+            repo = [[UserService alloc] initWithRepository:[DataRepository instance]];
+        return repo;
+    }
+}
+
 - (id)initWithRepository:(DataRepository*)repository
 {
     if ((self = [super init])) {

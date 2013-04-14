@@ -7,9 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UserService.h"
+
 #import "User.h"
 #import "Comment.h"
+
+@class UserService;
+@class LocationService;
+@class ImageService;
+@class CommentService;
+@class TripService;
+@class FollowService;
 
 
 @interface CommentCell : UITableViewCell
@@ -22,10 +29,17 @@
 @property UITextView * commentField;
 @property UILabel * userName;
 @property UIButton * userNameButton;
+
 @property UserService * userService;
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withCommentModel:(Comment *) comment withUserService:(UserService*) userService;
+@property LocationService * locationService;
+@property ImageService * imageService;
+@property CommentService * commentService;
+@property TripService * tripService;
+@property FollowService * followService;
 
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withCommentModel:(Comment *) comment withTripService: (TripService*) tripService withUserService:(UserService*) userService imageService:imageService  withLocationService:locationService withCommentService:commentService withFollowService:followService;
 
+@property CGRect imagerect;
 
 
 @end

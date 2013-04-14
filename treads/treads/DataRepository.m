@@ -11,6 +11,16 @@
 
 @implementation DataRepository
 
+static DataRepository* repo;
++(DataRepository*) instance {
+    @synchronized(self)
+    {
+        if (!repo)
+            repo = [[DataRepository alloc]init];
+            return repo;
+    }
+}
+
 - (id)init
 {
     if ((self = [super init])) {
