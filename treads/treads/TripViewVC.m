@@ -85,9 +85,9 @@
         
         myself.picker= [[LocationPickerVC alloc]initWithStyle:UITableViewStylePlain withLocationService:myself.locationService];
         myself.picker.returnLocationToTripView=myBlock;
-        myself.navcontroller= [[UINavigationController alloc] initWithRootViewController:myself.picker];
+        //myself.navcontroller= [[UINavigationController alloc] initWithRootViewController:myself.picker];
         
-        [myself presentViewController:myself.navcontroller animated:YES completion:nil];
+        [myself.navigationController pushViewController:myself.picker animated:YES];
     };
     TripViewVC* __weak _self = self;
     CameraService* __weak _cameraService = cameraService;
