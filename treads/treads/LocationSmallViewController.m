@@ -37,7 +37,7 @@
 {
     [super viewDidLoad];
      self.name.text = _location.title;
-    self.view.backgroundColor = [AppColors mainBackgroundColor];
+    self.view.backgroundColor = [AppColors secondaryBackgroundColor];
     // Do any additional setup after loading the view from its nib.
     CGRect  size= CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + 200 , self.view.bounds.size.width, 550) ;
     //add subView

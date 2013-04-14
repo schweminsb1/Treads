@@ -43,8 +43,7 @@
         CGRect commentEnterRect = CGRectMake(_commentTable.frame.origin.x, _commentTable.frame.origin.y -50, _commentTable.frame.size.width, 50);
         _commentEnterCell = [[CommentEnterBox alloc] initWithFrame:commentEnterRect];
         [self.view addSubview:_commentEnterCell];
-        self.view.backgroundColor = [AppColors secondaryBackgroundColor];
-        
+               
         
     }
     else
@@ -73,7 +72,8 @@
 -(void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
+    [self.view setBackgroundColor:[AppColors secondaryBackgroundColor]];
+
     /*
     self.name.text = _model.title;
     
