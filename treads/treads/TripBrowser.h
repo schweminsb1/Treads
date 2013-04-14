@@ -14,9 +14,9 @@
 
 @interface TripBrowser : UIView
 
-typedef enum {TripBrowserCell3x4, TripBrowserCell6x2, TripBrowserCell5x1, TripBrowserCell4x1} TripBrowserCellStyle;
+typedef enum {TripBrowserCell3x4, TripBrowserCell6x2, TripBrowserCell5x1, TripBrowserCell4x1, ProfileBrowserCell5x1} TripBrowserCellStyle;
 
-- (void)setBrowserData:(NSArray*)newSortedData forTarget:(NSObject*)newTarget withAction:(SEL)newListSelectAction;
+- (void)setBrowserData:(NSArray*)newSortedData withCellStyle:(TripBrowserCellStyle)cellStyle forTarget:(NSObject*)newTarget withAction:(SEL)newListSelectAction
 
 - (void)clearAndWait;
 
