@@ -12,6 +12,7 @@
 
 #import "TripService.h"
 #import "Trip.h"
+#import "User.h"
 
 #import "TripViewVC.h"
 #import "LocationService.h"
@@ -53,22 +54,22 @@
     [super viewDidLoad];
     
     //set up segmented control
-    browserModeControlLabels = @[@"Following", @"Feed", @"Favorites"];
+    browserModeControlLabels = @[
+                                 @"Following",
+                                 @"Feed",
+                                 @"Favorites"
+                                 ];
     browserModeControlActions = @[
-                       ^void(void) { [self.tripService getAllTripsForTarget:self withAction:@selector(dataHasLoaded:)]; },
-                       ^void(void) { [self.tripService getAllTripsForTarget:self withAction:@selector(dataHasLoaded:)]; },
-                        ^void(void) { [self.tripService getAllTripsForTarget:self withAction:@selector(dataHasLoaded:)]; }
+                                  ^void(void) { [self.tripService getAllTripsForTarget:self withAction:@selector(profileDataHasLoaded:)]; },
+                                   ^void(void) { [self.tripService getAllTripsForTarget:self withAction:@selector(tripDataHasLoaded:)]; },
+                                   ^void(void) { [self.tripService getAllTripsForTarget:self withAction:@selector(tripDataHasLoaded:)]; }
                       ];
     browserCellStyles = @[
-                          [NSNumber numberWithInt:TripBrowserCell5x1],
+                          [NSNumber numberWithInt:ProfileBrowserCell5x1],
                           [NSNumber numberWithInt:TripBrowserCell3x4],
                           [NSNumber numberWithInt:TripBrowserCell6x2]
                          ];
-    //browserModeControlActions = @[
-    //                              ^NSArray*(void) { return [self.tripService getFollowingTrips]; },
-    //                               ^NSArray*(void) { return [self.tripService getFeedTrips]; },
-    //                               ^NSArray*(void) { return [self.tripService getAllTrips]; }
-    //                               ];
+    
     self.browserModeControl = [[UISegmentedControl alloc] initWithItems:browserModeControlLabels];
     [self.browserModeControl addTarget:self action:@selector(segmentControlChange:) forControlEvents:UIControlEventValueChanged];
     self.browserModeControl.segmentedControlStyle = UISegmentedControlStyleBar;
@@ -92,12 +93,18 @@
 
 - (void)segmentControlChange:(UISegmentedControl*)sender
 {
-//    [self.browser clearAndWait];
+    [self.browser clearAndWait];
 //    [self.browser setCellStyle:(TripBrowserCellStyle)[browserCellStyles[sender.selectedSegmentIndex] intValue]];
     void(^fcn)(void) = browserModeControlActions[sender.selectedSegmentIndex]; fcn();
 }
 
-- (void)dataHasLoaded:(NSArray*)newData
+- (void)profileDataHasLoaded:(NSArray*)newData
+{
+    newData = @[];
+    [self.browser setBrowserData:newData withCellStyle:(TripBrowserCellStyle)[browserCellStyles[self.browserModeControl.selectedSegmentIndex] intValue] forTarget:self withAction:@selector(showTrip:)];
+}
+
+- (void)tripDataHasLoaded:(NSArray*)newData
 {
     [self.browser setBrowserData:newData withCellStyle:(TripBrowserCellStyle)[browserCellStyles[self.browserModeControl.selectedSegmentIndex] intValue] forTarget:self withAction:@selector(showTrip:)];
     for (Trip* trip in newData) {
@@ -124,6 +131,11 @@
     
     TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID LocationService:_locationService withCommentService:_commentService withUserService:_userService];
     [self.navigationController pushViewController:tripViewVC animated:YES];
+}
+
+- (void)showProfile:(User*)profile
+{
+    
 }
 
 @end
