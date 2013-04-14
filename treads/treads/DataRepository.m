@@ -187,15 +187,12 @@ static DataRepository* repo;
         }
     };
     [LocationTable insert:newLocation completion:itemBlock];
-        
-    
 }
 
 -(void) getLocationsOrdered: (MSReadQueryBlock) getAll
 {
     
      MSTable * LocationTable=  [self.client getTable:@"LocationTable"];
-    
     NSPredicate * predicategetALL = [NSPredicate predicateWithValue:YES];
     
     //sets the predicate to return an ordered set value based on the UserID
