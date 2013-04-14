@@ -190,6 +190,12 @@
             });
 //            [_cell changeLocation:200];
         };
+        cell.sendTripImageIDRequest = ^(TripLocationItem* locationItem) {
+            trip.imageID = locationItem.imageID;
+            trip.image = locationItem.image;
+            [viewerTable reloadData];
+            [self markChangeMade];
+        };
         cell.sendNewImageRequest = self.sendNewImageRequest;
         cell.sendDeleteLocationRequest = ^(){[_self removeLocationAtIndex:indexPath.row-1];};
         cell.sendMoveForwardRequest = ^(){[_self swapLocationItemsAtIndex:(indexPath.row-1) index:(indexPath.row)];};
@@ -244,26 +250,21 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingEnabled && indexPath.row == trip.tripLocations.count + 1) {
-        self.sendNewLocationRequest(^(TripLocation* newTripLocation){
-//            //add new location
-//            //at some point this will need to be converted to an async call/request function
-//            TripLocation* dummyLocation = [[TripLocation alloc] init];
-//            dummyLocation.tripLocationID = trip.tripLocations.count;
-//            dummyLocation.tripID = trip.tripID;
-//            dummyLocation.locationID = newTripLocation.locationID;
-//            dummyLocation.description = @"New location";
-//            dummyLocation.tripLocationItems = [[NSArray alloc] init];
-            newTripLocation.description = @"";
-            newTripLocation.tripLocationItems = [[NSArray alloc] init];
-            [self addLocationToCurrentTrip:newTripLocation];
-        });
-        
-        
+        [self requestNewLocationForIndex:trip.tripLocations.count];
     }
     return;
 }
 
-- (void)addLocationToCurrentTrip:(TripLocation*)newLocation
+- (void)requestNewLocationForIndex:(int)index
+{
+    self.sendNewLocationRequest(^(TripLocation* newTripLocation){
+        newTripLocation.description = @"";
+        newTripLocation.tripLocationItems = [[NSArray alloc] init];
+        [self addLocationToCurrentTrip:newTripLocation atIndex:index];
+    });
+}
+
+- (void)addLocationToCurrentTrip:(TripLocation*)newLocation atIndex:(int)index
 {
     NSMutableArray* temp = [NSMutableArray arrayWithArray:trip.tripLocations];
     [temp addObject:newLocation];

@@ -90,7 +90,7 @@
     if (editItemView!=nil) {
         [editItemView setHidden:!__editingEnabled];
         if (__editingEnabled) {
-            [editItemView setFrame:CGRectMake(self.bounds.size.width/2 - 100, imageSubViewSize.height - 50, 200, 40)];
+            [editItemView setFrame:CGRectMake(self.bounds.size.width/2 - 150, imageSubViewSize.height - 50, 300, 40)];
         }
     }
 
@@ -142,6 +142,8 @@
         ImageScrollBrowser* __weak _self = self;
         editItemView.requestChangeItem = ^(){[_self requestedChangeItem];};
         editItemView.requestRemoveItem = ^(){[_self requestedRemoveItem];};
+        editItemView.requestAddItem = ^(){[_self requestedAddItem];};
+        editItemView.requestFavoriteItem = ^(){[_self requestedFavoriteItem];};
         editItemView.requestMoveForward = ^(){[_self requestedMoveForward];};
         editItemView.requestMoveBackward = ^(){[_self requestedMoveBackward];};
         
@@ -306,6 +308,18 @@
         self.arrayWasChanged(temp);
         self.displayItems = temp;
         [self startHideAnimation];
+    }
+}
+
+- (void)requestedAddItem
+{
+//    self.sendadd
+}
+
+- (void)requestedFavoriteItem
+{
+    if (displayedTextIndex >= 0 && displayedTextIndex < self.displayItems.count) {
+        self.sendFavoriteItemRequest(self.displayItems[displayedTextIndex]);
     }
 }
 

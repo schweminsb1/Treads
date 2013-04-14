@@ -70,8 +70,8 @@
 		3C13F539171A184300EA6582 /* 404.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C13F538171A184300EA6582 /* 404.png */; };
 		3C13F53E171A3E6E00EA6582 /* pencil_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C13F53A171A3E6B00EA6582 /* pencil_select.png */; };
 		3C13F53F171A3E6E00EA6582 /* pencil_unselect.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C13F53B171A3E6C00EA6582 /* pencil_unselect.png */; };
-		3C13F540171A3E6E00EA6582 /* star_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C13F53C171A3E6D00EA6582 /* star_select.png */; };
-		3C13F541171A3E6E00EA6582 /* star_unselect.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C13F53D171A3E6E00EA6582 /* star_unselect.png */; };
+		3C13F544171A440500EA6582 /* star_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C13F542171A440200EA6582 /* star_select.png */; };
+		3C13F545171A440500EA6582 /* star_unselect.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C13F543171A440200EA6582 /* star_unselect.png */; };
 		3C60C7DB16E7004900FDFD7D /* TripBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C60C7DA16E7004900FDFD7D /* TripBrowser.m */; };
 		3C87B12316F7E7B8000ABF18 /* AppColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C87B12216F7E7B8000ABF18 /* AppColors.m */; };
 		3C882DC1170D1DF30041A9C8 /* ImageScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C882DC0170D1DF30041A9C8 /* ImageScrollTextView.m */; };
@@ -212,8 +212,8 @@
 		3C13F538171A184300EA6582 /* 404.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 404.png; sourceTree = "<group>"; };
 		3C13F53A171A3E6B00EA6582 /* pencil_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pencil_select.png; sourceTree = "<group>"; };
 		3C13F53B171A3E6C00EA6582 /* pencil_unselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pencil_unselect.png; sourceTree = "<group>"; };
-		3C13F53C171A3E6D00EA6582 /* star_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_select.png; sourceTree = "<group>"; };
-		3C13F53D171A3E6E00EA6582 /* star_unselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_unselect.png; sourceTree = "<group>"; };
+		3C13F542171A440200EA6582 /* star_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_select.png; sourceTree = "<group>"; };
+		3C13F543171A440200EA6582 /* star_unselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_unselect.png; sourceTree = "<group>"; };
 		3C60C7D916E7004900FDFD7D /* TripBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripBrowser.h; path = treads/TripBrowser.h; sourceTree = SOURCE_ROOT; };
 		3C60C7DA16E7004900FDFD7D /* TripBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripBrowser.m; path = treads/TripBrowser.m; sourceTree = SOURCE_ROOT; };
 		3C87B12116F7E7B8000ABF18 /* AppColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppColors.h; path = treads/AppColors.h; sourceTree = SOURCE_ROOT; };
@@ -629,8 +629,8 @@
 				3C90EAA317161AE000CACCC4 /* plus_unselect.png */,
 				3C13F53A171A3E6B00EA6582 /* pencil_select.png */,
 				3C13F53B171A3E6C00EA6582 /* pencil_unselect.png */,
-				3C13F53C171A3E6D00EA6582 /* star_select.png */,
-				3C13F53D171A3E6E00EA6582 /* star_unselect.png */,
+				3C13F542171A440200EA6582 /* star_select.png */,
+				3C13F543171A440200EA6582 /* star_unselect.png */,
 			);
 			name = "Edit Icons";
 			sourceTree = "<group>";
@@ -830,8 +830,8 @@
 				3C13F539171A184300EA6582 /* 404.png in Resources */,
 				3C13F53E171A3E6E00EA6582 /* pencil_select.png in Resources */,
 				3C13F53F171A3E6E00EA6582 /* pencil_unselect.png in Resources */,
-				3C13F540171A3E6E00EA6582 /* star_select.png in Resources */,
-				3C13F541171A3E6E00EA6582 /* star_unselect.png in Resources */,
+				3C13F544171A440500EA6582 /* star_select.png in Resources */,
+				3C13F545171A440500EA6582 /* star_unselect.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
