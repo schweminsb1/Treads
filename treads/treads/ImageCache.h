@@ -7,7 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface ImageCache : NSObject
+
++ (ImageCache*) sharedCache;
+
+- (void)cacheImage:(UIImage*)image withID:(int)index;
+- (UIImage*)tryReadImageFromCacheWithID:(int)index;
 
 @end

@@ -5,12 +5,16 @@
 //  Created by Sam Schwemin on 4/9/13.
 //  Copyright (c) 2013 Team Walking Stick. All rights reserved.
 //
+
 //Blob name is the imageid, located in the images container
+
 #import "ImageService.h"
 #import "DataRepository.h"
 #import "NSData+Base64.h"
-@implementation ImageService
 
+#import "ImageCache.h"
+
+@implementation ImageService
 
 static ImageService* repo;
 +(ImageService*) instance {
@@ -65,19 +69,26 @@ static ImageService* repo;
 }
 -(void) getImageWithPhotoID:(int) photoid withReturnBlock:(CompletionWithItems) comp
 {
-
-    [_dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"id = %d",photoid] usingService:self withReturnBlock:comp];
+    //get image from cache if it exists, else, grab from database
+    UIImage* image = [[ImageCache sharedCache] tryReadImageFromCacheWithID:photoid];
+    if (image) {
+        comp(@[image]);
+    }
+    else {
+        [_dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"id = %d",photoid] usingService:self withReturnBlock:comp];
+    }
 }
 
 
 - (NSArray*)convertReturnDataToServiceModel:(NSArray*)returnData
 {
     if (returnData.count > 0) {
-        
-        NSString * imagestring= returnData[0][@"imageString"];
-        UIImage * returnImage= [self imageFromString:imagestring];
-        NSArray * arr= @[returnImage];
-        return arr;
+        //convert and cache image
+        NSString* imageString= returnData[0][@"imageString"];
+        UIImage* returnImage= [self imageFromString:imageString];
+        int index = [returnData[0][@"id"] intValue];
+        [[ImageCache sharedCache] cacheImage:returnImage withID:index];
+        return @[returnImage];
     }
     else {
         return nil;
