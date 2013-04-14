@@ -186,7 +186,7 @@
         cell.sendNewLocationRequest = ^(){
             self.sendNewLocationRequest(^(TripLocation* newTripLocation){
                 newTripLocation.description = @"";
-                [_cell changeLocation:newTripLocation.locationID];
+                [_cell changeLocation:newTripLocation.locationID withName:newTripLocation.locationName];
             });
 //            [_cell changeLocation:200];
         };
