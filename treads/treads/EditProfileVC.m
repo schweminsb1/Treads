@@ -68,7 +68,15 @@
     }
     else
     {
-        if(self.updatePassword.text.length < 8)
+        if(![[self getPasswordHash:self.oldPassword.text] isEqual: returnedUser.password]) {
+            alert.message = @"Old Password is incorrect";
+            self.oldPassword.text = @"";
+            self.updatePassword.text = @"";
+            self.confirmPassword.text = @"";
+            [alert show];
+            return;
+        }
+        else if(self.updatePassword.text.length < 8)
         {
             alert.message = @"Passwords must be 8 or more characters long";
             self.oldPassword.text = @"";
@@ -86,13 +94,9 @@
             [alert show];
             return;
         }
-        else if (![[self getPasswordHash:self.oldPassword.text] isEqual: returnedUser.fname]) {
-            alert.message = @"Old Password is incorrect";
-            self.oldPassword.text = @"";
-            self.updatePassword.text = @"";
-            self.confirmPassword.text = @"";
-            [alert show];
-            return;
+        else {
+            returnedUser.password = [self getPasswordHash:self.oldPassword.text];
+            
         }
     }
 }
