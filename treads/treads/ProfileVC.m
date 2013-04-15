@@ -35,7 +35,7 @@
 @property LocationService * locationService;
 @property int followID;
 @property User* returnedUser;
-
+@property (strong) UIBarButtonItem* logoutButton;
 @property BOOL myProfile;
 
 @property CommentService * commentService;
@@ -52,6 +52,9 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        
+        _activityIndicatorView.hidesWhenStopped= YES;
+        _activityIndicatorView.hidden=YES;
         self.title = NSLocalizedString(@"Profile", @"Profile");
         self.tabBarItem.image = [UIImage imageNamed:(@"man.png")];
 //        self.tripService = myTripService;
@@ -74,8 +77,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-
-    
+    self.logoutButton = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStyleBordered target:self action:@selector(logout)];
+    self.navigationItem.rightBarButtonItem = self.logoutButton;
     self.edit.hidden = true;
     self.follow.hidden = true;
     self.profilePic.adjustsImageWhenDisabled = NO;
@@ -92,8 +95,20 @@
     
 }
 
+
+-(void) logout {
+    [TreadsSession instance].treadsUser = @"";
+    [TreadsSession instance].treadsUserID = -1;
+    [TreadsSession instance].profilePhotoID = -1;
+    [TreadsSession instance].coverPhotoID = -1;
+    [TreadsSession instance].fName = @"";
+    [TreadsSession instance].lName = @"";
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 -(void) viewWillAppear:(BOOL)animated {
-    
+    [super viewWillAppear:animated];
+    [self.activityIndicatorView startAnimating];
     [self.userService getUserbyID:self.userID forTarget:self withAction:@selector(dataHasLoaded:)];
     
 }
@@ -130,7 +145,7 @@
         [[TripService instance] getHeaderImageForTrip:trip forTarget:self withCompleteAction:@selector(refreshWithNewHeader)];
     }
     CompletionWithItems completion= ^(NSArray* items) {
-        
+        [self.activityIndicatorView stopAnimating];
         if (items.count > 0) {
             UIImage *returnImage= items[0];
             [self.profilePic setImage:returnImage forState:UIControlStateNormal];

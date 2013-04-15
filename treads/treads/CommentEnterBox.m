@@ -33,6 +33,7 @@
 
 - (void) layoutSubviews
 {
+    [self setAutoresizesSubviews:YES];
     [super layoutSubviews];
     
     CGRect imageRect= CGRectMake(self.bounds.origin.x+5, self.bounds.origin.y+5, 50, self.bounds.size.height-10);

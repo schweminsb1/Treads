@@ -18,6 +18,7 @@
 
 @interface ProfileVC : UIViewController
 
+@property (strong) IBOutlet UIActivityIndicatorView* activityIndicatorView;
 @property (strong) IBOutlet UIView* browserWindow;
 
 

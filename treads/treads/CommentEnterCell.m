@@ -73,7 +73,7 @@
         [_postButton setTitleColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] forState:UIControlStateReserved];
         [_postButton setTitleColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] forState:UIControlStateSelected];
         [_postButton setTitleColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0] forState:UIControlStateDisabled];
-     
+     [_postButton setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin];
     
     _enterField= [[UITextView alloc] initWithFrame:textRect];
     [_enterField setEditable: YES];
@@ -97,7 +97,10 @@
 
 -(void)fillButton
 {
-    [_cellOwner performSelector:_buttonCallBack withObject:_enterField.text];
+    if(![_enterField.text isEqual: @""])
+    {
+        [_cellOwner performSelector:_buttonCallBack withObject:_enterField.text];
+    }
     
 }
 

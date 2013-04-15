@@ -31,7 +31,8 @@ static CameraService* repo;
 
 - (void)showImagePickerFromViewController:(UIViewController*)viewController onSuccess:(void(^)(UIImage*))onSuccess
 {
-    if( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+      [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
+   if([[UIDevice currentDevice]userInterfaceIdiom]== UIUserInterfaceIdiomPad)
     {
         if ([popover isPopoverVisible])
         {
@@ -47,13 +48,13 @@ static CameraService* repo;
                 imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString *) kUTTypeImage,nil];
                 popover = [[UIPopoverController alloc] initWithContentViewController: imagePicker];
                 popover.delegate = self;
-                [popover presentPopoverFromRect:CGRectMake(0,0,300,300)inView:viewController.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                [popover presentPopoverFromRect:CGRectMake(0,0,300,300)inView:viewController.view permittedArrowDirections:0 animated:YES];
             }
         }
     }
     else
     {
-        [imagePicker presentViewController: imagePicker animated:YES completion:nil];
+        //[imagePicker presentViewController: imagePicker animated:YES completion:nil];
     }
     //showImagePicker();
     //[viewController presentViewController:popover animated:(YES) completion:nil];
@@ -70,6 +71,12 @@ static CameraService* repo;
     }
     self.onSuccessImage(selectedImage);
 
+}
+- (void)viewDidUnload {
+    popover = nil;
+    imagePicker = nil;
+    [popover dismissPopoverAnimated:YES];
+    [imagePicker dismissViewControllerAnimated:YES completion:nil];
 }
 UIImage*(^returnSelectedImage)(void) =^
 {
