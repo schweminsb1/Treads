@@ -233,9 +233,12 @@ didDismissWithButtonIndex:(NSInteger) buttonIndex
     {
         NSLog(@"OK Tapped. Hello World!");
         
-        
+        [[TripService instance]deleteTripWithID:_recentlySelectedTripForDeletion.tripID forTarget:self withAction:@selector(done:)];
         
     }
 }
-
+-(void)done:(NSNumber*)deleteditemid
+{
+    [browserTable reloadData];
+}
 @end
