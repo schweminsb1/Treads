@@ -23,7 +23,7 @@
 
 @implementation TripBrowser {
     BOOL layoutDone;
-    NSArray* sortedListData;
+    NSMutableArray* sortedListData;
     SEL listSelectAction;
     NSObject* target;
     UITableView* browserTable;
@@ -95,7 +95,7 @@
 - (void)setBrowserData:(NSArray*)newSortedData withCellStyle:(TripBrowserCellStyle)cellStyle forTarget:(NSObject*)newTarget withAction:(SEL)newListSelectAction
 {
     _cellStyle = cellStyle;
-    sortedListData = newSortedData;
+    sortedListData =[NSMutableArray arrayWithArray: newSortedData];
     target = newTarget;
     listSelectAction = newListSelectAction;
     
@@ -239,6 +239,14 @@ didDismissWithButtonIndex:(NSInteger) buttonIndex
 }
 -(void)done:(NSNumber*)deleteditemid
 {
+    
+    for(int i=0; i<sortedListData.count; i++)
+    {
+        if(((Trip*)sortedListData[i]).tripID==[deleteditemid intValue])
+        {
+            [sortedListData removeObjectAtIndex:i];
+        }
+    }
     [browserTable reloadData];
 }
 @end
