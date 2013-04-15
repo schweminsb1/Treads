@@ -87,8 +87,10 @@
     }
     if (self.cellStyle == TripBrowserCell4x1) {
         [subView setFrame:CGRectMake(self.bounds.size.width/2-370, 8, 550, 110)];
+        [publishSwitch setFrame:CGRectMake(self.bounds.size.width/2 + 200, 48, 60, 20)];
+        [publishLabel setFrame:CGRectMake(self.bounds.size.width/2 + 210, 73, 60, 20)];
+        [deleteTrip setFrame:CGRectMake(self.bounds.size.width/2 + 295, 38, 80, 50)];
     }
-    
 }
 
 - (void)createAndAddSubviews

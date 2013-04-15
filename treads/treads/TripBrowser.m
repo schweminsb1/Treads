@@ -23,6 +23,7 @@
 
 @implementation TripBrowser {
     BOOL layoutDone;
+    BOOL headerCell;
     NSMutableArray* sortedListData;
     SEL listSelectAction;
     NSObject* target;
@@ -40,6 +41,7 @@
 {
     if ((self = [super initWithFrame:frame])) {
         layoutDone = NO;
+        headerCell = NO;
         [self layoutSubviews];
         listSelectAction = nil;
     }
