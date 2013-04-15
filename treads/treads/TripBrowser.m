@@ -132,6 +132,7 @@
             TripBrowserCell* cell = [tableView dequeueReusableCellWithIdentifier:[self getCellIdentifier]];
             if (!cell) {
                 cell = [[TripBrowserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[self getCellIdentifier] cellStyle:self.cellStyle];
+                cell.deletefrom= @selector(deleteTrip:);
             }
             cell.displayTrip = (Trip*)sortedListData[indexPath.row];
             return cell;
@@ -202,6 +203,11 @@
 {
     //return [self tableView:tableView cellForRowAtIndexPath:indexPath].bounds.size.height + cellVerticalPadding;
     return [TripBrowserCell heightForCellStyle:self.cellStyle] + cellVerticalPadding;
+}
+-(void)deleteTrip:(Trip*)trip
+{
+    
+    
 }
 
 @end

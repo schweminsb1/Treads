@@ -16,6 +16,7 @@
 
 @property (readwrite) TripBrowserCellStyle cellStyle;
 
+
 @end
 
 @implementation TripBrowserCell {
@@ -159,15 +160,24 @@
         tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(330, 0, 220, 110)];
         tripDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [tripDescriptionTextView setHidden:YES];
-        publishSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(self.bounds.origin.x +560, self.bounds.size.height/2+20, 60, 20)];
+        publishSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(subView.bounds.origin.x +130, subView.bounds.size.height/2+40, 60, 20)];
         [publishSwitch setHidden:NO];
-        publishLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.bounds.origin.x +570, self.bounds.size.height/2+45, 60, 20)];
+        [publishSwitch setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin ];
+        
+       [publishSwitch addTarget:self action:@selector(valueChange:) forControlEvents:UIControlEventValueChanged];
+        publishLabel = [[UILabel alloc] initWithFrame:CGRectMake(subView.bounds.origin.x +140, subView.bounds.size.height/2+65, 60, 20)];
         publishLabel.text=@"Published";
-         [publishSwitch addTarget:self action:@selector(valueChange:) forControlEvents:UIControlEventValueChanged];
+        [publishLabel setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
         deleteTrip = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        deleteTrip.frame=CGRectMake(self.bounds.origin.x +580, self.bounds.size.height/2+20, 60, 20);
+        deleteTrip.frame=CGRectMake(subView.bounds.origin.x +225, subView.bounds.size.height/2+30, 80, 50);
         [deleteTrip setHidden:NO];
         [deleteTrip setTintColor:[UIColor redColor]];
+        [deleteTrip addTarget:self action:@selector(deleteTrip) forControlEvents:UIControlEventTouchUpInside];
+        deleteTrip.titleLabel.text=@"Delete";
+        deleteTrip.titleLabel.font=[UIFont fontWithName:@"Helvetica" size:12];
+        deleteTrip.titleLabel.textColor=[UIColor blackColor];
+        [deleteTrip setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
+        [self addSubview:deleteTrip];
        
     }
     
@@ -242,9 +252,9 @@
     [bgColorView setBackgroundColor:[AppColors toolbarColor]];
     [self setSelectedBackgroundView:bgColorView];
     [self bringSubviewToFront:subView];
-    [subView addSubview:publishSwitch];
-    [subView addSubview:publishLabel];
-    [subView bringSubviewToFront:publishSwitch];
+    [self addSubview:publishSwitch];
+    [self addSubview:publishLabel];
+    [self bringSubviewToFront:publishSwitch];
 }
 
 - (void)setDisplayTrip:(Trip*)displayTrip
@@ -287,6 +297,11 @@
 -(void)tripChanged:(NSNumber*)idfield withSuccess:(NSNumber*)success
 {
     
+    
+}
+-(void)deleteTrip
+{
+    [self performSelector:_deletefrom withObject:DisplayTrip];
     
 }
 
