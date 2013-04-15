@@ -140,6 +140,7 @@
             trip.profileImageID = [TreadsSession instance].profilePhotoID;
             trip.description = @"Trip Description";
             trip.imageID = [TripLocationItem UNDEFINED_IMAGE_ID];
+            trip.published=0;
             [self dataHasLoaded:@[trip]];
         }
         else {
