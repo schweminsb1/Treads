@@ -69,6 +69,7 @@
 {
     //load browser data
     [self.browser clearAndWait];
+    self.navigationItem.rightBarButtonItem = self.tripNewButton;
 //    [self.browser setCellStyle:TripBrowserCell4x1];
     [self.tripService getTripsWithUserID:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(dataHasLoaded:)];
     //[self.tripService getTripWithID:0 forTarget:self withAction:@selector(dataHasLoaded:)];

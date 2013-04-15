@@ -155,6 +155,7 @@
                 {
                     //    [self.appDelegate.tabBarController.viewControllers[4] updateUser: [TreadsSession instance].treadsUserID];
                     _appDelegate.window.rootViewController= _appDelegate.tabBarController;
+                   // [self.navigationController pushViewController:self.appDelegate.tabBarController animated:YES];
                 }
                 else
                 {

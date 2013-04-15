@@ -83,6 +83,8 @@
 
     
     self.tabBarController = [[UITabBarController alloc] init];
+    
+    
     self.tabBarController.viewControllers = @[
                                               [[UINavigationController alloc] initWithRootViewController:mapsVC],
                                               cameraVC,
@@ -113,6 +115,39 @@
     [self.window makeKeyAndVisible];
     
     return YES;
+}
+
+- (void) logout {
+    
+    //Initialize ViewControllers
+    UIViewController *mapsVC, *cameraVC, *myTripsVC, *followVC, *profileVC;
+    
+    mapsVC = [[MapsVC alloc] initWithNibName:@"MapsVC" bundle:nil withLocationService: self.locationService withCommentService: self.commentService withTripLocationService: _tripLocationService withUserService:_userService];
+    cameraVC = [[CameraVC alloc] initWithNibName:@"CameraVC" bundle:nil];
+    myTripsVC = [[MyTripsVC alloc] initWithNibName:@"MyTripsVC" bundle:nil withTripService:self.tripService withLocationService:_locationService withCommentService: _commentService withUserService:_userService];
+    followVC = [[FollowVC alloc] initWithNibName:@"FollowVC" bundle:nil withTripService:self.tripService withLocationService:_locationService withCommentService:_commentService withUserService:_userService];
+    profileVC = [[ProfileVC alloc] initWithNibName:@"ProfileVC" bundle:nil tripService:self.tripService userService:self.userService imageService:self.imageService isUser:YES userID:[TreadsSession instance].treadsUserID withLocationService:_locationService withCommentService:_commentService withFollowService:self.followService];
+    
+    
+    
+    self.tabBarController = [[UITabBarController alloc] init];
+    
+    self.tabBarController.viewControllers = @[
+                                              [[UINavigationController alloc] initWithRootViewController:mapsVC],
+                                              cameraVC,
+                                              [[UINavigationController alloc] initWithRootViewController:myTripsVC],
+                                              [[UINavigationController alloc] initWithRootViewController:followVC],
+                                              [[UINavigationController alloc] initWithRootViewController:profileVC]
+                                              ];
+    LoginVC* login;
+    
+    //Set the login controller to default
+    login = [[LoginVC alloc]initWithNibName:@"LoginVC" bundle:nil client:_dataRepository.client AppDelegate:self withUserService:_userService];
+    login.title = @"Login";
+    UINavigationController* LoginNavigation = [[UINavigationController alloc] initWithRootViewController:login];
+    
+    //self.window.rootViewController=LoginNavigation;
+    self.window.rootViewController=LoginNavigation;
 }
 
 @end
