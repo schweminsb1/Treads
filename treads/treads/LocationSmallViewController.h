@@ -26,6 +26,9 @@
 @property NSString * IncludedInTrips;
 @property NSString * CommentsInLocations;
 
+@property IBOutlet UILabel * latLabel;
+@property IBOutlet UILabel * lonLabel;
+
 //contains the page from which called this popup controller, this will be used to push a page onto the navigation controller of this instance
 @property MapsVC * homepage;
 
