@@ -17,4 +17,6 @@
 @property (copy) BOOL(^editingEnabled)();
 @property (copy) void(^markChangeMade)();
 
+@property (copy) void(^sendViewProfileRequest)(int profileID);
+
 @end

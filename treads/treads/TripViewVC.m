@@ -98,7 +98,7 @@
             onSuccess(image);
         }];
     };
-    self.viewer.gotolocationpage= ^(TripLocation * loc)
+    self.viewer.sendViewLocationRequest= ^(TripLocation * loc)
     {
          //
         //get location model
@@ -111,6 +111,9 @@
             
         };
         [_self.locationService getLocationByID:loc.locationID withLocationBlock:complete];
+    };
+    self.viewer.sendViewProfileRequest = ^(int profileID) {
+        [_self showProfileWithID:profileID];
     };
     [self.viewer setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     [self.viewerWindow addSubview: self.viewer];
@@ -262,8 +265,15 @@
     }
 }
 
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)showProfileWithID:(int)profileID
+{
+    ProfileVC* profilevc= [[ProfileVC alloc]initWithNibName:@"ProfileVC" bundle:nil tripService:_tripService userService:_userService imageService:[ImageService instance] isUser:NO userID:profileID withLocationService:_locationService withCommentService:_commentService withFollowService:[FollowService instance]];
+    [self.navigationController pushViewController:profilevc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

@@ -33,5 +33,6 @@
 
 @property (copy) void(^sendNewLocationRequest)(void(^onSuccess)(TripLocation*));
 @property (copy) void(^sendNewImageRequest)(void(^onSuccess)(UIImage*));
-@property (copy) void(^gotolocationpage)(TripLocation* loc);
+@property (copy) void(^sendViewLocationRequest)(TripLocation* location);
+@property (copy) void(^sendViewProfileRequest)(int profileID);
 @end
