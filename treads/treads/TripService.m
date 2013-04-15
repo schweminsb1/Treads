@@ -59,7 +59,7 @@ static TripService* repo;
 {
     //banner picture
     if (trip.imageID == [TripLocationItem UNDEFINED_IMAGE_ID]) {
-        trip.image = [self emptyImage];
+        trip.image = [ImageService emptyImage];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [target performSelector:completeAction];
@@ -72,7 +72,7 @@ static TripService* repo;
                 trip.image = (UIImage*)(items[0]);
             }
             else {
-                trip.image = [self imageNotFound];
+                trip.image = [ImageService imageNotFound];
             }
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
@@ -82,13 +82,13 @@ static TripService* repo;
     }
     
     //profile picture
-    trip.profileImage = [self emptyImage];
+    trip.profileImage = [ImageService emptyImage];
     [[ImageService instance] getImageWithPhotoID:trip.profileImageID withReturnBlock:^(NSArray *items) {
         if (items.count > 0) {
             trip.profileImage = (UIImage*)(items[0]);
         }
         else {
-            trip.profileImage = [self imageNotFound];
+            trip.profileImage = [ImageService imageNotFound];
         }
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
@@ -106,7 +106,7 @@ static TripService* repo;
         for (TripLocationItem* locationItem in location.tripLocationItems) {
             //ignore if no image is present
             if (locationItem.imageID == [TripLocationItem UNDEFINED_IMAGE_ID]) {
-                locationItem.image = [self imageNotFound];
+                locationItem.image = [ImageService imageNotFound];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
                 [target performSelector:refreshAction];
@@ -120,7 +120,7 @@ static TripService* repo;
                     locationItem.image = (UIImage*)(items[0]);
                 }
                 else {
-                    locationItem.image = [self imageNotFound];
+                    locationItem.image = [ImageService imageNotFound];
                 }
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
@@ -129,16 +129,6 @@ static TripService* repo;
             }];
         }
     }
-}
-
-- (UIImage*)emptyImage
-{
-    return [UIImage imageNamed:@"empty_item.png"];
-}
-
-- (UIImage*)imageNotFound
-{
-    return [UIImage imageNamed:@"404.png"];
 }
 
 - (NSArray*)convertReturnDataToServiceModel:(NSArray*)returnData
@@ -173,7 +163,7 @@ static TripService* repo;
                     tripLocationItem.tripLocationID = [[tripLocationItemDictionary objectForKey:@"tripLocationID"] intValue];
                     tripLocationItem.description = [tripLocationItemDictionary objectForKey:@"description"];
                     tripLocationItem.imageID = [[tripLocationItemDictionary objectForKey:@"imageID"] intValue];
-                    tripLocationItem.image = [self emptyImage];
+                    tripLocationItem.image = [ImageService emptyImage];
                     tripLocationItem.index = [[tripLocationItemDictionary objectForKey:@"index"] intValue];
                     [tripLocationItems addObject:tripLocationItem];
                 }

@@ -8,6 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+#import "TripBrowser.h"
+
+@class User;
+
 @interface ProfileBrowserCell : UITableViewCell
+
++ (int)heightForCellStyle:(TripBrowserCellStyle)cellStyle;
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier cellStyle:(TripBrowserCellStyle)cellStyle;
+
+@property (readonly) TripBrowserCellStyle cellStyle;
+
+@property (assign, nonatomic) User* displayProfile;
 
 @end
