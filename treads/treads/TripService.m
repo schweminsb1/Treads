@@ -144,6 +144,7 @@ static TripService* repo;
             trip.name = [returnTrip objectForKey:@"name"];
             trip.description = [returnTrip objectForKey:@"description"];
             trip.imageID = [[returnTrip objectForKey:@"imageID"] intValue];
+            trip.published= [[returnTrip objectForKey:@"published"]intValue];
             NSArray* tripLocationsDictionary = [returnTrip objectForKey:@"tripLocations"];
             NSMutableArray* tripLocations = [[NSMutableArray alloc] initWithCapacity:tripLocationsDictionary.count];
             for (NSDictionary* tripLocationDictionary in tripLocationsDictionary)
@@ -201,7 +202,8 @@ static TripService* repo;
                                            @"name":trip.name,
                                            @"description":trip.description,
                                            @"tripLocations":[NSArray arrayWithArray:tripLocations],
-                                           @"imageID":@(trip.imageID)
+                                           @"imageID":@(trip.imageID),
+                                           @"published":@(trip.published)
                                            }];
     
     if (trip.tripID == [Trip UNDEFINED_TRIP_ID]) {

@@ -31,5 +31,6 @@
 @property int profileImageID;
 @property (strong) UIImage* profileImage;
 @property (strong) UIImage* image;
+@property int published;
 
 @end
