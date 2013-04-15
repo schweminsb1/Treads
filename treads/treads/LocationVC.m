@@ -11,16 +11,20 @@
 #import "CommentCell.h"
 #import "TreadsSession.h"
 #import "CommentEnterCell.h"
-
+#import "TripLocation.h"
 #import "ProfileVC.h"
 #import "CommentService.h"
 #import "ImageService.h"
 #import "FollowService.h"
 #import "LocationService.h"
 #import "UserService.h"
+#import "TripService.h"
+#import "TripLocationService.h"
+#import "TripViewVC.h"
+
 @interface LocationVC ()
 @property NSMutableArray * commentModels;
-
+@property NSMutableArray * triplocationModels;
 @end
 
 @implementation LocationVC
@@ -36,15 +40,18 @@
         _imageService=imageService;
         _locationService=locationService;
         _followService=followService;
-        
+        _triplocationModels= [[NSMutableArray alloc] init];
         _model=model;
         [_commentService getCommentInLocation:[model.idField intValue] forTarget:self withAction:@selector(getModels:)];
-        
+        [[TripLocationService instance] getTripLocationWithLocation:model withCompletion:^(NSArray *items, Location *location) {
+            _triplocationModels=[NSMutableArray arrayWithArray:items];
+            [_commentTable reloadData];
+        }];
         CGRect commentEnterRect = CGRectMake(_commentTable.frame.origin.x, _commentTable.frame.origin.y -50, _commentTable.frame.size.width, 50);
         _commentEnterCell = [[CommentEnterBox alloc] initWithFrame:commentEnterRect];
         [self.view addSubview:_commentEnterCell];
                
-        
+        [_segmentControl addTarget:self action:@selector(didChangeSegmentControl:) forControlEvents:UIControlEventValueChanged];
     }
     else
     {
@@ -102,7 +109,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _commentModels.count + 1;
+    if([_segmentControl selectedSegmentIndex]==0)
+    {
+        return _commentModels.count + 1;
+    }
+    else
+    {
+        return _triplocationModels.count;
+    }
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -110,32 +124,43 @@
     //UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CELL"];
     UITableViewCell * ccell;
     
-    
-    if(indexPath.row == 0)
+    if([_segmentControl selectedSegmentIndex]==0)
     {
-          ccell= [tableView dequeueReusableCellWithIdentifier:@"CCELL"];
-        if (!ccell)
+        if(indexPath.row == 0)
         {
-            ccell = [[CommentEnterCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CCELL" ];
-            CommentEnterCell * cell=(CommentEnterCell *)ccell;
-            cell.cellOwner=self;
-            cell.buttonCallBack= @selector(addCommentToTableFromUserWithComment:);
+            ccell= [tableView dequeueReusableCellWithIdentifier:@"CCELL"];
+            if (!ccell)
+            {
+                ccell = [[CommentEnterCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CCELL" ];
+                CommentEnterCell * cell=(CommentEnterCell *)ccell;
+                cell.cellOwner=self;
+                cell.buttonCallBack= @selector(addCommentToTableFromUserWithComment:);
             
             //[cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
             //[cell setAutoresizesSubviews:YES];
+            }
         }
-    }
-    else if(indexPath.row >0)
-    {
-         //ccell= [tableView dequeueReusableCellWithIdentifier:@"CELL"];
-        if (!ccell)
+        else if(indexPath.row >0)
         {
-            ccell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL" withCommentModel: ((Comment *)_commentModels[(_commentModels.count)-(indexPath.row)])withTripService:_tripService withUserService:_userService imageService:_imageService withLocationService:_locationService withCommentService:_commentService withFollowService:_followService withLocationDelegate:self];
-        //[cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-        //[cell setAutoresizesSubviews:YES];
+            //ccell= [tableView dequeueReusableCellWithIdentifier:@"CELL"];
+            if (!ccell)
+            {
+                    ccell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL" withCommentModel: ((Comment *)_commentModels[(_commentModels.count)-(indexPath.row)])withTripService:_tripService withUserService:_userService imageService:_imageService withLocationService:_locationService withCommentService:_commentService withFollowService:_followService withLocationDelegate:self];
+                //[cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+                //[cell setAutoresizesSubviews:YES];
+            }
         }
     }
-       return ccell;
+    else
+    {
+        ccell = [tableView dequeueReusableCellWithIdentifier:@"trips"];
+        if(!ccell)
+        {
+            ccell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"trips"];
+        }
+        ccell.textLabel.text=[NSString stringWithFormat:@"%d",((TripLocation*)_triplocationModels[indexPath.row]).tripID];
+    }
+    return ccell;
 }
 
 
@@ -146,7 +171,12 @@
 }
 
 - (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) indexPath {
-    
+    if([_segmentControl selectedSegmentIndex]==1)
+    {
+        //goto trip view
+        TripViewVC * newvc= [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:_model.title tripService:[TripService instance] tripID:((TripLocation*)_triplocationModels[indexPath.row]).tripID LocationService:[LocationService instance] withCommentService:[CommentService instance] withUserService:[UserService instance]];
+        [self.navigationController pushViewController:newvc animated:YES];
+    }
     
 }
 
@@ -171,6 +201,8 @@
     
     
 }
-
+- (void)didChangeSegmentControl:(UISegmentedControl *)control {
+    [_commentTable reloadData];
+}
 
 @end
