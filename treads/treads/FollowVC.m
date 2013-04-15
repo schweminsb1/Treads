@@ -104,38 +104,45 @@
 
 - (void)profileDataHasLoaded:(NSArray*)newData
 {
-    NSMutableArray* profileArray = [[NSMutableArray alloc] init];
-    for (NSDictionary* dictionary in newData) {
-        [profileArray addObject:dictionary[@"followProfile"]];
-    }
-    [self.browser setBrowserData:profileArray withCellStyle:(TripBrowserCellStyle)[browserCellStyles[self.browserModeControl.selectedSegmentIndex] intValue] forTarget:self withAction:@selector(showProfile:)];
-    for (User* user in profileArray) {
-        [[ImageService instance] getImageWithPhotoID:user.profilePhotoID withReturnBlock:^(NSArray *items) {
-            if (items.count > 0) {
-                user.profileImage = (UIImage*)items[0];
-            }
-            else {
-                user.profileImage = [ImageService imageNotFound];
-            }
-            [self refreshWithNewHeader];
+    if (self.browserModeControl.selectedSegmentIndex == 0) {
+        NSMutableArray* profileArray = [[NSMutableArray alloc] init];
+        for (NSDictionary* dictionary in newData) {
+            [profileArray addObject:dictionary[@"followProfile"]];
+        }
+        [profileArray sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            return [((User*)obj1).fname compare:((User*)obj2).fname];
         }];
-        [[ImageService instance] getImageWithPhotoID:user.coverPhotoID withReturnBlock:^(NSArray *items) {
-            if (items.count > 0) {
-                user.coverImage = (UIImage*)items[0];
-            }
-            else {
-                user.coverImage = [ImageService imageNotFound];
-            }
-            [self refreshWithNewHeader];
-        }];
+        [self.browser setBrowserData:profileArray withCellStyle:(TripBrowserCellStyle)[browserCellStyles[self.browserModeControl.selectedSegmentIndex] intValue] forTarget:self withAction:@selector(showProfile:)];
+        for (User* user in profileArray) {
+            [[ImageService instance] getImageWithPhotoID:user.profilePhotoID withReturnBlock:^(NSArray *items) {
+                if (items.count > 0) {
+                    user.profileImage = (UIImage*)items[0];
+                }
+                else {
+                    user.profileImage = [ImageService imageNotFound];
+                }
+                [self refreshWithNewHeader];
+            }];
+            [[ImageService instance] getImageWithPhotoID:user.coverPhotoID withReturnBlock:^(NSArray *items) {
+                if (items.count > 0) {
+                    user.coverImage = (UIImage*)items[0];
+                }
+                else {
+                    user.coverImage = [ImageService imageNotFound];
+                }
+                [self refreshWithNewHeader];
+            }];
+        }
     }
 }
 
 - (void)tripDataHasLoaded:(NSArray*)newData
 {
-    [self.browser setBrowserData:newData withCellStyle:(TripBrowserCellStyle)[browserCellStyles[self.browserModeControl.selectedSegmentIndex] intValue] forTarget:self withAction:@selector(showTrip:)];
-    for (Trip* trip in newData) {
-        [self.tripService getHeaderImageForTrip:trip forTarget:self withCompleteAction:@selector(refreshWithNewHeader)];
+    if (self.browserModeControl.selectedSegmentIndex > 0) {
+        [self.browser setBrowserData:newData withCellStyle:(TripBrowserCellStyle)[browserCellStyles[self.browserModeControl.selectedSegmentIndex] intValue] forTarget:self withAction:@selector(showTrip:)];
+        for (Trip* trip in newData) {
+            [self.tripService getHeaderImageForTrip:trip forTarget:self withCompleteAction:@selector(refreshWithNewHeader)];
+        }
     }
 }
 
