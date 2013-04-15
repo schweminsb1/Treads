@@ -284,17 +284,25 @@
 }
 -(void)addTrip:(NSArray*)item
 {
-    Trip* trip=item[0];
-   if (trip.tripLocations.count>0)
-   {
-       TripLocation * triplocation=(trip.tripLocations[0]);
-       TripLocationItem * triplocationitem= triplocation.tripLocationItems[0];
-       int imageid= triplocationitem.imageID;
-       [[ImageService instance] getImageWithPhotoID:imageid withReturnBlock:^(NSArray *items) {
-           _imageView.image=items[0];
-       }];
+    if(item.count>0)
+    {
+        Trip* trip=item[0];
+        if (trip.tripLocations.count>0)
+        {
+            TripLocation * triplocation=(trip.tripLocations[0]);
+            if(triplocation.tripLocationItems.count>0)
+            {
+                TripLocationItem * triplocationitem= triplocation.tripLocationItems[0];
+                int imageid= triplocationitem.imageID;
+                [[ImageService instance] getImageWithPhotoID:imageid withReturnBlock:^(NSArray *items) {
+                if(items.count>0)
+                    
+                    _imageView.image=items[0];
+                }];
+            }
        
-   }
+        }
+    }
 
     
 }
