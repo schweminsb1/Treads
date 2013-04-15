@@ -52,7 +52,8 @@
         _tripModels = [[NSMutableArray alloc]init];
         _model=model;
         [_commentService getCommentInLocation:[model.idField intValue] forTarget:self withAction:@selector(getModels:)];
-        [[TripLocationService instance] getTripLocationWithLocation:model withCompletion:^(NSArray *items, Location *location)
+       
+        /*[[TripLocationService instance] getTripLocationWithLocation:model withCompletion:^(NSArray *items, Location *location)
         {
             _triplocationModels=[NSMutableArray arrayWithArray:items];
             for(int i=0; i< _triplocationModels.count; i++)
@@ -61,7 +62,9 @@
                 
             }
             
-        }];
+        }];*/
+        [[TripService instance] getTripsContainingLocationID:[_model.idField intValue]forTarget:self withAction:@selector(addTrips:)];
+        
         [self.browser clearAndWait];
         CGRect commentEnterRect = CGRectMake(_commentTable.frame.origin.x, _commentTable.frame.origin.y -50, _commentTable.frame.size.width, 50);
         _commentEnterCell = [[CommentEnterBox alloc] initWithFrame:commentEnterRect];
@@ -76,9 +79,9 @@
     }
     return self;
 }
--(void)addTrip:(NSArray*)items
+-(void)addTrips:(NSArray*)items
 {
-    if(items.count==1)
+   /* if(items.count==1)
     {
         [_tripModels addObject:items[0]];
         
@@ -90,8 +93,9 @@
         
         [_commentTable reloadData];
         
-    }
-    
+    }*/
+    _tripModels=[NSMutableArray arrayWithArray:items];
+       [self.browser setBrowserData:_tripModels withCellStyle:TripBrowserCell4x4 forTarget:self withAction:@selector(returnTrip:)];
 }
 -(void)returnTrip:(Trip*)trip
 {
@@ -248,7 +252,7 @@
         [_tableContainerView addSubview:_commentTable];
         [_commentTable reloadData];
     }
-    else if(control.selectedSegmentIndex==1 && (_tripModels.count==_triplocationModels.count))
+    else if(control.selectedSegmentIndex==1 && _tripModels != nil)
     {
        [_tableContainerView addSubview:_browser]; //place trip browser
         [self.browser clearAndWait];
