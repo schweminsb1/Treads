@@ -36,7 +36,7 @@
     ImageScrollBrowser* imageScrollBrowser;
     ImageScrollEditableTextView* imageScrollEditableTextView;
     ImageScrollEditItemView* imageScrollEditItemView;
-    UIView* imageScrollBrowserAddItemView;
+    UIImageView* imageScrollBrowserAddItemView;
     
     ImageScrollEditItemView* editItemView;
 }
@@ -138,7 +138,8 @@
     imageScrollEditableTextView.editingEnabled = ^BOOL(){return _self.editingEnabled();};
     imageScrollEditableTextView.markChangeMade = ^(){_self.markChangeMade();};
     
-    imageScrollBrowserAddItemView = [[UIView alloc] init];
+    imageScrollBrowserAddItemView = [[UIImageView alloc] init];
+    imageScrollBrowserAddItemView.image = [UIImage imageNamed:@"plus_unselect.png"];
     imageScrollBrowserAddItemView.backgroundColor = [AppColors toolbarColor];
     
     imageScrollEditItemView = [[ImageScrollEditItemView alloc] initDisplaysHorizontally:YES showFavorite:YES];
