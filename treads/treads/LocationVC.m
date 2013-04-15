@@ -22,11 +22,13 @@
 #import "TripLocationService.h"
 #import "TripViewVC.h"
 #import "Trip.h"
+#import "TripBrowser.h"
 
 @interface LocationVC ()
 @property NSMutableArray * commentModels;
 @property NSMutableArray * triplocationModels;
 @property NSMutableArray * tripModels;
+@property TripBrowser    * browser;
 @end
 
 @implementation LocationVC
@@ -37,6 +39,10 @@
     self =  [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if(self)
     {
+        _browser= [[TripBrowser alloc]initWithFrame:self.tableContainerView.bounds];
+        [self.browser setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+
+        
         _commentService = commentService;
         _userService=userService;
         _imageService=imageService;
@@ -56,6 +62,7 @@
             }
             
         }];
+        [self.browser clearAndWait];
         CGRect commentEnterRect = CGRectMake(_commentTable.frame.origin.x, _commentTable.frame.origin.y -50, _commentTable.frame.size.width, 50);
         _commentEnterCell = [[CommentEnterBox alloc] initWithFrame:commentEnterRect];
         [self.view addSubview:_commentEnterCell];
@@ -78,9 +85,17 @@
     }
     if(_tripModels.count == _triplocationModels.count)
     {
+        
+        [self.browser setBrowserData:_tripModels withCellStyle:TripBrowserCell4x4 forTarget:self withAction:@selector(returnTrip:)];
+        
         [_commentTable reloadData];
         
     }
+    
+}
+-(void)returnTrip:(Trip*)trip
+{
+    //gototrip
     
 }
 - (void)viewDidLoad
@@ -226,6 +241,26 @@
 }
 - (void)didChangeSegmentControl:(UISegmentedControl *)control {
     [_commentTable reloadData];
+    if(control.selectedSegmentIndex==0)
+    {
+        //remove trip browser
+        [_browser removeFromSuperview ];
+        [_tableContainerView addSubview:_commentTable];
+        [_commentTable reloadData];
+    }
+    else if(control.selectedSegmentIndex==1 && (_tripModels.count==_triplocationModels.count))
+    {
+       [_tableContainerView addSubview:_browser]; //place trip browser
+        [self.browser clearAndWait];
+        [self.browser setBrowserData:_tripModels withCellStyle:TripBrowserCell4x4 forTarget:self withAction:@selector(returnTrip:)];
+        [_tableContainerView bringSubviewToFront:_browser];
+        [_commentTable removeFromSuperview];
+    }
+    else
+    {
+        [control setSelectedSegmentIndex:0];
+        
+    }
 }
 
 @end

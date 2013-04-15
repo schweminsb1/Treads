@@ -28,7 +28,7 @@
 @property CommentService * commentService;
 @property TripService * tripService;
 @property FollowService * followService;
-
+@property IBOutlet UIView * tableContainerView;
 @property Location * model;
 
 //UI
