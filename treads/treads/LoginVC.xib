@@ -419,6 +419,22 @@
 					<int key="connectionID">508</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">newuser</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="381632477"/>
+					</object>
+					<int key="connectionID">509</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">login</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="501456327"/>
+					</object>
+					<int key="connectionID">510</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">RegisterClick:</string>
 						<reference key="source" ref="381632477"/>
@@ -564,7 +580,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">508</int>
+			<int key="maxID">510</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -598,6 +614,8 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="activityIndicatorView">UIActivityIndicatorView</string>
 						<string key="background">UIImageView</string>
+						<string key="login">UIButton</string>
+						<string key="newuser">UIButton</string>
 						<string key="passwordText">UITextField</string>
 						<string key="usernameText">UITextField</string>
 					</dictionary>
@@ -609,6 +627,14 @@
 						<object class="IBToOneOutletInfo" key="background">
 							<string key="name">background</string>
 							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="login">
+							<string key="name">login</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="newuser">
+							<string key="name">newuser</string>
+							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="passwordText">
 							<string key="name">passwordText</string>
