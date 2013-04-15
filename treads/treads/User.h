@@ -21,5 +21,6 @@
 
 @property (strong) UIImage* profileImage;
 @property (strong) UIImage* coverImage;
+@property int tripCount;
 
 @end

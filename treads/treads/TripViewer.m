@@ -164,7 +164,7 @@
         //fill out data
         TripViewer* __weak _self = self;
         cell.editingEnabled = ^BOOL(){return [_self editingEnabled];};
-        cell.markChangeMade = ^(){[_self markChangeMade];};
+        cell.markChangeMade = ^(){[_self markChangeMade]; _self.refreshTitle();};
         cell.sendViewProfileRequest = self.sendViewProfileRequest;
         cell.trip = trip;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;

@@ -84,7 +84,7 @@
         [subView setFrame:CGRectMake(self.bounds.size.width/2-275, 8, 550, 110)];
     }
     if (self.cellStyle == TripBrowserCell4x1) {
-        [subView setFrame:CGRectMake(self.bounds.size.width/2-330, 8, 440, 110)];
+        [subView setFrame:CGRectMake(self.bounds.size.width/2-330, 8, 550, 110)];
     }
     
 }
@@ -149,18 +149,18 @@
         [publishLabel setHidden:YES];
     }
     if (self.cellStyle == TripBrowserCell4x1) {
-        tripOwnerLabel = [[UILabel alloc] initWithFrame: CGRectMake(12, 10, 260, 34)];
-        tripNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(12, 41, 260, 25)];
-        tripDatesLabel = [[UILabel alloc] initWithFrame: CGRectMake(12, 64, 260, 18)];
-        tripContentLabel = [[UILabel alloc] initWithFrame: CGRectMake(12, 80, 260, 18)];
+        tripOwnerLabel = [[UILabel alloc] initWithFrame: CGRectMake(12, 10, 370, 34)];
+        tripNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(12, 41, 370, 25)];
+        tripDatesLabel = [[UILabel alloc] initWithFrame: CGRectMake(12, 64, 370, 18)];
+        tripContentLabel = [[UILabel alloc] initWithFrame: CGRectMake(12, 80, 370, 18)];
         profilePictureView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [profilePictureView setHidden:YES];
-        tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(220, 0, 220, 110)];
+        tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(330, 0, 220, 110)];
         tripDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [tripDescriptionTextView setHidden:YES];
-        publishSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(self.bounds.size.width/2 +500, self.bounds.size.height/2+20, 60, 20)];
+        publishSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(590, self.bounds.size.height/2+20, 60, 20)];
         [publishSwitch setHidden:NO];
-        publishLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.bounds.size.width/2 +510, self.bounds.size.height/2+45, 60, 20)];
+        publishLabel = [[UILabel alloc] initWithFrame:CGRectMake(600, self.bounds.size.height/2+45, 60, 20)];
         publishLabel.text=@"Published";
          [publishSwitch addTarget:self action:@selector(valueChange:) forControlEvents:UIControlEventValueChanged];
     }
@@ -236,9 +236,9 @@
     [bgColorView setBackgroundColor:[AppColors toolbarColor]];
     [self setSelectedBackgroundView:bgColorView];
     [self bringSubviewToFront:subView];
-    [self addSubview:publishSwitch];
-    [self addSubview:publishLabel];
-    [self bringSubviewToFront:publishSwitch];
+    [subView addSubview:publishSwitch];
+    [subView addSubview:publishLabel];
+    [subView bringSubviewToFront:publishSwitch];
 }
 
 - (void)setDisplayTrip:(Trip*)displayTrip

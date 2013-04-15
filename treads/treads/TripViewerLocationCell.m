@@ -94,7 +94,7 @@
         locationBGRView.backgroundColor = [UIColor clearColor];
         locationTextBackgroundView.backgroundColor = [AppColors mainBackgroundColor];
     }
-    [editItemView setFrame:CGRectMake(10, 80, 40, 250)];
+    [editItemView setFrame:CGRectMake(10, 80, 50, 300)];
     [editItemView setHidden:!__editingEnabled];
     [subView bringSubviewToFront:locationButton];
 }
@@ -141,6 +141,7 @@
     imageScrollBrowserAddItemView = [[UIImageView alloc] init];
     imageScrollBrowserAddItemView.image = [UIImage imageNamed:@"plus_unselect.png"];
     imageScrollBrowserAddItemView.backgroundColor = [AppColors toolbarColor];
+    imageScrollBrowserAddItemView.contentMode = UIViewContentModeScaleAspectFit;
     
     imageScrollEditItemView = [[ImageScrollEditItemView alloc] initDisplaysHorizontally:YES showFavorite:YES];
     
