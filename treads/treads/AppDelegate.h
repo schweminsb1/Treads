@@ -23,4 +23,6 @@
 
 @property (strong, nonatomic) UITabBarController *tabBarController;
 
+- (void) logout;
+
 @end

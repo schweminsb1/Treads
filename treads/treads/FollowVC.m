@@ -78,7 +78,6 @@
     [self.browserModeControl addTarget:self action:@selector(segmentControlChange:) forControlEvents:UIControlEventValueChanged];
     self.browserModeControl.segmentedControlStyle = UISegmentedControlStyleBar;
     
-    //attach segmented control to navigation controller
     [self.navigationController.navigationBar.topItem setTitleView:self.browserModeControl];
     
     //set up
@@ -93,6 +92,13 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self segmentControlChange:self.browserModeControl];
+    
+    [self.navigationController.navigationBar.topItem setTitleView:self.browserModeControl];
+}
+
+-(void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController.navigationBar.topItem setTitleView:nil];
 }
 
 - (void)segmentControlChange:(UISegmentedControl*)sender
