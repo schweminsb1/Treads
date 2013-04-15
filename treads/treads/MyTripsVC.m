@@ -35,7 +35,10 @@
 @property UserService * userService;
 @end
 
-@implementation MyTripsVC
+@implementation MyTripsVC {
+    NSArray* drafts;
+    NSArray* trips;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withTripService:(TripService *)tripServiceHandle withLocationService:(LocationService*)locationservice withCommentService:(CommentService*)commentService withUserService:(UserService*) userService
 {
@@ -70,13 +73,29 @@
     //load browser data
     [self.browser clearAndWait];
     self.navigationItem.rightBarButtonItem = self.tripNewButton;
-//    [self.browser setCellStyle:TripBrowserCell4x1];
-    [self.tripService getTripsWithUserID:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(dataHasLoaded:)];
+    //    [self.browser setCellStyle:TripBrowserCell4x1];
+    drafts = nil;
+    trips = nil;
+    [self.tripService getDraftsWithUserID:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(draftsHaveLoaded:)];
+    [self.tripService getTripsWithUserID:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(tripsHaveLoaded:)];
     //[self.tripService getTripWithID:0 forTarget:self withAction:@selector(dataHasLoaded:)];
 }
 
-- (void)dataHasLoaded:(NSArray*)newData
+- (void)draftsHaveLoaded:(NSArray*)newDrafts
 {
+    drafts = newDrafts;
+    if (drafts && trips) {[self dataHasLoaded];}
+}
+
+- (void)tripsHaveLoaded:(NSArray*)newTrips
+{
+    trips = newTrips;
+    if (drafts && trips) {[self dataHasLoaded];}
+}
+
+- (void)dataHasLoaded//:(NSArray*)newData
+{
+    NSArray* newData = [[NSArray arrayWithArray:drafts] arrayByAddingObjectsFromArray:trips];
     [self.browser setBrowserData:newData withCellStyle:TripBrowserCell4x1 forTarget:self withAction:@selector(showTrip:)];
     for (Trip* trip in newData) {
         [self.tripService getHeaderImageForTrip:trip forTarget:self withCompleteAction:@selector(refreshWithNewHeader)];
@@ -104,6 +123,7 @@
 - (void)showTrip:(Trip*)trip
 {
     TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID LocationService:_locationService withCommentService:_commentService withUserService:_userService];
+    tripViewVC.showDraft = (trip.published == 0 ? YES : NO);
     [self.navigationController pushViewController:tripViewVC animated:YES];
 }
 

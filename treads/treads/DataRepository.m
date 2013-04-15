@@ -51,19 +51,21 @@ static DataRepository* repo;
     
     MSReadQueryBlock queryCompletionBlock = ^(NSArray* items, NSInteger totalCount, NSError *error) {
         if (error == nil) {
-            
             #pragma clang diagnostic push
             #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             [requestingObject performSelector:returnAction withObject:[callingService convertReturnDataToServiceModel:items]];
             #pragma clang diagnostic pop
         }
         else {
-            NSLog([error localizedDescription]);
+//            NSLog([error localizedDescription]);
+            #pragma clang diagnostic push
+            #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            [requestingObject performSelector:returnAction withObject:[callingService convertReturnDataToServiceModel:@[]]];
+            #pragma clang diagnostic pop
         }
     };
     
     __autoreleasing NSError* error = [[NSError alloc] init];
-    
     [queryTable readWithQueryString:[query queryStringOrError:&error] completion:queryCompletionBlock];
 }
 
@@ -78,13 +80,17 @@ static DataRepository* repo;
     MSReadQueryBlock queryCompletionBlock = ^(NSArray* items, NSInteger totalCount, NSError *error) {
         if (error == nil) {
             
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            #pragma clang diagnostic push
+            #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             [requestingObject performSelector:returnAction withObject:[callingService convertReturnDataToServiceModel:items]];
-#pragma clang diagnostic pop
+            #pragma clang diagnostic pop
         }
         else {
-            NSLog([error localizedDescription]);
+            //NSLog([error localizedDescription]);
+            #pragma clang diagnostic push
+            #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            [requestingObject performSelector:returnAction withObject:[callingService convertReturnDataToServiceModel:@[]]];
+            #pragma clang diagnostic pop
         }
     };
     

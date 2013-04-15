@@ -32,6 +32,7 @@ static FollowService* repo;
 }
 
 - (NSArray*)convertReturnDataToServiceModel:(NSArray*)returnData {
+    if (!returnData || returnData.count == 0) {return [NSArray array];}
     NSMutableArray* returnArray = [[NSMutableArray alloc] init];
     for (int i=0; i<returnData.count; i++) {
         NSMutableDictionary* newDictionary = [NSMutableDictionary dictionaryWithDictionary:returnData[i]];

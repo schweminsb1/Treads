@@ -50,12 +50,16 @@
 {
     [super layoutSubviews];
     
-    if (layoutDone) {
-        return;
+    if (!layoutDone) {
+        [self setUpSubviews];
     }
     
-    layoutDone = YES;
-    
+    [activityIndicatorView setFrame:self.bounds];
+    [activityIndicatorView setCenter:self.center];
+}
+
+- (void)setUpSubviews
+{
     //set up table view
     browserTable = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
     [browserTable setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
@@ -76,6 +80,8 @@
     activityIndicatorView.color = [AppColors activityIndicatorColor];
     [self addSubview:activityIndicatorView];
     [self bringSubviewToFront:activityIndicatorView];
+    
+    layoutDone = YES;
 }
 
 //- (void)setCellStyle:(TripBrowserCellStyle)cellStyle
@@ -95,13 +101,14 @@
     
     [browserTable reloadData];
     [browserTable setContentOffset:CGPointZero animated:NO];
-    if (newSortedData != nil) {[activityIndicatorView stopAnimating];}
+    [activityIndicatorView stopAnimating];
+//    if (newSortedData != nil) {[activityIndicatorView stopAnimating];}
 }
 
 - (void)clearAndWait
 {
-    [activityIndicatorView startAnimating];
     [self setBrowserData:nil withCellStyle:self.cellStyle forTarget:nil withAction:nil];
+    [activityIndicatorView startAnimating];
 }
 
 - (void)refreshWithNewImages
