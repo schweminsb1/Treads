@@ -25,7 +25,7 @@
 @property IBOutlet UIImageView * banner;
 @property IBOutlet UILabel * name;
 @property IBOutlet UIButton * follow;
-@property IBOutlet UIButton * edit;
+//@property IBOutlet UIButton * edit;
 //@property TripService* tripService;
 @property UserService* userService;
 @property ImageService* imageService;
@@ -36,6 +36,7 @@
 @property int followID;
 @property User* returnedUser;
 @property (strong) UIBarButtonItem* logoutButton;
+@property (strong) UIBarButtonItem* settingsButton;
 @property BOOL myProfile;
 
 @property CommentService * commentService;
@@ -78,11 +79,13 @@
     // Do any additional setup after loading the view from its nib.
     
     self.logoutButton = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStyleBordered target:self action:@selector(logout)];
+    self.settingsButton = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStyleBordered target:self action:@selector(editProfile)];
     
     if(self.myProfile) {
-        self.navigationItem.rightBarButtonItem = self.logoutButton;
+        self.navigationItem.leftBarButtonItem = self.logoutButton;
+        self.navigationItem.rightBarButtonItem = self.settingsButton;
     }
-      self.edit.hidden = true;
+//      self.edit.hidden = true;
     self.follow.hidden = true;
     self.profilePic.adjustsImageWhenDisabled = NO;
     self.profilePic.adjustsImageWhenHighlighted = NO;
@@ -100,6 +103,8 @@
 
 
 -(void) logout {
+    
+    
     [TreadsSession instance].treadsUser = @"";
     [TreadsSession instance].treadsUserID = -1;
     [TreadsSession instance].profilePhotoID = -1;
@@ -128,7 +133,7 @@
         
         
         if (self.returnedUser.User_ID == [TreadsSession instance].treadsUserID) {
-            self.edit.hidden = false;
+//            self.edit.hidden = false;
         }
         else {
             self.follow.hidden = false;
@@ -212,7 +217,8 @@
     }
 }
 
-- (IBAction)editProfile:(id)sender{
+- (void)editProfile
+{
     EditProfileVC* editProfileVC = [[EditProfileVC alloc]initWithNibName:@"EditProfileVC" bundle:nil userService:self.userService];
     [self.navigationController pushViewController:editProfileVC animated:YES];
 }

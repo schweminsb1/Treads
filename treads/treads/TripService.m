@@ -75,6 +75,11 @@ static TripService* repo;
     [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"userID = '%d'", userID] usingService:self usingDataTable:@"FavoriteTripTable" forRequestingObject:target withReturnAction:returnAction];
 }
 
+- (void)deleteTripWithID:(int)tripID forTarget:(NSObject*)target withAction:(SEL)returnAction
+{
+    [self.dataRepository deleteDataItemsWithID:tripID usingService:self forRequestingObject:target withReturnAction:returnAction];
+}
+
 - (void)getHeaderImageForTrip:(Trip *)trip forTarget:(NSObject *)target withCompleteAction:(SEL)completeAction
 {
     if (!trip) {return;}

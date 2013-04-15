@@ -194,6 +194,28 @@ static DataRepository* repo;
     [userTable update:updateItem completion:updateBlock];
 }
 
+- (void)deleteDataItemsWithID:(int)index usingService:(id<TreadsService>)callingService forRequestingObject:(NSObject*)requestingObject withReturnAction:(SEL)returnAction
+{
+    MSTable* queryTable = [self.client getTable:callingService.dataTableIdentifier];
+    
+    MSDeleteBlock deleteBlock = ^(NSNumber* itemID, NSError* error) {
+        if (error == nil) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            [requestingObject performSelector:returnAction withObject:itemID];
+#pragma clang diagnostic pop
+        }
+        else {
+            //            NSLog([error localizedDescription]);
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            [requestingObject performSelector:returnAction withObject:itemID];
+#pragma clang diagnostic pop
+        }
+    };
+    
+    [queryTable deleteWithId:@(index) completion:deleteBlock];
+}
 
 
 

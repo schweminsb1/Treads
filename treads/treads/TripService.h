@@ -25,14 +25,19 @@
 
 //services
 - (void)getAllTripsForTarget:(NSObject*)target withAction:(SEL)returnAction;
+
 - (void)getTripWithID:(int)tripID forTarget:(NSObject*)target withAction:(SEL)returnAction;
 - (void)getDraftWithID:(int)tripID forTarget:(NSObject*)target withAction:(SEL)returnAction;
+
 - (void)getTripsWithUserID:(int)userID forTarget:(NSObject*)target withAction:(SEL)returnAction;
 - (void)getDraftsWithUserID:(int)userID forTarget:(NSObject*)target withAction:(SEL)returnAction;
+
 - (void)getFeedItemsForUserID:(int)userID forTarget:(NSObject*)target withAction:(SEL)returnAction;
 - (void)getFavoriteItemsForUserID:(int)userID forTarget:(NSObject*)target withAction:(SEL)returnAction;
 
 - (void)updateTrip:(Trip*)trip forTarget:(NSObject*)target withAction:(SEL)returnAction;
+
+- (void)deleteTripWithID:(int)tripID forTarget:(NSObject*)target withAction:(SEL)returnAction;
 
 //images
 //@property (strong) ImageService* imageService;
