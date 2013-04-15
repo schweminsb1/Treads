@@ -82,7 +82,7 @@
     if(self.myProfile) {
         self.navigationItem.rightBarButtonItem = self.logoutButton;
     }
-    self.edit.hidden = true;
+      self.edit.hidden = true;
     self.follow.hidden = true;
     self.profilePic.adjustsImageWhenDisabled = NO;
     self.profilePic.adjustsImageWhenHighlighted = NO;

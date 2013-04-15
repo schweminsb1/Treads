@@ -139,10 +139,6 @@ CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
     
 }
 
--(void) viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self.navigationController.navigationBar.topItem setTitleView:nil];
-}
 
 -(void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
