@@ -48,6 +48,7 @@
         _followService=followService;
         _triplocationModels= [[NSMutableArray alloc] init];
         _tripModels = [[NSMutableArray alloc]init];
+        _commentModels = [[NSMutableArray alloc]init];
         _model=model;
         [_commentService getCommentInLocation:[model.idField intValue] forTarget:self withAction:@selector(getModels:)];
        
@@ -149,7 +150,7 @@
 
 -(void)getModels: (NSArray*) items
 {
-    _commentModels=(NSMutableArray *)items;
+    _commentModels=[NSMutableArray arrayWithArray:items];
     //get users, and fill comentModel
     
     [_commentTable reloadData];
