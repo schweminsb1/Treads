@@ -71,7 +71,7 @@
     browserCellStyles = @[
                           [NSNumber numberWithInt:ProfileBrowserCell5x1],
                           [NSNumber numberWithInt:TripBrowserCell4x4],
-                          [NSNumber numberWithInt:TripBrowserCell6x2]
+                          [NSNumber numberWithInt:TripBrowserCell4x4]
                          ];
     
     self.browserModeControl = [[UISegmentedControl alloc] initWithItems:browserModeControlLabels];
