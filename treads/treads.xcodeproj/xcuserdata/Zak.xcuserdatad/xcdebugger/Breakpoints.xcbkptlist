@@ -359,12 +359,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Treads/ProfileVC.m"
-         timestampString = "387697602.803768"
+         timestampString = "387702783.895932"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "175"
-         endingLineNumber = "175"
-         landmarkName = "-logout"
+         startingLineNumber = "178"
+         endingLineNumber = "178"
+         landmarkName = "-didReceiveMemoryWarning"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -372,12 +372,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Treads/ProfileVC.m"
-         timestampString = "387697602.803768"
+         timestampString = "387702783.895932"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "176"
-         endingLineNumber = "176"
-         landmarkName = "-logout"
+         startingLineNumber = "179"
+         endingLineNumber = "179"
+         landmarkName = "-changePic:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -385,12 +385,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Treads/ProfileVC.m"
-         timestampString = "387697602.803768"
+         timestampString = "387702783.895932"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "177"
-         endingLineNumber = "177"
-         landmarkName = "-logout"
+         startingLineNumber = "180"
+         endingLineNumber = "180"
+         landmarkName = "-changePic:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

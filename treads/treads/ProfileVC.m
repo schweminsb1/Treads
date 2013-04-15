@@ -78,7 +78,10 @@
     // Do any additional setup after loading the view from its nib.
     
     self.logoutButton = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStyleBordered target:self action:@selector(logout)];
-    self.navigationItem.rightBarButtonItem = self.logoutButton;
+    
+    if(self.myProfile) {
+        self.navigationItem.rightBarButtonItem = self.logoutButton;
+    }
     self.edit.hidden = true;
     self.follow.hidden = true;
     self.profilePic.adjustsImageWhenDisabled = NO;
