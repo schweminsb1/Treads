@@ -40,12 +40,13 @@
     [super viewDidLoad];
      //[self.navigationController.navigationBar.topItem setTitleView: locationSearchBar];
     //[_service getLocationsforTarget:self withAction:@selector(fillLocations:)];
-   
+      locationSearchBar.tintColor=[AppColors toolbarColor];
 }
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [_service getLocationsforTarget:self withAction:@selector(fillLocations:)];
+  
    // [self.navigationController.navigationBar.topItem setTitleView: locationSearchBar];
 }
 
@@ -148,6 +149,11 @@
     return YES;
 }
 -(void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
+{
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    
+}
+-(void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller
 {
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
