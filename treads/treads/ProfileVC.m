@@ -99,6 +99,10 @@
         [self.followService getPeopleIFollow:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(followDataHasLoaded:)];
     }
     
+    //additional layout
+    self.view.backgroundColor = [AppColors secondaryBackgroundColor];
+    self.nameHighlightView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
+    
 }
 
 
@@ -167,7 +171,7 @@
     [self.browser setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     [self.browserWindow addSubview: self.browser];
     [self.browser clearAndWait];
-    [self.browser setBrowserData:newData withCellStyle:TripBrowserCell6x2 forTarget:self withAction:@selector(showTrip:)];
+    [self.browser setBrowserData:newData withCellStyle:TripBrowserCell4x4 forTarget:self withAction:@selector(showTrip:)];
     for (Trip* trip in newData) {
         [[TripService instance] getHeaderImageForTrip:trip forTarget:self withCompleteAction:@selector(refreshWithNewHeader)];
     }
@@ -183,7 +187,16 @@
         }
         
     };
-            [self.imageService getImageWithPhotoID:self.returnedUser.profilePhotoID withReturnBlock:completion];
+    [self.imageService getImageWithPhotoID:self.returnedUser.profilePhotoID withReturnBlock:completion];
+    [self.imageService getImageWithPhotoID:self.returnedUser.coverPhotoID withReturnBlock:^(NSArray *items) {
+        if (items.count > 0) {
+            UIImage *returnImage= items[0];
+            [self.banner setImage:returnImage];
+        }
+        else {
+            [self.banner setImage:[ImageService emptyImage]];
+        }
+    }];
 }
 
 - (void)refreshWithNewHeader

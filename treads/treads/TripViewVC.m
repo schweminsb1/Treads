@@ -38,6 +38,7 @@
 
 @implementation TripViewVC {
     BOOL needsTripLoad;
+    BOOL tappedSave;
     NSString* baseTitle;
     NSString* previousViewTitle;
     CameraService* cameraService;
@@ -56,6 +57,7 @@
         needsTripLoad = YES;
         self.favoriteID = -1;
         self.showDraft = NO;
+        tappedSave = NO;
     }
     return self;
 }
@@ -137,6 +139,7 @@
 {
     if (needsTripLoad) {
         [self.viewer clearAndWait];
+        tappedSave = NO;
         if (self.tripID == [Trip UNDEFINED_TRIP_ID]) {
             //create a new trip and place user into editing mode
             Trip* trip = [[Trip alloc] init];
@@ -270,16 +273,18 @@
 
 - (void)goBack:(id)sender
 {
-    [self.viewer prepareForExit];
-    if ([self.viewer getViewerTrip] != nil && [self.viewer changesWereMade]) {
-        //save trip changes if any were made
-//        [self.tripService updateTrip:[self.viewer viewerTrip] forTarget:self withAction:@selector(changesSavedTo:successfully:)];
-        [self.tripService updateNewImagesForTrip:[self.viewer viewerTrip] forTarget:self withCompleteAction:@selector(imagesWereUploaded)];
+    if (!tappedSave) {
+        tappedSave = YES;
+        [self.viewer prepareForExit];
+        if ([self.viewer getViewerTrip] != nil && [self.viewer changesWereMade]) {
+            //save trip changes if any were made
+            [self.tripService updateNewImagesForTrip:[self.viewer viewerTrip] forTarget:self withCompleteAction:@selector(imagesWereUploaded)];
+        }
+        else {
+            //if no changes were made or a trip is not loaded, simply pop the trip viewer
+            [self.navigationController popViewControllerAnimated:YES];
+        };
     }
-    else {
-        //if no changes were made or a trip is not loaded, simply pop the trip viewer
-        [self.navigationController popViewControllerAnimated:YES];
-    };
 }
 
 - (void)imagesWereUploaded
@@ -307,17 +312,22 @@
     else {
         UIAlertView *saved = [[UIAlertView alloc]
                               initWithTitle: [self.viewer viewerTrip].name
-                              message: @"Error: Changes could not be saved."
+                              message: @"Connection error: Changes could not be saved."
                               delegate: self
-                              cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil];
+                              cancelButtonTitle:@"Go Back"
+                              otherButtonTitles:@"Keep Editing", nil];
         [saved show];
     }
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    if (buttonIndex == 0) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else {
+        tappedSave = NO;
+    }
 }
 
 - (void)showProfileWithID:(int)profileID
