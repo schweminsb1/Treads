@@ -39,7 +39,7 @@ static TripLocationService* repo;
         TripLocation* tripLocation = [[TripLocation alloc] init];
         @try {
             tripLocation.tripLocationID = [[returnTripLocation objectForKey:@"id"] intValue];
-            tripLocation.tripID = [[returnTripLocation objectForKey:@"TripID"] intValue];
+            tripLocation.tripID = [[returnTripLocation objectForKey:@"tripID"] intValue];
             tripLocation.locationID = [[returnTripLocation objectForKey:@"LocationID"] intValue];
             
             [convertedData addObject:tripLocation];
