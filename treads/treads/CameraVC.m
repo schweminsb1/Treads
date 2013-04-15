@@ -27,6 +27,7 @@ BOOL previousDoneHit;
     if (self) {
         self.title = NSLocalizedString(@"Camera", @"Camera");
         self.tabBarItem.image = [UIImage imageNamed:@"camera.png"];
+        [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
     }
     return self;
 }
@@ -36,10 +37,10 @@ BOOL previousDoneHit;
     [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
     //[super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    if ([self.popoverController isPopoverVisible])
-    {
-        [self.popoverController dismissPopoverAnimated:YES];
-    }
+//    if ([self.popoverController isPopoverVisible])
+//    {
+//        [self.popoverController dismissPopoverAnimated:YES];
+//    }
     // setup the Camera
     if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
     {
@@ -49,10 +50,24 @@ BOOL previousDoneHit;
         self.imagePicker.allowsEditing = NO;
         self.imagePicker.navigationBar.opaque = true;
         self.imagePicker.delegate = self;
+        self.modalPresentationStyle = UIModalPresentationFullScreen;
         doneTakingPictures = NO;
+//        if([[UIDevice currentDevice]userInterfaceIdiom]== UIUserInterfaceIdiomPad)
+//        {
+//            self.popoverController = [[UIPopoverController alloc] initWithContentViewController: self.imagePicker];
+//            self.popoverController.delegate = self;
+//            [self.popoverController presentPopoverFromRect:CGRectMake(50,50,200,200)inView: self.view permittedArrowDirections:0 animated:YES];
+//        }
         if(!doneTakingPictures)
         {
-            [self presentViewController:self.imagePicker animated:YES completion:nil];
+//            if([[UIDevice currentDevice]userInterfaceIdiom]== UIUserInterfaceIdiomPad)
+//            {
+//                [self.popoverController presentPopoverFromRect:CGRectMake(self.view.frame.size.width,self.view.frame.size.height,320,400)inView: self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+//            }
+//            else
+//            {
+                [self presentViewController:self.imagePicker animated:YES completion: nil];
+//            }
 
         }
         _newMedia = YES;
@@ -61,15 +76,14 @@ BOOL previousDoneHit;
 void (^done)(void) = ^{
         // set the location that the block will complete to
         AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-        [appDelegate.tabBarController setSelectedIndex:3];
+        [appDelegate.tabBarController setSelectedIndex:2];
         doneTakingPictures = YES;
     };
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    done();
     [self dismissViewControllerAnimated:YES completion: nil];
     //[self.navigationController popViewControllerAnimated:YES];
-    
+     done();
 }
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -101,6 +115,8 @@ void (^done)(void) = ^{
 - (void)viewDidUnload {
     self.popoverController = nil;
     self.imagePicker = nil;
+    [self.popoverController dismissPopoverAnimated:YES];
+    [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)didReceiveMemoryWarning
 {
