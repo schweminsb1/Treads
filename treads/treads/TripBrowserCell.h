@@ -23,5 +23,5 @@
 @property (readonly) TripBrowserCellStyle cellStyle;
 
 @property (assign, nonatomic) Trip* displayTrip;
-
+@property TripBrowser * delegate;
 @end

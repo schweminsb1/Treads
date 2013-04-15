@@ -301,7 +301,8 @@
 }
 -(void)deleteTrip
 {
-    [self performSelector:_deletefrom withObject:DisplayTrip];
+    [ _delegate performSelector:_deletefrom withObject:DisplayTrip];
+    
     
 }
 

@@ -7,10 +7,10 @@
 //
 
 #import "TripBrowser.h"
-
+#import "TripService.h"
 #import "TripBrowserCell.h"
 #import "ProfileBrowserCell.h"
-
+#import "TripBrowser.h"
 #import "User.h"
 
 #import "AppColors.h"
@@ -18,7 +18,7 @@
 @interface TripBrowser()<UITableViewDataSource, UITableViewDelegate>
 
 @property TripBrowserCellStyle cellStyle;
-
+@property Trip * recentlySelectedTripForDeletion;
 @end
 
 @implementation TripBrowser {
@@ -139,9 +139,11 @@
             TripBrowserCell* cell = [tableView dequeueReusableCellWithIdentifier:[self getCellIdentifier]];
             if (!cell) {
                 cell = [[TripBrowserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[self getCellIdentifier] cellStyle:self.cellStyle];
-                cell.deletefrom= @selector(deleteTrip:);
+               
             }
+             cell.deletefrom= @selector(deleteTrip:);
             cell.displayTrip = (Trip*)sortedListData[indexPath.row];
+            cell.delegate=self;
             return cell;
         }
         case ProfileBrowserCell5x1: {
@@ -150,6 +152,7 @@
                 cell = [[ProfileBrowserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[self getCellIdentifier] cellStyle:self.cellStyle];
             }
             cell.displayProfile = (User*)sortedListData[indexPath.row];
+            
             return cell;
         }
         default:
@@ -213,8 +216,26 @@
 }
 -(void)deleteTrip:(Trip*)trip
 {
+    _recentlySelectedTripForDeletion=trip;
+    UIAlertView * alert= [[UIAlertView alloc]initWithTitle:@"Delete Trip?" message:[NSString stringWithFormat:@"You are about to delete Trip '%@' ",trip.name] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil];
+    [alert show];
     
     
+}
+- (void)alertView:(UIAlertView *)alertView
+didDismissWithButtonIndex:(NSInteger) buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        NSLog(@"Cancel Tapped.");
+    }
+    else if (buttonIndex == 1)
+    {
+        NSLog(@"OK Tapped. Hello World!");
+        
+        
+        
+    }
 }
 
 @end
