@@ -28,7 +28,7 @@
         self.homepage = root;
         self.service = service;
         _pin=location;
-        
+
          _CommentsInLocations=@"";
         
         // Custom initialization  
@@ -49,7 +49,8 @@
         
         _IncludedInTripsLabel.text=[NSString stringWithFormat:@"%d" , _pin.tripCount];
         
-  
+    _latLabel.text=[NSString stringWithFormat:@"%f",_pin.location.latitude];
+    _lonLabel.text=[NSString stringWithFormat:@"%f",_pin.location.longitude];
     ImageScrollBrowser * scrollbrowse= [[ImageScrollBrowser alloc] initWithImageSize:size.size displayView:nil addItemView:nil editItemView:nil];
 
     /*
