@@ -20,6 +20,7 @@
 
 @property (strong) IBOutlet UIActivityIndicatorView* activityIndicatorView;
 @property (strong) IBOutlet UIView* browserWindow;
+@property (strong) IBOutlet UIView* nameHighlightView;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil tripService:(TripService *)myTripService userService:(UserService *)myUserService imageService:(ImageService*)myImageService isUser:(BOOL)isUser userID:(int)myUserID withLocationService:(LocationService*) locationService withCommentService:(CommentService*) commentService  withFollowService:(FollowService*)myFollowService;
