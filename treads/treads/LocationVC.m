@@ -109,6 +109,8 @@
 -(void)returnTrip:(Trip*)trip
 {
     //gototrip
+    TripViewVC * tripView= [[TripViewVC alloc]initWithNibName:@"TripViewVC" bundle:nil backTitle:_model.title tripService:[TripService instance] tripID:trip.tripID LocationService:[LocationService instance] withCommentService:[CommentService instance] withUserService:[UserService instance]];
+    [self.navigationController pushViewController:tripView animated:YES];
     
 }
 
