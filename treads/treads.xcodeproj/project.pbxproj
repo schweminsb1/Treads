@@ -54,6 +54,7 @@
 		318D8C3716CA9509005A42F6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 318D8C3516CA94E1005A42F6 /* MapKit.framework */; };
 		3192AEC5171BA182008F8FB2 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3192AEC4171BA182008F8FB2 /* Default-Landscape~ipad.png */; };
 		3192AEC7171BA196008F8FB2 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3192AEC6171BA196008F8FB2 /* Default-Landscape@2x~ipad.png */; };
+		3192AECA171BACB5008F8FB2 /* FavoriteService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3192AEC9171BACB5008F8FB2 /* FavoriteService.m */; };
 		31983A261719CA2F0048A8D7 /* FollowService.m in Sources */ = {isa = PBXBuildFile; fileRef = 31983A251719CA2F0048A8D7 /* FollowService.m */; };
 		3910CBB1171BA59A006FA96C /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3910CBB0171BA59A006FA96C /* Default-Portrait~ipad.png */; };
 		3910CBB3171BA5B7006FA96C /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3910CBB2171BA5B7006FA96C /* Default-Portrait@2x~ipad.png */; };
@@ -196,6 +197,8 @@
 		318D8C3516CA94E1005A42F6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3192AEC4171BA182008F8FB2 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		3192AEC6171BA196008F8FB2 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
+		3192AEC8171BACB5008F8FB2 /* FavoriteService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FavoriteService.h; path = treads/FavoriteService.h; sourceTree = SOURCE_ROOT; };
+		3192AEC9171BACB5008F8FB2 /* FavoriteService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FavoriteService.m; path = treads/FavoriteService.m; sourceTree = SOURCE_ROOT; };
 		31983A241719CA2F0048A8D7 /* FollowService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FollowService.h; path = treads/FollowService.h; sourceTree = SOURCE_ROOT; };
 		31983A251719CA2F0048A8D7 /* FollowService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FollowService.m; path = treads/FollowService.m; sourceTree = SOURCE_ROOT; };
 		3910CBB0171BA59A006FA96C /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
@@ -653,6 +656,8 @@
 				29241805170E645200BB9FAE /* UserService.m */,
 				31983A241719CA2F0048A8D7 /* FollowService.h */,
 				31983A251719CA2F0048A8D7 /* FollowService.m */,
+				3192AEC8171BACB5008F8FB2 /* FavoriteService.h */,
+				3192AEC9171BACB5008F8FB2 /* FavoriteService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -946,6 +951,7 @@
 				39F5D515171A58FD00F0AE4E /* LocationMapVC.m in Sources */,
 				3C8A8855171B20B80076ED31 /* ImageCache.m in Sources */,
 				3C8A8858171B5F460076ED31 /* ProfileBrowserCell.m in Sources */,
+				3192AECA171BACB5008F8FB2 /* FavoriteService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
