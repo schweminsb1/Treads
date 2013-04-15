@@ -60,6 +60,11 @@ static TripService* repo;
     [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"userID = '%d'", userID] usingService:self usingDataTable:@"FeedTable" forRequestingObject:target withReturnAction:returnAction];
 }
 
+- (void)getFavoriteItemsForUserID:(int)userID forTarget:(NSObject *)target withAction:(SEL)returnAction
+{
+    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"userID = '%d'", userID] usingService:self usingDataTable:@"FavoriteTripTable" forRequestingObject:target withReturnAction:returnAction];
+}
+
 - (void)getHeaderImageForTrip:(Trip *)trip forTarget:(NSObject *)target withCompleteAction:(SEL)completeAction
 {
     if (!trip) {return;}
