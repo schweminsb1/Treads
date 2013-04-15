@@ -40,7 +40,7 @@
 					<object class="IBMKMapView" id="1067131327">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">319</int>
-						<string key="NSFrame">{{-20, 44}, {808, 960}}</string>
+						<string key="NSFrame">{{-20, 0}, {808, 1004}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -49,7 +49,7 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBMKMapType">2</int>
 					</object>
-					<object class="IBUISearchBar" id="866872965">
+					<object class="IBUISearchBar" id="804674085">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">290</int>
 						<string key="NSFrameSize">{768, 44}</string>
@@ -67,7 +67,7 @@
 				<string key="NSFrame">{{0, 20}, {768, 1004}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="866872965"/>
+				<reference key="NSNextKeyView" ref="804674085"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
@@ -81,7 +81,7 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
-			<object class="IBUISearchDisplayController" id="993786696">
+			<object class="IBUISearchDisplayController" id="825744880">
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
 		</array>
@@ -99,7 +99,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">searchDisplayController</string>
 						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="993786696"/>
+						<reference key="destination" ref="825744880"/>
 					</object>
 					<int key="connectionID">69</int>
 				</object>
@@ -107,7 +107,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">searchBar</string>
 						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="866872965"/>
+						<reference key="destination" ref="804674085"/>
 					</object>
 					<int key="connectionID">82</int>
 				</object>
@@ -130,7 +130,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
-						<reference key="source" ref="866872965"/>
+						<reference key="source" ref="804674085"/>
 						<reference key="destination" ref="841351856"/>
 					</object>
 					<int key="connectionID">74</int>
@@ -138,15 +138,15 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">searchBar</string>
-						<reference key="source" ref="993786696"/>
-						<reference key="destination" ref="866872965"/>
+						<reference key="source" ref="825744880"/>
+						<reference key="destination" ref="804674085"/>
 					</object>
 					<int key="connectionID">68</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">searchContentsController</string>
-						<reference key="source" ref="993786696"/>
+						<reference key="source" ref="825744880"/>
 						<reference key="destination" ref="841351856"/>
 					</object>
 					<int key="connectionID">70</int>
@@ -154,7 +154,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">searchResultsDataSource</string>
-						<reference key="source" ref="993786696"/>
+						<reference key="source" ref="825744880"/>
 						<reference key="destination" ref="841351856"/>
 					</object>
 					<int key="connectionID">71</int>
@@ -162,7 +162,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">searchResultsDelegate</string>
-						<reference key="source" ref="993786696"/>
+						<reference key="source" ref="825744880"/>
 						<reference key="destination" ref="841351856"/>
 					</object>
 					<int key="connectionID">72</int>
@@ -170,7 +170,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
-						<reference key="source" ref="993786696"/>
+						<reference key="source" ref="825744880"/>
 						<reference key="destination" ref="841351856"/>
 					</object>
 					<int key="connectionID">73</int>
@@ -199,20 +199,20 @@
 						<int key="objectID">2</int>
 						<reference key="object" ref="766721923"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="866872965"/>
+							<reference ref="804674085"/>
 							<reference ref="1067131327"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">66</int>
-						<reference key="object" ref="866872965"/>
+						<reference key="object" ref="804674085"/>
 						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="766721923"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">67</int>
-						<reference key="object" ref="993786696"/>
+						<reference key="object" ref="825744880"/>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
