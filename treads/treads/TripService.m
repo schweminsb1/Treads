@@ -33,7 +33,7 @@ static TripService* repo;
 - (id)initWithRepository:(DataRepository*)repository {
     if ((self = [super init])) {
         self.dataRepository = repository;
-        self.dataTableIdentifier = @"TripReader";
+        self.dataTableIdentifier = @"TripTable";
     }
     return self;
 }
@@ -42,17 +42,22 @@ static TripService* repo;
 
 - (void)getAllTripsForTarget:(NSObject *)target withAction:(SEL)returnAction
 {
-    [self.dataRepository retrieveDataItemsMatching:nil usingService:self forRequestingObject:target withReturnAction:returnAction];
+    [self.dataRepository retrieveDataItemsMatching:nil usingService:self usingDataTable:@"TripReader" forRequestingObject:target withReturnAction:returnAction];
 }
 
 - (void)getTripWithID:(int)tripID forTarget:(NSObject *)target withAction:(SEL)returnAction
 {
-    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"id = '%d'", tripID] usingService:self forRequestingObject:target withReturnAction:returnAction];
+    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"id = '%d'", tripID] usingService:self usingDataTable:@"TripReader" forRequestingObject:target withReturnAction:returnAction];
 }
 
 - (void)getTripsWithUserID:(int)userID forTarget:(NSObject*)target withAction:(SEL)returnAction
 {
-    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"userID = '%d'", userID] usingService:self forRequestingObject:target withReturnAction:returnAction];
+    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"userID = '%d'", userID] usingService:self usingDataTable:@"TripReader" forRequestingObject:target withReturnAction:returnAction];
+}
+
+- (void)getFeedItemsForUserID:(int)userID forTarget:(NSObject *)target withAction:(SEL)returnAction
+{
+    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"userID = '%d'", userID] usingService:self usingDataTable:@"FeedTable" forRequestingObject:target withReturnAction:returnAction];
 }
 
 - (void)getHeaderImageForTrip:(Trip *)trip forTarget:(NSObject *)target withCompleteAction:(SEL)completeAction
@@ -187,6 +192,9 @@ static TripService* repo;
             [convertedData addObject:trip];
         }
     }
+    [convertedData sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [@(-((Trip*)obj1).tripID) compare:@(-((Trip*)obj2).tripID)];
+    }];
     return [NSArray arrayWithArray:convertedData];
 }
 

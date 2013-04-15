@@ -67,6 +67,32 @@ static DataRepository* repo;
     [queryTable readWithQueryString:[query queryStringOrError:&error] completion:queryCompletionBlock];
 }
 
+- (void)retrieveDataItemsMatching:(NSString*)predicateStringOrNil usingService:(id<TreadsService>)callingService usingDataTable:(NSString*)nonDefaultTable forRequestingObject:(NSObject*)requestingObject withReturnAction:(SEL)returnAction
+{
+    MSTable* queryTable = [self.client getTable:nonDefaultTable];
+    MSQuery* query = [[MSQuery alloc] initWithTable:queryTable];
+    if (predicateStringOrNil != nil) {
+        [query setPredicate:[NSPredicate predicateWithFormat:predicateStringOrNil]];
+    }
+    
+    MSReadQueryBlock queryCompletionBlock = ^(NSArray* items, NSInteger totalCount, NSError *error) {
+        if (error == nil) {
+            
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            [requestingObject performSelector:returnAction withObject:[callingService convertReturnDataToServiceModel:items]];
+#pragma clang diagnostic pop
+        }
+        else {
+            NSLog([error localizedDescription]);
+        }
+    };
+    
+    __autoreleasing NSError* error = [[NSError alloc] init];
+    
+    [queryTable readWithQueryString:[query queryStringOrError:&error] completion:queryCompletionBlock];
+}
+
 - (void)retrieveDataItemsMatching:(NSString*)predicateStringOrNil usingService:(id<TreadsService>)callingService  withReturnBlock:(CompletionWithItems)completion
 {
     MSTable* queryTable = [self.client getTable:callingService.dataTableIdentifier];

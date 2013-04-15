@@ -20,7 +20,7 @@
 - (NSArray*)convertReturnDataToServiceModel:(NSArray*)returnData;
 
 //services
-- (void)getFeedItemsForUserID:(int)userID forTarget:(NSObject*)target withAction:(SEL)returnAction;;
+- (void)getFeedItemsForUserID:(int)userID forTarget:(NSObject*)target withAction:(SEL)returnAction;
 
 + (FeedService*)instance;
 

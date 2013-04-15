@@ -65,7 +65,7 @@
                                  ];
     browserModeControlActions = @[
                                   ^void(void) {[[FollowService instance] getPeopleIFollow:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(profileDataHasLoaded:)];},
-                                   ^void(void) {/*[[FeedService instance] getFeedItemsForUserID:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(tripDataHasLoaded:)];*/},
+                                   ^void(void) {[[TripService instance] getFeedItemsForUserID:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(tripDataHasLoaded:)];},
                                    ^void(void) {[[TripService instance] getAllTripsForTarget:self withAction:@selector(tripDataHasLoaded:)];}
                       ];
     browserCellStyles = @[
