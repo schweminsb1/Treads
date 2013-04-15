@@ -56,20 +56,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     //set up segmented control
     browserModeControlLabels = @[
                                  @"Following",
                                  @"Feed",
-                                 @"Favorites"
+                                 @"Favorites",
+                                 @"All"
                                  ];
     browserModeControlActions = @[
                                   ^void(void) {[[FollowService instance] getPeopleIFollow:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(profileDataHasLoaded:)];},
-                                   ^void(void) {[[TripService instance] getAllTripsForTarget:self withAction:@selector(tripDataHasLoaded:)];},
+                                   ^void(void) {[[TripService instance] getFeedItemsForUserID:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(tripDataHasLoaded:)];},
+                                   ^void(void) {[[TripService instance] getFavoriteItemsForUserID:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(tripDataHasLoaded:)];},
                                    ^void(void) {[[TripService instance] getAllTripsForTarget:self withAction:@selector(tripDataHasLoaded:)];}
                       ];
     browserCellStyles = @[
                           [NSNumber numberWithInt:ProfileBrowserCell5x1],
+                          [NSNumber numberWithInt:TripBrowserCell4x4],
                           [NSNumber numberWithInt:TripBrowserCell4x4],
                           [NSNumber numberWithInt:TripBrowserCell4x4]
                          ];

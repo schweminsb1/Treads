@@ -46,6 +46,8 @@ typedef void (^CompletionWithItemsandLocation)(NSArray * items, Location* locati
 //retrieval
 - (void)retrieveDataItemsMatching:(NSString*)predicateStringOrNil usingService:(id<TreadsService>)callingService forRequestingObject:(NSObject*)requestingObject withReturnAction:(SEL)returnAction;
 
+- (void)retrieveDataItemsMatching:(NSString*)predicateStringOrNil usingService:(id<TreadsService>)callingService usingDataTable:(NSString*)nonDefaultTable forRequestingObject:(NSObject*)requestingObject withReturnAction:(SEL)returnAction;
+
 - (void)retrieveDataItemsMatching:(NSString*)predicateStringOrNil usingService:(id<TreadsService>)callingService  withReturnBlock:(CompletionWithItems)completion;
 //creating, updating
 - (void)createDataItem:(NSDictionary*)updateItem usingService:(id<TreadsService>)callingService forRequestingObject:(NSObject*)requestingObject withReturnAction:(SEL)returnAction;

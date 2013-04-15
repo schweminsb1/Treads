@@ -42,21 +42,27 @@ static TripService* repo;
 
 - (void)getAllTripsForTarget:(NSObject *)target withAction:(SEL)returnAction
 {
-    [self.dataRepository retrieveDataItemsMatching:nil usingService:self forRequestingObject:target withReturnAction:returnAction];
+    [self.dataRepository retrieveDataItemsMatching:nil usingService:self usingDataTable:@"TripReader" forRequestingObject:target withReturnAction:returnAction];
 }
 
 - (void)getTripWithID:(int)tripID forTarget:(NSObject *)target withAction:(SEL)returnAction
 {
-    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"id = '%d'", tripID] usingService:self forRequestingObject:target withReturnAction:returnAction];
+    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"id = '%d'", tripID] usingService:self usingDataTable:@"TripReader" forRequestingObject:target withReturnAction:returnAction];
 }
 
 - (void)getTripsWithUserID:(int)userID forTarget:(NSObject*)target withAction:(SEL)returnAction
 {
-    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"userID = '%d'", userID] usingService:self forRequestingObject:target withReturnAction:returnAction];
+    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"userID = '%d'", userID] usingService:self usingDataTable:@"TripReader" forRequestingObject:target withReturnAction:returnAction];
+}
+
+- (void)getFeedItemsForUserID:(int)userID forTarget:(NSObject *)target withAction:(SEL)returnAction
+{
+    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"userID = '%d'", userID] usingService:self usingDataTable:@"FeedTable" forRequestingObject:target withReturnAction:returnAction];
 }
 
 - (void)getHeaderImageForTrip:(Trip *)trip forTarget:(NSObject *)target withCompleteAction:(SEL)completeAction
 {
+    if (!trip) {return;}
     //banner picture
     if (trip.imageID == [TripLocationItem UNDEFINED_IMAGE_ID]) {
         trip.image = [ImageService emptyImage];
@@ -134,7 +140,8 @@ static TripService* repo;
 - (NSArray*)convertReturnDataToServiceModel:(NSArray*)returnData
 {
     NSMutableArray* convertedData = [[NSMutableArray alloc] init];
-    for (NSDictionary* returnTrip in returnData) {
+    if (!returnData || returnData.count == 0) {return [NSArray array];}
+    for (NSDictionary* returnTrip in returnData[0]) {
         Trip* trip = [[Trip alloc] init];
         @try {
             trip.tripID = [[returnTrip objectForKey:@"id"] intValue];
@@ -185,6 +192,9 @@ static TripService* repo;
             [convertedData addObject:trip];
         }
     }
+    [convertedData sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [@(-((Trip*)obj1).tripID) compare:@(-((Trip*)obj2).tripID)];
+    }];
     return [NSArray arrayWithArray:convertedData];
 }
 

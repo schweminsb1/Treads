@@ -59,12 +59,6 @@ CLLocationCoordinate2D placedLocation;
 -(IBAction)chooseLocation:(id)sender
 {
     // call the Location Map VC
-    //CLLocationCoordinate2D(^placedLocation)(CLLocationCoordinate2D);
-//    void  (^getCoordinates)(CLLocationCoordinate2D*);
-//    getCoordinates=^(CLLocationCoordinate2D *location)
-//    {
-//       
-//    };
     CompletionBlockWithCoord block= ^(CLLocationCoordinate2D coord)
     {
         
@@ -125,15 +119,6 @@ CLLocationCoordinate2D placedLocation;
     }
     else
     {
-       
-       
-                     
-            // convert the latitude and longitude strings into double values
-//            NSString * myLat = _latitudeText.text;
-//            NSString * myLon = _longitudeText.text;
-            
-               //[myLon doubleValue];
-
             NSDictionary * newItem= @{
                                       @"name": [NSString stringWithString: _locationText.text],
                                       @"description": [NSString stringWithString: _descriptionText.text] ,
@@ -143,47 +128,9 @@ CLLocationCoordinate2D placedLocation;
             //call to insert item
         [[LocationService instance] addLocation:newItem forTarget:self withAction:(@selector(goBack:success:))];
 
-            //also add to location-attribute table
-        
-
-                        
     }
     
-    
 }
-//-(IBAction)addCoordinates:(id)sender
-//{
-//    UIButton *button = (UIButton*)sender;
-//    UIAlertView *alert = [[UIAlertView alloc]
-//                          initWithTitle: @"Woah!!"
-//                          message: @"The coordintates for the location were not found."
-//                          delegate: nil
-//                          cancelButtonTitle:@"OK"
-//                          otherButtonTitles:nil];
-//   // get the coordinates of the location typed into the location name field
-//    if (!self.geocoder) {
-//        self.geocoder = [[CLGeocoder alloc] init];
-//    }
-//    NSString *location = [NSString stringWithFormat:@"%@",_locationText];
-//    button.enabled = NO;
-//    [self.geocoder geocodeAddressString:location completionHandler:^(NSArray *placemarks, NSError *error)
-//    {
-//        if ([placemarks count] > 0) {
-//            CLPlacemark *placemark = [placemarks objectAtIndex:0];
-//            CLLocation *location = placemark.location;
-//            CLLocationCoordinate2D coordinate = location.coordinate;
-//            // store the coordinates
-//            _latitude  = coordinate.latitude;
-//            _longitude = coordinate.longitude;
-//        }
-//        else
-//        {
-//            [alert show];
-//        }
-//        button.enabled = YES;
-//    }];
-//}
-
 -(void) goBack:(NSNumber *)idnum success:(NSNumber*)success
 {
     [self.navigationController popViewControllerAnimated:YES];
