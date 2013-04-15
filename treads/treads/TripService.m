@@ -75,6 +75,11 @@ static TripService* repo;
     [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"userID = '%d'", userID] usingService:self usingDataTable:@"FavoriteTripTable" forRequestingObject:target withReturnAction:returnAction];
 }
 
+- (void)getTripsContainingLocationID:(int)locationID forTarget:(NSObject *)target withAction:(SEL)returnAction
+{
+    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"locationID = '%d'", locationID] usingService:self usingDataTable:@"LocationTripReader" forRequestingObject:target withReturnAction:returnAction];
+}
+
 - (void)deleteTripWithID:(int)tripID forTarget:(NSObject*)target withAction:(SEL)returnAction
 {
     [self.dataRepository deleteDataItemsWithID:tripID usingService:self forRequestingObject:target withReturnAction:returnAction];

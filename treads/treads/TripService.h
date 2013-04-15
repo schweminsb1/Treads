@@ -34,6 +34,7 @@
 
 - (void)getFeedItemsForUserID:(int)userID forTarget:(NSObject*)target withAction:(SEL)returnAction;
 - (void)getFavoriteItemsForUserID:(int)userID forTarget:(NSObject*)target withAction:(SEL)returnAction;
+- (void)getTripsContainingLocationID:(int)locationID forTarget:(NSObject*)target withAction:(SEL)returnAction;
 
 - (void)updateTrip:(Trip*)trip forTarget:(NSObject*)target withAction:(SEL)returnAction;
 
