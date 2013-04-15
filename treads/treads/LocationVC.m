@@ -22,6 +22,7 @@
 #import "TripLocationService.h"
 #import "TripViewVC.h"
 #import "Trip.h"
+#import "TripService.h"
 #import "TripBrowser.h"
 
 @interface LocationVC ()
@@ -92,13 +93,23 @@
         
     }*/
     _tripModels=[NSMutableArray arrayWithArray:items];
-       [self.browser setBrowserData:_tripModels withCellStyle:TripBrowserCell4x4 forTarget:self withAction:@selector(returnTrip:)];
+    [self.browser setBrowserData:_tripModels withCellStyle:TripBrowserCell4x4 forTarget:self withAction:@selector(returnTrip:)];
+    for (Trip* trip in items) {
+        [[TripService instance] getHeaderImageForTrip:trip forTarget:self withCompleteAction:@selector(refreshWithNewHeader)];
+    }
 }
+
+- (void)refreshWithNewHeader
+{
+    [self.browser refreshWithNewImages];
+}
+
 -(void)returnTrip:(Trip*)trip
 {
     //gototrip
     
 }
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -111,7 +122,9 @@
     self.description.text= _model.description;
      
     _browser= [[TripBrowser alloc] initWithFrame:self.commentTable.bounds];
-    [self.browser setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+    [self.browser setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    
+    [self.tableContainerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
 //    [self.browserWindow addSubview:_browser];
 //    [self.view addSubview:self.browserWindow];
     
