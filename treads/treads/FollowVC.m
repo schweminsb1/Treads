@@ -95,7 +95,7 @@
 {
     [self segmentControlChange:self.browserModeControl];
     
-    [self.navigationController.navigationBar.topItem setTitleView:self.browserModeControl];
+//    [self.navigationController.navigationBar.topItem setTitleView:self.browserModeControl];
 }
 
 //-(void) viewWillDisappear:(BOOL)animated {
