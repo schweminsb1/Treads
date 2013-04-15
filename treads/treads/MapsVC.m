@@ -24,18 +24,24 @@
 @interface MapsVC ()
 @property NSMutableArray * locationsInView;
 @property NSMutableArray * locationsTotal;
+@property (strong,nonatomic) NSMutableArray *locationsFilteredArray;
 @property Location * currentLocation;
 @property TripLocationService * tripLocationService;
 @property int locationCounter;
 @property __block int locationTotal;
 @property (nonatomic,copy)MSReadQueryBlock recieveAll;
 @property UIPopoverController* poc;
+@property IBOutlet UITableView * backgroundtable;
 @end
 
 @implementation MapsVC
-
+@synthesize locationsFilteredArray;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil withLocationService:(LocationService *) locationService withCommentService: (CommentService*) commentService withTripLocationService:(TripLocationService*) tripLocationService withUserService:(UserService*)userService{
+    
+    self= [super init];
+    
     if (self) {
+        locationsFilteredArray = [[NSMutableArray alloc] init];
         _PINLIMIT=50;
         _locationService=locationService;
         _commentService = commentService;
@@ -63,6 +69,9 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:YES];
+    
+     [self.navigationController.navigationBar.topItem setTitleView:_searchBar ];
+    
     __block MapsVC* myself=self;
 CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
     {
@@ -312,5 +321,73 @@ CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
     }
     //removr all annotations not in between these points, add all annottions in between the points
 }
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return locationsFilteredArray.count;
+    }
+
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+        MapPinAnnotation * location;
+        if (tableView == self.searchDisplayController.searchResultsTableView) {
+            location = [locationsFilteredArray objectAtIndex:indexPath.row];
+        } 
+        
+        cell.textLabel.text=location.title;
+
+    // Configure the cell...
+    
+    return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+
+        if (tableView == self.searchDisplayController.searchResultsTableView)
+        {
+            MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance( ((MapPinAnnotation*)locationsFilteredArray[indexPath.row]).coordinate, 50, 50);
+            [ _mapView setRegion:region animated:YES];
+        }
+}
+
+-(void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
+    // Update the filtered array based on the search text and scope.
+    // Remove all objects from the filtered search array
+    [self.locationsFilteredArray removeAllObjects];
+    // Filter the array using NSPredicate
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.title contains[c] %@",searchText];
+    locationsFilteredArray = [NSMutableArray arrayWithArray:[_locationsTotal filteredArrayUsingPredicate:predicate]];
+}
+
+#pragma mark - UISearchDisplayController Delegate Methods
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+    // Tells the table data source to reload when text changes
+    [self filterContentForSearchText:searchString scope:
+     [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:[self.searchDisplayController.searchBar selectedScopeButtonIndex]]];
+    // Return YES to cause the search result table view to be reloaded.
+    return YES;
+}
+-(void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
+{
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+}
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption {
+    // Tells the table data source to reload when scope bar selection changes
+    [self filterContentForSearchText:self.searchDisplayController.searchBar.text scope:
+     [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:searchOption]];
+    // Return YES to cause the search result table view to be reloaded.
+    return YES;
+}
+
+
+
+
 
 @end
