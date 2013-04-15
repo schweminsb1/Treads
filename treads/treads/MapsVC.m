@@ -64,7 +64,11 @@
         // add the pins to locations Total
         //add the pins to the mapView
     //end block;
-  
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    
+    [self.locationManager startUpdatingLocation];
+
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -154,11 +158,7 @@ CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
     //[_locationService performSelectorOnMainThread:@selector(getLocationsOrdered:) withObject:recieveAll waitUntilDone:YES];
     
     // Do any additional setup after loading the view from its nib.
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    [self.locationManager startUpdatingLocation];
-    
- 
+
     
     
 }
@@ -351,7 +351,7 @@ CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
 
         if (tableView == self.searchDisplayController.searchResultsTableView)
         {
-            MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance( ((MapPinAnnotation*)locationsFilteredArray[indexPath.row]).coordinate, 50, 50);
+            MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance( ((MapPinAnnotation*)locationsFilteredArray[indexPath.row]).coordinate, 600, 600);
             [ _mapView setRegion:region animated:YES];
         }
 }
