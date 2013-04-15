@@ -21,8 +21,10 @@
 @property IBOutlet UILabel * name;
 @property IBOutlet UIView * scrollView;
 @property IBOutlet UILabel * IncludedInTripsLabel;
+@property IBOutlet UILabel * CommentsInLocationsLabel;
 @property LocationService * service;
 @property NSString * IncludedInTrips;
+@property NSString * CommentsInLocations;
 
 //contains the page from which called this popup controller, this will be used to push a page onto the navigation controller of this instance
 @property MapsVC * homepage;

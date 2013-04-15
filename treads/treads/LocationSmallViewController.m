@@ -28,6 +28,9 @@
         self.homepage = root;
         self.service = service;
         _pin=location;
+        
+         _CommentsInLocations=@"";
+        
         // Custom initialization  
     }
     return self;
@@ -41,8 +44,8 @@
     // Do any additional setup after loading the view from its nib.
     CGRect  size= CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + 200 , self.view.bounds.size.width, 550) ;
     //add subView
-    
- 
+    _CommentsInLocationsLabel.text=_CommentsInLocations;
+    [[CommentService instance]getCommentInLocation:[_location.idField intValue] forTarget:self withAction:@selector(getCommentCount:)];
         
         _IncludedInTripsLabel.text=[NSString stringWithFormat:@"%d" , _pin.tripCount];
         
@@ -61,7 +64,12 @@
      
     
 }
-
+-(void)getCommentCount:(NSArray*)items
+{
+    _CommentsInLocations= [NSString stringWithFormat:@"%d",items.count];
+    _CommentsInLocationsLabel.text=_CommentsInLocations;
+    
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
