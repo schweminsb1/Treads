@@ -39,7 +39,7 @@
 + (int)heightForCellStyle:(TripBrowserCellStyle)cellStyle
 {
     if (cellStyle == TripBrowserCell4x1 || cellStyle == TripBrowserCell5x1 || cellStyle == ProfileBrowserCell5x1) {return 110;}
-    if (cellStyle == TripBrowserCell6x2) {return 220;}
+    if (cellStyle == TripBrowserCell6x2) {return 309;}
     if (cellStyle == TripBrowserCell3x4) {return 440;}
     if (cellStyle == TripBrowserCell4x4) {return 380;}
     return 0;
@@ -80,7 +80,7 @@
         [subView setFrame:CGRectMake(self.bounds.size.width/2-275, 16, 550, 372)];
     }
     if (self.cellStyle == TripBrowserCell6x2) {
-        [subView setFrame:CGRectMake(self.bounds.size.width/2-330, 8, 660, 220)];
+        [subView setFrame:CGRectMake(self.bounds.size.width/2-275, 8, 550, 309)];
     }
     if (self.cellStyle == TripBrowserCell5x1) {
         [subView setFrame:CGRectMake(self.bounds.size.width/2-275, 8, 550, 110)];
@@ -112,8 +112,6 @@
     if (self.cellStyle == TripBrowserCell4x4) {
         tripOwnerLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 10, 370, 34)];
         tripNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 41, 370, 25)];
-//        tripDatesLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 64, 370, 18)];
-//        tripContentLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 80, 370, 18)];
         profilePictureView = [[UIImageView alloc] initWithFrame:CGRectMake(-16, -8, 126, 126)];
         profilePictureBackgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(-20, -12, 134, 134)];
         tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 76, 550, 220)];
@@ -124,13 +122,15 @@
         [publishLabel setHidden:YES];
     }
     if (self.cellStyle == TripBrowserCell6x2) {
-        tripOwnerLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 10, 260, 34)];
-        tripNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 41, 260, 25)];
-        tripDatesLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 64, 260, 18)];
-        tripContentLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 80, 260, 18)];
-        profilePictureView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 110, 110)];
-        tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(330, 0, 330, 220)];
-        tripDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(12, 120, 312, 90)];
+        tripOwnerLabel = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, 0, 0)];
+        [tripOwnerLabel setHidden:YES];
+        tripNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 10, 370, 25)];
+        profilePictureView = [[UIImageView alloc] initWithFrame:CGRectMake(-16, -8, 126, 126)];
+        profilePictureBackgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(-20, -12, 134, 134)];
+        [profilePictureView setHidden:YES];
+        [profilePictureBackgroundView setHidden:YES];
+        tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 45, 550, 180)];
+        tripDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(12, 233, 422, 66)];
         publishSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [publishSwitch setHidden:YES];
         publishLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
