@@ -32,7 +32,7 @@
         
           _imagerect= CGRectMake(self.bounds.origin.x+5, self.bounds.origin.y+5, self.bounds.size.height-20, self.bounds.size.height-20);
         _userNameButton=[UIButton buttonWithType:UIButtonTypeCustom];
-        _userNameButton.frame=CGRectMake(_imagerect.origin.x+ _imagerect.size.width + 1, self.bounds.origin.y, 90, self.bounds.size.height-12);
+        _userNameButton.frame=CGRectMake(self.bounds.origin.x, self.bounds.origin.y, 90, self.bounds.size.height-12);
         _userNameButton.hidden=NO;
      
         [_userNameButton addTarget:self action:@selector(toProfilePage) forControlEvents:UIControlEventTouchUpInside];
