@@ -138,7 +138,7 @@
         //[self setNeedsLayout];
     }
     tripOwnerLabel.text = [NSString stringWithFormat:@"%@ %@", displayProfile.fname, displayProfile.lname];
-    tripNameLabel.text = @"Trips: 0";
+    tripNameLabel.text = [NSString stringWithFormat:@"Trips: %d", displayProfile.tripCount];
 //    tripDatesLabel.text = @"1/1/2013 - 12/31/2013";
 //    tripContentLabel.text = @"P213 C87";
     tripFeaturedImageView.image = displayProfile.coverImage;

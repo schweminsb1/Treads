@@ -44,6 +44,7 @@ static FollowService* repo;
         user.coverPhotoID = [followProfile[@"coverPhotoID"] intValue];
         user.profileImage = [ImageService emptyImage];
         user.coverImage = [ImageService emptyImage];
+        user.tripCount = [followProfile[@"tripCount"] intValue];
         newDictionary[@"followProfile"] = user;
         [returnArray addObject:newDictionary];
     }
