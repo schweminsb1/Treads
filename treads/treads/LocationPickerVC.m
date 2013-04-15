@@ -28,6 +28,8 @@
     if (self) {
         // Custom initialization
         _service=service;
+    
+  
     }
     
     return self;
@@ -36,7 +38,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+     //[self.navigationController.navigationBar.topItem setTitleView: locationSearchBar];
     //[_service getLocationsforTarget:self withAction:@selector(fillLocations:)];
    
 }
@@ -44,7 +46,7 @@
 {
     [super viewDidAppear:animated];
     [_service getLocationsforTarget:self withAction:@selector(fillLocations:)];
-    
+   // [self.navigationController.navigationBar.topItem setTitleView: locationSearchBar];
 }
 
 - (void)didReceiveMemoryWarning
@@ -145,7 +147,11 @@
     // Return YES to cause the search result table view to be reloaded.
     return YES;
 }
-
+-(void)searchDisplayControllerDidBeginSearch:(UISearchDisplayController *)controller
+{
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+}
 -(BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption {
     // Tells the table data source to reload when scope bar selection changes
     [self filterContentForSearchText:self.searchDisplayController.searchBar.text scope:

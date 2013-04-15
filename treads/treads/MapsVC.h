@@ -22,7 +22,7 @@
 @class TripService;
 @class FollowService;
 
-@interface MapsVC : UIViewController<CLLocationManagerDelegate, UISearchBarDelegate, UINavigationControllerDelegate,MKMapViewDelegate>
+@interface MapsVC : UIViewController<CLLocationManagerDelegate, UISearchBarDelegate,UISearchDisplayDelegate, MKMapViewDelegate,UITableViewDelegate, UITableViewDataSource>
 
 @property UserService * userService;
 @property LocationService * locationService;
