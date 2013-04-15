@@ -20,5 +20,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil client:(MSClient *) client  AppDelegate: ( id) appdelegate withUserService:(UserService*) userService;
 
 -(NSString *) getPasswordHash:(NSString * )user_input;
+@property IBOutlet UIButton * login;
+@property IBOutlet UIButton * newuser;
 
 @end

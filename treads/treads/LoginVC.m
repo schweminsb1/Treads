@@ -84,7 +84,8 @@
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil];
 
-    
+    _login.userInteractionEnabled=NO;
+    _newuser.userInteractionEnabled=NO;
 
     
     if ([_usernameText.text isEqualToString:@""] || [_passwordText.text isEqualToString:@""]) {
@@ -154,6 +155,8 @@
                 if([TreadsSession Login])
                 {
                     //    [self.appDelegate.tabBarController.viewControllers[4] updateUser: [TreadsSession instance].treadsUserID];
+                    [_login setUserInteractionEnabled:YES];
+                    [_newuser setUserInteractionEnabled:YES];
                     _appDelegate.window.rootViewController= _appDelegate.tabBarController;
                    // [self.navigationController pushViewController:self.appDelegate.tabBarController animated:YES];
                 }
@@ -162,6 +165,8 @@
                     alert.message= @"Your drive may be full too full to use Treads";
                     [alert show];
                     [self.activityIndicatorView stopAnimating];
+                    [_login setUserInteractionEnabled:YES];
+                    [_newuser setUserInteractionEnabled:YES];
                     return;
                 }
             }
@@ -176,6 +181,8 @@
             alert.message= @"The Email address and password do not match in the Treads server";
             [alert show];
             [self.activityIndicatorView stopAnimating];
+            [_login setUserInteractionEnabled:YES];
+            [_newuser setUserInteractionEnabled:YES];
             return;
         }
     }
@@ -186,6 +193,8 @@
         _passwordText.text=@"";
         [alert show];
         [self.activityIndicatorView stopAnimating];
+        [_login setUserInteractionEnabled:YES];
+        [_newuser setUserInteractionEnabled:YES];
         
         return;
     }
