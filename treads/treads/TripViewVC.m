@@ -27,6 +27,7 @@
 @property (strong) TripViewer* viewer;
 @property (strong) UIBarButtonItem* tripEditButton;
 @property (strong) UIBarButtonItem* backButton;
+@property (strong) UIBarButtonItem* favoriteButton;
 @property LocationService * locationService;
 @property LocationPickerVC * picker;
 @property UINavigationController * navcontroller;
@@ -171,10 +172,15 @@
         //request trip images
         [self.tripService getHeaderImageForTrip:returnedTrip forTarget:self withCompleteAction:@selector(refreshWithNewHeader)];
         [self.tripService getImagesForTrip:returnedTrip forTarget:self withRefreshAction:@selector(refreshWithNewImages) withCompleteAction:nil];
+        
     }
     else {
         [self.viewer displayTripLoadFailure];
     }
+}
+
+- (void)favorite {
+    
 }
 
 - (void)refreshWithNewHeader
