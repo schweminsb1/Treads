@@ -32,7 +32,7 @@
 
 + (int)heightForCellStyle:(TripBrowserCellStyle)cellStyle
 {
-    if (cellStyle == TripBrowserCell4x1 || cellStyle == TripBrowserCell5x1) {return 110;}
+    if (cellStyle == TripBrowserCell4x1 || cellStyle == TripBrowserCell5x1 || cellStyle == ProfileBrowserCell5x1) {return 110;}
     if (cellStyle == TripBrowserCell6x2) {return 220;}
     if (cellStyle == TripBrowserCell3x4) {return 440;}
     return 0;
@@ -65,9 +65,6 @@
         [self createAndAddSubviews];
         layoutDone = YES;
     }
-    
-    //set frames of subviews
-//    [subView setFrame:CGRectMake(24, 8, self.bounds.size.width-48, 110)];
     
     if (self.cellStyle == TripBrowserCell3x4) {
         [subView setFrame:CGRectMake(self.bounds.size.width/2-165, 8, 330, 440)];
@@ -198,43 +195,10 @@
     tripNameLabel.text = displayTrip.name;
     tripDatesLabel.text = @"1/1/2013 - 12/31/2013";
     tripContentLabel.text = @"P213 C87";
-//    tripContentLabel.text = [NSString stringWithFormat:@"%f, %f, %f, %f", self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, self.bounds.size.height];
-//    tripFeaturedImageView.image = nil;
-//    if (displayTrip.featuredLocationItem != nil) {
-//        if (displayTrip.featuredLocationItem.image != nil) {
-//            tripFeaturedImageView.image = displayTrip.featuredLocationItem.image;
-//        }
-//    }
     tripFeaturedImageView.image = displayTrip.image;
     profilePictureView.image = displayTrip.profileImage;
     tripDescriptionTextView.text = displayTrip.description;
     tripDescriptionTextView.contentOffset = CGPointMake(-tripDescriptionTextView.contentInset.left, -tripDescriptionTextView.contentInset.top);
 }
-
-//- (UIImage*)randomImage
-//{
-//    int image = random()%5;
-//    switch (image) {
-//        case 0:
-//            return [UIImage imageNamed:@"mountains.jpeg"];
-//            break;
-//        case 1:
-//            return [UIImage imageNamed:@"helicopter-bouldering-crash-pad.jpg"];
-//            break;
-//        case 2:
-//            return [UIImage imageNamed:@"remote-luxury-hiking-canada.jpg"];
-//            break;
-//        case 3:
-//            return [UIImage imageNamed:@"summit-boots-hiking-rocks.jpg"];
-//            break;
-//        case 4:
-//            return [UIImage imageNamed:@"virgin_river_hiking.jpg"];
-//            break;
-//        default:
-//            break;
-//    }
-//    return nil;
-//}
-
 
 @end

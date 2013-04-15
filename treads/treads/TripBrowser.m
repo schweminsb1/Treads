@@ -11,6 +11,8 @@
 #import "TripBrowserCell.h"
 #import "ProfileBrowserCell.h"
 
+#import "User.h"
+
 #import "AppColors.h"
 
 @interface TripBrowser()<UITableViewDataSource, UITableViewDelegate>
@@ -121,16 +123,29 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    TripBrowserCell* cell = [tableView dequeueReusableCellWithIdentifier:[self getCellIdentifier]];
-    if (!cell) {
-        cell = [[TripBrowserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[self getCellIdentifier] cellStyle:self.cellStyle];
-        //[cell setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-        //[cell setAutoresizesSubviews:YES];
+    switch (self.cellStyle) {
+        case TripBrowserCell3x4:
+        case TripBrowserCell4x1:
+        case TripBrowserCell5x1:
+        case TripBrowserCell6x2: {
+            TripBrowserCell* cell = [tableView dequeueReusableCellWithIdentifier:[self getCellIdentifier]];
+            if (!cell) {
+                cell = [[TripBrowserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[self getCellIdentifier] cellStyle:self.cellStyle];
+            }
+            cell.displayTrip = (Trip*)sortedListData[indexPath.row];
+            return cell;
+        }
+        case ProfileBrowserCell5x1: {
+            ProfileBrowserCell* cell = [tableView dequeueReusableCellWithIdentifier:[self getCellIdentifier]];
+            if (!cell) {
+                cell = [[ProfileBrowserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[self getCellIdentifier] cellStyle:self.cellStyle];
+            }
+            cell.displayProfile = (User*)sortedListData[indexPath.row];
+            return cell;
+        }
+        default:
+            return nil;
     }
-    
-    cell.displayTrip = (Trip*)sortedListData[indexPath.row];
-    
-    return cell;
 }
 
 #pragma mark - UITableViewDelegate
@@ -139,10 +154,25 @@
 {
     //listSelectAction((Trip*)sortedListData[indexPath.row]);
     if ([target respondsToSelector:listSelectAction]) {
-        #pragma clang diagnostic push
-        #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [target performSelector:listSelectAction withObject:((Trip*)sortedListData[indexPath.row])];
-        #pragma clang diagnostic pop
+        switch (self.cellStyle) {
+            case TripBrowserCell3x4:
+            case TripBrowserCell4x1:
+            case TripBrowserCell5x1:
+            case TripBrowserCell6x2: {
+                #pragma clang diagnostic push
+                #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+                [target performSelector:listSelectAction withObject:((Trip*)sortedListData[indexPath.row])];
+                #pragma clang diagnostic pop
+                break;
+            }
+            case ProfileBrowserCell5x1: {
+                #pragma clang diagnostic push
+                #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+                [target performSelector:listSelectAction withObject:((User*)sortedListData[indexPath.row])];
+                #pragma clang diagnostic pop
+                break;
+            }
+        }
     }
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface User : NSObject
 
@@ -17,4 +18,8 @@
 @property int profilePhotoID;
 @property int coverPhotoID;
 @property NSString * password;
+
+@property (strong) UIImage* profileImage;
+@property (strong) UIImage* coverImage;
+
 @end

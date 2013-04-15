@@ -36,5 +36,9 @@
 - (id)initWithRepository:(DataRepository*)repository;
 - (NSArray*)convertReturnDataToServiceModel:(NSArray*)returnData;
 
-+(ImageService*) instance ;
++ (ImageService*) instance;
+
++ (UIImage*)emptyImage;
++ (UIImage*)imageNotFound;
+
 @end

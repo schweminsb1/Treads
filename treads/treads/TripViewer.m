@@ -165,6 +165,7 @@
         TripViewer* __weak _self = self;
         cell.editingEnabled = ^BOOL(){return [_self editingEnabled];};
         cell.markChangeMade = ^(){[_self markChangeMade];};
+        cell.sendViewProfileRequest = self.sendViewProfileRequest;
         cell.trip = trip;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -178,7 +179,7 @@
         //fill out data
         TripViewer* __weak _self = self;
         TripViewerLocationCell* __weak _cell = cell;
-        cell.gotolocationpage=_gotolocationpage;
+        cell.sendViewLocationRequest = self.sendViewLocationRequest;
         cell.editingEnabled = ^BOOL(){return [_self editingEnabled];};
         cell.markChangeMade = ^(){[_self markChangeMade];};
         cell.tripLocation = trip.tripLocations[indexPath.row - 1];

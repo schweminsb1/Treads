@@ -117,5 +117,15 @@ static ImageService* repo;
     [_dataRepository createDataItem:dictionary usingService:self withReturnBlock:_comp];
 }
 
++ (UIImage*)emptyImage
+{
+    return [UIImage imageNamed:@"empty_item.png"];
+}
+
++ (UIImage*)imageNotFound
+{
+    return [UIImage imageNamed:@"404.png"];
+}
+
 
 @end

@@ -23,10 +23,13 @@
 @property (copy) void(^sendDeleteLocationRequest)();
 @property (copy) void(^sendMoveForwardRequest)();
 @property (copy) void(^sendMoveBackwardRequest)();
+
 @property (copy) void(^sendTripImageIDRequest)(TripLocationItem* locationItem);
+
 - (void)changeLocation:(int)newLocationID withName:(NSString*)name;
 - (void)gotoLocationPage;
-@property (copy) void(^gotolocationpage)(TripLocation* loc);
+
+@property (copy) void(^sendViewLocationRequest)(TripLocation* location);
 @property (copy) void(^sendNewImageRequest)(void(^onSuccess)(UIImage*));
 
 @end

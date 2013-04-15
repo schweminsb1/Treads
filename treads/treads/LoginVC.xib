@@ -127,7 +127,7 @@
 						<string key="NSFrame">{{240, 53}, {289, 98}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="703050293"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -191,7 +191,6 @@
 						<string key="NSFrame">{{403, 585}, {155, 65}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<float key="IBUIAlpha">0.75</float>
@@ -228,7 +227,7 @@
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<string key="IBUIText"/>
+						<string key="IBUIText">schweminsb1@gcc.edu</string>
 						<int key="IBUIBorderStyle">3</int>
 						<string key="IBUIPlaceholder">E-mail Address</string>
 						<object class="NSColor" key="IBUITextColor">
@@ -269,7 +268,7 @@
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<string key="IBUIText"/>
+						<string key="IBUIText">password</string>
 						<int key="IBUIBorderStyle">3</int>
 						<string key="IBUIPlaceholder">Password</string>
 						<object class="NSColor" key="IBUITextColor">
@@ -345,32 +344,9 @@
 						<reference key="IBUIFont" ref="922720642"/>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 					</object>
-					<object class="IBUIButton" id="703050293">
-						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">301</int>
-						<string key="NSFrame">{{361, 256}, {56, 44}}</string>
-						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="178486031"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Skip</string>
-						<reference key="IBUIHighlightedTitleColor" ref="159290460"/>
-						<object class="NSColor" key="IBUINormalTitleColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-						</object>
-						<reference key="IBUINormalTitleShadowColor" ref="247954302"/>
-						<reference key="IBUIFontDescription" ref="61644643"/>
-						<reference key="IBUIFont" ref="20387019"/>
-					</object>
 					<object class="IBUIActivityIndicatorView" id="161162454">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">-2147483356</int>
+						<int key="NSvFlags">-2147483347</int>
 						<string key="NSFrame">{{371, 483}, {37, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
@@ -460,15 +436,6 @@
 					</object>
 					<int key="connectionID">502</int>
 				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">skipClick:</string>
-						<reference key="source" ref="703050293"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">501</int>
-				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -496,7 +463,6 @@
 							<reference ref="599543753"/>
 							<reference ref="161162454"/>
 							<reference ref="502521403"/>
-							<reference ref="703050293"/>
 							<reference ref="772626344"/>
 							<reference ref="133896071"/>
 							<reference ref="88896699"/>
@@ -573,11 +539,6 @@
 						<reference key="object" ref="161162454"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">499</int>
-						<reference key="object" ref="703050293"/>
-						<reference key="parent" ref="191373211"/>
-					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -596,7 +557,6 @@
 				<string key="38.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="38.object.labelIdentifier">IBBuiltInLabel-Red</string>
 				<string key="497.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="499.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="64.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="95.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>

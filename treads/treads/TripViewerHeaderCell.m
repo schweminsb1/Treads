@@ -24,6 +24,7 @@
     EditableTextView* tripDescriptionEditableTextView;
     UIView* textBackground;
     UIImageView* profilePictureView;
+    UIButton* profileButton;
     //UILabel* tripDatesLabel;
     //UILabel* tripContentLabel;
 }
@@ -64,6 +65,7 @@
     [tripDescriptionEditableTextView setFrame:CGRectMake(20, 336, subView.frame.size.width-40, subView.frame.size.height-352)];
     [textBackground setFrame:CGRectMake(0, 24, subView.frame.size.width, 108)];
     [profilePictureView setFrame:CGRectMake(20, 16, 136, 136)];
+    [profileButton setFrame:profilePictureView.frame];
     
     //set editing-related properties
     BOOL __editingEnabled = self.editingEnabled();
@@ -109,13 +111,6 @@
     tripNameLabel.editingEnabledTextColor = [AppColors mainTextColor];
     tripNameLabel.editingEnabled = ^BOOL(){return _self.editingEnabled();};
     tripNameLabel.markChangeMade = ^(){_self.markChangeMade();};
-    
-//    tripNameLabel = [[UILabel alloc] init];
-//    tripNameLabel.backgroundColor = [UIColor clearColor];
-//    tripNameLabel.font = [UIFont systemFontOfSize: 28];
-//    tripNameLabel.textColor = [AppColors lightTextColor];
-//    tripNameLabel.textAlignment = NSTextAlignmentLeft;
-//    tripNameLabel.adjustsFontSizeToFitWidth = YES;
 
     tripDescriptionEditableTextView = [[EditableTextView alloc] initWithFont:[UIFont systemFontOfSize:17]  edgeInset:UIEdgeInsetsMake(-10, -7, 0, -7) restrictSingleLine:NO maxTextLength:1000];
     tripDescriptionEditableTextView.editingDisabledBackgroundColor = [UIColor clearColor];
@@ -124,10 +119,6 @@
     tripDescriptionEditableTextView.editingEnabledTextColor = [AppColors mainTextColor];
     tripDescriptionEditableTextView.editingEnabled = ^BOOL(){return _self.editingEnabled();};
     tripDescriptionEditableTextView.markChangeMade = ^(){_self.markChangeMade();};
-    //tripDescriptionLabel.font = [UIFont systemFontOfSize: 17];
-    //tripDescriptionLabel.textColor = [AppColors mainTextColor];
-    //tripDescriptionLabel.textAlignment = NSTextAlignmentLeft;
-    //tripDescriptionLabel.adjustsFontSizeToFitWidth = YES;
     
     textBackground = [[UIView alloc] init];
     textBackground.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
@@ -137,20 +128,32 @@
     profilePictureView.contentMode = UIViewContentModeScaleAspectFill;
     profilePictureView.clipsToBounds = YES;
     
+    profileButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    profileButton.hidden = NO;
+    [profileButton addTarget:self action:@selector(profilePictureWasTapped) forControlEvents:UIControlEventTouchUpInside];
+    
     [subView addSubview:tripFeaturedImage];
     
     [subView addSubview:textBackground];
     [subView addSubview:profilePictureView];
+    [subView addSubview:profileButton];
     
     [subView addSubview:tripOwnerLabel];
     [subView addSubview:tripNameLabel];
     [subView addSubview:tripDescriptionEditableTextView];
     
     [subView bringSubviewToFront:tripOwnerLabel];
+    [subView bringSubviewToFront:profileButton];
+}
+
+- (void)profilePictureWasTapped
+{
+    self.sendViewProfileRequest(self.trip.userID);
 }
 
 - (void)setTrip:(Trip*)trip
 {
+    _trip = trip;
     if (!layoutDone) {
         [self layoutSubviews];
         //[self setNeedsLayout];
