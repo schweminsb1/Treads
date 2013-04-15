@@ -20,6 +20,7 @@
 #import "TreadsSession.h"
 #import "ImageService.h"
 #import "ProfileVC.h"
+#import "FeedService.h"
 
 @interface FollowVC () {
     NSArray* browserModeControlLabels;
@@ -56,7 +57,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     //set up segmented control
     browserModeControlLabels = @[
                                  @"Following",
@@ -65,7 +65,7 @@
                                  ];
     browserModeControlActions = @[
                                   ^void(void) {[[FollowService instance] getPeopleIFollow:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(profileDataHasLoaded:)];},
-                                   ^void(void) {[[TripService instance] getAllTripsForTarget:self withAction:@selector(tripDataHasLoaded:)];},
+                                   ^void(void) {/*[[FeedService instance] getFeedItemsForUserID:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(tripDataHasLoaded:)];*/},
                                    ^void(void) {[[TripService instance] getAllTripsForTarget:self withAction:@selector(tripDataHasLoaded:)];}
                       ];
     browserCellStyles = @[

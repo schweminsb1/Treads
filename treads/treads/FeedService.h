@@ -8,6 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FeedService : NSObject
+#import "TreadsService.h"
+
+@interface FeedService : NSObject<TreadsService>
+
+//protocol
+@property (strong) DataRepository* dataRepository;
+@property (copy) NSString* dataTableIdentifier;
+
+- (id)initWithRepository:(DataRepository*)repository;
+- (NSArray*)convertReturnDataToServiceModel:(NSArray*)returnData;
+
+//services
+- (void)getFeedItemsForUserID:(int)userID forTarget:(NSObject*)target withAction:(SEL)returnAction;;
+
++ (FeedService*)instance;
 
 @end

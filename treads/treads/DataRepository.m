@@ -57,6 +57,9 @@ static DataRepository* repo;
             [requestingObject performSelector:returnAction withObject:[callingService convertReturnDataToServiceModel:items]];
             #pragma clang diagnostic pop
         }
+        else {
+            NSLog([error localizedDescription]);
+        }
     };
     
     __autoreleasing NSError* error = [[NSError alloc] init];

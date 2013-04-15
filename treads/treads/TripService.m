@@ -33,7 +33,7 @@ static TripService* repo;
 - (id)initWithRepository:(DataRepository*)repository {
     if ((self = [super init])) {
         self.dataRepository = repository;
-        self.dataTableIdentifier = @"TripTable";
+        self.dataTableIdentifier = @"TripReader";
     }
     return self;
 }
@@ -57,6 +57,7 @@ static TripService* repo;
 
 - (void)getHeaderImageForTrip:(Trip *)trip forTarget:(NSObject *)target withCompleteAction:(SEL)completeAction
 {
+    if (!trip) {return;}
     //banner picture
     if (trip.imageID == [TripLocationItem UNDEFINED_IMAGE_ID]) {
         trip.image = [ImageService emptyImage];
@@ -134,7 +135,8 @@ static TripService* repo;
 - (NSArray*)convertReturnDataToServiceModel:(NSArray*)returnData
 {
     NSMutableArray* convertedData = [[NSMutableArray alloc] init];
-    for (NSDictionary* returnTrip in returnData) {
+    if (!returnData || returnData.count == 0) {return [NSArray array];}
+    for (NSDictionary* returnTrip in returnData[0]) {
         Trip* trip = [[Trip alloc] init];
         @try {
             trip.tripID = [[returnTrip objectForKey:@"id"] intValue];
