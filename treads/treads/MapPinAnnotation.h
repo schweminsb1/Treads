@@ -14,7 +14,7 @@
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 @property (nonatomic, readonly) NSString* title;
 @property (nonatomic, readonly) NSString* subtitle;
-@property (nonatomic, readonly) Location * location;
+@property (nonatomic) Location * location;
 @property (nonatomic) int tripCount;
 
 - (id)initWithCoordinates:(CLLocationCoordinate2D)location
