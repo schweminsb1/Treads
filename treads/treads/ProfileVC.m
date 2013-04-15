@@ -25,6 +25,7 @@
 @property IBOutlet UIImageView * banner;
 @property IBOutlet UILabel * name;
 @property IBOutlet UIButton * follow;
+@property UIImageView* profileImage;
 //@property IBOutlet UIButton * edit;
 //@property TripService* tripService;
 @property UserService* userService;
@@ -87,8 +88,8 @@
     }
 //      self.edit.hidden = true;
     self.follow.hidden = true;
-    self.profilePic.adjustsImageWhenDisabled = NO;
-    self.profilePic.adjustsImageWhenHighlighted = NO;
+//    self.profilePic.adjustsImageWhenDisabled = NO;
+//    self.profilePic.adjustsImageWhenHighlighted = NO;
     
     if(self.myProfile) {
         self.userID = [TreadsSession instance].treadsUserID;
@@ -100,9 +101,36 @@
     }
     
     //additional layout
-    self.view.backgroundColor = [AppColors secondaryBackgroundColor];
+    self.view.backgroundColor = [AppColors tertiaryBackgroundColor];
     self.nameHighlightView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
+    [self.banner setFrame:CGRectMake(self.view.bounds.size.width/2 - 330, 0, 660, 240)];
+    [self.nameHighlightView setFrame:CGRectMake(0, 24, 660, 64)];
+    [self.profilePic setFrame:CGRectMake(20, 16, 136, 136)];
+    [self.banner setContentMode:UIViewContentModeScaleAspectFill];
     
+    self.profileImage = [[UIImageView alloc] initWithFrame:self.profilePic.frame];
+    [self.profileImage setContentMode:UIViewContentModeScaleAspectFill];
+    [self.profileImage setClipsToBounds:YES];
+    [self.profileImage setBackgroundColor:[AppColors blankItemBackgroundColor]];
+    
+    [self.name setFrame:CGRectMake(176, 33, 480, 46)];
+    [self.name setFont:[UIFont boldSystemFontOfSize: 38]];
+    [self.name setTextColor:[AppColors lightTextColor]];
+    [self.name setTextAlignment:NSTextAlignmentLeft];
+    [self.name setAdjustsFontSizeToFitWidth:YES];
+    
+    [self.nameHighlightView removeFromSuperview];
+    [self.banner addSubview:self.nameHighlightView];
+    [self.profilePic removeFromSuperview];
+    [self.banner addSubview:self.profilePic];
+    [self.name removeFromSuperview];
+    [self.banner addSubview:self.name];
+    [self.banner addSubview:self.profileImage];
+    
+    [self.banner bringSubviewToFront:self.profileImage];
+    [self.banner bringSubviewToFront:self.profilePic];
+    
+    [self.banner setUserInteractionEnabled:YES];
 }
 
 
@@ -179,11 +207,11 @@
         [self.activityIndicatorView stopAnimating];
         if (items.count > 0) {
             UIImage *returnImage= items[0];
-            [self.profilePic setImage:returnImage forState:UIControlStateNormal];
+            [self.profileImage setImage:returnImage];//] forState:UIControlStateNormal];
         }
         else {
-            UIImage* defaultPic = [UIImage imageNamed:@"man.png"];
-            [self.profilePic setImage:defaultPic forState:UIControlStateNormal];
+//            UIImage* defaultPic = [UIImage imageNamed:@"man.png"];
+            [self.profileImage setImage:[ImageService emptyImage]];// forState:UIControlStateNormal];
         }
         
     };
@@ -213,7 +241,7 @@
     
     ProfileVC* __weak _self = self;
     [[CameraService instance]showImagePickerFromViewController:_self onSuccess:^(UIImage* image) {
-        [self.profilePic setImage:image forState:UIControlStateNormal];
+        [self.profileImage setImage:image];//forState:UIControlStateNormal];
         [[ImageService instance] insertImage:image withCompletion:^(NSDictionary *item, NSError* error ) {
             if (error == nil) {
                 self.returnedUser.profilePhotoID = [((NSString*)item[@"id"]) intValue];

@@ -314,7 +314,7 @@
                               initWithTitle: [self.viewer viewerTrip].name
                               message: @"Connection error: Changes could not be saved."
                               delegate: self
-                              cancelButtonTitle:@"Go Back"
+                              cancelButtonTitle:@"Discard Changes"
                               otherButtonTitles:@"Keep Editing", nil];
         [saved show];
     }
