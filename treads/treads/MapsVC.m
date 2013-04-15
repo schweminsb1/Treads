@@ -223,7 +223,7 @@ CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
                                        self.callout = self.poc;
                                        
                                        //size as neededs
-                                       self.poc.popoverContentSize = CGSizeMake(320, 400);
+                                       self.poc.popoverContentSize = CGSizeMake(320, 320);
                                        
                                        //show the popover next to the annotation view (pin)
                                        [self.poc presentPopoverFromRect:view.bounds inView:view
