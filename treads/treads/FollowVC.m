@@ -70,7 +70,7 @@
                       ];
     browserCellStyles = @[
                           [NSNumber numberWithInt:ProfileBrowserCell5x1],
-                          [NSNumber numberWithInt:TripBrowserCell3x4],
+                          [NSNumber numberWithInt:TripBrowserCell4x4],
                           [NSNumber numberWithInt:TripBrowserCell6x2]
                          ];
     
@@ -163,13 +163,14 @@
     UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:browserModeControlLabels[self.browserModeControl.selectedSegmentIndex] style: UIBarButtonItemStyleBordered target: nil action: nil];
     [self.navigationItem setBackBarButtonItem: newBackButton];
     
-    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:self.title tripService:self.tripService tripID:trip.tripID LocationService:_locationService withCommentService:_commentService withUserService:_userService];
+    TripViewVC* tripViewVC = [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:browserModeControlLabels[self.browserModeControl.selectedSegmentIndex] tripService:self.tripService tripID:trip.tripID LocationService:_locationService withCommentService:_commentService withUserService:_userService];
     [self.navigationController pushViewController:tripViewVC animated:YES];
 }
 
 - (void)showProfile:(User*)profile
 {
     ProfileVC* profilevc= [[ProfileVC alloc]initWithNibName:@"ProfileVC" bundle:nil tripService:_tripService userService:_userService imageService:[ImageService instance] isUser:NO userID:profile.User_ID withLocationService:_locationService withCommentService:_commentService withFollowService:[FollowService instance]];
+    [self.navigationItem.backBarButtonItem setTitle:browserModeControlLabels[self.browserModeControl.selectedSegmentIndex]];
     [self.navigationController pushViewController:profilevc animated:YES];
 }
 

@@ -125,6 +125,7 @@
 {
     switch (self.cellStyle) {
         case TripBrowserCell3x4:
+        case TripBrowserCell4x4:
         case TripBrowserCell4x1:
         case TripBrowserCell5x1:
         case TripBrowserCell6x2: {
@@ -156,6 +157,7 @@
     if ([target respondsToSelector:listSelectAction]) {
         switch (self.cellStyle) {
             case TripBrowserCell3x4:
+            case TripBrowserCell4x4:
             case TripBrowserCell4x1:
             case TripBrowserCell5x1:
             case TripBrowserCell6x2: {

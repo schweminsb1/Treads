@@ -34,7 +34,7 @@
 {
     if (cellStyle == TripBrowserCell4x1 || cellStyle == TripBrowserCell5x1 || cellStyle == ProfileBrowserCell5x1) {return 110;}
     if (cellStyle == TripBrowserCell6x2) {return 220;}
-    if (cellStyle == TripBrowserCell3x4) {return 440;}
+    if (cellStyle == TripBrowserCell3x4 || cellStyle == TripBrowserCell4x4) {return 440;}
     return 0;
 }
 
@@ -69,6 +69,9 @@
     if (self.cellStyle == TripBrowserCell3x4) {
         [subView setFrame:CGRectMake(self.bounds.size.width/2-165, 8, 330, 440)];
     }
+    if (self.cellStyle == TripBrowserCell4x4) {
+        [subView setFrame:CGRectMake(self.bounds.size.width/2-220, 8, 440, 440)];
+    }
     if (self.cellStyle == TripBrowserCell6x2) {
         [subView setFrame:CGRectMake(self.bounds.size.width/2-330, 8, 660, 220)];
     }
@@ -94,6 +97,15 @@
         profilePictureView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 110, 110)];
         tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 110, 330, 220)];
         tripDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(12, 340, 312, 90)];
+    }
+    if (self.cellStyle == TripBrowserCell4x4) {
+        tripOwnerLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 10, 370, 34)];
+        tripNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 41, 370, 25)];
+        tripDatesLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 64, 370, 18)];
+        tripContentLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 80, 370, 18)];
+        profilePictureView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 110, 110)];
+        tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 110, 440, 220)];
+        tripDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(12, 340, 422, 90)];
     }
     if (self.cellStyle == TripBrowserCell6x2) {
         tripOwnerLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 10, 260, 34)];
