@@ -50,12 +50,16 @@
 {
     [super layoutSubviews];
     
-    if (layoutDone) {
-        return;
+    if (!layoutDone) {
+        [self setUpSubviews];
     }
     
-    layoutDone = YES;
-    
+    [activityIndicatorView setFrame:self.bounds];
+    [activityIndicatorView setCenter:self.center];
+}
+
+- (void)setUpSubviews
+{
     //set up table view
     browserTable = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
     [browserTable setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
@@ -76,6 +80,8 @@
     activityIndicatorView.color = [AppColors activityIndicatorColor];
     [self addSubview:activityIndicatorView];
     [self bringSubviewToFront:activityIndicatorView];
+    
+    layoutDone = YES;
 }
 
 //- (void)setCellStyle:(TripBrowserCellStyle)cellStyle

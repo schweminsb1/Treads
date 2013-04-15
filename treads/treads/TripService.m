@@ -55,6 +55,11 @@ static TripService* repo;
     [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"userID = '%d'", userID] usingService:self usingDataTable:@"TripReader" forRequestingObject:target withReturnAction:returnAction];
 }
 
+- (void)getDraftsWithUserID:(int)userID forTarget:(NSObject*)target withAction:(SEL)returnAction
+{
+    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"userID = '%d'", userID] usingService:self usingDataTable:@"DraftReader" forRequestingObject:target withReturnAction:returnAction];
+}
+
 - (void)getFeedItemsForUserID:(int)userID forTarget:(NSObject *)target withAction:(SEL)returnAction
 {
     [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"userID = '%d'", userID] usingService:self usingDataTable:@"FeedTable" forRequestingObject:target withReturnAction:returnAction];
