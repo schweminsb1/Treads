@@ -125,11 +125,11 @@
 {
     if (buttonIndex == 0)
     {
-        NSLog(@"Cancel Tapped.");
+        
     }
     else if (buttonIndex == 1)
     {
-        NSLog(@"OK Tapped. Hello World!");
+        [self gotoLoginScreen];
     }
 }
 
