@@ -254,6 +254,7 @@
         [self.browser clearAndWait];
         [self.browser setBrowserData:_tripModels withCellStyle:TripBrowserCell4x4 forTarget:self withAction:@selector(returnTrip:)];
         [_tableContainerView bringSubviewToFront:_browser];
+        [_browser setHidden:NO];
         [_commentTable removeFromSuperview];
     }
     else

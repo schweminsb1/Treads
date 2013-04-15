@@ -72,6 +72,7 @@
 }
 - (void)viewDidAppear:(BOOL)animated
 {
+    _locationsTotal=[[NSMutableArray alloc] init];
     [super viewDidAppear:YES];
     
      [self.navigationController.navigationBar.topItem setTitleView:_searchBar ];
