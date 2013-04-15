@@ -21,10 +21,12 @@
 #import "TripService.h"
 #import "TripLocationService.h"
 #import "TripViewVC.h"
+#import "Trip.h"
 
 @interface LocationVC ()
 @property NSMutableArray * commentModels;
 @property NSMutableArray * triplocationModels;
+@property NSMutableArray * tripModels;
 @end
 
 @implementation LocationVC
@@ -41,11 +43,18 @@
         _locationService=locationService;
         _followService=followService;
         _triplocationModels= [[NSMutableArray alloc] init];
+        _tripModels = [[NSMutableArray alloc]init];
         _model=model;
         [_commentService getCommentInLocation:[model.idField intValue] forTarget:self withAction:@selector(getModels:)];
-        [[TripLocationService instance] getTripLocationWithLocation:model withCompletion:^(NSArray *items, Location *location) {
+        [[TripLocationService instance] getTripLocationWithLocation:model withCompletion:^(NSArray *items, Location *location)
+        {
             _triplocationModels=[NSMutableArray arrayWithArray:items];
-            [_commentTable reloadData];
+            for(int i=0; i< _triplocationModels.count; i++)
+            {
+                [[TripService instance] getTripWithID:((TripLocation*)_triplocationModels[i]).tripID forTarget:self withAction:@selector(addTrip:)];
+                
+            }
+            
         }];
         CGRect commentEnterRect = CGRectMake(_commentTable.frame.origin.x, _commentTable.frame.origin.y -50, _commentTable.frame.size.width, 50);
         _commentEnterCell = [[CommentEnterBox alloc] initWithFrame:commentEnterRect];
@@ -60,7 +69,20 @@
     }
     return self;
 }
-
+-(void)addTrip:(NSArray*)items
+{
+    if(items.count==1)
+    {
+        [_tripModels addObject:items[0]];
+        
+    }
+    if(_tripModels.count == _triplocationModels.count)
+    {
+        [_commentTable reloadData];
+        
+    }
+    
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -115,7 +137,7 @@
     }
     else
     {
-        return _triplocationModels.count;
+        return _tripModels.count;
     }
 }
 
@@ -158,7 +180,8 @@
         {
             ccell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"trips"];
         }
-        ccell.textLabel.text=[NSString stringWithFormat:@"%d",((TripLocation*)_triplocationModels[indexPath.row]).tripID];
+        ccell.textLabel.text=[NSString stringWithFormat:@"%@",((Trip*)_tripModels[indexPath.row]).name];
+       
     }
     return ccell;
 }
@@ -174,7 +197,7 @@
     if([_segmentControl selectedSegmentIndex]==1)
     {
         //goto trip view
-        TripViewVC * newvc= [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:_model.title tripService:[TripService instance] tripID:((TripLocation*)_triplocationModels[indexPath.row]).tripID LocationService:[LocationService instance] withCommentService:[CommentService instance] withUserService:[UserService instance]];
+        TripViewVC * newvc= [[TripViewVC alloc] initWithNibName:@"TripViewVC" bundle:nil backTitle:_model.title tripService:[TripService instance] tripID:((Trip*)_tripModels[indexPath.row]).tripID LocationService:[LocationService instance] withCommentService:[CommentService instance] withUserService:[UserService instance]];
         [self.navigationController pushViewController:newvc animated:YES];
     }
     
