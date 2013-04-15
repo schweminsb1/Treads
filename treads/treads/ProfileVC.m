@@ -103,8 +103,12 @@
 
 
 -(void) logout {
-    
-    
+    UIAlertView * alert= [[UIAlertView alloc]initWithTitle:@"Logout" message:[NSString stringWithFormat:@"Logout of Treads?"] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    [alert show];
+}
+
+-(void)gotoLoginScreen
+{
     [TreadsSession instance].treadsUser = @"";
     [TreadsSession instance].treadsUserID = -1;
     [TreadsSession instance].profilePhotoID = -1;
@@ -115,7 +119,18 @@
     
     AppDelegate* appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate logout];
+}
 
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        NSLog(@"Cancel Tapped.");
+    }
+    else if (buttonIndex == 1)
+    {
+        NSLog(@"OK Tapped. Hello World!");
+    }
 }
 
 -(void) viewWillAppear:(BOOL)animated {

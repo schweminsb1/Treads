@@ -57,7 +57,7 @@ typedef void (^CompletionWithItemsandLocation)(NSArray * items, Location* locati
 - (void)updateDataItem:(NSDictionary*)updateItem usingService:(id<TreadsService>)callingService forRequestingObject:(NSObject*)requestingObject withReturnAction:(SEL)returnAction;
 
 //deleting
-- (void)deleteDataItemsWithID:(int)index usingService:(id<TreadsService>)callingService forRequestingObject:(NSObject*)requestingObject withReturnAction:(SEL)returnAction
+- (void)deleteDataItemsWithID:(int)index usingService:(id<TreadsService>)callingService forRequestingObject:(NSObject*)requestingObject withReturnAction:(SEL)returnAction;
 
 //Locations
 - (void)addLocation:(NSDictionary*)newLocation forTarget:(NSObject*) target withAction: (SEL) returnAction;
