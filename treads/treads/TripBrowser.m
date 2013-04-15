@@ -217,7 +217,7 @@
 -(void)deleteTrip:(Trip*)trip
 {
     _recentlySelectedTripForDeletion=trip;
-    UIAlertView * alert= [[UIAlertView alloc]initWithTitle:@"Delete Trip?" message:[NSString stringWithFormat:@"You are about to delete Trip '%@'",trip.name] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK"];
+    UIAlertView * alert= [[UIAlertView alloc]initWithTitle:@"Delete Trip?" message:[NSString stringWithFormat:@"You are about to delete Trip '%@' ",trip.name] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil];
     [alert show];
     
     
