@@ -29,6 +29,7 @@
 @property NSMutableArray * triplocationModels;
 @property NSMutableArray * tripModels;
 @property TripBrowser    * browser;
+//@property UIView* browserWindow;
 @end
 
 @implementation LocationVC
@@ -39,10 +40,6 @@
     self =  [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if(self)
     {
-        _browser= [[TripBrowser alloc]initWithFrame:self.tableContainerView.bounds];
-        [self.browser setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-
-        
         _commentService = commentService;
         _userService=userService;
         _imageService=imageService;
@@ -113,7 +110,10 @@
     
     self.description.text= _model.description;
      
-    
+    _browser= [[TripBrowser alloc] initWithFrame:self.commentTable.bounds];
+    [self.browser setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+//    [self.browserWindow addSubview:_browser];
+//    [self.view addSubview:self.browserWindow];
     
     // Do any additional setup after loading the view from its nib.
 }
