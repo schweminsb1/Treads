@@ -122,7 +122,7 @@
     [subView addSubview:tripDatesLabel];
     [subView addSubview:tripContentLabel];
     [subView addSubview:profilePictureView];
-    [subView addSubview:tripFeaturedImageView];
+//    [subView addSubview:tripFeaturedImageView];
     
     UIView *bgColorView = [[UIView alloc] init];
     bgColorView.bounds = subView.bounds;
@@ -138,9 +138,9 @@
         //[self setNeedsLayout];
     }
     tripOwnerLabel.text = [NSString stringWithFormat:@"%@ %@", displayProfile.fname, displayProfile.lname];
-    tripNameLabel.text = @"Subheader";
-    tripDatesLabel.text = @"1/1/2013 - 12/31/2013";
-    tripContentLabel.text = @"P213 C87";
+    tripNameLabel.text = @"Trips: 0";
+//    tripDatesLabel.text = @"1/1/2013 - 12/31/2013";
+//    tripContentLabel.text = @"P213 C87";
     tripFeaturedImageView.image = displayProfile.coverImage;
     profilePictureView.image = displayProfile.profileImage;
 }

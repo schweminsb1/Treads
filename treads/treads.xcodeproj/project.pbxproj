@@ -52,6 +52,8 @@
 		318BC8191719058500F4EB67 /* EditProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 318BC8171719058500F4EB67 /* EditProfileVC.m */; };
 		318BC81A1719058500F4EB67 /* EditProfileVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 318BC8181719058500F4EB67 /* EditProfileVC.xib */; };
 		318D8C3716CA9509005A42F6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 318D8C3516CA94E1005A42F6 /* MapKit.framework */; };
+		3192AEC5171BA182008F8FB2 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3192AEC4171BA182008F8FB2 /* Default-Landscape~ipad.png */; };
+		3192AEC7171BA196008F8FB2 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 3192AEC6171BA196008F8FB2 /* Default-Landscape@2x~ipad.png */; };
 		31983A261719CA2F0048A8D7 /* FollowService.m in Sources */ = {isa = PBXBuildFile; fileRef = 31983A251719CA2F0048A8D7 /* FollowService.m */; };
 		3914480B16EE4B20001B16BE /* mountains.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 3914480A16EE4B20001B16BE /* mountains.jpeg */; };
 		39164F5316EA91C200877549 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39164F5216EA91C200877549 /* CoreLocation.framework */; };
@@ -190,6 +192,8 @@
 		318BC8171719058500F4EB67 /* EditProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditProfileVC.m; path = treads/EditProfileVC.m; sourceTree = SOURCE_ROOT; };
 		318BC8181719058500F4EB67 /* EditProfileVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EditProfileVC.xib; path = treads/EditProfileVC.xib; sourceTree = SOURCE_ROOT; };
 		318D8C3516CA94E1005A42F6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3192AEC4171BA182008F8FB2 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		3192AEC6171BA196008F8FB2 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		31983A241719CA2F0048A8D7 /* FollowService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FollowService.h; path = treads/FollowService.h; sourceTree = SOURCE_ROOT; };
 		31983A251719CA2F0048A8D7 /* FollowService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FollowService.m; path = treads/FollowService.m; sourceTree = SOURCE_ROOT; };
 		3914480A16EE4B20001B16BE /* mountains.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = mountains.jpeg; path = treads/mountains.jpeg; sourceTree = SOURCE_ROOT; };
@@ -366,6 +370,8 @@
 		3188B14E16C9CE16008E1D7F = {
 			isa = PBXGroup;
 			children = (
+				3192AEC6171BA196008F8FB2 /* Default-Landscape@2x~ipad.png */,
+				3192AEC4171BA182008F8FB2 /* Default-Landscape~ipad.png */,
 				3C13F52F171A10FF00EA6582 /* icon57.png */,
 				3C13F52D171A10F700EA6582 /* icon114.png */,
 				296CC3F816FCEA7C0089F1F1 /* treads.entitlements */,
@@ -863,6 +869,8 @@
 				3C13F545171A440500EA6582 /* star_unselect.png in Resources */,
 				39F5D514171A58FD00F0AE4E /* LocationMapVC.xib in Resources */,
 				3C8A8852171B1C620076ED31 /* empty_item.png in Resources */,
+				3192AEC5171BA182008F8FB2 /* Default-Landscape~ipad.png in Resources */,
+				3192AEC7171BA196008F8FB2 /* Default-Landscape@2x~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
