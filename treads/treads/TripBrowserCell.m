@@ -11,7 +11,7 @@
 #import "Trip.h"
 
 #import "AppColors.h"
-
+#import "TripService.h"
 @interface TripBrowserCell()
 
 @property (readwrite) TripBrowserCellStyle cellStyle;
@@ -29,6 +29,9 @@
     UIImageView* profilePictureView;
     UIImageView* tripFeaturedImageView;
     UIView* profilePictureBackgroundView;
+    UISwitch * publishSwitch;
+    UILabel  * publishLabel;
+    Trip    * DisplayTrip;
 }
 
 + (int)heightForCellStyle:(TripBrowserCellStyle)cellStyle
@@ -99,6 +102,10 @@
         profilePictureView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 110, 110)];
         tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 110, 330, 220)];
         tripDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(12, 340, 312, 90)];
+        publishSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        [publishSwitch setHidden:YES];
+        publishLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        [publishLabel setHidden:YES];
     }
     if (self.cellStyle == TripBrowserCell4x4) {
         tripOwnerLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 10, 370, 34)];
@@ -109,6 +116,10 @@
         profilePictureBackgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(-20, -12, 134, 134)];
         tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 76, 550, 220)];
         tripDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(12, 304, 422, 66)];
+        publishSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        [publishSwitch setHidden:YES];
+        publishLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        [publishLabel setHidden:YES];
     }
     if (self.cellStyle == TripBrowserCell6x2) {
         tripOwnerLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 10, 260, 34)];
@@ -118,6 +129,10 @@
         profilePictureView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 110, 110)];
         tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(330, 0, 330, 220)];
         tripDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(12, 120, 312, 90)];
+        publishSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        [publishSwitch setHidden:YES];
+        publishLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        [publishLabel setHidden:YES];
     }
     if (self.cellStyle == TripBrowserCell5x1) {
         tripOwnerLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 10, 260, 34)];
@@ -128,6 +143,10 @@
         tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(330, 0, 220, 110)];
         tripDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [tripDescriptionTextView setHidden:YES];
+        publishSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        [publishSwitch setHidden:YES];
+        publishLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        [publishLabel setHidden:YES];
     }
     if (self.cellStyle == TripBrowserCell4x1) {
         tripOwnerLabel = [[UILabel alloc] initWithFrame: CGRectMake(12, 10, 260, 34)];
@@ -139,6 +158,11 @@
         tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(220, 0, 220, 110)];
         tripDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [tripDescriptionTextView setHidden:YES];
+        publishSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(self.bounds.size.width/2 +500, self.bounds.size.height/2+20, 60, 20)];
+        [publishSwitch setHidden:NO];
+        publishLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.bounds.size.width/2 +510, self.bounds.size.height/2+45, 60, 20)];
+        publishLabel.text=@"Published";
+         [publishSwitch addTarget:self action:@selector(valueChange:) forControlEvents:UIControlEventValueChanged];
     }
     
     subView = [[UIView alloc] init];
@@ -168,7 +192,13 @@
     tripContentLabel.textColor = [AppColors secondaryTextColor];
     tripContentLabel.textAlignment = NSTextAlignmentLeft;
     tripContentLabel.adjustsFontSizeToFitWidth = YES;
-        
+    
+    publishLabel.backgroundColor=[UIColor clearColor];
+    publishLabel.font = [UIFont systemFontOfSize: 17];
+    publishLabel.textColor = [AppColors secondaryTextColor];
+    publishLabel.textAlignment = NSTextAlignmentLeft;
+    publishLabel.adjustsFontSizeToFitWidth = YES;
+    
     profilePictureView.backgroundColor = [UIColor lightGrayColor];
     profilePictureView.contentMode = UIViewContentModeScaleAspectFill;
     profilePictureView.clipsToBounds = YES;
@@ -192,7 +222,7 @@
     [subView addSubview:profilePictureView];
     [subView addSubview:tripFeaturedImageView];
     [subView addSubview:tripDescriptionTextView];
-    
+
     if (profilePictureBackgroundView) {
         profilePictureBackgroundView.backgroundColor = [AppColors mainBackgroundColor];
         [subView addSubview:profilePictureBackgroundView];
@@ -206,10 +236,14 @@
     [bgColorView setBackgroundColor:[AppColors toolbarColor]];
     [self setSelectedBackgroundView:bgColorView];
     [self bringSubviewToFront:subView];
+    [self addSubview:publishSwitch];
+    [self addSubview:publishLabel];
+    [self bringSubviewToFront:publishSwitch];
 }
 
 - (void)setDisplayTrip:(Trip*)displayTrip
 {
+    DisplayTrip=displayTrip;
     if (!layoutDone) {
         [self layoutSubviews];
         //[self setNeedsLayout];
@@ -222,6 +256,32 @@
     profilePictureView.image = displayTrip.profileImage;
     tripDescriptionTextView.text = displayTrip.description;
     tripDescriptionTextView.contentOffset = CGPointMake(-tripDescriptionTextView.contentInset.left, -tripDescriptionTextView.contentInset.top);
+    if(displayTrip.published==0){
+        [publishSwitch setOn:NO];
+    }
+    else
+    {
+        [publishSwitch setOn:YES];
+    }
+}
+
+-(void)valueChange:(id)sender
+{
+    if([publishSwitch isOn])
+    {
+        DisplayTrip.published=1;
+        [[TripService instance]updateTrip:DisplayTrip forTarget:self withAction:@selector(tripChanged:withSuccess:)];
+    }
+    else
+    {
+        DisplayTrip.published=0;
+        [[TripService instance]updateTrip:DisplayTrip forTarget:self withAction:@selector(tripChanged:withSuccess:)];
+    }
+}
+-(void)tripChanged:(NSNumber*)idfield withSuccess:(NSNumber*)success
+{
+    
+    
 }
 
 @end

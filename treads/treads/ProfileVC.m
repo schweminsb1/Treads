@@ -16,8 +16,8 @@
 #import "CameraService.h"
 #import "ImageService.h"
 #import "ImageScrollBrowser.h"
-
 #import "ImageScrollEditableTextView.h"
+#import "AppDelegate.h"
 
 @interface ProfileVC ()
 
@@ -103,7 +103,11 @@
     [TreadsSession instance].coverPhotoID = -1;
     [TreadsSession instance].fName = @"";
     [TreadsSession instance].lName = @"";
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [TreadsSession instance].Logout;
+    
+    AppDelegate* appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    [appDelegate logout];
+
 }
 
 -(void) viewWillAppear:(BOOL)animated {

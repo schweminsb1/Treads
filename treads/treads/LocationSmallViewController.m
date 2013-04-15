@@ -14,20 +14,20 @@
 #import "TripLocationService.h"
 
 @interface LocationSmallViewController ()
-
+@property MapPinAnnotation * pin;
 @end
 
 @implementation LocationSmallViewController
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil location: (Location *) location homeController: (MapsVC *) root Service: (LocationService *)service
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil location: (MapPinAnnotation *) location homeController: (MapsVC *) root Service: (LocationService *) service;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.location=location;
+        self.location=location.location;
         self.homepage = root;
         self.service = service;
-        
+        _pin=location;
         // Custom initialization  
     }
     return self;
@@ -42,11 +42,11 @@
     CGRect  size= CGRectMake(self.view.bounds.origin.x, self.view.bounds.origin.y + 200 , self.view.bounds.size.width, 550) ;
     //add subView
     
-    [[TripLocationService instance] getTripLocationWithLocation:_location withCompletion:^(NSArray *items, Location *location) {
-        _IncludedInTrips= [NSString stringWithFormat:@"%d" , items.count];
-        _IncludedInTripsLabel.text=_IncludedInTrips;
+ 
         
-    }];
+        _IncludedInTripsLabel.text=[NSString stringWithFormat:@"%d" , _pin.tripCount];
+        
+  
     ImageScrollBrowser * scrollbrowse= [[ImageScrollBrowser alloc] initWithImageSize:size.size displayView:nil addItemView:nil editItemView:nil];
 
     /*

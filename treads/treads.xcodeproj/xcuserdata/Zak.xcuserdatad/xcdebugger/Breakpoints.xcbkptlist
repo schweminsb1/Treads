@@ -39,7 +39,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "126"
          endingLineNumber = "126"
-         landmarkName = "-log:"
+         landmarkName = "-ForgottenPassword:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -359,12 +359,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Treads/ProfileVC.m"
-         timestampString = "387686772.30544"
+         timestampString = "387697602.803768"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "171"
-         endingLineNumber = "171"
-         landmarkName = "-didReceiveMemoryWarning"
+         startingLineNumber = "175"
+         endingLineNumber = "175"
+         landmarkName = "-logout"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -372,12 +372,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Treads/ProfileVC.m"
-         timestampString = "387686772.30544"
+         timestampString = "387697602.803768"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "172"
-         endingLineNumber = "172"
-         landmarkName = "-changePic:"
+         startingLineNumber = "176"
+         endingLineNumber = "176"
+         landmarkName = "-logout"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -385,64 +385,116 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Treads/ProfileVC.m"
-         timestampString = "387686772.30544"
+         timestampString = "387697602.803768"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "173"
-         endingLineNumber = "173"
-         landmarkName = "-changePic:"
+         startingLineNumber = "177"
+         endingLineNumber = "177"
+         landmarkName = "-logout"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Treads/ProfileVC.m"
-         timestampString = "387686772.30544"
+         filePath = "treads/TripViewVC.m"
+         timestampString = "387694108.218795"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "130"
-         endingLineNumber = "130"
-         landmarkName = "-dataHasLoaded:"
+         startingLineNumber = "190"
+         endingLineNumber = "190"
+         landmarkName = "-favsLoaded:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Treads/ProfileVC.m"
-         timestampString = "387686772.30544"
+         filePath = "treads/TripViewVC.m"
+         timestampString = "387694109.196875"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "138"
-         endingLineNumber = "138"
-         landmarkName = "-tripsHaveLoaded:"
+         startingLineNumber = "191"
+         endingLineNumber = "191"
+         landmarkName = "-favsLoaded:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "treads/TripService.m"
-         timestampString = "387669490.459025"
+         filePath = "treads/TripViewVC.m"
+         timestampString = "387694110.02678"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "55"
-         endingLineNumber = "55"
-         landmarkName = "-getTripsWithUserID:forTarget:withAction:"
+         startingLineNumber = "192"
+         endingLineNumber = "192"
+         landmarkName = "-favsLoaded:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Treads/ProfileVC.m"
-         timestampString = "387686772.30544"
+         filePath = "treads/TripViewVC.m"
+         timestampString = "387694188.882103"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "130"
-         endingLineNumber = "130"
-         landmarkName = "-dataHasLoaded:"
+         startingLineNumber = "194"
+         endingLineNumber = "194"
+         landmarkName = "-favsLoaded:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "treads/TripViewVC.m"
+         timestampString = "387694407.128113"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "214"
+         endingLineNumber = "214"
+         landmarkName = "-favSuccess"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "treads/TripViewVC.m"
+         timestampString = "387694412.72012"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "205"
+         endingLineNumber = "205"
+         landmarkName = "-favorite:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "treads/TripViewVC.m"
+         timestampString = "387694413.52021"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "206"
+         endingLineNumber = "206"
+         landmarkName = "-favorite:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "treads/TripViewVC.m"
+         timestampString = "387694415.311903"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "209"
+         endingLineNumber = "209"
+         landmarkName = "-favorite:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

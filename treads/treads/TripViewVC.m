@@ -17,7 +17,7 @@
 #import "TripLocation.h"
 #import "TripViewer.h"
 #import "CommentService.h"
-
+#import "FavoriteService.h"
 #import "TreadsSession.h"
 
 @interface TripViewVC()<UINavigationBarDelegate>
@@ -33,6 +33,7 @@
 @property UINavigationController * navcontroller;
 @property CommentService * commentService;
 @property UserService * userService;
+@property int favoriteID;
 @end
 
 @implementation TripViewVC {
@@ -53,6 +54,7 @@
         _commentService = commentService;
         _userService=userService;
         needsTripLoad = YES;
+        self.favoriteID = -1;
     }
     return self;
 }
@@ -138,6 +140,7 @@
             trip.profileImageID = [TreadsSession instance].profilePhotoID;
             trip.description = @"Trip Description";
             trip.imageID = [TripLocationItem UNDEFINED_IMAGE_ID];
+            trip.published=0;
             [self dataHasLoaded:@[trip]];
         }
         else {
@@ -166,21 +169,50 @@
             self.navigationItem.rightBarButtonItem = self.tripEditButton;
         }
         else {
-            self.navigationItem.rightBarButtonItem = nil;
+            self.favoriteButton = [[UIBarButtonItem alloc] initWithTitle:@"Favorite" style:UIBarButtonItemStyleBordered target:self action:@selector(favorite:)];
+            self.navigationItem.rightBarButtonItem = self.favoriteButton;
+            [[FavoriteService instance] getMyFavs:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(favsLoaded:)];
         }
         
         //request trip images
         [self.tripService getHeaderImageForTrip:returnedTrip forTarget:self withCompleteAction:@selector(refreshWithNewHeader)];
         [self.tripService getImagesForTrip:returnedTrip forTarget:self withRefreshAction:@selector(refreshWithNewImages) withCompleteAction:nil];
-        
+
     }
     else {
         [self.viewer displayTripLoadFailure];
     }
 }
 
-- (void)favorite {
+- (void)favsLoaded:(NSArray*)newData  {
+    [self.favoriteButton setTitle:@"Favorite"];
+    self.favoriteID = -1;
     
+    for (int x = 0; x < newData.count; x++) {
+        int y = [((NSString*)newData[x][@"tripID"])intValue];
+        if (self.tripID == y) {
+            [self.favoriteButton setTitle:@"Unfavorite"];
+            self.favoriteID = [((NSString*)newData[x][@"id"])intValue];
+            break;
+        }
+    }
+    
+    self.favoriteButton.enabled = true;
+
+}
+
+- (void)favorite:(id)tripID {
+    self.favoriteButton.enabled = false;
+    if(self.favoriteID < 0) {
+        [[FavoriteService instance] addFav:[TreadsSession instance].treadsUserID withTripID:self.tripID fromTarget:self withReturn:@selector(favSuccess)];
+    }
+    else {
+        [[FavoriteService instance]deleteFav:[NSString stringWithFormat:@"id = %i", self.favoriteID] fromTarget:self withReturn:@selector(favSuccess)];
+    }
+}
+
+- (void) favSuccess {
+    [[FavoriteService instance] getMyFavs:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(favsLoaded:)];
 }
 
 - (void)refreshWithNewHeader
@@ -195,7 +227,7 @@
 
 - (void)setBaseTitle:(Trip*)trip
 {
-    baseTitle = [NSString stringWithFormat:@"%@: %@", @"Trip Owner", trip.name];
+    baseTitle = [NSString stringWithFormat:@"%@: %@", trip.username, trip.name];
 }
 
 - (void)setTitleBar:(NSString*)appendedTitle

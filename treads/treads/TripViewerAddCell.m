@@ -10,7 +10,7 @@
 
 @implementation TripViewerAddCell {
     BOOL layoutDone;
-    UIView* subView;
+    UIImageView* subView;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -45,8 +45,9 @@
 
 - (void)createAndAddSubviews
 {
-    subView = [[UIView alloc] init];
-    subView.backgroundColor = [AppColors toolbarColor];
+    subView = [[UIImageView alloc] init];
+    subView.backgroundColor =  AppColors.toolbarColor;
+    subView.image =[UIImage imageNamed:@"plus_unselect.png"];
     [self addSubview:subView];
 }
 

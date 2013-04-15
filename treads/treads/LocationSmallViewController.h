@@ -10,7 +10,7 @@
 #import "Location.h"
 #import "LocationVC.h"
 #import "MapsVC.h"
-
+#import "MapPinAnnotation.h"
 
 @class LocationService;
 @class MapsVC;
@@ -29,7 +29,7 @@
 
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil location: (Location *) location homeController: (MapsVC *) root Service: (LocationService *) service;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil location: (MapPinAnnotation *) location homeController: (MapsVC *) root Service: (LocationService *) service;
 
 -(IBAction)goToLocationPage:(id)sender;
 

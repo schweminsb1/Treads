@@ -128,31 +128,7 @@ CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
             //[_locationsTotal addObject:locationPin];
         }
         //add trip count
-        
-        CGPoint nePoint = CGPointMake(myself.mapView.bounds.origin.x + myself.mapView.bounds.size.width, myself.mapView.bounds.origin.y);
-        CGPoint swPoint = CGPointMake((myself.mapView.bounds.origin.x), (myself.mapView.bounds.origin.y + myself.mapView.bounds.size.height));
-        
-        //Then transform those point into lat,lng values
-        CLLocationCoordinate2D neCoord;
-        neCoord = [myself.mapView convertPoint:nePoint toCoordinateFromView:myself.mapView];
-        
-        CLLocationCoordinate2D swCoord;
-        swCoord = [myself.mapView convertPoint:swPoint toCoordinateFromView:myself.mapView];
-     /* 
-      for(int i=0; i< _locationsTotal.count; i++)
-        {
-            double lat=((MapPinAnnotation*)_locationsTotal[i]).location.latitude;
-            double lon=((MapPinAnnotation*)_locationsTotal[i]).location.longitude;
-            //double topcornerlat=neCoord.latitude;
-            //double bottomcornerlat=swCoord.latitude;
-            //double topcornerlon=neCoord.longitude;
-            //double bottomcornerlon=swCoord.longitude;
-            if(neCoord.latitude>lat && swCoord.latitude<lat && neCoord.longitude>lon && swCoord.longitude<lon)
-            {
-                [self.mapView addAnnotation:_locationsTotal[i]];
-            }
-        }
-      */
+
     };
     [_locationService getLocationsOrdered:_recieveAll];
     //[_locationService performSelectorOnMainThread:@selector(getLocationsOrdered:) withObject:recieveAll waitUntilDone:YES];
@@ -163,6 +139,10 @@ CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
     
 }
 
+-(void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController.navigationBar.topItem setTitleView:nil];
+}
 
 -(void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
@@ -239,7 +219,7 @@ CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
     MapPinAnnotation * thisPin= (MapPinAnnotation *)view.annotation;
     _currentLocation = thisPin.location;
     
-    LocationSmallViewController *ycvc = [[LocationSmallViewController alloc] initWithNibName:@"LocationSmallViewController" bundle:nil location:thisPin.location homeController:self Service: _locationService];
+    LocationSmallViewController *ycvc = [[LocationSmallViewController alloc] initWithNibName:@"LocationSmallViewController" bundle:nil location:thisPin homeController:self Service: _locationService];
     
                                         self.poc = [[UIPopoverController alloc] initWithContentViewController:ycvc];
                                    
