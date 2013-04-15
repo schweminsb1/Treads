@@ -154,10 +154,25 @@
 {
     //listSelectAction((Trip*)sortedListData[indexPath.row]);
     if ([target respondsToSelector:listSelectAction]) {
-        #pragma clang diagnostic push
-        #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [target performSelector:listSelectAction withObject:((Trip*)sortedListData[indexPath.row])];
-        #pragma clang diagnostic pop
+        switch (self.cellStyle) {
+            case TripBrowserCell3x4:
+            case TripBrowserCell4x1:
+            case TripBrowserCell5x1:
+            case TripBrowserCell6x2: {
+                #pragma clang diagnostic push
+                #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+                [target performSelector:listSelectAction withObject:((Trip*)sortedListData[indexPath.row])];
+                #pragma clang diagnostic pop
+                break;
+            }
+            case ProfileBrowserCell5x1: {
+                #pragma clang diagnostic push
+                #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+                [target performSelector:listSelectAction withObject:((User*)sortedListData[indexPath.row])];
+                #pragma clang diagnostic pop
+                break;
+            }
+        }
     }
 }
 

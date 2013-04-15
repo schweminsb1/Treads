@@ -32,7 +32,7 @@
 
 + (int)heightForCellStyle:(TripBrowserCellStyle)cellStyle
 {
-    if (cellStyle == TripBrowserCell4x1 || cellStyle == TripBrowserCell5x1) {return 110;}
+    if (cellStyle == TripBrowserCell4x1 || cellStyle == TripBrowserCell5x1 || cellStyle == ProfileBrowserCell5x1) {return 110;}
     if (cellStyle == TripBrowserCell6x2) {return 220;}
     if (cellStyle == TripBrowserCell3x4) {return 440;}
     return 0;

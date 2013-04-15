@@ -8,6 +8,9 @@
 
 #import "FollowService.h"
 #import "DataRepository.h"
+#import "ImageService.h"
+
+#import "User.h"
 
 @implementation FollowService
 
@@ -29,7 +32,22 @@ static FollowService* repo;
 }
 
 - (NSArray*)convertReturnDataToServiceModel:(NSArray*)returnData {
-    return returnData;
+    NSMutableArray* returnArray = [[NSMutableArray alloc] init];
+    for (int i=0; i<returnData.count; i++) {
+        NSMutableDictionary* newDictionary = [NSMutableDictionary dictionaryWithDictionary:returnData[i]];
+        NSDictionary* followProfile = newDictionary[@"followProfile"];
+        User* user = [[User alloc] init];
+        user.User_ID = [followProfile[@"id"] intValue];
+        user.fname = followProfile[@"Fname"];
+        user.lname = followProfile[@"Lname"];
+        user.profilePhotoID = [followProfile[@"profilePhotoID"] intValue];
+        user.coverPhotoID = [followProfile[@"coverPhotoID"] intValue];
+        user.profileImage = [ImageService emptyImage];
+        user.coverImage = [ImageService emptyImage];
+        newDictionary[@"followProfile"] = user;
+        [returnArray addObject:newDictionary];
+    }
+    return returnArray;
 }
 
 - (void) getPeopleIFollow:(int)myID forTarget:(NSObject*)target withAction:(SEL)returnAction {

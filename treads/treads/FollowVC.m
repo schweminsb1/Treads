@@ -18,6 +18,8 @@
 #import "LocationService.h"
 #import "FollowService.h"
 #import "TreadsSession.h"
+#import "ImageService.h"
+#import "ProfileVC.h"
 
 @interface FollowVC () {
     NSArray* browserModeControlLabels;
@@ -102,8 +104,31 @@
 
 - (void)profileDataHasLoaded:(NSArray*)newData
 {
-    newData = @[];
-    [self.browser setBrowserData:newData withCellStyle:(TripBrowserCellStyle)[browserCellStyles[self.browserModeControl.selectedSegmentIndex] intValue] forTarget:self withAction:@selector(showTrip:)];
+    NSMutableArray* profileArray = [[NSMutableArray alloc] init];
+    for (NSDictionary* dictionary in newData) {
+        [profileArray addObject:dictionary[@"followProfile"]];
+    }
+    [self.browser setBrowserData:profileArray withCellStyle:(TripBrowserCellStyle)[browserCellStyles[self.browserModeControl.selectedSegmentIndex] intValue] forTarget:self withAction:@selector(showProfile:)];
+    for (User* user in profileArray) {
+        [[ImageService instance] getImageWithPhotoID:user.profilePhotoID withReturnBlock:^(NSArray *items) {
+            if (items.count > 0) {
+                user.profileImage = (UIImage*)items[0];
+            }
+            else {
+                user.profileImage = [ImageService imageNotFound];
+            }
+            [self refreshWithNewHeader];
+        }];
+        [[ImageService instance] getImageWithPhotoID:user.coverPhotoID withReturnBlock:^(NSArray *items) {
+            if (items.count > 0) {
+                user.coverImage = (UIImage*)items[0];
+            }
+            else {
+                user.coverImage = [ImageService imageNotFound];
+            }
+            [self refreshWithNewHeader];
+        }];
+    }
 }
 
 - (void)tripDataHasLoaded:(NSArray*)newData
@@ -137,7 +162,8 @@
 
 - (void)showProfile:(User*)profile
 {
-    
+    ProfileVC* profilevc= [[ProfileVC alloc]initWithNibName:@"ProfileVC" bundle:nil tripService:_tripService userService:_userService imageService:[ImageService instance] isUser:NO userID:profile.User_ID withLocationService:_locationService withCommentService:_commentService withFollowService:[FollowService instance]];
+    [self.navigationController pushViewController:profilevc animated:YES];
 }
 
 @end
