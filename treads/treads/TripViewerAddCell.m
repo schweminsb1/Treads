@@ -48,6 +48,7 @@
     subView = [[UIImageView alloc] init];
     subView.backgroundColor =  AppColors.toolbarColor;
     subView.image =[UIImage imageNamed:@"plus_unselect.png"];
+    subView.contentMode = UIViewContentModeScaleAspectFit;
     [self addSubview:subView];
 }
 

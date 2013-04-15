@@ -31,6 +31,7 @@
 - (void)refreshWithNewHeader;
 - (void)refreshWithNewImages;
 
+@property (copy) void(^refreshTitle)();
 @property (copy) void(^sendNewLocationRequest)(void(^onSuccess)(TripLocation*));
 @property (copy) void(^sendNewImageRequest)(void(^onSuccess)(UIImage*));
 @property (copy) void(^sendViewLocationRequest)(TripLocation* location);

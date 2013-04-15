@@ -136,6 +136,9 @@
         return NO;
     }
     
+    self.textWasChanged(combinedString);
+    self.markChangeMade();
+    
     return YES;
 }
 

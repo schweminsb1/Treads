@@ -109,7 +109,8 @@
         {
             Location * location1=location;
             LocationVC * locationVC= [[LocationVC alloc] initWithNibName:@"LocationVC" bundle:nil withModel:location1 withTripService:[TripService instance] withUserService:[UserService instance] imageService:[ImageService instance] withLocationService:[LocationService instance] withCommentService:[CommentService instance] withFollowService:[FollowService instance] ];
-            
+            [_self.viewer setEditingEnabled:NO];
+            [_self setTitleBar:nil];
             [_self.navigationController pushViewController:locationVC animated:YES];
             
         };
@@ -117,6 +118,11 @@
     };
     self.viewer.sendViewProfileRequest = ^(int profileID) {
         [_self showProfileWithID:profileID];
+    };
+    self.viewer.refreshTitle = ^() {
+        [_self setBaseTitle:[_self.viewer getViewerTrip]];
+        if ([_self.viewer editingEnabled]) {[_self setTitleBar:@"Editing"];}
+        else {[_self setTitleBar:nil];}
     };
     [self.viewer setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     [self.viewerWindow addSubview: self.viewer];
@@ -232,7 +238,7 @@
 
 - (void)setTitleBar:(NSString*)appendedTitle
 {
-    if (appendedTitle) {
+    if (appendedTitle && ![appendedTitle isEqual: @""]) {
         self.navigationItem.title = [NSString stringWithFormat:@"%@ - %@", baseTitle, appendedTitle];
     }
     else {
@@ -310,6 +316,8 @@
 
 - (void)showProfileWithID:(int)profileID
 {
+    [self.viewer setEditingEnabled:NO];
+    [self setTitleBar:nil];
     ProfileVC* profilevc= [[ProfileVC alloc]initWithNibName:@"ProfileVC" bundle:nil tripService:_tripService userService:_userService imageService:[ImageService instance] isUser:NO userID:profileID withLocationService:_locationService withCommentService:_commentService withFollowService:[FollowService instance]];
     [self.navigationController pushViewController:profilevc animated:YES];
 }
