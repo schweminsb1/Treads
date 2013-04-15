@@ -32,6 +32,7 @@
     UISwitch * publishSwitch;
     UILabel  * publishLabel;
     Trip    * DisplayTrip;
+    UIButton * deleteTrip;
 }
 
 + (int)heightForCellStyle:(TripBrowserCellStyle)cellStyle
@@ -84,7 +85,7 @@
         [subView setFrame:CGRectMake(self.bounds.size.width/2-275, 8, 550, 110)];
     }
     if (self.cellStyle == TripBrowserCell4x1) {
-        [subView setFrame:CGRectMake(self.bounds.size.width/2-330, 8, 550, 110)];
+        [subView setFrame:CGRectMake(self.bounds.size.width/2-370, 8, 550, 110)];
     }
     
 }
@@ -158,11 +159,16 @@
         tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(330, 0, 220, 110)];
         tripDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [tripDescriptionTextView setHidden:YES];
-        publishSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(590, self.bounds.size.height/2+20, 60, 20)];
+        publishSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(self.bounds.origin.x +560, self.bounds.size.height/2+20, 60, 20)];
         [publishSwitch setHidden:NO];
-        publishLabel = [[UILabel alloc] initWithFrame:CGRectMake(600, self.bounds.size.height/2+45, 60, 20)];
+        publishLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.bounds.origin.x +570, self.bounds.size.height/2+45, 60, 20)];
         publishLabel.text=@"Published";
          [publishSwitch addTarget:self action:@selector(valueChange:) forControlEvents:UIControlEventValueChanged];
+        deleteTrip = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        deleteTrip.frame=CGRectMake(self.bounds.origin.x +580, self.bounds.size.height/2+20, 60, 20);
+        [deleteTrip setHidden:NO];
+        [deleteTrip setTintColor:[UIColor redColor]];
+       
     }
     
     subView = [[UIView alloc] init];
