@@ -366,6 +366,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">imageView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="153286325"/>
+					</object>
+					<int key="connectionID">96</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="758141593"/>
 						<reference key="destination" ref="372490531"/>
@@ -400,8 +408,8 @@
 							<reference ref="287740432"/>
 							<reference ref="997342091"/>
 							<reference ref="170375128"/>
-							<reference ref="153286325"/>
 							<reference ref="1018061916"/>
+							<reference ref="153286325"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -500,7 +508,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">95</int>
+			<int key="maxID">96</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

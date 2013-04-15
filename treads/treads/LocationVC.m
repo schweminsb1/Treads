@@ -52,16 +52,17 @@
         _model=model;
         [_commentService getCommentInLocation:[model.idField intValue] forTarget:self withAction:@selector(getModels:)];
        
-        /*[[TripLocationService instance] getTripLocationWithLocation:model withCompletion:^(NSArray *items, Location *location)
+        [[TripLocationService instance] getTripLocationWithLocation:model withCompletion:^(NSArray *items, Location *location)
         {
             _triplocationModels=[NSMutableArray arrayWithArray:items];
-            for(int i=0; i< _triplocationModels.count; i++)
+            if(_triplocationModels.count>0)
             {
-                [[TripService instance] getTripWithID:((TripLocation*)_triplocationModels[i]).tripID forTarget:self withAction:@selector(addTrip:)];
+                [[TripService instance] getTripWithID:((TripLocation*)_triplocationModels[0]).tripID forTarget:self withAction:@selector(addTrip:)];
                 
             }
             
-        }];*/
+        }];
+        
         [[TripService instance] getTripsContainingLocationID:[_model.idField intValue]forTarget:self withAction:@selector(addTrips:)];
         
         [self.browser clearAndWait];
@@ -280,6 +281,22 @@
         [control setSelectedSegmentIndex:0];
         
     }
+}
+-(void)addTrip:(NSArray*)item
+{
+    Trip* trip=item[0];
+   if (trip.tripLocations.count>0)
+   {
+       TripLocation * triplocation=(trip.tripLocations[0]);
+       TripLocationItem * triplocationitem= triplocation.tripLocationItems[0];
+       int imageid= triplocationitem.imageID;
+       [[ImageService instance] getImageWithPhotoID:imageid withReturnBlock:^(NSArray *items) {
+           _imageView.image=items[0];
+       }];
+       
+   }
+
+    
 }
 
 @end
