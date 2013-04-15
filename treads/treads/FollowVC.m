@@ -98,10 +98,10 @@
     [self.navigationController.navigationBar.topItem setTitleView:self.browserModeControl];
 }
 
--(void) viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [self.navigationController.navigationBar.topItem setTitleView:nil];
-}
+//-(void) viewWillDisappear:(BOOL)animated {
+//    [super viewWillDisappear:animated];
+//    [self.navigationController.navigationBar.topItem setTitleView:nil];
+//}
 
 - (void)segmentControlChange:(UISegmentedControl*)sender
 {
