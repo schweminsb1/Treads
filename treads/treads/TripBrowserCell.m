@@ -171,7 +171,10 @@
         deleteTrip = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         deleteTrip.frame=CGRectMake(subView.bounds.origin.x +225, subView.bounds.size.height/2+30, 80, 50);
         [deleteTrip setHidden:NO];
-        [deleteTrip setTintColor:[UIColor redColor]];
+        [deleteTrip setBackgroundImage:[UIImage imageNamed:@"minus_unselect"] forState:UIControlStateNormal];
+        [deleteTrip setBackgroundImage:[UIImage imageNamed:@"minus_select"] forState:UIControlStateSelected];
+        [deleteTrip setBackgroundColor:[UIColor redColor]];
+         [deleteTrip setTintColor:[UIColor redColor]];
         [deleteTrip addTarget:self action:@selector(deleteTrip) forControlEvents:UIControlEventTouchUpInside];
         deleteTrip.titleLabel.text=@"Delete";
         deleteTrip.titleLabel.font=[UIFont fontWithName:@"Helvetica" size:12];
