@@ -55,6 +55,7 @@
         _userService=userService;
         needsTripLoad = YES;
         self.favoriteID = -1;
+        self.showDraft = NO;
     }
     return self;
 }
@@ -151,7 +152,12 @@
         }
         else {
             //load the trip from the database
-            [self.tripService getTripWithID:self.tripID forTarget:self withAction:@selector(dataHasLoaded:)];
+            if (self.showDraft) {
+                [self.tripService getDraftWithID:self.tripID forTarget:self withAction:@selector(dataHasLoaded:)];
+            }
+            else {
+                [self.tripService getTripWithID:self.tripID forTarget:self withAction:@selector(dataHasLoaded:)];
+            }
         }
     }
 }

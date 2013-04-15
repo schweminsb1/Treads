@@ -101,13 +101,14 @@
     
     [browserTable reloadData];
     [browserTable setContentOffset:CGPointZero animated:NO];
-    if (newSortedData != nil) {[activityIndicatorView stopAnimating];}
+    [activityIndicatorView stopAnimating];
+//    if (newSortedData != nil) {[activityIndicatorView stopAnimating];}
 }
 
 - (void)clearAndWait
 {
-    [activityIndicatorView startAnimating];
     [self setBrowserData:nil withCellStyle:self.cellStyle forTarget:nil withAction:nil];
+    [activityIndicatorView startAnimating];
 }
 
 - (void)refreshWithNewImages

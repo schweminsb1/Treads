@@ -34,6 +34,7 @@ static TripLocationService* repo;
 
 - (NSArray*)convertReturnDataToServiceModel:(NSArray*)returnData
 {
+    if (!returnData || returnData.count == 0) {return [NSArray array];}
     NSMutableArray* convertedData = [[NSMutableArray alloc] init];
     for (NSDictionary* returnTripLocation in returnData) {
         TripLocation* tripLocation = [[TripLocation alloc] init];

@@ -24,6 +24,7 @@ typedef void (^GoToLocationBlock) (TripLocation*);
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil backTitle:(NSString *)backTitle tripService:(TripService *)myTripService tripID:(int)myTripID LocationService:(LocationService *) myLocationService withCommentService: (CommentService*) commentService withUserService:(UserService*)userService;
 
+@property BOOL showDraft;
 
 - (void)dataHasLoaded:(NSArray*)newData;
 

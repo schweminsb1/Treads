@@ -45,6 +45,7 @@ static LocationService* repo;
 
 - (NSArray*)convertReturnDataToServiceModel:(NSArray*)returnData
 {
+    if (!returnData || returnData.count == 0) {return [NSArray array];}
     NSMutableArray * results = [[NSMutableArray alloc]init];
     for ( int i=0; i< returnData.count; i++)
     {
