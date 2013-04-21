@@ -276,7 +276,7 @@
     if (!tappedSave) {
         tappedSave = YES;
         [self.viewer prepareForExit];
-        if ([self.viewer getViewerTrip] != nil && [self.viewer changesWereMade]) {
+        if ([self.viewer getViewerTrip] != nil && [self.viewer getViewerTrip].userID == [TreadsSession instance].treadsUserID && [self.viewer changesWereMade]) {
             //save trip changes if any were made
             [self.tripService updateNewImagesForTrip:[self.viewer viewerTrip] forTarget:self withCompleteAction:@selector(imagesWereUploaded)];
         }

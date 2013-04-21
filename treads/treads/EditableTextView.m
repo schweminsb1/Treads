@@ -23,6 +23,7 @@
     int textMaxLength;
     UITapGestureRecognizer *tap;
     UISwipeGestureRecognizer *swipe;
+    NSString* oldText;
 }
 
 - (id)initWithFont:(UIFont*)font edgeInset:(UIEdgeInsets)edgeInset restrictSingleLine:(BOOL)singleLine maxTextLength:(int)maxTextLength
@@ -40,6 +41,10 @@
 
 - (void)loseFocus
 {
+//    if (self.textWasChanged) {
+//        self.textWasChanged(descriptionTextView.text);
+//        self.markChangeMade();
+//    }
     [descriptionTextView resignFirstResponder];
 }
 
@@ -86,6 +91,7 @@
     if (!layoutDone) {
         [self layoutSubviews];
     }
+    oldText = descriptionTextView.text;
     descriptionTextView.text = newText;
     descriptionTextView.contentOffset = CGPointMake(-descriptionTextView.contentInset.left, -descriptionTextView.contentInset.top);
     [self setNeedsLayout];
@@ -118,8 +124,10 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-    self.textWasChanged(textView.text);
-    self.markChangeMade();
+    if (![textView.text isEqual:oldText]) {
+        self.textWasChanged(textView.text);
+        self.markChangeMade();
+    }
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text

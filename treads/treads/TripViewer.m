@@ -136,6 +136,7 @@
 {
     //resign all first responders
     //[self setEditingEnabled:NO];
+    if ([trip.name isEqual:@""]) {trip.name = @"My Trip";}
 }
 
 - (void)clearAndWait
