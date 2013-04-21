@@ -68,35 +68,40 @@
 - (void)createAndAddSubviews
 {
     changeItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [changeItemButton setBackgroundImage:[UIImage imageNamed:@"pencil_unselect.png"] forState:UIControlStateNormal];
-    [changeItemButton setBackgroundImage:[UIImage imageNamed:@"pencil_select.png"] forState:UIControlStateHighlighted];
-    [changeItemButton setBackgroundColor:[AppColors toolbarColor]];
+    [changeItemButton setBackgroundImage:[UIImage imageNamed:@"button_blue_unselect.png"] forState:UIControlStateNormal];
+    [changeItemButton setBackgroundImage:[UIImage imageNamed:@"button_blue_select.png"] forState:UIControlStateHighlighted];
+    [changeItemButton setImage:[UIImage imageNamed:@"pencil_unselect.png"] forState:UIControlStateNormal];
+    [changeItemButton setImage:[UIImage imageNamed:@"pencil_unselect.png"] forState:UIControlStateHighlighted];
     [changeItemButton addTarget:self action:@selector(tappedChangeItemButton:) forControlEvents:UIControlEventTouchUpInside];
     
     removeItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [removeItemButton setBackgroundImage:[UIImage imageNamed:@"minus_unselect.png"] forState:UIControlStateNormal];
-    [removeItemButton setBackgroundImage:[UIImage imageNamed:@"minus_select.png"] forState:UIControlStateHighlighted];
-    [removeItemButton setBackgroundColor:[AppColors toolbarColor]];
+    [removeItemButton setBackgroundImage:[UIImage imageNamed:@"button_blue_unselect.png"] forState:UIControlStateNormal];
+    [removeItemButton setBackgroundImage:[UIImage imageNamed:@"button_blue_select.png"] forState:UIControlStateHighlighted];
+    [removeItemButton setImage:[UIImage imageNamed:@"minus_unselect.png"] forState:UIControlStateNormal];
+    [removeItemButton setImage:[UIImage imageNamed:@"minus_unselect.png"] forState:UIControlStateHighlighted];
     [removeItemButton addTarget:self action:@selector(tappedRemoveItemButton:) forControlEvents:UIControlEventTouchUpInside];
     
     moveForwardButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [moveForwardButton setBackgroundImage:[UIImage imageNamed:@"arrow_unselect.png"] forState:UIControlStateNormal];
-    [moveForwardButton setBackgroundImage:[UIImage imageNamed:@"arrow_select.png"] forState:UIControlStateHighlighted];
-    [moveForwardButton setBackgroundColor:[AppColors toolbarColor]];
-    [moveForwardButton setTransform:CGAffineTransformMakeRotation(layoutHorizontal?M_PI_2:M_PI)];
+    [moveForwardButton setBackgroundImage:[UIImage imageNamed:@"button_blue_unselect.png"] forState:UIControlStateNormal];
+    [moveForwardButton setBackgroundImage:[UIImage imageNamed:@"button_blue_select.png"] forState:UIControlStateHighlighted];
+    [moveForwardButton setImage:[UIImage imageNamed:@"arrow_unselect.png"] forState:UIControlStateNormal];
+    [moveForwardButton setImage:[UIImage imageNamed:@"arrow_unselect.png"] forState:UIControlStateHighlighted];
+    [moveForwardButton.imageView setTransform:CGAffineTransformMakeRotation(layoutHorizontal?M_PI_2:M_PI)];
     [moveForwardButton addTarget:self action:@selector(tappedMoveForwardButton:) forControlEvents:UIControlEventTouchUpInside];
     
     moveBackwardButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [moveBackwardButton setBackgroundImage:[UIImage imageNamed:@"arrow_unselect.png"] forState:UIControlStateNormal];
-    [moveBackwardButton setBackgroundImage:[UIImage imageNamed:@"arrow_select.png"] forState:UIControlStateHighlighted];
-    [moveBackwardButton setBackgroundColor:[AppColors toolbarColor]];
-    [moveBackwardButton setTransform:CGAffineTransformMakeRotation(layoutHorizontal?-M_PI_2:0)];
+    [moveBackwardButton setBackgroundImage:[UIImage imageNamed:@"button_blue_unselect.png"] forState:UIControlStateNormal];
+    [moveBackwardButton setBackgroundImage:[UIImage imageNamed:@"button_blue_select.png"] forState:UIControlStateHighlighted];
+    [moveBackwardButton setImage:[UIImage imageNamed:@"arrow_unselect.png"] forState:UIControlStateNormal];
+    [moveBackwardButton setImage:[UIImage imageNamed:@"arrow_unselect.png"] forState:UIControlStateHighlighted];
+    [moveBackwardButton.imageView setTransform:CGAffineTransformMakeRotation(layoutHorizontal?-M_PI_2:0)];
     [moveBackwardButton addTarget:self action:@selector(tappedMoveBackwardButton:) forControlEvents:UIControlEventTouchUpInside];
     
     addItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addItemButton setBackgroundImage:[UIImage imageNamed:@"plus_unselect.png"] forState:UIControlStateNormal];
-    [addItemButton setBackgroundImage:[UIImage imageNamed:@"plus_select.png"] forState:UIControlStateHighlighted];
-    [addItemButton setBackgroundColor:[AppColors toolbarColor]];
+    [addItemButton setBackgroundImage:[UIImage imageNamed:@"button_blue_unselect.png"] forState:UIControlStateNormal];
+    [addItemButton setBackgroundImage:[UIImage imageNamed:@"button_blue_select.png"] forState:UIControlStateHighlighted];
+    [addItemButton setImage:[UIImage imageNamed:@"plus_unselect.png"] forState:UIControlStateNormal];
+    [addItemButton setImage:[UIImage imageNamed:@"plus_unselect.png"] forState:UIControlStateHighlighted];
     [addItemButton addTarget:self action:@selector(tappedAddItemButton:) forControlEvents:UIControlEventTouchUpInside];
     
     [self addSubview:changeItemButton];
@@ -107,9 +112,10 @@
     
     if (showFavorite) {
         favoriteItemButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [favoriteItemButton setBackgroundImage:[UIImage imageNamed:@"star_unselect.png"] forState:UIControlStateNormal];
-        [favoriteItemButton setBackgroundImage:[UIImage imageNamed:@"star_select.png"] forState:UIControlStateHighlighted];
-        [favoriteItemButton setBackgroundColor:[AppColors toolbarColor]];
+        [favoriteItemButton setBackgroundImage:[UIImage imageNamed:@"button_blue_unselect.png"] forState:UIControlStateNormal];
+        [favoriteItemButton setBackgroundImage:[UIImage imageNamed:@"button_blue_select.png"] forState:UIControlStateHighlighted];
+        [favoriteItemButton setImage:[UIImage imageNamed:@"star_unselect.png"] forState:UIControlStateNormal];
+        [favoriteItemButton setImage:[UIImage imageNamed:@"star_unselect.png"] forState:UIControlStateHighlighted];
         [favoriteItemButton addTarget:self action:@selector(tappedFavoriteItemButton:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:favoriteItemButton];
     }

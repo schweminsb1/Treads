@@ -89,7 +89,7 @@
         [subView setFrame:CGRectMake(self.bounds.size.width/2-370, 8, 550, 110)];
         [publishSwitch setFrame:CGRectMake(self.bounds.size.width/2 + 200, 48, 60, 20)];
         [publishLabel setFrame:CGRectMake(self.bounds.size.width/2 + 210, 73, 60, 20)];
-        [deleteTrip setFrame:CGRectMake(self.bounds.size.width/2 + 295, 38, 80, 50)];
+        [deleteTrip setFrame:CGRectMake(self.bounds.size.width/2 + 295, 38, 50, 50)];
     }
 }
 
@@ -170,18 +170,22 @@
         publishLabel = [[UILabel alloc] initWithFrame:CGRectMake(subView.bounds.origin.x +140, subView.bounds.size.height/2+65, 60, 20)];
         publishLabel.text=@"Published";
         [publishLabel setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
+        
+        
         deleteTrip = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        deleteTrip.frame=CGRectMake(subView.bounds.origin.x +225, subView.bounds.size.height/2+30, 80, 50);
+        deleteTrip.frame=CGRectMake(subView.bounds.origin.x +225, subView.bounds.size.height/2+30, 50, 50);
         [deleteTrip setHidden:NO];
-        [deleteTrip setBackgroundImage:[UIImage imageNamed:@"minus_unselect"] forState:UIControlStateNormal];
-        [deleteTrip setBackgroundImage:[UIImage imageNamed:@"minus_select"] forState:UIControlStateSelected];
-        [deleteTrip setBackgroundColor:[UIColor redColor]];
-         [deleteTrip setTintColor:[UIColor redColor]];
+        [deleteTrip setBackgroundImage:[UIImage imageNamed:@"button_red_unselect.png"] forState:UIControlStateNormal];
+        [deleteTrip setBackgroundImage:[UIImage imageNamed:@"button_red_select.png"] forState:UIControlStateSelected];
+        [deleteTrip setImage:[UIImage imageNamed:@"minus_unselect.png"] forState:UIControlStateNormal];
+        [deleteTrip setImage:[UIImage imageNamed:@"minus_unselect.png"] forState:UIControlStateSelected];
+//        [deleteTrip setBackgroundColor:[UIColor redColor]];
+//         [deleteTrip setTintColor:[UIColor redColor]];
         [deleteTrip addTarget:self action:@selector(deleteTrip) forControlEvents:UIControlEventTouchUpInside];
-        deleteTrip.titleLabel.text=@"Delete";
-        deleteTrip.titleLabel.font=[UIFont fontWithName:@"Helvetica" size:12];
-        deleteTrip.titleLabel.textColor=[UIColor blackColor];
-        [deleteTrip setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
+//        deleteTrip.titleLabel.text=@"Delete";
+//        deleteTrip.titleLabel.font=[UIFont fontWithName:@"Helvetica" size:12];
+//        deleteTrip.titleLabel.textColor=[UIColor blackColor];
+//        [deleteTrip setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
         [self addSubview:deleteTrip];
        
     }
@@ -269,10 +273,14 @@
         [self layoutSubviews];
         //[self setNeedsLayout];
     }
+    int photoCount = 0;
+    for (TripLocation* tripLocation in displayTrip.tripLocations) {
+        photoCount += tripLocation.tripLocationItems.count;
+    }
     tripOwnerLabel.text = displayTrip.username;
     tripNameLabel.text = displayTrip.name;
-    tripDatesLabel.text = @"1/1/2013 - 12/31/2013";
-    tripContentLabel.text = @"P213 C87";
+    tripDatesLabel.text = [NSString stringWithFormat:@"%d Photo%@", photoCount, photoCount == 1 ? @"" : @"s"];
+    tripContentLabel.text = [NSString stringWithFormat:@"%d Location%@", displayTrip.tripLocations.count, displayTrip.tripLocations.count == 1 ? @"" : @"s"];
     tripFeaturedImageView.image = displayTrip.image;
     profilePictureView.image = displayTrip.profileImage;
     tripDescriptionTextView.text = displayTrip.description;
