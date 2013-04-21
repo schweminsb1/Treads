@@ -314,7 +314,10 @@
 }
 -(void)deleteTrip
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     [ _delegate performSelector:_deletefrom withObject:DisplayTrip];
+#pragma clang diagnostic pop
     
     
 }

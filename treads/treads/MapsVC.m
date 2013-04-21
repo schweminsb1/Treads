@@ -303,7 +303,7 @@ CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
     if (tableView == self.searchDisplayController.searchResultsTableView) {
         return locationsFilteredArray.count;
     }
-
+    return 0;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -99,7 +99,10 @@
 {
     if(![_enterField.text isEqual: @""])
     {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         [_cellOwner performSelector:_buttonCallBack withObject:_enterField.text];
+#pragma clang diagnostic pop
     }
     
 }

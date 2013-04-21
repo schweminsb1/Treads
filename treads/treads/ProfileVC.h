@@ -32,7 +32,7 @@
 - (void) followDataHasLoaded:(NSArray*)newData;
 - (IBAction)followUser:(id)sender;
 
-- (IBAction)editProfile:(id)sender;
+//- (IBAction)editProfile:(id)sender;
 - (void) followSuccess;
 @property (copy) void (^sendNewImageRequest)(void(^onSuccess)(UIImage*));
 

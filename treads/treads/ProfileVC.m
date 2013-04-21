@@ -147,7 +147,7 @@
     [TreadsSession instance].coverPhotoID = -1;
     [TreadsSession instance].fName = @"";
     [TreadsSession instance].lName = @"";
-    [TreadsSession instance].Logout;
+    [[TreadsSession instance] Logout];
     
     AppDelegate* appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate logout];

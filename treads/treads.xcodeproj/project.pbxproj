@@ -101,6 +101,7 @@
 		3C954924172469DF006E0BE7 /* icon_pencil.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C95491F172469DF006E0BE7 /* icon_pencil.png */; };
 		3C954925172469DF006E0BE7 /* icon_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C954920172469DF006E0BE7 /* icon_plus.png */; };
 		3C954926172469DF006E0BE7 /* icon_star.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C954921172469DF006E0BE7 /* icon_star.png */; };
+		3C95492917246BDA006E0BE7 /* UserPreferencesRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C95492817246BDA006E0BE7 /* UserPreferencesRepository.m */; };
 		3C958FEE16EA6C4F0038AD7C /* helicopter-bouldering-crash-pad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C958FEA16EA6C4F0038AD7C /* helicopter-bouldering-crash-pad.jpg */; };
 		3C958FEF16EA6C4F0038AD7C /* remote-luxury-hiking-canada.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C958FEB16EA6C4F0038AD7C /* remote-luxury-hiking-canada.jpg */; };
 		3C958FF016EA6C4F0038AD7C /* summit-boots-hiking-rocks.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C958FEC16EA6C4F0038AD7C /* summit-boots-hiking-rocks.jpg */; };
@@ -270,6 +271,8 @@
 		3C95491F172469DF006E0BE7 /* icon_pencil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_pencil.png; sourceTree = "<group>"; };
 		3C954920172469DF006E0BE7 /* icon_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_plus.png; sourceTree = "<group>"; };
 		3C954921172469DF006E0BE7 /* icon_star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_star.png; sourceTree = "<group>"; };
+		3C95492717246BDA006E0BE7 /* UserPreferencesRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserPreferencesRepository.h; path = treads/UserPreferencesRepository.h; sourceTree = SOURCE_ROOT; };
+		3C95492817246BDA006E0BE7 /* UserPreferencesRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserPreferencesRepository.m; path = treads/UserPreferencesRepository.m; sourceTree = SOURCE_ROOT; };
 		3C958FEA16EA6C4F0038AD7C /* helicopter-bouldering-crash-pad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "helicopter-bouldering-crash-pad.jpg"; path = "treads/helicopter-bouldering-crash-pad.jpg"; sourceTree = SOURCE_ROOT; };
 		3C958FEB16EA6C4F0038AD7C /* remote-luxury-hiking-canada.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "remote-luxury-hiking-canada.jpg"; path = "treads/remote-luxury-hiking-canada.jpg"; sourceTree = SOURCE_ROOT; };
 		3C958FEC16EA6C4F0038AD7C /* summit-boots-hiking-rocks.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "summit-boots-hiking-rocks.jpg"; path = "treads/summit-boots-hiking-rocks.jpg"; sourceTree = SOURCE_ROOT; };
@@ -631,6 +634,8 @@
 				3C12312316EFCB89006CCBFE /* DataRepository.m */,
 				3C8A8853171B20B70076ED31 /* ImageCache.h */,
 				3C8A8854171B20B80076ED31 /* ImageCache.m */,
+				3C95492717246BDA006E0BE7 /* UserPreferencesRepository.h */,
+				3C95492817246BDA006E0BE7 /* UserPreferencesRepository.m */,
 			);
 			name = Repositories;
 			sourceTree = "<group>";
@@ -954,6 +959,7 @@
 				3C8A8858171B5F460076ED31 /* ProfileBrowserCell.m in Sources */,
 				3192AECA171BACB5008F8FB2 /* FavoriteService.m in Sources */,
 				3C8A885E171C464E0076ED31 /* ProfileHeaderCell.m in Sources */,
+				3C95492917246BDA006E0BE7 /* UserPreferencesRepository.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
