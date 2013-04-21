@@ -66,10 +66,12 @@
     BOOL __editingEnabled = self.editingEnabled();
     int additionalCells = (__editingEnabled&&addItemView!=nil)?1:0;
     
+    CGPoint offset = imageScrollView.contentOffset;
+    
     //set frames of subviews
     [imageScrollView setFrame:CGRectMake(0, 0, self.bounds.size.width, imageSubViewSize.height)];
     [imageScrollPaddingLeft setFrame:CGRectMake(0, 0, (self.bounds.size.width-imageSubViewSize.width)/2, imageScrollView.bounds.size.height)];
-    [imageScrollPaddingRight setFrame:CGRectMake((imageSubViewCount+additionalCells)*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width, 0, (self.bounds.size.width-imageSubViewSize.width)/2, imageScrollView.bounds.size.height)];
+    [imageScrollPaddingRight setFrame:CGRectMake((imageSubViewCount+additionalCells)*imageSubViewSize.width + (self.bounds.size.width-imageSubViewSize.width)/2, 0, (self.bounds.size.width-imageSubViewSize.width)/2, imageScrollView.bounds.size.height)];
     
     for (int i=0; i<imageSubViews.count; i++) {
         UIImageView* imageSubView = (UIImageView*)imageSubViews[i];
@@ -95,9 +97,11 @@
     }
 
     //resize the scroll view and display view
-    [imageScrollView setContentSize:CGSizeMake((imageSubViewCount+additionalCells)*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width*2 + (isAnimatingItemRemove?imageScrollPaddingRemoval.bounds.size.width:0), imageScrollView.bounds.size.height)];
+    [imageScrollView setContentSize:CGSizeMake((imageSubViewCount+additionalCells)*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width + imageScrollPaddingRight.bounds.size.width + (isAnimatingItemRemove?imageScrollPaddingRemoval.bounds.size.width:0), imageScrollView.bounds.size.height)];
     [displayView setFrame:CGRectMake(0, imageSubViewSize.height, self.bounds.size.width, self.bounds.size.height - imageSubViewSize.height)];
     [displayView setNeedsLayout];
+    
+    [imageScrollView setContentOffset:offset];
 }
 
 - (void)createAndAddSubviews

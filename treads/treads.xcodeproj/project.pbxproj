@@ -75,10 +75,6 @@
 		3C13F52E171A10F800EA6582 /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C13F52D171A10F700EA6582 /* icon114.png */; };
 		3C13F530171A10FF00EA6582 /* icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C13F52F171A10FF00EA6582 /* icon57.png */; };
 		3C13F539171A184300EA6582 /* 404.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C13F538171A184300EA6582 /* 404.png */; };
-		3C13F53E171A3E6E00EA6582 /* pencil_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C13F53A171A3E6B00EA6582 /* pencil_select.png */; };
-		3C13F53F171A3E6E00EA6582 /* pencil_unselect.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C13F53B171A3E6C00EA6582 /* pencil_unselect.png */; };
-		3C13F544171A440500EA6582 /* star_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C13F542171A440200EA6582 /* star_select.png */; };
-		3C13F545171A440500EA6582 /* star_unselect.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C13F543171A440200EA6582 /* star_unselect.png */; };
 		3C60C7DB16E7004900FDFD7D /* TripBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C60C7DA16E7004900FDFD7D /* TripBrowser.m */; };
 		3C87B12316F7E7B8000ABF18 /* AppColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C87B12216F7E7B8000ABF18 /* AppColors.m */; };
 		3C882DC1170D1DF30041A9C8 /* ImageScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C882DC0170D1DF30041A9C8 /* ImageScrollTextView.m */; };
@@ -99,13 +95,12 @@
 		3C90D6FF17236C0B00DE38BB /* button_blue_unselect.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C90D6FB17236C0B00DE38BB /* button_blue_unselect.png */; };
 		3C90D70017236C0B00DE38BB /* button_red_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C90D6FC17236C0B00DE38BB /* button_red_select.png */; };
 		3C90D70117236C0B00DE38BB /* button_red_unselect.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C90D6FD17236C0B00DE38BB /* button_red_unselect.png */; };
-		3C90EAA417161AE000CACCC4 /* arrow_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C90EA9C17161AE000CACCC4 /* arrow_select.png */; };
-		3C90EAA517161AE000CACCC4 /* arrow_unselect.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C90EA9D17161AE000CACCC4 /* arrow_unselect.png */; };
-		3C90EAA817161AE000CACCC4 /* minus_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C90EAA017161AE000CACCC4 /* minus_select.png */; };
-		3C90EAA917161AE000CACCC4 /* minus_unselect.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C90EAA117161AE000CACCC4 /* minus_unselect.png */; };
-		3C90EAAA17161AE000CACCC4 /* plus_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C90EAA217161AE000CACCC4 /* plus_select.png */; };
-		3C90EAAB17161AE000CACCC4 /* plus_unselect.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C90EAA317161AE000CACCC4 /* plus_unselect.png */; };
 		3C919D5E17149FC300FED52D /* ImageScrollEditItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C919D5D17149FC300FED52D /* ImageScrollEditItemView.m */; };
+		3C954922172469DF006E0BE7 /* icon_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C95491D172469DF006E0BE7 /* icon_arrow.png */; };
+		3C954923172469DF006E0BE7 /* icon_minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C95491E172469DF006E0BE7 /* icon_minus.png */; };
+		3C954924172469DF006E0BE7 /* icon_pencil.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C95491F172469DF006E0BE7 /* icon_pencil.png */; };
+		3C954925172469DF006E0BE7 /* icon_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C954920172469DF006E0BE7 /* icon_plus.png */; };
+		3C954926172469DF006E0BE7 /* icon_star.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C954921172469DF006E0BE7 /* icon_star.png */; };
 		3C958FEE16EA6C4F0038AD7C /* helicopter-bouldering-crash-pad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C958FEA16EA6C4F0038AD7C /* helicopter-bouldering-crash-pad.jpg */; };
 		3C958FEF16EA6C4F0038AD7C /* remote-luxury-hiking-canada.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C958FEB16EA6C4F0038AD7C /* remote-luxury-hiking-canada.jpg */; };
 		3C958FF016EA6C4F0038AD7C /* summit-boots-hiking-rocks.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C958FEC16EA6C4F0038AD7C /* summit-boots-hiking-rocks.jpg */; };
@@ -234,10 +229,6 @@
 		3C13F52D171A10F700EA6582 /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114.png; sourceTree = "<group>"; };
 		3C13F52F171A10FF00EA6582 /* icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57.png; sourceTree = "<group>"; };
 		3C13F538171A184300EA6582 /* 404.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 404.png; sourceTree = "<group>"; };
-		3C13F53A171A3E6B00EA6582 /* pencil_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pencil_select.png; sourceTree = "<group>"; };
-		3C13F53B171A3E6C00EA6582 /* pencil_unselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pencil_unselect.png; sourceTree = "<group>"; };
-		3C13F542171A440200EA6582 /* star_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_select.png; sourceTree = "<group>"; };
-		3C13F543171A440200EA6582 /* star_unselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_unselect.png; sourceTree = "<group>"; };
 		3C60C7D916E7004900FDFD7D /* TripBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripBrowser.h; path = treads/TripBrowser.h; sourceTree = SOURCE_ROOT; };
 		3C60C7DA16E7004900FDFD7D /* TripBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripBrowser.m; path = treads/TripBrowser.m; sourceTree = SOURCE_ROOT; };
 		3C87B12116F7E7B8000ABF18 /* AppColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppColors.h; path = treads/AppColors.h; sourceTree = SOURCE_ROOT; };
@@ -271,15 +262,14 @@
 		3C90D6FB17236C0B00DE38BB /* button_blue_unselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_blue_unselect.png; sourceTree = "<group>"; };
 		3C90D6FC17236C0B00DE38BB /* button_red_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_red_select.png; sourceTree = "<group>"; };
 		3C90D6FD17236C0B00DE38BB /* button_red_unselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_red_unselect.png; sourceTree = "<group>"; };
-		3C90EA9C17161AE000CACCC4 /* arrow_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_select.png; sourceTree = "<group>"; };
-		3C90EA9D17161AE000CACCC4 /* arrow_unselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_unselect.png; sourceTree = "<group>"; };
-		3C90EAA017161AE000CACCC4 /* minus_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minus_select.png; sourceTree = "<group>"; };
-		3C90EAA117161AE000CACCC4 /* minus_unselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minus_unselect.png; sourceTree = "<group>"; };
-		3C90EAA217161AE000CACCC4 /* plus_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus_select.png; sourceTree = "<group>"; };
-		3C90EAA317161AE000CACCC4 /* plus_unselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus_unselect.png; sourceTree = "<group>"; };
 		3C919D5B17149EB000FED52D /* EditControlsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EditControlsView.h; path = treads/EditControlsView.h; sourceTree = SOURCE_ROOT; };
 		3C919D5C17149FC300FED52D /* ImageScrollEditItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageScrollEditItemView.h; path = treads/ImageScrollEditItemView.h; sourceTree = SOURCE_ROOT; };
 		3C919D5D17149FC300FED52D /* ImageScrollEditItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageScrollEditItemView.m; path = treads/ImageScrollEditItemView.m; sourceTree = SOURCE_ROOT; };
+		3C95491D172469DF006E0BE7 /* icon_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_arrow.png; sourceTree = "<group>"; };
+		3C95491E172469DF006E0BE7 /* icon_minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_minus.png; sourceTree = "<group>"; };
+		3C95491F172469DF006E0BE7 /* icon_pencil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_pencil.png; sourceTree = "<group>"; };
+		3C954920172469DF006E0BE7 /* icon_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_plus.png; sourceTree = "<group>"; };
+		3C954921172469DF006E0BE7 /* icon_star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_star.png; sourceTree = "<group>"; };
 		3C958FEA16EA6C4F0038AD7C /* helicopter-bouldering-crash-pad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "helicopter-bouldering-crash-pad.jpg"; path = "treads/helicopter-bouldering-crash-pad.jpg"; sourceTree = SOURCE_ROOT; };
 		3C958FEB16EA6C4F0038AD7C /* remote-luxury-hiking-canada.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "remote-luxury-hiking-canada.jpg"; path = "treads/remote-luxury-hiking-canada.jpg"; sourceTree = SOURCE_ROOT; };
 		3C958FEC16EA6C4F0038AD7C /* summit-boots-hiking-rocks.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "summit-boots-hiking-rocks.jpg"; path = "treads/summit-boots-hiking-rocks.jpg"; sourceTree = SOURCE_ROOT; };
@@ -676,20 +666,15 @@
 		3C90EA871716115900CACCC4 /* Edit Icons */ = {
 			isa = PBXGroup;
 			children = (
+				3C95491D172469DF006E0BE7 /* icon_arrow.png */,
+				3C95491E172469DF006E0BE7 /* icon_minus.png */,
+				3C95491F172469DF006E0BE7 /* icon_pencil.png */,
+				3C954920172469DF006E0BE7 /* icon_plus.png */,
+				3C954921172469DF006E0BE7 /* icon_star.png */,
 				3C90D6FA17236C0B00DE38BB /* button_blue_select.png */,
 				3C90D6FB17236C0B00DE38BB /* button_blue_unselect.png */,
 				3C90D6FC17236C0B00DE38BB /* button_red_select.png */,
 				3C90D6FD17236C0B00DE38BB /* button_red_unselect.png */,
-				3C90EA9C17161AE000CACCC4 /* arrow_select.png */,
-				3C90EA9D17161AE000CACCC4 /* arrow_unselect.png */,
-				3C90EAA017161AE000CACCC4 /* minus_select.png */,
-				3C90EAA117161AE000CACCC4 /* minus_unselect.png */,
-				3C90EAA217161AE000CACCC4 /* plus_select.png */,
-				3C90EAA317161AE000CACCC4 /* plus_unselect.png */,
-				3C13F53A171A3E6B00EA6582 /* pencil_select.png */,
-				3C13F53B171A3E6C00EA6582 /* pencil_unselect.png */,
-				3C13F542171A440200EA6582 /* star_select.png */,
-				3C13F543171A440200EA6582 /* star_unselect.png */,
 			);
 			name = "Edit Icons";
 			sourceTree = "<group>";
@@ -880,21 +865,11 @@
 				29C21B95170BA76D005B39E4 /* LocationSmallViewController.xib in Resources */,
 				3C882DC9170D28160041A9C8 /* LocationVC.xib in Resources */,
 				3C882DCB170D28160041A9C8 /* LocationViewController.xib in Resources */,
-				3C90EAA417161AE000CACCC4 /* arrow_select.png in Resources */,
-				3C90EAA517161AE000CACCC4 /* arrow_unselect.png in Resources */,
-				3C90EAA817161AE000CACCC4 /* minus_select.png in Resources */,
-				3C90EAA917161AE000CACCC4 /* minus_unselect.png in Resources */,
-				3C90EAAA17161AE000CACCC4 /* plus_select.png in Resources */,
-				3C90EAAB17161AE000CACCC4 /* plus_unselect.png in Resources */,
 				297672A117162DD300C756FB /* LocationPickerVC.xib in Resources */,
 				318BC81A1719058500F4EB67 /* EditProfileVC.xib in Resources */,
 				3C13F52E171A10F800EA6582 /* icon114.png in Resources */,
 				3C13F530171A10FF00EA6582 /* icon57.png in Resources */,
 				3C13F539171A184300EA6582 /* 404.png in Resources */,
-				3C13F53E171A3E6E00EA6582 /* pencil_select.png in Resources */,
-				3C13F53F171A3E6E00EA6582 /* pencil_unselect.png in Resources */,
-				3C13F544171A440500EA6582 /* star_select.png in Resources */,
-				3C13F545171A440500EA6582 /* star_unselect.png in Resources */,
 				39F5D514171A58FD00F0AE4E /* LocationMapVC.xib in Resources */,
 				3C8A8852171B1C620076ED31 /* empty_item.png in Resources */,
 				3192AEC5171BA182008F8FB2 /* Default-Landscape~ipad.png in Resources */,
@@ -905,6 +880,11 @@
 				3C90D6FF17236C0B00DE38BB /* button_blue_unselect.png in Resources */,
 				3C90D70017236C0B00DE38BB /* button_red_select.png in Resources */,
 				3C90D70117236C0B00DE38BB /* button_red_unselect.png in Resources */,
+				3C954922172469DF006E0BE7 /* icon_arrow.png in Resources */,
+				3C954923172469DF006E0BE7 /* icon_minus.png in Resources */,
+				3C954924172469DF006E0BE7 /* icon_pencil.png in Resources */,
+				3C954925172469DF006E0BE7 /* icon_plus.png in Resources */,
+				3C954926172469DF006E0BE7 /* icon_star.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

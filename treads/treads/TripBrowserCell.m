@@ -177,8 +177,8 @@
         [deleteTrip setHidden:NO];
         [deleteTrip setBackgroundImage:[UIImage imageNamed:@"button_red_unselect.png"] forState:UIControlStateNormal];
         [deleteTrip setBackgroundImage:[UIImage imageNamed:@"button_red_select.png"] forState:UIControlStateSelected];
-        [deleteTrip setImage:[UIImage imageNamed:@"minus_unselect.png"] forState:UIControlStateNormal];
-        [deleteTrip setImage:[UIImage imageNamed:@"minus_unselect.png"] forState:UIControlStateSelected];
+        [deleteTrip setImage:[UIImage imageNamed:@"icon_minus.png"] forState:UIControlStateNormal];
+        [deleteTrip setImage:[UIImage imageNamed:@"icon_minus.png"] forState:UIControlStateSelected];
 //        [deleteTrip setBackgroundColor:[UIColor redColor]];
 //         [deleteTrip setTintColor:[UIColor redColor]];
         [deleteTrip addTarget:self action:@selector(deleteTrip) forControlEvents:UIControlEventTouchUpInside];
