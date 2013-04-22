@@ -117,11 +117,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.view setBackgroundColor:[AppColors mainBackgroundColor]];
+    [self.view setBackgroundColor:[AppColors tertiaryBackgroundColor]];
     self.name.text = _model.title;
     
-    self.lon.text = [NSString stringWithFormat:@"%f", _model.longitude ];
-     self.lat.text = [NSString stringWithFormat:@"%f", _model.latitude ];
+    self.nameHighlightView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
+    
+//    self.lon.text = [NSString stringWithFormat:@"%f", _model.longitude ];
+//     self.lat.text = [NSString stringWithFormat:@"%f", _model.latitude ];
     
     self.description.text= _model.description;
      
@@ -129,6 +131,18 @@
     [self.browser setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     
     [self.tableContainerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    
+//    [self.name setFrame:CGRectMake(176, 33, 480, 46)];
+    [self.name setFont:[UIFont boldSystemFontOfSize: 38]];
+    [self.name setTextColor:[AppColors lightTextColor]];
+    [self.name setTextAlignment:NSTextAlignmentCenter];
+    [self.name setAdjustsFontSizeToFitWidth:YES];
+    
+//    [self.lat setHidden:YES];
+//    [self.lon setHidden:YES];
+    
+    [self.imageView setClipsToBounds:YES];
+    
 //    [self.browserWindow addSubview:_browser];
 //    [self.view addSubview:self.browserWindow];
     
@@ -137,7 +151,7 @@
 -(void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.view setBackgroundColor:[AppColors secondaryBackgroundColor]];
+//    [self.view setBackgroundColor:[AppColors secondaryBackgroundColor]];
 
     /*
     self.name.text = _model.title;
