@@ -70,17 +70,24 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
+    static NSString *CellIdentifier2 = @"NewCell";
+    UITableViewCell *cell;
+
     if(indexPath.row==0)
     {
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier2];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier2];
+        }
         cell.textLabel.text=@"Create New";
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
     }
     else
     {
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
         Location * location;
         if (tableView == self.searchDisplayController.searchResultsTableView) {
             location = [locationsFilteredArray objectAtIndex:indexPath.row-1];
