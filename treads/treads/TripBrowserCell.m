@@ -311,7 +311,6 @@
     for (UITouch* touch in event.allTouches) {
         if (CGRectContainsPoint(subView.bounds, [touch locationInView:subView])) {
             [self.delegate respondToSelectAtIndexPath:self.indexPath];
-//            [super touchesEnded:touches withEvent:event];
         }
     }
     [super touchesEnded:touches withEvent:event];

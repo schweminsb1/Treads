@@ -155,6 +155,8 @@
                 cell = [[ProfileBrowserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[self getCellIdentifier] cellStyle:self.cellStyle];
             }
             cell.displayProfile = (User*)sortedListData[indexPath.row];
+            cell.delegate = self;
+            cell.indexPath = indexPath;
             
             return cell;
         }

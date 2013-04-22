@@ -124,11 +124,13 @@
     [subView addSubview:profilePictureView];
 //    [subView addSubview:tripFeaturedImageView];
     
-    UIView *bgColorView = [[UIView alloc] init];
-    bgColorView.bounds = subView.bounds;
-    bgColorView.frame = subView.frame;
-    [bgColorView setBackgroundColor:[AppColors toolbarColor]];
-    [self setSelectedBackgroundView:bgColorView];
+//    UIView *bgColorView = [[UIView alloc] init];
+//    bgColorView.bounds = subView.bounds;
+//    bgColorView.frame = subView.frame;
+//    [bgColorView setBackgroundColor:[AppColors toolbarColor]];
+//    [self setSelectedBackgroundView:bgColorView];
+    
+    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
 }
 
 - (void)setDisplayProfile:(User*)displayProfile
@@ -143,6 +145,16 @@
 //    tripContentLabel.text = @"P213 C87";
     tripFeaturedImageView.image = displayProfile.coverImage;
     profilePictureView.image = displayProfile.profileImage;
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    for (UITouch* touch in event.allTouches) {
+        if (CGRectContainsPoint(subView.bounds, [touch locationInView:subView])) {
+            [self.delegate respondToSelectAtIndexPath:self.indexPath];
+        }
+    }
+    [super touchesEnded:touches withEvent:event];
 }
 
 @end
