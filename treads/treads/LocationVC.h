@@ -37,7 +37,7 @@
 //@property (strong, atomic) IBOutlet  UILabel * lat;
 //@property (strong, atomic) IBOutlet  UILabel * lon;
 @property (strong, atomic) IBOutlet  UITextView * description;
-@property (strong, atomic) IBOutlet  UISegmentedControl * segmentControl;
+@property (strong)  UISegmentedControl * segmentControl;
 @property IBOutlet UITableView * commentTable;
 @property CommentEnterBox * commentEnterCell;
 @property (strong) IBOutlet UIView* nameHighlightView;

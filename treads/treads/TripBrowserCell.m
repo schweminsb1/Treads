@@ -30,10 +30,12 @@
     UIImageView* profilePictureView;
     UIImageView* tripFeaturedImageView;
     UIView* profilePictureBackgroundView;
-    UISwitch * publishSwitch;
-    UILabel  * publishLabel;
-    Trip    * DisplayTrip;
-    UIButton * deleteTrip;
+    UISwitch* publishSwitch;
+    UILabel* publishLabel;
+    Trip* DisplayTrip;
+    UIButton* deleteTrip;
+//    UIView* bgColorView;
+//    UIView* bgSubView;
 }
 
 + (int)heightForCellStyle:(TripBrowserCellStyle)cellStyle
@@ -91,6 +93,9 @@
         [publishLabel setFrame:CGRectMake(self.bounds.size.width/2 + 210, 73, 60, 20)];
         [deleteTrip setFrame:CGRectMake(self.bounds.size.width/2 + 295, 38, 50, 50)];
     }
+    
+//    [bgColorView setBounds:self.bounds];
+//    [bgSubView setFrame:subView.frame];
 }
 
 - (void)createAndAddSubviews
@@ -255,11 +260,18 @@
     
     [subView bringSubviewToFront:profilePictureView];
     
-    UIView *bgColorView = [[UIView alloc] init];
-    bgColorView.bounds = subView.bounds;
-    bgColorView.frame = subView.frame;
-    [bgColorView setBackgroundColor:[AppColors toolbarColor]];
-    [self setSelectedBackgroundView:bgColorView];
+//    bgColorView = [[UIView alloc] init];
+//    bgColorView.bounds = self.bounds;
+//    bgColorView.frame = self.frame;
+//    [bgColorView setBackgroundColor:[UIColor clearColor]];
+//    bgSubView = [[UIView alloc] init];
+//    bgColorView.frame = subView.frame;
+//    bgColorView.backgroundColor = [UIColor clearColor];
+//    [bgColorView addSubview:bgSubView];
+//    [self setSelectedBackgroundView:bgColorView];
+    
+    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
     [self bringSubviewToFront:subView];
     [self addSubview:publishSwitch];
     [self addSubview:publishLabel];
@@ -294,7 +306,18 @@
     }
 }
 
--(void)valueChange:(id)sender
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    for (UITouch* touch in event.allTouches) {
+        if (CGRectContainsPoint(subView.bounds, [touch locationInView:subView])) {
+            [self.delegate respondToSelectAtIndexPath:self.indexPath];
+//            [super touchesEnded:touches withEvent:event];
+        }
+    }
+    [super touchesEnded:touches withEvent:event];
+}
+
+- (void)valueChange:(id)sender
 {
     if([publishSwitch isOn])
     {
@@ -307,19 +330,18 @@
         [[TripService instance]updateTrip:DisplayTrip forTarget:self withAction:@selector(tripChanged:withSuccess:)];
     }
 }
--(void)tripChanged:(NSNumber*)idfield withSuccess:(NSNumber*)success
+
+- (void)tripChanged:(NSNumber*)idfield withSuccess:(NSNumber*)success
 {
     
-    
 }
--(void)deleteTrip
+
+- (void)deleteTrip
 {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     [ _delegate performSelector:_deletefrom withObject:DisplayTrip];
 #pragma clang diagnostic pop
-    
-    
 }
 
 @end

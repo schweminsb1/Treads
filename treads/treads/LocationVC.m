@@ -143,6 +143,14 @@
     
     [self.imageView setClipsToBounds:YES];
     
+//    [self.segmentControl removeFromSuperview];
+    self.segmentControl = [[UISegmentedControl alloc] initWithItems:@[@"Comments", @"Trips"]];
+    [self.segmentControl addTarget:self action:@selector(didChangeSegmentControl:) forControlEvents:UIControlEventValueChanged];
+    self.segmentControl.segmentedControlStyle = UISegmentedControlStyleBar;
+    [self.navigationItem setTitleView:self.segmentControl];
+//    [self.navigationController.navigationBar.topItem setTitleView:self.segmentControl];
+    [self.segmentControl setSelectedSegmentIndex:0];
+    
 //    [self.browserWindow addSubview:_browser];
 //    [self.view addSubview:self.browserWindow];
     
