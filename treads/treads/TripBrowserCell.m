@@ -119,9 +119,11 @@
     if (self.cellStyle == TripBrowserCell4x4) {
         tripOwnerLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 10, 370, 34)];
         tripNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 41, 370, 25)];
+        tripDatesLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 64, 370, 18)];
+        tripContentLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 80, 370, 18)];
         profilePictureView = [[UIImageView alloc] initWithFrame:CGRectMake(-16, -8, 126, 126)];
         profilePictureBackgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(-20, -12, 134, 134)];
-        tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 76, 550, 220)];
+        tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 110, 550, 186)];
         tripDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(12, 304, 422, 66)];
         publishSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [publishSwitch setHidden:YES];
@@ -184,13 +186,7 @@
         [deleteTrip setBackgroundImage:[UIImage imageNamed:@"button_red_select.png"] forState:UIControlStateSelected];
         [deleteTrip setImage:[UIImage imageNamed:@"icon_minus.png"] forState:UIControlStateNormal];
         [deleteTrip setImage:[UIImage imageNamed:@"icon_minus.png"] forState:UIControlStateSelected];
-//        [deleteTrip setBackgroundColor:[UIColor redColor]];
-//         [deleteTrip setTintColor:[UIColor redColor]];
         [deleteTrip addTarget:self action:@selector(deleteTrip) forControlEvents:UIControlEventTouchUpInside];
-//        deleteTrip.titleLabel.text=@"Delete";
-//        deleteTrip.titleLabel.font=[UIFont fontWithName:@"Helvetica" size:12];
-//        deleteTrip.titleLabel.textColor=[UIColor blackColor];
-//        [deleteTrip setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
         [self addSubview:deleteTrip];
        
     }
