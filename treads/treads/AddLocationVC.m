@@ -89,20 +89,20 @@ CLLocationCoordinate2D placedLocation;
                                 delegate: nil
                                 cancelButtonTitle:@"OK"
                                 otherButtonTitles:nil];
-    UIAlertView *descriptiontooLong = [[UIAlertView alloc]
-                                initWithTitle: @"Woah!!"
-                                message: @"The description and attributes are rescricted to 250 characters each."
-                                delegate: nil
-                                cancelButtonTitle:@"OK"
-                                otherButtonTitles:nil];
+//    UIAlertView *descriptiontooLong = [[UIAlertView alloc]
+//                                initWithTitle: @"Woah!!"
+//                                message: @"The description and attributes are rescricted to 250 characters each."
+//                                delegate: nil
+//                                cancelButtonTitle:@"OK"
+//                                otherButtonTitles:nil];
     
    
     __block NSArray * returnedValues= nil;
     returnedValues= [[NSArray alloc] init];
     
     // check for empty fields
-    if([_locationText.text isEqualToString:@""] || [_attributeText.text isEqualToString:@""] ||
-       [_descriptionText.text isEqualToString:@""] || _latitude == 91 || _longitude == 181 )
+    if([_locationText.text isEqualToString:@""]/* || [_attributeText.text isEqualToString:@""] ||
+       [_descriptionText.text isEqualToString:@""]*/ || _latitude == 91 || _longitude == 181 )
     {
         [alert show];
     }
@@ -113,15 +113,15 @@ CLLocationCoordinate2D placedLocation;
         
     }
     // check for descriptions/attribute lists that are too long
-    else if(_descriptionText.text.length > 250 || _attributeText.text.length > 250)
-    {
-        [descriptiontooLong show];
-    }
+//    else if(_descriptionText.text.length > 250 || _attributeText.text.length > 250)
+//    {
+//        [descriptiontooLong show];
+//    }
     else
     {
             NSDictionary * newItem= @{
                                       @"name": [NSString stringWithString: _locationText.text],
-                                      @"description": [NSString stringWithString: _descriptionText.text] ,
+//                                      @"description": [NSString stringWithString: _descriptionText.text] ,
                                       @"latitude": [NSNumber numberWithDouble: self.latitude],
                                       @"longitude": [NSNumber numberWithDouble: self.longitude]
                                       };

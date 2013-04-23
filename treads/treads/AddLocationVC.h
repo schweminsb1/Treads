@@ -18,8 +18,8 @@
 
 @property IBOutlet UITextField  * locationText;
 
-@property IBOutlet UITextView   * descriptionText;
-@property IBOutlet UITextView   * attributeText;
+//@property IBOutlet UITextView   * descriptionText;
+//@property IBOutlet UITextView   * attributeText;
 
 @property IBOutlet UITextField  * latitudeText;
 @property IBOutlet UITextField  * longitudeText;

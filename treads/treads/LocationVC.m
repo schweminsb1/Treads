@@ -125,12 +125,12 @@
 //    self.lon.text = [NSString stringWithFormat:@"%f", _model.longitude ];
 //     self.lat.text = [NSString stringWithFormat:@"%f", _model.latitude ];
     
-    self.description.text= _model.description;
-     
-    _browser= [[TripBrowser alloc] initWithFrame:self.commentTable.bounds];
-    [self.browser setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+//    self.description.text= _model.description;
     
-    [self.tableContainerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    _browser= [[TripBrowser alloc] initWithFrame:self.commentTable.bounds];
+    [self.browser setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+    
+    [self.tableContainerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     
 //    [self.name setFrame:CGRectMake(176, 33, 480, 46)];
     [self.name setFont:[UIFont boldSystemFontOfSize: 38]];
