@@ -66,7 +66,7 @@ BOOL previousDoneHit;
 //            }
 //            else
 //            {
-                [self presentViewController:self.imagePicker animated:YES completion: nil];
+                [self presentViewController:self.imagePicker animated:NO completion: nil];
 //            }
 
         }
