@@ -246,7 +246,9 @@ CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
 {
     //Do search on searchbar
     //set mapview center focus on pin with location the searchbar most matches
-    
+    searchBar.text=@"";
+    [searchBar setShowsCancelButton:NO animated:YES];
+    [searchBar resignFirstResponder];
 }
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {

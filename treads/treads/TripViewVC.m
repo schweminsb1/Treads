@@ -120,6 +120,7 @@
         [_self.locationService getLocationByID:loc.locationID withLocationBlock:complete];
     };
     self.viewer.sendViewProfileRequest = ^(int profileID) {
+        [_self.viewer setEditingEnabled:NO];
         [_self showProfileWithID:profileID];
     };
     self.viewer.refreshTitle = ^() {
@@ -145,12 +146,12 @@
             Trip* trip = [[Trip alloc] init];
             trip.tripID = [Trip UNDEFINED_TRIP_ID];
             trip.userID = [TreadsSession instance].treadsUserID;
-            trip.name = @"New Trip";
+            trip.name = @"";
             trip.username = [NSString stringWithFormat:@"%@ %@", [TreadsSession instance].fName, [TreadsSession instance].lName];
             trip.profileImageID = [TreadsSession instance].profilePhotoID;
-            trip.description = @"Trip Description";
+            trip.description = @"";
             trip.imageID = [TripLocationItem UNDEFINED_IMAGE_ID];
-            trip.published=0;
+            trip.published = 0;
             [self dataHasLoaded:@[trip]];
         }
         else {
@@ -175,7 +176,8 @@
         [self.viewer setViewerTrip:(returnedTrip) enableEditing:(returnedTrip.tripID == [Trip UNDEFINED_TRIP_ID]?YES:NO)];
         
         [self setBaseTitle:returnedTrip];
-        [self setTitleBar:nil];
+        if ([self.viewer editingEnabled]) {[self setTitleBar:@"Editing"];}
+        else {[self setTitleBar:nil];}
         
         //if the user has editing rights, add the nav bar item
         if (returnedTrip.userID == [TreadsSession instance].treadsUserID) { //can edit

@@ -69,6 +69,8 @@ static CameraService* repo;
     {
         selectedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     }
+    popover = nil;
+    imagePicker = nil;
     self.onSuccessImage(selectedImage);
 
 }
@@ -77,6 +79,7 @@ static CameraService* repo;
     imagePicker = nil;
     [popover dismissPopoverAnimated:YES];
     [imagePicker dismissViewControllerAnimated:YES completion:nil];
+    
 }
 UIImage*(^returnSelectedImage)(void) =^
 {
