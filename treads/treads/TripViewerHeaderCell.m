@@ -61,11 +61,11 @@
     //[bgrView setFrame:CGRectMake(0, 328, self.bounds.size.width, self.bounds.size.height-328)];
     [subView setFrame:CGRectMake(24, 8, self.bounds.size.width-48, 480)];
     [tripFeaturedImage setFrame:CGRectMake(0, 0, subView.frame.size.width, 320)];
-    [tripOwnerLabel setFrame:CGRectMake(176, 38, subView.frame.size.width-196, 44)];
+    [tripOwnerLabel setFrame:CGRectMake(176, 33, subView.frame.size.width-196, 46)];
     [tripOwnerButton setFrame:tripOwnerLabel.frame];
-    [tripNameLabel setFrame:CGRectMake(176, 82, subView.frame.size.width-196, 36)];
+    [tripNameLabel setFrame:CGRectMake(176, 78, subView.frame.size.width-196, 36)];
     [tripDescriptionEditableTextView setFrame:CGRectMake(20, 336, subView.frame.size.width-40, subView.frame.size.height-352)];
-    [textBackground setFrame:CGRectMake(0, 24, subView.frame.size.width, 108)];
+    [textBackground setFrame:CGRectMake(0, 24, subView.frame.size.width, 102)];
     [profilePictureView setFrame:CGRectMake(20, 16, 136, 136)];
     [profileButton setFrame:profilePictureView.frame];
     

@@ -50,7 +50,7 @@
     _profilePicture =[[UIImageView alloc] initWithFrame: imageRect];
     _profilePicture.image = _proPic;
     
-    CGRect textRect= CGRectMake(imageRect.origin.x + imageRect.size.width + 1, self.bounds.origin.y, 550, self.bounds.size.height-1);
+    CGRect textRect= CGRectMake(imageRect.origin.x + imageRect.size.width + 1, self.bounds.origin.y, 502, self.bounds.size.height-1);
     
     CGRect buttonBounds= CGRectMake(textRect.origin.x + textRect.size.width + 1, self.bounds.origin.y, 90, self.bounds.size.height);
     _postButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];

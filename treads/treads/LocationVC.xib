@@ -40,7 +40,7 @@
 					<object class="IBUIImageView" id="153286325">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">293</int>
-						<string key="NSFrame">{{54, 0}, {660, 240}}</string>
+						<string key="NSFrame">{{24, 16}, {720, 200}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="681529587"/>
@@ -57,7 +57,7 @@
 					<object class="IBUIView" id="681529587">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">293</int>
-						<string key="NSFrame">{{54, 24}, {660, 64}}</string>
+						<string key="NSFrame">{{24, 40}, {720, 64}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1018061916"/>
@@ -74,10 +74,10 @@
 					<object class="IBUILabel" id="1018061916">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">293</int>
-						<string key="NSFrame">{{69, 33}, {630, 46}}</string>
+						<string key="NSFrame">{{39, 49}, {690, 46}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="614677645"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -111,7 +111,7 @@
 							<object class="IBUITableView" id="758141593">
 								<reference key="NSNextResponder" ref="614677645"/>
 								<int key="NSvFlags">274</int>
-								<string key="NSFrameSize">{768, 671}</string>
+								<string key="NSFrame">{{24, 16}, {720, 663}}</string>
 								<reference key="NSSuperview" ref="614677645"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
@@ -131,7 +131,7 @@
 								<float key="IBUISectionFooterHeight">22</float>
 							</object>
 						</array>
-						<string key="NSFrame">{{0, 240}, {768, 671}}</string>
+						<string key="NSFrame">{{0, 216}, {768, 695}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="758141593"/>
@@ -311,7 +311,6 @@
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="commentTable">UITableView</string>
-						<string key="description">UITextView</string>
 						<string key="imageView">UIImageView</string>
 						<string key="name">UILabel</string>
 						<string key="nameHighlightView">UIView</string>
@@ -321,10 +320,6 @@
 						<object class="IBToOneOutletInfo" key="commentTable">
 							<string key="name">commentTable</string>
 							<string key="candidateClassName">UITableView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="description">
-							<string key="name">description</string>
-							<string key="candidateClassName">UITextView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="imageView">
 							<string key="name">imageView</string>

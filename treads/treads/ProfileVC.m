@@ -104,10 +104,10 @@
     }
     
     //additional layout
-    self.view.backgroundColor = [AppColors tertiaryBackgroundColor];
+    self.view.backgroundColor = [AppColors secondaryBackgroundColor];
     self.nameHighlightView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
-    [self.banner setFrame:CGRectMake(self.view.bounds.size.width/2 - 330, 0, 660, 240)];
-    [self.nameHighlightView setFrame:CGRectMake(0, 24, 660, 64)];
+    [self.banner setFrame:CGRectMake(self.view.bounds.size.width/2 - 360, 16, 720, 200)];
+    [self.nameHighlightView setFrame:CGRectMake(0, 24, 720, 64)];
     [self.profilePic setFrame:CGRectMake(20, 16, 136, 136)];
     [self.banner setContentMode:UIViewContentModeScaleAspectFill];
     
@@ -121,7 +121,7 @@
     [self.coverImage setClipsToBounds:YES];
     [self.coverImage setBackgroundColor:[AppColors tertiaryBackgroundColor]];
     
-    [self.name setFrame:CGRectMake(176, 33, 480, 46)];
+    [self.name setFrame:CGRectMake(176, 33, 540, 46)];
     [self.name setFont:[UIFont boldSystemFontOfSize: 38]];
     [self.name setTextColor:[AppColors lightTextColor]];
     [self.name setTextAlignment:NSTextAlignmentLeft];

@@ -117,7 +117,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.view setBackgroundColor:[AppColors tertiaryBackgroundColor]];
+    [self.view setBackgroundColor:[AppColors secondaryBackgroundColor]];
+    [self.tableContainerView setBackgroundColor:[AppColors secondaryBackgroundColor]];
     self.name.text = _model.title;
     
     self.nameHighlightView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
@@ -127,7 +128,7 @@
     
 //    self.description.text= _model.description;
     
-    _browser= [[TripBrowser alloc] initWithFrame:self.commentTable.bounds];
+    _browser= [[TripBrowser alloc] initWithFrame:self.tableContainerView.bounds];
     [self.browser setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     
     [self.tableContainerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
