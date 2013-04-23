@@ -129,9 +129,10 @@
 //    self.description.text= _model.description;
     
     _browser= [[TripBrowser alloc] initWithFrame:self.tableContainerView.bounds];
+    [_tableContainerView addSubview:_browser]; //place trip browser
     [self.browser setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-    
-    [self.tableContainerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+    [self.browser setHidden:YES];
+//    [self.tableContainerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     
 //    [self.name setFrame:CGRectMake(176, 33, 480, 46)];
     [self.name setFont:[UIFont boldSystemFontOfSize: 38]];
@@ -288,17 +289,17 @@
     if(control.selectedSegmentIndex==0)
     {
         //remove trip browser
-        [_browser removeFromSuperview ];
+//        [_browser removeFromSuperview ];
+        [self.browser setHidden:YES];
         [_tableContainerView addSubview:_commentTable];
         [_commentTable reloadData];
     }
     else if(control.selectedSegmentIndex==1 && _tripModels != nil)
     {
-       [_tableContainerView addSubview:_browser]; //place trip browser
+        [self.browser setHidden:NO];
         [self.browser clearAndWait];
         [self.browser setBrowserData:_tripModels withCellStyle:TripBrowserCell4x4 forTarget:self withAction:@selector(returnTrip:)];
         [_tableContainerView bringSubviewToFront:_browser];
-        [_browser setHidden:NO];
         [_commentTable removeFromSuperview];
     }
     else
