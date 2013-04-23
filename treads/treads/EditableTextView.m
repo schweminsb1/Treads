@@ -97,6 +97,11 @@
     [self setNeedsLayout];
 }
 
+- (void)setAutocapitalizationType:(UITextAutocapitalizationType)textAutocapitalizationType
+{
+    [descriptionTextView setAutocapitalizationType:textAutocapitalizationType];
+}
+
 - (UIViewController*)getTopViewController
 {
     AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;

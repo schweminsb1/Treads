@@ -62,6 +62,7 @@
 						<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
 						<float key="IBUIMinimumFontSize">17</float>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
+							<int key="IBUIAutocapitalizationType">1</int>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
 						<int key="IBUIClearButtonMode">1</int>
@@ -336,13 +337,13 @@
 						<int key="objectID">2</int>
 						<reference key="object" ref="766721923"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="504373711"/>
 							<reference ref="274335480"/>
 							<reference ref="809445766"/>
 							<reference ref="258606703"/>
 							<reference ref="345797360"/>
 							<reference ref="690383943"/>
 							<reference ref="83074037"/>
+							<reference ref="504373711"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -430,21 +431,11 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="attributeText">UITextView</string>
-						<string key="descriptionText">UITextView</string>
 						<string key="latitudeText">UITextField</string>
 						<string key="locationText">UITextField</string>
 						<string key="longitudeText">UITextField</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="attributeText">
-							<string key="name">attributeText</string>
-							<string key="candidateClassName">UITextView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="descriptionText">
-							<string key="name">descriptionText</string>
-							<string key="candidateClassName">UITextView</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="latitudeText">
 							<string key="name">latitudeText</string>
 							<string key="candidateClassName">UITextField</string>
