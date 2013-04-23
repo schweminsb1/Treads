@@ -64,9 +64,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "370"
-         endingLineNumber = "370"
-         landmarkName = "-deleteDataItem:usingService:forRequestingObject:withReturnAction:"
-         landmarkType = "5">
+         endingLineNumber = "370">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -77,9 +75,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "380"
-         endingLineNumber = "380"
-         landmarkName = "-deleteDataItem:usingService:forRequestingObject:withReturnAction:"
-         landmarkType = "5">
+         endingLineNumber = "380">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -103,9 +99,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "374"
-         endingLineNumber = "374"
-         landmarkName = "-deleteDataItem:usingService:forRequestingObject:withReturnAction:"
-         landmarkType = "5">
+         endingLineNumber = "374">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -116,9 +110,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "368"
-         endingLineNumber = "368"
-         landmarkName = "-deleteDataItem:usingService:forRequestingObject:withReturnAction:"
-         landmarkType = "5">
+         endingLineNumber = "368">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -131,58 +123,6 @@
          startingLineNumber = "149"
          endingLineNumber = "149"
          landmarkName = "-dataHasLoaded:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "treads/DataRepository.m"
-         timestampString = "387596275.47612"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "143"
-         endingLineNumber = "143"
-         landmarkName = "-updateDataItem:usingService:forRequestingObject:withReturnAction:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "treads/DataRepository.m"
-         timestampString = "387596463.542516"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "144"
-         endingLineNumber = "144"
-         landmarkName = "-updateDataItem:usingService:forRequestingObject:withReturnAction:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "treads/DataRepository.m"
-         timestampString = "387596523.986082"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "145"
-         endingLineNumber = "145"
-         landmarkName = "-updateDataItem:usingService:forRequestingObject:withReturnAction:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "treads/DataRepository.m"
-         timestampString = "387596526.530196"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "159"
-         endingLineNumber = "159"
-         landmarkName = "-updateDataItem:usingService:forRequestingObject:withReturnAction:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -203,63 +143,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "treads/UserService.m"
-         timestampString = "387598235.579845"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "108"
-         endingLineNumber = "108"
-         landmarkName = "-updateUser:forTarget:withAction:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "treads/UserService.m"
-         timestampString = "387598239.243932"
+         timestampString = "388420257.789807"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "97"
          endingLineNumber = "97"
-         landmarkName = "-updateUser:forTarget:withAction:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "treads/UserService.m"
-         timestampString = "387598404.242962"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "95"
-         endingLineNumber = "95"
-         landmarkName = "-updateUser:forTarget:withAction:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "treads/UserService.m"
-         timestampString = "387598521.619264"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "96"
-         endingLineNumber = "96"
-         landmarkName = "-updateUser:forTarget:withAction:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "treads/UserService.m"
-         timestampString = "387649675.623217"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "107"
-         endingLineNumber = "107"
          landmarkName = "-updateUser:forTarget:withAction:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -358,52 +246,13 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Treads/ProfileVC.m"
-         timestampString = "387702783.895932"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "178"
-         endingLineNumber = "178"
-         landmarkName = "-didReceiveMemoryWarning"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Treads/ProfileVC.m"
-         timestampString = "387702783.895932"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "179"
-         endingLineNumber = "179"
-         landmarkName = "-changePic:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Treads/ProfileVC.m"
-         timestampString = "387702783.895932"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "180"
-         endingLineNumber = "180"
-         landmarkName = "-changePic:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "treads/TripViewVC.m"
          timestampString = "387694108.218795"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "190"
          endingLineNumber = "190"
-         landmarkName = "-favsLoaded:"
+         landmarkName = "-dataHasLoaded:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -416,7 +265,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "191"
          endingLineNumber = "191"
-         landmarkName = "-favsLoaded:"
+         landmarkName = "-dataHasLoaded:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -429,7 +278,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "192"
          endingLineNumber = "192"
-         landmarkName = "-favsLoaded:"
+         landmarkName = "-dataHasLoaded:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -442,7 +291,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "194"
          endingLineNumber = "194"
-         landmarkName = "-favsLoaded:"
+         landmarkName = "-dataHasLoaded:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -455,7 +304,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "214"
          endingLineNumber = "214"
-         landmarkName = "-favSuccess"
+         landmarkName = "-favsLoaded:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -468,7 +317,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "205"
          endingLineNumber = "205"
-         landmarkName = "-favorite:"
+         landmarkName = "-favsLoaded:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -481,7 +330,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "206"
          endingLineNumber = "206"
-         landmarkName = "-favorite:"
+         landmarkName = "-favsLoaded:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -494,7 +343,59 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "209"
          endingLineNumber = "209"
-         landmarkName = "-favorite:"
+         landmarkName = "-favsLoaded:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Treads/ProfileVC.m"
+         timestampString = "388373053.023258"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "234"
+         endingLineNumber = "234"
+         landmarkName = "-changeBanner:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Treads/ProfileVC.m"
+         timestampString = "388373054.766161"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "235"
+         endingLineNumber = "235"
+         landmarkName = "-changeBanner:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Treads/ProfileVC.m"
+         timestampString = "388373136.470604"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "236"
+         endingLineNumber = "236"
+         landmarkName = "-changeBanner:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Treads/ProfileVC.m"
+         timestampString = "388373137.030498"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "237"
+         endingLineNumber = "237"
+         landmarkName = "-changeBanner:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

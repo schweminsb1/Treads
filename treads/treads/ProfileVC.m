@@ -22,7 +22,7 @@
 @interface ProfileVC ()
 
 @property IBOutlet UIButton * profilePic;
-@property IBOutlet UIImageView * banner;
+@property IBOutlet UIButton * banner;
 @property IBOutlet UILabel * name;
 @property IBOutlet UIButton * follow;
 @property UIImageView* profileImage;
@@ -219,11 +219,28 @@
     [self.imageService getImageWithPhotoID:self.returnedUser.coverPhotoID withReturnBlock:^(NSArray *items) {
         if (items.count > 0) {
             UIImage *returnImage= items[0];
-            [self.banner setImage:returnImage];
+            [self.banner setBackgroundImage:returnImage forState:UIControlStateNormal];
         }
         else {
-            [self.banner setImage:[ImageService emptyImage]];
+            [self.banner setBackgroundImage:[ImageService emptyImage]forState:UIControlStateNormal];
         }
+    }];
+}
+- (IBAction)changeBanner:(id)sender {
+    ProfileVC* __weak _self = self;
+    [[CameraService instance]showImagePickerFromViewController:_self onSuccess:^(UIImage* image) {
+        [self.banner setBackgroundImage:image forState:UIControlStateNormal];
+        [[ImageService instance] insertImage:image withCompletion:^(NSDictionary *item, NSError* error ) {
+            if (error == nil) {
+                self.returnedUser.coverPhotoID = [((NSString*)item[@"id"]) intValue];
+                [TreadsSession instance].coverPhotoID = [((NSString*)item[@"id"]) intValue];
+                [[UserService instance] updateUser:self.returnedUser forTarget:self withAction:@selector(photoUpdateSuccess)];
+            }
+            else {
+                NSLog(@"%@", error);
+            }
+        }];
+        
     }];
 }
 
