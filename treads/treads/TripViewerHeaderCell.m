@@ -117,7 +117,7 @@
     tripNameLabel.editingEnabledTextColor = [AppColors mainTextColor];
     tripNameLabel.editingEnabled = ^BOOL(){return _self.editingEnabled();};
     tripNameLabel.markChangeMade = ^(){_self.markChangeMade();};
-    [tripNameLabel setAutocapitalizationType:UITextAutocapitalizationTypeWords];
+//    [tripNameLabel setAutocapitalizationType:UITextAutocapitalizationTypeWords];
 
     tripDescriptionEditableTextView = [[EditableTextView alloc] initWithFont:[UIFont systemFontOfSize:17]  edgeInset:UIEdgeInsetsMake(-10, -7, 0, -7) restrictSingleLine:NO maxTextLength:1000];
     tripDescriptionEditableTextView.editingDisabledBackgroundColor = [UIColor clearColor];
