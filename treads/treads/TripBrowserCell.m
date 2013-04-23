@@ -40,9 +40,10 @@
 
 + (int)heightForCellStyle:(TripBrowserCellStyle)cellStyle
 {
-    if (cellStyle == TripBrowserCell4x1 || cellStyle == TripBrowserCell5x1 || cellStyle == ProfileBrowserCell5x1) {return 110;}
+    if (cellStyle == TripBrowserCell4x1) {return 79;}
+    if (cellStyle == TripBrowserCell5x1 || cellStyle == ProfileBrowserCell5x1) {return 110;}
     if (cellStyle == TripBrowserCell6x2) {return 309;}
-    if (cellStyle == TripBrowserCell3x4) {return 440;}
+    if (cellStyle == TripBrowserCell3x4) {return 344;}
     if (cellStyle == TripBrowserCell4x4) {return 380;}
     return 0;
 }
@@ -76,7 +77,7 @@
     }
     
     if (self.cellStyle == TripBrowserCell3x4) {
-        [subView setFrame:CGRectMake(self.bounds.size.width/2-165, 8, 330, 440)];
+        [subView setFrame:CGRectMake(self.bounds.size.width/2-165, 8, 330, 344)];
     }
     if (self.cellStyle == TripBrowserCell4x4) {
         [subView setFrame:CGRectMake(self.bounds.size.width/2-275, 16, 550, 372)];
@@ -88,10 +89,10 @@
         [subView setFrame:CGRectMake(self.bounds.size.width/2-275, 8, 550, 110)];
     }
     if (self.cellStyle == TripBrowserCell4x1) {
-        [subView setFrame:CGRectMake(self.bounds.size.width/2-280, 8, 550, 110)];
-        [publishSwitch setFrame:CGRectMake(self.bounds.size.width/2 + 290, 48, 60, 20)];
-        [publishLabel setFrame:CGRectMake(self.bounds.size.width/2 + 300, 73, 60, 20)];
-        [deleteTrip setFrame:CGRectMake(self.bounds.size.width/2 - 350, 38, 50, 50)];
+        [subView setFrame:CGRectMake(self.bounds.size.width/2-280, 8, 550, 79)];
+        [publishSwitch setFrame:CGRectMake(self.bounds.size.width/2 + 290, 33, 60, 20)];
+        [publishLabel setFrame:CGRectMake(self.bounds.size.width/2 + 300, 58, 60, 20)];
+        [deleteTrip setFrame:CGRectMake(self.bounds.size.width/2 - 350, 23, 50, 50)];
     }
     
 //    [bgColorView setBounds:self.bounds];
@@ -104,13 +105,17 @@
     
     //set frame layout based on style enum
     if (self.cellStyle == TripBrowserCell3x4) {
-        tripOwnerLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 10, 260, 34)];
-        tripNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 41, 260, 25)];
-        tripDatesLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 64, 260, 18)];
-        tripContentLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 80, 260, 18)];
-        profilePictureView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 110, 110)];
-        tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 110, 330, 220)];
-        tripDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(12, 340, 312, 90)];
+        tripOwnerLabel = [[UILabel alloc] initWithFrame: CGRectMake(12, 10, 260, 34)];
+        [tripOwnerLabel setHidden:YES];
+        tripNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(12, 10, 260, 25)];
+        tripDatesLabel = [[UILabel alloc] initWithFrame: CGRectMake(12, 33, 260, 18)];
+        tripContentLabel = [[UILabel alloc] initWithFrame: CGRectMake(12, 49, 260, 18)];
+        profilePictureView = [[UIImageView alloc] initWithFrame:CGRectMake(-16, -8, 126, 126)];
+        profilePictureBackgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(-20, -12, 134, 134)];
+        [profilePictureView setHidden:YES];
+        [profilePictureBackgroundView setHidden:YES];
+        tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 79, 330, 186)];
+        tripDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(12, 273, 312, 66)];
         publishSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [publishSwitch setHidden:YES];
         publishLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
@@ -160,18 +165,18 @@
         [publishLabel setHidden:YES];
     }
     if (self.cellStyle == TripBrowserCell4x1) {
-        tripOwnerLabel = [[UILabel alloc] initWithFrame: CGRectMake(12, 10, 370, 34)];
-        tripNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(12, 41, 370, 25)];
-        tripDatesLabel = [[UILabel alloc] initWithFrame: CGRectMake(12, 64, 370, 18)];
-        tripContentLabel = [[UILabel alloc] initWithFrame: CGRectMake(12, 80, 370, 18)];
+        tripOwnerLabel = [[UILabel alloc] initWithFrame: CGRectMake(12, 10, 260, 34)];
+        [tripOwnerLabel setHidden:YES];
+        tripNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(12, 10, 260, 25)];
+        tripDatesLabel = [[UILabel alloc] initWithFrame: CGRectMake(12, 33, 260, 18)];
+        tripContentLabel = [[UILabel alloc] initWithFrame: CGRectMake(12, 49, 260, 18)];
         profilePictureView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [profilePictureView setHidden:YES];
-        tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(330, 0, 220, 110)];
+        tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(330, 0, 220, 79)];
         tripDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [tripDescriptionTextView setHidden:YES];
         publishSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(subView.bounds.origin.x +130, subView.bounds.size.height/2+40, 60, 20)];
-        [publishSwitch setHidden:NO];
-        [publishSwitch setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin ];
+//        [publishSwitch setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin ];
         
        [publishSwitch addTarget:self action:@selector(valueChange:) forControlEvents:UIControlEventValueChanged];
         publishLabel = [[UILabel alloc] initWithFrame:CGRectMake(subView.bounds.origin.x +140, subView.bounds.size.height/2+65, 60, 20)];
@@ -202,7 +207,7 @@
     tripOwnerLabel.adjustsFontSizeToFitWidth = YES;
     
     tripNameLabel.backgroundColor = [UIColor clearColor];
-    tripNameLabel.font = [UIFont systemFontOfSize: 19];
+    tripNameLabel.font = (self.cellStyle == TripBrowserCell3x4 || self.cellStyle == TripBrowserCell4x1)?[UIFont boldSystemFontOfSize:19]:[UIFont systemFontOfSize:19];
     tripNameLabel.textColor = [AppColors mainTextColor];
     tripNameLabel.textAlignment = NSTextAlignmentLeft;
     tripNameLabel.adjustsFontSizeToFitWidth = YES;

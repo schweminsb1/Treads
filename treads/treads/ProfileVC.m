@@ -199,7 +199,7 @@
     [self.browser setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     [self.browserWindow addSubview: self.browser];
     [self.browser clearAndWait];
-    [self.browser setBrowserData:newData withCellStyle:TripBrowserCell4x4 forTarget:self withAction:@selector(showTrip:)];
+    [self.browser setBrowserData:newData withCellStyle:TripBrowserCell3x4 forTarget:self withAction:@selector(showTrip:)];
     for (Trip* trip in newData) {
         [[TripService instance] getHeaderImageForTrip:trip forTarget:self withCompleteAction:@selector(refreshWithNewHeader)];
     }

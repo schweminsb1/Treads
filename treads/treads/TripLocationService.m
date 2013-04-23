@@ -26,7 +26,7 @@ static TripLocationService* repo;
 - (id)initWithRepository:(DataRepository*)repository {
     if ((self = [super init])) {
         self.dataRepository = repository;
-        self.dataTableIdentifier = @"TripLocationTable";
+        self.dataTableIdentifier = @"TripLocationReader";
     }
     return self;
 }
@@ -43,11 +43,19 @@ static TripLocationService* repo;
             tripLocation.tripID = [[returnTripLocation objectForKey:@"tripID"] intValue];
             tripLocation.locationID = [[returnTripLocation objectForKey:@"LocationID"] intValue];
             
-            [convertedData addObject:tripLocation];
+            BOOL uniqueTrip = YES;
+            for (TripLocation* oldTripLocation in convertedData) {
+                if (oldTripLocation.tripID == tripLocation.tripID) {
+                    uniqueTrip = NO;
+                    break;
+                }
+            }
+            if (uniqueTrip) {[convertedData addObject:tripLocation];}
         }
         @catch (NSException* exception) {
             //tripLocation.name = @"Error - could not parse trip data";
-            [convertedData addObject:tripLocation];
+//            [convertedData addObject:tripLocation];
+            continue;
         }
     }
     return [NSArray arrayWithArray:convertedData];
@@ -76,15 +84,14 @@ static TripLocationService* repo;
         [self.dataRepository updateDataItem:tripLocationDictionary usingService:self forRequestingObject:target withReturnAction:returnAction];
     }
 }
-- (void)getTripLocationWithLocation:(Location*)location withCompletion:(CompletionWithItemsandLocation)block1{
+- (void)getTripLocationWithLocation:(Location*)location withCompletion:(CompletionWithItemsandLocation)block1
+{
     CompletionWithItems block = ^(NSArray * items)
     {
         block1(items,location);
-        
     };
   
     [_dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"locationID = %@" , location.idField] usingService:self withReturnBlock:block];
-  //  [_dataRepository retrieveDataItemsMatching:[NSString stringWithFormat: @"locationID = %d",[location.idField intValue]] usingService:self withReturnBlock:block];
 }
 
 @end
