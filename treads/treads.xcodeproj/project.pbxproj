@@ -69,6 +69,7 @@
 		3973FE4C1710AC6000D4AAE1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3973FE4B1710AC6000D4AAE1 /* MobileCoreServices.framework */; };
 		39F5D514171A58FD00F0AE4E /* LocationMapVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39F5D512171A58FD00F0AE4E /* LocationMapVC.xib */; };
 		39F5D515171A58FD00F0AE4E /* LocationMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F5D513171A58FD00F0AE4E /* LocationMapVC.m */; };
+		3C03544417272D2D004CD7A1 /* DualTripBrowserCellHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C03544317272D2D004CD7A1 /* DualTripBrowserCellHolder.m */; };
 		3C094FA716EFF74700C537B1 /* TreadsSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C094FA616EFF74700C537B1 /* TreadsSession.m */; };
 		3C12312416EFCB89006CCBFE /* DataRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C12312316EFCB89006CCBFE /* DataRepository.m */; };
 		3C12312716EFCB98006CCBFE /* ProfileService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C12312616EFCB98006CCBFE /* ProfileService.m */; };
@@ -220,6 +221,8 @@
 		39F5D511171A58FD00F0AE4E /* LocationMapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationMapVC.h; sourceTree = "<group>"; };
 		39F5D512171A58FD00F0AE4E /* LocationMapVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationMapVC.xib; sourceTree = "<group>"; };
 		39F5D513171A58FD00F0AE4E /* LocationMapVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationMapVC.m; sourceTree = "<group>"; };
+		3C03544217272D2D004CD7A1 /* DualTripBrowserCellHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DualTripBrowserCellHolder.h; path = treads/DualTripBrowserCellHolder.h; sourceTree = SOURCE_ROOT; };
+		3C03544317272D2D004CD7A1 /* DualTripBrowserCellHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DualTripBrowserCellHolder.m; path = treads/DualTripBrowserCellHolder.m; sourceTree = SOURCE_ROOT; };
 		3C04028C16F6B8CA0030D8BA /* TreadsService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TreadsService.h; path = treads/TreadsService.h; sourceTree = SOURCE_ROOT; };
 		3C094FA516EFF74700C537B1 /* TreadsSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TreadsSession.h; path = treads/TreadsSession.h; sourceTree = SOURCE_ROOT; };
 		3C094FA616EFF74700C537B1 /* TreadsSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TreadsSession.m; path = treads/TreadsSession.m; sourceTree = SOURCE_ROOT; };
@@ -762,6 +765,8 @@
 				3C8A8857171B5F450076ED31 /* ProfileBrowserCell.m */,
 				3C8A885C171C464A0076ED31 /* ProfileHeaderCell.h */,
 				3C8A885D171C464C0076ED31 /* ProfileHeaderCell.m */,
+				3C03544217272D2D004CD7A1 /* DualTripBrowserCellHolder.h */,
+				3C03544317272D2D004CD7A1 /* DualTripBrowserCellHolder.m */,
 			);
 			name = "Trip Browser";
 			sourceTree = "<group>";
@@ -960,6 +965,7 @@
 				3192AECA171BACB5008F8FB2 /* FavoriteService.m in Sources */,
 				3C8A885E171C464E0076ED31 /* ProfileHeaderCell.m in Sources */,
 				3C95492917246BDA006E0BE7 /* UserPreferencesRepository.m in Sources */,
+				3C03544417272D2D004CD7A1 /* DualTripBrowserCellHolder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

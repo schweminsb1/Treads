@@ -23,6 +23,6 @@
 @property (assign, nonatomic) User* displayProfile;
 
 @property TripBrowser* delegate;
-@property NSIndexPath* indexPath;
+@property int row;
 
 @end

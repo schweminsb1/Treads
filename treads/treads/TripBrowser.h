@@ -24,6 +24,6 @@ typedef enum {TripBrowserCell3x4, TripBrowserCell4x4, TripBrowserCell6x2, TripBr
 
 - (void)refreshWithNewImages;
 
-- (void)respondToSelectAtIndexPath:(NSIndexPath*)indexPath;
+- (void)respondToSelectAtRow:(int)row;
 
 @end

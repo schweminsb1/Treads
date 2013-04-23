@@ -26,6 +26,7 @@
 @property IBOutlet UILabel * name;
 @property IBOutlet UIButton * follow;
 @property UIImageView* profileImage;
+@property UIImageView* coverImage;
 //@property IBOutlet UIButton * edit;
 //@property TripService* tripService;
 @property UserService* userService;
@@ -94,9 +95,11 @@
     if(self.myProfile) {
         self.userID = [TreadsSession instance].treadsUserID;
         self.profilePic.enabled = true;
+        self.banner.enabled = true;
     }
     else {
         self.profilePic.enabled = false;
+        self.banner.enabled = false;
         [self.followService getPeopleIFollow:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(followDataHasLoaded:)];
     }
     
@@ -113,6 +116,11 @@
     [self.profileImage setClipsToBounds:YES];
     [self.profileImage setBackgroundColor:[AppColors blankItemBackgroundColor]];
     
+    self.coverImage = [[UIImageView alloc] initWithFrame:self.banner.bounds];
+    [self.coverImage setContentMode:UIViewContentModeScaleAspectFill];
+    [self.coverImage setClipsToBounds:YES];
+    [self.coverImage setBackgroundColor:[AppColors tertiaryBackgroundColor]];
+    
     [self.name setFrame:CGRectMake(176, 33, 480, 46)];
     [self.name setFont:[UIFont boldSystemFontOfSize: 38]];
     [self.name setTextColor:[AppColors lightTextColor]];
@@ -120,6 +128,7 @@
     [self.name setAdjustsFontSizeToFitWidth:YES];
     
     [self.nameHighlightView removeFromSuperview];
+    [self.banner addSubview:self.coverImage];
     [self.banner addSubview:self.nameHighlightView];
     [self.profilePic removeFromSuperview];
     [self.banner addSubview:self.profilePic];
@@ -131,6 +140,8 @@
     [self.banner bringSubviewToFront:self.profilePic];
     
     [self.banner setUserInteractionEnabled:YES];
+    
+    [self.browserWindow setBackgroundColor:[AppColors secondaryBackgroundColor]];
 }
 
 
@@ -219,17 +230,17 @@
     [self.imageService getImageWithPhotoID:self.returnedUser.coverPhotoID withReturnBlock:^(NSArray *items) {
         if (items.count > 0) {
             UIImage *returnImage= items[0];
-            [self.banner setBackgroundImage:returnImage forState:UIControlStateNormal];
+            [self.coverImage setImage:returnImage];
         }
         else {
-            [self.banner setBackgroundImage:[ImageService emptyImage]forState:UIControlStateNormal];
+            [self.coverImage setImage:[ImageService emptyImage]];
         }
     }];
 }
 - (IBAction)changeBanner:(id)sender {
     ProfileVC* __weak _self = self;
     [[CameraService instance]showImagePickerFromViewController:_self onSuccess:^(UIImage* image) {
-        [self.banner setBackgroundImage:image forState:UIControlStateNormal];
+        [self.coverImage setImage:image];
         [[ImageService instance] insertImage:image withCompletion:^(NSDictionary *item, NSError* error ) {
             if (error == nil) {
                 self.returnedUser.coverPhotoID = [((NSString*)item[@"id"]) intValue];

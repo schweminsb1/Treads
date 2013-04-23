@@ -10,6 +10,7 @@
 #import "TripService.h"
 #import "TripBrowserCell.h"
 #import "ProfileBrowserCell.h"
+#import "DualTripBrowserCellHolder.h"
 #import "TripBrowser.h"
 #import "User.h"
 
@@ -127,13 +128,29 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (self.cellStyle == TripBrowserCell3x4) {return (sortedListData.count+1)/2;}
     return sortedListData.count;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (self.cellStyle) {
-        case TripBrowserCell3x4:
+        case TripBrowserCell3x4: {
+            DualTripBrowserCellHolder* cell = [tableView dequeueReusableCellWithIdentifier:[self getCellIdentifier]];
+            if (!cell) {
+                cell = [[DualTripBrowserCellHolder alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[self getCellIdentifier] cellStyle:self.cellStyle];
+            }
+            cell.deletefrom = @selector(deleteTrip:);
+            if (2*indexPath.row+1 < sortedListData.count) {
+                cell.displayTripArray = @[(Trip*)sortedListData[2*indexPath.row], (Trip*)sortedListData[2*indexPath.row+1]];
+            }
+            else {
+                cell.displayTripArray = @[(Trip*)sortedListData[2*indexPath.row]];
+            }
+            cell.delegate = self;
+            cell.row = indexPath.row;
+            return cell;
+        }
         case TripBrowserCell4x4:
         case TripBrowserCell4x1:
         case TripBrowserCell5x1:
@@ -141,12 +158,11 @@
             TripBrowserCell* cell = [tableView dequeueReusableCellWithIdentifier:[self getCellIdentifier]];
             if (!cell) {
                 cell = [[TripBrowserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[self getCellIdentifier] cellStyle:self.cellStyle];
-               
             }
             cell.deletefrom = @selector(deleteTrip:);
             cell.displayTrip = (Trip*)sortedListData[indexPath.row];
             cell.delegate = self;
-            cell.indexPath = indexPath;
+            cell.row = indexPath.row;
             return cell;
         }
         case ProfileBrowserCell5x1: {
@@ -156,7 +172,7 @@
             }
             cell.displayProfile = (User*)sortedListData[indexPath.row];
             cell.delegate = self;
-            cell.indexPath = indexPath;
+            cell.row = indexPath.row;
             
             return cell;
         }
@@ -168,7 +184,7 @@
 #pragma mark - UITableViewDelegate
 
 //- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-- (void)respondToSelectAtIndexPath:(NSIndexPath*)indexPath
+- (void)respondToSelectAtRow:(int)row
 {
     //listSelectAction((Trip*)sortedListData[indexPath.row]);
     if ([target respondsToSelector:listSelectAction]) {
@@ -180,14 +196,14 @@
             case TripBrowserCell6x2: {
                 #pragma clang diagnostic push
                 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-                [target performSelector:listSelectAction withObject:((Trip*)sortedListData[indexPath.row])];
+                [target performSelector:listSelectAction withObject:((Trip*)sortedListData[row])];
                 #pragma clang diagnostic pop
                 break;
             }
             case ProfileBrowserCell5x1: {
                 #pragma clang diagnostic push
                 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-                [target performSelector:listSelectAction withObject:((User*)sortedListData[indexPath.row])];
+                [target performSelector:listSelectAction withObject:((User*)sortedListData[row])];
                 #pragma clang diagnostic pop
                 break;
             }

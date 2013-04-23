@@ -14,9 +14,9 @@
 
 @interface TripBrowserCell : UITableViewCell
 
-@property SEL deletefrom;
-
 + (int)heightForCellStyle:(TripBrowserCellStyle)cellStyle;
+
+- (id)initWithCellStyle:(TripBrowserCellStyle)style;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier cellStyle:(TripBrowserCellStyle)cellStyle;
 
@@ -25,6 +25,7 @@
 @property (assign, nonatomic) Trip* displayTrip;
 
 @property TripBrowser* delegate;
-@property NSIndexPath* indexPath;
+@property int row;
+@property SEL deletefrom;
 
 @end

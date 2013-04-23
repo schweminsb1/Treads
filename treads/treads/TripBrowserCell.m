@@ -12,10 +12,10 @@
 
 #import "AppColors.h"
 #import "TripService.h"
+
 @interface TripBrowserCell()
 
 @property (readwrite) TripBrowserCellStyle cellStyle;
-
 
 @end
 
@@ -46,6 +46,17 @@
     if (cellStyle == TripBrowserCell3x4) {return 344;}
     if (cellStyle == TripBrowserCell4x4) {return 380;}
     return 0;
+}
+
+- (id)initWithCellStyle:(TripBrowserCellStyle)cellStyle
+{
+    self = [super init];
+    if (self) {
+        //[self layoutSubviews];
+        layoutDone = NO;
+        self.cellStyle = cellStyle;
+    }
+    return self;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier cellStyle:(TripBrowserCellStyle)cellStyle
@@ -311,7 +322,7 @@
 {
     for (UITouch* touch in event.allTouches) {
         if (CGRectContainsPoint(subView.bounds, [touch locationInView:subView])) {
-            [self.delegate respondToSelectAtIndexPath:self.indexPath];
+            [self.delegate respondToSelectAtRow:self.row];
         }
     }
     [super touchesEnded:touches withEvent:event];
