@@ -12,7 +12,7 @@
 
 @property NSString * idField;
 @property NSString * title;
-@property NSString * description;
+//@property NSString * description;
 @property float latitude;
 @property float longitude;
 

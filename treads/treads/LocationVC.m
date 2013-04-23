@@ -117,18 +117,40 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.view setBackgroundColor:[AppColors mainBackgroundColor]];
+    [self.view setBackgroundColor:[AppColors tertiaryBackgroundColor]];
     self.name.text = _model.title;
     
-    self.lon.text = [NSString stringWithFormat:@"%f", _model.longitude ];
-     self.lat.text = [NSString stringWithFormat:@"%f", _model.latitude ];
+    self.nameHighlightView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
     
-    self.description.text= _model.description;
-     
+//    self.lon.text = [NSString stringWithFormat:@"%f", _model.longitude ];
+//     self.lat.text = [NSString stringWithFormat:@"%f", _model.latitude ];
+    
+//    self.description.text= _model.description;
+    
     _browser= [[TripBrowser alloc] initWithFrame:self.commentTable.bounds];
-    [self.browser setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [self.browser setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     
-    [self.tableContainerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [self.tableContainerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+    
+//    [self.name setFrame:CGRectMake(176, 33, 480, 46)];
+    [self.name setFont:[UIFont boldSystemFontOfSize: 38]];
+    [self.name setTextColor:[AppColors lightTextColor]];
+    [self.name setTextAlignment:NSTextAlignmentCenter];
+    [self.name setAdjustsFontSizeToFitWidth:YES];
+    
+//    [self.lat setHidden:YES];
+//    [self.lon setHidden:YES];
+    
+    [self.imageView setClipsToBounds:YES];
+    
+//    [self.segmentControl removeFromSuperview];
+    self.segmentControl = [[UISegmentedControl alloc] initWithItems:@[@"Comments", @"Trips"]];
+    [self.segmentControl addTarget:self action:@selector(didChangeSegmentControl:) forControlEvents:UIControlEventValueChanged];
+    self.segmentControl.segmentedControlStyle = UISegmentedControlStyleBar;
+    [self.navigationItem setTitleView:self.segmentControl];
+//    [self.navigationController.navigationBar.topItem setTitleView:self.segmentControl];
+    [self.segmentControl setSelectedSegmentIndex:0];
+    
 //    [self.browserWindow addSubview:_browser];
 //    [self.view addSubview:self.browserWindow];
     
@@ -137,7 +159,7 @@
 -(void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.view setBackgroundColor:[AppColors secondaryBackgroundColor]];
+//    [self.view setBackgroundColor:[AppColors secondaryBackgroundColor]];
 
     /*
     self.name.text = _model.title;

@@ -97,6 +97,11 @@
     [self setNeedsLayout];
 }
 
+- (void)setAutocapitalizationType:(UITextAutocapitalizationType)textAutocapitalizationType
+{
+    [descriptionTextView setAutocapitalizationType:textAutocapitalizationType];
+}
+
 - (UIViewController*)getTopViewController
 {
     AppDelegate* appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
@@ -112,14 +117,12 @@
     swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     
     [[self getTopViewController].view addGestureRecognizer:tap];
-    //[[self getTopViewController].view addGestureRecognizer:swipe];
 }
 
 -(void)dismissKeyboard
 {
     [descriptionTextView resignFirstResponder];
     [[self getTopViewController].view removeGestureRecognizer:tap];
-    //[[self getTopViewController].view removeGestureRecognizer:swipe];
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView

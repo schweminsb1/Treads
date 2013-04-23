@@ -143,9 +143,10 @@
                 cell = [[TripBrowserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[self getCellIdentifier] cellStyle:self.cellStyle];
                
             }
-             cell.deletefrom= @selector(deleteTrip:);
+            cell.deletefrom = @selector(deleteTrip:);
             cell.displayTrip = (Trip*)sortedListData[indexPath.row];
-            cell.delegate=self;
+            cell.delegate = self;
+            cell.indexPath = indexPath;
             return cell;
         }
         case ProfileBrowserCell5x1: {
@@ -154,6 +155,8 @@
                 cell = [[ProfileBrowserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[self getCellIdentifier] cellStyle:self.cellStyle];
             }
             cell.displayProfile = (User*)sortedListData[indexPath.row];
+            cell.delegate = self;
+            cell.indexPath = indexPath;
             
             return cell;
         }
@@ -164,7 +167,8 @@
 
 #pragma mark - UITableViewDelegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)respondToSelectAtIndexPath:(NSIndexPath*)indexPath
 {
     //listSelectAction((Trip*)sortedListData[indexPath.row]);
     if ([target respondsToSelector:listSelectAction]) {
@@ -216,39 +220,32 @@
     //return [self tableView:tableView cellForRowAtIndexPath:indexPath].bounds.size.height + cellVerticalPadding;
     return [TripBrowserCell heightForCellStyle:self.cellStyle] + cellVerticalPadding;
 }
--(void)deleteTrip:(Trip*)trip
+
+- (void)deleteTrip:(Trip*)trip
 {
-    _recentlySelectedTripForDeletion=trip;
-    UIAlertView * alert= [[UIAlertView alloc]initWithTitle:@"Delete Trip?" message:[NSString stringWithFormat:@"You are about to delete Trip '%@' ",trip.name] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil];
+    self.recentlySelectedTripForDeletion = trip;
+    UIAlertView * alert= [[UIAlertView alloc]initWithTitle:@"Delete Trip?" message:[NSString stringWithFormat:@"You are about to delete Trip '%@' ", trip.name] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK",nil];
     [alert show];
-    
-    
 }
-- (void)alertView:(UIAlertView *)alertView
-didDismissWithButtonIndex:(NSInteger) buttonIndex
+
+- (void)alertView:(UIAlertView*)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 0)
+    if (buttonIndex == 1)
     {
-        NSLog(@"Cancel Tapped.");
-    }
-    else if (buttonIndex == 1)
-    {
-        NSLog(@"OK Tapped. Hello World!");
-        
-        [[TripService instance]deleteTripWithID:_recentlySelectedTripForDeletion.tripID forTarget:self withAction:@selector(done:)];
-        
+        [[TripService instance]deleteTripWithID:self.recentlySelectedTripForDeletion.tripID forTarget:self withAction:@selector(didDeleteTripWithID:)];
     }
 }
--(void)done:(NSNumber*)deleteditemid
+
+- (void)didDeleteTripWithID:(NSNumber*)index
 {
-    
-    for(int i=0; i<sortedListData.count; i++)
+    for (int i = 0; i < sortedListData.count; i++)
     {
-        if(((Trip*)sortedListData[i]).tripID==[deleteditemid intValue])
+        if (((Trip*)sortedListData[i]).tripID == [index intValue])
         {
             [sortedListData removeObjectAtIndex:i];
         }
     }
     [browserTable reloadData];
 }
+
 @end

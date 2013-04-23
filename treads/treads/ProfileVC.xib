@@ -44,9 +44,14 @@
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSNextKeyView" ref="1038646616"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<int key="IBUIContentMode">3</int>
+						<int key="IBUIContentMode">2</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<object class="NSCustomResource" key="IBUIImage" id="528975541">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">empty_item.png</string>
+						</object>
+						<reference key="IBUIHighlightedImage" ref="528975541"/>
 					</object>
 					<object class="IBUIButton" id="1038646616">
 						<reference key="NSNextResponder" ref="766721923"/>
@@ -156,7 +161,7 @@
 					<object class="IBUIView" id="465580102">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">310</int>
-						<string key="NSFrame">{{0, 240}, {768, 643}}</string>
+						<string key="NSFrame">{{0, 240}, {768, 671}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -351,6 +356,10 @@
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
+		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="NS.key.0">empty_item.png</string>
+			<string key="NS.object.0">{540, 360}</string>
+		</object>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
 </archive>

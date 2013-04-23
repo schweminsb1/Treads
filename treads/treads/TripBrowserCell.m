@@ -30,10 +30,12 @@
     UIImageView* profilePictureView;
     UIImageView* tripFeaturedImageView;
     UIView* profilePictureBackgroundView;
-    UISwitch * publishSwitch;
-    UILabel  * publishLabel;
-    Trip    * DisplayTrip;
-    UIButton * deleteTrip;
+    UISwitch* publishSwitch;
+    UILabel* publishLabel;
+    Trip* DisplayTrip;
+    UIButton* deleteTrip;
+//    UIView* bgColorView;
+//    UIView* bgSubView;
 }
 
 + (int)heightForCellStyle:(TripBrowserCellStyle)cellStyle
@@ -86,11 +88,14 @@
         [subView setFrame:CGRectMake(self.bounds.size.width/2-275, 8, 550, 110)];
     }
     if (self.cellStyle == TripBrowserCell4x1) {
-        [subView setFrame:CGRectMake(self.bounds.size.width/2-370, 8, 550, 110)];
-        [publishSwitch setFrame:CGRectMake(self.bounds.size.width/2 + 200, 48, 60, 20)];
-        [publishLabel setFrame:CGRectMake(self.bounds.size.width/2 + 210, 73, 60, 20)];
-        [deleteTrip setFrame:CGRectMake(self.bounds.size.width/2 + 295, 38, 50, 50)];
+        [subView setFrame:CGRectMake(self.bounds.size.width/2-280, 8, 550, 110)];
+        [publishSwitch setFrame:CGRectMake(self.bounds.size.width/2 + 290, 48, 60, 20)];
+        [publishLabel setFrame:CGRectMake(self.bounds.size.width/2 + 300, 73, 60, 20)];
+        [deleteTrip setFrame:CGRectMake(self.bounds.size.width/2 - 350, 38, 50, 50)];
     }
+    
+//    [bgColorView setBounds:self.bounds];
+//    [bgSubView setFrame:subView.frame];
 }
 
 - (void)createAndAddSubviews
@@ -114,9 +119,11 @@
     if (self.cellStyle == TripBrowserCell4x4) {
         tripOwnerLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 10, 370, 34)];
         tripNameLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 41, 370, 25)];
+        tripDatesLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 64, 370, 18)];
+        tripContentLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 80, 370, 18)];
         profilePictureView = [[UIImageView alloc] initWithFrame:CGRectMake(-16, -8, 126, 126)];
         profilePictureBackgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(-20, -12, 134, 134)];
-        tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 76, 550, 220)];
+        tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 110, 550, 186)];
         tripDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(12, 304, 422, 66)];
         publishSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [publishSwitch setHidden:YES];
@@ -179,13 +186,7 @@
         [deleteTrip setBackgroundImage:[UIImage imageNamed:@"button_red_select.png"] forState:UIControlStateSelected];
         [deleteTrip setImage:[UIImage imageNamed:@"icon_minus.png"] forState:UIControlStateNormal];
         [deleteTrip setImage:[UIImage imageNamed:@"icon_minus.png"] forState:UIControlStateSelected];
-//        [deleteTrip setBackgroundColor:[UIColor redColor]];
-//         [deleteTrip setTintColor:[UIColor redColor]];
         [deleteTrip addTarget:self action:@selector(deleteTrip) forControlEvents:UIControlEventTouchUpInside];
-//        deleteTrip.titleLabel.text=@"Delete";
-//        deleteTrip.titleLabel.font=[UIFont fontWithName:@"Helvetica" size:12];
-//        deleteTrip.titleLabel.textColor=[UIColor blackColor];
-//        [deleteTrip setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
         [self addSubview:deleteTrip];
        
     }
@@ -255,11 +256,18 @@
     
     [subView bringSubviewToFront:profilePictureView];
     
-    UIView *bgColorView = [[UIView alloc] init];
-    bgColorView.bounds = subView.bounds;
-    bgColorView.frame = subView.frame;
-    [bgColorView setBackgroundColor:[AppColors toolbarColor]];
-    [self setSelectedBackgroundView:bgColorView];
+//    bgColorView = [[UIView alloc] init];
+//    bgColorView.bounds = self.bounds;
+//    bgColorView.frame = self.frame;
+//    [bgColorView setBackgroundColor:[UIColor clearColor]];
+//    bgSubView = [[UIView alloc] init];
+//    bgColorView.frame = subView.frame;
+//    bgColorView.backgroundColor = [UIColor clearColor];
+//    [bgColorView addSubview:bgSubView];
+//    [self setSelectedBackgroundView:bgColorView];
+    
+    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
     [self bringSubviewToFront:subView];
     [self addSubview:publishSwitch];
     [self addSubview:publishLabel];
@@ -294,7 +302,17 @@
     }
 }
 
--(void)valueChange:(id)sender
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    for (UITouch* touch in event.allTouches) {
+        if (CGRectContainsPoint(subView.bounds, [touch locationInView:subView])) {
+            [self.delegate respondToSelectAtIndexPath:self.indexPath];
+        }
+    }
+    [super touchesEnded:touches withEvent:event];
+}
+
+- (void)valueChange:(id)sender
 {
     if([publishSwitch isOn])
     {
@@ -307,19 +325,18 @@
         [[TripService instance]updateTrip:DisplayTrip forTarget:self withAction:@selector(tripChanged:withSuccess:)];
     }
 }
--(void)tripChanged:(NSNumber*)idfield withSuccess:(NSNumber*)success
+
+- (void)tripChanged:(NSNumber*)idfield withSuccess:(NSNumber*)success
 {
     
-    
 }
--(void)deleteTrip
+
+- (void)deleteTrip
 {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     [ _delegate performSelector:_deletefrom withObject:DisplayTrip];
 #pragma clang diagnostic pop
-    
-    
 }
 
 @end

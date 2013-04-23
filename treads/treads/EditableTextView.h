@@ -15,13 +15,16 @@
 - (void)loseFocus;
 
 //editing
-- (void) setText:(NSString*)newText;
+- (void)setText:(NSString*)newText;
+
 @property (copy) void(^textWasChanged)(NSString* newText);
 
 @property (copy) BOOL(^editingEnabled)();
 @property (copy) void(^markChangeMade)();
 
 //display
+- (void)setAutocapitalizationType:(UITextAutocapitalizationType)textAutocapitalizationType;
+
 @property (strong) UIColor* editingDisabledBackgroundColor;
 @property (strong) UIColor* editingEnabledBackgroundColor;
 

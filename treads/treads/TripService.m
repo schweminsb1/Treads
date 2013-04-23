@@ -169,6 +169,15 @@ static TripService* repo;
     for (NSDictionary* returnTrip in returnData[0]) {
         Trip* trip = [[Trip alloc] init];
         @try {
+            BOOL uniqueTrip = YES;
+            int tripID = [[returnTrip objectForKey:@"id"] intValue];
+            for (Trip* oldTrip in convertedData) {
+                if (oldTrip.tripID == tripID) {
+                    uniqueTrip = NO;
+                    break;
+                }
+            }
+            if (!uniqueTrip) {continue;}
             trip.tripID = [[returnTrip objectForKey:@"id"] intValue];
             trip.userID = [[returnTrip objectForKey:@"userID"] intValue];
             trip.username = [returnTrip objectForKey:@"username"];

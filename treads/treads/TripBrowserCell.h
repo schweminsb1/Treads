@@ -23,5 +23,8 @@
 @property (readonly) TripBrowserCellStyle cellStyle;
 
 @property (assign, nonatomic) Trip* displayTrip;
-@property TripBrowser * delegate;
+
+@property TripBrowser* delegate;
+@property NSIndexPath* indexPath;
+
 @end

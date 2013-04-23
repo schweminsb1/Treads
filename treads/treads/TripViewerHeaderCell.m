@@ -25,6 +25,7 @@
     UIView* textBackground;
     UIImageView* profilePictureView;
     UIButton* profileButton;
+    UIButton* tripOwnerButton;
     //UILabel* tripDatesLabel;
     //UILabel* tripContentLabel;
 }
@@ -61,6 +62,7 @@
     [subView setFrame:CGRectMake(24, 8, self.bounds.size.width-48, 480)];
     [tripFeaturedImage setFrame:CGRectMake(0, 0, subView.frame.size.width, 320)];
     [tripOwnerLabel setFrame:CGRectMake(176, 38, subView.frame.size.width-196, 44)];
+    [tripOwnerButton setFrame:tripOwnerLabel.frame];
     [tripNameLabel setFrame:CGRectMake(176, 82, subView.frame.size.width-196, 36)];
     [tripDescriptionEditableTextView setFrame:CGRectMake(20, 336, subView.frame.size.width-40, subView.frame.size.height-352)];
     [textBackground setFrame:CGRectMake(0, 24, subView.frame.size.width, 108)];
@@ -104,6 +106,10 @@
     tripOwnerLabel.textAlignment = NSTextAlignmentLeft;
     tripOwnerLabel.adjustsFontSizeToFitWidth = YES;
     
+    tripOwnerButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    tripOwnerButton.hidden = NO;
+    [tripOwnerButton addTarget:self action:@selector(profilePictureWasTapped) forControlEvents:UIControlEventTouchUpInside];
+    
     tripNameLabel = [[EditableTextView alloc] initWithFont:[UIFont systemFontOfSize:28] edgeInset:UIEdgeInsetsMake(-8, -7, 0, 0) restrictSingleLine:YES maxTextLength:50];
     tripNameLabel.editingDisabledBackgroundColor = [UIColor clearColor];
     tripNameLabel.editingEnabledBackgroundColor = [AppColors secondaryBackgroundColor];
@@ -111,6 +117,7 @@
     tripNameLabel.editingEnabledTextColor = [AppColors mainTextColor];
     tripNameLabel.editingEnabled = ^BOOL(){return _self.editingEnabled();};
     tripNameLabel.markChangeMade = ^(){_self.markChangeMade();};
+//    [tripNameLabel setAutocapitalizationType:UITextAutocapitalizationTypeWords];
 
     tripDescriptionEditableTextView = [[EditableTextView alloc] initWithFont:[UIFont systemFontOfSize:17]  edgeInset:UIEdgeInsetsMake(-10, -7, 0, -7) restrictSingleLine:NO maxTextLength:1000];
     tripDescriptionEditableTextView.editingDisabledBackgroundColor = [UIColor clearColor];
@@ -139,10 +146,12 @@
     [subView addSubview:profileButton];
     
     [subView addSubview:tripOwnerLabel];
+    [subView addSubview:tripOwnerButton];
     [subView addSubview:tripNameLabel];
     [subView addSubview:tripDescriptionEditableTextView];
     
     [subView bringSubviewToFront:tripOwnerLabel];
+    [subView bringSubviewToFront:tripOwnerButton];
     [subView bringSubviewToFront:profileButton];
 }
 
