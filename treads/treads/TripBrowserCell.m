@@ -29,6 +29,7 @@
     UITextView* tripDescriptionTextView;
     UIImageView* profilePictureView;
     UIImageView* tripFeaturedImageView;
+    CGRect tripFeaturedImageFrameFull;
     UIView* profilePictureBackgroundView;
     UISwitch* publishSwitch;
     UILabel* publishLabel;
@@ -125,7 +126,9 @@
         profilePictureBackgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(-20, -12, 134, 134)];
         [profilePictureView setHidden:YES];
         [profilePictureBackgroundView setHidden:YES];
-        tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 79, 330, 186)];
+        tripFeaturedImageFrameFull = CGRectMake(0, 79, 330, 265);
+//        tripFeaturedImageFrameFull = CGRectMake(0, 79, 330, 186);
+        tripFeaturedImageView = [[UIImageView alloc] initWithFrame:tripFeaturedImageFrameFull];
         tripDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(12, 273, 312, 66)];
         publishSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [publishSwitch setHidden:YES];
@@ -139,8 +142,10 @@
         tripContentLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 80, 370, 18)];
         profilePictureView = [[UIImageView alloc] initWithFrame:CGRectMake(-16, -8, 126, 126)];
         profilePictureBackgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(-20, -12, 134, 134)];
-        tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 110, 550, 186)];
-        tripDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(12, 304, 422, 66)];
+        tripFeaturedImageFrameFull = CGRectMake(0, 110, 550, 262); //372 {262} [32]
+//        tripFeaturedImageFrameFull = CGRectMake(0, 110, 550, 186); //296
+        tripFeaturedImageView = [[UIImageView alloc] initWithFrame:tripFeaturedImageFrameFull];
+        tripDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(12, 304, 526, 66)];
         publishSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [publishSwitch setHidden:YES];
         publishLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
@@ -154,7 +159,8 @@
         profilePictureBackgroundView = [[UIImageView alloc] initWithFrame:CGRectMake(-20, -12, 134, 134)];
         [profilePictureView setHidden:YES];
         [profilePictureBackgroundView setHidden:YES];
-        tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 45, 550, 180)];
+        tripFeaturedImageFrameFull = CGRectMake(0, 45, 550, 180);
+        tripFeaturedImageView = [[UIImageView alloc] initWithFrame:tripFeaturedImageFrameFull];
         tripDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(12, 233, 422, 66)];
         publishSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [publishSwitch setHidden:YES];
@@ -167,7 +173,8 @@
         tripDatesLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 64, 260, 18)];
         tripContentLabel = [[UILabel alloc] initWithFrame: CGRectMake(122, 80, 260, 18)];
         profilePictureView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 110, 110)];
-        tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(330, 0, 220, 110)];
+        tripFeaturedImageFrameFull = CGRectMake(330, 0, 220, 110);
+        tripFeaturedImageView = [[UIImageView alloc] initWithFrame:tripFeaturedImageFrameFull];
         tripDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [tripDescriptionTextView setHidden:YES];
         publishSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
@@ -183,7 +190,8 @@
         tripContentLabel = [[UILabel alloc] initWithFrame: CGRectMake(12, 49, 260, 18)];
         profilePictureView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [profilePictureView setHidden:YES];
-        tripFeaturedImageView = [[UIImageView alloc] initWithFrame:CGRectMake(330, 0, 220, 79)];
+        tripFeaturedImageFrameFull = CGRectMake(330, 0, 220, 79);
+        tripFeaturedImageView = [[UIImageView alloc] initWithFrame:tripFeaturedImageFrameFull];
         tripDescriptionTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [tripDescriptionTextView setHidden:YES];
         publishSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(subView.bounds.origin.x +130, subView.bounds.size.height/2+40, 60, 20)];
@@ -307,7 +315,37 @@
     tripContentLabel.text = [NSString stringWithFormat:@"%d Location%@", displayTrip.tripLocations.count, displayTrip.tripLocations.count == 1 ? @"" : @"s"];
     tripFeaturedImageView.image = displayTrip.image;
     profilePictureView.image = displayTrip.profileImage;
-    tripDescriptionTextView.text = displayTrip.description;
+    if (self.cellStyle == TripBrowserCell3x4 || self.cellStyle == TripBrowserCell4x4) {
+        if ([displayTrip.description isEqual:@""]) {
+            tripDescriptionTextView.text = @"";
+            tripDescriptionTextView.hidden = YES;
+            int offset = 16 + [@"ABC" sizeWithFont:tripDescriptionTextView.font constrainedToSize:CGSizeMake(tripDescriptionTextView.bounds.size.width, tripFeaturedImageView.bounds.size.height / 2) lineBreakMode:NSLineBreakByWordWrapping].height;;
+            tripFeaturedImageView.frame = CGRectMake(
+                                                     tripFeaturedImageFrameFull.origin.x,
+                                                     tripFeaturedImageFrameFull.origin.y,
+                                                     tripFeaturedImageFrameFull.size.width,
+                                                     tripFeaturedImageFrameFull.size.height - offset);
+        }
+        else {
+            tripDescriptionTextView.text = displayTrip.description;
+            tripDescriptionTextView.hidden = NO;
+            int offset = 16 + [displayTrip.description sizeWithFont:tripDescriptionTextView.font constrainedToSize:CGSizeMake(tripDescriptionTextView.bounds.size.width, tripFeaturedImageView.bounds.size.height / 2) lineBreakMode:NSLineBreakByWordWrapping].height;
+            //        int offset = 76;
+            tripFeaturedImageView.frame = CGRectMake(
+                                                     tripFeaturedImageFrameFull.origin.x,
+                                                     tripFeaturedImageFrameFull.origin.y,
+                                                     tripFeaturedImageFrameFull.size.width,
+                                                     tripFeaturedImageFrameFull.size.height - offset);
+            tripDescriptionTextView.frame = CGRectMake(
+                                                       tripDescriptionTextView.frame.origin.x,
+                                                       tripFeaturedImageView.frame.origin.y + tripFeaturedImageView.frame.size.height + 8,
+                                                       tripDescriptionTextView.frame.size.width,
+                                                       offset - 16);
+        }
+    }
+    else {
+        tripDescriptionTextView.text = displayTrip.description;
+    }
     tripDescriptionTextView.contentOffset = CGPointMake(-tripDescriptionTextView.contentInset.left, -tripDescriptionTextView.contentInset.top);
     if(displayTrip.published==0){
         [publishSwitch setOn:NO];
