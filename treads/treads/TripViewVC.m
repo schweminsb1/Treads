@@ -25,6 +25,7 @@
 @property TripService* tripService;
 @property  int tripID;
 @property (strong) TripViewer* viewer;
+@property (strong) UIView* waitView;
 @property (strong) UIBarButtonItem* tripEditButton;
 @property (strong) UIBarButtonItem* backButton;
 @property (strong) UIBarButtonItem* favoriteButton;
@@ -134,6 +135,13 @@
     //set up back button
     self.backButton = [[UIBarButtonItem alloc] initWithTitle:previousViewTitle style:UIBarButtonItemStyleBordered target:self action:@selector(goBack:)];
     self.navigationItem.leftBarButtonItem = self.backButton;
+    
+    //set up waiting view
+    self.waitView = [[UIView alloc] initWithFrame:self.viewerWindow.frame];
+    self.waitView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
+    self.waitView.hidden = YES;
+    self.waitView.userInteractionEnabled = YES;
+    [self.viewerWindow addSubview:self.waitView];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -281,9 +289,11 @@
         if ([self.viewer getViewerTrip] != nil && [self.viewer getViewerTrip].userID == [TreadsSession instance].treadsUserID && [self.viewer changesWereMade]) {
             //save trip changes if any were made
             [self.tripService updateNewImagesForTrip:[self.viewer viewerTrip] forTarget:self withCompleteAction:@selector(imagesWereUploaded)];
+            self.waitView.hidden = NO;
         }
         else {
             //if no changes were made or a trip is not loaded, simply pop the trip viewer
+            [self.viewer didExit];
             [self.navigationController popViewControllerAnimated:YES];
         };
     }
@@ -296,6 +306,8 @@
 
 - (void)changesSavedTo:(NSNumber*)savedTripID successfully:(NSNumber*)wasSuccessful {
     BOOL successful = [wasSuccessful boolValue];
+    self.waitView.hidden = YES;
+    [self.viewer didExit];
     if (successful) {
         int tripID = [savedTripID intValue];
         if (self.tripID != tripID) {

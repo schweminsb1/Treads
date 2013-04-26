@@ -114,11 +114,6 @@
     
     //reload table data
     [viewerTable reloadData];
-    
-    //scroll if at bottom of screen to show/hide add button
-//    if (viewerTable.contentOffset.y == viewerTable.contentSize.height - self.bounds.size.height) {
-//        [viewerTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:trip.tripLocations.count+(editingEnabled?1:0) inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-//    }
 }
 
 - (void)displayTripLoadFailure
@@ -137,6 +132,12 @@
     //resign all first responders
     //[self setEditingEnabled:NO];
     if ([trip.name isEqual:@""]) {trip.name = @"My Trip";}
+    [activityIndicatorView startAnimating];
+}
+
+- (void)didExit
+{
+    [activityIndicatorView stopAnimating];
 }
 
 - (void)clearAndWait
@@ -146,11 +147,6 @@
 }
 
 #pragma mark - UITableViewDataSource
-
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//    return 1;//sortedListData.count;
-//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -223,6 +219,11 @@
         }
         //fill out data
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.requestAddItem = ^(){
+            if (editingEnabled) {
+                [self requestNewLocationForIndex:trip.tripLocations.count];
+            }
+        };
         return cell;
     }
     else {
@@ -260,13 +261,13 @@
 
 #pragma mark - UITableViewDelegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingEnabled && indexPath.row == trip.tripLocations.count + 1) {
-        [self requestNewLocationForIndex:trip.tripLocations.count];
-    }
-    return;
-}
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if (editingEnabled && indexPath.row == trip.tripLocations.count + 1) {
+//        [self requestNewLocationForIndex:trip.tripLocations.count];
+//    }
+//    return;
+//}
 
 - (void)requestNewLocationForIndex:(int)index
 {
@@ -343,7 +344,7 @@
         return 480 + cellVerticalPadding;
     }
     else if (editingEnabled && indexPath.row == trip.tripLocations.count + 1) {
-        return 150 + cellVerticalPadding;
+        return 90 + cellVerticalPadding;
     }
     return 620 + cellVerticalPadding;
 }

@@ -10,4 +10,6 @@
 
 @interface TripViewerAddCell : UITableViewCell
 
+@property (copy) void(^requestAddItem)();
+
 @end

@@ -30,13 +30,13 @@
 
 -(void) insertImage:(UIImage *) image withCompletion:(MSItemBlock) ultimatecompletionblock;
 
-
 -(void) getImageWithPhotoID:(int) photoid withReturnBlock:(CompletionWithItems) comp;
 
 - (id)initWithRepository:(DataRepository*)repository;
 - (NSArray*)convertReturnDataToServiceModel:(NSArray*)returnData;
 
 + (ImageService*) instance;
++ (UIImage*)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 
 + (UIImage*)emptyImage;
 + (UIImage*)imageNotFound;

@@ -25,6 +25,7 @@
 
 - (Trip*)getViewerTrip;
 - (void)prepareForExit;
+- (void)didExit;
 
 - (void)clearAndWait;
 
