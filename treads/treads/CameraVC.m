@@ -2,7 +2,7 @@
 //  CameraVC.m
 //  Treads
 //
-//  Created by Zachary Kanoff on 2/11/13.
+//  Created by Zachary Kanoff, Anthony DeLeone on 2/11/13.
 //  Copyright (c) 2013 Team Walking Stick. All rights reserved.
 //
 
@@ -35,12 +35,6 @@ BOOL previousDoneHit;
 - (void)viewDidAppear:(BOOL)animated
 {
     [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
-    //[super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-//    if ([self.popoverController isPopoverVisible])
-//    {
-//        [self.popoverController dismissPopoverAnimated:YES];
-//    }
     // setup the Camera
     if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
     {
@@ -52,41 +46,28 @@ BOOL previousDoneHit;
         self.imagePicker.delegate = self;
         self.modalPresentationStyle = UIModalPresentationFullScreen;
         doneTakingPictures = NO;
-//        if([[UIDevice currentDevice]userInterfaceIdiom]== UIUserInterfaceIdiomPad)
-//        {
-//            self.popoverController = [[UIPopoverController alloc] initWithContentViewController: self.imagePicker];
-//            self.popoverController.delegate = self;
-//            [self.popoverController presentPopoverFromRect:CGRectMake(50,50,200,200)inView: self.view permittedArrowDirections:0 animated:YES];
-//        }
         if(!doneTakingPictures)
         {
-//            if([[UIDevice currentDevice]userInterfaceIdiom]== UIUserInterfaceIdiomPad)
-//            {
-//                [self.popoverController presentPopoverFromRect:CGRectMake(self.view.frame.size.width,self.view.frame.size.height,320,400)inView: self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-//            }
-//            else
-//            {
                 [self presentViewController:self.imagePicker animated:NO completion: nil];
-//            }
-
         }
         _newMedia = YES;
     }
 }
 void (^done)(void) = ^{
-        // set the location that the block will complete to
+        // dismiss the camera view and direct the user to the my trips view
         AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
         [appDelegate.tabBarController setSelectedIndex:2];
         doneTakingPictures = YES;
     };
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
+    // when the user clicks cancel call the done block and dismiss the viewcontroller
     [self dismissViewControllerAnimated:YES completion: nil];
-    //[self.navigationController popViewControllerAnimated:YES];
      done();
 }
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    // handle when the user selects an image
     [self.popoverController dismissPopoverAnimated:true];
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     [self dismissViewControllerAnimated:YES completion: nil];
@@ -102,6 +83,7 @@ void (^done)(void) = ^{
 }
 -(void)image:(UIImage *)image finishedSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
+    // send an alert message if the photo failed to save
     if (error) {
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle: @"Save failed"

@@ -12,9 +12,6 @@
 
 @interface CameraService : NSObject
 
-//- (void) showImagePicker;
-//- (UIImage *) returnSelectedImage;
-
 - (void)showImagePickerFromViewController:(UIViewController*)viewController onSuccess:(void(^)(UIImage*))onSuccess;
 
 +(CameraService*) instance ;
