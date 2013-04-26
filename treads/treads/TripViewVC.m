@@ -141,6 +141,7 @@
     self.waitView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
     self.waitView.hidden = YES;
     self.waitView.userInteractionEnabled = YES;
+    self.waitView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     [self.viewerWindow addSubview:self.waitView];
 }
 

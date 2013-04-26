@@ -329,7 +329,7 @@
         else {
             tripDescriptionTextView.text = displayTrip.description;
             tripDescriptionTextView.hidden = NO;
-            int offset = 16 + [displayTrip.description sizeWithFont:tripDescriptionTextView.font constrainedToSize:CGSizeMake(tripDescriptionTextView.bounds.size.width, tripFeaturedImageView.bounds.size.height / 2) lineBreakMode:NSLineBreakByWordWrapping].height;
+            int offset = 16 + [displayTrip.description sizeWithFont:tripDescriptionTextView.font constrainedToSize:CGSizeMake(tripDescriptionTextView.bounds.size.width, tripFeaturedImageFrameFull.size.height / 2) lineBreakMode:NSLineBreakByWordWrapping].height;
             //        int offset = 76;
             tripFeaturedImageView.frame = CGRectMake(
                                                      tripFeaturedImageFrameFull.origin.x,
