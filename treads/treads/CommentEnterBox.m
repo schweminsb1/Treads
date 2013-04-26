@@ -54,7 +54,7 @@
     
     _enterField= [[UITextView alloc] initWithFrame:textRect];
     [_enterField setEditable: YES];
-    
+    [_enterField setFont:[UIFont fontWithName:@"Helvetica" size:17]];
     [self addSubview:_profilePicture];
     [self addSubview:_postButton];
     [self addSubview:_enterField];
