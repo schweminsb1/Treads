@@ -8,6 +8,8 @@
 
 #import "TripViewerLocationCell.h"
 
+#import "ImageService.h"
+
 #import "ImageScrollBrowser.h"
 #import "ImageScrollTextView.h"
 #import "ImageScrollEditableTextView.h"
@@ -36,7 +38,7 @@
     ImageScrollBrowser* imageScrollBrowser;
     ImageScrollEditableTextView* imageScrollEditableTextView;
     ImageScrollEditItemView* imageScrollEditItemView;
-    UIView* imageScrollBrowserAddItemView;
+    UIButton* imageScrollBrowserAddItemView;
     
     ImageScrollEditItemView* editItemView;
 }
@@ -129,15 +131,45 @@
     imageScrollEditableTextView.editingEnabled = ^BOOL(){return _self.editingEnabled();};
     imageScrollEditableTextView.markChangeMade = ^(){_self.markChangeMade();};
     
-    imageScrollBrowserAddItemView = [[UIView alloc] init];
+//    imageScrollBrowserAddItemView = [[UIView alloc] init];
 //    imageScrollBrowserAddItemView.image = [UIImage imageNamed:@"plus_unselect.png"];
 //    imageScrollBrowserAddItemView.backgroundColor = [AppColors toolbarColor];
 //    imageScrollBrowserAddItemView.contentMode = UIViewContentModeScaleAspectFit;
     
+    //add new item button
+    imageScrollBrowserAddItemView = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    UIImage* buttonNormalImage = [ImageService imageWithImage:[UIImage imageNamed:@"button_blue_unselect.png"] scaledToSize:CGSizeMake(50, 50)];
+    [imageScrollBrowserAddItemView setBackgroundImage:[buttonNormalImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, buttonNormalImage.size.width * (72.0/312.0), 0, buttonNormalImage.size.width * (72.0/312.0))]forState:UIControlStateNormal];
+    
+    UIImage* buttonSelectImage = [ImageService imageWithImage:[UIImage imageNamed:@"button_blue_select.png"] scaledToSize:CGSizeMake(50, 50)];
+    [imageScrollBrowserAddItemView setBackgroundImage:[buttonSelectImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, buttonSelectImage.size.width * (72.0/312.0), 0, buttonSelectImage.size.width * (72.0/312.0))]forState:UIControlStateHighlighted];
+    
+    NSString* buttonText = @"Add Picture";
+    
+    [imageScrollBrowserAddItemView setTitle:buttonText forState:UIControlStateNormal];
+    [imageScrollBrowserAddItemView setTitle:buttonText forState:UIControlStateHighlighted];
+    [imageScrollBrowserAddItemView setTitleColor:[UIColor colorWithWhite:0 alpha:0.6] forState:UIControlStateNormal];
+    [imageScrollBrowserAddItemView setTitleColor:[UIColor colorWithWhite:0 alpha:0.6] forState:UIControlStateHighlighted];
+    [imageScrollBrowserAddItemView.titleLabel setFont:[UIFont boldSystemFontOfSize:20]];
+    
+    UIImage* icon = [ImageService imageWithImage:[UIImage imageNamed:@"icon_plus.png"] scaledToSize:CGSizeMake(50, 50)];
+    [imageScrollBrowserAddItemView setImage:icon forState:UIControlStateNormal];
+    [imageScrollBrowserAddItemView setImage:icon forState:UIControlStateHighlighted];
+    
+    CGSize textSize = [buttonText sizeWithFont:imageScrollBrowserAddItemView.titleLabel.font constrainedToSize:subView.bounds.size lineBreakMode:NSLineBreakByClipping];
+    [imageScrollBrowserAddItemView setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, -icon.size.width/4)];
+    [imageScrollBrowserAddItemView setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, -textSize.width/4)];
+    
+    [imageScrollBrowserAddItemView addTarget:self action:@selector(tappedEmptySetButton) forControlEvents:UIControlEventTouchUpInside];
+    
+    [imageScrollBrowserAddItemView setBounds:CGRectMake(0, 0, 250, 50)];
+    
+    //edit item view
     imageScrollEditItemView = [[ImageScrollEditItemView alloc] initDisplaysHorizontally:YES showFavorite:YES];
     
     //scroll browser
-    imageScrollBrowser = [[ImageScrollBrowser alloc] initWithImageSize:CGSizeMake(540, 360) displayView:imageScrollEditableTextView addItemView:imageScrollBrowserAddItemView editItemView:imageScrollEditItemView];
+    imageScrollBrowser = [[ImageScrollBrowser alloc] initWithImageSize:CGSizeMake(540, 360) displayView:imageScrollEditableTextView addItemView:nil emptySetView:imageScrollBrowserAddItemView editItemView:imageScrollEditItemView];
     imageScrollBrowser.editingEnabled = ^BOOL(){return _self.editingEnabled();};
     ImageScrollBrowser* __weak _imageScrollBrowser = imageScrollBrowser;
     imageScrollBrowser.sendNewItemRequest = ^(int index, BOOL replaceItem) {
@@ -185,6 +217,11 @@
 //    //return NO;
 //    return YES;
 //}
+
+- (void)tappedEmptySetButton
+{
+    imageScrollBrowser.sendNewItemRequest(0, YES);
+}
 
 - (void)changeLocation:(int)newLocationID withName:(NSString*)name
 {

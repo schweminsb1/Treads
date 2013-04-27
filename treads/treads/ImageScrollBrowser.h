@@ -15,7 +15,7 @@
 
 @interface ImageScrollBrowser : UIView
 
-- (id)initWithImageSize:(CGSize)size displayView:(UIView<ImageScrollDisplayView>*)view addItemView:(UIView*)addView editItemView:(UIView<EditControlsView>*)editView;
+- (id)initWithImageSize:(CGSize)size displayView:(UIView<ImageScrollDisplayView>*)initializedDisplayView addItemView:(UIView*)addView emptySetView:(UIView*) emptyView editItemView:(UIView<EditControlsView>*)editView;
 
 @property (assign, nonatomic) NSArray* displayItems;
 

@@ -51,7 +51,7 @@
         
     _latLabel.text=[NSString stringWithFormat:@"%f",_pin.location.latitude];
     _lonLabel.text=[NSString stringWithFormat:@"%f",_pin.location.longitude];
-    ImageScrollBrowser * scrollbrowse= [[ImageScrollBrowser alloc] initWithImageSize:size.size displayView:nil addItemView:nil editItemView:nil];
+    ImageScrollBrowser * scrollbrowse= [[ImageScrollBrowser alloc] initWithImageSize:size.size displayView:nil addItemView:nil emptySetView: nil editItemView:nil];
 
     /*
     NSMutableArray * triplocationItems= [[NSMutableArray alloc] init];

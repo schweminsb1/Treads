@@ -33,11 +33,12 @@
     
     UIView<ImageScrollDisplayView>* displayView;
     UIView* addItemView;
+    UIView* emptySetView;
     UIView<EditControlsView>* editItemView;
     int displayedTextIndex;
 }
 
-- (id)initWithImageSize:(CGSize)size displayView:(UIView<ImageScrollDisplayView>*)initializedDisplayView addItemView:(UIView *)addView editItemView:(UIView<EditControlsView>*)editView
+- (id)initWithImageSize:(CGSize)size displayView:(UIView<ImageScrollDisplayView>*)initializedDisplayView addItemView:(UIView*)addView emptySetView:(UIView*) emptyView editItemView:(UIView<EditControlsView>*)editView
 {
     self = [super init];
     if (self) {
@@ -48,6 +49,7 @@
         imageSubViewSize = size;
         displayView = initializedDisplayView;
         addItemView = addView;
+        emptySetView = emptyView;
         editItemView = editView;
     }
     return self;
@@ -76,23 +78,28 @@
     for (int i=0; i<imageSubViews.count; i++) {
         UIImageView* imageSubView = (UIImageView*)imageSubViews[i];
         [imageSubView setFrame:CGRectMake(i*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width, 0, imageSubViewSize.width, imageSubViewSize.height)];
-//        int addedOffset = (isAnimatingItemRemove&&i>=displayedTextIndex?imageScrollPaddingRemoval.bounds.size.width:0);
-//        int x = imageScrollPaddingRemoval.bounds.size.width;
-//        [imageSubView setFrame:CGRectMake(i*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width + addedOffset, 0, imageSubViewSize.width, imageSubViewSize.height)];
     }
     
     //if editing is enabled and the views exist, set frames
     //of add item view and edit item view
-    if (addItemView!=nil) {
+    if (addItemView) {
         [addItemView setHidden:!__editingEnabled];
         if (__editingEnabled) {
             [addItemView setFrame:CGRectMake(imageSubViews.count*imageSubViewSize.width + imageScrollPaddingLeft.bounds.size.width, 0, imageSubViewSize.width, imageSubViewSize.height)];
         }
     }
-    if (editItemView!=nil) {
-        [editItemView setHidden:!__editingEnabled];
-        if (__editingEnabled) {
+    if (editItemView) {
+        BOOL showEditItemView = __editingEnabled && (!emptySetView || imageSubViewCount > 0);
+        [editItemView setHidden:!showEditItemView];
+        if (showEditItemView) {
             [editItemView setFrame:CGRectMake(self.bounds.size.width/2 - 156, imageSubViewSize.height - 60, 318, 50)];
+        }
+    }
+    if (emptySetView) {
+        BOOL showEmptySetView = __editingEnabled && imageSubViewCount == 0;
+        [emptySetView setHidden:!showEmptySetView];
+        if (showEmptySetView) {
+            [emptySetView setFrame:CGRectMake(self.bounds.size.width/2 - emptySetView.bounds.size.width/2, imageSubViewSize.height - emptySetView.bounds.size.height - 10, emptySetView.bounds.size.width, emptySetView.bounds.size.height)];
         }
     }
 
@@ -101,6 +108,10 @@
     [displayView setFrame:CGRectMake(0, imageSubViewSize.height, self.bounds.size.width, self.bounds.size.height - imageSubViewSize.height)];
     [displayView setNeedsLayout];
     
+    int contentSize = imageScrollView.contentSize.width - imageScrollView.bounds.size.width;
+    if (offset.x > contentSize && contentSize >= 0) {
+        offset = CGPointMake(contentSize, offset.y);
+    }
     [imageScrollView setContentOffset:offset];
 }
 
@@ -141,9 +152,10 @@
     //display view
     [self addSubview:displayView];
     
+    ImageScrollBrowser* __weak _self = self;
+    
     //edit item view
-    if (editItemView != nil) {
-        ImageScrollBrowser* __weak _self = self;
+    if (editItemView) {
         editItemView.requestChangeItem = ^(){[_self requestedChangeItem];};
         editItemView.requestRemoveItem = ^(){[_self requestedRemoveItem];};
         editItemView.requestAddItem = ^(){[_self requestedAddItem];};
@@ -153,6 +165,11 @@
         
         [self addSubview:editItemView];
         [self bringSubviewToFront:editItemView];
+    }
+    
+    //empty set view
+    if (emptySetView) {
+        [self addSubview:emptySetView];
     }
 }
 
@@ -316,10 +333,17 @@
         id<ImageScrollDisplayableItem>item = self.displayItems[displayedTextIndex];
         NSMutableArray* temp = [NSMutableArray arrayWithArray:self.displayItems];
         [temp removeObject:item];
+        BOOL showHideAnimation = YES;
+        if (displayedTextIndex >= temp.count) {
+            displayedTextIndex = temp.count - 1;
+            showHideAnimation = NO;
+        }
         resetOnDisplay = NO;
         self.arrayWasChanged(temp);
         self.displayItems = temp;
-        [self startHideAnimation];
+        if (showHideAnimation) {
+            [self startHideAnimation];
+        }
     }
 }
 
