@@ -36,7 +36,7 @@
     ImageScrollBrowser* imageScrollBrowser;
     ImageScrollEditableTextView* imageScrollEditableTextView;
     ImageScrollEditItemView* imageScrollEditItemView;
-    UIImageView* imageScrollBrowserAddItemView;
+    UIView* imageScrollBrowserAddItemView;
     
     ImageScrollEditItemView* editItemView;
 }
@@ -103,13 +103,7 @@
 {
     TripViewerLocationCell* __weak _self = self;
     
-
- 
-    
-    //bgrView = [[UIView alloc] init];
-    //bgrView.backgroundColor = [AppColors tertiaryBackgroundColor];
-    //[self addSubview:bgrView];
-    
+    //location header
     subView = [[UIView alloc] init];
     subView.backgroundColor = [AppColors mainBackgroundColor];
     [self addSubview:subView];
@@ -124,33 +118,29 @@
     locationNameLabel.textAlignment = NSTextAlignmentLeft;
     locationNameLabel.adjustsFontSizeToFitWidth = YES;
     
-//    UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:nil];
-//    tapGestureRecognizer.delegate = self;
-//    [self addGestureRecognizer:tapGestureRecognizer];
-    
     locationTextBackgroundView = [[UIView alloc] init];
     
     locationMapView = [[UIImageView alloc] init];
     locationMapView.contentMode = UIViewContentModeRight;
     locationMapView.clipsToBounds = YES;
     
+    //scroll browser objects
     imageScrollEditableTextView = [[ImageScrollEditableTextView alloc] init];
     imageScrollEditableTextView.editingEnabled = ^BOOL(){return _self.editingEnabled();};
     imageScrollEditableTextView.markChangeMade = ^(){_self.markChangeMade();};
     
-    imageScrollBrowserAddItemView = [[UIImageView alloc] init];
-    imageScrollBrowserAddItemView.image = [UIImage imageNamed:@"plus_unselect.png"];
-    imageScrollBrowserAddItemView.backgroundColor = [AppColors toolbarColor];
-    imageScrollBrowserAddItemView.contentMode = UIViewContentModeScaleAspectFit;
+    imageScrollBrowserAddItemView = [[UIView alloc] init];
+//    imageScrollBrowserAddItemView.image = [UIImage imageNamed:@"plus_unselect.png"];
+//    imageScrollBrowserAddItemView.backgroundColor = [AppColors toolbarColor];
+//    imageScrollBrowserAddItemView.contentMode = UIViewContentModeScaleAspectFit;
     
     imageScrollEditItemView = [[ImageScrollEditItemView alloc] initDisplaysHorizontally:YES showFavorite:YES];
     
+    //scroll browser
     imageScrollBrowser = [[ImageScrollBrowser alloc] initWithImageSize:CGSizeMake(540, 360) displayView:imageScrollEditableTextView addItemView:imageScrollBrowserAddItemView editItemView:imageScrollEditItemView];
     imageScrollBrowser.editingEnabled = ^BOOL(){return _self.editingEnabled();};
     ImageScrollBrowser* __weak _imageScrollBrowser = imageScrollBrowser;
     imageScrollBrowser.sendNewItemRequest = ^(int index, BOOL replaceItem) {
-//        CameraService* cameraService = [[CameraService alloc] init];
-//        [cameraService showImagePickerOnSuccess:^(UIImage* returnImage) {
         _self.sendNewImageRequest(^(UIImage* returnImage) {
             TripLocationItem* newItem = [[TripLocationItem alloc] init];
             newItem.tripLocationItemID = -1;
@@ -166,17 +156,19 @@
         _self.sendTripImageIDRequest(locationItem);
     };
     
-    [subView addSubview:locationMapView];
-    [subView addSubview:locationTextBackgroundView];
-    [subView addSubview:locationNameLabel];
-    [subView addSubview:imageScrollBrowser];
-    
+    //edit item view
     editItemView = [[ImageScrollEditItemView alloc] initDisplaysHorizontally:NO showFavorite:NO];
     editItemView.requestChangeItem = ^(){[_self requestedChangeItem];};
     editItemView.requestRemoveItem = ^(){[_self requestedRemoveItem];};
     editItemView.requestAddItem = ^(){[_self requestedAddItem];};
     editItemView.requestMoveForward = ^(){[_self requestedMoveForward];};
     editItemView.requestMoveBackward = ^(){[_self requestedMoveBackward];};
+    
+    //add subviews
+    [subView addSubview:locationMapView];
+    [subView addSubview:locationTextBackgroundView];
+    [subView addSubview:locationNameLabel];
+    [subView addSubview:imageScrollBrowser];
     
     [self addSubview:editItemView];
     [self bringSubviewToFront:editItemView];
