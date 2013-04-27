@@ -284,7 +284,7 @@
 {
     locationNameLabel.text = tripLocation.locationName;//[NSString stringWithFormat:@"Location: ID %d, LocationID: %d", tripLocation.tripLocationID, tripLocation.locationID];
     
-    locationMapView.image = [UIImage imageNamed:@"map_preview.png"];
+//    locationMapView.image = [UIImage imageNamed:@"map_preview.png"];
     
     locationDescriptionTextView.text = [NSString stringWithFormat:@"Description for Trip Location %d: %@", tripLocation.tripID, tripLocation.description];
     locationDescriptionTextView.contentOffset = CGPointZero;
