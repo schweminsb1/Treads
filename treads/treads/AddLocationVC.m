@@ -15,6 +15,7 @@
 #import "LocationService.h"
 #import "LocationMapVC.h"
 #import "AppColors.h"
+#import "LocationPickerVC.h"
 
 @interface AddLocationVC ()
 
@@ -24,9 +25,6 @@
 @property CLGeocoder            *geocoder;
 @property LocationService       *myLocationService;
 @property LocationMapVC         *locationMapVC;
-
-
-//@property        TreadsSession * treadsSession;
 
 @end
 
@@ -43,35 +41,29 @@ CLLocationCoordinate2D placedLocation;
     }
     return self;
 }
-
-- (void)viewDidLoad
+-(id)initWithCoordinates:(CLLocationCoordinate2D)locationCoord
+{
+        // Custom initialization
+        self.latitude = locationCoord.latitude;
+        self.longitude = locationCoord.longitude;
+    
+    return self;
+    
+}
+- (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidLoad];
-    self.title = NSLocalizedString(@"Add New Location", @"Add New Location");
-    // Do any additional setup after loading the view from its nib.
+    self.title = NSLocalizedString(@"Name New Location", @"Name New Location");
+    float mylong = self.longitude;
+    float mylat = self.latitude;
+    [_latitudeText setText:[NSString stringWithFormat:@"%.2f", mylong]];
+    [_longitudeText setText:[NSString stringWithFormat:@"%.2f", mylat]];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
--(IBAction)chooseLocation:(id)sender
-{
-    // call the Location Map VC
-    CompletionBlockWithCoord block= ^(CLLocationCoordinate2D coord)
-    {
-        
-        self.latitude =  coord.latitude;    //[myLat doubleValue];
-        self.longitude = coord.longitude;
-        float mylong = self.longitude;
-        float mylat = self.latitude;
-       [_latitudeText setText:[NSString stringWithFormat:@"%.2f", mylong]];
-        [_longitudeText setText:[NSString stringWithFormat:@"%.2f", mylat]];
-    };
-     self.locationMapVC = [[LocationMapVC alloc]init];
-    self.locationMapVC.locationMapSuccess = block;
-    [self.navigationController pushViewController:self.locationMapVC animated:YES];
 }
 -(IBAction)FinishClick:(id)sender
 {
@@ -89,20 +81,12 @@ CLLocationCoordinate2D placedLocation;
                                 delegate: nil
                                 cancelButtonTitle:@"OK"
                                 otherButtonTitles:nil];
-//    UIAlertView *descriptiontooLong = [[UIAlertView alloc]
-//                                initWithTitle: @"Woah!!"
-//                                message: @"The description and attributes are rescricted to 250 characters each."
-//                                delegate: nil
-//                                cancelButtonTitle:@"OK"
-//                                otherButtonTitles:nil];
-    
-   
+       
     __block NSArray * returnedValues= nil;
     returnedValues= [[NSArray alloc] init];
     
     // check for empty fields
-    if([_locationText.text isEqualToString:@""]/* || [_attributeText.text isEqualToString:@""] ||
-       [_descriptionText.text isEqualToString:@""]*/ || _latitude == 91 || _longitude == 181 )
+    if([_locationText.text isEqualToString:@""] || _latitude == 91 || _longitude == 181 )
     {
         [alert show];
     }
@@ -112,16 +96,10 @@ CLLocationCoordinate2D placedLocation;
         [nametooLong show];
         
     }
-    // check for descriptions/attribute lists that are too long
-//    else if(_descriptionText.text.length > 250 || _attributeText.text.length > 250)
-//    {
-//        [descriptiontooLong show];
-//    }
     else
     {
             NSDictionary * newItem= @{
                                       @"name": [NSString stringWithString: _locationText.text],
-//                                      @"description": [NSString stringWithString: _descriptionText.text] ,
                                       @"latitude": [NSNumber numberWithDouble: self.latitude],
                                       @"longitude": [NSNumber numberWithDouble: self.longitude]
                                       };
@@ -134,6 +112,5 @@ CLLocationCoordinate2D placedLocation;
 -(void) goBack:(NSNumber *)idnum success:(NSNumber*)success
 {
     [self.navigationController popViewControllerAnimated:YES];
-    
 }
 @end

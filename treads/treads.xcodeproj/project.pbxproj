@@ -165,7 +165,7 @@
 		316399B316ECB3F6003B3F0E /* EditTripVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditTripVC.h; path = treads/EditTripVC.h; sourceTree = SOURCE_ROOT; };
 		316399B416ECB3F6003B3F0E /* EditTripVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditTripVC.m; path = treads/EditTripVC.m; sourceTree = SOURCE_ROOT; };
 		316399B516ECB3F6003B3F0E /* EditTripVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EditTripVC.xib; path = treads/EditTripVC.xib; sourceTree = SOURCE_ROOT; };
-		3188B15716C9CE17008E1D7F /* treads.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = treads.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3188B15716C9CE17008E1D7F /* Treads.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Treads.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3188B15A16C9CE17008E1D7F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3188B15C16C9CE17008E1D7F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3188B15E16C9CE17008E1D7F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -400,7 +400,7 @@
 		3188B15816C9CE17008E1D7F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3188B15716C9CE17008E1D7F /* treads.app */,
+				3188B15716C9CE17008E1D7F /* Treads.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -816,7 +816,7 @@
 			);
 			name = treads;
 			productName = Treads;
-			productReference = 3188B15716C9CE17008E1D7F /* treads.app */;
+			productReference = 3188B15716C9CE17008E1D7F /* Treads.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1041,7 +1041,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Treads/treads-Prefix.pch";
 				INFOPLIST_FILE = "Treads/treads-Info.plist";
-				PRODUCT_NAME = treads;
+				PRODUCT_NAME = Treads;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1057,7 +1057,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Treads/treads-Prefix.pch";
 				INFOPLIST_FILE = "Treads/treads-Info.plist";
-				PRODUCT_NAME = treads;
+				PRODUCT_NAME = Treads;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
