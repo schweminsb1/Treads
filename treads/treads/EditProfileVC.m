@@ -36,6 +36,7 @@
     if (self) {
         // Custom initialization
         self.userService = myUserService;
+
     }
     return self;
 }
@@ -46,6 +47,13 @@
     // Do any additional setup after loading the view from its nib.
     
     
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.fName.text = [TreadsSession instance].fName;
+    self.lName.text = [TreadsSession instance].lName;
+    self.email.text = [TreadsSession instance].treadsUser;
 }
 
 - (void)didReceiveMemoryWarning
