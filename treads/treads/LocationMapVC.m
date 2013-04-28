@@ -81,7 +81,9 @@ bool popNavigationStack = NO;
     {
        
         AddLocationVC *addLocVC = [[AddLocationVC alloc]initWithCoordinates: _placedLocation];
+        addLocVC.returnLocationToTripView=_returnLocationToTripView;
         popNavigationStack = YES;
+        addLocVC.tripViewReturnDelegate=_tripViewReturnDelegate;
         [self.navigationController pushViewController:addLocVC animated:YES];
     }
     else

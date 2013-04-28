@@ -26,6 +26,7 @@
 @property LocationService       *myLocationService;
 @property LocationMapVC         *locationMapVC;
 
+
 @end
 
 @implementation AddLocationVC
@@ -37,6 +38,7 @@ CLLocationCoordinate2D placedLocation;
         _myLocationService=myLocationService;
         self.latitude = 0.0;
         self.longitude =0.0;
+        _LocationModelnew= [[Location alloc] init];
         
     }
     return self;
@@ -103,6 +105,11 @@ CLLocationCoordinate2D placedLocation;
                                       @"latitude": [NSNumber numberWithDouble: self.latitude],
                                       @"longitude": [NSNumber numberWithDouble: self.longitude]
                                       };
+        _LocationModelnew = [[Location alloc]init];
+        _LocationModelnew.title=_locationText.text;
+        _LocationModelnew.latitude=self.latitude;
+        _LocationModelnew.longitude=self.longitude;
+        
             //call to insert item
         [[LocationService instance] addLocation:newItem forTarget:self withAction:(@selector(goBack:success:))];
 
@@ -111,6 +118,10 @@ CLLocationCoordinate2D placedLocation;
 }
 -(void) goBack:(NSNumber *)idnum success:(NSNumber*)success
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    _LocationModelnew.idField=[NSString stringWithFormat: @"%@", idnum];
+    
+    _returnLocationToTripView(_LocationModelnew);
+    [self.navigationController popToViewController:_tripViewReturnDelegate animated:YES];
+    
 }
 @end

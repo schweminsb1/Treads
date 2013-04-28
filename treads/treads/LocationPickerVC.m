@@ -114,6 +114,8 @@
         
         //AddLocationVC * addLocVC= [[AddLocationVC alloc] init];
         LocationMapVC *addLocMapVC = [[LocationMapVC alloc]init];
+        addLocMapVC.returnLocationToTripView=_returnLocationToTripView;
+        addLocMapVC.tripViewReturnDelegate=_tripViewerReturnDelegate;
         [self.navigationController pushViewController:addLocMapVC animated:YES];
     }
     else
