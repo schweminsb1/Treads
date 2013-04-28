@@ -11,6 +11,8 @@
 #import "LocationService.h"
 #import "TripViewVC.h"
 #import "AddLocationVC.h"
+#import "LocationMapVC.h"
+
 @interface LocationPickerVC ()
 @property LocationService * service;
 @property NSMutableArray * locations;
@@ -110,9 +112,9 @@
     if(indexPath.row ==0)
     {
         
-        AddLocationVC * addLocVC= [[AddLocationVC alloc] init];
-
-        [self.navigationController pushViewController:addLocVC animated:YES];
+        //AddLocationVC * addLocVC= [[AddLocationVC alloc] init];
+        LocationMapVC *addLocMapVC = [[LocationMapVC alloc]init];
+        [self.navigationController pushViewController:addLocMapVC animated:YES];
     }
     else
     {
