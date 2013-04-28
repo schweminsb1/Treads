@@ -18,9 +18,9 @@ typedef enum {TripBrowserCell3x4, TripBrowserCell4x4, TripBrowserCell6x2, TripBr
 
 - (void)setBrowserData:(NSArray*)newSortedData withCellStyle:(TripBrowserCellStyle)cellStyle forTarget:(NSObject*)newTarget withAction:(SEL)newListSelectAction;
 
-- (void)clearAndWait;
+@property (copy, nonatomic) NSString* filterString;
 
-//@property (nonatomic) TripBrowserCellStyle cellStyle;
+- (void)clearAndWait;
 
 - (void)refreshWithNewImages;
 

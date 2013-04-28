@@ -20,11 +20,13 @@
 
 @property TripBrowserCellStyle cellStyle;
 @property Trip * recentlySelectedTripForDeletion;
+
 @end
 
 @implementation TripBrowser {
     BOOL layoutDone;
     BOOL headerCell;
+    NSArray* fullListData;
     NSMutableArray* sortedListData;
     SEL listSelectAction;
     NSObject* target;
@@ -45,6 +47,7 @@
         headerCell = NO;
         [self layoutSubviews];
         listSelectAction = nil;
+        self.filterString = @"";
     }
     return self;
 }
@@ -98,9 +101,10 @@
 - (void)setBrowserData:(NSArray*)newSortedData withCellStyle:(TripBrowserCellStyle)cellStyle forTarget:(NSObject*)newTarget withAction:(SEL)newListSelectAction
 {
     _cellStyle = cellStyle;
-    sortedListData =[NSMutableArray arrayWithArray: newSortedData];
+    fullListData = newSortedData;
     target = newTarget;
     listSelectAction = newListSelectAction;
+    [self refreshFilter];
     
     [browserTable reloadData];
     [browserTable setContentOffset:CGPointZero animated:NO];
@@ -110,6 +114,7 @@
 
 - (void)clearAndWait
 {
+    self.filterString = @"";
     [self setBrowserData:nil withCellStyle:self.cellStyle forTarget:nil withAction:nil];
     [activityIndicatorView startAnimating];
 }
@@ -117,6 +122,48 @@
 - (void)refreshWithNewImages
 {
     [browserTable reloadData];
+}
+
+- (void)setFilterString:(NSString *)filterString
+{
+    _filterString = [filterString lowercaseString];
+    [self refreshFilter];
+}
+
+- (void)refreshFilter
+{
+    if (!fullListData) {
+        //don't sort an empty set
+        sortedListData = nil;
+        [browserTable reloadData];
+        return;
+    }
+    if (!self.filterString || [self.filterString isEqual:@""]) {
+        //if the filter string is empty, return the entire set
+        sortedListData = [NSMutableArray arrayWithArray:fullListData];
+        [browserTable reloadData];
+        return;
+    }
+    sortedListData = [[NSMutableArray alloc] init];
+    if (self.cellStyle == ProfileBrowserCell5x1) {
+        //sort profiles
+        sortedListData = [NSMutableArray arrayWithArray:fullListData];
+        [browserTable reloadData];
+    }
+    else {
+        //sort trips
+        for (int i = 0; i < fullListData.count; i++) {
+            Trip* trip = fullListData[i];
+            if (
+                [[trip.username lowercaseString] rangeOfString:self.filterString].location != NSNotFound ||
+                [[trip.name lowercaseString] rangeOfString:self.filterString].location != NSNotFound ||
+                [[trip.description lowercaseString] rangeOfString:self.filterString].location != NSNotFound
+                ) {
+                [sortedListData addObject:trip];
+            }
+        }
+        [browserTable reloadData];
+    }
 }
 
 #pragma mark - UITableViewDataSource

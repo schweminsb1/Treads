@@ -21,7 +21,7 @@
 #import "ImageService.h"
 #import "ProfileVC.h"
 
-@interface FollowVC ()<UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate> {
+@interface FollowVC ()<UISearchBarDelegate> {
     NSArray* browserModeControlLabels;
     NSArray* browserModeControlActions;
     NSArray* browserModeSearchBars;
@@ -33,7 +33,7 @@
 
 @property (strong) UIView* titleView;
 @property (strong) UISegmentedControl* browserModeControl;
-@property (strong) UISearchDisplayController* userSearchController;
+//@property (strong) UISearchDisplayController* userSearchController;
 @property (strong) UISearchBar* userSearchBar;
 //@property (strong) UISearchDisplayController* tripSearchController;
 @property (strong) UISearchBar* tripFilterBar;
@@ -164,6 +164,7 @@
         [browserModeSearchBars[i] setHidden:YES];
     }
     [browserModeSearchBars[sender.selectedSegmentIndex] setHidden:NO];
+    self.tripFilterBar.placeholder = [NSString stringWithFormat:@"Search %@", browserModeControlLabels[sender.selectedSegmentIndex]];
 }
 
 - (void)profileDataHasLoaded:(NSArray*)newData
@@ -236,6 +237,36 @@
     ProfileVC* profilevc= [[ProfileVC alloc]initWithNibName:@"ProfileVC" bundle:nil tripService:_tripService userService:_userService imageService:[ImageService instance] isUser:NO userID:profile.User_ID withLocationService:_locationService withCommentService:_commentService withFollowService:[FollowService instance]];
     [self.navigationItem.backBarButtonItem setTitle:browserModeControlLabels[self.browserModeControl.selectedSegmentIndex]];
     [self.navigationController pushViewController:profilevc animated:YES];
+}
+
+#pragma mark - Search
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    if (searchBar == self.tripFilterBar) {
+        [self.browser setFilterString:searchText];
+    }
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    if (searchBar == self.tripFilterBar) {
+        
+    }
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+    if (searchBar == self.tripFilterBar) {
+        
+    }
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    if (searchBar == self.tripFilterBar) {
+        [self.tripFilterBar resignFirstResponder];
+    }
 }
 
 @end
