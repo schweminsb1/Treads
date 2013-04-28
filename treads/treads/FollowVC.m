@@ -21,18 +21,27 @@
 #import "ImageService.h"
 #import "ProfileVC.h"
 
-@interface FollowVC () {
+@interface FollowVC ()<UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate> {
     NSArray* browserModeControlLabels;
     NSArray* browserModeControlActions;
+    NSArray* browserModeSearchBars;
     NSArray* browserCellStyles;
 }
 
 @property (strong) TripService* tripService;
 @property (strong) TripBrowser* browser;
+
+@property (strong) UIView* titleView;
 @property (strong) UISegmentedControl* browserModeControl;
+@property (strong) UISearchDisplayController* userSearchController;
+@property (strong) UISearchBar* userSearchBar;
+//@property (strong) UISearchDisplayController* tripSearchController;
+@property (strong) UISearchBar* tripFilterBar;
+
 @property LocationService * locationService;
 @property CommentService * commentService;
 @property UserService * userService;
+
 @end
 
 @implementation FollowVC
@@ -76,13 +85,59 @@
                           [NSNumber numberWithInt:TripBrowserCell4x4]
                          ];
     
+    //set up header
+    CGRect windowBounds = [[UIScreen mainScreen] bounds];
+    self.titleView = [[UIView alloc] init];
+    
+    [self.titleView setBounds:CGRectMake(0, 0, windowBounds.size.width * 0.75, 44)];
+    [self.titleView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    
+    //browser mode control
     self.browserModeControl = [[UISegmentedControl alloc] initWithItems:browserModeControlLabels];
-    [self.browserModeControl addTarget:self action:@selector(segmentControlChange:) forControlEvents:UIControlEventValueChanged];
     self.browserModeControl.segmentedControlStyle = UISegmentedControlStyleBar;
+    [self.browserModeControl setFrame:CGRectMake(0, self.titleView.bounds.size.height / 2 - self.browserModeControl.bounds.size.height / 2, self.browserModeControl.bounds.size.width, self.browserModeControl.bounds.size.height)];
+    [self.browserModeControl addTarget:self action:@selector(segmentControlChange:) forControlEvents:UIControlEventValueChanged];
+    self.browserModeControl.tintColor = self.navigationController.navigationBar.tintColor;
+    [self.titleView addSubview:self.browserModeControl];
     
-    [self.navigationController.navigationBar.topItem setTitleView:self.browserModeControl];
+    //user search bar
+    self.userSearchBar = [[UISearchBar alloc] init];
+    self.userSearchBar.hidden = YES;
+    self.userSearchBar.placeholder = @"Find Users";
+    self.userSearchBar.delegate = self;
+    self.userSearchBar.barStyle = self.navigationController.navigationBar.barStyle;
+    self.userSearchBar.tintColor = self.navigationController.navigationBar.tintColor;
+    self.userSearchBar.frame = CGRectMake(self.browserModeControl.bounds.size.width + 12, 0, self.titleView.bounds.size.width - self.browserModeControl.bounds.size.width - 12, 42);
+    self.userSearchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [self.titleView addSubview:self.userSearchBar];
+
+    //user search controller
+//    self.userSearchController = [[UISearchDisplayController alloc] initWithSearchBar:self.userSearchBar contentsController:self];
+//    self.userSearchController.delegate = self;
+//    self.userSearchController.searchResultsDataSource = self;
+//    self.userSearchController.searchResultsDelegate = self;
     
-    //set up
+    //trip filter bar
+    self.tripFilterBar = [[UISearchBar alloc] init];
+    self.tripFilterBar.hidden = YES;
+    self.tripFilterBar.placeholder = @"Search";
+    self.tripFilterBar.delegate = self;
+    self.tripFilterBar.barStyle = self.navigationController.navigationBar.barStyle;
+    self.tripFilterBar.tintColor = self.navigationController.navigationBar.tintColor;
+    self.tripFilterBar.frame = CGRectMake(self.browserModeControl.bounds.size.width + 12, 0, self.titleView.bounds.size.width - self.browserModeControl.bounds.size.width - 12, 42);
+    self.tripFilterBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [self.titleView addSubview:self.tripFilterBar];
+    
+    [self.navigationController.navigationBar.topItem setTitleView:self.titleView];
+    
+    browserModeSearchBars = @[
+                              self.userSearchBar,
+                              self.tripFilterBar,
+                              self.tripFilterBar,
+                              self.tripFilterBar
+                              ];
+    
+    //set up browser
     self.browser = [[TripBrowser alloc] initWithFrame:self.browserWindow.bounds];
     [self.browser setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     [self.browserWindow addSubview: self.browser];
@@ -94,8 +149,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [self segmentControlChange:self.browserModeControl];
-    
-//    [self.navigationController.navigationBar.topItem setTitleView:self.browserModeControl];
 }
 
 //-(void) viewWillDisappear:(BOOL)animated {
@@ -106,8 +159,11 @@
 - (void)segmentControlChange:(UISegmentedControl*)sender
 {
     [self.browser clearAndWait];
-//    [self.browser setCellStyle:(TripBrowserCellStyle)[browserCellStyles[sender.selectedSegmentIndex] intValue]];
     void(^fcn)(void) = browserModeControlActions[sender.selectedSegmentIndex]; fcn();
+    for (int i = 0; i < browserModeSearchBars.count; i++) {
+        [browserModeSearchBars[i] setHidden:YES];
+    }
+    [browserModeSearchBars[sender.selectedSegmentIndex] setHidden:NO];
 }
 
 - (void)profileDataHasLoaded:(NSArray*)newData
