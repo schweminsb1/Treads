@@ -161,7 +161,9 @@
     [self.browser clearAndWait];
     void(^fcn)(void) = browserModeControlActions[sender.selectedSegmentIndex]; fcn();
     for (int i = 0; i < browserModeSearchBars.count; i++) {
+        ((UISearchBar*)browserModeSearchBars[i]).text = @"";
         [browserModeSearchBars[i] setHidden:YES];
+        [browserModeSearchBars[i] resignFirstResponder];
     }
     [browserModeSearchBars[sender.selectedSegmentIndex] setHidden:NO];
     self.tripFilterBar.placeholder = [NSString stringWithFormat:@"Search %@", browserModeControlLabels[sender.selectedSegmentIndex]];
