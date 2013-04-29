@@ -332,6 +332,7 @@ CompletionWithItemsandLocation comp= ^(NSArray * items, Location * location)
         {
             MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance( ((MapPinAnnotation*)locationsFilteredArray[indexPath.row]).coordinate, 600, 600);
             [ _mapView setRegion:region animated:YES];
+            [_searchdisplaycontroller setActive:NO animated:YES];
         }
 }
 
