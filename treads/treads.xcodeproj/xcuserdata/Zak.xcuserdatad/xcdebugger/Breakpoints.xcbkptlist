@@ -39,7 +39,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "126"
          endingLineNumber = "126"
-         landmarkName = "-ForgottenPassword:"
+         landmarkName = "-RegisterClick:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "treads/EditProfileVC.m"
-         timestampString = "388869398.134095"
+         timestampString = "388893642.196247"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "164"
-         endingLineNumber = "164"
+         startingLineNumber = "169"
+         endingLineNumber = "169"
          landmarkName = "-dataHasLoaded:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -117,11 +117,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "treads/EditProfileVC.m"
-         timestampString = "388869398.134095"
+         timestampString = "388893642.196247"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "157"
-         endingLineNumber = "157"
+         startingLineNumber = "162"
+         endingLineNumber = "162"
          landmarkName = "-dataHasLoaded:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -351,11 +351,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "treads/EditProfileVC.m"
-         timestampString = "388869411.320431"
+         timestampString = "388893642.196247"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "54"
-         endingLineNumber = "54"
+         startingLineNumber = "59"
+         endingLineNumber = "59"
          landmarkName = "-viewWillAppear:"
          landmarkType = "5">
       </FileBreakpoint>
