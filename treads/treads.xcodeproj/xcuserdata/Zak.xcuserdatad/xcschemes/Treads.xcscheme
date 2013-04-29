@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3188B15616C9CE17008E1D7F"
-               BuildableName = "treads.app"
+               BuildableName = "Treads.app"
                BlueprintName = "treads"
                ReferencedContainer = "container:treads.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3188B15616C9CE17008E1D7F"
-            BuildableName = "treads.app"
+            BuildableName = "Treads.app"
             BlueprintName = "treads"
             ReferencedContainer = "container:treads.xcodeproj">
          </BuildableReference>
@@ -52,7 +52,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3188B15616C9CE17008E1D7F"
-            BuildableName = "treads.app"
+            BuildableName = "Treads.app"
             BlueprintName = "treads"
             ReferencedContainer = "container:treads.xcodeproj">
          </BuildableReference>
@@ -70,7 +70,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3188B15616C9CE17008E1D7F"
-            BuildableName = "treads.app"
+            BuildableName = "Treads.app"
             BlueprintName = "treads"
             ReferencedContainer = "container:treads.xcodeproj">
          </BuildableReference>
