@@ -30,7 +30,7 @@
 @property CommentService * commentService;
 @property TripService * tripService;
 @property FollowService * followService;
-
+@property IBOutlet UISearchDisplayController * searchdisplaycontroller;
 @property (strong) IBOutlet UISearchBar* searchBar;
 
 @property (strong) IBOutlet MKMapView* mapView;
