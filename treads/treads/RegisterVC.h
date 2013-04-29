@@ -10,7 +10,7 @@
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 #import "AppDelegate.h"
 @class UserService;
-@interface RegisterVC : UIViewController
+@interface RegisterVC : UIViewController <UITextFieldDelegate>
 
 @property (strong) IBOutlet UIActivityIndicatorView* activityIndicatorView;
 -(IBAction) RegisterNewUser :(id) sender;

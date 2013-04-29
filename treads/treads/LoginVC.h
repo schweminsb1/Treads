@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 @class UserService;
-@interface LoginVC : UIViewController
+@interface LoginVC : UIViewController <UITextFieldDelegate>
 
 @property (strong) IBOutlet UIActivityIndicatorView* activityIndicatorView;
 

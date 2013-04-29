@@ -49,6 +49,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _emailAdress.delegate=self;
+    _firstName.delegate=self;
+    _lastName.delegate=self;
+    _confirmEmail.delegate=self;
+    _password.delegate=self;
+    _confirmPassword.delegate=self;
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -188,6 +194,57 @@
     _appDelegate.window.rootViewController= _appDelegate.tabBarController;
     
 }
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    if(textField == _firstName)
+    {
+        [textField resignFirstResponder];
+        [_lastName becomeFirstResponder];
+        
+    }
+    else if( textField == _lastName)
+    {
+        [textField resignFirstResponder];
+        [_emailAdress becomeFirstResponder];
+    }
+    else if( textField == _emailAdress)
+    {
+        [textField resignFirstResponder];
+        [_confirmEmail becomeFirstResponder];
+    }
+    else if( textField == _confirmEmail)
+    {
+        [textField resignFirstResponder];
+        [_password becomeFirstResponder];
+    }
+    else if( textField == _password)
+    {
+        [textField resignFirstResponder];
+        [_confirmPassword becomeFirstResponder];
+    }
+    else if( textField == _confirmPassword)
+    {
+        [textField resignFirstResponder];
+        [self RegisterNewUser:self];
+    }
+    
+    return YES;
+}
+-(void) textFieldDidEndEditing:(UITextField *) textField{
+    
+    
+}
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    // enter closes the keyboard
+    if ([string isEqualToString:@"\n"])
+    {
+        [textField resignFirstResponder];
+        return NO;
+    }
+    return YES;
+}
 - (void)keyboardDidShow:(NSNotification *)notification
 {
     //Assign new frame to your view
@@ -197,19 +254,19 @@
     
     if(orientation == 0)
     {
-         [self.view setFrame:CGRectMake(0,-60,_rectangle.size.width,_rectangle.size.height)];
+         [self.view setFrame:CGRectMake(0,-100,_rectangle.size.width,_rectangle.size.height)];
     }
     else if(orientation == UIInterfaceOrientationPortrait)
     {
-         [self.view setFrame:CGRectMake(0,-60,_rectangle.size.width,_rectangle.size.height)];
+         [self.view setFrame:CGRectMake(0,-100,_rectangle.size.width,_rectangle.size.height)];
     }
     else if(orientation == UIInterfaceOrientationLandscapeLeft)
     {
-          [self.view setFrame:CGRectMake(0,-150,_rectangle.size.height,_rectangle.size.width)];
+          [self.view setFrame:CGRectMake(0,-240,_rectangle.size.height,_rectangle.size.width)];
     }
     else if(orientation == UIInterfaceOrientationLandscapeRight)
     {
-           [self.view setFrame:CGRectMake(0,-150,_rectangle.size.height,_rectangle.size.width)];
+           [self.view setFrame:CGRectMake(0,-240,_rectangle.size.height,_rectangle.size.width)];
     }
     [UIView setAnimationDuration:0.3];
     [UIView commitAnimations];
