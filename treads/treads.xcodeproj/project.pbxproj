@@ -89,7 +89,6 @@
 		3C8A8852171B1C620076ED31 /* empty_item.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C8A8851171B1C620076ED31 /* empty_item.png */; };
 		3C8A8855171B20B80076ED31 /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8A8854171B20B80076ED31 /* ImageCache.m */; };
 		3C8A8858171B5F460076ED31 /* ProfileBrowserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8A8857171B5F450076ED31 /* ProfileBrowserCell.m */; };
-		3C8A885E171C464E0076ED31 /* ProfileHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8A885D171C464C0076ED31 /* ProfileHeaderCell.m */; };
 		3C8A908C16E7DAA2007F0BB8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C8A908B16E7DAA2007F0BB8 /* Default-568h@2x.png */; };
 		3C8A909016E7DFC8007F0BB8 /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8A908F16E7DFC8007F0BB8 /* Trip.m */; };
 		3C8AC26D16E82BE30070271E /* TripService.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C8AC26C16E82BE30070271E /* TripService.m */; };
@@ -257,8 +256,6 @@
 		3C8A8854171B20B80076ED31 /* ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageCache.m; path = treads/ImageCache.m; sourceTree = SOURCE_ROOT; };
 		3C8A8856171B5F440076ED31 /* ProfileBrowserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileBrowserCell.h; path = treads/ProfileBrowserCell.h; sourceTree = SOURCE_ROOT; };
 		3C8A8857171B5F450076ED31 /* ProfileBrowserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileBrowserCell.m; path = treads/ProfileBrowserCell.m; sourceTree = SOURCE_ROOT; };
-		3C8A885C171C464A0076ED31 /* ProfileHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileHeaderCell.h; path = treads/ProfileHeaderCell.h; sourceTree = SOURCE_ROOT; };
-		3C8A885D171C464C0076ED31 /* ProfileHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileHeaderCell.m; path = treads/ProfileHeaderCell.m; sourceTree = SOURCE_ROOT; };
 		3C8A908B16E7DAA2007F0BB8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		3C8A908E16E7DFC8007F0BB8 /* Trip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Trip.h; path = treads/Trip.h; sourceTree = SOURCE_ROOT; };
 		3C8A908F16E7DFC8007F0BB8 /* Trip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Trip.m; path = treads/Trip.m; sourceTree = SOURCE_ROOT; };
@@ -769,8 +766,6 @@
 				3C906BEE16F7A8B2009C75BF /* TripBrowserCell.m */,
 				3C8A8856171B5F440076ED31 /* ProfileBrowserCell.h */,
 				3C8A8857171B5F450076ED31 /* ProfileBrowserCell.m */,
-				3C8A885C171C464A0076ED31 /* ProfileHeaderCell.h */,
-				3C8A885D171C464C0076ED31 /* ProfileHeaderCell.m */,
 				3C03544217272D2D004CD7A1 /* DualTripBrowserCellHolder.h */,
 				3C03544317272D2D004CD7A1 /* DualTripBrowserCellHolder.m */,
 			);
@@ -971,7 +966,6 @@
 				3C8A8855171B20B80076ED31 /* ImageCache.m in Sources */,
 				3C8A8858171B5F460076ED31 /* ProfileBrowserCell.m in Sources */,
 				3192AECA171BACB5008F8FB2 /* FavoriteService.m in Sources */,
-				3C8A885E171C464E0076ED31 /* ProfileHeaderCell.m in Sources */,
 				3C95492917246BDA006E0BE7 /* UserPreferencesRepository.m in Sources */,
 				3C03544417272D2D004CD7A1 /* DualTripBrowserCellHolder.m in Sources */,
 			);

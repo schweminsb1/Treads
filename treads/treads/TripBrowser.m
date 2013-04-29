@@ -311,4 +311,9 @@
     [browserTable reloadData];
 }
 
+- (void)toggleFollowForUser:(User*)user
+{
+    self.sendToggleFollowRequestForUser(user);
+}
+
 @end

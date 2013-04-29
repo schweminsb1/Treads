@@ -46,6 +46,7 @@ static FollowService* repo;
         user.profileImage = [ImageService emptyImage];
         user.coverImage = [ImageService emptyImage];
         user.tripCount = [followProfile[@"tripCount"] intValue];
+        user.followID = [newDictionary[@"id"] intValue];
         newDictionary[@"followProfile"] = user;
         [returnArray addObject:newDictionary];
     }
@@ -53,7 +54,7 @@ static FollowService* repo;
 }
 
 - (void) getPeopleIFollow:(int)myID forTarget:(NSObject*)target withAction:(SEL)returnAction {
-    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"MyID = '%i'", myID] usingService:self forRequestingObject:target withReturnAction:returnAction];
+    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"MyID = '%i'", myID] usingService:self usingDataTable:@"FollowReader" forRequestingObject:target withReturnAction:returnAction];
 }
 
 - (void) addFollow:(int)myID withTheirID:(int)theirID fromTarget:(NSObject *) target withReturn:(SEL) returnAction {

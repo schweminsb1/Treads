@@ -223,7 +223,7 @@ static DataRepository* repo;
             [requestingObject performSelector:returnAction];
 #pragma clang diagnostic pop
         };
-        
+        NSLog(error.localizedDescription);
         if (error == nil) {
 //            id y = items[0][@"id"];
             //  NSLog(y);

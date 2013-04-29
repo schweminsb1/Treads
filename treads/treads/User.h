@@ -23,4 +23,7 @@
 @property (strong) UIImage* coverImage;
 @property int tripCount;
 
+//derived
+@property int followID;
+
 @end

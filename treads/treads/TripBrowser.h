@@ -10,7 +10,7 @@
 
 #import "Trip.h"
 
-//#import "TripBrowserCell.h"
+@class User;
 
 @interface TripBrowser : UIView
 
@@ -25,5 +25,9 @@ typedef enum {TripBrowserCell3x4, TripBrowserCell4x4, TripBrowserCell6x2, TripBr
 - (void)refreshWithNewImages;
 
 - (void)respondToSelectAtRow:(int)row;
+
+@property (copy) void(^sendToggleFollowRequestForUser)(User* user);
+
+- (void)toggleFollowForUser:(User*)user;
 
 @end

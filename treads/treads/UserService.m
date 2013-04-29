@@ -9,6 +9,7 @@
 #import "UserService.h"
 //#import "User.h"
 #import "DataRepository.h"
+#import "TreadsSession.h"
 
 @implementation UserService
 
@@ -36,16 +37,22 @@ static UserService* repo;
     NSMutableArray * results = [[NSMutableArray alloc]init];
     for ( int i=0; i< returnData.count; i++)
     {
-        User * user         =       [[User alloc] init];
+        User* user          =       [[User alloc] init];
         user.fname          =       returnData[i][@"Fname"];
         user.emailaddress   =       returnData[i][@"emailAddress"];
         user.lname          =       returnData[i][@"Lname"];
         user.User_ID        =       [((NSString*)returnData[i][@"id"]) intValue];
-        user.profilePhotoID=      [((NSString*)returnData[i][@"profilePhotoID"]) intValue];
-        user.password       =        returnData[i][@"password"];
-        user.coverPhotoID   =  [((NSString*)returnData[i][@"coverPhotoID"]) intValue];
+        user.profilePhotoID =       [((NSString*)returnData[i][@"profilePhotoID"]) intValue];
+        user.password       =       returnData[i][@"password"];
+        user.coverPhotoID   =       [((NSString*)returnData[i][@"coverPhotoID"]) intValue];
         if ([((NSDictionary*)returnData[i]) valueForKey:@"tripCount"]) {
             user.tripCount = [returnData[i][@"tripCount"] intValue];
+        }
+        if ([((NSDictionary*)returnData[i]) valueForKey:@"followID"]) {
+            user.followID = [returnData[i][@"followID"] intValue];
+        }
+        else {
+            user.followID = -1;
         }
         [results addObject: user];
     }
@@ -59,7 +66,7 @@ static UserService* repo;
 
 - (void)getUsersContainingSubstring:(NSString *)substring forTarget:(NSObject *)target withAction:(SEL)returnAction
 {
-    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"search = '%@'", substring] usingService:self usingDataTable:@"UserFilteredReader" forRequestingObject:target withReturnAction:returnAction];
+    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"'%d' = '%@'", [TreadsSession instance].treadsUserID, substring] usingService:self usingDataTable:@"UserFilteredReader" forRequestingObject:target withReturnAction:returnAction];
 }
 
 -(NSArray *)getUserbyID:(int)UserID

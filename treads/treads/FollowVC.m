@@ -133,10 +133,24 @@
     //set up browser
     self.browser = [[TripBrowser alloc] initWithFrame:self.browserWindow.bounds];
     [self.browser setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+    FollowVC* __weak _self = self;
+    self.browser.sendToggleFollowRequestForUser = ^(User* user) {
+        if(user.followID < 0) {
+            [[FollowService instance] addFollow:[TreadsSession instance].treadsUserID withTheirID:user.User_ID fromTarget:_self withReturn:@selector(followSuccess)];
+        }
+        else {
+            [[FollowService instance] deleteFollow:[NSString stringWithFormat:@"id = %i", user.followID] fromTarget:_self withReturn:@selector(followSuccess)];
+        }
+    };
     [self.browserWindow addSubview: self.browser];
     
     //initial display
     [self.browserModeControl setSelectedSegmentIndex:1];
+}
+
+- (void)followSuccess
+{
+    [self searchBar:self.userSearchBar textDidChange:self.userSearchBar.text];
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -88,7 +88,7 @@
         self.navigationItem.rightBarButtonItem = self.settingsButton;
     }
 //      self.edit.hidden = true;
-    self.follow.hidden = true;
+    self.follow.hidden = YES;
 //    self.profilePic.adjustsImageWhenDisabled = NO;
 //    self.profilePic.adjustsImageWhenHighlighted = NO;
     
@@ -190,12 +190,12 @@
         self.name.text = [NSString stringWithFormat:@"%@ %@", self.returnedUser.fname, self.returnedUser.lname];
         
         
-        if (self.returnedUser.User_ID == [TreadsSession instance].treadsUserID) {
-//            self.edit.hidden = false;
-        }
-        else {
-            self.follow.hidden = false;
-        }
+//        if (self.returnedUser.User_ID == [TreadsSession instance].treadsUserID) {
+////            self.edit.hidden = false;
+//        }
+//        else {
+////            self.follow.hidden = false;
+//        }
       
         [[TripService instance] getTripsWithUserID:self.userID forTarget:self withAction:@selector(tripsHaveLoaded:)];
         
@@ -317,6 +317,7 @@
         }
     }
     self.follow.enabled = true;
+    self.follow.hidden = NO;
     
     NSString* buttonText = @"";
     if (self.followID == -1) {
