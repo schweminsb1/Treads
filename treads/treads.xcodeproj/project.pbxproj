@@ -76,6 +76,8 @@
 		3C13F52E171A10F800EA6582 /* icon114.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C13F52D171A10F700EA6582 /* icon114.png */; };
 		3C13F530171A10FF00EA6582 /* icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C13F52F171A10FF00EA6582 /* icon57.png */; };
 		3C13F539171A184300EA6582 /* 404.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C13F538171A184300EA6582 /* 404.png */; };
+		3C1BB200172E0143003AB20A /* button_white_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BB1FE172E0143003AB20A /* button_white_select.png */; };
+		3C1BB201172E0143003AB20A /* button_white_unselect.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BB1FF172E0143003AB20A /* button_white_unselect.png */; };
 		3C60C7DB16E7004900FDFD7D /* TripBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C60C7DA16E7004900FDFD7D /* TripBrowser.m */; };
 		3C87B12316F7E7B8000ABF18 /* AppColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C87B12216F7E7B8000ABF18 /* AppColors.m */; };
 		3C882DC1170D1DF30041A9C8 /* ImageScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C882DC0170D1DF30041A9C8 /* ImageScrollTextView.m */; };
@@ -233,6 +235,8 @@
 		3C13F52D171A10F700EA6582 /* icon114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114.png; sourceTree = "<group>"; };
 		3C13F52F171A10FF00EA6582 /* icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57.png; sourceTree = "<group>"; };
 		3C13F538171A184300EA6582 /* 404.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 404.png; sourceTree = "<group>"; };
+		3C1BB1FE172E0143003AB20A /* button_white_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_white_select.png; sourceTree = "<group>"; };
+		3C1BB1FF172E0143003AB20A /* button_white_unselect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_white_unselect.png; sourceTree = "<group>"; };
 		3C60C7D916E7004900FDFD7D /* TripBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripBrowser.h; path = treads/TripBrowser.h; sourceTree = SOURCE_ROOT; };
 		3C60C7DA16E7004900FDFD7D /* TripBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripBrowser.m; path = treads/TripBrowser.m; sourceTree = SOURCE_ROOT; };
 		3C87B12116F7E7B8000ABF18 /* AppColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppColors.h; path = treads/AppColors.h; sourceTree = SOURCE_ROOT; };
@@ -683,6 +687,8 @@
 				3C90D6FB17236C0B00DE38BB /* button_blue_unselect.png */,
 				3C90D6FC17236C0B00DE38BB /* button_red_select.png */,
 				3C90D6FD17236C0B00DE38BB /* button_red_unselect.png */,
+				3C1BB1FE172E0143003AB20A /* button_white_select.png */,
+				3C1BB1FF172E0143003AB20A /* button_white_unselect.png */,
 			);
 			name = "Edit Icons";
 			sourceTree = "<group>";
@@ -895,6 +901,8 @@
 				3C954924172469DF006E0BE7 /* icon_pencil.png in Resources */,
 				3C954925172469DF006E0BE7 /* icon_plus.png in Resources */,
 				3C954926172469DF006E0BE7 /* icon_star.png in Resources */,
+				3C1BB200172E0143003AB20A /* button_white_select.png in Resources */,
+				3C1BB201172E0143003AB20A /* button_white_unselect.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

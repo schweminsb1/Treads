@@ -21,9 +21,9 @@
 - (id)initWithRepository:(DataRepository*)repository;
 - (NSArray*)convertReturnDataToServiceModel:(NSArray*)returnData;
 
-
 - (void)getUserbyID:(int)UserID forTarget:(NSObject *)target withAction:(SEL)returnAction;
 - (void)getUserbyEmail:(NSString *)emailAddress forTarget:(NSObject *)target withAction:(SEL)returnAction;
+- (void)getUsersContainingSubstring:(NSString *)substring forTarget:(NSObject *)target withAction:(SEL)returnAction;
 
 -(NSArray *)getUserbyID:(int)UserID;
 

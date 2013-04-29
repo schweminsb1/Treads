@@ -77,7 +77,7 @@
 						<string key="NSFrame">{{129, 40}, {160, 160}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="55203625"/>
+						<reference key="NSNextKeyView" ref="369753284"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<int key="IBUIContentMode">2</int>
@@ -96,6 +96,7 @@
 					<object class="IBUIView" id="452073531">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">293</int>
+						<array class="NSMutableArray" key="NSSubviews"/>
 						<string key="NSFrame">{{54, 60}, {660, 90}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
@@ -113,10 +114,10 @@
 					<object class="IBUIButton" id="55203625">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">293</int>
-						<string key="NSFrame">{{328, 112}, {112, 44}}</string>
+						<string key="NSFrame">{{324, 112}, {120, 51}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="369753284"/>
+						<reference key="NSNextKeyView" ref="465580102"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -139,7 +140,7 @@
 						<string key="NSFrame">{{250, 73}, {267, 74}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="465580102"/>
+						<reference key="NSNextKeyView" ref="55203625"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -318,11 +319,6 @@
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">21</int>
-						<reference key="object" ref="55203625"/>
-						<reference key="parent" ref="766721923"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">49</int>
 						<reference key="object" ref="465580102"/>
 						<array class="NSMutableArray" key="children"/>
@@ -347,6 +343,11 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">69</int>
 						<reference key="object" ref="876181980"/>
+						<reference key="parent" ref="766721923"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">21</int>
+						<reference key="object" ref="55203625"/>
 						<reference key="parent" ref="766721923"/>
 					</object>
 				</array>
@@ -377,17 +378,25 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">ProfileVC</string>
 					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">followUser:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">followUser:</string>
-						<object class="IBActionInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="changeBanner:">id</string>
+						<string key="changePic:">id</string>
+						<string key="followUser:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="changeBanner:">
+							<string key="name">changeBanner:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="changePic:">
+							<string key="name">changePic:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="followUser:">
 							<string key="name">followUser:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-					</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="activityIndicatorView">UIActivityIndicatorView</string>
 						<string key="banner">UIButton</string>
