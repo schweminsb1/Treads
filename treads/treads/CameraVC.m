@@ -70,7 +70,7 @@ void (^done)(void) = ^{
     // handle when the user selects an image
     [self.popoverController dismissPopoverAnimated:true];
     NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
-    [self dismissViewControllerAnimated:YES completion: nil];
+    [self dismissViewControllerAnimated:NO completion: nil];
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
         UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
         // write the saved photo to the photo library
