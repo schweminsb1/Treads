@@ -10,6 +10,7 @@
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 #import "LocationPickerVC.h"
 #import "TripViewVC.h"
+#import "LocationMapVC.h"
 @class LocationService;
 
 @interface AddLocationVC : UIViewController
@@ -23,7 +24,8 @@
 @property (nonatomic, copy)void(^onSuccessLocation)(CLLocationCoordinate2D);
 @property (nonatomic, copy) void (^returnLocationToTripView)(Location*);
 @property TripViewVC * tripViewReturnDelegate;
-
+@property LocationMapVC * delegate;
+@property UIPopoverController * delegatepopover;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil locationService:(LocationService *)myLocationService tripID:(int)myTripID;
 -(void) goBack:(NSNumber *)idnum success:(NSNumber*)success;
 -(id)initWithCoordinates:(CLLocationCoordinate2D) locationCoord;
