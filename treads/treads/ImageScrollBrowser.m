@@ -20,6 +20,7 @@
 @implementation ImageScrollBrowser {
     BOOL layoutDone;
     BOOL resetOnDisplay;
+    BOOL gotoLastItem;
     BOOL isAnimatingItemRemove;
     BOOL isAnimatingItemSwap;
     UIScrollView* imageScrollView;
@@ -44,6 +45,7 @@
     if (self) {
         layoutDone = NO;
         resetOnDisplay = YES;
+        gotoLastItem = NO;
         isAnimatingItemRemove = NO;
         isAnimatingItemSwap = NO;
         imageSubViewSize = size;
@@ -218,13 +220,14 @@
         [self setDescriptionDisplayToIndex:0];
     }
     else {
-        if (imageScrollView.contentOffset.x / imageSubViewSize.width == displayedTextIndex) {
+        if (gotoLastItem || imageScrollView.contentOffset.x / imageSubViewSize.width == displayedTextIndex) {
             displayedTextIndex--;
             [self setDescriptionDisplayToIndex:displayedTextIndex+1];
         }
     }
     
     resetOnDisplay = YES;
+    gotoLastItem = NO;
     
     [imageScrollView bringSubviewToFront:imageScrollPaddingRemoval];
     
@@ -316,6 +319,7 @@
     NSMutableArray* temp = [NSMutableArray arrayWithArray:self.displayItems];
     [temp addObject:item];
     resetOnDisplay = NO;
+    gotoLastItem = YES;
     displayedTextIndex = self.displayItems.count;
     self.arrayWasChanged(temp);
     self.displayItems = temp;
@@ -337,6 +341,7 @@
         if (displayedTextIndex >= temp.count) {
             displayedTextIndex = temp.count - 1;
             showHideAnimation = NO;
+            gotoLastItem = YES;
         }
         resetOnDisplay = NO;
         self.arrayWasChanged(temp);

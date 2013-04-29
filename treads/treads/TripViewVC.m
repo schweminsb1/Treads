@@ -50,12 +50,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        
-        
-        self.rectangle= self.view.bounds;
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
-        
         self.tripService = myTripService;
         self.tripID = myTripID;
         previousViewTitle = backTitle;
@@ -66,6 +60,11 @@
         self.favoriteID = -1;
         self.showDraft = NO;
         tappedSave = NO;
+        
+        self.rectangle= self.view.bounds;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
     }
     return self;
 }
