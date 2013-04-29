@@ -12,8 +12,9 @@
 #import "LocationSmallViewController.h"
 #import "LocationService.h"
 #import "TripViewVC.h"
-@interface LocationMapVC : UIViewController <CLLocationManagerDelegate, UISearchBarDelegate, UINavigationControllerDelegate,MKMapViewDelegate>
+@interface LocationMapVC : UIViewController <CLLocationManagerDelegate, UISearchBarDelegate, UINavigationControllerDelegate,MKMapViewDelegate,UIPopoverControllerDelegate>
 @property (nonatomic, copy)void(^locationMapSuccess)(CLLocationCoordinate2D);
 @property (nonatomic, copy) void (^returnLocationToTripView)(Location*);
 @property TripViewVC * tripViewReturnDelegate;
+@property BOOL finishClicked;
 @end

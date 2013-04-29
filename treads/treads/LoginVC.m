@@ -21,6 +21,7 @@
 @property          AppDelegate * appDelegate;
 @property        TreadsSession * treadsSession;
 @property        UserService * userService;
+@property         CGRect rectangle;
 @end
 
 @implementation LoginVC
@@ -35,6 +36,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
     if (self) {
+        _rectangle= self.view.bounds;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
+        
         _activityIndicatorView.hidesWhenStopped= YES;
         _activityIndicatorView.hidden=YES;
         
@@ -47,7 +52,7 @@
         [pictures addObject:[UIImage imageNamed:@"summit-boots-hiking-rocks.jpg"]];
         [pictures addObject:[UIImage imageNamed:@"helicopter-bouldering-crash-pad.jpg"]];
        _background = [[UIImageView alloc]initWithImage:pictures[1]];
-        
+
         [self.view setAutoresizesSubviews:YES];
         [self.view setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
             [self.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight
@@ -60,6 +65,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _usernameText.delegate=self;
+    _passwordText.delegate=self;
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -202,6 +209,89 @@
     {
         //theres more than one item
     }
+    
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+   
+    if(textField == _usernameText)
+   {
+       [textField resignFirstResponder];
+       [_passwordText becomeFirstResponder];
+       
+   }
+    else if( textField == _passwordText)
+    {
+        [textField resignFirstResponder];
+        [self LoginClick:self];
+    }
+    
+    return YES;
+}
+-(void) textFieldDidEndEditing:(UITextField *) textField{
+    
+    
+}
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    // enter closes the keyboard
+    if ([string isEqualToString:@"\n"])
+    {
+        [textField resignFirstResponder];
+        return NO;
+    }
+    return YES;
+}
+- (void)keyboardDidShow:(NSNotification *)notification
+{
+    //Assign new frame to your view
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    [UIView beginAnimations:nil context:NULL]; // animate the following:
+    // move to new location
+    
+    if(orientation == 0)
+    {
+        [self.view setFrame:CGRectMake(0,-60,_rectangle.size.width,_rectangle.size.height)];
+    }
+    else if(orientation == UIInterfaceOrientationPortrait)
+    {
+        [self.view setFrame:CGRectMake(0,-60,_rectangle.size.width,_rectangle.size.height)];
+    }
+    else if(orientation == UIInterfaceOrientationLandscapeLeft)
+    {
+        [self.view setFrame:CGRectMake(0,-150,_rectangle.size.height,_rectangle.size.width)];
+    }
+    else if(orientation == UIInterfaceOrientationLandscapeRight)
+    {
+        [self.view setFrame:CGRectMake(0,-150,_rectangle.size.height,_rectangle.size.width)];
+    }
+    [UIView setAnimationDuration:0.3];
+    [UIView commitAnimations];
+    //here taken -20 for example i.e. your view will be scrolled to -20. change its value according to your requirement.
+    
+}
+
+-(void)keyboardDidHide:(NSNotification *)notification
+{
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    [UIView beginAnimations:nil context:NULL];
+    if(orientation == 0)
+    {
+        [self.view setFrame:CGRectMake(0,0,_rectangle.size.width,_rectangle.size.height)];
+    }
+    else if(orientation == UIInterfaceOrientationPortrait)
+    {
+        [self.view setFrame:CGRectMake(0,0,_rectangle.size.width,_rectangle.size.height)];
+    }
+    else if(orientation == UIInterfaceOrientationLandscapeLeft)
+    {
+        [self.view setFrame:CGRectMake(0,0,_rectangle.size.height,_rectangle.size.width)];
+    }
+    else if(orientation == UIInterfaceOrientationLandscapeRight)
+    {
+        [self.view setFrame:CGRectMake(0,0,_rectangle.size.height,_rectangle.size.width)];
+    }
+    [UIView setAnimationDuration:0.3];
+    [UIView commitAnimations];
     
 }
 

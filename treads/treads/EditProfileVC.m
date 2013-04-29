@@ -25,6 +25,7 @@
 @property IBOutlet UITextField * lName;
 @property IBOutlet UITextField * email;
 @property UserService * userService;
+@property         CGRect rectangle;
 
 @end
 
@@ -36,6 +37,10 @@
     if (self) {
         // Custom initialization
         self.userService = myUserService;
+        
+        self.rectangle= self.view.bounds;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
 
     }
     return self;
@@ -189,6 +194,60 @@
     [hash appendString:salt];
     NSString * inputHash= [NSString stringWithFormat:@"%lu",(unsigned long)[hash hash]];
     return inputHash;
+    
+}
+
+- (void)keyboardDidShow:(NSNotification *)notification
+{
+    //Assign new frame to your view
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    [UIView beginAnimations:nil context:NULL]; // animate the following:
+    // move to new location
+    
+    if(orientation == 0)
+    {
+        [self.view setFrame:CGRectMake(0,-60,_rectangle.size.width,_rectangle.size.height)];
+    }
+    else if(orientation == UIInterfaceOrientationPortrait)
+    {
+        [self.view setFrame:CGRectMake(0,-60,_rectangle.size.width,_rectangle.size.height)];
+    }
+    else if(orientation == UIInterfaceOrientationLandscapeLeft)
+    {
+        [self.view setFrame:CGRectMake(0,-150,_rectangle.size.height,_rectangle.size.width)];
+    }
+    else if(orientation == UIInterfaceOrientationLandscapeRight)
+    {
+        [self.view setFrame:CGRectMake(0,-150,_rectangle.size.height,_rectangle.size.width)];
+    }
+    [UIView setAnimationDuration:0.3];
+    [UIView commitAnimations];
+    //here taken -20 for example i.e. your view will be scrolled to -20. change its value according to your requirement.
+    
+}
+
+-(void)keyboardDidHide:(NSNotification *)notification
+{
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    [UIView beginAnimations:nil context:NULL];
+    if(orientation == 0)
+    {
+        [self.view setFrame:CGRectMake(0,0,_rectangle.size.width,_rectangle.size.height)];
+    }
+    else if(orientation == UIInterfaceOrientationPortrait)
+    {
+        [self.view setFrame:CGRectMake(0,0,_rectangle.size.width,_rectangle.size.height)];
+    }
+    else if(orientation == UIInterfaceOrientationLandscapeLeft)
+    {
+        [self.view setFrame:CGRectMake(0,0,_rectangle.size.height,_rectangle.size.width)];
+    }
+    else if(orientation == UIInterfaceOrientationLandscapeRight)
+    {
+        [self.view setFrame:CGRectMake(0,0,_rectangle.size.height,_rectangle.size.width)];
+    }
+    [UIView setAnimationDuration:0.3];
+    [UIView commitAnimations];
     
 }
 

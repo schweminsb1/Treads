@@ -35,6 +35,7 @@
 @property CommentService * commentService;
 @property UserService * userService;
 @property int favoriteID;
+@property         CGRect rectangle;
 @end
 
 @implementation TripViewVC {
@@ -49,6 +50,12 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        
+        
+        self.rectangle= self.view.bounds;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
+        
         self.tripService = myTripService;
         self.tripID = myTripID;
         previousViewTitle = backTitle;
@@ -357,6 +364,62 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+
+- (void)keyboardDidShow:(NSNotification *)notification
+{
+    //Assign new frame to your view
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    [UIView beginAnimations:nil context:NULL]; // animate the following:
+    // move to new location
+    
+    if(orientation == 0)
+    {
+        [self.view setFrame:CGRectMake(0,-60,_rectangle.size.width,_rectangle.size.height)];
+    }
+    else if(orientation == UIInterfaceOrientationPortrait)
+    {
+        [self.view setFrame:CGRectMake(0,-60,_rectangle.size.width,_rectangle.size.height)];
+    }
+    else if(orientation == UIInterfaceOrientationLandscapeLeft)
+    {
+        [self.view setFrame:CGRectMake(0,-90,_rectangle.size.height,_rectangle.size.width)];
+    }
+    else if(orientation == UIInterfaceOrientationLandscapeRight)
+    {
+        [self.view setFrame:CGRectMake(0,-90,_rectangle.size.height,_rectangle.size.width)];
+    }
+    [UIView setAnimationDuration:0.3];
+    [UIView commitAnimations];
+    //here taken -20 for example i.e. your view will be scrolled to -20. change its value according to your requirement.
+    
+}
+
+-(void)keyboardDidHide:(NSNotification *)notification
+{
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    [UIView beginAnimations:nil context:NULL];
+    if(orientation == 0)
+    {
+        [self.view setFrame:CGRectMake(0,0,_rectangle.size.width,_rectangle.size.height)];
+    }
+    else if(orientation == UIInterfaceOrientationPortrait)
+    {
+        [self.view setFrame:CGRectMake(0,0,_rectangle.size.width,_rectangle.size.height)];
+    }
+    else if(orientation == UIInterfaceOrientationLandscapeLeft)
+    {
+        [self.view setFrame:CGRectMake(0,0,_rectangle.size.height,_rectangle.size.width)];
+    }
+    else if(orientation == UIInterfaceOrientationLandscapeRight)
+    {
+        [self.view setFrame:CGRectMake(0,0,_rectangle.size.height,_rectangle.size.width)];
+    }
+    [UIView setAnimationDuration:0.3];
+    [UIView commitAnimations];
+    
 }
 
 @end
