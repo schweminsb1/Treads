@@ -17,6 +17,7 @@
 #import "TripViewVC.h"
 #import "LocationService.h"
 #import "FollowService.h"
+#import "UserService.h"
 #import "TreadsSession.h"
 #import "ImageService.h"
 #import "ProfileVC.h"
@@ -33,9 +34,7 @@
 
 @property (strong) UIView* titleView;
 @property (strong) UISegmentedControl* browserModeControl;
-//@property (strong) UISearchDisplayController* userSearchController;
 @property (strong) UISearchBar* userSearchBar;
-//@property (strong) UISearchDisplayController* tripSearchController;
 @property (strong) UISearchBar* tripFilterBar;
 
 @property LocationService * locationService;
@@ -73,7 +72,7 @@
                                  @"All"
                                  ];
     browserModeControlActions = @[
-                                  ^void(void) {[[FollowService instance] getPeopleIFollow:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(profileDataHasLoaded:)];},
+                                  ^void(void) {[[FollowService instance] getPeopleIFollow:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(profileDataHasLoadedFromFollowService:)];},
                                    ^void(void) {[[TripService instance] getFeedItemsForUserID:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(tripDataHasLoaded:)];},
                                    ^void(void) {[[TripService instance] getFavoriteItemsForUserID:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(tripDataHasLoaded:)];},
                                    ^void(void) {[[TripService instance] getAllTripsForTarget:self withAction:@selector(tripDataHasLoaded:)];}
@@ -110,12 +109,6 @@
     self.userSearchBar.frame = CGRectMake(self.browserModeControl.bounds.size.width + 12, 0, self.titleView.bounds.size.width - self.browserModeControl.bounds.size.width - 12, 42);
     self.userSearchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.titleView addSubview:self.userSearchBar];
-
-    //user search controller
-//    self.userSearchController = [[UISearchDisplayController alloc] initWithSearchBar:self.userSearchBar contentsController:self];
-//    self.userSearchController.delegate = self;
-//    self.userSearchController.searchResultsDataSource = self;
-//    self.userSearchController.searchResultsDelegate = self;
     
     //trip filter bar
     self.tripFilterBar = [[UISearchBar alloc] init];
@@ -169,13 +162,23 @@
     self.tripFilterBar.placeholder = [NSString stringWithFormat:@"Search %@", browserModeControlLabels[sender.selectedSegmentIndex]];
 }
 
-- (void)profileDataHasLoaded:(NSArray*)newData
+- (void)profileDataHasLoadedFromFollowService:(NSArray*)newData
+{
+    NSMutableArray* profileArray = [[NSMutableArray alloc] init];
+    for (NSDictionary* dictionary in newData) {
+        [profileArray addObject:dictionary[@"followProfile"]];
+    }
+    [self profileDataHasLoaded:profileArray];
+}
+
+- (void)profileDataHasLoadedFromUserService:(NSArray*)newData
+{
+    [self profileDataHasLoaded:[NSMutableArray arrayWithArray:newData]];
+}
+
+- (void)profileDataHasLoaded:(NSMutableArray*)profileArray
 {
     if (self.browserModeControl.selectedSegmentIndex == 0) {
-        NSMutableArray* profileArray = [[NSMutableArray alloc] init];
-        for (NSDictionary* dictionary in newData) {
-            [profileArray addObject:dictionary[@"followProfile"]];
-        }
         [profileArray sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
             return [((User*)obj1).fname compare:((User*)obj2).fname];
         }];
@@ -226,7 +229,6 @@
 
 - (void)showTrip:(Trip*)trip
 {
-    //NSLog(@"Showing Trip: %@", trip.name);
     UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:browserModeControlLabels[self.browserModeControl.selectedSegmentIndex] style: UIBarButtonItemStyleBordered target: nil action: nil];
     [self.navigationItem setBackBarButtonItem: newBackButton];
     
@@ -245,6 +247,15 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
+    if (searchBar == self.userSearchBar) {
+        if ([searchText isEqual:@""]) {
+            void(^fcn)(void) = browserModeControlActions[0]; fcn();
+        }
+        else {
+            [[UserService instance] getUsersContainingSubstring:searchText forTarget:self withAction:@selector(profileDataHasLoadedFromUserService:)];
+        }
+    }
+    
     if (searchBar == self.tripFilterBar) {
         [self.browser setFilterString:searchText];
     }

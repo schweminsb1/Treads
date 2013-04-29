@@ -44,21 +44,25 @@ static UserService* repo;
         user.profilePhotoID=      [((NSString*)returnData[i][@"profilePhotoID"]) intValue];
         user.password       =        returnData[i][@"password"];
         user.coverPhotoID   =  [((NSString*)returnData[i][@"coverPhotoID"]) intValue];
+        if ([((NSDictionary*)returnData[i]) valueForKey:@"tripCount"]) {
+            user.tripCount = [returnData[i][@"tripCount"] intValue];
+        }
         [results addObject: user];
     }
     return results;
-
-    
 }
 
 - (void)getUserbyID:(int)UserID forTarget:(NSObject *)target withAction:(SEL)returnAction
 {
-    
     [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"id = '%d'", UserID] usingService:self forRequestingObject:target withReturnAction:returnAction];
-    
-    
 }
--(NSArray *)getUserbyID:(int)UserID 
+
+- (void)getUsersContainingSubstring:(NSString *)substring forTarget:(NSObject *)target withAction:(SEL)returnAction
+{
+    [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"search = '%@'", substring] usingService:self usingDataTable:@"UserFilteredReader" forRequestingObject:target withReturnAction:returnAction];
+}
+
+-(NSArray *)getUserbyID:(int)UserID
 {
     __block NSArray * objects;
     __block BOOL completed=false;
@@ -72,22 +76,16 @@ static UserService* repo;
     while(!completed)
     {}
     
-    
     return objects;
-    
 }
 
 - (void)getUserbyEmail:(NSString *)emailAddress forTarget:(NSObject *)target withAction:(SEL)returnAction
 {
-    
     [self.dataRepository retrieveDataItemsMatching:[NSString stringWithFormat:@"emailAddress = '%@' ", emailAddress] usingService:self forRequestingObject:target withReturnAction:returnAction];
-    
-    
 }
 
 - (void)addUser:(NSDictionary*)newUser forTarget:(NSObject*) target withAction: (SEL) returnAction
 {
-    
     [_dataRepository createDataItem:newUser usingService:self forRequestingObject:target withReturnAction:returnAction];
 }
 
