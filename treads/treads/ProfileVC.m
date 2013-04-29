@@ -307,18 +307,41 @@
     [self.navigationController pushViewController:editProfileVC animated:YES];
 }
 
-- (void) followDataHasLoaded:(NSArray*)newData {
-    [self.follow setTitle:@"Follow" forState:UIControlStateNormal];
+- (void) followDataHasLoaded:(NSArray*)newData
+{
     self.followID = -1;
-
     for (int x = 0; x < newData.count; x++) {
         if (self.userID == [((NSString*)newData[x][@"TheirID"])intValue]) {
-            [self.follow setTitle:@"Unfollow" forState:UIControlStateNormal];
             self.followID = [((NSString*)newData[x][@"id"])intValue];
             break;
         }
     }
     self.follow.enabled = true;
+    
+    NSString* buttonText = @"";
+    if (self.followID == -1) {
+        //Follow
+        buttonText = @"Follow";
+        UIImage* buttonNormalImage = [ImageService imageWithImage:[UIImage imageNamed:@"button_white_unselect.png"] scaledToSize:CGSizeMake(50, 50)];
+        [self.follow setBackgroundImage:[buttonNormalImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, buttonNormalImage.size.width * (72.0/312.0), 0, buttonNormalImage.size.width * (72.0/312.0))]forState:UIControlStateNormal];
+        [self.follow setBackgroundImage:[buttonNormalImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, buttonNormalImage.size.width * (72.0/312.0), 0, buttonNormalImage.size.width * (72.0/312.0))]forState:UIControlStateDisabled];
+        UIImage* buttonSelectImage = [ImageService imageWithImage:[UIImage imageNamed:@"button_white_select.png"] scaledToSize:CGSizeMake(50, 50)];
+        [self.follow setBackgroundImage:[buttonSelectImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, buttonSelectImage.size.width * (72.0/312.0), 0, buttonSelectImage.size.width * (72.0/312.0))]forState:UIControlStateHighlighted];
+    }
+    else {
+        //Following
+        buttonText = @"Following";
+        UIImage* buttonNormalImage = [ImageService imageWithImage:[UIImage imageNamed:@"button_blue_unselect.png"] scaledToSize:CGSizeMake(50, 50)];
+        [self.follow setBackgroundImage:[buttonNormalImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, buttonNormalImage.size.width * (72.0/312.0), 0, buttonNormalImage.size.width * (72.0/312.0))]forState:UIControlStateNormal];
+        [self.follow setBackgroundImage:[buttonNormalImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, buttonNormalImage.size.width * (72.0/312.0), 0, buttonNormalImage.size.width * (72.0/312.0))]forState:UIControlStateDisabled];
+        UIImage* buttonSelectImage = [ImageService imageWithImage:[UIImage imageNamed:@"button_blue_select.png"] scaledToSize:CGSizeMake(50, 50)];
+        [self.follow setBackgroundImage:[buttonSelectImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, buttonSelectImage.size.width * (72.0/312.0), 0, buttonSelectImage.size.width * (72.0/312.0))]forState:UIControlStateHighlighted];
+    }
+    [self.follow setTitle:buttonText forState:UIControlStateNormal];
+    [self.follow setTitle:buttonText forState:UIControlStateHighlighted];
+    [self.follow setTitleColor:[UIColor colorWithWhite:0 alpha:0.6] forState:UIControlStateNormal];
+    [self.follow setTitleColor:[UIColor colorWithWhite:0 alpha:0.6] forState:UIControlStateHighlighted];
+    [self.follow.titleLabel setFont:[UIFont boldSystemFontOfSize:20]];
 }
 
 - (IBAction)followUser:(id)sender {
@@ -333,7 +356,6 @@
 
 - (void) followSuccess {
     [self.followService getPeopleIFollow:[TreadsSession instance].treadsUserID forTarget:self withAction:@selector(followDataHasLoaded:)];
-
 }
 
 @end

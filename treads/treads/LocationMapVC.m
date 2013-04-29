@@ -17,6 +17,8 @@
 @property (strong) CLLocationManager* locationManager;
 @property (strong) UIBarButtonItem* doneButton;
 @property CLLocationCoordinate2D placedLocation;
+@property (strong) UIPopoverController *addLocPop;
+
 @end
 
 @implementation LocationMapVC
@@ -28,6 +30,8 @@ bool popNavigationStack = NO;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        _finishClicked=NO;
+        
     }
     return self;
 }
@@ -79,12 +83,18 @@ bool popNavigationStack = NO;
 {
     if(_placedLocation.latitude != -500 && _placedLocation.longitude != -500)
     {
-       
+        
         AddLocationVC *addLocVC = [[AddLocationVC alloc]initWithCoordinates: _placedLocation];
+        _addLocPop = [[UIPopoverController alloc]initWithContentViewController:addLocVC];
+        _addLocPop.delegate=self;
         addLocVC.returnLocationToTripView=_returnLocationToTripView;
         popNavigationStack = YES;
         addLocVC.tripViewReturnDelegate=_tripViewReturnDelegate;
-        [self.navigationController pushViewController:addLocVC animated:YES];
+        addLocVC.delegatepopover=_addLocPop;
+        addLocVC.delegate = self;
+        _addLocPop.popoverContentSize = CGSizeMake(320,140);
+        
+        [_addLocPop presentPopoverFromRect:CGRectMake( self.view.bounds.size.width/2, self.view.bounds.size.height/2-70, 200, 200) inView:self.view permittedArrowDirections:0 animated:YES];
     }
     else
     {
@@ -113,12 +123,27 @@ bool popNavigationStack = NO;
     [self.mapView addAnnotation:self.locationPin];
     _placedLocation.latitude = touchMapCoordinate.latitude;
     _placedLocation.longitude = touchMapCoordinate.longitude;
+    [_mapView setRegion:MKCoordinateRegionMake(touchMapCoordinate, _mapView.region.span) animated: YES];
     
 }
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+-(void)popoverControllerDidDismissPopover:(UIPopoverController *)popovercontroller
+{
+    if(_finishClicked == YES)
+    {
+        [self.navigationController popToViewController:_tripViewReturnDelegate animated:YES];
+        
+    }
+    
+}
+-(BOOL)popoverControllerShouldDismissPopover:(UIPopoverController*)popovercontroller
+{
+    
+    return YES;
 }
 
 @end

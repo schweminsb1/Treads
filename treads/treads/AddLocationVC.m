@@ -110,6 +110,10 @@ CLLocationCoordinate2D placedLocation;
         _LocationModelnew.latitude=self.latitude;
         _LocationModelnew.longitude=self.longitude;
         
+        //set boolean
+        _delegate.finishClicked=YES;
+        [_delegatepopover dismissPopoverAnimated:YES];
+        [_delegatepopover.delegate popoverControllerDidDismissPopover:self.delegatepopover];
             //call to insert item
         [[LocationService instance] addLocation:newItem forTarget:self withAction:(@selector(goBack:success:))];
 
