@@ -85,11 +85,12 @@
                          ];
     
     //set up header
-    CGRect windowBounds = [[UIScreen mainScreen] bounds];
+//    CGRect windowBounds = [[UIScreen mainScreen] bounds];)
     self.titleView = [[UIView alloc] init];
     
-    [self.titleView setBounds:CGRectMake(0, 0, windowBounds.size.width * 0.75, 44)];
-    [self.titleView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [self.titleView setBounds:CGRectMake(0, 0, 550, 44)];
+//    [self.titleView setBounds:CGRectMake(0, 0, windowBounds.size.width * 0.75, 44)];
+//    [self.titleView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     
     //browser mode control
     self.browserModeControl = [[UISegmentedControl alloc] initWithItems:browserModeControlLabels];
@@ -107,7 +108,7 @@
     self.userSearchBar.barStyle = self.navigationController.navigationBar.barStyle;
     self.userSearchBar.tintColor = self.navigationController.navigationBar.tintColor;
     self.userSearchBar.frame = CGRectMake(self.browserModeControl.bounds.size.width + 12, 0, self.titleView.bounds.size.width - self.browserModeControl.bounds.size.width - 12, 42);
-    self.userSearchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+//    self.userSearchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.titleView addSubview:self.userSearchBar];
     
     //trip filter bar
@@ -118,7 +119,7 @@
     self.tripFilterBar.barStyle = self.navigationController.navigationBar.barStyle;
     self.tripFilterBar.tintColor = self.navigationController.navigationBar.tintColor;
     self.tripFilterBar.frame = CGRectMake(self.browserModeControl.bounds.size.width + 12, 0, self.titleView.bounds.size.width - self.browserModeControl.bounds.size.width - 12, 42);
-    self.tripFilterBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+//    self.tripFilterBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.titleView addSubview:self.tripFilterBar];
     
     [self.navigationController.navigationBar.topItem setTitleView:self.titleView];
