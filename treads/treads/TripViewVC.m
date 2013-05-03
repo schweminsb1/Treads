@@ -61,8 +61,6 @@
         self.showDraft = NO;
         tappedSave = NO;
         
-        self.rectangle= self.view.bounds;
-        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
     }
@@ -369,6 +367,8 @@
 
 - (void)keyboardDidShow:(NSNotification *)notification
 {
+    self.rectangle = self.view.bounds;
+    
     //Assign new frame to your view
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
     [UIView beginAnimations:nil context:NULL]; // animate the following:
@@ -384,11 +384,11 @@
     }
     else if(orientation == UIInterfaceOrientationLandscapeLeft)
     {
-        [self.view setFrame:CGRectMake(0,-90,_rectangle.size.height,_rectangle.size.width)];
+        [self.view setFrame:CGRectMake(0,-90,_rectangle.size.width,_rectangle.size.height)];
     }
     else if(orientation == UIInterfaceOrientationLandscapeRight)
     {
-        [self.view setFrame:CGRectMake(0,-90,_rectangle.size.height,_rectangle.size.width)];
+        [self.view setFrame:CGRectMake(0,-90,_rectangle.size.width,_rectangle.size.height)];
     }
     [UIView setAnimationDuration:0.3];
     [UIView commitAnimations];
@@ -398,6 +398,8 @@
 
 -(void)keyboardDidHide:(NSNotification *)notification
 {
+    self.rectangle = self.view.bounds;
+    
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
     [UIView beginAnimations:nil context:NULL];
     if(orientation == 0)
@@ -410,11 +412,11 @@
     }
     else if(orientation == UIInterfaceOrientationLandscapeLeft)
     {
-        [self.view setFrame:CGRectMake(0,0,_rectangle.size.height,_rectangle.size.width)];
+        [self.view setFrame:CGRectMake(0,0,_rectangle.size.width,_rectangle.size.height)];
     }
     else if(orientation == UIInterfaceOrientationLandscapeRight)
     {
-        [self.view setFrame:CGRectMake(0,0,_rectangle.size.height,_rectangle.size.width)];
+        [self.view setFrame:CGRectMake(0,0,_rectangle.size.width,_rectangle.size.height)];
     }
     [UIView setAnimationDuration:0.3];
     [UIView commitAnimations];

@@ -35,6 +35,7 @@ static DataRepository* repo;
 {
     MSTable* queryTable = [self.client getTable:callingService.dataTableIdentifier];
     MSQuery* query = [[MSQuery alloc] initWithTable:queryTable];
+    query.fetchLimit = 250;
     if (predicateStringOrNil != nil) {
         [query setPredicate:[NSPredicate predicateWithFormat:predicateStringOrNil]];
     }
@@ -63,6 +64,7 @@ static DataRepository* repo;
 {
     MSTable* queryTable = [self.client getTable:nonDefaultTable];
     MSQuery* query = [[MSQuery alloc] initWithTable:queryTable];
+    query.fetchLimit = 250;
     if (predicateStringOrNil != nil) {
         [query setPredicate:[NSPredicate predicateWithFormat:predicateStringOrNil]];
     }
@@ -93,6 +95,7 @@ static DataRepository* repo;
 {
     MSTable* queryTable = [self.client getTable:callingService.dataTableIdentifier];
     MSQuery* query = [[MSQuery alloc] initWithTable:queryTable];
+    query.fetchLimit = 250;
     if (predicateStringOrNil != nil) {
         [query setPredicate:[NSPredicate predicateWithFormat:predicateStringOrNil]];
     }
@@ -223,7 +226,7 @@ static DataRepository* repo;
             [requestingObject performSelector:returnAction];
 #pragma clang diagnostic pop
         };
-        NSLog(error.localizedDescription);
+//        NSLog(error.localizedDescription);
         if (error == nil) {
 //            id y = items[0][@"id"];
             //  NSLog(y);
@@ -276,6 +279,7 @@ static DataRepository* repo;
     [predicategetALL mutableOrderedSetValueForKey:@"id"];
     
     MSQuery * queryGetAll = [[MSQuery alloc]initWithTable:LocationTable withPredicate:predicategetALL];
+    queryGetAll.fetchLimit = 250;
     
     [LocationTable readWithQueryString:[queryGetAll queryStringOrError:nil] completion:getAll ];
     
@@ -290,6 +294,7 @@ static DataRepository* repo;
  //   long  inte= [locationID intValue];
     NSPredicate * predicate = [NSPredicate predicateWithValue:YES];   /*[NSPredicate predicateWithFormat:@"id == %@", [NSNumber numberWithInt:  inte]  ];*/
     MSQuery * query= [[MSQuery alloc]initWithTable:commentsTable withPredicate:predicate];
+    query.fetchLimit = 250;
     
     [commentsTable readWithQueryString:[query queryStringOrError:nil] completion:getComments];
   
