@@ -316,6 +316,12 @@
             break;
         }
     }
+    
+    if (self.userID == [TreadsSession instance].treadsUserID) {
+        self.follow.hidden = YES;
+        return;
+    }
+    
     self.follow.enabled = true;
     self.follow.hidden = NO;
     

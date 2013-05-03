@@ -9,6 +9,7 @@
 #import "FollowService.h"
 #import "DataRepository.h"
 #import "ImageService.h"
+#import "TreadsSession.h"
 
 #import "User.h"
 
@@ -35,20 +36,38 @@ static FollowService* repo;
     if (!returnData || returnData.count == 0) {return [NSArray array];}
     NSMutableArray* returnArray = [[NSMutableArray alloc] init];
     for (int i=0; i<returnData.count; i++) {
-        NSMutableDictionary* newDictionary = [NSMutableDictionary dictionaryWithDictionary:returnData[i]];
-        NSDictionary* followProfile = newDictionary[@"followProfile"];
-        User* user = [[User alloc] init];
-        user.User_ID = [followProfile[@"id"] intValue];
-        user.fname = followProfile[@"Fname"];
-        user.lname = followProfile[@"Lname"];
-        user.profilePhotoID = [followProfile[@"profilePhotoID"] intValue];
-        user.coverPhotoID = [followProfile[@"coverPhotoID"] intValue];
-        user.profileImage = [ImageService emptyImage];
-        user.coverImage = [ImageService emptyImage];
-        user.tripCount = [followProfile[@"tripCount"] intValue];
-        user.followID = [newDictionary[@"id"] intValue];
-        newDictionary[@"followProfile"] = user;
-        [returnArray addObject:newDictionary];
+        @try {
+            NSMutableDictionary* newDictionary = [NSMutableDictionary dictionaryWithDictionary:returnData[i]];
+            NSDictionary* followProfile = newDictionary[@"followProfile"];
+            
+            //check for duplicates and self-following
+            BOOL unique = YES;
+            int followID = [followProfile[@"id"] intValue];
+            for (NSMutableDictionary* existingUser in returnArray) {
+                if (followID == ((User*)existingUser[@"followProfile"]).User_ID) {
+                    unique = NO;
+                    break;
+                }
+            }
+            if (followID == [TreadsSession instance].treadsUserID) {unique = NO;}
+            if (!unique) {continue;}
+            
+            User* user = [[User alloc] init];
+            user.User_ID = [followProfile[@"id"] intValue];
+            user.fname = followProfile[@"Fname"];
+            user.lname = followProfile[@"Lname"];
+            user.profilePhotoID = [followProfile[@"profilePhotoID"] intValue];
+            user.coverPhotoID = [followProfile[@"coverPhotoID"] intValue];
+            user.profileImage = [ImageService emptyImage];
+            user.coverImage = [ImageService emptyImage];
+            user.tripCount = [followProfile[@"tripCount"] intValue];
+            user.followID = [newDictionary[@"id"] intValue];
+            newDictionary[@"followProfile"] = user;
+            [returnArray addObject:newDictionary];
+        }
+        @catch (NSException* exception) {
+            
+        }
     }
     return returnArray;
 }

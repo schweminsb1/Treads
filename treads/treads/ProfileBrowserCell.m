@@ -10,6 +10,7 @@
 
 #import "User.h"
 #import "ImageService.h"
+#import "TreadsSession.h"
 
 @interface ProfileBrowserCell()
 
@@ -153,11 +154,20 @@
 //    tripContentLabel.text = @"P213 C87";
     tripFeaturedImageView.image = displayProfile.coverImage;
     profilePictureView.image = displayProfile.profileImage;
-    if (displayProfile.followID >= 0) {
-        [self setButtonStyleFollowing];
+    if (displayProfile.User_ID == [TreadsSession instance].treadsUserID)
+    {
+        //hide button
+        [followButton setHidden:YES];
     }
     else {
-        [self setButtonStyleFollow];
+        //show button
+        [followButton setHidden:NO];
+        if (displayProfile.followID >= 0) {
+            [self setButtonStyleFollowing];
+        }
+        else {
+            [self setButtonStyleFollow];
+        }
     }
 }
 
